@@ -1,0 +1,124 @@
+{
+  "name": "FDN_AUTHORIZECLIENTDATA",
+  "domain": "oauth-integracao",
+  "purpose": "Configuração de cliente de autenticação/autorização para consumir serviços externos (credenciais, URLs e tokens OAuth), por tenant e código.",
+  "schema_card": "by_table/FDN_AUTHORIZECLIENTDATA.json",
+  "business_concepts": [
+    "oauth-integracao",
+    "FDN_AUTHORIZECLIENTDATA"
+  ],
+  "grain": {
+    "description": "Configuração de cliente de autenticação/autorização para consumir serviços externos (credenciais, URLs e tokens OAuth), por tenant e código. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "AUTHORIZECLIENTDATA_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_AUTHORIZECLIENTDATA.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0411",
+      "from_table": "FDN_AUTHORIZECLIENTDATA",
+      "to_table": "FDN_TENANT",
+      "on": [
+        "FDN_AUTHORIZECLIENTDATA.TENANT_ID = FDN_TENANT.TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Tenant dono.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0411",
+      "table": "FDN_TENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0432",
+      "table": "FDN_FLUIG_SERVER",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FDNAuthorizeClientDataI001",
+      "unique": false,
+      "columns": [
+        "TENANT_ID",
+        "CODE",
+        "AUTHORIZECLIENTDATA_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_AUTHORIZECLIENTDATA.json",
+  "observed_query_count": 6,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Configuração de cliente de autenticação/autorização para consumir serviços externos (credenciais, URLs e tokens OAuth), por tenant e código. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "AUTHORIZECLIENTDATA_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "name": "MARCA_DAGUA",
+  "domain": "ecm-documents",
+  "purpose": "Cadastro de marcas d'água (texto, fonte, cor, alinhamento) aplicáveis a documentos na visualização/download.",
+  "schema_card": "by_table/MARCA_DAGUA.json",
+  "business_concepts": [
+    "ecm-documents",
+    "MARCA_DAGUA"
+  ],
+  "grain": {
+    "description": "Cadastro de marcas d'água (texto, fonte, cor, alinhamento) aplicáveis a documentos na visualização/download. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "NR_MARCA_DAGUA"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/MARCA_DAGUA.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0116",
+      "table": "DOCUMENTO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0757",
+      "table": "DOCUMENTO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/MARCA_DAGUA.json",
+  "observed_query_count": 3,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Cadastro de marcas d'água (texto, fonte, cor, alinhamento) aplicáveis a documentos na visualização/download. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "NR_MARCA_DAGUA"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

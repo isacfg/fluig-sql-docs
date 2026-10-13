@@ -50,6 +50,8 @@ Relaciona a instância de processo pai (e seu estado) às instâncias de sub-pro
 
 - `(COD_EMPRESA, NUM_PROCES)` → **PROCES_WORKFLOW** `(COD_EMPRESA, NUM_PROCES)` · N:1 · logical-probable/probable — Instância filha criada para a tarefa ad hoc.
 - `(COD_EMPRESA, NUM_PROCES_PAI)` → **PROCES_WORKFLOW** `(COD_EMPRESA, NUM_PROCES)` · N:1 · logical-probable/probable — Instância pai (relação não listada pela heurística; deduzida do nome da coluna).
+- `(COD_EMPRESA)` → **PROCES_WORKFLOW** `(COD_EMPRESA)` · N:1 · hql-join/confirmed — WorkflowAdHocProcess.findActiveByParent
+- `(NUM_PROCES)` → **PROCES_WORKFLOW** `(NUM_PROCES)` · N:1 · hql-join/confirmed — WorkflowAdHocProcess.findActiveByParent
 
 **Dicas de consulta:** Dois joins distintos a PROCES_WORKFLOW (pai e filho); use aliases.
 
@@ -629,6 +631,9 @@ Associa um formulário (documento/versão) a datasets usados por ele (FormDatase
 
 - `(COD_EMPRESA, COD_DATASET)` → **SERV_DATASET** `(COD_EMPRESA, COD_DATASET)` · N:1 · physical-fk/confirmed — FK física para o dataset.
 - `(COD_EMPRESA, NR_DOCUMENTO, NR_VERSAO)` → **DOCUMENTO** `(COD_EMPRESA, NR_DOCUMENTO, NR_VERSAO)` · N:1 · logical-probable/probable — Formulário dono do vínculo.
+- `(COD_EMPRESA)` → **DOCUMENTO** `(COD_EMPRESA)` · N:1 · hql-join/confirmed — FormDataset.FIND_RELATION_WITH_OTHERS_FORMS
+- `(NR_DOCUMENTO)` → **DOCUMENTO** `(NR_DOCUMENTO)` · N:1 · hql-join/confirmed — FormDataset.FIND_RELATION_WITH_OTHERS_FORMS
+- `(NR_VERSAO)` → **DOCUMENTO** `(NR_VERSAO)` · N:1 · hql-join/confirmed — FormDataset.FIND_RELATION_WITH_OTHERS_FORMS
 
 **Dicas de consulta:** Na lista de colunas aparece também uma linha CONSTRAINT (UK_FORMDATASET001), que é a unique key, não coluna real.
 
@@ -1440,6 +1445,8 @@ Instancia (solicitacao) de processo de workflow: dados de abertura, solicitante,
 
 - `(COD_EMPRESA, COD_DEF_PROCES, NUM_VERS)` → **VERS_DEF_PROCES** `(COD_EMPRESA, COD_DEF_PROCES, NUM_VERS)` · N:1 · logical-probable/probable — Versao da definicao de processo da instancia.
 - `(COD_EMPRESA, NUM_PROCES_ORIG)` → **PROCES_WORKFLOW** `(COD_EMPRESA, NUM_PROCES)` · N:1 · logical-probable/probable — Instancia pai (subprocesso).
+- `(COD_EMPRESA)` → **ANEXO_PROCES** `(COD_EMPRESA)` · N:1 · hql-join/confirmed — ProcessAttachment.countByProcessInstance
+- `(NUM_PROCES)` → **ANEXO_PROCES** `(NUM_PROCES)` · N:1 · hql-join/confirmed — ProcessAttachment.countByProcessInstance
 
 **Dicas de consulta:** Filtrar sempre por COD_EMPRESA. Para abertas use LOG_ATIV=1; indices WORKFLOWPROCES01-06 favorecem filtros por COD_DEF_PROCES, STATUS, CLOSURE_STATUS, DEADLINE_DATE. Contem matricula do solicitante.
 

@@ -1,0 +1,128 @@
+[
+  {
+    "name": "WCMApplicationAppDependency.findAll",
+    "query": "SELECT b FROM WCMApplicationAppDependency b",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationAppDependency",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationAppDependency.java",
+    "owner_table": "WCM_APPLICATION_APP_DEPENDENCY",
+    "tables": [
+      "WCM_APPLICATION_APP_DEPENDENCY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMApplicationAppDependency.findById",
+    "query": "SELECT b FROM WCMApplicationAppDependency b WHERE b.id = :id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationAppDependency",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationAppDependency.java",
+    "owner_table": "WCM_APPLICATION_APP_DEPENDENCY",
+    "tables": [
+      "WCM_APPLICATION_APP_DEPENDENCY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMApplicationAppDependency.findByComponentId",
+    "query": "SELECT b FROM WCMApplicationAppDependency b WHERE b.component.id = :componentId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationAppDependency",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationAppDependency.java",
+    "owner_table": "WCM_APPLICATION_APP_DEPENDENCY",
+    "tables": [
+      "WCM_APPLICATION_APP_DEPENDENCY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMApplicationAppDependency.listByDependencyId",
+    "query": "SELECT b FROM WCMApplicationAppDependency b WHERE b.applicationDependency.id = :dependencyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationAppDependency",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationAppDependency.java",
+    "owner_table": "WCM_APPLICATION_APP_DEPENDENCY",
+    "tables": [
+      "WCM_APPLICATION_APP_DEPENDENCY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMApplicationAppDependency.listByDependencyCode",
+    "query": "SELECT aad FROM WCMApplicationAppDependency aad JOIN WCMApplicationDependency ad ON aad.applicationDependency.id = ad.id WHERE ad.code = :dependencyCode",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationAppDependency",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationAppDependency.java",
+    "owner_table": "WCM_APPLICATION_APP_DEPENDENCY",
+    "tables": [
+      "WCM_APPLICATION_APP_DEPENDENCY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMApplicationAppDependency.findByDependencyId",
+    "query": "SELECT aad FROM WCMApplicationAppDependency aad JOIN WCMApplicationDependency ad ON aad.applicationDependency.id = ad.id WHERE aad.applicationDependency.id = :dependencyId AND ad.tenant.id = :tenantId ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationAppDependency",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationAppDependency.java",
+    "owner_table": "WCM_APPLICATION_APP_DEPENDENCY",
+    "tables": [
+      "WCM_APPLICATION_APP_DEPENDENCY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMApplicationAppDependency.findByDependencyIdAndApplicationId",
+    "query": "SELECT aad FROM WCMApplicationAppDependency aad WHERE aad.applicationDependency.id = :dependencyId AND aad.component.id = :applicationId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationAppDependency",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationAppDependency.java",
+    "owner_table": "WCM_APPLICATION_APP_DEPENDENCY",
+    "tables": [
+      "WCM_APPLICATION_APP_DEPENDENCY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

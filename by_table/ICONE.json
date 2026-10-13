@@ -15,6 +15,80 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.dm.model.Icon"
  ],
+ "observed_queries": [
+  {
+   "name": "Icon.findByIconId",
+   "query": "SELECT i FROM Icon i WHERE i.iconPK.iconId = :iconId AND i.iconPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Icon",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Icon.java",
+   "owner_table": "ICONE",
+   "tables": [
+    "ICONE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Icon.findAll",
+   "query": "SELECT i FROM Icon i WHERE i.iconPK.companyId = :companyId ORDER BY i.iconPK.iconId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Icon",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Icon.java",
+   "owner_table": "ICONE",
+   "tables": [
+    "ICONE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Icon.findByExtension",
+   "query": "SELECT i FROM Icon i WHERE i.iconPK.companyId = :companyId AND i.extension= :extension",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Icon",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Icon.java",
+   "owner_table": "ICONE",
+   "tables": [
+    "ICONE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Icon.findByMimiType",
+   "query": "SELECT i FROM Icon i WHERE i.iconPK.companyId = :companyId AND i.mimeType= :mimetype",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Icon",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Icon.java",
+   "owner_table": "ICONE",
+   "tables": [
+    "ICONE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",

@@ -1,0 +1,119 @@
+{
+  "name": "FDN_VOLUME",
+  "domain": "foundation-platform",
+  "purpose": "Volumes de armazenamento de arquivos (GED/documentos) por tenant, com capacidade máxima e espaço usado.",
+  "schema_card": "by_table/FDN_VOLUME.json",
+  "business_concepts": [
+    "foundation-platform",
+    "FDN_VOLUME"
+  ],
+  "grain": {
+    "description": "Volumes de armazenamento de arquivos (GED/documentos) por tenant, com capacidade máxima e espaço usado. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "VOLUME_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_VOLUME.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0637",
+      "from_table": "FDN_VOLUME",
+      "to_table": "FDN_TENANT",
+      "on": [
+        "FDN_VOLUME.TENANT_ID = FDN_TENANT.TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Tenant dono do volume.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0637",
+      "table": "FDN_TENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0639",
+      "table": "FDN_VOLUMESITE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0642",
+      "table": "FDN_VOLUMESITE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_VOLUME.json",
+  "observed_query_count": 6,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Volumes de armazenamento de arquivos (GED/documentos) por tenant, com capacidade máxima e espaço usado. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "VOLUME_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

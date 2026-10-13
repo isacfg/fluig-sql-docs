@@ -17,6 +17,98 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.dm.model.DocumentSecurityConfig"
  ],
+ "observed_queries": [
+  {
+   "name": "DocumentSecurityConfig.findRestrictions",
+   "query": "SELECT c FROM DocumentSecurityConfig c WHERE c.documentSecurityConfigPK.companyId = :companyId AND c.documentSecurityConfigPK.documentId = :documentID AND c.documentSecurityConfigPK.version = :version AND c.permission = false",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.DocumentSecurityConfig",
+   "source_file": "com/datasul/technology/webdesk/dm/model/DocumentSecurityConfig.java",
+   "owner_table": "CONFIGUR_SEGUR_DOCTO",
+   "tables": [
+    "CONFIGUR_SEGUR_DOCTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "DocumentSecurityConfig.findRestrictionsForAll",
+   "query": "SELECT c FROM DocumentSecurityConfig c WHERE c.documentSecurityConfigPK.companyId = :companyId AND c.documentSecurityConfigPK.documentId = :documentID AND c.documentSecurityConfigPK.version = :version AND c.attributionValue = :attributionValue AND c.permission = false",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.DocumentSecurityConfig",
+   "source_file": "com/datasul/technology/webdesk/dm/model/DocumentSecurityConfig.java",
+   "owner_table": "CONFIGUR_SEGUR_DOCTO",
+   "tables": [
+    "CONFIGUR_SEGUR_DOCTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "DocumentSecurityConfig.findFullPermissionByDocument",
+   "query": "SELECT c FROM DocumentSecurityConfig c WHERE c.documentSecurityConfigPK.companyId = :companyId AND c.documentSecurityConfigPK.documentId = :documentID AND c.documentSecurityConfigPK.version = :version AND c.securityLevel = :securityLevel AND c.permission = true",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.DocumentSecurityConfig",
+   "source_file": "com/datasul/technology/webdesk/dm/model/DocumentSecurityConfig.java",
+   "owner_table": "CONFIGUR_SEGUR_DOCTO",
+   "tables": [
+    "CONFIGUR_SEGUR_DOCTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "DocumentSecurityConfig.findByDocument",
+   "query": "SELECT c FROM DocumentSecurityConfig c WHERE c.documentSecurityConfigPK.companyId = :companyId AND c.documentSecurityConfigPK.documentId = :documentID AND c.documentSecurityConfigPK.version = :version",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.DocumentSecurityConfig",
+   "source_file": "com/datasul/technology/webdesk/dm/model/DocumentSecurityConfig.java",
+   "owner_table": "CONFIGUR_SEGUR_DOCTO",
+   "tables": [
+    "CONFIGUR_SEGUR_DOCTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "DocumentSecurityConfig.transferPermissionsByDocRange",
+   "query": "UPDATE DocumentSecurityConfig c SET c.attributionValue = :pNewValAtribuic WHERE c.documentSecurityConfigPK.companyId = :companyId AND c.documentSecurityConfigPK.documentId >= :nrDocumentIni AND c.documentSecurityConfigPK.documentId <= :nrDocumentFim AND c.attributionType = :idiTipAtribuic AND c.attributionValue = :desValAtribuic",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.DocumentSecurityConfig",
+   "source_file": "com/datasul/technology/webdesk/dm/model/DocumentSecurityConfig.java",
+   "owner_table": "CONFIGUR_SEGUR_DOCTO",
+   "tables": [
+    "CONFIGUR_SEGUR_DOCTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",

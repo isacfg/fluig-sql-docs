@@ -19,6 +19,26 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.dm.model.DocumentLanguage"
  ],
+ "observed_queries": [
+  {
+   "name": "DocumentLanguage.findLanguagesByTenant",
+   "query": "SELECT d FROM DocumentLanguage d WHERE d.tenantId = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.DocumentLanguage",
+   "source_file": "com/datasul/technology/webdesk/dm/model/DocumentLanguage.java",
+   "owner_table": "ECM_DOCTO_LANGUAGE",
+   "tables": [
+    "ECM_DOCTO_LANGUAGE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "ID",

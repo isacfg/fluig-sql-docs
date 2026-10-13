@@ -22,6 +22,656 @@
   "com.totvs.technology.wcm.core.entity.WCMApplication",
   "com.totvs.technology.wcm.core.entity.WCMLayout"
  ],
+ "observed_queries": [
+  {
+   "name": "WCMTheme.findAll",
+   "query": "SELECT b FROM WCMTheme b WHERE b.isExtension = 0",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMTheme",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMTheme.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMTheme.findAllWithExtensions",
+   "query": "SELECT b FROM WCMTheme b",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMTheme",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMTheme.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMTheme.findById",
+   "query": "SELECT b FROM WCMTheme b WHERE b.id = :id",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMTheme",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMTheme.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMTheme.findByCode",
+   "query": "SELECT b FROM WCMTheme b WHERE b.code = :code",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMTheme",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMTheme.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMTheme.findByPage",
+   "query": "SELECT p.theme FROM WCMPage p WHERE p.id = :pageId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMTheme",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMTheme.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMTheme.findByDeveloperCode",
+   "query": "SELECT b FROM WCMTheme b WHERE b.developerCode = :developerCode",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMTheme",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMTheme.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMComponent.findAll",
+   "query": "SELECT b FROM WCMComponent b",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMComponent",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMComponent.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMComponent.findById",
+   "query": "SELECT b FROM WCMComponent b WHERE b.id = :id",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMComponent",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMComponent.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMComponent.findByCode",
+   "query": "SELECT b FROM WCMComponent b WHERE b.code = :code",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMComponent",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMComponent.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMComponent.findByDeveloperCode",
+   "query": "SELECT b FROM WCMComponent b WHERE b.developerCode = :developerCode",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMComponent",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMComponent.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMComponent.findByDeveloperName",
+   "query": "SELECT b FROM WCMComponent b WHERE b.developerName = :developerName",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMComponent",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMComponent.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMComponent.findByDeveloperUrl",
+   "query": "SELECT b FROM WCMComponent b WHERE b.developerUrl = :developerUrl",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMComponent",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMComponent.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMComponent.findComponentsFromComponentsCodeList",
+   "query": "SELECT b FROM WCMComponent b WHERE b.code IN (:componentsCode)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMComponent",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMComponent.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMWidget.findAll",
+   "query": "SELECT b FROM WCMWidget b WHERE b.isExtension = 0",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMWidget",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMWidget.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMWidget.findAllWithExtensions",
+   "query": "SELECT b FROM WCMWidget b",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMWidget",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMWidget.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMWidget.findById",
+   "query": "SELECT b FROM WCMWidget b WHERE b.id = :id",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMWidget",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMWidget.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMWidget.findByCode",
+   "query": "SELECT b FROM WCMWidget b WHERE b.code = :code",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMWidget",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMWidget.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMWidget.findByDeveloperCode",
+   "query": "SELECT b FROM WCMWidget b WHERE b.developerCode = :developerCode",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMWidget",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMWidget.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMWidget.findByDeveloperName",
+   "query": "SELECT b FROM WCMWidget b WHERE b.developerName = :developerName",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMWidget",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMWidget.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMWidget.findByDeveloperUrl",
+   "query": "SELECT b FROM WCMWidget b WHERE b.developerUrl = :developerUrl",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMWidget",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMWidget.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMWidget.findAllowedWidgets",
+   "query": "SELECT b FROM WCMWidget b WHERE b.uiWidget = true AND b.applicationPublic = true",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMWidget",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMWidget.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMWidget.findEnabledWidgetsByInternalAndTenant",
+   "query": "SELECT b FROM WCMWidget b WHERE b.uiWidget = true  AND b.applicationPublic = true  AND b.internal = :internal AND b.id NOT IN    (SELECT t.application.id FROM WCMTenantApplication t      WHERE  t.application.id = b.id     AND    t.tenant.id = :tenantId      AND    t.enabled = :enabled)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMWidget",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMWidget.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMWidget.findResourceCodesByCodes",
+   "query": "SELECT concat('widget.', LTRIM(STR(b.id))) FROM WCMApplication b WHERE b.code in (:codes)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMWidget",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMWidget.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMWidget.findByCodeFetchCategories",
+   "query": "SELECT b FROM WCMWidget b JOIN FETCH b.categories c WHERE b.code = :code",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMWidget",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMWidget.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMApplication.findAll",
+   "query": "SELECT b FROM WCMApplication b WHERE b.isExtension = 0",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplication",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMApplication.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMApplication.findAllWithExtensions",
+   "query": "SELECT b FROM WCMApplication b",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplication",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMApplication.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMApplication.findAllByFilter",
+   "query": "SELECT b FROM WCMApplication b WHERE (b.description LIKE :search OR b.code LIKE :search OR b.title LIKE :search) ORDER BY b.code",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplication",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMApplication.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMApplication.findById",
+   "query": "SELECT b FROM WCMApplication b WHERE b.id = :id",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplication",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMApplication.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMApplication.findByCode",
+   "query": "SELECT b FROM WCMApplication b WHERE b.code = :code",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplication",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMApplication.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMApplication.findByFileName",
+   "query": "SELECT b FROM WCMApplication b WHERE b.fileName = :fileName",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplication",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMApplication.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMLayout.findAll",
+   "query": "SELECT b FROM WCMLayout b WHERE b.isExtension = 0",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMLayout",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMLayout.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMLayout.findAllWithExtensions",
+   "query": "SELECT b FROM WCMLayout b",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMLayout",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMLayout.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMLayout.findById",
+   "query": "SELECT b FROM WCMLayout b WHERE b.id = :id",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMLayout",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMLayout.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMLayout.findByCode",
+   "query": "SELECT b FROM WCMLayout b WHERE b.code = :code",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMLayout",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMLayout.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMLayout.findByDeveloperCode",
+   "query": "SELECT b FROM WCMLayout b WHERE b.developerCode = :developerCode",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMLayout",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMLayout.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMLayout.getPageVersionLayoutId",
+   "query": "SELECT v.layout FROM WCMPageVersion v WHERE v.id = :pageVersionId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMLayout",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMLayout.java",
+   "owner_table": "WCM_APPLICATION",
+   "tables": [
+    "WCM_APPLICATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "APPLICATION_TYPE",
@@ -528,6 +1178,19 @@
    "kind": "physical-fk",
    "description": "Páginas que usam este tema.",
    "status": "confirmed"
+  },
+  {
+   "to_table": "WCM_APPLICATION_APP_DEPENDENCY",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "Dataset.findComponentByDatasetDependency",
+   "status": "confirmed"
   }
  ],
  "rejected_relationships": [],
@@ -542,6 +1205,17 @@
    ],
    "cardinality": "N:1",
    "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_APPLICATIONCATEGORY",
+   "from_cols": [
+    "APPLICATION_CATEGORY_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
   },
   {
    "from_table": "WCM_APPLICATIONLOCALE",
@@ -663,6 +1337,17 @@
    ],
    "cardinality": "N:1",
    "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_TENANTAPPLICATION",
+   "from_cols": [
+    "TENANT_APPLICATION_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
   },
   {
    "from_table": "WCM_PAGEVERSION",

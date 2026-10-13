@@ -1,0 +1,20 @@
+[
+  {
+    "name": "FDNRecentlyViewed.findFDNRecentlyViewed",
+    "query": "SELECT new com.fluig.foundation.recentlyviewed.entity.FDNRecentlyViewed( rv.tenantId, rv.login, MAX(rv.datAccess), rv.description, rv.type, rv.page, rv.processInstanceId, rv.documentId) FROM FDNRecentlyViewed rv WHERE rv.tenantId = :tenantId AND rv.login = :login AND (rv.page IS NULL OR rv.page NOT IN(:excludedPages)) GROUP BY rv.login, rv.tenantId, rv.description, rv.type, rv.page, rv.processInstanceId, rv.documentId ORDER BY MAX(rv.datAccess) DESC ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.recentlyviewed.entity.FDNRecentlyViewed",
+    "source_file": "com/fluig/foundation/recentlyviewed/entity/FDNRecentlyViewed.java",
+    "owner_table": "FDN_RECENTLY_VIEWED",
+    "tables": [
+      "FDN_RECENTLY_VIEWED"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

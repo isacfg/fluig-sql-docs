@@ -1,0 +1,146 @@
+[
+  {
+    "name": "Dataset.findAllActive",
+    "query": "SELECT d FROM Dataset d WHERE d.datasetPK.companyId = :companyId AND d.active = true",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dataset.model.Dataset",
+    "source_file": "com/datasul/technology/webdesk/dataset/model/Dataset.java",
+    "owner_table": "SERV_DATASET",
+    "tables": [
+      "SERV_DATASET"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Dataset.findActiveByTenantAndType",
+    "query": "SELECT d FROM Dataset d  WHERE d.datasetPK.companyId = :tenantId AND d.type = :type  AND d.active = true",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dataset.model.Dataset",
+    "source_file": "com/datasul/technology/webdesk/dataset/model/Dataset.java",
+    "owner_table": "SERV_DATASET",
+    "tables": [
+      "SERV_DATASET"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Dataset.findByPrimaryKey",
+    "query": "SELECT d FROM Dataset d  WHERE d.datasetPK.companyId = :tenantId AND d.datasetPK.datasetId = :datasetId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dataset.model.Dataset",
+    "source_file": "com/datasul/technology/webdesk/dataset/model/Dataset.java",
+    "owner_table": "SERV_DATASET",
+    "tables": [
+      "SERV_DATASET"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Dataset.delete.permanently",
+    "query": "DELETE FROM Dataset d  WHERE d.datasetPK.companyId = :tenantId AND d.datasetPK.datasetId = :datasetId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dataset.model.Dataset",
+    "source_file": "com/datasul/technology/webdesk/dataset/model/Dataset.java",
+    "owner_table": "SERV_DATASET",
+    "tables": [
+      "SERV_DATASET"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Dataset.findActiveByPrimaryKey",
+    "query": "SELECT d FROM Dataset d  WHERE d.datasetPK.companyId = :tenantId AND d.datasetPK.datasetId = :datasetId AND d.active = true",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dataset.model.Dataset",
+    "source_file": "com/datasul/technology/webdesk/dataset/model/Dataset.java",
+    "owner_table": "SERV_DATASET",
+    "tables": [
+      "SERV_DATASET"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Dataset.findByTenantAndDocumentId",
+    "query": "SELECT d FROM Dataset d WHERE d.datasetPK.companyId = :tenantId AND d.active = true AND cast(SUBSTRING(d.datasetImpl, 1, 20) as string) = cast(:documentId as string)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dataset.model.Dataset",
+    "source_file": "com/datasul/technology/webdesk/dataset/model/Dataset.java",
+    "owner_table": "SERV_DATASET",
+    "tables": [
+      "SERV_DATASET"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Dataset.findByApplicationDependencyAndTenant",
+    "query": "SELECT d FROM Dataset d JOIN WCMApplicationDependency ad ON d.datasetPK.datasetId = ad.code AND d.datasetPK.companyId = ad.tenant.id JOIN WCMApplicationAppDependency appDp ON ad.id = appDp.applicationDependency.id WHERE appDp.component.id = :applicationId AND d.datasetPK.companyId = :companyId AND ad.resourceType = :resourceType",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dataset.model.Dataset",
+    "source_file": "com/datasul/technology/webdesk/dataset/model/Dataset.java",
+    "owner_table": "SERV_DATASET",
+    "tables": [
+      "SERV_DATASET"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Dataset.findComponentByDatasetDependency",
+    "query": "SELECT b FROM WCMComponent b LEFT JOIN WCMApplicationAppDependency appDp ON b.id = appDp.component.id  LEFT JOIN WCMApplicationDependency ad ON appDp.applicationDependency.id = ad.id  WHERE ad.code = :datasetId AND ad.tenant.id = :tenantId and appDp.active = :active",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dataset.model.Dataset",
+    "source_file": "com/datasul/technology/webdesk/dataset/model/Dataset.java",
+    "owner_table": "SERV_DATASET",
+    "tables": [
+      "SERV_DATASET"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

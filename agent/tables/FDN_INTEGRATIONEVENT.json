@@ -1,0 +1,141 @@
+{
+  "name": "FDN_INTEGRATIONEVENT",
+  "domain": "integracao-eventos",
+  "purpose": "Eventos de integração que cada integração (FDN_INTEGRATION) declara tratar. Cada linha é um nome de evento.",
+  "schema_card": "by_table/FDN_INTEGRATIONEVENT.json",
+  "business_concepts": [
+    "integracao-eventos",
+    "FDN_INTEGRATIONEVENT"
+  ],
+  "grain": {
+    "description": "Eventos de integração que cada integração (FDN_INTEGRATION) declara tratar. Cada linha é um nome de evento. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "INTEGRATIONEVENT_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_INTEGRATIONEVENT.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0454",
+      "from_table": "FDN_INTEGRATIONEVENT",
+      "to_table": "FDN_INTEGRATION",
+      "on": [
+        "FDN_INTEGRATIONEVENT.INTEGRATION_ID = FDN_INTEGRATION.INTEGRATION_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "INTEGRATION_ID",
+          "to_column": "INTEGRATION_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Eventos tratados pela integração.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0455",
+      "from_table": "FDN_INTEGRATIONEVENT",
+      "to_table": "FDN_INTEGRATION",
+      "on": [
+        "FDN_INTEGRATIONEVENT.INTEGRATION_ID = FDN_INTEGRATION.INTEGRATION_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "INTEGRATION_ID",
+          "to_column": "INTEGRATION_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Integração dona.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0454",
+      "table": "FDN_INTEGRATION",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0455",
+      "table": "FDN_INTEGRATION",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0458",
+      "table": "FDN_INTEGRATIONLISTENEREVT",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FK_J3DCFG764OG3RY3Y9WNBP3RS4",
+      "unique": false,
+      "columns": [
+        "INTEGRATION_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_INTEGRATIONEVENT.json",
+  "observed_query_count": 7,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Eventos de integração que cada integração (FDN_INTEGRATION) declara tratar. Cada linha é um nome de evento. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "INTEGRATIONEVENT_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

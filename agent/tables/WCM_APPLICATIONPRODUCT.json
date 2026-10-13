@@ -1,0 +1,89 @@
+{
+  "name": "WCM_APPLICATIONPRODUCT",
+  "domain": "wcm-portal",
+  "purpose": "Produto TOTVS ao qual a aplicação WCM está associada (um registro por produto).",
+  "schema_card": "by_table/WCM_APPLICATIONPRODUCT.json",
+  "business_concepts": [
+    "wcm-portal",
+    "WCM_APPLICATIONPRODUCT"
+  ],
+  "grain": {
+    "description": "Produto TOTVS ao qual a aplicação WCM está associada (um registro por produto). Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "APPLICATION_PRODUCT_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/WCM_APPLICATIONPRODUCT.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-1049",
+      "from_table": "WCM_APPLICATIONPRODUCT",
+      "to_table": "WCM_APPLICATION",
+      "on": [
+        "WCM_APPLICATIONPRODUCT.APPLICATION_ID = WCM_APPLICATION.APPLICATION_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "APPLICATION_ID",
+          "to_column": "APPLICATION_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Aplicação WCM dona do registro.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-1049",
+      "table": "WCM_APPLICATION",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/WCM_APPLICATIONPRODUCT.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Produto TOTVS ao qual a aplicação WCM está associada (um registro por produto). Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "APPLICATION_PRODUCT_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

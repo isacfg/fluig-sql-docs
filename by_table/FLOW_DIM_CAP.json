@@ -18,6 +18,26 @@
  "jpa_entities": [
   "com.datasul.technology.cap.model.FlowDim"
  ],
+ "observed_queries": [
+  {
+   "name": "FlowDim.findAll",
+   "query": "SELECT f FROM FlowDim f WHERE f.flowDimPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.cap.model.FlowDim",
+   "source_file": "com/datasul/technology/cap/model/FlowDim.java",
+   "owner_table": "FLOW_DIM_CAP",
+   "tables": [
+    "FLOW_DIM_CAP"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COMPANYID",

@@ -1,0 +1,74 @@
+[
+  {
+    "name": "FDNLocalHoliday.findLocalHolidayByLocalAndHoliday",
+    "query": "SELECT localHoliday FROM FDNLocalHoliday localHoliday WHERE localHoliday.holiday.companyId = :companyId AND localHoliday.holiday.id = :holidayId AND localHoliday.local.id = :localId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.local.entity.FDNLocalHoliday",
+    "source_file": "com/fluig/local/entity/FDNLocalHoliday.java",
+    "owner_table": "FDN_LOCALHOLIDAY",
+    "tables": [
+      "FDN_LOCALHOLIDAY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNLocalHoliday.findLocalHolidayByHoliday",
+    "query": "SELECT localHoliday FROM FDNLocalHoliday localHoliday WHERE localHoliday.holiday.companyId = :companyId AND localHoliday.holiday.id = :holidayId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.local.entity.FDNLocalHoliday",
+    "source_file": "com/fluig/local/entity/FDNLocalHoliday.java",
+    "owner_table": "FDN_LOCALHOLIDAY",
+    "tables": [
+      "FDN_LOCALHOLIDAY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNLocalHoliday.countLocalHolidayByHoliday",
+    "query": "SELECT COUNT(localHoliday.id) FROM FDNLocalHoliday localHoliday WHERE localHoliday.holiday.companyId = :companyId AND localHoliday.holiday.id = :holidayId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.local.entity.FDNLocalHoliday",
+    "source_file": "com/fluig/local/entity/FDNLocalHoliday.java",
+    "owner_table": "FDN_LOCALHOLIDAY",
+    "tables": [
+      "FDN_LOCALHOLIDAY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNLocalHoliday.findLocalHolidayByLocal",
+    "query": "SELECT localHoliday FROM FDNLocalHoliday localHoliday WHERE localHoliday.holiday.companyId = :companyId AND localHoliday.local.id = :localId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.local.entity.FDNLocalHoliday",
+    "source_file": "com/fluig/local/entity/FDNLocalHoliday.java",
+    "owner_table": "FDN_LOCALHOLIDAY",
+    "tables": [
+      "FDN_LOCALHOLIDAY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

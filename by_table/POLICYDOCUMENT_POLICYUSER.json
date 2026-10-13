@@ -17,6 +17,7 @@
  ],
  "indexes": [],
  "jpa_entities": [],
+ "observed_queries": [],
  "columns": [
   {
    "name": "POLICYDOCUMENT_ID",

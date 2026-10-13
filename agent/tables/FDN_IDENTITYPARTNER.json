@@ -1,0 +1,105 @@
+{
+  "name": "FDN_IDENTITYPARTNER",
+  "domain": "foundation-identity-access",
+  "purpose": "Parceiro de identidade/licenciamento do tenant: guarda credenciais de cliente, licença e quantidade de usuários licenciados.",
+  "schema_card": "by_table/FDN_IDENTITYPARTNER.json",
+  "business_concepts": [
+    "foundation-identity-access",
+    "FDN_IDENTITYPARTNER"
+  ],
+  "grain": {
+    "description": "Parceiro de identidade/licenciamento do tenant: guarda credenciais de cliente, licença e quantidade de usuários licenciados. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_IDENTITYPARTNER.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0451",
+      "from_table": "FDN_IDENTITYPARTNER",
+      "to_table": "FDN_TENANT",
+      "on": [
+        "FDN_IDENTITYPARTNER.TENANT_ID = FDN_TENANT.TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Tenant ao qual o registro pertence.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0451",
+      "table": "FDN_TENANT",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_IDENTITYPARTNER.json",
+  "observed_query_count": 1,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Parceiro de identidade/licenciamento do tenant: guarda credenciais de cliente, licença e quantidade de usuários licenciados. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

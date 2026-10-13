@@ -1,0 +1,489 @@
+{
+  "name": "FDN_PERMISSION",
+  "domain": "foundation-identity-access",
+  "purpose": "Concessão de permissão sobre um recurso (FDN_RESOURCE) a um usuário, grupo ou papel.",
+  "schema_card": "by_table/FDN_PERMISSION.json",
+  "business_concepts": [
+    "foundation-identity-access",
+    "FDN_PERMISSION"
+  ],
+  "grain": {
+    "description": "Concessão de permissão sobre um recurso (FDN_RESOURCE) a um usuário, grupo ou papel. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "PERMISSION_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_PERMISSION.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0438",
+      "from_table": "FDN_PERMISSION",
+      "to_table": "FDN_GROUP",
+      "on": [
+        "FDN_PERMISSION.TENANT_ID = FDN_GROUP.TENANT_ID",
+        "FDN_PERMISSION.GROUP_CODE = FDN_GROUP.GROUP_CODE"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "GROUP_CODE",
+          "to_column": "GROUP_CODE"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "hql-join",
+      "evidence": "FDNGroup.findGroupsWithPermission",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0505",
+      "from_table": "FDN_PERMISSION",
+      "to_table": "FDN_RESOURCE",
+      "on": [
+        "FDN_PERMISSION.TENANT_ID = FDN_RESOURCE.TENANT_ID",
+        "FDN_PERMISSION.RESOURCE_ID = FDN_RESOURCE.RESOURCE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "RESOURCE_ID",
+          "to_column": "RESOURCE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Recurso protegido.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0507",
+      "from_table": "FDN_PERMISSION",
+      "to_table": "FDN_USERTENANT",
+      "on": [
+        "FDN_PERMISSION.TENANT_ID = FDN_USERTENANT.TENANT_ID",
+        "FDN_PERMISSION.LOGIN = FDN_USERTENANT.LOGIN"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "LOGIN",
+          "to_column": "LOGIN"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Usuário beneficiário, sem FK.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance.",
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0509",
+      "from_table": "FDN_PERMISSION",
+      "to_table": "FDN_GROUP",
+      "on": [
+        "FDN_PERMISSION.TENANT_ID = FDN_GROUP.TENANT_ID",
+        "FDN_PERMISSION.GROUP_CODE = FDN_GROUP.GROUP_CODE"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "GROUP_CODE",
+          "to_column": "GROUP_CODE"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "hql-join",
+      "evidence": "Grupo beneficiário (FDNGroup join FDNPermission em HQL).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0511",
+      "from_table": "FDN_PERMISSION",
+      "to_table": "FDN_ROLE",
+      "on": [
+        "FDN_PERMISSION.TENANT_ID = FDN_ROLE.TENANT_ID",
+        "FDN_PERMISSION.ROLE_CODE = FDN_ROLE.ROLE_CODE"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "ROLE_CODE",
+          "to_column": "ROLE_CODE"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Papel beneficiário, sem FK.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0552",
+      "from_table": "FDN_PERMISSION",
+      "to_table": "FDN_RESOURCE",
+      "on": [
+        "FDN_PERMISSION.TENANT_ID = FDN_RESOURCE.TENANT_ID",
+        "FDN_PERMISSION.RESOURCE_ID = FDN_RESOURCE.RESOURCE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "RESOURCE_ID",
+          "to_column": "RESOURCE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Permissões concedidas sobre o recurso.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0570",
+      "from_table": "FDN_PERMISSION",
+      "to_table": "FDN_ROLE",
+      "on": [
+        "FDN_PERMISSION.TENANT_ID = FDN_ROLE.TENANT_ID",
+        "FDN_PERMISSION.ROLE_CODE = FDN_ROLE.ROLE_CODE"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "ROLE_CODE",
+          "to_column": "ROLE_CODE"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "hql-join",
+      "evidence": "FDNRole.findRolesWithPermission",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0632",
+      "from_table": "FDN_PERMISSION",
+      "to_table": "FDN_USERTENANT",
+      "on": [
+        "FDN_PERMISSION.TENANT_ID = FDN_USERTENANT.TENANT_ID",
+        "FDN_PERMISSION.LOGIN = FDN_USERTENANT.LOGIN"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "LOGIN",
+          "to_column": "LOGIN"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "hql-join",
+      "evidence": "FDNUserTenant.findActiveUsersWithPermission",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0438",
+      "table": "FDN_GROUP",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0505",
+      "table": "FDN_RESOURCE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0507",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0509",
+      "table": "FDN_GROUP",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0511",
+      "table": "FDN_ROLE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0519",
+      "table": "FDN_RESOURCETYPEPERMISSION",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0552",
+      "table": "FDN_RESOURCE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0570",
+      "table": "FDN_ROLE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0632",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FDNPERMISSIONI001",
+      "unique": false,
+      "columns": [
+        "PERMISSION",
+        "PERMISSION_ID"
+      ]
+    },
+    {
+      "name": "FDNPERMISSIONI002",
+      "unique": false,
+      "columns": [
+        "ROLE_CODE",
+        "TENANT_ID",
+        "RESOURCE_ID"
+      ]
+    },
+    {
+      "name": "FDNPERMISSIONI003",
+      "unique": false,
+      "columns": [
+        "LOGIN",
+        "TENANT_ID",
+        "RESOURCE_ID"
+      ]
+    },
+    {
+      "name": "FDNPERMISSIONI004",
+      "unique": false,
+      "columns": [
+        "TENANT_ID",
+        "RESOURCE_ID",
+        "LOGIN",
+        "ROLE_CODE",
+        "GROUP_CODE"
+      ]
+    },
+    {
+      "name": "FDNPERMISSIONI005",
+      "unique": false,
+      "columns": [
+        "GROUP_CODE",
+        "TENANT_ID",
+        "RESOURCE_ID"
+      ]
+    },
+    {
+      "name": "FDNPERMISSIONI006",
+      "unique": false,
+      "columns": [
+        "PERMISSION",
+        "TENANT_ID",
+        "GROUP_CODE"
+      ]
+    },
+    {
+      "name": "FK_1E1Q3G0LJX41YF0IUNGU1L4PK",
+      "unique": false,
+      "columns": [
+        "RESOURCE_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_PERMISSION.json",
+  "observed_query_count": 47,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Concessão de permissão sobre um recurso (FDN_RESOURCE) a um usuário, grupo ou papel. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "PERMISSION_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

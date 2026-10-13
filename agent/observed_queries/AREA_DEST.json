@@ -1,0 +1,20 @@
+[
+  {
+    "name": "DestinationArea.findAll",
+    "query": "SELECT a FROM DestinationArea a WHERE a.destinationAreaPK.companyId = :companyId ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.foundation.model.DestinationArea",
+    "source_file": "com/datasul/technology/webdesk/foundation/model/DestinationArea.java",
+    "owner_table": "AREA_DEST",
+    "tables": [
+      "AREA_DEST"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

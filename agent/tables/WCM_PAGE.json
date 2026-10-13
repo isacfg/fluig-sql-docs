@@ -1,0 +1,377 @@
+{
+  "name": "WCM_PAGE",
+  "domain": "wcm-portal",
+  "purpose": "Página do portal WCM (hierárquica), com tema, URL amigável e flags de exibição.",
+  "schema_card": "by_table/WCM_PAGE.json",
+  "business_concepts": [
+    "wcm-portal",
+    "WCM_PAGE"
+  ],
+  "grain": {
+    "description": "Página do portal WCM (hierárquica), com tema, URL amigável e flags de exibição. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "PAGE_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/WCM_PAGE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-1038",
+      "from_table": "WCM_PAGE",
+      "to_table": "WCM_APPLICATION",
+      "on": [
+        "WCM_PAGE.THEME_ID = WCM_APPLICATION.APPLICATION_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "THEME_ID",
+          "to_column": "APPLICATION_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Páginas que usam este tema.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1083",
+      "from_table": "WCM_PAGE",
+      "to_table": "WCM_PAGE",
+      "on": [
+        "WCM_PAGE.TENANT_ID = WCM_PAGE.TENANT_ID",
+        "WCM_PAGE.PARENT_PAGE_ID = WCM_PAGE.PAGE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "PARENT_PAGE_ID",
+          "to_column": "PAGE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Pai.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1085",
+      "from_table": "WCM_PAGE",
+      "to_table": "FDN_RESOURCE",
+      "on": [
+        "WCM_PAGE.TENANT_ID = FDN_RESOURCE.TENANT_ID",
+        "WCM_PAGE.RESOURCE_ID = FDN_RESOURCE.RESOURCE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "RESOURCE_ID",
+          "to_column": "RESOURCE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Recurso.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1087",
+      "from_table": "WCM_PAGE",
+      "to_table": "FDN_TENANT",
+      "on": [
+        "WCM_PAGE.TENANT_ID = FDN_TENANT.TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Tenant.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1089",
+      "from_table": "WCM_PAGE",
+      "to_table": "WCM_APPLICATION",
+      "on": [
+        "WCM_PAGE.THEME_ID = WCM_APPLICATION.APPLICATION_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "THEME_ID",
+          "to_column": "APPLICATION_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Tema.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1091",
+      "from_table": "WCM_PAGE",
+      "to_table": "FDN_RESOURCE",
+      "on": [
+        "WCM_PAGE.TENANT_ID = FDN_RESOURCE.TENANT_ID",
+        "WCM_PAGE.PAGE_ID = FDN_RESOURCE.RESOURCE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "PAGE_ID",
+          "to_column": "RESOURCE_ID"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "hql-join",
+      "evidence": "FDNResource.findAllResourcesByFilterWithExcludeListWithoutForbiddenCodes",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1104",
+      "from_table": "WCM_PAGE",
+      "to_table": "WCM_PAGEVERSION",
+      "on": [
+        "WCM_PAGE.PAGE_ID = WCM_PAGEVERSION.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "PAGE_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "hql-join",
+      "evidence": "WCMPage.findStartPage",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-1038",
+      "table": "WCM_APPLICATION",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1083",
+      "table": "WCM_PAGE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1084",
+      "table": "WCM_PAGE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1085",
+      "table": "FDN_RESOURCE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1087",
+      "table": "FDN_TENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1089",
+      "table": "WCM_APPLICATION",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1091",
+      "table": "FDN_RESOURCE",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1100",
+      "table": "WCM_PAGEVERSION",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1104",
+      "table": "WCM_PAGEVERSION",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "WCMPAGEI001",
+      "unique": false,
+      "columns": [
+        "PAGE_CODE"
+      ]
+    },
+    {
+      "name": "WCMPAGEI002",
+      "unique": false,
+      "columns": [
+        "PARENT_PAGE_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/WCM_PAGE.json",
+  "observed_query_count": 44,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Página do portal WCM (hierárquica), com tema, URL amigável e flags de exibição. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "PAGE_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

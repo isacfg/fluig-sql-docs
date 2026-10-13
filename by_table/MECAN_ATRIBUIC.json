@@ -15,6 +15,62 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.workflow.model.AttributionMecanism"
  ],
+ "observed_queries": [
+  {
+   "name": "AttributionMecanism.findAll",
+   "query": "SELECT am FROM AttributionMecanism am WHERE am.attributionMecanismPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.AttributionMecanism",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/AttributionMecanism.java",
+   "owner_table": "MECAN_ATRIBUIC",
+   "tables": [
+    "MECAN_ATRIBUIC"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "AttributionMecanism.findAttributionMecanism",
+   "query": "SELECT am FROM AttributionMecanism am WHERE am.attributionMecanismPK.companyId = :companyId AND am.attributionMecanismPK.attributionMecanismId NOT IN (:denied)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.AttributionMecanism",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/AttributionMecanism.java",
+   "owner_table": "MECAN_ATRIBUIC",
+   "tables": [
+    "MECAN_ATRIBUIC"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "AttributionMecanism.findById",
+   "query": "SELECT am FROM AttributionMecanism am WHERE am.attributionMecanismPK.companyId = :companyId and am.attributionMecanismPK.attributionMecanismId = :attributionMecanismId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.AttributionMecanism",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/AttributionMecanism.java",
+   "owner_table": "MECAN_ATRIBUIC",
+   "tables": [
+    "MECAN_ATRIBUIC"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_MECAN_ATRIBUIC",

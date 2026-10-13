@@ -1,0 +1,88 @@
+{
+  "name": "COLAB_SUBSTTO",
+  "domain": "bpm-workflow",
+  "purpose": "Configuração de substituição de usuário (delegação): quem é substituído, quem substitui, período e quais tipos de tarefa (GED/workflow) são delegados.",
+  "schema_card": "by_table/COLAB_SUBSTTO.json",
+  "business_concepts": [
+    "bpm-workflow",
+    "COLAB_SUBSTTO"
+  ],
+  "grain": {
+    "description": "Configuração de substituição de usuário (delegação): quem é substituído, quem substitui, período e quais tipos de tarefa (GED/workflow) são delegados. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COLLEAGUE_REPLACEMENT_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/COLAB_SUBSTTO.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0037",
+      "table": "COLAB_SUBSTTO_PROCESSO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0039",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0042",
+      "table": "COLAB_SUBSTTO_PROCESSO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/COLAB_SUBSTTO.json",
+  "observed_query_count": 5,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Configuração de substituição de usuário (delegação): quem é substituído, quem substitui, período e quais tipos de tarefa (GED/workflow) são delegados. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COLLEAGUE_REPLACEMENT_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

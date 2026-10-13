@@ -1,0 +1,126 @@
+{
+  "name": "ECM_COLLABORATION_GUEST",
+  "domain": "ecm-collaboration",
+  "purpose": "Participantes (convidados) de uma colaboração externa, com permissão no serviço externo.",
+  "schema_card": "by_table/ECM_COLLABORATION_GUEST.json",
+  "business_concepts": [
+    "ecm-collaboration",
+    "ECM_COLLABORATION_GUEST"
+  ],
+  "grain": {
+    "description": "Participantes (convidados) de uma colaboração externa, com permissão no serviço externo. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COLLABORATION_GUEST_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/ECM_COLLABORATION_GUEST.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0144",
+      "from_table": "ECM_COLLABORATION_GUEST",
+      "to_table": "ECM_COLLABORATION",
+      "on": [
+        "ECM_COLLABORATION_GUEST.COLLABORATION_ID = ECM_COLLABORATION.COLLABORATION_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COLLABORATION_ID",
+          "to_column": "COLLABORATION_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Convidados da colaboração (OneToMany guests).",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0149",
+      "from_table": "ECM_COLLABORATION_GUEST",
+      "to_table": "ECM_COLLABORATION",
+      "on": [
+        "ECM_COLLABORATION_GUEST.COLLABORATION_ID = ECM_COLLABORATION.COLLABORATION_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COLLABORATION_ID",
+          "to_column": "COLLABORATION_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Colaboração à qual pertence.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0144",
+      "table": "ECM_COLLABORATION",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0149",
+      "table": "ECM_COLLABORATION",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/ECM_COLLABORATION_GUEST.json",
+  "observed_query_count": 3,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Participantes (convidados) de uma colaboração externa, com permissão no serviço externo. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COLLABORATION_GUEST_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

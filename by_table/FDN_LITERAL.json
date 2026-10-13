@@ -23,6 +23,134 @@
  "jpa_entities": [
   "com.totvs.technology.foundation.i18n.entity.FDNLiteral"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNLiteral.findByLocaleCodeAndKey",
+   "query": "SELECT l FROM FDNLiteral l WHERE l.locale = :locale and l.productCode = :productCode and l.key = :key",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.i18n.entity.FDNLiteral",
+   "source_file": "com/totvs/technology/foundation/i18n/entity/FDNLiteral.java",
+   "owner_table": "FDN_LITERAL",
+   "tables": [
+    "FDN_LITERAL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNLiteral.findByLocaleAndCode",
+   "query": "SELECT l FROM FDNLiteral l WHERE l.locale = :locale and l.productCode = :productCode",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.i18n.entity.FDNLiteral",
+   "source_file": "com/totvs/technology/foundation/i18n/entity/FDNLiteral.java",
+   "owner_table": "FDN_LITERAL",
+   "tables": [
+    "FDN_LITERAL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNLiteral.findByLocale",
+   "query": "SELECT l.productCode, l.key, l.originalValue FROM FDNLiteral l WHERE l.locale = :locale",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.i18n.entity.FDNLiteral",
+   "source_file": "com/totvs/technology/foundation/i18n/entity/FDNLiteral.java",
+   "owner_table": "FDN_LITERAL",
+   "tables": [
+    "FDN_LITERAL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNLiteral.findLastUpdateByLocale",
+   "query": "SELECT l FROM FDNLiteral l WHERE l.locale = :locale and l.lastUpdateDate is NOT NULL order by l.lastUpdateDate desc",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.i18n.entity.FDNLiteral",
+   "source_file": "com/totvs/technology/foundation/i18n/entity/FDNLiteral.java",
+   "owner_table": "FDN_LITERAL",
+   "tables": [
+    "FDN_LITERAL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNLiteral.findLastUpdateByLocaleAndCode",
+   "query": "SELECT l FROM FDNLiteral l WHERE l.locale = :locale and l.productCode = :code and l.lastUpdateDate is NOT NULL order by l.lastUpdateDate desc",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.i18n.entity.FDNLiteral",
+   "source_file": "com/totvs/technology/foundation/i18n/entity/FDNLiteral.java",
+   "owner_table": "FDN_LITERAL",
+   "tables": [
+    "FDN_LITERAL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNLiteral.findCustomByLocale",
+   "query": "SELECT l FROM FDNLiteral l WHERE l.locale = :locale AND l.customValue is NOT NULL",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.i18n.entity.FDNLiteral",
+   "source_file": "com/totvs/technology/foundation/i18n/entity/FDNLiteral.java",
+   "owner_table": "FDN_LITERAL",
+   "tables": [
+    "FDN_LITERAL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNLiteral.findCustomByLocaleAndCode",
+   "query": "SELECT l.productCode, l.key, l.customValue FROM FDNLiteral l WHERE l.locale = :locale and l.productCode = :productCode AND l.customValue IS NOT NULL",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.i18n.entity.FDNLiteral",
+   "source_file": "com/totvs/technology/foundation/i18n/entity/FDNLiteral.java",
+   "owner_table": "FDN_LITERAL",
+   "tables": [
+    "FDN_LITERAL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "LITERAL_ID",

@@ -1,0 +1,107 @@
+{
+  "name": "FLUIG_AUDIT_CONFIG",
+  "domain": "audit",
+  "purpose": "Configuração de auditoria por tenant: habilita/desabilita e define retenção em dias.",
+  "schema_card": "by_table/FLUIG_AUDIT_CONFIG.json",
+  "business_concepts": [
+    "audit",
+    "FLUIG_AUDIT_CONFIG"
+  ],
+  "grain": {
+    "description": "Configuração de auditoria por tenant: habilita/desabilita e define retenção em dias. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "AUDIT_CONFIG_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FLUIG_AUDIT_CONFIG.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0685",
+      "from_table": "FLUIG_AUDIT_CONFIG",
+      "to_table": "FDN_TENANT",
+      "on": [
+        "FLUIG_AUDIT_CONFIG.TENANT_ID = FDN_TENANT.TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Tenant da configuração.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0685",
+      "table": "FDN_TENANT",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FLUIG_AUDIT_CONFIG.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Configuração de auditoria por tenant: habilita/desabilita e define retenção em dias. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "AUDIT_CONFIG_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

@@ -19,6 +19,80 @@
  "jpa_entities": [
   "com.totvs.technology.foundation.dataservice.entity.FDNServiceOperation"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNServiceOperation.findAll",
+   "query": "SELECT fso FROM FDNServiceOperation fso WHERE fso.tenantId = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.dataservice.entity.FDNServiceOperation",
+   "source_file": "com/totvs/technology/foundation/dataservice/entity/FDNServiceOperation.java",
+   "owner_table": "FDN_SERVICE_OPERATION",
+   "tables": [
+    "FDN_SERVICE_OPERATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNServiceOperation.findByName",
+   "query": "SELECT fso FROM FDNServiceOperation fso WHERE fso.tenantId = :tenantId AND fso.name = :name",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.dataservice.entity.FDNServiceOperation",
+   "source_file": "com/totvs/technology/foundation/dataservice/entity/FDNServiceOperation.java",
+   "owner_table": "FDN_SERVICE_OPERATION",
+   "tables": [
+    "FDN_SERVICE_OPERATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNServiceOperation.findByService",
+   "query": "SELECT fso FROM FDNServiceOperation fso WHERE fso.tenantId = :tenantId AND fso.service = :service",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.dataservice.entity.FDNServiceOperation",
+   "source_file": "com/totvs/technology/foundation/dataservice/entity/FDNServiceOperation.java",
+   "owner_table": "FDN_SERVICE_OPERATION",
+   "tables": [
+    "FDN_SERVICE_OPERATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNServiceOperation.findAllWithPattern",
+   "query": "SELECT fso FROM FDNServiceOperation fso WHERE fso.tenantId = :tenantId AND (UPPER(fso.name) like :pattern OR UPPER(fso.description) like :pattern)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.dataservice.entity.FDNServiceOperation",
+   "source_file": "com/totvs/technology/foundation/dataservice/entity/FDNServiceOperation.java",
+   "owner_table": "FDN_SERVICE_OPERATION",
+   "tables": [
+    "FDN_SERVICE_OPERATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "OPERATION_ID",

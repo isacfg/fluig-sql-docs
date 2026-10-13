@@ -1,0 +1,92 @@
+{
+  "name": "TIME_DIM_CAP",
+  "domain": "bpm-analytics-dw",
+  "purpose": "Dimensão de tempo (calendário): uma linha por dia com data completa, feriado e dia da semana.",
+  "schema_card": "by_table/TIME_DIM_CAP.json",
+  "business_concepts": [
+    "bpm-analytics-dw",
+    "TIME_DIM_CAP"
+  ],
+  "grain": {
+    "description": "Dimensão de tempo (calendário): uma linha por dia com data completa, feriado e dia da semana. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COMPANYID",
+      "DAYID",
+      "MONTHID",
+      "YEARID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/TIME_DIM_CAP.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0308",
+      "table": "FACT_ACTIVITY_COST_CAP",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0320",
+      "table": "FACT_ACTIVITY_VOLUME_CAP",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0332",
+      "table": "FACT_FLOW_VOLUME_CAP",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0342",
+      "table": "FACT_PROCES_COST_CAP",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0350",
+      "table": "FACT_PROCES_VOLUME_CAP",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/TIME_DIM_CAP.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Dimensão de tempo (calendário): uma linha por dia com data completa, feriado e dia da semana. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COMPANYID",
+        "DAYID",
+        "MONTHID",
+        "YEARID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

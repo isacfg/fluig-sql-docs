@@ -1,0 +1,38 @@
+[
+  {
+    "name": "CardField.findAll",
+    "query": "SELECT d FROM CardField d WHERE d.cardFieldPK.companyId = :companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.forms.model.CardField",
+    "source_file": "com/datasul/technology/webdesk/forms/model/CardField.java",
+    "owner_table": "FICHA",
+    "tables": [
+      "FICHA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "CardField.findAllByDocumentAndTable",
+    "query": "SELECT cf FROM CardField cf where cf.cardFieldPK.companyId = :companyId and cf.cardFieldPK.cardId = :cardId and cf.cardFieldPK.version = :version and cf.cardFieldPK.tableId = :tableId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.forms.model.CardField",
+    "source_file": "com/datasul/technology/webdesk/forms/model/CardField.java",
+    "owner_table": "FICHA",
+    "tables": [
+      "FICHA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

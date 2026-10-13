@@ -1,0 +1,203 @@
+{
+  "name": "FDN_OAUTHAPPUSER",
+  "domain": "oauth-provider",
+  "purpose": "Autorização de um usuário (login) a uma aplicação OAuth, ligando ao token emitido.",
+  "schema_card": "by_table/FDN_OAUTHAPPUSER.json",
+  "business_concepts": [
+    "oauth-provider",
+    "FDN_OAUTHAPPUSER"
+  ],
+  "grain": {
+    "description": "Autorização de um usuário (login) a uma aplicação OAuth, ligando ao token emitido. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "OAUTH_APP_USER_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_OAUTHAPPUSER.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0481",
+      "from_table": "FDN_OAUTHAPPUSER",
+      "to_table": "FDN_OAUTHAPPTOKEN",
+      "on": [
+        "FDN_OAUTHAPPUSER.OAUTH_APP_TOKEN_ID = FDN_OAUTHAPPTOKEN.OAUTH_APP_TOKEN_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "OAUTH_APP_TOKEN_ID",
+          "to_column": "OAUTH_APP_TOKEN_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Token emitido nesta autorização.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0483",
+      "from_table": "FDN_OAUTHAPPUSER",
+      "to_table": "FDN_OAUTHAPP",
+      "on": [
+        "FDN_OAUTHAPPUSER.OAUTH_APP_ID = FDN_OAUTHAPP.OAUTH_APP_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "OAUTH_APP_ID",
+          "to_column": "OAUTH_APP_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Aplicação autorizada (FDNOAuthApplicationUser.application).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0485",
+      "from_table": "FDN_OAUTHAPPUSER",
+      "to_table": "FDN_USERTENANT",
+      "on": [
+        "FDN_OAUTHAPPUSER.LOGIN = FDN_USERTENANT.LOGIN"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "LOGIN",
+          "to_column": "LOGIN"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Usuário que autorizou, por login. [alvo corrigido: USER_CODE/LOGIN pertencem a FDN_USERTENANT]",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0481",
+      "table": "FDN_OAUTHAPPTOKEN",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0483",
+      "table": "FDN_OAUTHAPP",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0485",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0538",
+      "table": "FDN_PUSH",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FDNOAUTHAPPUSERI001",
+      "unique": false,
+      "columns": [
+        "LOGIN",
+        "OAUTH_APP_USER_ID"
+      ]
+    },
+    {
+      "name": "FK_A9KHQDRF0PSQX2XJ1Q7CFJBNJ",
+      "unique": false,
+      "columns": [
+        "OAUTH_APP_ID"
+      ]
+    },
+    {
+      "name": "FK_D9J4MBXLV5SR5KBUYA29QTPWE",
+      "unique": false,
+      "columns": [
+        "OAUTH_APP_TOKEN_ID"
+      ]
+    },
+    {
+      "name": "FDNOAUTHAPPUSERI002",
+      "unique": false,
+      "columns": [
+        "LOGIN",
+        "OAUTH_APP_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_OAUTHAPPUSER.json",
+  "observed_query_count": 11,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Autorização de um usuário (login) a uma aplicação OAuth, ligando ao token emitido. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "OAUTH_APP_USER_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

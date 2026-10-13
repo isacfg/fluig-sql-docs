@@ -19,6 +19,134 @@
  "jpa_entities": [
   "com.fluig.foundation.volume.entity.FDNSite"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNSite.findByTenantIdAndId",
+   "query": "SELECT o FROM FDNSite o WHERE o.tenantId= :tenantId AND o.id = :id",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.volume.entity.FDNSite",
+   "source_file": "com/fluig/foundation/volume/entity/FDNSite.java",
+   "owner_table": "FDN_SITE",
+   "tables": [
+    "FDN_SITE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNSite.findByTenantId",
+   "query": "SELECT o FROM FDNSite o WHERE o.tenantId= :tenantId AND o.active = true",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.volume.entity.FDNSite",
+   "source_file": "com/fluig/foundation/volume/entity/FDNSite.java",
+   "owner_table": "FDN_SITE",
+   "tables": [
+    "FDN_SITE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNSite.findByTenantAndLocalId",
+   "query": "SELECT o FROM FDNSite o WHERE o.tenantId= :tenantId AND o.local.id = :localId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.volume.entity.FDNSite",
+   "source_file": "com/fluig/foundation/volume/entity/FDNSite.java",
+   "owner_table": "FDN_SITE",
+   "tables": [
+    "FDN_SITE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNSite.findLocalSite",
+   "query": "SELECT o.id FROM FDNSite o WHERE o.tenantId= :tenantId AND o.siteCode = 'Fluig'",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.volume.entity.FDNSite",
+   "source_file": "com/fluig/foundation/volume/entity/FDNSite.java",
+   "owner_table": "FDN_SITE",
+   "tables": [
+    "FDN_SITE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNSite.findBySiteCode",
+   "query": "SELECT o FROM FDNSite o WHERE o.tenantId = :tenantId and o.siteCode = :siteCode",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.volume.entity.FDNSite",
+   "source_file": "com/fluig/foundation/volume/entity/FDNSite.java",
+   "owner_table": "FDN_SITE",
+   "tables": [
+    "FDN_SITE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNSite.findByCode",
+   "query": "SELECT o FROM FDNSite o WHERE o.siteCode = :siteCode AND o.active = true",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.volume.entity.FDNSite",
+   "source_file": "com/fluig/foundation/volume/entity/FDNSite.java",
+   "owner_table": "FDN_SITE",
+   "tables": [
+    "FDN_SITE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNSite.inactivate",
+   "query": "UPDATE FDNSite SET local = null, siteCode = :newSiteCode, active = false WHERE tenantId = :tenantId AND id = :siteId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.volume.entity.FDNSite",
+   "source_file": "com/fluig/foundation/volume/entity/FDNSite.java",
+   "owner_table": "FDN_SITE",
+   "tables": [
+    "FDN_SITE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "SITE_ID",

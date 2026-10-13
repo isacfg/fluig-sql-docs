@@ -1,0 +1,87 @@
+{
+  "name": "FDN_RESOURCETYPE",
+  "domain": "foundation-identity-access",
+  "purpose": "Tipos de recurso protegível (categorias de FDN_RESOURCE).",
+  "schema_card": "by_table/FDN_RESOURCETYPE.json",
+  "business_concepts": [
+    "foundation-identity-access",
+    "FDN_RESOURCETYPE"
+  ],
+  "grain": {
+    "description": "Tipos de recurso protegível (categorias de FDN_RESOURCE). Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "RESOURCE_TYPE_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_RESOURCETYPE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0548",
+      "table": "FDN_RESOURCE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0555",
+      "table": "FDN_RESOURCE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0557",
+      "table": "FDN_RESOURCETYPEPERMISSION",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0560",
+      "table": "FDN_RESOURCETYPEPERMISSION",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FDNRESOURCETYPEI001",
+      "unique": false,
+      "columns": [
+        "RESOURCE_TYPE_CODE"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_RESOURCETYPE.json",
+  "observed_query_count": 4,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Tipos de recurso protegível (categorias de FDN_RESOURCE). Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "RESOURCE_TYPE_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

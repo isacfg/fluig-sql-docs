@@ -17,6 +17,6 @@ for i, b in enumerate(batches, 1):
             columns=[dict(name=c['name'], type=c['type'], nullable=c['nullable'], default=c['default'], java=[dict(field=j['field'], type=j['type'], entity=j['entity'], enum=j['enum'], lob=j['lob']) for j in c['java']]) for c in t['columns']],
             uniques=t['uniques'], indexes=[dict(name=x['name'], unique=x['unique'], cols=x['cols']) for x in t['indexes']],
             candidate_relations=[dict(to=r['to_table'], from_cols=r['from_cols'], to_cols=r['to_cols'], kind=r['kind'], evidence=r['evidence']) for r in t['rel']],
-            named_queries=t['queries'][:12]))
+            named_queries=t.get('observed_queries', t['queries'])[:12]))
     json.dump(dict(batch=i, tables=tabs), open(f'batches/batch_{i:02d}.json', 'w'), indent=1, ensure_ascii=False)
     print(i, len(b), sum(len(t['columns']) for t in b), b[0]['domain'], '..', b[-1]['domain'], [t['name'] for t in b][:3])

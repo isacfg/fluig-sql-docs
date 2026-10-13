@@ -1,0 +1,337 @@
+{
+  "name": "FDN_GROUPUSERROLE",
+  "domain": "foundation-identity-access",
+  "purpose": "Tabela de associação de membros de grupo: liga um grupo a um usuário (LOGIN), a um papel (ROLE_CODE) ou a um subgrupo (CHILD_GROUPCODE).",
+  "schema_card": "by_table/FDN_GROUPUSERROLE.json",
+  "business_concepts": [
+    "membro do grupo",
+    "subgrupo",
+    "group membership"
+  ],
+  "grain": {
+    "description": "Um vínculo de grupo com usuário, subgrupo ou papel; não necessariamente um membro usuário.",
+    "columns": [
+      "GROUPUSERROLE_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "reviewed-schema-description",
+    "business_grain_reviewed": true
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {
+    "direct_users": [
+      "LOGIN IS NOT NULL"
+    ]
+  },
+  "semantic_evidence": "by_table/FDN_GROUPUSERROLE.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values",
+  "canonical_joins": [
+    {
+      "id": "join-0441",
+      "from_table": "FDN_GROUPUSERROLE",
+      "to_table": "FDN_USERTENANT",
+      "on": [
+        "FDN_GROUPUSERROLE.TENANT_ID = FDN_USERTENANT.TENANT_ID",
+        "FDN_GROUPUSERROLE.LOGIN = FDN_USERTENANT.LOGIN"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "LOGIN",
+          "to_column": "LOGIN"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Usuário membro (FDNGroupUserRole.user); junção apenas por LOGIN.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0443",
+      "from_table": "FDN_GROUPUSERROLE",
+      "to_table": "FDN_ROLE",
+      "on": [
+        "FDN_GROUPUSERROLE.TENANT_ID = FDN_ROLE.TENANT_ID",
+        "FDN_GROUPUSERROLE.ROLE_CODE = FDN_ROLE.ROLE_CODE"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "ROLE_CODE",
+          "to_column": "ROLE_CODE"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Papel associado ao grupo.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0445",
+      "from_table": "FDN_GROUPUSERROLE",
+      "to_table": "FDN_GROUP",
+      "on": [
+        "FDN_GROUPUSERROLE.TENANT_ID = FDN_GROUP.TENANT_ID",
+        "FDN_GROUPUSERROLE.CHILD_GROUPCODE = FDN_GROUP.GROUP_CODE"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "CHILD_GROUPCODE",
+          "to_column": "GROUP_CODE"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Subgrupo membro.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0447",
+      "from_table": "FDN_GROUPUSERROLE",
+      "to_table": "FDN_GROUP",
+      "on": [
+        "FDN_GROUPUSERROLE.TENANT_ID = FDN_GROUP.TENANT_ID",
+        "FDN_GROUPUSERROLE.GROUP_CODE = FDN_GROUP.GROUP_CODE"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "GROUP_CODE",
+          "to_column": "GROUP_CODE"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Grupo pai (FK física composta).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0449",
+      "from_table": "FDN_GROUPUSERROLE",
+      "to_table": "FDN_TENANT",
+      "on": [
+        "FDN_GROUPUSERROLE.TENANT_ID = FDN_TENANT.TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Tenant ao qual o registro pertence.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0441",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0443",
+      "table": "FDN_ROLE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0445",
+      "table": "FDN_GROUP",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0447",
+      "table": "FDN_GROUP",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0449",
+      "table": "FDN_TENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FDNUSERGROUPRI001",
+      "unique": false,
+      "columns": [
+        "LOGIN",
+        "GROUP_CODE"
+      ]
+    },
+    {
+      "name": "FDNUSERGROUPRI002",
+      "unique": false,
+      "columns": [
+        "ROLE_CODE",
+        "GROUP_CODE"
+      ]
+    },
+    {
+      "name": "FDNUSERGROUPRI003",
+      "unique": false,
+      "columns": [
+        "CHILD_GROUPCODE",
+        "GROUP_CODE"
+      ]
+    },
+    {
+      "name": "FDNUSERGROUPRI004",
+      "unique": false,
+      "columns": [
+        "TENANT_ID",
+        "GROUP_CODE"
+      ]
+    },
+    {
+      "name": "FDNUSERGROUPRI005",
+      "unique": false,
+      "columns": [
+        "TENANT_ID",
+        "ROLE_CODE"
+      ]
+    },
+    {
+      "name": "FKfwbai78xt64hryxiljewqu98e",
+      "unique": false,
+      "columns": [
+        "TENANT_ID",
+        "CHILD_GROUPCODE"
+      ]
+    }
+  ],
+  "query_examples": [
+    "recipes/users/direct_group_members.sql"
+  ],
+  "observed_queries_path": "agent/observed_queries/FDN_GROUPUSERROLE.json",
+  "observed_query_count": 20,
+  "warnings": [
+    "Direct membership does not resolve nested groups or effective permissions."
+  ],
+  "query_semantics": {
+    "grain": {
+      "description": "Um vínculo de grupo com usuário, subgrupo ou papel; não necessariamente um membro usuário.",
+      "columns": [
+        "GROUPUSERROLE_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "reviewed-schema-description",
+      "business_grain_reviewed": true
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {
+      "direct_users": [
+        "LOGIN IS NOT NULL"
+      ]
+    }
+  }
+}

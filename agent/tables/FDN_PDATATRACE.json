@@ -1,0 +1,172 @@
+{
+  "name": "FDN_PDATATRACE",
+  "domain": "privacy-lgpd",
+  "purpose": "Rastro de acesso/alteração de dados pessoais (LGPD): quem, quando, qual recurso e campos.",
+  "schema_card": "by_table/FDN_PDATATRACE.json",
+  "business_concepts": [
+    "privacy-lgpd",
+    "FDN_PDATATRACE"
+  ],
+  "grain": {
+    "description": "Rastro de acesso/alteração de dados pessoais (LGPD): quem, quando, qual recurso e campos. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "PDATATRACE_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_PDATATRACE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0491",
+      "from_table": "FDN_PDATATRACE",
+      "to_table": "FDN_USERTENANT",
+      "on": [
+        "FDN_PDATATRACE.TENANT_ID = FDN_USERTENANT.TENANT_ID",
+        "FDN_PDATATRACE.USER_TENANT_ID = FDN_USERTENANT.USER_TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "USER_TENANT_ID",
+          "to_column": "USER_TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Usuário associado ao evento.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance.",
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0493",
+      "from_table": "FDN_PDATATRACE",
+      "to_table": "FDN_PERSONALDATA",
+      "on": [
+        "FDN_PDATATRACE.TENANT_ID = FDN_PERSONALDATA.TENANT_ID",
+        "FDN_PDATATRACE.RESOURCE_TABLE = FDN_PERSONALDATA.TABLE_ID",
+        "FDN_PDATATRACE.FIELDS = FDN_PERSONALDATA.FIELD_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "RESOURCE_TABLE",
+          "to_column": "TABLE_ID"
+        },
+        {
+          "from_column": "FIELDS",
+          "to_column": "FIELD_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Catálogo de dados pessoais correspondente à tabela/campos rastreados.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance.",
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0491",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0493",
+      "table": "FDN_PERSONALDATA",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "fdn_pdatatrace__idx1",
+      "unique": false,
+      "columns": [
+        "TENANT_ID",
+        "USER_TENANT_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_PDATATRACE.json",
+  "observed_query_count": 5,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Rastro de acesso/alteração de dados pessoais (LGPD): quem, quando, qual recurso e campos. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "PDATATRACE_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

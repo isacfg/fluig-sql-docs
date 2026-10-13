@@ -15,6 +15,44 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.dm.model.CustomFields"
  ],
+ "observed_queries": [
+  {
+   "name": "CustomFields.findAll",
+   "query": "SELECT cf FROM CustomFields cf WHERE cf.customFieldsPK.companyId = :companyId ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.CustomFields",
+   "source_file": "com/datasul/technology/webdesk/dm/model/CustomFields.java",
+   "owner_table": "CAMPO_CUSTOM",
+   "tables": [
+    "CAMPO_CUSTOM"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "CustomFields.findAlwaysShow",
+   "query": "SELECT cf FROM CustomFields cf WHERE cf.customFieldsPK.companyId = :companyId and cf.alwaysShow = true",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.CustomFields",
+   "source_file": "com/datasul/technology/webdesk/dm/model/CustomFields.java",
+   "owner_table": "CAMPO_CUSTOM",
+   "tables": [
+    "CAMPO_CUSTOM"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",

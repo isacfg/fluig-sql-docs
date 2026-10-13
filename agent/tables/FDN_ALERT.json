@@ -1,0 +1,380 @@
+{
+  "name": "FDN_ALERT",
+  "domain": "foundation-alert",
+  "purpose": "Alerta/notificacao da central de alertas do Fluig destinado a um usuario (receiver), ligado a um tipo de evento, a um objeto e a um local.",
+  "schema_card": "by_table/FDN_ALERT.json",
+  "business_concepts": [
+    "foundation-alert",
+    "FDN_ALERT"
+  ],
+  "grain": {
+    "description": "Alerta/notificacao da central de alertas do Fluig destinado a um usuario (receiver), ligado a um tipo de evento, a um objeto e a um local. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_ALERT.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0365",
+      "from_table": "FDN_ALERT",
+      "to_table": "FDN_USERTENANT",
+      "on": [
+        "FDN_ALERT.RECEIVER_ID = FDN_USERTENANT.USER_TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "RECEIVER_ID",
+          "to_column": "USER_TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Destinatario do alerta.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0367",
+      "from_table": "FDN_ALERT",
+      "to_table": "FDN_ALERTEVENTTYPE",
+      "on": [
+        "FDN_ALERT.EVENT_TYPE_ID = FDN_ALERTEVENTTYPE.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "EVENT_TYPE_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Tipo de evento.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0369",
+      "from_table": "FDN_ALERT",
+      "to_table": "FDN_ALERTOBJECT",
+      "on": [
+        "FDN_ALERT.OBJECT_ID = FDN_ALERTOBJECT.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "OBJECT_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Objeto alvo do alerta.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0371",
+      "from_table": "FDN_ALERT",
+      "to_table": "FDN_ALERTOBJECT",
+      "on": [
+        "FDN_ALERT.PLACE_ID = FDN_ALERTOBJECT.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "PLACE_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Local do evento.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0404",
+      "from_table": "FDN_ALERT",
+      "to_table": "FDN_ALERTOBJECT",
+      "on": [
+        "FDN_ALERT.OBJECT_ID = FDN_ALERTOBJECT.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "OBJECT_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Alertas que apontam para este objeto.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0406",
+      "from_table": "FDN_ALERT",
+      "to_table": "FDN_ALERTOBJECT",
+      "on": [
+        "FDN_ALERT.PLACE_ID = FDN_ALERTOBJECT.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "PLACE_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Alertas que usam este objeto como local.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0365",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0367",
+      "table": "FDN_ALERTEVENTTYPE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0369",
+      "table": "FDN_ALERTOBJECT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0371",
+      "table": "FDN_ALERTOBJECT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0373",
+      "table": "FDN_ALERTACTION",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0375",
+      "table": "FDN_ALERTMETADATA",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0377",
+      "table": "FDN_ALERTSENDER",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0380",
+      "table": "FDN_ALERTACTION",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0398",
+      "table": "FDN_ALERTMETADATA",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0404",
+      "table": "FDN_ALERTOBJECT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0406",
+      "table": "FDN_ALERTOBJECT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0410",
+      "table": "FDN_ALERTSENDER",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FDNALERTI002",
+      "unique": false,
+      "columns": [
+        "RECEIVER_ID",
+        "IS_READ"
+      ]
+    },
+    {
+      "name": "FDNALERTI003",
+      "unique": false,
+      "columns": [
+        "RECEIVER_ID",
+        "CREATION_DATE"
+      ]
+    },
+    {
+      "name": "FDNALERTI004",
+      "unique": false,
+      "columns": [
+        "CREATION_DATE"
+      ]
+    },
+    {
+      "name": "FDNALERTI005",
+      "unique": false,
+      "columns": [
+        "EVENT_TYPE_ID",
+        "RECEIVER_ID",
+        "IS_READ"
+      ]
+    },
+    {
+      "name": "FDNALERTI006",
+      "unique": false,
+      "columns": [
+        "EVENT_TYPE_ID",
+        "CREATION_DATE",
+        "IS_READ",
+        "RECEIVER_ID"
+      ]
+    },
+    {
+      "name": "FK_5J91TOHMRQOAQH4R4H1CQ7U0J",
+      "unique": false,
+      "columns": [
+        "EVENT_TYPE_ID"
+      ]
+    },
+    {
+      "name": "FK_5XQOYWDMPIXHTFDL9JA0XGR2T",
+      "unique": false,
+      "columns": [
+        "OBJECT_ID"
+      ]
+    },
+    {
+      "name": "FK_EFLCRY1BMVBM7EM8K8XGFYXVJ",
+      "unique": false,
+      "columns": [
+        "PLACE_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_ALERT.json",
+  "observed_query_count": 26,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Alerta/notificacao da central de alertas do Fluig destinado a um usuario (receiver), ligado a um tipo de evento, a um objeto e a um local. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

@@ -1,0 +1,663 @@
+{
+  "name": "FDN_USERTENANT",
+  "domain": "foundation-identity-access",
+  "purpose": "Vínculo do usuário (FDN_USER) com um tenant: contém login, e-mail, senha, estado e identificadores usados na autenticação.",
+  "schema_card": "by_table/FDN_USERTENANT.json",
+  "business_concepts": [
+    "usuário do tenant",
+    "matrícula",
+    "login",
+    "tenant user"
+  ],
+  "grain": {
+    "description": "Um vínculo de usuário global com tenant, identificado por USER_TENANT_ID; USER_CODE não possui UNIQUE declarado.",
+    "columns": [
+      "USER_TENANT_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "reviewed-schema-description",
+    "business_grain_reviewed": true
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {
+    "active": [
+      "USER_STATE = 1"
+    ],
+    "by_user_code": [
+      "USER_CODE = :user_code"
+    ]
+  },
+  "semantic_evidence": "by_table/FDN_USERTENANT.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values",
+  "canonical_joins": [
+    {
+      "id": "join-0594",
+      "from_table": "FDN_USERTENANT",
+      "to_table": "FDN_TENANT",
+      "on": [
+        "FDN_USERTENANT.TENANT_ID = FDN_TENANT.TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Usuários do tenant.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0604",
+      "from_table": "FDN_USERTENANT",
+      "to_table": "FDN_USER",
+      "on": [
+        "FDN_USERTENANT.USER_ID = FDN_USER.USER_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "USER_ID",
+          "to_column": "USER_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Vínculos do usuário com tenants.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0610",
+      "from_table": "FDN_USERTENANT",
+      "to_table": "FDN_USERLOGGING",
+      "on": [
+        "FDN_USERTENANT.TENANT_ID = FDN_USERLOGGING.TENANT_ID",
+        "FDN_USERTENANT.LOGIN = FDN_USERLOGGING.LOGIN"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "LOGIN",
+          "to_column": "LOGIN"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Usuário (FK por LOGIN).",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0614",
+      "from_table": "FDN_USERTENANT",
+      "to_table": "FDN_USERPICTURE",
+      "on": [
+        "FDN_USERTENANT.USER_TENANT_ID = FDN_USERPICTURE.USER_TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "USER_TENANT_ID",
+          "to_column": "USER_TENANT_ID"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Usuário dono da foto.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0621",
+      "from_table": "FDN_USERTENANT",
+      "to_table": "FDN_USER",
+      "on": [
+        "FDN_USERTENANT.USER_ID = FDN_USER.USER_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "USER_ID",
+          "to_column": "USER_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Usuário global.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0623",
+      "from_table": "FDN_USERTENANT",
+      "to_table": "FDN_TENANT",
+      "on": [
+        "FDN_USERTENANT.TENANT_ID = FDN_TENANT.TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Tenant ao qual o registro pertence.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0625",
+      "from_table": "FDN_USERTENANT",
+      "to_table": "FDN_USERTENANT",
+      "on": [
+        "FDN_USERTENANT.TENANT_ID = FDN_USERTENANT.TENANT_ID",
+        "FDN_USERTENANT.ANONYMIZATION_USER_ID = FDN_USERTENANT.USER_TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "ANONYMIZATION_USER_ID",
+          "to_column": "USER_TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Quem anonimizou.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0040",
+      "table": "COLAB_SUBSTTO",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0128",
+      "table": "DOCUMENTO",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0312",
+      "table": "FACT_ACTIVITY_COST_CAP",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0324",
+      "table": "FACT_ACTIVITY_VOLUME_CAP",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0338",
+      "table": "FACT_FLOW_VOLUME_CAP",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0346",
+      "table": "FACT_PROCES_COST_CAP",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0354",
+      "table": "FACT_PROCES_VOLUME_CAP",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0366",
+      "table": "FDN_ALERT",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0386",
+      "table": "FDN_ALERTCONFIG",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0408",
+      "table": "FDN_ALERTSENDER",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0424",
+      "table": "FDN_DATASETHISTORY",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0430",
+      "table": "FDN_DOWNLOADNOTIFY",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0442",
+      "table": "FDN_GROUPUSERROLE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0460",
+      "table": "FDN_JAASUSERGROUP",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0474",
+      "table": "FDN_LOCALUSER",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0486",
+      "table": "FDN_OAUTHAPPUSER",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0492",
+      "table": "FDN_PDATATRACE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0508",
+      "table": "FDN_PERMISSION",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0530",
+      "table": "FDN_PERSONALDATA",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0532",
+      "table": "FDN_PERSONALDATA",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0594",
+      "table": "FDN_TENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0604",
+      "table": "FDN_USER",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0606",
+      "table": "FDN_USERDATA",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0608",
+      "table": "FDN_USERDATA",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0610",
+      "table": "FDN_USERLOGGING",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0614",
+      "table": "FDN_USERPICTURE",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0616",
+      "table": "FDN_USERROLE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0621",
+      "table": "FDN_USER",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0623",
+      "table": "FDN_TENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0625",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0626",
+      "table": "FDN_USERTENANT",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0627",
+      "table": "FDN_USERDATA",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0631",
+      "table": "FDN_PERMISSION",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0674",
+      "table": "FILTER_GROUP",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0682",
+      "table": "FLUIG_AUDIT",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0846",
+      "table": "PROCES_WORKFLOW_ERROR_LOG",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0880",
+      "table": "RESET_PASSWORD_TOKEN",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0892",
+      "table": "SESSAO_TOKEN",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0996",
+      "table": "TAR_PROCES",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1018",
+      "table": "USER_DIM_CAP",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1020",
+      "table": "VAL_HORA_COLAB",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1022",
+      "table": "VERBOSE_SCRIPT_LOG",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1096",
+      "table": "WCM_PAGEVERSION",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FDNUSERTENI001",
+      "unique": false,
+      "columns": [
+        "EMAIL",
+        "TENANT_ID"
+      ]
+    },
+    {
+      "name": "FDNUSERTENI003",
+      "unique": false,
+      "columns": [
+        "TENANT_ID",
+        "idp_id"
+      ]
+    },
+    {
+      "name": "FDNUSERTENI002",
+      "unique": false,
+      "columns": [
+        "TENANT_ID",
+        "USER_CODE"
+      ]
+    },
+    {
+      "name": "FDNUSERTENI004",
+      "unique": false,
+      "columns": [
+        "TENANT_ID",
+        "USER_STATE"
+      ]
+    },
+    {
+      "name": "FDNUSERTENI005",
+      "unique": false,
+      "columns": [
+        "USER_CODE"
+      ]
+    },
+    {
+      "name": "FK_QHN8G1324PC7EVBY2GEW74ANL",
+      "unique": false,
+      "columns": [
+        "USER_ID"
+      ]
+    }
+  ],
+  "query_examples": [
+    "recipes/users/active_users.sql",
+    "recipes/users/user_by_code.sql",
+    "recipes/users/direct_group_members.sql"
+  ],
+  "observed_queries_path": "agent/observed_queries/FDN_USERTENANT.json",
+  "observed_query_count": 40,
+  "warnings": [
+    "USER_CODE + TENANT_ID has a non-unique index, not a UNIQUE constraint; legacy matrícula joins require a data uniqueness check.",
+    "LOGIN is globally UNIQUE in this clean-install DDL; retain tenant predicates for scoped business queries."
+  ],
+  "query_semantics": {
+    "grain": {
+      "description": "Um vínculo de usuário global com tenant, identificado por USER_TENANT_ID; USER_CODE não possui UNIQUE declarado.",
+      "columns": [
+        "USER_TENANT_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "reviewed-schema-description",
+      "business_grain_reviewed": true
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {
+      "active": [
+        "USER_STATE = 1"
+      ],
+      "by_user_code": [
+        "USER_CODE = :user_code"
+      ]
+    }
+  }
+}

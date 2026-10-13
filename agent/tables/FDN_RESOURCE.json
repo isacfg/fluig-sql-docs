@@ -1,0 +1,349 @@
+{
+  "name": "FDN_RESOURCE",
+  "domain": "foundation-identity-access",
+  "purpose": "Recurso protegido por permissão (tela, serviço, documento, método de API etc.), organizado em hierarquia e classificado por tipo.",
+  "schema_card": "by_table/FDN_RESOURCE.json",
+  "business_concepts": [
+    "foundation-identity-access",
+    "FDN_RESOURCE"
+  ],
+  "grain": {
+    "description": "Recurso protegido por permissão (tela, serviço, documento, método de API etc.), organizado em hierarquia e classificado por tipo. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "RESOURCE_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_RESOURCE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0547",
+      "from_table": "FDN_RESOURCE",
+      "to_table": "FDN_RESOURCETYPE",
+      "on": [
+        "FDN_RESOURCE.RESOURCE_TYPE_ID = FDN_RESOURCETYPE.RESOURCE_TYPE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "RESOURCE_TYPE_ID",
+          "to_column": "RESOURCE_TYPE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Tipo do recurso.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0549",
+      "from_table": "FDN_RESOURCE",
+      "to_table": "FDN_RESOURCE",
+      "on": [
+        "FDN_RESOURCE.TENANT_ID = FDN_RESOURCE.TENANT_ID",
+        "FDN_RESOURCE.PARENT_ID = FDN_RESOURCE.RESOURCE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "PARENT_ID",
+          "to_column": "RESOURCE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Recurso pai (hierarquia).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0556",
+      "from_table": "FDN_RESOURCE",
+      "to_table": "FDN_RESOURCETYPE",
+      "on": [
+        "FDN_RESOURCE.RESOURCE_TYPE_ID = FDN_RESOURCETYPE.RESOURCE_TYPE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "RESOURCE_TYPE_ID",
+          "to_column": "RESOURCE_TYPE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Recursos deste tipo.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1092",
+      "from_table": "FDN_RESOURCE",
+      "to_table": "WCM_PAGE",
+      "on": [
+        "FDN_RESOURCE.TENANT_ID = WCM_PAGE.TENANT_ID",
+        "FDN_RESOURCE.RESOURCE_ID = WCM_PAGE.PAGE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "RESOURCE_ID",
+          "to_column": "PAGE_ID"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "hql-join",
+      "evidence": "FDNResource.findAllResourcesByFilterWithExcludeListWithoutForbiddenCodes",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0418",
+      "table": "FDN_CATEGORY_RESOURCE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0506",
+      "table": "FDN_PERMISSION",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0522",
+      "table": "FDN_PERMISSION_MAPPING",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0524",
+      "table": "FDN_PERMISSION_MAPPING",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0547",
+      "table": "FDN_RESOURCETYPE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0549",
+      "table": "FDN_RESOURCE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0550",
+      "table": "FDN_RESOURCE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0551",
+      "table": "FDN_PERMISSION",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0553",
+      "table": "FDN_RESTORE_PERMISSION_MAPPING",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0556",
+      "table": "FDN_RESOURCETYPE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0562",
+      "table": "FDN_RESTORE_PERMISSION_MAPPING",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1082",
+      "table": "WCM_MENUITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1086",
+      "table": "WCM_PAGE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1092",
+      "table": "WCM_PAGE",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FDNRESOURCEI001",
+      "unique": false,
+      "columns": [
+        "RESOURCE_CODE",
+        "RESOURCE_TYPE_ID",
+        "TENANT_ID"
+      ]
+    },
+    {
+      "name": "FDNRESOURCEI002",
+      "unique": false,
+      "columns": [
+        "RESOURCE_CODE",
+        "TENANT_ID"
+      ]
+    },
+    {
+      "name": "FDNRESOURCEI003",
+      "unique": false,
+      "columns": [
+        "TENANT_ID",
+        "RESOURCE_TYPE_ID",
+        "RESOURCE_ID"
+      ]
+    },
+    {
+      "name": "FDNRESOURCEI004",
+      "unique": false,
+      "columns": [
+        "INTERNAL",
+        "TENANT_ID"
+      ]
+    },
+    {
+      "name": "FK_BUUI78YNPCODCCXS9LBOI427F",
+      "unique": false,
+      "columns": [
+        "PARENT_ID"
+      ]
+    },
+    {
+      "name": "FK_58BWMDKLR41YJ7UEL2P01RJN7",
+      "unique": false,
+      "columns": [
+        "RESOURCE_TYPE_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_RESOURCE.json",
+  "observed_query_count": 26,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Recurso protegido por permissão (tela, serviço, documento, método de API etc.), organizado em hierarquia e classificado por tipo. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "RESOURCE_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

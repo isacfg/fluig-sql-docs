@@ -18,6 +18,152 @@
   "com.datasul.technology.webdesk.dm.model.AllocatedDocument",
   "com.datasul.technology.webdesk.dm.model.LockedDocument"
  ],
+ "observed_queries": [
+  {
+   "name": "AllocatedDocument.isWebDavEditable",
+   "query": "SELECT ad FROM AllocatedDocument ad WHERE ad.allocatedDocumentPK.companyId = :companyId AND ad.allocatedDocumentPK.destinationDocument = :documentId AND ad.active = true",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.AllocatedDocument",
+   "source_file": "com/datasul/technology/webdesk/dm/model/AllocatedDocument.java",
+   "owner_table": "DOCTO_ALOCAD",
+   "tables": [
+    "DOCTO_ALOCAD"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "AllocatedDocument.findActiveDestiny",
+   "query": "SELECT d FROM AllocatedDocument d WHERE d.allocatedDocumentPK.companyId = :companyId AND d.allocatedDocumentPK.destinationDocument = :destinationDocument AND d.colleagueId = :colleagueId AND d.active = :active",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.AllocatedDocument",
+   "source_file": "com/datasul/technology/webdesk/dm/model/AllocatedDocument.java",
+   "owner_table": "DOCTO_ALOCAD",
+   "tables": [
+    "DOCTO_ALOCAD"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "AllocatedDocument.findActiveOrigin",
+   "query": "SELECT d FROM AllocatedDocument d WHERE d.allocatedDocumentPK.companyId = :companyId AND d.allocatedDocumentPK.sourceDocument = :sourceDocument AND d.allocatedDocumentPK.sourceVersion = :sourceVersion AND d.active = :active",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.AllocatedDocument",
+   "source_file": "com/datasul/technology/webdesk/dm/model/AllocatedDocument.java",
+   "owner_table": "DOCTO_ALOCAD",
+   "tables": [
+    "DOCTO_ALOCAD"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "AllocatedDocument.findAllocatedDocumentById",
+   "query": "SELECT d FROM AllocatedDocument d WHERE d.allocatedDocumentPK.companyId = :companyId AND (d.allocatedDocumentPK.destinationDocument = :documentId OR (d.allocatedDocumentPK.sourceDocument = :documentId AND (:version is null OR d.allocatedDocumentPK.sourceVersion = :version)))  AND d.active = :active",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.AllocatedDocument",
+   "source_file": "com/datasul/technology/webdesk/dm/model/AllocatedDocument.java",
+   "owner_table": "DOCTO_ALOCAD",
+   "tables": [
+    "DOCTO_ALOCAD"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "AllocatedDocument.findAllocatedDocumentByIdAndUser",
+   "query": "SELECT d FROM AllocatedDocument d WHERE d.allocatedDocumentPK.companyId = :companyId AND (d.allocatedDocumentPK.destinationDocument = :documentId OR (d.allocatedDocumentPK.sourceDocument = :documentId AND (:version is null OR d.allocatedDocumentPK.sourceVersion = :version)))  AND d.active = :active AND d.colleagueId = :colleagueId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.AllocatedDocument",
+   "source_file": "com/datasul/technology/webdesk/dm/model/AllocatedDocument.java",
+   "owner_table": "DOCTO_ALOCAD",
+   "tables": [
+    "DOCTO_ALOCAD"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "AllocatedDocument.findActive",
+   "query": "SELECT d FROM AllocatedDocument d WHERE d.allocatedDocumentPK.companyId = :companyId AND (d.allocatedDocumentPK.sourceDocument = :documentId OR d.allocatedDocumentPK.destinationDocument = :documentId) AND d.active = :active",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.AllocatedDocument",
+   "source_file": "com/datasul/technology/webdesk/dm/model/AllocatedDocument.java",
+   "owner_table": "DOCTO_ALOCAD",
+   "tables": [
+    "DOCTO_ALOCAD"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "LockedDocument.findByDestinationDocument",
+   "query": "SELECT d FROM LockedDocument d WHERE d.lockedDocumentPK.companyId = :companyId AND d.lockedDocumentPK.destinationDocument = :destinationDocument AND d.colleagueId = :colleagueId AND d.active = :active",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.LockedDocument",
+   "source_file": "com/datasul/technology/webdesk/dm/model/LockedDocument.java",
+   "owner_table": "DOCTO_ALOCAD",
+   "tables": [
+    "DOCTO_ALOCAD"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "LockedDocument.findBySourceDocument",
+   "query": "SELECT d FROM LockedDocument d WHERE d.lockedDocumentPK.companyId = :companyId AND d.lockedDocumentPK.sourceDocument = :sourceDocument AND d.lockedDocumentPK.sourceVersion = :sourceVersion AND d.active = :active",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.LockedDocument",
+   "source_file": "com/datasul/technology/webdesk/dm/model/LockedDocument.java",
+   "owner_table": "DOCTO_ALOCAD",
+   "tables": [
+    "DOCTO_ALOCAD"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",

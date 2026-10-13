@@ -20,6 +20,7 @@
  "jpa_entities": [
   "com.fluig.metadataform.model.ZoomFilterField"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "ID",

@@ -1,0 +1,117 @@
+{
+  "name": "POLICYDOCUMENT",
+  "domain": "use-policy",
+  "purpose": "Documento de política de uso (termos) em um idioma, com versão de documento, flag de padrão e exigência de consentimento.",
+  "schema_card": "by_table/POLICYDOCUMENT.json",
+  "business_concepts": [
+    "use-policy",
+    "POLICYDOCUMENT"
+  ],
+  "grain": {
+    "description": "Documento de política de uso (termos) em um idioma, com versão de documento, flag de padrão e exigência de consentimento. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "id"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/POLICYDOCUMENT.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-1014",
+      "from_table": "POLICYDOCUMENT",
+      "to_table": "USEPOLICY_POLICYDOCUMENT",
+      "on": [
+        "POLICYDOCUMENT.ID = USEPOLICY_POLICYDOCUMENT.DOCUMENTS_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "ID",
+          "to_column": "DOCUMENTS_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Documento da política.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0791",
+      "table": "POLICYUSER",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0796",
+      "table": "POLICYDOCUMENT_POLICYUSER",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0798",
+      "table": "POLICYUSER",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1012",
+      "table": "USEPOLICY",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1014",
+      "table": "USEPOLICY_POLICYDOCUMENT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Documento de política de uso (termos) em um idioma, com versão de documento, flag de padrão e exigência de consentimento. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "id"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

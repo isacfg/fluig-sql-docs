@@ -1,0 +1,171 @@
+{
+  "name": "FDN_VOLUMESITE",
+  "domain": "foundation-platform",
+  "purpose": "Associa um volume de armazenamento a um site, informando o caminho físico (STORAGE) usado por esse site naquele volume.",
+  "schema_card": "by_table/FDN_VOLUMESITE.json",
+  "business_concepts": [
+    "foundation-platform",
+    "FDN_VOLUMESITE"
+  ],
+  "grain": {
+    "description": "Associa um volume de armazenamento a um site, informando o caminho físico (STORAGE) usado por esse site naquele volume. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "VOLUMESITE_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_VOLUMESITE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0640",
+      "from_table": "FDN_VOLUMESITE",
+      "to_table": "FDN_VOLUME",
+      "on": [
+        "FDN_VOLUMESITE.VOLUME_ID = FDN_VOLUME.VOLUME_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "VOLUME_ID",
+          "to_column": "VOLUME_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Mapeamentos do volume para sites com caminho de storage.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0641",
+      "from_table": "FDN_VOLUMESITE",
+      "to_table": "FDN_VOLUME",
+      "on": [
+        "FDN_VOLUMESITE.VOLUME_ID = FDN_VOLUME.VOLUME_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "VOLUME_ID",
+          "to_column": "VOLUME_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Volume vinculado (FDNVolumeSite.volume).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0643",
+      "from_table": "FDN_VOLUMESITE",
+      "to_table": "FDN_SITE",
+      "on": [
+        "FDN_VOLUMESITE.SITE_ID = FDN_SITE.SITE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "SITE_ID",
+          "to_column": "SITE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Site vinculado.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0640",
+      "table": "FDN_VOLUME",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0641",
+      "table": "FDN_VOLUME",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0643",
+      "table": "FDN_SITE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FK_9JODRY492AMD4AHS0O7C4T3KW",
+      "unique": false,
+      "columns": [
+        "SITE_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_VOLUMESITE.json",
+  "observed_query_count": 5,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Associa um volume de armazenamento a um site, informando o caminho físico (STORAGE) usado por esse site naquele volume. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "VOLUMESITE_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

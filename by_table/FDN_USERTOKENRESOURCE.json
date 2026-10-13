@@ -19,6 +19,80 @@
  "jpa_entities": [
   "com.totvs.technology.foundation.security.entity.FDNUserTokenResource"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNUserTokenResource.findAll",
+   "query": "SELECT b FROM FDNUserTokenResource b",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTokenResource",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTokenResource.java",
+   "owner_table": "FDN_USERTOKENRESOURCE",
+   "tables": [
+    "FDN_USERTOKENRESOURCE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTokenResource.findById",
+   "query": "SELECT b FROM FDNUserTokenResource b WHERE b.id = :id",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTokenResource",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTokenResource.java",
+   "owner_table": "FDN_USERTOKENRESOURCE",
+   "tables": [
+    "FDN_USERTOKENRESOURCE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTokenResource.findByToken",
+   "query": "SELECT b FROM FDNUserTokenResource b WHERE b.userToken.token = :token",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTokenResource",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTokenResource.java",
+   "owner_table": "FDN_USERTOKENRESOURCE",
+   "tables": [
+    "FDN_USERTOKENRESOURCE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTokenResource.findByTokenResource",
+   "query": "SELECT b FROM FDNUserTokenResource b WHERE b.userToken.token = :token AND b.resource = :resource",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTokenResource",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTokenResource.java",
+   "owner_table": "FDN_USERTOKENRESOURCE",
+   "tables": [
+    "FDN_USERTOKENRESOURCE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "USERTOKENRESOURCE_ID",

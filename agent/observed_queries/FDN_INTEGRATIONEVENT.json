@@ -1,0 +1,128 @@
+[
+  {
+    "name": "FDNIntegrationEvent.findAll",
+    "query": "SELECT b FROM FDNIntegrationEvent b",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.integration.entity.FDNIntegrationEvent",
+    "source_file": "com/totvs/technology/foundation/integration/entity/FDNIntegrationEvent.java",
+    "owner_table": "FDN_INTEGRATIONEVENT",
+    "tables": [
+      "FDN_INTEGRATIONEVENT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNIntegrationEvent.findById",
+    "query": "SELECT b FROM FDNIntegrationEvent b WHERE b.id = :id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.integration.entity.FDNIntegrationEvent",
+    "source_file": "com/totvs/technology/foundation/integration/entity/FDNIntegrationEvent.java",
+    "owner_table": "FDN_INTEGRATIONEVENT",
+    "tables": [
+      "FDN_INTEGRATIONEVENT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNIntegrationEvent.findByIntegration",
+    "query": "SELECT b FROM FDNIntegrationEvent b WHERE b.integration.id = :integrationId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.integration.entity.FDNIntegrationEvent",
+    "source_file": "com/totvs/technology/foundation/integration/entity/FDNIntegrationEvent.java",
+    "owner_table": "FDN_INTEGRATIONEVENT",
+    "tables": [
+      "FDN_INTEGRATIONEVENT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNIntegrationEvent.findByEventName",
+    "query": "SELECT b FROM FDNIntegrationEvent b WHERE b.eventName = :eventName",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.integration.entity.FDNIntegrationEvent",
+    "source_file": "com/totvs/technology/foundation/integration/entity/FDNIntegrationEvent.java",
+    "owner_table": "FDN_INTEGRATIONEVENT",
+    "tables": [
+      "FDN_INTEGRATIONEVENT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNIntegrationEvent.findByIntegrationEvent",
+    "query": "SELECT b FROM FDNIntegrationEvent b WHERE b.integration.id = :integrationId AND b.eventName = :eventName",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.integration.entity.FDNIntegrationEvent",
+    "source_file": "com/totvs/technology/foundation/integration/entity/FDNIntegrationEvent.java",
+    "owner_table": "FDN_INTEGRATIONEVENT",
+    "tables": [
+      "FDN_INTEGRATIONEVENT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNIntegrationEvent.findByJndiName",
+    "query": "SELECT b FROM FDNIntegrationEvent b WHERE b.integration.jndiName = :jndiName",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.integration.entity.FDNIntegrationEvent",
+    "source_file": "com/totvs/technology/foundation/integration/entity/FDNIntegrationEvent.java",
+    "owner_table": "FDN_INTEGRATIONEVENT",
+    "tables": [
+      "FDN_INTEGRATIONEVENT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNIntegrationEvent.findByExplicitEventName",
+    "query": "SELECT b FROM FDNIntegrationEvent b WHERE b.eventName = :eventName AND b.explicit = :explicit",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.integration.entity.FDNIntegrationEvent",
+    "source_file": "com/totvs/technology/foundation/integration/entity/FDNIntegrationEvent.java",
+    "owner_table": "FDN_INTEGRATIONEVENT",
+    "tables": [
+      "FDN_INTEGRATIONEVENT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

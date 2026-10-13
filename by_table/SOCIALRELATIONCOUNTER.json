@@ -19,6 +19,134 @@
  "jpa_entities": [
   "com.totvs.technology.social.relation.entity.SocialRelationCounter"
  ],
+ "observed_queries": [
+  {
+   "name": "SocialRelationCounter.ListBySocial",
+   "query": "SELECT t FROM SocialRelationCounter t WHERE t.social.id = :socialId ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.relation.entity.SocialRelationCounter",
+   "source_file": "com/totvs/technology/social/relation/entity/SocialRelationCounter.java",
+   "owner_table": "SOCIALRELATIONCOUNTER",
+   "tables": [
+    "SOCIALRELATIONCOUNTER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialRelationCounter.Find",
+   "query": "SELECT t FROM SocialRelationCounter t WHERE t.social.id = :socialId AND t.relationType = :type",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.relation.entity.SocialRelationCounter",
+   "source_file": "com/totvs/technology/social/relation/entity/SocialRelationCounter.java",
+   "owner_table": "SOCIALRELATIONCOUNTER",
+   "tables": [
+    "SOCIALRELATIONCOUNTER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialRelationCounter.UpdateQuantity",
+   "query": "UPDATE SocialRelationCounter SET quantity = quantity + :modifier WHERE social.id = :socialId AND relationType = :type",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.relation.entity.SocialRelationCounter",
+   "source_file": "com/totvs/technology/social/relation/entity/SocialRelationCounter.java",
+   "owner_table": "SOCIALRELATIONCOUNTER",
+   "tables": [
+    "SOCIALRELATIONCOUNTER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialRelationCounter.SetQuantity",
+   "query": "UPDATE SocialRelationCounter SET quantity = :modifier WHERE social.id = :socialId AND relationType = :type",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.relation.entity.SocialRelationCounter",
+   "source_file": "com/totvs/technology/social/relation/entity/SocialRelationCounter.java",
+   "owner_table": "SOCIALRELATIONCOUNTER",
+   "tables": [
+    "SOCIALRELATIONCOUNTER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialRelationCounter.UpdateGroupQuantity",
+   "query": "UPDATE SocialRelationCounter r SET r.quantity = r.quantity + :modifier WHERE r.relationType in (:type) AND r.social.id in ( SELECT b.social.id FROM SocialRelation b WHERE b.related.id = :socialId AND b.type = r.relationType AND status = 0 ) ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.relation.entity.SocialRelationCounter",
+   "source_file": "com/totvs/technology/social/relation/entity/SocialRelationCounter.java",
+   "owner_table": "SOCIALRELATIONCOUNTER",
+   "tables": [
+    "SOCIALRELATIONCOUNTER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialRelationCounter.ListOrderedByRelation",
+   "query": "SELECT t.social.id  FROM SocialRelationCounter t WHERE t.social.tenantId = :tenantId  AND t.social.type = :socialType AND t.relationType = :relationType AND t.social.hidden = false  AND t.social.state = :state ORDER BY t.quantity DESC",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.relation.entity.SocialRelationCounter",
+   "source_file": "com/totvs/technology/social/relation/entity/SocialRelationCounter.java",
+   "owner_table": "SOCIALRELATIONCOUNTER",
+   "tables": [
+    "SOCIALRELATIONCOUNTER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialRelationCounter.ListOrderedByRelationFilter",
+   "query": "SELECT t.social.id  FROM SocialRelationCounter t WHERE t.social.tenantId = :tenantId  AND t.social.type = :socialType AND t.relationType = :relationType AND t.social.hidden = false  AND LOWER(social.name) like :pattern ORDER BY t.quantity DESC",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.relation.entity.SocialRelationCounter",
+   "source_file": "com/totvs/technology/social/relation/entity/SocialRelationCounter.java",
+   "owner_table": "SOCIALRELATIONCOUNTER",
+   "tables": [
+    "SOCIALRELATIONCOUNTER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "ID",

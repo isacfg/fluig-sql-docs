@@ -1,0 +1,322 @@
+{
+  "name": "FDN_ALERTCONFIG",
+  "domain": "foundation-alert",
+  "purpose": "Preferencia de recebimento de alertas: para um tenant/usuario, evento e canal, define se o alerta e recebido (ligado/desligado/bloqueado).",
+  "schema_card": "by_table/FDN_ALERTCONFIG.json",
+  "business_concepts": [
+    "foundation-alert",
+    "FDN_ALERTCONFIG"
+  ],
+  "grain": {
+    "description": "Preferencia de recebimento de alertas: para um tenant/usuario, evento e canal, define se o alerta e recebido (ligado/desligado/bloqueado). Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_ALERTCONFIG.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0384",
+      "from_table": "FDN_ALERTCONFIG",
+      "to_table": "FDN_ALERTAPPSENDER",
+      "on": [
+        "FDN_ALERTCONFIG.TENANT_ID = FDN_ALERTAPPSENDER.TENANT_ID",
+        "FDN_ALERTCONFIG.SENDER_APP_ID = FDN_ALERTAPPSENDER.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "SENDER_APP_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Preferencias de recebimento por canal.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0385",
+      "from_table": "FDN_ALERTCONFIG",
+      "to_table": "FDN_USERTENANT",
+      "on": [
+        "FDN_ALERTCONFIG.TENANT_ID = FDN_USERTENANT.TENANT_ID",
+        "FDN_ALERTCONFIG.USER_ID = FDN_USERTENANT.USER_TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "USER_ID",
+          "to_column": "USER_TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Usuario dono da preferencia (a relacao e com FDN_USERTENANT, nao FDN_USER).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0387",
+      "from_table": "FDN_ALERTCONFIG",
+      "to_table": "FDN_ALERTEVENTTYPE",
+      "on": [
+        "FDN_ALERTCONFIG.TENANT_ID = FDN_ALERTEVENTTYPE.TENANT_ID",
+        "FDN_ALERTCONFIG.EVENT_TYPE_ID = FDN_ALERTEVENTTYPE.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "EVENT_TYPE_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Evento configurado.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0389",
+      "from_table": "FDN_ALERTCONFIG",
+      "to_table": "FDN_ALERTAPPSENDER",
+      "on": [
+        "FDN_ALERTCONFIG.TENANT_ID = FDN_ALERTAPPSENDER.TENANT_ID",
+        "FDN_ALERTCONFIG.SENDER_APP_ID = FDN_ALERTAPPSENDER.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "SENDER_APP_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Canal configurado.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0391",
+      "from_table": "FDN_ALERTCONFIG",
+      "to_table": "FDN_TENANT",
+      "on": [
+        "FDN_ALERTCONFIG.TENANT_ID = FDN_TENANT.TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Tenant.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0384",
+      "table": "FDN_ALERTAPPSENDER",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0385",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0387",
+      "table": "FDN_ALERTEVENTTYPE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0389",
+      "table": "FDN_ALERTAPPSENDER",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0391",
+      "table": "FDN_TENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "INDEX_ALERT_CONFIG_USER",
+      "unique": false,
+      "columns": [
+        "USER_ID",
+        "EVENT_TYPE_ID",
+        "SENDER_APP_ID",
+        "TENANT_ID"
+      ]
+    },
+    {
+      "name": "IDX_FDNALERTCFG001",
+      "unique": false,
+      "columns": [
+        "TENANT_ID",
+        "USER_ID",
+        "EVENT_TYPE_ID"
+      ]
+    },
+    {
+      "name": "FK_S8I22S6LGF56AG553O46HGWLY",
+      "unique": false,
+      "columns": [
+        "SENDER_APP_ID"
+      ]
+    },
+    {
+      "name": "FK_OYT9OVQOKGT6XQ2M8UW84G0GA",
+      "unique": false,
+      "columns": [
+        "EVENT_TYPE_ID"
+      ]
+    },
+    {
+      "name": "FK_FVYGX95H5FDHBA4DHWVI10LLT",
+      "unique": false,
+      "columns": [
+        "TENANT_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_ALERTCONFIG.json",
+  "observed_query_count": 11,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Preferencia de recebimento de alertas: para um tenant/usuario, evento e canal, define se o alerta e recebido (ligado/desligado/bloqueado). Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

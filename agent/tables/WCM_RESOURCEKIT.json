@@ -1,0 +1,65 @@
+{
+  "name": "WCM_RESOURCEKIT",
+  "domain": "wcm-resources",
+  "purpose": "Catálogo de kits de recursos estáticos (conjuntos de arquivos) identificados por código.",
+  "schema_card": "by_table/WCM_RESOURCEKIT.json",
+  "business_concepts": [
+    "wcm-resources",
+    "WCM_RESOURCEKIT"
+  ],
+  "grain": {
+    "description": "Catálogo de kits de recursos estáticos (conjuntos de arquivos) identificados por código. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "RESOURCE_KIT_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/WCM_RESOURCEKIT.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-1113",
+      "table": "WCM_RESOURCEKITFILE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1116",
+      "table": "WCM_RESOURCEKITFILE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/WCM_RESOURCEKIT.json",
+  "observed_query_count": 3,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Catálogo de kits de recursos estáticos (conjuntos de arquivos) identificados por código. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "RESOURCE_KIT_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

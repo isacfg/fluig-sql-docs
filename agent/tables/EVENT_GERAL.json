@@ -1,0 +1,78 @@
+{
+  "name": "EVENT_GERAL",
+  "domain": "bpm-workflow",
+  "purpose": "Eventos globais (scripts JavaScript) disponíveis a todo o ambiente do tenant, ex.: eventos globais de workflow (GlobalEvent).",
+  "schema_card": "by_table/EVENT_GERAL.json",
+  "business_concepts": [
+    "bpm-workflow",
+    "EVENT_GERAL"
+  ],
+  "grain": {
+    "description": "Eventos globais (scripts JavaScript) disponíveis a todo o ambiente do tenant, ex.: eventos globais de workflow (GlobalEvent). Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "COD_EVENT"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/EVENT_GERAL.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0298",
+      "table": "EVENT_FICHA",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [
+    "DSL_EVENT"
+  ],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/EVENT_GERAL.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Eventos globais (scripts JavaScript) disponíveis a todo o ambiente do tenant, ex.: eventos globais de workflow (GlobalEvent). Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "COD_EVENT"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

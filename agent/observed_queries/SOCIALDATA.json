@@ -1,0 +1,110 @@
+[
+  {
+    "name": "SocialData.ListBySocial",
+    "query": "SELECT t FROM SocialData t WHERE t.social.id = :socialId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialData",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialData.java",
+    "owner_table": "SOCIALDATA",
+    "tables": [
+      "SOCIALDATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialData.Find",
+    "query": "SELECT t FROM SocialData t WHERE t.social.id = :socialId AND t.key = :key",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialData",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialData.java",
+    "owner_table": "SOCIALDATA",
+    "tables": [
+      "SOCIALDATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialData.findByDataKeyAndFoundationUserId",
+    "query": "SELECT sd FROM SocialData sd WHERE sd.tenantId = :tenantId AND sd.key = :key AND sd.social.id = (SELECT su.id FROM Social su WHERE su.tenantId = :tenantId AND su.foundationUserId = :foundationUserId)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialData",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialData.java",
+    "owner_table": "SOCIALDATA",
+    "tables": [
+      "SOCIALDATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialData.findByKeyAndValueAndTenantId",
+    "query": "SELECT sd FROM SocialData sd WHERE sd.tenantId = :tenantId AND sd.key = :key AND sd.value = :value",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialData",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialData.java",
+    "owner_table": "SOCIALDATA",
+    "tables": [
+      "SOCIALDATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialData.removeByKeyAndTenantId",
+    "query": "DELETE FROM SocialData WHERE key = :key AND tenantId = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialData",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialData.java",
+    "owner_table": "SOCIALDATA",
+    "tables": [
+      "SOCIALDATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialData.findByKeyAndTenantId",
+    "query": "SELECT sd FROM SocialData sd WHERE sd.tenantId = :tenantId AND sd.key = :key",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialData",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialData.java",
+    "owner_table": "SOCIALDATA",
+    "tables": [
+      "SOCIALDATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

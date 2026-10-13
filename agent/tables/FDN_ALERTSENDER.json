@@ -1,0 +1,178 @@
+{
+  "name": "FDN_ALERTSENDER",
+  "domain": "foundation-alert",
+  "purpose": "Registra quem enviou/originou um alerta (usuario remetente) e por qual via.",
+  "schema_card": "by_table/FDN_ALERTSENDER.json",
+  "business_concepts": [
+    "foundation-alert",
+    "FDN_ALERTSENDER"
+  ],
+  "grain": {
+    "description": "Registra quem enviou/originou um alerta (usuario remetente) e por qual via. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_ALERTSENDER.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0378",
+      "from_table": "FDN_ALERTSENDER",
+      "to_table": "FDN_ALERT",
+      "on": [
+        "FDN_ALERTSENDER.ALERT_ID = FDN_ALERT.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "ALERT_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Remetentes do alerta.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0407",
+      "from_table": "FDN_ALERTSENDER",
+      "to_table": "FDN_USERTENANT",
+      "on": [
+        "FDN_ALERTSENDER.USER_ID = FDN_USERTENANT.USER_TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "USER_ID",
+          "to_column": "USER_TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Usuario remetente.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0409",
+      "from_table": "FDN_ALERTSENDER",
+      "to_table": "FDN_ALERT",
+      "on": [
+        "FDN_ALERTSENDER.ALERT_ID = FDN_ALERT.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "ALERT_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Alerta enviado.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0378",
+      "table": "FDN_ALERT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0407",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0409",
+      "table": "FDN_ALERT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FDNALERTSENDERI001",
+      "unique": false,
+      "columns": [
+        "ALERT_ID"
+      ]
+    },
+    {
+      "name": "FK_CI7SNWTOUYWJLT2NONO14DU0E",
+      "unique": false,
+      "columns": [
+        "USER_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_ALERTSENDER.json",
+  "observed_query_count": 10,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Registra quem enviou/originou um alerta (usuario remetente) e por qual via. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

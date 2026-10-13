@@ -1,0 +1,56 @@
+[
+  {
+    "name": "WCMResourceKit.findAll",
+    "query": "SELECT b FROM WCMResourceKit b",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMResourceKit",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMResourceKit.java",
+    "owner_table": "WCM_RESOURCEKIT",
+    "tables": [
+      "WCM_RESOURCEKIT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMResourceKit.findById",
+    "query": "SELECT b FROM WCMResourceKit b WHERE b.id = :id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMResourceKit",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMResourceKit.java",
+    "owner_table": "WCM_RESOURCEKIT",
+    "tables": [
+      "WCM_RESOURCEKIT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMResourceKit.findByCode",
+    "query": "SELECT b FROM WCMResourceKit b WHERE b.code = :code",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMResourceKit",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMResourceKit.java",
+    "owner_table": "WCM_RESOURCEKIT",
+    "tables": [
+      "WCM_RESOURCEKIT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

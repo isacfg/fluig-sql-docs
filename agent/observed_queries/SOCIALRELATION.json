@@ -1,0 +1,146 @@
+[
+  {
+    "name": "SocialRelation.listByType",
+    "query": "SELECT b FROM SocialRelation b WHERE social.id = :social AND type IN (:type) AND status IN (:status) AND related.state IN (:state) ORDER BY related.name",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialRelation",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialRelation.java",
+    "owner_table": "SOCIALRELATION",
+    "tables": [
+      "SOCIALRELATION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialRelation.listRelatedIdsByType",
+    "query": "SELECT b.related.id FROM  SocialRelation b WHERE social.id = :social AND type IN (:type) AND status IN (:status) AND related.state IN (:state) ORDER BY related.name",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialRelation",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialRelation.java",
+    "owner_table": "SOCIALRELATION",
+    "tables": [
+      "SOCIALRELATION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialRelation.listByRelated",
+    "query": "SELECT b FROM SocialRelation b WHERE related.id = :social AND type IN (:type) AND status IN (:status) ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialRelation",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialRelation.java",
+    "owner_table": "SOCIALRELATION",
+    "tables": [
+      "SOCIALRELATION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialRelation.find",
+    "query": "SELECT b FROM SocialRelation b WHERE social.id = :social AND related.id = :related AND type = :type ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialRelation",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialRelation.java",
+    "owner_table": "SOCIALRELATION",
+    "tables": [
+      "SOCIALRELATION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialRelation.listByTypeFilter",
+    "query": "SELECT b FROM SocialRelation b WHERE social.id = :social AND b.type IN (:type) AND b.status IN (:status) AND related.state IN (:state) AND (LOWER(related.name) like :pattern OR LOWER(related.alias) like :pattern) ORDER BY related.name",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialRelation",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialRelation.java",
+    "owner_table": "SOCIALRELATION",
+    "tables": [
+      "SOCIALRELATION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialRelation.count",
+    "query": "SELECT count(b) FROM SocialRelation b WHERE social.id = :socialId AND b.type = :type AND b.status = :status AND related.state = :state ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialRelation",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialRelation.java",
+    "owner_table": "SOCIALRELATION",
+    "tables": [
+      "SOCIALRELATION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialRelation.listBySocialAndType",
+    "query": "SELECT b FROM SocialRelation b WHERE social.id = :social AND type = :type ORDER BY related.name",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialRelation",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialRelation.java",
+    "owner_table": "SOCIALRELATION",
+    "tables": [
+      "SOCIALRELATION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialRelation.listAllParticipantsInCommunity",
+    "query": "select obj.social.alias from SocialRelation obj where obj.tenantId = :tenantId AND obj.related.alias = :alias AND obj.type = 3 and obj.status = 0",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialRelation",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialRelation.java",
+    "owner_table": "SOCIALRELATION",
+    "tables": [
+      "SOCIALRELATION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

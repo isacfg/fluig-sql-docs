@@ -1,0 +1,134 @@
+{
+  "name": "FDN_ALERTMODULE",
+  "domain": "foundation-alert",
+  "purpose": "Modulo/aplicacao do Fluig que agrupa tipos de evento de alerta, por tenant.",
+  "schema_card": "by_table/FDN_ALERTMODULE.json",
+  "business_concepts": [
+    "foundation-alert",
+    "FDN_ALERTMODULE"
+  ],
+  "grain": {
+    "description": "Modulo/aplicacao do Fluig que agrupa tipos de evento de alerta, por tenant. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_ALERTMODULE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0399",
+      "from_table": "FDN_ALERTMODULE",
+      "to_table": "FDN_TENANT",
+      "on": [
+        "FDN_ALERTMODULE.TENANT_ID = FDN_TENANT.TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Tenant.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0394",
+      "table": "FDN_ALERTEVENTTYPE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0399",
+      "table": "FDN_TENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0401",
+      "table": "FDN_ALERTEVENTTYPE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "INDEX_ALERT_MODULE_KEY",
+      "unique": false,
+      "columns": [
+        "MODULE_KEY"
+      ]
+    },
+    {
+      "name": "FK_KLLTETF2YJBVVHXPPUPB7UWRQ",
+      "unique": false,
+      "columns": [
+        "TENANT_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_ALERTMODULE.json",
+  "observed_query_count": 4,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Modulo/aplicacao do Fluig que agrupa tipos de evento de alerta, por tenant. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

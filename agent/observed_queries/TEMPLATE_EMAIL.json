@@ -1,0 +1,128 @@
+[
+  {
+    "name": "EmailTemplate.findAll",
+    "query": "SELECT e FROM EmailTemplate e WHERE e.emailTemplatePK.companyId = :companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.template.email.model.EmailTemplate",
+    "source_file": "com/datasul/technology/webdesk/template/email/model/EmailTemplate.java",
+    "owner_table": "TEMPLATE_EMAIL",
+    "tables": [
+      "TEMPLATE_EMAIL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "EmailTemplate.findByDialectId",
+    "query": "SELECT e FROM EmailTemplate e WHERE e.emailTemplatePK.companyId = :companyId AND e.emailTemplatePK.templateId = :templateId AND e.emailTemplatePK.dialectId = :dialectId ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.template.email.model.EmailTemplate",
+    "source_file": "com/datasul/technology/webdesk/template/email/model/EmailTemplate.java",
+    "owner_table": "TEMPLATE_EMAIL",
+    "tables": [
+      "TEMPLATE_EMAIL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "EmailTemplate.findDefaultTemplate",
+    "query": "SELECT e FROM EmailTemplate e WHERE e.emailTemplatePK.companyId = :companyId AND e.emailTemplatePK.templateId = :templateId AND e.defaultTemplate = true ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.template.email.model.EmailTemplate",
+    "source_file": "com/datasul/technology/webdesk/template/email/model/EmailTemplate.java",
+    "owner_table": "TEMPLATE_EMAIL",
+    "tables": [
+      "TEMPLATE_EMAIL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "EmailTemplate.findAllCustom",
+    "query": "SELECT e FROM EmailTemplate e WHERE e.emailTemplatePK.companyId = :companyId AND e.defaultTemplate = false ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.template.email.model.EmailTemplate",
+    "source_file": "com/datasul/technology/webdesk/template/email/model/EmailTemplate.java",
+    "owner_table": "TEMPLATE_EMAIL",
+    "tables": [
+      "TEMPLATE_EMAIL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "EmailTemplate.findByFileName",
+    "query": "SELECT e FROM EmailTemplate e WHERE e.emailTemplatePK.companyId = :companyId AND e.phisicalFile = :phisicalFile ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.template.email.model.EmailTemplate",
+    "source_file": "com/datasul/technology/webdesk/template/email/model/EmailTemplate.java",
+    "owner_table": "TEMPLATE_EMAIL",
+    "tables": [
+      "TEMPLATE_EMAIL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "EmailTemplate.findByTemplateId",
+    "query": "SELECT e FROM EmailTemplate e WHERE e.emailTemplatePK.companyId = :companyId AND e.emailTemplatePK.templateId = :templateId ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.template.email.model.EmailTemplate",
+    "source_file": "com/datasul/technology/webdesk/template/email/model/EmailTemplate.java",
+    "owner_table": "TEMPLATE_EMAIL",
+    "tables": [
+      "TEMPLATE_EMAIL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "EmailTemplate.findCustomByFilter",
+    "query": "SELECT e FROM EmailTemplate e WHERE e.emailTemplatePK.companyId = :companyId AND e.defaultTemplate = false AND (e.emailTemplatePK.templateId LIKE :templateId OR e.templateDescription LIKE :templateDescription)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.template.email.model.EmailTemplate",
+    "source_file": "com/datasul/technology/webdesk/template/email/model/EmailTemplate.java",
+    "owner_table": "TEMPLATE_EMAIL",
+    "tables": [
+      "TEMPLATE_EMAIL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

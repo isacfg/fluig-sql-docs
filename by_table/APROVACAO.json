@@ -28,6 +28,80 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.dm.model.Approval"
  ],
+ "observed_queries": [
+  {
+   "name": "Approval.deleteByDocumentAndCompany",
+   "query": "DELETE Approval a WHERE a.approvalPK.documentId = :documentId AND a.approvalPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Approval",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Approval.java",
+   "owner_table": "APROVACAO",
+   "tables": [
+    "APROVACAO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Approval.findApprovalsToTransfer",
+   "query": "SELECT a FROM Approval a WHERE a.approvalPK.companyId = :companyId AND a.approvalPK.documentId >= :documentIdInitial AND a.approvalPK.documentId <= :documentIdFinal AND a.approvalPK.colleagueId = :colleagueId AND a.approved = false",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Approval",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Approval.java",
+   "owner_table": "APROVACAO",
+   "tables": [
+    "APROVACAO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Approval.findApprovalsByDocument",
+   "query": "SELECT a FROM Approval a WHERE a.approvalPK.companyId = :tenantId AND a.approvalPK.documentId = :documentId AND a.approvalPK.version = :version",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Approval",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Approval.java",
+   "owner_table": "APROVACAO",
+   "tables": [
+    "APROVACAO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Approval.findApprovalsByDocumentAndApproved",
+   "query": "SELECT a FROM Approval a WHERE a.approvalPK.companyId = :tenantId AND a.approvalPK.documentId = :documentId AND a.approvalPK.version = :version AND a.approved = :approved",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Approval",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Approval.java",
+   "owner_table": "APROVACAO",
+   "tables": [
+    "APROVACAO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "CD_MATRICULA",

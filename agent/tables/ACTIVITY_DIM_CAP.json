@@ -1,0 +1,121 @@
+{
+  "name": "ACTIVITY_DIM_CAP",
+  "domain": "bpm-analytics-dw",
+  "purpose": "Dimensão (modelo estrela do CAP, analytics de BPM) com as atividades de cada versão de processo.",
+  "schema_card": "by_table/ACTIVITY_DIM_CAP.json",
+  "business_concepts": [
+    "bpm-analytics-dw",
+    "ACTIVITY_DIM_CAP"
+  ],
+  "grain": {
+    "description": "Dimensão (modelo estrela do CAP, analytics de BPM) com as atividades de cada versão de processo. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ACTIVITYID",
+      "COMPANYID",
+      "PROCESSID",
+      "PROCESSVERSION"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/ACTIVITY_DIM_CAP.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0001",
+      "from_table": "ACTIVITY_DIM_CAP",
+      "to_table": "PROCES_VERSION_DIM_CAP",
+      "on": [
+        "ACTIVITY_DIM_CAP.COMPANYID = PROCES_VERSION_DIM_CAP.COMPANYID",
+        "ACTIVITY_DIM_CAP.PROCESSID = PROCES_VERSION_DIM_CAP.PROCESSID",
+        "ACTIVITY_DIM_CAP.PROCESSVERSION = PROCES_VERSION_DIM_CAP.PROCESSVERSION"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COMPANYID",
+          "to_column": "COMPANYID"
+        },
+        {
+          "from_column": "PROCESSID",
+          "to_column": "PROCESSID"
+        },
+        {
+          "from_column": "PROCESSVERSION",
+          "to_column": "PROCESSVERSION"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Versão do processo da dimensão.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0001",
+      "table": "PROCES_VERSION_DIM_CAP",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0302",
+      "table": "FACT_ACTIVITY_COST_CAP",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0314",
+      "table": "FACT_ACTIVITY_VOLUME_CAP",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/ACTIVITY_DIM_CAP.json",
+  "observed_query_count": 1,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Dimensão (modelo estrela do CAP, analytics de BPM) com as atividades de cada versão de processo. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ACTIVITYID",
+        "COMPANYID",
+        "PROCESSID",
+        "PROCESSVERSION"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

@@ -1,0 +1,961 @@
+[
+  {
+    "id": "workflow/pending_tasks_by_user",
+    "intent": "Listar tarefas pendentes de um usuário",
+    "keywords": [
+      "tarefas pendentes",
+      "central de tarefas",
+      "responsável"
+    ],
+    "start_table": "TAR_PROCES",
+    "tables": [
+      "TAR_PROCES",
+      "PROCES_WORKFLOW"
+    ],
+    "path": "recipes/workflow/pending_tasks_by_user.sql",
+    "result_grain": "one task assignment (five-column TAR_PROCES PK)",
+    "dialect": "mysql",
+    "document_mode": "unspecified",
+    "parameters": [
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      },
+      {
+        "name": "user_code",
+        "description": "Bind value for user_code"
+      }
+    ],
+    "assumptions": [],
+    "evidence": [
+      "by_table/TAR_PROCES.json",
+      "by_table/PROCES_WORKFLOW.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT t.COD_EMPRESA, t.NUM_PROCES, t.NUM_SEQ_MOVTO, t.NUM_SEQ_TRANSF,\n       t.CD_MATRICULA, t.IDI_STATUS, t.START_DATE, t.DEADLINE, p.COD_DEF_PROCES\nFROM TAR_PROCES AS t\nJOIN PROCES_WORKFLOW AS p ON p.COD_EMPRESA = t.COD_EMPRESA AND p.NUM_PROCES = t.NUM_PROCES\nWHERE t.COD_EMPRESA = :tenant_id AND t.CD_MATRICULA = :user_code\n  AND t.LOG_ATIV = 1 AND t.IDI_STATUS IN (0, 1)\nORDER BY t.DEADLINE, t.NUM_PROCES, t.NUM_SEQ_MOVTO, t.NUM_SEQ_TRANSF;",
+    "expected_warnings": []
+  },
+  {
+    "id": "workflow/open_processes",
+    "intent": "Listar solicitações abertas",
+    "keywords": [
+      "solicitações abertas",
+      "processos em andamento"
+    ],
+    "start_table": "PROCES_WORKFLOW",
+    "tables": [
+      "PROCES_WORKFLOW"
+    ],
+    "path": "recipes/workflow/open_processes.sql",
+    "result_grain": "one process instance per tenant",
+    "dialect": "mysql",
+    "document_mode": "unspecified",
+    "parameters": [
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [],
+    "evidence": [
+      "by_table/PROCES_WORKFLOW.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT p.COD_EMPRESA, p.NUM_PROCES, p.COD_DEF_PROCES, p.NUM_VERS,\n       p.COD_MATR_REQUISIT, p.START_DATE, p.DEADLINE_DATE\nFROM PROCES_WORKFLOW AS p\nWHERE p.COD_EMPRESA = :tenant_id AND p.LOG_ATIV = 1\nORDER BY p.NUM_PROCES;",
+    "expected_warnings": []
+  },
+  {
+    "id": "workflow/closed_processes",
+    "intent": "Listar solicitações encerradas (inclui possíveis canceladas)",
+    "keywords": [
+      "processos encerrados",
+      "solicitações fechadas"
+    ],
+    "start_table": "PROCES_WORKFLOW",
+    "tables": [
+      "PROCES_WORKFLOW"
+    ],
+    "path": "recipes/workflow/closed_processes.sql",
+    "result_grain": "one process instance per tenant",
+    "dialect": "mysql",
+    "document_mode": "unspecified",
+    "parameters": [
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [
+      "LOG_ATIV=0 não distingue conclusão e cancelamento; valores de STATUS não confirmados."
+    ],
+    "evidence": [
+      "by_table/PROCES_WORKFLOW.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT p.COD_EMPRESA, p.NUM_PROCES, p.COD_DEF_PROCES, p.STATUS, p.END_DATE\nFROM PROCES_WORKFLOW AS p\nWHERE p.COD_EMPRESA = :tenant_id AND p.LOG_ATIV = 0\nORDER BY p.END_DATE, p.NUM_PROCES;",
+    "expected_warnings": []
+  },
+  {
+    "id": "workflow/process_history",
+    "intent": "Listar histórico de uma solicitação",
+    "keywords": [
+      "histórico",
+      "movimentações",
+      "trilha do processo"
+    ],
+    "start_table": "HISTOR_PROCES",
+    "tables": [
+      "HISTOR_PROCES"
+    ],
+    "path": "recipes/workflow/process_history.sql",
+    "result_grain": "one process movement per tenant",
+    "dialect": "mysql",
+    "document_mode": "unspecified",
+    "parameters": [
+      {
+        "name": "process_id",
+        "description": "Bind value for process_id"
+      },
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [],
+    "evidence": [
+      "by_table/HISTOR_PROCES.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT h.COD_EMPRESA, h.NUM_PROCES, h.NUM_SEQ_MOVTO, h.NUM_SEQ_MOVTO_ANT,\n       h.NUM_SEQ_ESTADO, h.NUM_SEQ_THREAD, h.MOVTO_DATE_TIME, h.LOG_ATIV\nFROM HISTOR_PROCES AS h\nWHERE h.COD_EMPRESA = :tenant_id AND h.NUM_PROCES = :process_id\nORDER BY h.NUM_SEQ_MOVTO;",
+    "expected_warnings": []
+  },
+  {
+    "id": "workflow/current_movements",
+    "intent": "Listar posições atuais da solicitação",
+    "keywords": [
+      "atividade atual",
+      "threads paralelas",
+      "posição do processo"
+    ],
+    "start_table": "HISTOR_PROCES",
+    "tables": [
+      "HISTOR_PROCES"
+    ],
+    "path": "recipes/workflow/current_movements.sql",
+    "result_grain": "one active movement; parallel threads may return multiple rows",
+    "dialect": "mysql",
+    "document_mode": "unspecified",
+    "parameters": [
+      {
+        "name": "process_id",
+        "description": "Bind value for process_id"
+      },
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [],
+    "evidence": [
+      "by_table/HISTOR_PROCES.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT h.COD_EMPRESA, h.NUM_PROCES, h.NUM_SEQ_MOVTO, h.NUM_SEQ_ESTADO, h.NUM_SEQ_THREAD\nFROM HISTOR_PROCES AS h\nWHERE h.COD_EMPRESA = :tenant_id AND h.NUM_PROCES = :process_id AND h.LOG_ATIV = 1\nORDER BY h.NUM_SEQ_MOVTO;",
+    "expected_warnings": []
+  },
+  {
+    "id": "workflow/process_attachments",
+    "intent": "Listar anexos e suas versões registradas",
+    "keywords": [
+      "anexos",
+      "documentos da solicitação"
+    ],
+    "start_table": "ANEXO_PROCES",
+    "tables": [
+      "ANEXO_PROCES",
+      "DOCUMENTO"
+    ],
+    "path": "recipes/workflow/process_attachments.sql",
+    "result_grain": "one attachment association; unmatched document versions retained",
+    "dialect": "mysql",
+    "document_mode": "historical",
+    "parameters": [
+      {
+        "name": "process_id",
+        "description": "Bind value for process_id"
+      },
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [
+      "Join lógico ANEXO_PROCES -> DOCUMENTO é probable; verificar na instância.",
+      "A versão registrada pode estar excluída ou não ser a corrente."
+    ],
+    "evidence": [
+      "by_table/ANEXO_PROCES.json",
+      "by_table/DOCUMENTO.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT a.COD_EMPRESA, a.NUM_PROCES, a.NUM_SEQ_ANEXO, a.NR_DOCUMENTO,\n       a.NR_VERSAO, a.DT_ANEXO, d.DS_PRINCIPAL_DOCUMENTO, d.LOG_DELETE\nFROM ANEXO_PROCES AS a\nLEFT JOIN DOCUMENTO AS d ON d.COD_EMPRESA = a.COD_EMPRESA\n  AND d.NR_DOCUMENTO = a.NR_DOCUMENTO AND d.NR_VERSAO = a.NR_VERSAO\nWHERE a.COD_EMPRESA = :tenant_id AND a.NUM_PROCES = :process_id\nORDER BY a.NUM_SEQ_ANEXO;",
+    "expected_warnings": [
+      "probable-relationship"
+    ]
+  },
+  {
+    "id": "workflow/overdue_tasks",
+    "intent": "Listar tarefas pendentes vencidas",
+    "keywords": [
+      "tarefas atrasadas",
+      "prazo vencido"
+    ],
+    "start_table": "TAR_PROCES",
+    "tables": [
+      "TAR_PROCES"
+    ],
+    "path": "recipes/workflow/overdue_tasks.sql",
+    "result_grain": "one pending task assignment",
+    "dialect": "mysql",
+    "document_mode": "unspecified",
+    "parameters": [
+      {
+        "name": "as_of",
+        "description": "Bind value for as_of"
+      },
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [
+      "as_of deve usar a convenção temporal da instância; deadline NULL não é vencido."
+    ],
+    "evidence": [
+      "by_table/TAR_PROCES.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT t.COD_EMPRESA, t.NUM_PROCES, t.NUM_SEQ_MOVTO, t.NUM_SEQ_TRANSF,\n       t.CD_MATRICULA, t.DEADLINE\nFROM TAR_PROCES AS t\nWHERE t.COD_EMPRESA = :tenant_id AND t.LOG_ATIV = 1 AND t.IDI_STATUS IN (0, 1)\n  AND t.DEADLINE < :as_of\nORDER BY t.DEADLINE;",
+    "expected_warnings": []
+  },
+  {
+    "id": "workflow/open_counts_by_definition",
+    "intent": "Contar solicitações abertas por definição",
+    "keywords": [
+      "quantidade de solicitações",
+      "contagem por processo"
+    ],
+    "start_table": "PROCES_WORKFLOW",
+    "tables": [
+      "PROCES_WORKFLOW"
+    ],
+    "path": "recipes/workflow/open_counts_by_definition.sql",
+    "result_grain": "one process definition per tenant",
+    "dialect": "mysql",
+    "document_mode": "unspecified",
+    "parameters": [
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [],
+    "evidence": [
+      "by_table/PROCES_WORKFLOW.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT p.COD_EMPRESA, p.COD_DEF_PROCES, COUNT(*) AS process_count\nFROM PROCES_WORKFLOW AS p\nWHERE p.COD_EMPRESA = :tenant_id AND p.LOG_ATIV = 1\nGROUP BY p.COD_EMPRESA, p.COD_DEF_PROCES;",
+    "expected_warnings": []
+  },
+  {
+    "id": "workflow/processes_with_pending_tasks",
+    "intent": "Listar solicitações com tarefas pendentes do usuário sem duplicar",
+    "keywords": [
+      "minhas solicitações pendentes",
+      "processos com tarefas"
+    ],
+    "start_table": "PROCES_WORKFLOW",
+    "tables": [
+      "PROCES_WORKFLOW",
+      "TAR_PROCES"
+    ],
+    "path": "recipes/workflow/processes_with_pending_tasks.sql",
+    "result_grain": "one process instance; EXISTS avoids task fanout",
+    "dialect": "mysql",
+    "document_mode": "unspecified",
+    "parameters": [
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      },
+      {
+        "name": "user_code",
+        "description": "Bind value for user_code"
+      }
+    ],
+    "assumptions": [],
+    "evidence": [
+      "by_table/PROCES_WORKFLOW.json",
+      "by_table/TAR_PROCES.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT p.COD_EMPRESA, p.NUM_PROCES, p.COD_DEF_PROCES, p.START_DATE\nFROM PROCES_WORKFLOW AS p\nWHERE p.COD_EMPRESA = :tenant_id AND p.LOG_ATIV = 1\n  AND EXISTS (SELECT 1 FROM TAR_PROCES AS t\n              WHERE t.COD_EMPRESA = p.COD_EMPRESA AND t.NUM_PROCES = p.NUM_PROCES\n                AND t.CD_MATRICULA = :user_code AND t.LOG_ATIV = 1 AND t.IDI_STATUS IN (0, 1))\nORDER BY p.NUM_PROCES;",
+    "expected_warnings": []
+  },
+  {
+    "id": "workflow/process_definition_versions",
+    "intent": "Listar versões de uma definição",
+    "keywords": [
+      "versões do processo",
+      "modelador"
+    ],
+    "start_table": "VERS_DEF_PROCES",
+    "tables": [
+      "VERS_DEF_PROCES",
+      "DEF_PROCES"
+    ],
+    "path": "recipes/workflow/process_definition_versions.sql",
+    "result_grain": "one process definition version per tenant",
+    "dialect": "mysql",
+    "document_mode": "unspecified",
+    "parameters": [
+      {
+        "name": "process_code",
+        "description": "Bind value for process_code"
+      },
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [],
+    "evidence": [
+      "by_table/VERS_DEF_PROCES.json",
+      "by_table/DEF_PROCES.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT v.COD_EMPRESA, v.COD_DEF_PROCES, v.NUM_VERS, v.LOG_ATIV,\n       v.LOG_BLOQDO, v.DES_VERS, d.DES_DEF_PROCES\nFROM VERS_DEF_PROCES AS v\nJOIN DEF_PROCES AS d ON d.COD_EMPRESA = v.COD_EMPRESA AND d.COD_DEF_PROCES = v.COD_DEF_PROCES\nWHERE v.COD_EMPRESA = :tenant_id AND v.COD_DEF_PROCES = :process_code\nORDER BY v.NUM_VERS;",
+    "expected_warnings": []
+  },
+  {
+    "id": "workflow/definition_states",
+    "intent": "Listar atividades de uma versão de processo",
+    "keywords": [
+      "atividades BPMN",
+      "estados da definição"
+    ],
+    "start_table": "ESTADO_PROCES",
+    "tables": [
+      "ESTADO_PROCES"
+    ],
+    "path": "recipes/workflow/definition_states.sql",
+    "result_grain": "one state in one specified definition version per tenant",
+    "dialect": "mysql",
+    "document_mode": "unspecified",
+    "parameters": [
+      {
+        "name": "process_code",
+        "description": "Bind value for process_code"
+      },
+      {
+        "name": "process_version",
+        "description": "Bind value for process_version"
+      },
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [],
+    "evidence": [
+      "by_table/ESTADO_PROCES.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT e.COD_EMPRESA, e.COD_DEF_PROCES, e.NUM_VERS, e.NUM_SEQ,\n       e.NOM_ESTADO, e.DES_ESTADO, e.IDI_TIP_BPMN, e.LOG_ESTADO_INICIAL\nFROM ESTADO_PROCES AS e\nWHERE e.COD_EMPRESA = :tenant_id AND e.COD_DEF_PROCES = :process_code AND e.NUM_VERS = :process_version\nORDER BY e.NUM_SEQ;",
+    "expected_warnings": []
+  },
+  {
+    "id": "ecm/current_document",
+    "intent": "Obter estado corrente de um documento",
+    "keywords": [
+      "documento atual",
+      "GED"
+    ],
+    "start_table": "DOCUMENTO",
+    "tables": [
+      "DOCUMENTO"
+    ],
+    "path": "recipes/ecm/current_document.sql",
+    "result_grain": "one active non-deleted document version; current uniqueness is an application invariant",
+    "dialect": "mysql",
+    "document_mode": "current",
+    "parameters": [
+      {
+        "name": "document_id",
+        "description": "Bind value for document_id"
+      },
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [],
+    "evidence": [
+      "by_table/DOCUMENTO.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT d.COD_EMPRESA, d.NR_DOCUMENTO, d.NR_VERSAO, d.DS_PRINCIPAL_DOCUMENTO,\n       d.TP_DOCUMENTO, d.NR_DOCUMENTO_PAI, d.DT_ATUALIZACAO\nFROM DOCUMENTO AS d\nWHERE d.COD_EMPRESA = :tenant_id AND d.NR_DOCUMENTO = :document_id\n  AND d.VERSAO_ATIVA = 1 AND d.LOG_DELETE = 0;",
+    "expected_warnings": []
+  },
+  {
+    "id": "ecm/document_versions",
+    "intent": "Listar versões de um documento incluindo lixeira",
+    "keywords": [
+      "histórico de versões",
+      "versões do documento"
+    ],
+    "start_table": "DOCUMENTO",
+    "tables": [
+      "DOCUMENTO"
+    ],
+    "path": "recipes/ecm/document_versions.sql",
+    "result_grain": "one document version per tenant",
+    "dialect": "mysql",
+    "document_mode": "historical",
+    "parameters": [
+      {
+        "name": "document_id",
+        "description": "Bind value for document_id"
+      },
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [],
+    "evidence": [
+      "by_table/DOCUMENTO.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT d.COD_EMPRESA, d.NR_DOCUMENTO, d.NR_VERSAO, d.VERSAO_ATIVA,\n       d.LOG_DELETE, d.DS_VERSAO, d.DT_CRIACAO, d.DT_ATUALIZACAO\nFROM DOCUMENTO AS d\nWHERE d.COD_EMPRESA = :tenant_id AND d.NR_DOCUMENTO = :document_id\nORDER BY d.NR_VERSAO;",
+    "expected_warnings": []
+  },
+  {
+    "id": "ecm/folder_children",
+    "intent": "Listar filhos correntes de uma pasta",
+    "keywords": [
+      "conteúdo da pasta",
+      "árvore GED"
+    ],
+    "start_table": "DOCUMENTO",
+    "tables": [
+      "DOCUMENTO"
+    ],
+    "path": "recipes/ecm/folder_children.sql",
+    "result_grain": "one current child document version",
+    "dialect": "mysql",
+    "document_mode": "current",
+    "parameters": [
+      {
+        "name": "folder_id",
+        "description": "Bind value for folder_id"
+      },
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [],
+    "evidence": [
+      "by_table/DOCUMENTO.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT d.COD_EMPRESA, d.NR_DOCUMENTO, d.NR_VERSAO, d.TP_DOCUMENTO, d.DS_PRINCIPAL_DOCUMENTO\nFROM DOCUMENTO AS d\nWHERE d.COD_EMPRESA = :tenant_id AND d.NR_DOCUMENTO_PAI = :folder_id\n  AND d.VERSAO_ATIVA = 1 AND d.LOG_DELETE = 0\nORDER BY d.NR_DOCUMENTO;",
+    "expected_warnings": []
+  },
+  {
+    "id": "ecm/deleted_documents",
+    "intent": "Listar versões de documentos na lixeira",
+    "keywords": [
+      "lixeira",
+      "documentos excluídos"
+    ],
+    "start_table": "DOCUMENTO",
+    "tables": [
+      "DOCUMENTO"
+    ],
+    "path": "recipes/ecm/deleted_documents.sql",
+    "result_grain": "one deleted document version; multiple versions may exist",
+    "dialect": "mysql",
+    "document_mode": "historical",
+    "parameters": [
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [],
+    "evidence": [
+      "by_table/DOCUMENTO.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT d.COD_EMPRESA, d.NR_DOCUMENTO, d.NR_VERSAO, d.DS_PRINCIPAL_DOCUMENTO, d.VERSAO_ATIVA\nFROM DOCUMENTO AS d\nWHERE d.COD_EMPRESA = :tenant_id AND d.LOG_DELETE = 1\nORDER BY d.NR_DOCUMENTO, d.NR_VERSAO;",
+    "expected_warnings": []
+  },
+  {
+    "id": "ecm/files_by_publisher",
+    "intent": "Listar arquivos correntes publicados por um usuário",
+    "keywords": [
+      "arquivos publicados",
+      "publicador"
+    ],
+    "start_table": "DOCUMENTO",
+    "tables": [
+      "DOCUMENTO"
+    ],
+    "path": "recipes/ecm/files_by_publisher.sql",
+    "result_grain": "one current file document version",
+    "dialect": "mysql",
+    "document_mode": "current",
+    "parameters": [
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      },
+      {
+        "name": "user_code",
+        "description": "Bind value for user_code"
+      }
+    ],
+    "assumptions": [],
+    "evidence": [
+      "by_table/DOCUMENTO.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT d.COD_EMPRESA, d.NR_DOCUMENTO, d.NR_VERSAO, d.DS_PRINCIPAL_DOCUMENTO, d.CD_PUBLICADOR\nFROM DOCUMENTO AS d\nWHERE d.COD_EMPRESA = :tenant_id AND d.CD_PUBLICADOR = :user_code AND d.TP_DOCUMENTO = '2'\n  AND d.VERSAO_ATIVA = 1 AND d.LOG_DELETE = 0\nORDER BY d.NR_DOCUMENTO;",
+    "expected_warnings": []
+  },
+  {
+    "id": "ecm/current_counts_by_type",
+    "intent": "Contar versões correntes por tipo de documento",
+    "keywords": [
+      "contagem GED",
+      "tipos de documento"
+    ],
+    "start_table": "DOCUMENTO",
+    "tables": [
+      "DOCUMENTO"
+    ],
+    "path": "recipes/ecm/current_counts_by_type.sql",
+    "result_grain": "one document type per tenant; counts current-version rows",
+    "dialect": "mysql",
+    "document_mode": "current",
+    "parameters": [
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [],
+    "evidence": [
+      "by_table/DOCUMENTO.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT d.COD_EMPRESA, d.TP_DOCUMENTO, COUNT(*) AS current_version_count\nFROM DOCUMENTO AS d\nWHERE d.COD_EMPRESA = :tenant_id AND d.VERSAO_ATIVA = 1 AND d.LOG_DELETE = 0\nGROUP BY d.COD_EMPRESA, d.TP_DOCUMENTO;",
+    "expected_warnings": []
+  },
+  {
+    "id": "ecm/custom_fields_for_version",
+    "intent": "Listar valores customizados de uma versão de documento",
+    "keywords": [
+      "metadados",
+      "campos customizados"
+    ],
+    "start_table": "DOCTO_CAMPO_CUSTOM",
+    "tables": [
+      "DOCTO_CAMPO_CUSTOM",
+      "CAMPO_CUSTOM"
+    ],
+    "path": "recipes/ecm/custom_fields_for_version.sql",
+    "result_grain": "one custom field value per document version",
+    "dialect": "mysql",
+    "document_mode": "unspecified",
+    "parameters": [
+      {
+        "name": "document_id",
+        "description": "Bind value for document_id"
+      },
+      {
+        "name": "document_version",
+        "description": "Bind value for document_version"
+      },
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [
+      "Join lógico com CAMPO_CUSTOM é probable. COD_VALOR é projetado explicitamente porque é o valor solicitado."
+    ],
+    "evidence": [
+      "by_table/DOCTO_CAMPO_CUSTOM.json",
+      "by_table/CAMPO_CUSTOM.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT v.COD_EMPRESA, v.NR_DOCUMENTO, v.NR_VERSAO, v.COD_CAMPO_CUSTOM, c.DES_CAMPO_CUSTOM, v.COD_VALOR\nFROM DOCTO_CAMPO_CUSTOM AS v\nLEFT JOIN CAMPO_CUSTOM AS c ON c.COD_EMPRESA = v.COD_EMPRESA AND c.COD_CAMPO_CUSTOM = v.COD_CAMPO_CUSTOM\nWHERE v.COD_EMPRESA = :tenant_id AND v.NR_DOCUMENTO = :document_id AND v.NR_VERSAO = :document_version\nORDER BY v.COD_CAMPO_CUSTOM;",
+    "expected_warnings": [
+      "probable-relationship"
+    ]
+  },
+  {
+    "id": "users/active_users",
+    "intent": "Listar usuários ativos do tenant com nome",
+    "keywords": [
+      "usuários ativos",
+      "colaboradores",
+      "nome do usuário"
+    ],
+    "start_table": "FDN_USERTENANT",
+    "tables": [
+      "FDN_USERTENANT",
+      "FDN_USER"
+    ],
+    "path": "recipes/users/active_users.sql",
+    "result_grain": "one tenant-user association",
+    "dialect": "mysql",
+    "document_mode": "unspecified",
+    "parameters": [
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [],
+    "evidence": [
+      "by_table/FDN_USERTENANT.json",
+      "by_table/FDN_USER.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT ut.TENANT_ID, ut.USER_TENANT_ID, ut.USER_CODE, ut.LOGIN, u.FULL_NAME\nFROM FDN_USERTENANT AS ut\nJOIN FDN_USER AS u ON u.USER_ID = ut.USER_ID\nWHERE ut.TENANT_ID = :tenant_id AND ut.USER_STATE = 1\nORDER BY ut.LOGIN;",
+    "expected_warnings": []
+  },
+  {
+    "id": "users/user_by_code",
+    "intent": "Localizar vínculos por matrícula sem assumir unicidade",
+    "keywords": [
+      "matrícula",
+      "user code",
+      "login do colaborador"
+    ],
+    "start_table": "FDN_USERTENANT",
+    "tables": [
+      "FDN_USERTENANT"
+    ],
+    "path": "recipes/users/user_by_code.sql",
+    "result_grain": "one matching tenant-user association; more than one may match",
+    "dialect": "mysql",
+    "document_mode": "unspecified",
+    "parameters": [
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      },
+      {
+        "name": "user_code",
+        "description": "Bind value for user_code"
+      }
+    ],
+    "assumptions": [
+      "Conferir unicidade de (TENANT_ID, USER_CODE) antes de enriquecer tarefas por matrícula."
+    ],
+    "evidence": [
+      "by_table/FDN_USERTENANT.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT ut.TENANT_ID, ut.USER_TENANT_ID, ut.USER_CODE, ut.LOGIN, ut.USER_STATE\nFROM FDN_USERTENANT AS ut\nWHERE ut.TENANT_ID = :tenant_id AND ut.USER_CODE = :user_code\nORDER BY ut.USER_TENANT_ID;",
+    "expected_warnings": []
+  },
+  {
+    "id": "users/visible_groups",
+    "intent": "Listar grupos visíveis do tenant",
+    "keywords": [
+      "grupos",
+      "grupos de usuários"
+    ],
+    "start_table": "FDN_GROUP",
+    "tables": [
+      "FDN_GROUP"
+    ],
+    "path": "recipes/users/visible_groups.sql",
+    "result_grain": "one group per tenant",
+    "dialect": "mysql",
+    "document_mode": "unspecified",
+    "parameters": [
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [],
+    "evidence": [
+      "by_table/FDN_GROUP.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT g.TENANT_ID, g.GROUP_ID, g.GROUP_CODE, g.DESCRIPTION, g.GROUP_TYPE\nFROM FDN_GROUP AS g\nWHERE g.TENANT_ID = :tenant_id AND g.INTERNAL = 0\nORDER BY g.GROUP_CODE;",
+    "expected_warnings": []
+  },
+  {
+    "id": "users/direct_group_members",
+    "intent": "Listar associações diretas de usuários de um grupo",
+    "keywords": [
+      "membros do grupo",
+      "participantes"
+    ],
+    "start_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE",
+      "FDN_USERTENANT"
+    ],
+    "path": "recipes/users/direct_group_members.sql",
+    "result_grain": "one membership association, not distinct users or effective membership",
+    "dialect": "mysql",
+    "document_mode": "unspecified",
+    "parameters": [
+      {
+        "name": "group_code",
+        "description": "Bind value for group_code"
+      },
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [
+      "Não expande subgrupos nem papéis herdados; múltiplas associações podem apontar para o mesmo usuário."
+    ],
+    "evidence": [
+      "by_table/FDN_GROUPUSERROLE.json",
+      "by_table/FDN_USERTENANT.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT m.TENANT_ID, m.GROUPUSERROLE_ID, m.GROUP_CODE, ut.USER_TENANT_ID, ut.LOGIN, ut.USER_CODE\nFROM FDN_GROUPUSERROLE AS m\nJOIN FDN_USERTENANT AS ut ON ut.LOGIN = m.LOGIN AND ut.TENANT_ID = m.TENANT_ID\nWHERE m.TENANT_ID = :tenant_id AND m.GROUP_CODE = :group_code AND m.LOGIN IS NOT NULL\nORDER BY m.GROUPUSERROLE_ID;",
+    "expected_warnings": []
+  },
+  {
+    "id": "users/direct_user_roles",
+    "intent": "Listar papéis diretos de um login",
+    "keywords": [
+      "papéis",
+      "roles",
+      "perfis do usuário"
+    ],
+    "start_table": "FDN_USERROLE",
+    "tables": [
+      "FDN_USERROLE",
+      "FDN_ROLE"
+    ],
+    "path": "recipes/users/direct_user_roles.sql",
+    "result_grain": "one direct user-role association",
+    "dialect": "mysql",
+    "document_mode": "unspecified",
+    "parameters": [
+      {
+        "name": "login",
+        "description": "Bind value for login"
+      },
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [
+      "Não representa permissões efetivas nem papéis herdados de grupos."
+    ],
+    "evidence": [
+      "by_table/FDN_USERROLE.json",
+      "by_table/FDN_ROLE.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT ur.TENANT_ID, ur.USERROLE_ID, ur.LOGIN, ur.ROLE_CODE, r.DESCRIPTION\nFROM FDN_USERROLE AS ur\nJOIN FDN_ROLE AS r ON r.TENANT_ID = ur.TENANT_ID AND r.ROLE_CODE = ur.ROLE_CODE\nWHERE ur.TENANT_ID = :tenant_id AND ur.LOGIN = :login\nORDER BY ur.ROLE_CODE;",
+    "expected_warnings": []
+  },
+  {
+    "id": "forms/current_form_definitions",
+    "intent": "Listar fichários correntes do GED",
+    "keywords": [
+      "formulários",
+      "fichários publicados"
+    ],
+    "start_table": "DOCUMENTO",
+    "tables": [
+      "DOCUMENTO"
+    ],
+    "path": "recipes/forms/current_form_definitions.sql",
+    "result_grain": "one current form-definition document version",
+    "dialect": "mysql",
+    "document_mode": "current",
+    "parameters": [
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [],
+    "evidence": [
+      "by_table/DOCUMENTO.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT d.COD_EMPRESA, d.NR_DOCUMENTO, d.NR_VERSAO, d.DS_PRINCIPAL_DOCUMENTO, d.NM_DATASET\nFROM DOCUMENTO AS d\nWHERE d.COD_EMPRESA = :tenant_id AND d.TP_DOCUMENTO = '4' AND d.VERSAO_ATIVA = 1 AND d.LOG_DELETE = 0\nORDER BY d.NR_DOCUMENTO;",
+    "expected_warnings": []
+  },
+  {
+    "id": "forms/record_fields",
+    "intent": "Listar valores EAV de uma versão de ficha",
+    "keywords": [
+      "campos da ficha",
+      "dados do formulário"
+    ],
+    "start_table": "FICHA",
+    "tables": [
+      "FICHA"
+    ],
+    "path": "recipes/forms/record_fields.sql",
+    "result_grain": "one field value per record version and logical table",
+    "dialect": "mysql",
+    "document_mode": "unspecified",
+    "parameters": [
+      {
+        "name": "record_id",
+        "description": "Bind value for record_id"
+      },
+      {
+        "name": "record_version",
+        "description": "Bind value for record_version"
+      },
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [
+      "Tabelas ML dinâmicas não constam deste catálogo; não inferir nomes ou estrutura de linhas filhas."
+    ],
+    "evidence": [
+      "by_table/FICHA.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT f.COD_EMPRESA, f.NR_FICHA, f.NR_VERSAO, f.COD_TABELA, f.COD_CAMPO, f.NR_FICHARIO, f.COD_VALOR\nFROM FICHA AS f\nWHERE f.COD_EMPRESA = :tenant_id AND f.NR_FICHA = :record_id AND f.NR_VERSAO = :record_version\nORDER BY f.COD_TABELA, f.COD_CAMPO;",
+    "expected_warnings": []
+  },
+  {
+    "id": "forms/form_field_definitions",
+    "intent": "Listar definições de campos de fichário e versão",
+    "keywords": [
+      "estrutura do formulário",
+      "campos do fichário"
+    ],
+    "start_table": "FICHARIO_CAMPO",
+    "tables": [
+      "FICHARIO_CAMPO"
+    ],
+    "path": "recipes/forms/form_field_definitions.sql",
+    "result_grain": "one field definition per form version and logical table",
+    "dialect": "mysql",
+    "document_mode": "unspecified",
+    "parameters": [
+      {
+        "name": "form_id",
+        "description": "Bind value for form_id"
+      },
+      {
+        "name": "form_version",
+        "description": "Bind value for form_version"
+      },
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [],
+    "evidence": [
+      "by_table/FICHARIO_CAMPO.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT f.COD_EMPRESA, f.NR_FICHARIO, f.NR_VERSAO, f.COD_TABELA, f.COD_CAMPO, f.TIPO_CAMPO\nFROM FICHARIO_CAMPO AS f\nWHERE f.COD_EMPRESA = :tenant_id AND f.NR_FICHARIO = :form_id AND f.NR_VERSAO = :form_version\nORDER BY f.COD_TABELA, f.COD_CAMPO;",
+    "expected_warnings": []
+  },
+  {
+    "id": "forms/metadata_form_versions",
+    "intent": "Listar versões de formulário de metadados com documento",
+    "keywords": [
+      "formulário de metadados",
+      "metadata form versions"
+    ],
+    "start_table": "ECM_METADATA_FORM",
+    "tables": [
+      "ECM_METADATA_FORM",
+      "DOCUMENTO"
+    ],
+    "path": "recipes/forms/metadata_form_versions.sql",
+    "result_grain": "one metadata-form version",
+    "dialect": "mysql",
+    "document_mode": "historical",
+    "parameters": [
+      {
+        "name": "document_id",
+        "description": "Bind value for document_id"
+      },
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [],
+    "evidence": [
+      "by_table/ECM_METADATA_FORM.json",
+      "by_table/DOCUMENTO.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT m.TENANT_ID, m.ID, m.TITLE, m.DOCUMENT_ID, m.DCMNT_VRSN_NMBER,\n       m.VERSION_STATUS, d.DS_PRINCIPAL_DOCUMENTO, d.LOG_DELETE\nFROM ECM_METADATA_FORM AS m\nJOIN DOCUMENTO AS d ON d.COD_EMPRESA = m.TENANT_ID AND d.NR_DOCUMENTO = m.DOCUMENT_ID\n  AND d.NR_VERSAO = m.DCMNT_VRSN_NMBER\nWHERE m.TENANT_ID = :tenant_id AND m.DOCUMENT_ID = :document_id\nORDER BY m.DCMNT_VRSN_NMBER;",
+    "expected_warnings": []
+  },
+  {
+    "id": "forms/subprocess_field_mapping",
+    "intent": "Listar mapeamento de campos para subprocessos",
+    "keywords": [
+      "campos de subprocesso",
+      "mapeamento pai filho"
+    ],
+    "start_table": "PROCESS_FORM_MAP",
+    "tables": [
+      "PROCESS_FORM_MAP"
+    ],
+    "path": "recipes/forms/subprocess_field_mapping.sql",
+    "result_grain": "one configured field mapping",
+    "dialect": "mysql",
+    "document_mode": "unspecified",
+    "parameters": [
+      {
+        "name": "process_code",
+        "description": "Bind value for process_code"
+      },
+      {
+        "name": "process_version",
+        "description": "Bind value for process_version"
+      },
+      {
+        "name": "tenant_id",
+        "description": "ID numérico do tenant; COD_EMPRESA e TENANT_ID usam o escopo indicado na ficha."
+      }
+    ],
+    "assumptions": [
+      "MAP_FLOW é exibido sem decodificar valores não confirmados."
+    ],
+    "evidence": [
+      "by_table/PROCESS_FORM_MAP.json"
+    ],
+    "validation": "static-only; no database execution",
+    "sql": "SELECT m.TENANT_ID, m.FORM_MAP_ID, m.PROCESS_CODE, m.VERSION, m.STATE_SEQUENCE,\n       m.PROCESS_FIELD, m.SUB_PROCESS_CODE, m.SUB_PROCESS_FIELD, m.MAP_FLOW\nFROM PROCESS_FORM_MAP AS m\nWHERE m.TENANT_ID = :tenant_id AND m.PROCESS_CODE = :process_code AND m.VERSION = :process_version\nORDER BY m.FORM_MAP_ID;",
+    "expected_warnings": []
+  }
+]

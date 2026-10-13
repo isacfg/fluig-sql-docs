@@ -1,0 +1,398 @@
+[
+  {
+    "name": "WCMPageVersion.findDraftByPageCodeFetchPage",
+    "query": "SELECT v FROM WCMPageVersion v JOIN FETCH v.page p WHERE p.pageCode = :pageCode AND v.published = :isPublished",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.findLastPublishedFetchPage",
+    "query": "SELECT v FROM WCMPageVersion v JOIN FETCH v.page p LEFT JOIN FETCH p.parentPage pp WHERE p.id = :pageId AND v.id IN (select max(id) from WCMPageVersion pv WHERE pv.page.id = p.id AND pv.published = :published)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.findLastVersion",
+    "query": "SELECT v FROM WCMPageVersion v JOIN v.page p WHERE p.id = :pageId AND v.id IN (select max(id) from WCMPageVersion pv WHERE pv.page.id = p.id AND pv.published = :published)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.findLastVersionPublishedByPage",
+    "query": "SELECT v FROM WCMPageVersion v WHERE v.page = :page AND v.id IN (SELECT MAX(id) FROM WCMPageVersion maxVersion WHERE maxVersion.page = :page AND maxVersion.published = :published)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.findLastVersionByPageIdFetchPage",
+    "query": "SELECT v FROM WCMPageVersion v JOIN FETCH v.page p WHERE p.id = :pageId AND v.id IN (SELECT MAX(id) FROM WCMPageVersion maxVersion WHERE maxVersion.page.id = :pageId)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.findByPage",
+    "query": "SELECT v FROM WCMPageVersion v WHERE v.page = :page",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.findLastVersionByPageCodeAndTenant",
+    "query": "SELECT v FROM WCMPageVersion v JOIN FETCH v.page p LEFT JOIN FETCH p.parentPage pp WHERE p.pageCode = :pageCode AND p.resource.tenantId = :tenantId AND v.id IN (SELECT MAX(id) FROM WCMPageVersion mv WHERE mv.page = v.page)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.findNextVersionNumberByPage",
+    "query": "SELECT MAX(version)+1 FROM WCMPageVersion WHERE page.id = :pageId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.findAllVOByPageId",
+    "query": "SELECT NEW com.totvs.technology.wcm.core.service.vo.WCMPageVersionVO(v.version, v.modifiedDate, v.versionDescription, v.lastEditUser.user.fullName, v.layout.title) FROM WCMPageVersion v WHERE v.page.id = :pageId AND v.published = :published ORDER BY v.version DESC",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.findAllVOByPageIdAndDescription",
+    "query": "SELECT NEW com.totvs.technology.wcm.core.service.vo.WCMPageVersionVO(v.version, v.modifiedDate, v.versionDescription, v.lastEditUser.user.fullName, v.layout.title) FROM WCMPageVersion v WHERE v.page.id = :pageId AND v.published = :published AND v.versionDescription LIKE :description ORDER BY v.version DESC",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.findLastVersionVOByPageId",
+    "query": "SELECT NEW com.totvs.technology.wcm.core.service.vo.WCMPageVersionVO(v.version, v.modifiedDate, v.versionDescription, v.lastEditUser.user.fullName, v.layout.title) FROM WCMPageVersion v WHERE v.page.id = :pageId AND v.version IN (SELECT MAX(version) FROM WCMPageVersion maxVersion WHERE maxVersion.page.id = :pageId)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.findLastUnpublishedFetchUser",
+    "query": "SELECT v FROM WCMPageVersion v JOIN v.page p JOIN FETCH v.lastEditUser u WHERE p.id = :pageId AND v.id IN (select max(id) from WCMPageVersion pv WHERE pv.page.id = p.id AND pv.published = false)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.findAllUnpublishedVersionsFromPage",
+    "query": "SELECT pageVersion FROM WCMPageVersion pageVersion WHERE pageVersion.page.id = :pageId AND pageVersion.published = false ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.findLastVersionFetchUser",
+    "query": "SELECT v FROM WCMPageVersion v JOIN v.page p JOIN FETCH v.lastEditUser u WHERE p.id = :pageId AND v.id IN (select max(id) from WCMPageVersion pv WHERE pv.page.id = p.id)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.findByIdFetchPage",
+    "query": "SELECT v FROM WCMPageVersion v JOIN FETCH v.page p WHERE v.id = :pageVersionId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.findByPageAndVersion",
+    "query": "SELECT v FROM WCMPageVersion v JOIN FETCH v.page p WHERE p.id = :pageId AND v.version = :version",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.findByLayoutCode",
+    "query": "SELECT v FROM WCMPageVersion v JOIN FETCH v.page p  WHERE v.layout.code = :layoutCode    AND v.id IN (          SELECT MAX(id)             FROM WCMPageVersion maxVersion            WHERE maxVersion.page.id = p.id)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.findPublishedVersionsByLayoutId",
+    "query": "SELECT v FROM WCMPageVersion v JOIN FETCH v.page p  WHERE v.layout.id = :layoutId    AND v.id IN (          SELECT MAX(id)             FROM WCMPageVersion maxVersion            WHERE maxVersion.page.id = p.id             AND maxVersion.published = true)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.findByTenandAndLayout",
+    "query": "SELECT v FROM WCMPageVersion v JOIN FETCH v.page p  WHERE p.resource.tenantId = :tenantId AND v.layout.id = :layoutId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.findLayoutByVersion",
+    "query": "SELECT v.layout   FROM WCMPageVersion v  WHERE v.id = :pageVersionId ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.updateAllVersionsTitleAndDescription",
+    "query": "UPDATE WCMPageVersion v  SET v.title = :title, v.description = :description, v.versionDescription = :versionDescription  WHERE v.page.id = :pageId ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageVersion.countByTenant",
+    "query": "SELECT COUNT(p.id) FROM WCMPageVersion p WHERE p.page.tenant.id = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageVersion",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageVersion.java",
+    "owner_table": "WCM_PAGEVERSION",
+    "tables": [
+      "WCM_PAGEVERSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

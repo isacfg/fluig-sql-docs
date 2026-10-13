@@ -17,6 +17,26 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.lists.model.MetaListPerspectiveFilter"
  ],
+ "observed_queries": [
+  {
+   "name": "MetaListPerspectiveFilter.findAll",
+   "query": "SELECT mlpf FROM MetaListPerspectiveFilter mlpf WHERE mlpf.metaListPerspectiveFilterPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.lists.model.MetaListPerspectiveFilter",
+   "source_file": "com/datasul/technology/webdesk/lists/model/MetaListPerspectiveFilter.java",
+   "owner_table": "META_LISTA_PERSPECT_FILTRO",
+   "tables": [
+    "META_LISTA_PERSPECT_FILTRO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",

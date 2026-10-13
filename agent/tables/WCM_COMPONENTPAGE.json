@@ -1,0 +1,179 @@
+{
+  "name": "WCM_COMPONENTPAGE",
+  "domain": "wcm-portal",
+  "purpose": "Associa um componente (aplicação WCM) a uma versão de página.",
+  "schema_card": "by_table/WCM_COMPONENTPAGE.json",
+  "business_concepts": [
+    "wcm-portal",
+    "WCM_COMPONENTPAGE"
+  ],
+  "grain": {
+    "description": "Associa um componente (aplicação WCM) a uma versão de página. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COMPONENTPAGE_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/WCM_COMPONENTPAGE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-1067",
+      "from_table": "WCM_COMPONENTPAGE",
+      "to_table": "WCM_APPLICATION",
+      "on": [
+        "WCM_COMPONENTPAGE.APPLICATION_ID = WCM_APPLICATION.APPLICATION_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "APPLICATION_ID",
+          "to_column": "APPLICATION_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Aplicação WCM dona do registro.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1069",
+      "from_table": "WCM_COMPONENTPAGE",
+      "to_table": "WCM_PAGEVERSION",
+      "on": [
+        "WCM_COMPONENTPAGE.PAGEVERSION_ID = WCM_PAGEVERSION.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "PAGEVERSION_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Versão de página.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1071",
+      "from_table": "WCM_COMPONENTPAGE",
+      "to_table": "FDN_TENANT",
+      "on": [
+        "WCM_COMPONENTPAGE.TENANT_ID = FDN_TENANT.TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Tenant.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-1067",
+      "table": "WCM_APPLICATION",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1069",
+      "table": "WCM_PAGEVERSION",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1071",
+      "table": "FDN_TENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/WCM_COMPONENTPAGE.json",
+  "observed_query_count": 5,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Associa um componente (aplicação WCM) a uma versão de página. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COMPONENTPAGE_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

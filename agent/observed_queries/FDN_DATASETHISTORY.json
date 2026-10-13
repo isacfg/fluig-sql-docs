@@ -1,0 +1,56 @@
+[
+  {
+    "name": "FDNDatasetHistory.findAll",
+    "query": "SELECT b FROM FDNDatasetHistory b",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.dataset.entity.FDNDatasetHistory",
+    "source_file": "com/fluig/foundation/dataset/entity/FDNDatasetHistory.java",
+    "owner_table": "FDN_DATASETHISTORY",
+    "tables": [
+      "FDN_DATASETHISTORY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNDatasetHistory.findByVersion",
+    "query": "SELECT b FROM FDNDatasetHistory b WHERE b.datasetId = :datasetId AND b.version = :version AND b.tenantId = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.dataset.entity.FDNDatasetHistory",
+    "source_file": "com/fluig/foundation/dataset/entity/FDNDatasetHistory.java",
+    "owner_table": "FDN_DATASETHISTORY",
+    "tables": [
+      "FDN_DATASETHISTORY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNDatasetHistory.findLastVersion",
+    "query": "SELECT b FROM FDNDatasetHistory b WHERE b.tenantId = :tenantId AND b.datasetId = :datasetId ORDER BY version DESC",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.dataset.entity.FDNDatasetHistory",
+    "source_file": "com/fluig/foundation/dataset/entity/FDNDatasetHistory.java",
+    "owner_table": "FDN_DATASETHISTORY",
+    "tables": [
+      "FDN_DATASETHISTORY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

@@ -18,6 +18,44 @@
  "jpa_entities": [
   "com.fluig.datatrace.entity.PersonalDatatraceConfig"
  ],
+ "observed_queries": [
+  {
+   "name": "PersonalDatatraceConfig.findAll",
+   "query": "SELECT f FROM PersonalDatatraceConfig f",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.datatrace.entity.PersonalDatatraceConfig",
+   "source_file": "com/fluig/datatrace/entity/PersonalDatatraceConfig.java",
+   "owner_table": "FDN_PDATATRACE_CONFIG",
+   "tables": [
+    "FDN_PDATATRACE_CONFIG"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "PersonalDatatraceConfig.findByTenant",
+   "query": "SELECT f FROM PersonalDatatraceConfig f WHERE f.tenantId = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.datatrace.entity.PersonalDatatraceConfig",
+   "source_file": "com/fluig/datatrace/entity/PersonalDatatraceConfig.java",
+   "owner_table": "FDN_PDATATRACE_CONFIG",
+   "tables": [
+    "FDN_PDATATRACE_CONFIG"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "PDATATRACE_CONFIG_ID",

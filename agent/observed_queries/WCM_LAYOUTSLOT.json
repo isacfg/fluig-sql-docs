@@ -1,0 +1,74 @@
+[
+  {
+    "name": "WCMLayoutSlot.findAll",
+    "query": "SELECT b FROM WCMLayoutSlot b",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMLayoutSlot",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMLayoutSlot.java",
+    "owner_table": "WCM_LAYOUTSLOT",
+    "tables": [
+      "WCM_LAYOUTSLOT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMLayoutSlot.findById",
+    "query": "SELECT b FROM WCMLayoutSlot b WHERE b.id = :id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMLayoutSlot",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMLayoutSlot.java",
+    "owner_table": "WCM_LAYOUTSLOT",
+    "tables": [
+      "WCM_LAYOUTSLOT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMLayoutSlot.findByLayout",
+    "query": "SELECT b FROM WCMLayoutSlot b WHERE b.layout.id = :layoutId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMLayoutSlot",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMLayoutSlot.java",
+    "owner_table": "WCM_LAYOUTSLOT",
+    "tables": [
+      "WCM_LAYOUTSLOT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMLayoutSlot.findByLayoutAndSlot",
+    "query": "SELECT b FROM WCMLayoutSlot b WHERE b.layout.id = :layoutId AND b.slot = :slotCode",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMLayoutSlot",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMLayoutSlot.java",
+    "owner_table": "WCM_LAYOUTSLOT",
+    "tables": [
+      "WCM_LAYOUTSLOT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

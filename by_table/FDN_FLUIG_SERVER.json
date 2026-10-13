@@ -14,6 +14,7 @@
  "jpa_entities": [
   "com.fluig.foundation.fluigserver.entity.FluigServer"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "ID",

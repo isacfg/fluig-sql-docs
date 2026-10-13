@@ -1,0 +1,74 @@
+[
+  {
+    "name": "SocialFavorite.list",
+    "query": "SELECT b FROM SocialFavorite b WHERE tenantId = :tenantId AND user.id = :userId AND favoritedSocial.state != 2",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialFavorite",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialFavorite.java",
+    "owner_table": "SOCIALFAVORITE",
+    "tables": [
+      "SOCIALFAVORITE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialFavorite.listByType",
+    "query": "SELECT b FROM SocialFavorite b WHERE tenantId = :tenantId AND user.id = :userId AND favoritedSocial.type = :socialType AND favoritedSocial.state != 2",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialFavorite",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialFavorite.java",
+    "owner_table": "SOCIALFAVORITE",
+    "tables": [
+      "SOCIALFAVORITE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialFavorite.find",
+    "query": "SELECT b FROM SocialFavorite b WHERE tenantId = :tenantId AND user.id = :userId AND favoritedSocial.id = :favoritedSocialId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialFavorite",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialFavorite.java",
+    "owner_table": "SOCIALFAVORITE",
+    "tables": [
+      "SOCIALFAVORITE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialFavorite.listFavoriteds",
+    "query": "SELECT b FROM SocialFavorite b WHERE tenantId = :tenantId AND favoritedSocial.id = :favoritedSocialId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialFavorite",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialFavorite.java",
+    "owner_table": "SOCIALFAVORITE",
+    "tables": [
+      "SOCIALFAVORITE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

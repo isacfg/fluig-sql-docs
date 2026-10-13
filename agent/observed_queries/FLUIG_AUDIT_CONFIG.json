@@ -1,0 +1,38 @@
+[
+  {
+    "name": "FluigAuditConfig.findAll",
+    "query": "SELECT f FROM FluigAudit f",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.audit.entity.FluigAuditConfig",
+    "source_file": "com/fluig/audit/entity/FluigAuditConfig.java",
+    "owner_table": "FLUIG_AUDIT_CONFIG",
+    "tables": [
+      "FLUIG_AUDIT_CONFIG"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FluigAuditConfig.findByTenant",
+    "query": "SELECT f FROM FluigAuditConfig f WHERE f.tenantId = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.audit.entity.FluigAuditConfig",
+    "source_file": "com/fluig/audit/entity/FluigAuditConfig.java",
+    "owner_table": "FLUIG_AUDIT_CONFIG",
+    "tables": [
+      "FLUIG_AUDIT_CONFIG"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

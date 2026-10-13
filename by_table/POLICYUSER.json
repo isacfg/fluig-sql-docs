@@ -28,6 +28,62 @@
  "jpa_entities": [
   "com.totvs.technology.global.usepolicy.entities.PolicyUser"
  ],
+ "observed_queries": [
+  {
+   "name": "PolicyUser.verifyAcceptedTheUsePolicy",
+   "query": "select u from PolicyUser u where documentVersion = :documentVersion and policyDocument.documentId = :documentId and username like :username",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.global.usepolicy.entities.PolicyUser",
+   "source_file": "com/totvs/technology/global/usepolicy/entities/PolicyUser.java",
+   "owner_table": "POLICYUSER",
+   "tables": [
+    "POLICYUSER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "PolicyUser.verifyAcceptedTheUsePolicyByAlias",
+   "query": "select u from PolicyUser u where documentVersion = :documentVersion and policyDocument.documentId = :documentId and alias = :alias",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.global.usepolicy.entities.PolicyUser",
+   "source_file": "com/totvs/technology/global/usepolicy/entities/PolicyUser.java",
+   "owner_table": "POLICYUSER",
+   "tables": [
+    "POLICYUSER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "PolicyUser.getByAliasAndVersion",
+   "query": "select u from PolicyUser u where alias = :alias and documentVersion = :documentVersion",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.global.usepolicy.entities.PolicyUser",
+   "source_file": "com/totvs/technology/global/usepolicy/entities/PolicyUser.java",
+   "owner_table": "POLICYUSER",
+   "tables": [
+    "POLICYUSER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "ID",

@@ -15,6 +15,62 @@
  "jpa_entities": [
   "com.totvs.technology.foundation.dataservice.entity.DataService"
  ],
+ "observed_queries": [
+  {
+   "name": "DataService.findAll",
+   "query": "SELECT d FROM DataService d WHERE d.dataServicePK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.dataservice.entity.DataService",
+   "source_file": "com/totvs/technology/foundation/dataservice/entity/DataService.java",
+   "owner_table": "SERV_DADOS",
+   "tables": [
+    "SERV_DADOS"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "DataService.find",
+   "query": "SELECT d FROM DataService d WHERE d.dataServicePK.companyId = :companyId and d.dataServicePK.dataServiceName = :dataServiceName",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.dataservice.entity.DataService",
+   "source_file": "com/totvs/technology/foundation/dataservice/entity/DataService.java",
+   "owner_table": "SERV_DADOS",
+   "tables": [
+    "SERV_DADOS"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "DataService.findByType",
+   "query": "SELECT d FROM DataService d WHERE d.dataServicePK.companyId = :companyId AND d.dataServiceType in :types AND (d.dataServicePK.dataServiceName like CONCAT('%', :name, '%') OR d.dataServiceDescription like CONCAT('%', :description, '%'))",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.dataservice.entity.DataService",
+   "source_file": "com/totvs/technology/foundation/dataservice/entity/DataService.java",
+   "owner_table": "SERV_DADOS",
+   "tables": [
+    "SERV_DADOS"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",

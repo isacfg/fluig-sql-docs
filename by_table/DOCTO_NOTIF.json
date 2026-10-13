@@ -16,6 +16,7 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.dm.model.DocumentNotify"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "CD_MATRICULA",

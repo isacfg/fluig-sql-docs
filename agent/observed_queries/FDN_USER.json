@@ -1,0 +1,74 @@
+[
+  {
+    "name": "FDNUser.findAll",
+    "query": "SELECT b FROM FDNUser b",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNUser",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNUser.java",
+    "owner_table": "FDN_USER",
+    "tables": [
+      "FDN_USER"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNUser.findById",
+    "query": "SELECT b FROM FDNUser b WHERE b.id = :userId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNUser",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNUser.java",
+    "owner_table": "FDN_USER",
+    "tables": [
+      "FDN_USER"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNUser.findByType",
+    "query": "SELECT b FROM FDNUser b WHERE b.userType = :userType",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNUser",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNUser.java",
+    "owner_table": "FDN_USER",
+    "tables": [
+      "FDN_USER"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNUser.findNologinUser",
+    "query": "SELECT b FROM FDNUser b WHERE b.userType = 2",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNUser",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNUser.java",
+    "owner_table": "FDN_USER",
+    "tables": [
+      "FDN_USER"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

@@ -1,0 +1,85 @@
+{
+  "name": "TERMO",
+  "domain": "ecm-search",
+  "purpose": "Dicionário de termos de busca por idioma, com marcação de termos irrelevantes (stop words).",
+  "schema_card": "by_table/TERMO.json",
+  "business_concepts": [
+    "ecm-search",
+    "TERMO"
+  ],
+  "grain": {
+    "description": "Dicionário de termos de busca por idioma, com marcação de termos irrelevantes (stop words). Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "IND_IDIOMA",
+      "COD_TERMO"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/TERMO.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0894",
+      "table": "SINONIMO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1003",
+      "table": "SINONIMO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/TERMO.json",
+  "observed_query_count": 3,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Dicionário de termos de busca por idioma, com marcação de termos irrelevantes (stop words). Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "IND_IDIOMA",
+        "COD_TERMO"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

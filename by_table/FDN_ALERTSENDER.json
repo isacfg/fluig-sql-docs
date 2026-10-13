@@ -29,6 +29,188 @@
  "jpa_entities": [
   "com.totvs.technology.foundation.alert.entity.FDNAlertSender"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNAlertSender.findNotGroupedAlertSendersBySender",
+   "query": "select * from FDN_ALERTSENDER a inner join (select ALERT_ID from FDN_ALERTSENDER group by ALERT_ID having count(*) = 1) ac on a.ALERT_ID = ac.ALERT_ID and a.USER_ID = :userId",
+   "native": true,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "sql",
+   "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertSender",
+   "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertSender.java",
+   "owner_table": "FDN_ALERTSENDER",
+   "tables": [
+    "FDN_ALERTSENDER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNAlertSender.findAll",
+   "query": "SELECT b FROM FDNAlertSender b",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertSender",
+   "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertSender.java",
+   "owner_table": "FDN_ALERTSENDER",
+   "tables": [
+    "FDN_ALERTSENDER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNAlertSender.findByAlert",
+   "query": "SELECT b FROM FDNAlertSender b where b.alert.id = :alertId order by b.id desc",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertSender",
+   "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertSender.java",
+   "owner_table": "FDN_ALERTSENDER",
+   "tables": [
+    "FDN_ALERTSENDER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNAlertSender.findByUser",
+   "query": "SELECT b FROM FDNAlertSender b where b.user.id = :userId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertSender",
+   "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertSender.java",
+   "owner_table": "FDN_ALERTSENDER",
+   "tables": [
+    "FDN_ALERTSENDER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNAlertSender.findByAlertAndUser",
+   "query": "SELECT b FROM FDNAlertSender b where b.alert.id = :alertId and b.user.id = :userId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertSender",
+   "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertSender.java",
+   "owner_table": "FDN_ALERTSENDER",
+   "tables": [
+    "FDN_ALERTSENDER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNAlertSender.removeAlertSendersByAlertIdsList",
+   "query": " DELETE FROM FDNAlertSender alertSender WHERE alertSender.alertId IN ( :alertIds )",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertSender",
+   "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertSender.java",
+   "owner_table": "FDN_ALERTSENDER",
+   "tables": [
+    "FDN_ALERTSENDER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNAlertSender.deleteAlertSenderBySender",
+   "query": "DELETE FROM FDNAlertSender alertSender WHERE alertSender.userId = :userId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertSender",
+   "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertSender.java",
+   "owner_table": "FDN_ALERTSENDER",
+   "tables": [
+    "FDN_ALERTSENDER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNAlertSender.findByUserAndReciverAndEventType",
+   "query": "SELECT b FROM FDNAlertSender b JOIN b.alert a WHERE b.userId = :userId AND a.receiverId = :receiverId AND a.eventTypeId = :eventTypeId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertSender",
+   "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertSender.java",
+   "owner_table": "FDN_ALERTSENDER",
+   "tables": [
+    "FDN_ALERTSENDER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNAlertSender.findByUserAndEventType",
+   "query": "SELECT b FROM FDNAlertSender b JOIN b.alert a WHERE b.userId = :userId AND a.eventTypeId = :eventTypeId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertSender",
+   "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertSender.java",
+   "owner_table": "FDN_ALERTSENDER",
+   "tables": [
+    "FDN_ALERTSENDER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNAlertSender.deleteAlertSenderBySenderAndAlertId",
+   "query": "DELETE FROM FDNAlertSender alertSender WHERE alertSender.userId = :userId AND alertSender.alertId = :alertId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertSender",
+   "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertSender.java",
+   "owner_table": "FDN_ALERTSENDER",
+   "tables": [
+    "FDN_ALERTSENDER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "ID",

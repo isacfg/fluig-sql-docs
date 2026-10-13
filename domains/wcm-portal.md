@@ -51,6 +51,7 @@ Catálogo de aplicações do portal WCM em herança single-table: temas, layouts
 - `(APPLICATION_ID)` → **WCM_APPLICATIONCATEGORY** `(APPLICATION_ID)` · 1:N · physical-fk/confirmed — Categorias.
 - `(APPLICATION_ID)` → **WCM_LAYOUTSLOT** `(APPLICATION_ID)` · 1:N · physical-fk/confirmed — Slots de layout.
 - `(APPLICATION_ID)` → **WCM_PAGE** `(THEME_ID)` · 1:N · physical-fk/confirmed — Páginas que usam este tema.
+- `(APPLICATION_ID)` → **WCM_APPLICATION_APP_DEPENDENCY** `(ID)` · N:1 · hql-join/confirmed — Dataset.findComponentByDatasetDependency
 
 **Dicas de consulta:** Sempre filtre por APPLICATION_TYPE ao buscar temas/widgets/layouts. Sem COD_EMPRESA/tenant. Colunas LOB: EXTENDED_DATA, PAGE_DESCRIPTOR.
 
@@ -73,6 +74,7 @@ Categoria atribuída a uma aplicação WCM (agrupamento no catálogo de widgets)
 **Relacionamentos (saem desta tabela):**
 
 - `(APPLICATION_ID)` → **WCM_APPLICATION** `(APPLICATION_ID)` · N:1 · physical-fk/confirmed — Aplicação WCM dona do registro.
+- `(APPLICATION_CATEGORY_ID)` → **WCM_APPLICATION** `(APPLICATION_ID)` · N:1 · hql-join/confirmed — findGroupedEnabledWidgetsCategoriesByTenant
 
 **Dicas de consulta:** Único por APPLICATION_ID+APPLICATION_CATEGORY.
 
@@ -233,6 +235,7 @@ Vínculo entre aplicação WCM e uma dependência (WCM_APPLICATION_DEPENDENCY), 
 
 - `(APPLICATION_ID)` → **WCM_APPLICATION** `(APPLICATION_ID)` · N:1 · jpa-join/confirmed — Aplicação dona.
 - `(DEPENDENCY_ID)` → **WCM_APPLICATION_DEPENDENCY** `(ID)` · N:1 · physical-fk/confirmed — Dependência.
+- `(ID)` → **WCM_APPLICATION_DEPENDENCY** `(ID)` · N:1 · hql-join/confirmed — WCMApplicationAppDependency.listByDependencyCode
 
 ## WCM_APPLICATION_DEPENDENCY
 
@@ -256,6 +259,7 @@ Dependência (biblioteca/recurso por código e tipo) que aplicações WCM podem 
 **Relacionamentos (saem desta tabela):**
 
 - `(TENANT_ID)` → **FDN_TENANT** `(TENANT_ID)` · N:1 · physical-fk/confirmed — Tenant.
+- `(ID)` → **WCM_APPLICATION_APP_DEPENDENCY** `(ID)` · N:1 · hql-join/confirmed — WCMApplicationDependency.findByTenantIdAndComponentId
 
 **Dicas de consulta:** Filtre por TENANT_ID.
 
@@ -400,6 +404,7 @@ Página do portal WCM (hierárquica), com tema, URL amigável e flags de exibiç
 - `(RESOURCE_ID)` → **FDN_RESOURCE** `(RESOURCE_ID)` · N:1 · physical-fk/confirmed — Recurso.
 - `(TENANT_ID)` → **FDN_TENANT** `(TENANT_ID)` · N:1 · physical-fk/confirmed — Tenant.
 - `(THEME_ID)` → **WCM_APPLICATION** `(APPLICATION_ID)` · N:1 · physical-fk/confirmed — Tema.
+- `(PAGE_ID)` → **FDN_RESOURCE** `(RESOURCE_ID)` · N:1 · hql-join/confirmed — FDNResource.findAllResourcesByFilterWithExcludeListWithoutForbiddenCodes
 
 **Dicas de consulta:** Filtre por TENANT_ID.
 

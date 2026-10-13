@@ -1,0 +1,70 @@
+{
+  "name": "SERV_DADOS",
+  "domain": "integracao-servicos-dados",
+  "purpose": "Cadastro de serviços de dados (data services) externos usados por datasets e integrações: SOAP, Progress, REST e JDBC, com URL e credenciais.",
+  "schema_card": "by_table/SERV_DADOS.json",
+  "business_concepts": [
+    "integracao-servicos-dados",
+    "SERV_DADOS"
+  ],
+  "grain": {
+    "description": "Cadastro de serviços de dados (data services) externos usados por datasets e integrações: SOAP, Progress, REST e JDBC, com URL e credenciais. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "NOM_SERV_DADOS"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/SERV_DADOS.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [
+    "CLB_BINDING"
+  ],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/SERV_DADOS.json",
+  "observed_query_count": 3,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Cadastro de serviços de dados (data services) externos usados por datasets e integrações: SOAP, Progress, REST e JDBC, com URL e credenciais. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "NOM_SERV_DADOS"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

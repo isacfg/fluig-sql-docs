@@ -1,0 +1,83 @@
+{
+  "name": "ADAPTER",
+  "domain": "bpm-integracao",
+  "purpose": "Cadastro de adapters (conectores externos) do Fluig; cada adapter aponta para um caminho de implementação e é referenciado por APLICATIVO.",
+  "schema_card": "by_table/ADAPTER.json",
+  "business_concepts": [
+    "bpm-integracao",
+    "ADAPTER"
+  ],
+  "grain": {
+    "description": "Cadastro de adapters (conectores externos) do Fluig; cada adapter aponta para um caminho de implementação e é referenciado por APLICATIVO. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "COD_ADAPTER"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/ADAPTER.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0003",
+      "table": "APLICATIVO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0018",
+      "table": "APLICATIVO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/ADAPTER.json",
+  "observed_query_count": 1,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Cadastro de adapters (conectores externos) do Fluig; cada adapter aponta para um caminho de implementação e é referenciado por APLICATIVO. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "COD_ADAPTER"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

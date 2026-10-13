@@ -1,0 +1,92 @@
+[
+  {
+    "name": "FDNResourceTypePermission.findAll",
+    "query": "SELECT b FROM FDNResourceTypePermission b",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.permission.entity.FDNResourceTypePermission",
+    "source_file": "com/totvs/technology/foundation/permission/entity/FDNResourceTypePermission.java",
+    "owner_table": "FDN_RESOURCETYPEPERMISSION",
+    "tables": [
+      "FDN_RESOURCETYPEPERMISSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNResourceTypePermission.findById",
+    "query": "SELECT b FROM FDNResourceTypePermission b WHERE b.id = :id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.permission.entity.FDNResourceTypePermission",
+    "source_file": "com/totvs/technology/foundation/permission/entity/FDNResourceTypePermission.java",
+    "owner_table": "FDN_RESOURCETYPEPERMISSION",
+    "tables": [
+      "FDN_RESOURCETYPEPERMISSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNResourceTypePermission.findByResourceTypeId",
+    "query": "SELECT b FROM FDNResourceTypePermission b WHERE b.resourceType.id = :resourceTypeId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.permission.entity.FDNResourceTypePermission",
+    "source_file": "com/totvs/technology/foundation/permission/entity/FDNResourceTypePermission.java",
+    "owner_table": "FDN_RESOURCETYPEPERMISSION",
+    "tables": [
+      "FDN_RESOURCETYPEPERMISSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNResourceTypePermission.findByPermission",
+    "query": "SELECT b FROM FDNResourceTypePermission b WHERE b.permission = :permission",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.permission.entity.FDNResourceTypePermission",
+    "source_file": "com/totvs/technology/foundation/permission/entity/FDNResourceTypePermission.java",
+    "owner_table": "FDN_RESOURCETYPEPERMISSION",
+    "tables": [
+      "FDN_RESOURCETYPEPERMISSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNResourceTypePermission.findByResourceTypePermission",
+    "query": "SELECT b FROM FDNResourceTypePermission b WHERE b.resourceType.id = :resourceTypeId AND b.permission = :permission",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.permission.entity.FDNResourceTypePermission",
+    "source_file": "com/totvs/technology/foundation/permission/entity/FDNResourceTypePermission.java",
+    "owner_table": "FDN_RESOURCETYPEPERMISSION",
+    "tables": [
+      "FDN_RESOURCETYPEPERMISSION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

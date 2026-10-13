@@ -1,0 +1,148 @@
+{
+  "name": "FICHARIO",
+  "domain": "ecm-forms",
+  "purpose": "Definição das tabelas de um fichário (formulário): cada fichário tem uma tabela principal e, opcionalmente, tabelas filhas (pai-e-filho).",
+  "schema_card": "by_table/FICHARIO.json",
+  "business_concepts": [
+    "fichário",
+    "tabela pai filha",
+    "form table"
+  ],
+  "grain": {
+    "description": "Uma tabela lógica de um fichário e versão por tenant, distinguida por COD_TABELA.",
+    "columns": [
+      "COD_EMPRESA",
+      "NR_FICHARIO",
+      "NR_VERSAO",
+      "COD_TABELA"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "reviewed-schema-description",
+    "business_grain_reviewed": true
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {
+    "by_version": [
+      "NR_FICHARIO = :form_id",
+      "NR_VERSAO = :form_version"
+    ]
+  },
+  "semantic_evidence": "by_table/FICHARIO.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values",
+  "canonical_joins": [
+    {
+      "id": "join-0649",
+      "from_table": "FICHARIO",
+      "to_table": "DOCUMENTO",
+      "on": [
+        "FICHARIO.COD_EMPRESA = DOCUMENTO.COD_EMPRESA",
+        "FICHARIO.NR_FICHARIO = DOCUMENTO.NR_DOCUMENTO",
+        "FICHARIO.NR_VERSAO = DOCUMENTO.NR_VERSAO"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "NR_FICHARIO",
+          "to_column": "NR_DOCUMENTO"
+        },
+        {
+          "from_column": "NR_VERSAO",
+          "to_column": "NR_VERSAO"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Documento fichário (tipo 4).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0649",
+      "table": "DOCUMENTO",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0651",
+      "table": "FICHARIO_CAMPO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0654",
+      "table": "FICHARIO_CAMPO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FICHARIO.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Uma tabela lógica de um fichário e versão por tenant, distinguida por COD_TABELA.",
+      "columns": [
+        "COD_EMPRESA",
+        "NR_FICHARIO",
+        "NR_VERSAO",
+        "COD_TABELA"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "reviewed-schema-description",
+      "business_grain_reviewed": true
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {
+      "by_version": [
+        "NR_FICHARIO = :form_id",
+        "NR_VERSAO = :form_version"
+      ]
+    }
+  }
+}

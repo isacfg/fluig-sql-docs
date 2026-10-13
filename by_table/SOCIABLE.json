@@ -142,6 +142,548 @@
   "com.totvs.technology.social.sociable.entity.SociableComment",
   "com.totvs.technology.social.shareplace.post.entity.SocialPost"
  ],
+ "observed_queries": [
+  {
+   "name": "SociableNoCodeObject.QUERY_FIND_BY_EXTERNAL_ID",
+   "query": "SELECT b FROM SociableNoCodeObject b WHERE b.externalId =:externalId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.SociableNoCodeObject",
+   "source_file": "com/totvs/technology/social/sociable/entity/SociableNoCodeObject.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Sociable.UpdateNumberComments",
+   "query": "UPDATE Sociable t  SET numberComments = numberComments + :modifier, lastUpdateDate = :lastUpdate WHERE id = :id ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.Sociable",
+   "source_file": "com/totvs/technology/social/sociable/entity/Sociable.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Sociable.UpdateNumberLikes",
+   "query": "UPDATE Sociable t  SET numberLikes = numberLikes + :modifier  WHERE id = :id ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.Sociable",
+   "source_file": "com/totvs/technology/social/sociable/entity/Sociable.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Sociable.UpdateNumberWatchers",
+   "query": "UPDATE Sociable t  SET numberWatchers = numberWatchers + :modifier  WHERE id = :id ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.Sociable",
+   "source_file": "com/totvs/technology/social/sociable/entity/Sociable.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Sociable.UpdateNumberShares",
+   "query": "UPDATE Sociable t  SET numberShares = numberShares + :modifier  WHERE id = :id ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.Sociable",
+   "source_file": "com/totvs/technology/social/sociable/entity/Sociable.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Sociable.UpdateNumberSharesByPost",
+   "query": " UPDATE Sociable t     SET t.numberShares = t.numberShares + :modifier   WHERE t.tenantId = :tenantId     AND t.id IN (:ids) ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.Sociable",
+   "source_file": "com/totvs/technology/social/sociable/entity/Sociable.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Sociable.UpdateNumberDenounces",
+   "query": "UPDATE Sociable t  SET numberDenouncements = numberDenouncements + :modifier  WHERE id = :id ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.Sociable",
+   "source_file": "com/totvs/technology/social/sociable/entity/Sociable.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Sociable.ListAll",
+   "query": "SELECT t FROM Sociable t  WHERE t.tenantId = :tenantId ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.Sociable",
+   "source_file": "com/totvs/technology/social/sociable/entity/Sociable.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Sociable.CountComments",
+   "query": "SELECT COUNT(b.id) FROM Sociable b  WHERE b.sociableType = SociableComment AND b.removed = false AND b.tenantId = :tenantId AND b.numberDenouncements = 0 ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.Sociable",
+   "source_file": "com/totvs/technology/social/sociable/entity/Sociable.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Sociable.CommentsTenant",
+   "query": "SELECT b.id FROM Sociable b  WHERE b.sociableType = SociableComment AND b.removed = false AND b.tenantId = :tenantId AND b.numberDenouncements = 0 ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.Sociable",
+   "source_file": "com/totvs/technology/social/sociable/entity/Sociable.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialObject.find",
+   "query": "SELECT b FROM SocialObject b WHERE objectClass = :objectClass AND removed = false AND objectId = :objectId AND tenantId = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.SocialObject",
+   "source_file": "com/totvs/technology/social/sociable/entity/SocialObject.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialObject.find.class",
+   "query": "SELECT b FROM SocialObject b WHERE objectClass = :objectClass AND removed = false AND tenantId = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.SocialObject",
+   "source_file": "com/totvs/technology/social/sociable/entity/SocialObject.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialObject.find.last.class",
+   "query": "SELECT b FROM SocialObject b WHERE objectClass = :objectClass AND removed = false AND tenantId = :tenantId order by b.id desc",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.SocialObject",
+   "source_file": "com/totvs/technology/social/sociable/entity/SocialObject.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SociableComment.list",
+   "query": "SELECT b FROM SociableComment b WHERE sociable.id =:sociableId and removed =:removed and numberDenouncements = 0 ORDER BY b.creationDate DESC ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.SociableComment",
+   "source_file": "com/totvs/technology/social/sociable/entity/SociableComment.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SociableComment.listLastComment",
+   "query": "SELECT b FROM SociableComment b WHERE sociable.id =:sociableId and removed =:removed and numberDenouncements = 0 AND b.id < :lastCommentId ORDER BY b.creationDate DESC ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.SociableComment",
+   "source_file": "com/totvs/technology/social/sociable/entity/SociableComment.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SociableComment.removeAll",
+   "query": "DELETE FROM SociableComment b WHERE sociable.id = :sociableId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.SociableComment",
+   "source_file": "com/totvs/technology/social/sociable/entity/SociableComment.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SociableComment.find",
+   "query": "SELECT b FROM SociableComment b WHERE sociable.id = :sociableId AND removed = false AND user.id = :userId ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.SociableComment",
+   "source_file": "com/totvs/technology/social/sociable/entity/SociableComment.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SociableComment.list.byClass",
+   "query": "SELECT b FROM SociableComment b JOIN b.sociable s WHERE s.objectClass = :objectClass AND b.removed = false AND b.numberDenouncements = 0 AND b.tenantId = :tenantId ORDER BY b.creationDate DESC",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.SociableComment",
+   "source_file": "com/totvs/technology/social/sociable/entity/SociableComment.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SociableComment.list.byClassId",
+   "query": "SELECT b FROM SociableComment b JOIN b.sociable s WHERE s.objectClass = :objectClass AND s.objectId = :objectId AND b.removed = false and b.numberDenouncements = 0 AND b.tenantId = :tenantId ORDER BY b.creationDate DESC",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.SociableComment",
+   "source_file": "com/totvs/technology/social/sociable/entity/SociableComment.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialPost.listSocial",
+   "query": "SELECT b FROM SocialPost b WHERE removed =:removed AND numberDenouncements = 0 AND social.id = :socialId  ORDER BY lastUpdateDate DESC",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.shareplace.post.entity.SocialPost",
+   "source_file": "com/totvs/technology/social/shareplace/post/entity/SocialPost.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialPost.listWithSociable",
+   "query": "SELECT b FROM SocialPost b WHERE removed =:removed AND numberDenouncements = 0 AND linkedObject.id = :linkedObject  ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.shareplace.post.entity.SocialPost",
+   "source_file": "com/totvs/technology/social/shareplace/post/entity/SocialPost.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialPost.findByIdTenant",
+   "query": "SELECT b FROM SocialPost b  WHERE removed =:removed AND tenantId = :tenantId AND id = :id  ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.shareplace.post.entity.SocialPost",
+   "source_file": "com/totvs/technology/social/shareplace/post/entity/SocialPost.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialPost.listPostBySocialAndVisibility",
+   "query": "SELECT b FROM SocialPost b  WHERE removed =:removed AND numberDenouncements = 0 AND social.id = :socialId   AND visibility =:visibility ORDER BY lastUpdateDate DESC",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.shareplace.post.entity.SocialPost",
+   "source_file": "com/totvs/technology/social/shareplace/post/entity/SocialPost.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialPost.listPostBySocialAndVisibilityLastPost",
+   "query": "SELECT b FROM SocialPost b  WHERE removed =:removed AND social.id = :socialId AND b.lastUpdateDate > :lastUpdateDate  AND visibility =:visibility ORDER BY lastUpdateDate DESC",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.shareplace.post.entity.SocialPost",
+   "source_file": "com/totvs/technology/social/shareplace/post/entity/SocialPost.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialPost.ListPostIdsBySocialAndVisibility",
+   "query": "SELECT b.id FROM SocialPost b  WHERE removed =:removed AND numberDenouncements = 0 AND social.id = :socialId  AND visibility IN (:visibility) ORDER BY lastUpdateDate DESC",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.shareplace.post.entity.SocialPost",
+   "source_file": "com/totvs/technology/social/shareplace/post/entity/SocialPost.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialPost.ListPostIds",
+   "query": "SELECT b.id FROM SocialPost b  WHERE removed = false AND tenantId = :tenantId AND numberDenouncements = 0 ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.shareplace.post.entity.SocialPost",
+   "source_file": "com/totvs/technology/social/shareplace/post/entity/SocialPost.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialPost.findLinkedObjectBySociable",
+   "query": "select obj1.linkedObject.id from SocialPost obj1 where obj1.id =:sociableId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.shareplace.post.entity.SocialPost",
+   "source_file": "com/totvs/technology/social/shareplace/post/entity/SocialPost.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialPost.updateLinkedObject",
+   "query": "UPDATE Sociable t  SET linkedObject = :newlinkedObject  WHERE linkedObject = :linkedObject ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.shareplace.post.entity.SocialPost",
+   "source_file": "com/totvs/technology/social/shareplace/post/entity/SocialPost.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialPost.CountPosts",
+   "query": "SELECT COUNT(b.id) FROM SocialPost b  WHERE removed = false AND tenantId = :tenantId AND numberDenouncements = 0 ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.shareplace.post.entity.SocialPost",
+   "source_file": "com/totvs/technology/social/shareplace/post/entity/SocialPost.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialPost.findPostAttachments",
+   "query": "SELECT b FROM SocialPost b INNER JOIN FETCH b.attachments a WHERE b.id = :id AND a.sociableType <> 'SociableComment'",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.shareplace.post.entity.SocialPost",
+   "source_file": "com/totvs/technology/social/shareplace/post/entity/SocialPost.java",
+   "owner_table": "SOCIABLE",
+   "tables": [
+    "SOCIABLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "SOCIABLETYPE",

@@ -27,6 +27,224 @@
  "jpa_entities": [
   "com.totvs.technology.foundation.security.entity.FDNUserData"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNUserData.findAll",
+   "query": "SELECT b FROM FDNUserData b WHERE b.hide = false",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserData.java",
+   "owner_table": "FDN_USERDATA",
+   "tables": [
+    "FDN_USERDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserData.findById",
+   "query": "SELECT b FROM FDNUserData b WHERE b.id = :id AND b.hide = false",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserData.java",
+   "owner_table": "FDN_USERDATA",
+   "tables": [
+    "FDN_USERDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserData.findByTenantId",
+   "query": "SELECT b FROM FDNUserData b WHERE b.user.id = :id AND b.dataKey = :key",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserData.java",
+   "owner_table": "FDN_USERDATA",
+   "tables": [
+    "FDN_USERDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserData.findByDataKey",
+   "query": "SELECT b FROM FDNUserData b WHERE b.user.id = :userId AND b.dataKey = :dataKey AND b.hide = false",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserData.java",
+   "owner_table": "FDN_USERDATA",
+   "tables": [
+    "FDN_USERDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserData.findByUser",
+   "query": "SELECT b FROM FDNUserData b WHERE b.user.id = :userId AND b.hide = false",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserData.java",
+   "owner_table": "FDN_USERDATA",
+   "tables": [
+    "FDN_USERDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserData.findByDataKeys",
+   "query": "SELECT b FROM FDNUserData b WHERE b.user.id = :userId AND b.dataKey IN (:dataKeys) AND b.hide = false",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserData.java",
+   "owner_table": "FDN_USERDATA",
+   "tables": [
+    "FDN_USERDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserData.findUsersIdByParam",
+   "query": "SELECT b.user.user.id FROM FDNUserData b WHERE b.user.tenantId = :tenantId AND b.dataKey = :dataKey AND b.dataValue = :dataValue",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserData.java",
+   "owner_table": "FDN_USERDATA",
+   "tables": [
+    "FDN_USERDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserData.findUsersByParam",
+   "query": "SELECT b FROM FDNUserData b WHERE b.user.tenantId = :tenantId AND b.dataKey = :dataKey AND b.dataValue = :dataValue",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserData.java",
+   "owner_table": "FDN_USERDATA",
+   "tables": [
+    "FDN_USERDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserData.countUsersByParam",
+   "query": "SELECT count(b.user) FROM FDNUserData b WHERE b.user.tenantId = :tenantId AND b.dataKey = :dataKey AND b.dataValue = :dataValue",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserData.java",
+   "owner_table": "FDN_USERDATA",
+   "tables": [
+    "FDN_USERDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserData.countUsersOfGroupWithDataEqual",
+   "query": "SELECT count(b.user) FROM FDNUserData b,FDNGroupUserRole gr WHERE gr.tenantId = :tenantId AND gr.login= b.user.login AND gr.groupCode=:groupCode AND b.user.tenantId = :tenantId AND b.dataKey = :dataKey AND b.dataValue = :dataValue",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserData.java",
+   "owner_table": "FDN_USERDATA",
+   "tables": [
+    "FDN_USERDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserData.removeByKey",
+   "query": "DELETE FROM FDNUserData p WHERE p.user.login = :login AND p.dataKey = :dataKey",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserData.java",
+   "owner_table": "FDN_USERDATA",
+   "tables": [
+    "FDN_USERDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserData.sumUsersDataEqual",
+   "query": "SELECT sum(b.dataValue) FROM FDNUserData b WHERE b.user.tenantId = :tenantId AND b.dataKey = :dataKey",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserData.java",
+   "owner_table": "FDN_USERDATA",
+   "tables": [
+    "FDN_USERDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "USERDATA_ID",

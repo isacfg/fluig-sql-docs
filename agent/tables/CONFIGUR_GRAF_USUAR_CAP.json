@@ -1,0 +1,130 @@
+{
+  "name": "CONFIGUR_GRAF_USUAR_CAP",
+  "domain": "bpm-cap",
+  "purpose": "Configuração de gráficos do CAP (Controle e Acompanhamento de Processos) por usuário: quais métricas/séries exibir, processo analisado e frequência de snapshot.",
+  "schema_card": "by_table/CONFIGUR_GRAF_USUAR_CAP.json",
+  "business_concepts": [
+    "bpm-cap",
+    "CONFIGUR_GRAF_USUAR_CAP"
+  ],
+  "grain": {
+    "description": "Configuração de gráficos do CAP (Controle e Acompanhamento de Processos) por usuário: quais métricas/séries exibir, processo analisado e frequência de snapshot. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "CD_MATRICULA",
+      "COD_EMPRESA",
+      "NUM_SEQ"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/CONFIGUR_GRAF_USUAR_CAP.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0051",
+      "from_table": "CONFIGUR_GRAF_USUAR_CAP",
+      "to_table": "DEF_PROCES",
+      "on": [
+        "CONFIGUR_GRAF_USUAR_CAP.COD_EMPRESA = DEF_PROCES.COD_EMPRESA",
+        "CONFIGUR_GRAF_USUAR_CAP.COD_DEF_PROCES = DEF_PROCES.COD_DEF_PROCES"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_DEF_PROCES",
+          "to_column": "COD_DEF_PROCES"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Processo analisado (relação lógica não listada).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0048",
+      "table": "CONFIGUR_GRAF_COMPART",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0049",
+      "table": "CONFIGUR_GRAF_COMPART",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0051",
+      "table": "DEF_PROCES",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Configuração de gráficos do CAP (Controle e Acompanhamento de Processos) por usuário: quais métricas/séries exibir, processo analisado e frequência de snapshot. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "CD_MATRICULA",
+        "COD_EMPRESA",
+        "NUM_SEQ"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

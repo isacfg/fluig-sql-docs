@@ -23,6 +23,44 @@
  "jpa_entities": [
   "com.totvs.technology.social.mention.entity.Mention"
  ],
+ "observed_queries": [
+  {
+   "name": "Mention.findByMentioningIdAndClass",
+   "query": "SELECT m from Mention m where m.mentioningId = :mentioningId and m.mentioningClass = :mentioningClass",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.mention.entity.Mention",
+   "source_file": "com/totvs/technology/social/mention/entity/Mention.java",
+   "owner_table": "MENTION",
+   "tables": [
+    "MENTION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Mention.removeByMentioningId",
+   "query": "DELETE FROM Mention m WHERE m.mentioningId = :mentioningId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.mention.entity.Mention",
+   "source_file": "com/totvs/technology/social/mention/entity/Mention.java",
+   "owner_table": "MENTION",
+   "tables": [
+    "MENTION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "ID",

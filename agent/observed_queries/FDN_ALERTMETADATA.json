@@ -1,0 +1,38 @@
+[
+  {
+    "name": "FDNAlertMetadata.findByAlert",
+    "query": "SELECT b FROM FDNAlertMetadata b WHERE b.alert.id = :alertId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertMetadata",
+    "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertMetadata.java",
+    "owner_table": "FDN_ALERTMETADATA",
+    "tables": [
+      "FDN_ALERTMETADATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNAlertMetadata.removeAlertMetadatasByAlertIdsList",
+    "query": " DELETE FROM FDNAlertMetadata alertMetadata WHERE alertMetadata.alertId IN ( :alertIds )",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertMetadata",
+    "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertMetadata.java",
+    "owner_table": "FDN_ALERTMETADATA",
+    "tables": [
+      "FDN_ALERTMETADATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

@@ -1,0 +1,362 @@
+[
+  {
+    "name": "SocialUser.findByFoundationUser",
+    "query": "SELECT b FROM SocialUser b WHERE foundationUserId = :foundationUserId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialUser",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialUser.java",
+    "owner_table": "SOCIAL",
+    "tables": [
+      "SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialUser.ListByFoundationIds",
+    "query": "SELECT b FROM SocialUser b WHERE tenantId = :tenantId AND foundationUserId IN (:foundationUserId)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialUser",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialUser.java",
+    "owner_table": "SOCIAL",
+    "tables": [
+      "SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialUser.ListByTenantAndType",
+    "query": "SELECT b FROM SocialUser b WHERE type = :type AND tenantId = :tenantId ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialUser",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialUser.java",
+    "owner_table": "SOCIAL",
+    "tables": [
+      "SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialUser.ListByTenantAndTypeFilter",
+    "query": "SELECT b FROM SocialUser b WHERE type = :type AND tenantId = :tenantId and LOWER(name) like :pattern",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialUser",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialUser.java",
+    "owner_table": "SOCIAL",
+    "tables": [
+      "SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialUser.listByTenantAndAliases",
+    "query": "SELECT su FROM SocialUser su WHERE su.tenantId = :tenantId AND su.alias IN ( :aliases ) AND su.state = 1 AND su.type = 0",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.SocialUser",
+    "source_file": "com/totvs/technology/social/relation/entity/SocialUser.java",
+    "owner_table": "SOCIAL",
+    "tables": [
+      "SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Social.findByAlias",
+    "query": "SELECT b FROM Social b  WHERE alias = :alias  ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.Social",
+    "source_file": "com/totvs/technology/social/relation/entity/Social.java",
+    "owner_table": "SOCIAL",
+    "tables": [
+      "SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Social.findByAliasTenant",
+    "query": "SELECT b FROM Social b WHERE alias = :alias AND tenantId = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.Social",
+    "source_file": "com/totvs/technology/social/relation/entity/Social.java",
+    "owner_table": "SOCIAL",
+    "tables": [
+      "SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Social.findByIdTenant",
+    "query": "SELECT b FROM Social b WHERE tenantId = :tenantId AND id = :id ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.Social",
+    "source_file": "com/totvs/technology/social/relation/entity/Social.java",
+    "owner_table": "SOCIAL",
+    "tables": [
+      "SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Social.ListIdsByTenant",
+    "query": "SELECT b.id FROM Social b WHERE tenantId = :tenantId AND b.state IN (:state) AND hidden = :hidden ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.Social",
+    "source_file": "com/totvs/technology/social/relation/entity/Social.java",
+    "owner_table": "SOCIAL",
+    "tables": [
+      "SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Social.CountByTenant",
+    "query": "SELECT COUNT(b.id) FROM Social b WHERE tenantId = :tenantId AND b.type IN (:type) AND b.state IN (:state)  AND hidden = :hidden",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.Social",
+    "source_file": "com/totvs/technology/social/relation/entity/Social.java",
+    "owner_table": "SOCIAL",
+    "tables": [
+      "SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Social.FindSocialByIds",
+    "query": "SELECT b FROM Social b WHERE b.tenantId = :tenantId AND b.id IN(:id)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.Social",
+    "source_file": "com/totvs/technology/social/relation/entity/Social.java",
+    "owner_table": "SOCIAL",
+    "tables": [
+      "SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Social.ListByTenantAndType",
+    "query": "SELECT b FROM Social b WHERE b.tenantId = :tenantId AND b.type IN(:type) AND b.hidden = :hidden ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.Social",
+    "source_file": "com/totvs/technology/social/relation/entity/Social.java",
+    "owner_table": "SOCIAL",
+    "tables": [
+      "SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Social.FindSocialByTenantStateTypeMatchAlias",
+    "query": "SELECT b FROM Social b WHERE b.tenantId = :tenantId AND b.type IN(:type) AND b.state IN (:state)  AND UPPER(b.alias) like :alias  ORDER BY b.alias ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.Social",
+    "source_file": "com/totvs/technology/social/relation/entity/Social.java",
+    "owner_table": "SOCIAL",
+    "tables": [
+      "SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Social.FindSocialByTenantStateHiddenTypeMatchAlias",
+    "query": "SELECT b FROM Social b WHERE b.tenantId = :tenantId AND b.type IN(:type) AND b.state IN (:state)  AND UPPER(b.alias) like :alias  AND b.hidden = :hidden ORDER BY b.alias ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.Social",
+    "source_file": "com/totvs/technology/social/relation/entity/Social.java",
+    "owner_table": "SOCIAL",
+    "tables": [
+      "SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Social.FindSocialByTenantStateType",
+    "query": "SELECT b FROM Social b WHERE b.tenantId = :tenantId AND b.type IN(:type) AND b.state IN (:state)ORDER BY b.alias ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.Social",
+    "source_file": "com/totvs/technology/social/relation/entity/Social.java",
+    "owner_table": "SOCIAL",
+    "tables": [
+      "SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Social.FindSocialByTenantStateTypeHidden",
+    "query": "SELECT b FROM Social b WHERE b.tenantId = :tenantId AND b.type IN(:type) AND b.state IN (:state) AND b.hidden = :hidden ORDER BY b.alias ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.Social",
+    "source_file": "com/totvs/technology/social/relation/entity/Social.java",
+    "owner_table": "SOCIAL",
+    "tables": [
+      "SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Social.FindSocialByTenantStateTypeMatchName",
+    "query": "SELECT b FROM Social b WHERE b.tenantId = :tenantId AND b.type IN(:type) AND b.state IN (:state)   AND UPPER(b.name) like :name  ORDER BY b.name ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.Social",
+    "source_file": "com/totvs/technology/social/relation/entity/Social.java",
+    "owner_table": "SOCIAL",
+    "tables": [
+      "SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Social.FindSocialByTenantStateTypeMatchPattern",
+    "query": "SELECT b FROM Social b WHERE b.tenantId = :tenantId AND b.type IN(:type) AND b.state IN (:state) AND (UPPER(b.name) like :pattern OR UPPER(b.alias) like :pattern)  ORDER BY b.alias ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.Social",
+    "source_file": "com/totvs/technology/social/relation/entity/Social.java",
+    "owner_table": "SOCIAL",
+    "tables": [
+      "SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Social.FindSocialByTenantStateHiddenTypeMatchName",
+    "query": "SELECT b FROM Social b WHERE b.tenantId = :tenantId AND b.type IN(:type) AND b.state IN (:state)   AND UPPER(b.name) like :name  AND b.hidden = :hidden ORDER BY b.name ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.Social",
+    "source_file": "com/totvs/technology/social/relation/entity/Social.java",
+    "owner_table": "SOCIAL",
+    "tables": [
+      "SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Social.FindSocialWithoutTypeMatchPattern",
+    "query": "SELECT b FROM Social b LEFT JOIN b.socialFavorites f WITH (f.user.id = :loggedUserId) WHERE b.tenantId = :tenantId AND b.type IN (0,1) AND b.state = 1 AND b.id <> :loggedUserId AND (b.hidden = 0 OR (b.hidden = 1 AND b.id IN (SELECT r.related.id FROM SocialRelation r WHERE r.social.id = :loggedUserId))) AND (UPPER(b.name) like :likePattern OR UPPER(b.alias) like :likePattern) ORDER BY (CASE WHEN UPPER(b.name) = :pattern THEN 1 WHEN f.id IS NOT NULL THEN 2 ELSE 3 END),  f.id , b.name",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.relation.entity.Social",
+    "source_file": "com/totvs/technology/social/relation/entity/Social.java",
+    "owner_table": "SOCIAL",
+    "tables": [
+      "SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

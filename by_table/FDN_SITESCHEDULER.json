@@ -22,6 +22,26 @@
  "jpa_entities": [
   "com.fluig.foundation.volume.entity.FDNSiteScheduler"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNSiteScheduler.findBySite",
+   "query": "SELECT o FROM FDNSiteScheduler o WHERE o.siteId = :siteId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.volume.entity.FDNSiteScheduler",
+   "source_file": "com/fluig/foundation/volume/entity/FDNSiteScheduler.java",
+   "owner_table": "FDN_SITESCHEDULER",
+   "tables": [
+    "FDN_SITESCHEDULER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "SITESCHEDULER_ID",

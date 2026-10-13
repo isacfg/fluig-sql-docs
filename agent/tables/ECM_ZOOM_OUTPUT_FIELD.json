@@ -1,0 +1,180 @@
+{
+  "name": "ECM_ZOOM_OUTPUT_FIELD",
+  "domain": "ecm-metadata-forms",
+  "purpose": "Mapeia um campo (DISPLAY_KEY) do dataset do zoom para outro item do formulario (HTML_ID) que sera preenchido quando um registro e selecionado.",
+  "schema_card": "by_table/ECM_ZOOM_OUTPUT_FIELD.json",
+  "business_concepts": [
+    "ecm-metadata-forms",
+    "ECM_ZOOM_OUTPUT_FIELD"
+  ],
+  "grain": {
+    "description": "Mapeia um campo (DISPLAY_KEY) do dataset do zoom para outro item do formulario (HTML_ID) que sera preenchido quando um registro e selecionado. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/ECM_ZOOM_OUTPUT_FIELD.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0252",
+      "from_table": "ECM_ZOOM_OUTPUT_FIELD",
+      "to_table": "ECM_ZOOM_FIELD_FORM_ITEM",
+      "on": [
+        "ECM_ZOOM_OUTPUT_FIELD.METADATAFORM_ID = ECM_ZOOM_FIELD_FORM_ITEM.METADATAFORM_ID",
+        "ECM_ZOOM_OUTPUT_FIELD.HTML_ID_ZOOM_ITEM = ECM_ZOOM_FIELD_FORM_ITEM.HTML_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "METADATAFORM_ID",
+          "to_column": "METADATAFORM_ID"
+        },
+        {
+          "from_column": "HTML_ID_ZOOM_ITEM",
+          "to_column": "HTML_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Campos de saida (preenchimento de outros itens).",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0255",
+      "from_table": "ECM_ZOOM_OUTPUT_FIELD",
+      "to_table": "ECM_ZOOM_FIELD_FORM_ITEM",
+      "on": [
+        "ECM_ZOOM_OUTPUT_FIELD.METADATAFORM_ID = ECM_ZOOM_FIELD_FORM_ITEM.METADATAFORM_ID",
+        "ECM_ZOOM_OUTPUT_FIELD.HTML_ID_ZOOM_ITEM = ECM_ZOOM_FIELD_FORM_ITEM.HTML_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "METADATAFORM_ID",
+          "to_column": "METADATAFORM_ID"
+        },
+        {
+          "from_column": "HTML_ID_ZOOM_ITEM",
+          "to_column": "HTML_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Item zoom dono do mapeamento de saida (@JoinColumns, FK_ID_ZM_OUT_DSPLY).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0257",
+      "from_table": "ECM_ZOOM_OUTPUT_FIELD",
+      "to_table": "ECM_ABSTRACT_FORM_ITEM",
+      "on": [
+        "ECM_ZOOM_OUTPUT_FIELD.METADATAFORM_ID = ECM_ABSTRACT_FORM_ITEM.METADATAFORM_ID",
+        "ECM_ZOOM_OUTPUT_FIELD.HTML_ID = ECM_ABSTRACT_FORM_ITEM.HTML_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "METADATAFORM_ID",
+          "to_column": "METADATAFORM_ID"
+        },
+        {
+          "from_column": "HTML_ID",
+          "to_column": "HTML_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Item de destino preenchido; polimorfico entre as tabelas *_FORM_ITEM, sem FK.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0252",
+      "table": "ECM_ZOOM_FIELD_FORM_ITEM",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0255",
+      "table": "ECM_ZOOM_FIELD_FORM_ITEM",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0257",
+      "table": "ECM_ABSTRACT_FORM_ITEM",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Mapeia um campo (DISPLAY_KEY) do dataset do zoom para outro item do formulario (HTML_ID) que sera preenchido quando um registro e selecionado. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

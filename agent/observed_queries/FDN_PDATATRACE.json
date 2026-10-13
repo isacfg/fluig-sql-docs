@@ -1,0 +1,92 @@
+[
+  {
+    "name": "PersonalDatatrace.findAll",
+    "query": "SELECT f FROM PersonalDatatrace f",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.datatrace.entity.PersonalDatatrace",
+    "source_file": "com/fluig/datatrace/entity/PersonalDatatrace.java",
+    "owner_table": "FDN_PDATATRACE",
+    "tables": [
+      "FDN_PDATATRACE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "PersonalDatatrace.findByTenant",
+    "query": "SELECT f FROM PersonalDatatrace f WHERE f.tenantId = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.datatrace.entity.PersonalDatatrace",
+    "source_file": "com/fluig/datatrace/entity/PersonalDatatrace.java",
+    "owner_table": "FDN_PDATATRACE",
+    "tables": [
+      "FDN_PDATATRACE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "PersonalDatatrace.findById",
+    "query": "SELECT f FROM PersonalDatatrace f WHERE f.id = :id AND f.tenantId = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.datatrace.entity.PersonalDatatrace",
+    "source_file": "com/fluig/datatrace/entity/PersonalDatatrace.java",
+    "owner_table": "FDN_PDATATRACE",
+    "tables": [
+      "FDN_PDATATRACE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "PersonalDatatrace.removeBeforeDate",
+    "query": "DELETE FROM PersonalDatatrace f WHERE f.timestamp < :beforeDate ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.datatrace.entity.PersonalDatatrace",
+    "source_file": "com/fluig/datatrace/entity/PersonalDatatrace.java",
+    "owner_table": "FDN_PDATATRACE",
+    "tables": [
+      "FDN_PDATATRACE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "PersonalDatatrace.findByResource",
+    "query": "SELECT o FROM PersonalDatatrace as o WHERE o.tenantId = :tenantId AND o.resourceTable = :table AND o.resourceKey = :key AND o.resourceId = :id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.datatrace.entity.PersonalDatatrace",
+    "source_file": "com/fluig/datatrace/entity/PersonalDatatrace.java",
+    "owner_table": "FDN_PDATATRACE",
+    "tables": [
+      "FDN_PDATATRACE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

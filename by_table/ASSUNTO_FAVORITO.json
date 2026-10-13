@@ -16,6 +16,26 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.dm.model.FavoriteTopic"
  ],
+ "observed_queries": [
+  {
+   "name": "FavoriteTopic.findAll",
+   "query": "SELECT f FROM FavoriteTopic f WHERE f.favoriteTopicPK.userId = :userId AND f.favoriteTopicPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.FavoriteTopic",
+   "source_file": "com/datasul/technology/webdesk/dm/model/FavoriteTopic.java",
+   "owner_table": "ASSUNTO_FAVORITO",
+   "tables": [
+    "ASSUNTO_FAVORITO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",

@@ -1,0 +1,20 @@
+[
+  {
+    "name": "ProcessStateTrigger.findInitialTimerTrigger",
+    "query": "SELECT pst FROM ProcessStateTrigger pst, ProcessState ps WHERE pst.processStateTriggerPK.companyId = :companyId AND pst.processStateTriggerPK.processId = :processId AND pst.processStateTriggerPK.version = :version AND ps.processStatePK.version = pst.processStateTriggerPK.version AND ps.processStatePK.processId = pst.processStateTriggerPK.processId AND ps.processStatePK.companyId = pst.processStateTriggerPK.companyId AND ps.processStatePK.sequence = pst.processStateTriggerPK.stateSequence AND ps.bpmnType = :bpmnType",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessStateTrigger",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessStateTrigger.java",
+    "owner_table": "ESTADO_PROCES_TRIGGER",
+    "tables": [
+      "ESTADO_PROCES_TRIGGER"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "name": "SocialFolder.findAll",
+    "query": "SELECT s FROM SocialFolder s WHERE s.socialFolderPK.companyId = :companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dm.model.SocialFolder",
+    "source_file": "com/datasul/technology/webdesk/dm/model/SocialFolder.java",
+    "owner_table": "DOCTO_SOCIAL",
+    "tables": [
+      "DOCTO_SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialFolder.findByDocumentId",
+    "query": "SELECT s FROM SocialFolder s WHERE s.socialFolderPK.companyId = :companyId AND s.documentId = :documentId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dm.model.SocialFolder",
+    "source_file": "com/datasul/technology/webdesk/dm/model/SocialFolder.java",
+    "owner_table": "DOCTO_SOCIAL",
+    "tables": [
+      "DOCTO_SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialFolder.findBySpaceAlias",
+    "query": "SELECT s FROM SocialFolder s WHERE s.socialFolderPK.companyId = :companyId AND s.socialFolderPK.spaceAlias = :spaceAlias",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dm.model.SocialFolder",
+    "source_file": "com/datasul/technology/webdesk/dm/model/SocialFolder.java",
+    "owner_table": "DOCTO_SOCIAL",
+    "tables": [
+      "DOCTO_SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SocialFolder.findBySpaceAliasAndFolderType",
+    "query": "SELECT s FROM SocialFolder s WHERE s.socialFolderPK.companyId = :companyId AND s.socialFolderPK.spaceAlias = :spaceAlias AND s.socialFolderPK.folderType = :folderType",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dm.model.SocialFolder",
+    "source_file": "com/datasul/technology/webdesk/dm/model/SocialFolder.java",
+    "owner_table": "DOCTO_SOCIAL",
+    "tables": [
+      "DOCTO_SOCIAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "name": "ProcessAttachment.findByDocumentId",
+    "query": "SELECT pa from ProcessAttachment pa where pa.processAttachmentPK.companyId = :companyId AND pa.documentId = :documentId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessAttachment",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessAttachment.java",
+    "owner_table": "ANEXO_PROCES",
+    "tables": [
+      "ANEXO_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessAttachment.findAttachmentByProcessInstanceVersion",
+    "query": "select pa from ProcessAttachment pa where pa.processAttachmentPK.companyId = :companyId and pa.processAttachmentPK.processInstanceId = :processInstanceId and pa.version = :version",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessAttachment",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessAttachment.java",
+    "owner_table": "ANEXO_PROCES",
+    "tables": [
+      "ANEXO_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessAttachment.findByDocumentIdAndVersion",
+    "query": "select pa from ProcessAttachment pa where pa.processAttachmentPK.companyId = :companyId AND pa.documentId = :documentId and pa.version = :version",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessAttachment",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessAttachment.java",
+    "owner_table": "ANEXO_PROCES",
+    "tables": [
+      "ANEXO_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessAttachment.countByProcessInstance",
+    "query": "select count(pa.processAttachmentPK.processInstanceId) from ProcessAttachment pa, WorkflowProcess wp where pa.processAttachmentPK.companyId = :companyId and pa.processAttachmentPK.processInstanceId = :processInstanceId and wp.workflowProcessPK.companyId = pa.processAttachmentPK.companyId and wp.workflowProcessPK.processInstanceId = pa.processAttachmentPK.processInstanceId and wp.attachmentSeqId != pa.processAttachmentPK.attachmentSequence",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessAttachment",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessAttachment.java",
+    "owner_table": "ANEXO_PROCES",
+    "tables": [
+      "ANEXO_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

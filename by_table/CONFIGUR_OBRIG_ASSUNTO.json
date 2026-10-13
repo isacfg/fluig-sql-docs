@@ -16,6 +16,80 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.dm.model.MandatoryTopicConfig"
  ],
+ "observed_queries": [
+  {
+   "name": "MandatoryTopicConfig.findByKey",
+   "query": "SELECT c FROM MandatoryTopicConfig c WHERE c.mandatoryTopicConfigPK.topicId = :topicId AND c.mandatoryTopicConfigPK.companyId = :companyId AND c.mandatoryTopicConfigPK.sequence = :sequence",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.MandatoryTopicConfig",
+   "source_file": "com/datasul/technology/webdesk/dm/model/MandatoryTopicConfig.java",
+   "owner_table": "CONFIGUR_OBRIG_ASSUNTO",
+   "tables": [
+    "CONFIGUR_OBRIG_ASSUNTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "MandatoryTopicConfig.findByTopicId",
+   "query": "SELECT c FROM MandatoryTopicConfig c WHERE c.mandatoryTopicConfigPK.topicId = :topicId AND c.mandatoryTopicConfigPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.MandatoryTopicConfig",
+   "source_file": "com/datasul/technology/webdesk/dm/model/MandatoryTopicConfig.java",
+   "owner_table": "CONFIGUR_OBRIG_ASSUNTO",
+   "tables": [
+    "CONFIGUR_OBRIG_ASSUNTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "MandatoryTopicConfig.findEveryoneSubjects",
+   "query": "SELECT c FROM MandatoryTopicConfig c WHERE c.mandatoryTopicConfigPK.topicId = :topicId AND c.mandatoryTopicConfigPK.companyId = :companyId AND c.attributeType = 3",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.MandatoryTopicConfig",
+   "source_file": "com/datasul/technology/webdesk/dm/model/MandatoryTopicConfig.java",
+   "owner_table": "CONFIGUR_OBRIG_ASSUNTO",
+   "tables": [
+    "CONFIGUR_OBRIG_ASSUNTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "MandatoryTopicConfig.findSubjects",
+   "query": "SELECT c FROM MandatoryTopicConfig c WHERE c.mandatoryTopicConfigPK.topicId = :topicId AND c.mandatoryTopicConfigPK.companyId = :companyId AND c.attributeType = :attributeType AND c.attributeValue = :attributeValue",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.MandatoryTopicConfig",
+   "source_file": "com/datasul/technology/webdesk/dm/model/MandatoryTopicConfig.java",
+   "owner_table": "CONFIGUR_OBRIG_ASSUNTO",
+   "tables": [
+    "CONFIGUR_OBRIG_ASSUNTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",

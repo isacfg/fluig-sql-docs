@@ -19,6 +19,26 @@
  "jpa_entities": [
   "com.fluig.rating.api.entity.Rating"
  ],
+ "observed_queries": [
+  {
+   "name": "Rating.getByUserCode",
+   "query": "select u from Rating u where tenantId = :tenantId and userCode = :userCode and appIdentifier = :appIdentifier",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.rating.api.entity.Rating",
+   "source_file": "com/fluig/rating/api/entity/Rating.java",
+   "owner_table": "RATING",
+   "tables": [
+    "RATING"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "ID",

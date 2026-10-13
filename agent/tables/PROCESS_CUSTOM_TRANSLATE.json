@@ -1,0 +1,128 @@
+{
+  "name": "PROCESS_CUSTOM_TRANSLATE",
+  "domain": "bpm-workflow",
+  "purpose": "Traducoes customizadas (chave/descricao) por idioma de uma versao de processo.",
+  "schema_card": "by_table/PROCESS_CUSTOM_TRANSLATE.json",
+  "business_concepts": [
+    "bpm-workflow",
+    "PROCESS_CUSTOM_TRANSLATE"
+  ],
+  "grain": {
+    "description": "Traducoes customizadas (chave/descricao) por idioma de uma versao de processo. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "id"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/PROCESS_CUSTOM_TRANSLATE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0809",
+      "from_table": "PROCESS_CUSTOM_TRANSLATE",
+      "to_table": "VERS_DEF_PROCES",
+      "on": [
+        "PROCESS_CUSTOM_TRANSLATE.TENANT_ID = VERS_DEF_PROCES.COD_EMPRESA",
+        "PROCESS_CUSTOM_TRANSLATE.PROCESS_ID = VERS_DEF_PROCES.COD_DEF_PROCES",
+        "PROCESS_CUSTOM_TRANSLATE.VERSION = VERS_DEF_PROCES.NUM_VERS"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "PROCESS_ID",
+          "to_column": "COD_DEF_PROCES"
+        },
+        {
+          "from_column": "VERSION",
+          "to_column": "NUM_VERS"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Versao do processo traduzida.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0809",
+      "table": "VERS_DEF_PROCES",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "PROCESSCUSTOMTRANSLATE01",
+      "unique": false,
+      "columns": [
+        "TENANT_ID",
+        "PROCESS_ID",
+        "VERSION",
+        "LANGUAGE"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Traducoes customizadas (chave/descricao) por idioma de uma versao de processo. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "id"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

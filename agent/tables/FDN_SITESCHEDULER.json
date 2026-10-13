@@ -1,0 +1,97 @@
+{
+  "name": "FDN_SITESCHEDULER",
+  "domain": "foundation-platform",
+  "purpose": "Janelas de agendamento (início/fim) associadas a um site do Fluig; usada por consulta FDNSiteScheduler.findBySite.",
+  "schema_card": "by_table/FDN_SITESCHEDULER.json",
+  "business_concepts": [
+    "foundation-platform",
+    "FDN_SITESCHEDULER"
+  ],
+  "grain": {
+    "description": "Janelas de agendamento (início/fim) associadas a um site do Fluig; usada por consulta FDNSiteScheduler.findBySite. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "SITESCHEDULER_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_SITESCHEDULER.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0587",
+      "from_table": "FDN_SITESCHEDULER",
+      "to_table": "FDN_SITE",
+      "on": [
+        "FDN_SITESCHEDULER.SITE_ID = FDN_SITE.SITE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "SITE_ID",
+          "to_column": "SITE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Site dono do agendamento (FK FK_9314CU0VGYY7PXECBECEIJPM8; JPA FDNSiteScheduler.site).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0587",
+      "table": "FDN_SITE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FK_9314CU0VGYY7PXECBECEIJPM8",
+      "unique": false,
+      "columns": [
+        "SITE_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_SITESCHEDULER.json",
+  "observed_query_count": 1,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Janelas de agendamento (início/fim) associadas a um site do Fluig; usada por consulta FDNSiteScheduler.findBySite. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "SITESCHEDULER_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

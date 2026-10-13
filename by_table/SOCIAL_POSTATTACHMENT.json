@@ -10,6 +10,7 @@
  "unique_constraints": [],
  "indexes": [],
  "jpa_entities": [],
+ "observed_queries": [],
  "columns": [
   {
    "name": "POST_ID",

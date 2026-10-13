@@ -1,0 +1,56 @@
+[
+  {
+    "name": "FactProcesVolume.findAll",
+    "query": "SELECT f FROM FactProcesVolume f WHERE f.factProcesVolumePK.companyId = :companyId ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.cap.model.FactProcesVolume",
+    "source_file": "com/datasul/technology/cap/model/FactProcesVolume.java",
+    "owner_table": "FACT_PROCES_VOLUME_CAP",
+    "tables": [
+      "FACT_PROCES_VOLUME_CAP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FactProcesVolume.findByProcess",
+    "query": "SELECT f FROM FactProcesVolume f WHERE f.factProcesVolumePK.companyId = :companyId AND f.factProcesVolumePK.processID = :processID",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.cap.model.FactProcesVolume",
+    "source_file": "com/datasul/technology/cap/model/FactProcesVolume.java",
+    "owner_table": "FACT_PROCES_VOLUME_CAP",
+    "tables": [
+      "FACT_PROCES_VOLUME_CAP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FactProcesVolume.findDateLastSnapShot",
+    "query": "SELECT f.factProcesVolumePK.day, f.factProcesVolumePK.month, f.factProcesVolumePK.year FROM FactProcesVolume f WHERE f.factProcesVolumePK.companyId = :companyId AND f.factProcesVolumePK.processID = :processID ORDER BY f.factProcesVolumePK.year DESC, f.factProcesVolumePK.month DESC, f.factProcesVolumePK.day DESC",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.cap.model.FactProcesVolume",
+    "source_file": "com/datasul/technology/cap/model/FactProcesVolume.java",
+    "owner_table": "FACT_PROCES_VOLUME_CAP",
+    "tables": [
+      "FACT_PROCES_VOLUME_CAP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

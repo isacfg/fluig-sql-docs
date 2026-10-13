@@ -20,6 +20,62 @@
  "jpa_entities": [
   "com.totvs.technology.wcm.core.entity.WCMResourceComponentFile"
  ],
+ "observed_queries": [
+  {
+   "name": "WCMResourceComponentFile.findAll",
+   "query": "SELECT b FROM WCMResourceComponentFile b",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMResourceComponentFile",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMResourceComponentFile.java",
+   "owner_table": "WCM_RESOURCECOMPONENTFILE",
+   "tables": [
+    "WCM_RESOURCECOMPONENTFILE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMResourceComponentFile.findById",
+   "query": "SELECT b FROM WCMResourceComponentFile b WHERE b.id = :id",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMResourceComponentFile",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMResourceComponentFile.java",
+   "owner_table": "WCM_RESOURCECOMPONENTFILE",
+   "tables": [
+    "WCM_RESOURCECOMPONENTFILE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMResourceComponentFile.findByComponent",
+   "query": "SELECT b FROM WCMResourceComponentFile b WHERE b.component.id = :componentId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMResourceComponentFile",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMResourceComponentFile.java",
+   "owner_table": "WCM_RESOURCECOMPONENTFILE",
+   "tables": [
+    "WCM_RESOURCECOMPONENTFILE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "RESOURCE_COMPONENT_FILE_ID",

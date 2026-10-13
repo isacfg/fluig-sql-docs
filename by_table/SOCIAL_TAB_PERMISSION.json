@@ -20,6 +20,44 @@
  "jpa_entities": [
   "com.totvs.technology.social.relation.entity.SocialTabPermission"
  ],
+ "observed_queries": [
+  {
+   "name": "SocialTabPermission.FIND_BY_SOCIALID_TABID",
+   "query": "SELECT t FROM SocialTabPermission t WHERE t.tenantId = :tenantId AND t.social.id = :socialId AND t.tabId = :tabId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.relation.entity.SocialTabPermission",
+   "source_file": "com/totvs/technology/social/relation/entity/SocialTabPermission.java",
+   "owner_table": "SOCIAL_TAB_PERMISSION",
+   "tables": [
+    "SOCIAL_TAB_PERMISSION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialTabPermission.FIND_BY_SOCIALID",
+   "query": "SELECT t FROM SocialTabPermission t WHERE t.tenantId = :tenantId AND t.social.id = :socialId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.relation.entity.SocialTabPermission",
+   "source_file": "com/totvs/technology/social/relation/entity/SocialTabPermission.java",
+   "owner_table": "SOCIAL_TAB_PERMISSION",
+   "tables": [
+    "SOCIAL_TAB_PERMISSION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "SOCIAL_TAB_PERMISSION_ID",

@@ -1,0 +1,74 @@
+{
+  "name": "CALEND_GLOBAL",
+  "domain": "calendario-feriados",
+  "purpose": "Feriados globais da empresa (entidade FDNHoliday). Cada linha é um feriado de um calendário identificado por COD_FER_CALEND, fixo (dia/mês) ou de um ano específico.",
+  "schema_card": "by_table/CALEND_GLOBAL.json",
+  "business_concepts": [
+    "calendario-feriados",
+    "CALEND_GLOBAL"
+  ],
+  "grain": {
+    "description": "Feriados globais da empresa (entidade FDNHoliday). Cada linha é um feriado de um calendário identificado por COD_FER_CALEND, fixo (dia/mês) ou de um ano específico. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/CALEND_GLOBAL.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0470",
+      "table": "FDN_LOCALHOLIDAY",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/CALEND_GLOBAL.json",
+  "observed_query_count": 4,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Feriados globais da empresa (entidade FDNHoliday). Cada linha é um feriado de um calendário identificado por COD_FER_CALEND, fixo (dia/mês) ou de um ano específico. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

@@ -1,0 +1,182 @@
+[
+  {
+    "name": "FormDataset.FIND_BY_DOCUMENT_FETCH_DATASET",
+    "query": "  SELECT b FROM FormDataset b JOIN FETCH b.dataset  WHERE b.companyId = :companyId    AND b.documentId = :documentId    AND b.version = :version ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dataset.model.FormDataset",
+    "source_file": "com/datasul/technology/webdesk/dataset/model/FormDataset.java",
+    "owner_table": "FORM_DATASET",
+    "tables": [
+      "FORM_DATASET"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FormDataset.FIND_BY_UNIQUE_KEY_FETCH_DATASET",
+    "query": "  SELECT b FROM FormDataset b JOIN FETCH b.dataset  WHERE b.companyId = :companyId    AND b.documentId = :documentId    AND b.version = :version    AND b.datasetId = :datasetId ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dataset.model.FormDataset",
+    "source_file": "com/datasul/technology/webdesk/dataset/model/FormDataset.java",
+    "owner_table": "FORM_DATASET",
+    "tables": [
+      "FORM_DATASET"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FormDataset.FIND_BY_DOCUMENT",
+    "query": "  SELECT b FROM FormDataset b  WHERE b.companyId = :companyId    AND b.documentId = :documentId    AND b.version = :version ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dataset.model.FormDataset",
+    "source_file": "com/datasul/technology/webdesk/dataset/model/FormDataset.java",
+    "owner_table": "FORM_DATASET",
+    "tables": [
+      "FORM_DATASET"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FormDataset.FIND_BY_UNIQUE_KEY",
+    "query": "  SELECT b FROM FormDataset b  WHERE b.companyId = :companyId    AND b.documentId = :documentId    AND b.version = :version    AND b.datasetId = :datasetId ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dataset.model.FormDataset",
+    "source_file": "com/datasul/technology/webdesk/dataset/model/FormDataset.java",
+    "owner_table": "FORM_DATASET",
+    "tables": [
+      "FORM_DATASET"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FormDataset.DELETE_ALL_OF_A_DOCUMENT",
+    "query": "  DELETE FROM FormDataset b  WHERE b.companyId = :companyId    AND b.documentId = :documentId    AND b.version = :version ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dataset.model.FormDataset",
+    "source_file": "com/datasul/technology/webdesk/dataset/model/FormDataset.java",
+    "owner_table": "FORM_DATASET",
+    "tables": [
+      "FORM_DATASET"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FormDataset.DELETE_ALL_OF_A_DOCUMENT_WITHOUT_VERSION",
+    "query": "  DELETE FROM FormDataset b  WHERE b.companyId = :companyId    AND b.documentId = :documentId ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dataset.model.FormDataset",
+    "source_file": "com/datasul/technology/webdesk/dataset/model/FormDataset.java",
+    "owner_table": "FORM_DATASET",
+    "tables": [
+      "FORM_DATASET"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FormDataset.DELETE_DATASET_IN_PREVIOUS_DOCUMENT_VERSIONS",
+    "query": "  DELETE FROM FormDataset b  WHERE b.companyId = :companyId    AND b.datasetId = :datasetId ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dataset.model.FormDataset",
+    "source_file": "com/datasul/technology/webdesk/dataset/model/FormDataset.java",
+    "owner_table": "FORM_DATASET",
+    "tables": [
+      "FORM_DATASET"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FormDataset.FIND_RELATED_DATASET_IDS",
+    "query": "  SELECT b.datasetId FROM FormDataset b  WHERE b.companyId = :companyId    AND b.documentId = :documentId    AND b.version = :version ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dataset.model.FormDataset",
+    "source_file": "com/datasul/technology/webdesk/dataset/model/FormDataset.java",
+    "owner_table": "FORM_DATASET",
+    "tables": [
+      "FORM_DATASET"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FormDataset.FIND_RELATION_WITH_OTHERS_FORMS",
+    "query": "  SELECT b FROM FormDataset b, Document d  WHERE b.companyId     = d.documentPK.companyId    AND b.documentId    = d.documentPK.documentId    AND b.version       = d.documentPK.version    AND b.companyId     = :companyId    AND b.datasetId     = :datasetId    AND b.datasetId     != d.datasetName    AND d.activeVersion = true ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dataset.model.FormDataset",
+    "source_file": "com/datasul/technology/webdesk/dataset/model/FormDataset.java",
+    "owner_table": "FORM_DATASET",
+    "tables": [
+      "FORM_DATASET"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FormDataset.FIND_RELATED_CARDS_WITH_DATASET",
+    "query": "  SELECT b FROM FormDataset b  WHERE b.companyId     = :companyId    AND b.documentId    != :documentId    AND b.datasetId     = :datasetName ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dataset.model.FormDataset",
+    "source_file": "com/datasul/technology/webdesk/dataset/model/FormDataset.java",
+    "owner_table": "FORM_DATASET",
+    "tables": [
+      "FORM_DATASET"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

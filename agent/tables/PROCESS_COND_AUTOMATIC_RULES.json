@@ -1,0 +1,134 @@
+{
+  "name": "PROCESS_COND_AUTOMATIC_RULES",
+  "domain": "bpm-workflow",
+  "purpose": "Condicoes das regras de transicao automatica de atividade (campo, operador, valor), agrupadas por expressao e ordem.",
+  "schema_card": "by_table/PROCESS_COND_AUTOMATIC_RULES.json",
+  "business_concepts": [
+    "bpm-workflow",
+    "PROCESS_COND_AUTOMATIC_RULES"
+  ],
+  "grain": {
+    "description": "Condicoes das regras de transicao automatica de atividade (campo, operador, valor), agrupadas por expressao e ordem. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/PROCESS_COND_AUTOMATIC_RULES.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0807",
+      "from_table": "PROCESS_COND_AUTOMATIC_RULES",
+      "to_table": "ESTADO_PROCES",
+      "on": [
+        "PROCESS_COND_AUTOMATIC_RULES.TENANT_ID = ESTADO_PROCES.COD_EMPRESA",
+        "PROCESS_COND_AUTOMATIC_RULES.PROCESS_ID = ESTADO_PROCES.COD_DEF_PROCES",
+        "PROCESS_COND_AUTOMATIC_RULES.PROCESS_VERSION = ESTADO_PROCES.NUM_VERS",
+        "PROCESS_COND_AUTOMATIC_RULES.STATE_SEQUENCE = ESTADO_PROCES.NUM_SEQ"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "PROCESS_ID",
+          "to_column": "COD_DEF_PROCES"
+        },
+        {
+          "from_column": "PROCESS_VERSION",
+          "to_column": "NUM_VERS"
+        },
+        {
+          "from_column": "STATE_SEQUENCE",
+          "to_column": "NUM_SEQ"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Atividade com regra automatica.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0807",
+      "table": "ESTADO_PROCES",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "ESTADOPROCESSCONDRULE",
+      "unique": false,
+      "columns": [
+        "TENANT_ID",
+        "PROCESS_ID",
+        "PROCESS_VERSION",
+        "STATE_SEQUENCE",
+        "EXPRESSION_ORDER"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Condicoes das regras de transicao automatica de atividade (campo, operador, valor), agrupadas por expressao e ordem. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

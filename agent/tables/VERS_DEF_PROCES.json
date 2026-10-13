@@ -1,0 +1,282 @@
+{
+  "name": "VERS_DEF_PROCES",
+  "domain": "bpm-process-definition",
+  "purpose": "Versões de definições de processo (BPM): uma linha por versão publicada/em edição do processo com seu diagrama e opções.",
+  "schema_card": "by_table/VERS_DEF_PROCES.json",
+  "business_concepts": [
+    "versão do processo",
+    "process definition version"
+  ],
+  "grain": {
+    "description": "Uma versão de definição de processo por tenant.",
+    "columns": [
+      "COD_EMPRESA",
+      "COD_DEF_PROCES",
+      "NUM_VERS"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "reviewed-schema-description",
+    "business_grain_reviewed": true
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {
+    "active": [
+      "LOG_ATIV = 1"
+    ]
+  },
+  "semantic_evidence": "by_table/VERS_DEF_PROCES.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values",
+  "canonical_joins": [
+    {
+      "id": "join-0062",
+      "from_table": "VERS_DEF_PROCES",
+      "to_table": "DEF_PROCES",
+      "on": [
+        "VERS_DEF_PROCES.COD_EMPRESA = DEF_PROCES.COD_EMPRESA",
+        "VERS_DEF_PROCES.COD_DEF_PROCES = DEF_PROCES.COD_DEF_PROCES"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_DEF_PROCES",
+          "to_column": "COD_DEF_PROCES"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Versões da definição.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1025",
+      "from_table": "VERS_DEF_PROCES",
+      "to_table": "DEF_PROCES",
+      "on": [
+        "VERS_DEF_PROCES.COD_EMPRESA = DEF_PROCES.COD_EMPRESA",
+        "VERS_DEF_PROCES.COD_DEF_PROCES = DEF_PROCES.COD_DEF_PROCES"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_DEF_PROCES",
+          "to_column": "COD_DEF_PROCES"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "hql-join",
+      "evidence": "Definição do processo (findAvailableProcess).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0046",
+      "table": "COMPON_GRAF_PROCES",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0062",
+      "table": "DEF_PROCES",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0130",
+      "table": "DOC_PROCES",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0270",
+      "table": "ESTADO_PROCES",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0300",
+      "table": "EVENT_PROCES",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0360",
+      "table": "FAVORITOS_PROCES",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0700",
+      "table": "HISTOR_CONVER",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0734",
+      "table": "LINK_PROCES",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0744",
+      "table": "LIN_PROCES",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0810",
+      "table": "PROCESS_CUSTOM_TRANSLATE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0822",
+      "table": "PROCESS_VERSION_TRANSLATE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0836",
+      "table": "PROCES_WORKFLOW",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0848",
+      "table": "PROPRIED_AVANCAD_PROCES",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0856",
+      "table": "PROPRIED_EXT",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0882",
+      "table": "SEGUR_ANEXO_PROCES",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1025",
+      "table": "DEF_PROCES",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1027",
+      "table": "VERS_DEF_PROCES_ALERT",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1032",
+      "table": "VERS_DEF_PROCES_ALERT",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [
+    "CLB_IMG_PROCES"
+  ],
+  "indexes": [],
+  "query_examples": [
+    "recipes/workflow/process_definition_versions.sql"
+  ],
+  "observed_queries_path": "agent/observed_queries/VERS_DEF_PROCES.json",
+  "observed_query_count": 8,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Uma versão de definição de processo por tenant.",
+      "columns": [
+        "COD_EMPRESA",
+        "COD_DEF_PROCES",
+        "NUM_VERS"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "reviewed-schema-description",
+      "business_grain_reviewed": true
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {
+      "active": [
+        "LOG_ATIV = 1"
+      ]
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "name": "FDN_LOCK",
+  "domain": "concorrencia-lock",
+  "purpose": "Locks distribuídos de recursos: indica que um item de uma funcionalidade está bloqueado por uma instância/sessão (UUID).",
+  "schema_card": "by_table/FDN_LOCK.json",
+  "business_concepts": [
+    "concorrencia-lock",
+    "FDN_LOCK"
+  ],
+  "grain": {
+    "description": "Locks distribuídos de recursos: indica que um item de uma funcionalidade está bloqueado por uma instância/sessão (UUID). Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "TENANT_ID",
+      "FEATURE_TYPE",
+      "ITEM_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_LOCK.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_LOCK.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Locks distribuídos de recursos: indica que um item de uma funcionalidade está bloqueado por uma instância/sessão (UUID). Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "TENANT_ID",
+        "FEATURE_TYPE",
+        "ITEM_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

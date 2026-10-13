@@ -14,6 +14,44 @@
  "jpa_entities": [
   "com.totvs.technology.foundation.security.entity.FDNUserMobileToken"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNUserMobileToken.findAll",
+   "query": "SELECT a FROM FDNUserMobileToken a",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserMobileToken",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserMobileToken.java",
+   "owner_table": "FDN_USERMOBILETOKEN",
+   "tables": [
+    "FDN_USERMOBILETOKEN"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserMobileToken.findByIdIdp",
+   "query": "SELECT a FROM FDNUserMobileToken a WHERE a.userIdIdp = :idIdp",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserMobileToken",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserMobileToken.java",
+   "owner_table": "FDN_USERMOBILETOKEN",
+   "tables": [
+    "FDN_USERMOBILETOKEN"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "USER_IDIDP",

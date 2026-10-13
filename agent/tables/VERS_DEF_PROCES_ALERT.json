@@ -1,0 +1,179 @@
+{
+  "name": "VERS_DEF_PROCES_ALERT",
+  "domain": "bpm-process-definition",
+  "purpose": "Alertas de análise (boas práticas/riscos) gerados para versões de definição de processo.",
+  "schema_card": "by_table/VERS_DEF_PROCES_ALERT.json",
+  "business_concepts": [
+    "bpm-process-definition",
+    "VERS_DEF_PROCES_ALERT"
+  ],
+  "grain": {
+    "description": "Alertas de análise (boas práticas/riscos) gerados para versões de definição de processo. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/VERS_DEF_PROCES_ALERT.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-1028",
+      "from_table": "VERS_DEF_PROCES_ALERT",
+      "to_table": "VERS_DEF_PROCES",
+      "on": [
+        "VERS_DEF_PROCES_ALERT.TENANT_ID = VERS_DEF_PROCES.COD_EMPRESA",
+        "VERS_DEF_PROCES_ALERT.PROCESS_ID = VERS_DEF_PROCES.COD_DEF_PROCES",
+        "VERS_DEF_PROCES_ALERT.PROCESS_VERSION = VERS_DEF_PROCES.NUM_VERS"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "PROCESS_ID",
+          "to_column": "COD_DEF_PROCES"
+        },
+        {
+          "from_column": "PROCESS_VERSION",
+          "to_column": "NUM_VERS"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "probable",
+      "source_kind": "logical-confirmed",
+      "evidence": "Alertas de análise estática da versão.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1031",
+      "from_table": "VERS_DEF_PROCES_ALERT",
+      "to_table": "VERS_DEF_PROCES",
+      "on": [
+        "VERS_DEF_PROCES_ALERT.TENANT_ID = VERS_DEF_PROCES.COD_EMPRESA",
+        "VERS_DEF_PROCES_ALERT.PROCESS_ID = VERS_DEF_PROCES.COD_DEF_PROCES",
+        "VERS_DEF_PROCES_ALERT.PROCESS_VERSION = VERS_DEF_PROCES.NUM_VERS"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "PROCESS_ID",
+          "to_column": "COD_DEF_PROCES"
+        },
+        {
+          "from_column": "PROCESS_VERSION",
+          "to_column": "NUM_VERS"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-confirmed",
+      "evidence": "Versão analisada.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-1028",
+      "table": "VERS_DEF_PROCES",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1031",
+      "table": "VERS_DEF_PROCES",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [
+    "DETAILS"
+  ],
+  "indexes": [
+    {
+      "name": "VERS_DEF_PROCES_ALERT_01",
+      "unique": false,
+      "columns": [
+        "TENANT_ID",
+        "PROCESS_ID",
+        "PROCESS_VERSION",
+        "SCRIPT_VERSION"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Alertas de análise (boas práticas/riscos) gerados para versões de definição de processo. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

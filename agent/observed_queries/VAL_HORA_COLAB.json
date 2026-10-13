@@ -1,0 +1,20 @@
+[
+  {
+    "name": "ColleagueHourValue.findAll",
+    "query": "SELECT c FROM ColleagueHourValue c WHERE c.colleagueHourValuePK.companyId = :companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ColleagueHourValue",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ColleagueHourValue.java",
+    "owner_table": "VAL_HORA_COLAB",
+    "tables": [
+      "VAL_HORA_COLAB"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

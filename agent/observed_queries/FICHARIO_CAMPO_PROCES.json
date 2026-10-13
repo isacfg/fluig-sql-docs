@@ -1,0 +1,56 @@
+[
+  {
+    "name": "ProcessFormField.findAll",
+    "query": "SELECT pff from ProcessFormField pff where pff.processFormFieldPK.companyId = :companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessFormField",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessFormField.java",
+    "owner_table": "FICHARIO_CAMPO_PROCES",
+    "tables": [
+      "FICHARIO_CAMPO_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessFormField.findByProcessId",
+    "query": "SELECT pff from ProcessFormField pff where pff.processFormFieldPK.companyId = :companyId AND pff.processFormFieldPK.processId = :processId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessFormField",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessFormField.java",
+    "owner_table": "FICHARIO_CAMPO_PROCES",
+    "tables": [
+      "FICHARIO_CAMPO_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessFormField.findByProcessIdAndFieldName",
+    "query": "SELECT pff from ProcessFormField pff where pff.processFormFieldPK.companyId = :companyId AND pff.processFormFieldPK.processId = :processId AND UPPER(pff.fieldDescription) = UPPER(:fieldName)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessFormField",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessFormField.java",
+    "owner_table": "FICHARIO_CAMPO_PROCES",
+    "tables": [
+      "FICHARIO_CAMPO_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

@@ -17,6 +17,7 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.dm.model.DocumentRanking"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "CD_MATRICULA",

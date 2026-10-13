@@ -1,0 +1,38 @@
+[
+  {
+    "name": "WorkflowTask.findWorkflowTaskByMovementSequence",
+    "query": "SELECT wt FROM WorkflowTask wt WHERE wt.taskPK.companyId = :companyId AND wt.processInstanceId = :processInstanceId AND wt.movementSequence = :movementSequence ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.WorkflowTask",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/WorkflowTask.java",
+    "owner_table": "TAR_WORKFLOW",
+    "tables": [
+      "TAR_WORKFLOW"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WorkflowTask.findWorkflowTaskByMovementSequenceAndUser",
+    "query": "SELECT wt FROM WorkflowTask wt WHERE wt.taskPK.companyId = :companyId AND wt.processInstanceId = :processInstanceId AND wt.movementSequence = :movementSequence AND wt.owner = :colleagueId ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.WorkflowTask",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/WorkflowTask.java",
+    "owner_table": "TAR_WORKFLOW",
+    "tables": [
+      "TAR_WORKFLOW"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

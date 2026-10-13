@@ -1,0 +1,1050 @@
+{
+  "name": "DOCUMENTO",
+  "domain": "ecm-documents",
+  "purpose": "Tabela central do ECM: cada linha é uma VERSÃO de um item da árvore de documentos do GED (pasta, arquivo, fichário de formulário, ficha, anexo de processo, link externo etc.), distinguido por TP_DOCUMENTO.",
+  "schema_card": "by_table/DOCUMENTO.json",
+  "business_concepts": [
+    "GED",
+    "documento",
+    "pasta",
+    "ficha",
+    "ECM",
+    "document version"
+  ],
+  "grain": {
+    "description": "Uma versão de um documento por tenant; não um documento lógico independentemente de versão.",
+    "columns": [
+      "COD_EMPRESA",
+      "NR_DOCUMENTO",
+      "NR_VERSAO"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "reviewed-schema-description",
+    "business_grain_reviewed": true
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {
+    "current": [
+      "VERSAO_ATIVA = 1",
+      "LOG_DELETE = 0"
+    ],
+    "not_deleted": [
+      "LOG_DELETE = 0"
+    ],
+    "folders": [
+      "TP_DOCUMENTO IN ('0', '1')"
+    ],
+    "files": [
+      "TP_DOCUMENTO = '2'"
+    ],
+    "form_definitions": [
+      "TP_DOCUMENTO = '4'"
+    ],
+    "form_records": [
+      "TP_DOCUMENTO = '5'"
+    ]
+  },
+  "semantic_evidence": "by_table/DOCUMENTO.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values",
+  "canonical_joins": [
+    {
+      "id": "join-0113",
+      "from_table": "DOCUMENTO",
+      "to_table": "TIPO_DOCUMENTO",
+      "on": [
+        "DOCUMENTO.COD_EMPRESA = TIPO_DOCUMENTO.COD_EMPRESA",
+        "DOCUMENTO.CD_TIPO_DOC = TIPO_DOCUMENTO.CD_TIPO_DOC"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "CD_TIPO_DOC",
+          "to_column": "CD_TIPO_DOC"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Tipo de documento.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0115",
+      "from_table": "DOCUMENTO",
+      "to_table": "MARCA_DAGUA",
+      "on": [
+        "DOCUMENTO.COD_EMPRESA = MARCA_DAGUA.COD_EMPRESA",
+        "DOCUMENTO.NR_MARCA_DAGUA = MARCA_DAGUA.NR_MARCA_DAGUA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "NR_MARCA_DAGUA",
+          "to_column": "NR_MARCA_DAGUA"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "logical-confirmed",
+      "evidence": "Marca d'água aplicada (query COUNT_DOCUMENTS_BY_WATERMARK).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0117",
+      "from_table": "DOCUMENTO",
+      "to_table": "ICONE",
+      "on": [
+        "DOCUMENTO.COD_EMPRESA = ICONE.COD_EMPRESA",
+        "DOCUMENTO.NR_ICONE = ICONE.NR_ICONE"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "NR_ICONE",
+          "to_column": "NR_ICONE"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Ícone do item.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0119",
+      "from_table": "DOCUMENTO",
+      "to_table": "META_LISTA",
+      "on": [
+        "DOCUMENTO.COD_EMPRESA = META_LISTA.COD_EMPRESA",
+        "DOCUMENTO.COD_LISTA = META_LISTA.COD_LISTA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_LISTA",
+          "to_column": "COD_LISTA"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Meta-lista de formulário.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0121",
+      "from_table": "DOCUMENTO",
+      "to_table": "DOCTO_DESTAQ_COLAB",
+      "on": [
+        "DOCUMENTO.COD_EMPRESA = DOCTO_DESTAQ_COLAB.COD_EMPRESA",
+        "DOCUMENTO.NR_DOCUMENTO = DOCTO_DESTAQ_COLAB.NR_DOCUMENTO",
+        "DOCUMENTO.NR_VERSAO = DOCTO_DESTAQ_COLAB.NR_VERSAO",
+        "DOCUMENTO.CD_MATRICULA = DOCTO_DESTAQ_COLAB.CD_MATRICULA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "NR_DOCUMENTO",
+          "to_column": "NR_DOCUMENTO"
+        },
+        {
+          "from_column": "NR_VERSAO",
+          "to_column": "NR_VERSAO"
+        },
+        {
+          "from_column": "CD_MATRICULA",
+          "to_column": "CD_MATRICULA"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:N",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Heurística; DOCTO_DESTAQ_COLAB é filho (por usuário) de DOCUMENTO por (EMPRESA,DOC,VERSAO); matrícula não é chave da relação.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0123",
+      "from_table": "DOCUMENTO",
+      "to_table": "DOCTO_RANKING",
+      "on": [
+        "DOCUMENTO.COD_EMPRESA = DOCTO_RANKING.COD_EMPRESA",
+        "DOCUMENTO.NR_DOCUMENTO = DOCTO_RANKING.NR_DOCUMENTO",
+        "DOCUMENTO.NR_VERSAO = DOCTO_RANKING.NR_VERSAO",
+        "DOCUMENTO.CD_MATRICULA = DOCTO_RANKING.CD_MATRICULA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "NR_DOCUMENTO",
+          "to_column": "NR_DOCUMENTO"
+        },
+        {
+          "from_column": "NR_VERSAO",
+          "to_column": "NR_VERSAO"
+        },
+        {
+          "from_column": "CD_MATRICULA",
+          "to_column": "CD_MATRICULA"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:N",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Heurística; ranking por usuário refere o documento por (EMPRESA,DOC,VERSAO).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0125",
+      "from_table": "DOCUMENTO",
+      "to_table": "PREFER_PASTA",
+      "on": [
+        "DOCUMENTO.COD_EMPRESA = PREFER_PASTA.COD_EMPRESA",
+        "DOCUMENTO.NR_DOCUMENTO = PREFER_PASTA.NR_DOCUMENTO",
+        "DOCUMENTO.NR_VERSAO = PREFER_PASTA.NR_VERSAO",
+        "DOCUMENTO.CD_MATRICULA = PREFER_PASTA.CD_MATRICULA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "NR_DOCUMENTO",
+          "to_column": "NR_DOCUMENTO"
+        },
+        {
+          "from_column": "NR_VERSAO",
+          "to_column": "NR_VERSAO"
+        },
+        {
+          "from_column": "CD_MATRICULA",
+          "to_column": "CD_MATRICULA"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:N",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Heurística; preferências de pasta por usuário referenciam o documento.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0202",
+      "from_table": "DOCUMENTO",
+      "to_table": "ECM_METADATA_FORM",
+      "on": [
+        "DOCUMENTO.COD_EMPRESA = ECM_METADATA_FORM.TENANT_ID",
+        "DOCUMENTO.NR_DOCUMENTO = ECM_METADATA_FORM.DOCUMENT_ID",
+        "DOCUMENTO.NR_VERSAO = ECM_METADATA_FORM.DCMNT_VRSN_NMBER"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "NR_DOCUMENTO",
+          "to_column": "DOCUMENT_ID"
+        },
+        {
+          "from_column": "NR_VERSAO",
+          "to_column": "DCMNT_VRSN_NMBER"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Documento ECM (formulário) associado a esta versão (FK_METDTFORM_DCMNT, @ManyToOne Document).",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0758",
+      "from_table": "DOCUMENTO",
+      "to_table": "MARCA_DAGUA",
+      "on": [
+        "DOCUMENTO.COD_EMPRESA = MARCA_DAGUA.COD_EMPRESA",
+        "DOCUMENTO.NR_MARCA_DAGUA = MARCA_DAGUA.NR_MARCA_DAGUA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "NR_MARCA_DAGUA",
+          "to_column": "NR_MARCA_DAGUA"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "logical-confirmed",
+      "evidence": "Documentos que usam a marca (DOCUMENTO.NR_MARCA_DAGUA).",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1008",
+      "from_table": "DOCUMENTO",
+      "to_table": "TIPO_DOCUMENTO",
+      "on": [
+        "DOCUMENTO.COD_EMPRESA = TIPO_DOCUMENTO.COD_EMPRESA",
+        "DOCUMENTO.CD_TIPO_DOC = TIPO_DOCUMENTO.CD_TIPO_DOC"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "CD_TIPO_DOC",
+          "to_column": "CD_TIPO_DOC"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Documentos classificados neste tipo.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0016",
+      "table": "ANEXO_PROCES",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0022",
+      "table": "APROVACAO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0056",
+      "table": "CONFIGUR_SEGUR_DOCTO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0058",
+      "table": "CONHECIMENTO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0060",
+      "table": "DEFAULT_PROPRIED_DOCTO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0072",
+      "table": "DOCTO_ALOCAD",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0074",
+      "table": "DOCTO_ALOCAD",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0076",
+      "table": "DOCTO_ANOTACAO_COLAB",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0082",
+      "table": "DOCTO_APLICAT",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0086",
+      "table": "DOCTO_CAMPO_CUSTOM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0088",
+      "table": "DOCTO_COMENT",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0090",
+      "table": "DOCTO_CONTDO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0094",
+      "table": "DOCTO_NOTIF",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0096",
+      "table": "DOCTO_OBS_COLAB",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0100",
+      "table": "DOCTO_RELACDO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0102",
+      "table": "DOCTO_RELACDO",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0104",
+      "table": "DOCTO_SOCIAL",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0106",
+      "table": "DOCTO_TAG",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0109",
+      "table": "LINK_DOCTO_VIRTUAL",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0111",
+      "table": "DOCUMENTO",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0112",
+      "table": "DOCUMENTO",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0113",
+      "table": "TIPO_DOCUMENTO",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0115",
+      "table": "MARCA_DAGUA",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0117",
+      "table": "ICONE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0119",
+      "table": "META_LISTA",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0121",
+      "table": "DOCTO_DESTAQ_COLAB",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0123",
+      "table": "DOCTO_RANKING",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0125",
+      "table": "PREFER_PASTA",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0127",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0142",
+      "table": "ECM_COLLABORATION",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0192",
+      "table": "ECM_IMAGE_FORM_ITEM",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0202",
+      "table": "ECM_METADATA_FORM",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0296",
+      "table": "EVENT_FICHA",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0356",
+      "table": "FAVORITOS",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0542",
+      "table": "FDN_RECENTLY_VIEWED",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0646",
+      "table": "FICHA",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0650",
+      "table": "FICHARIO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0690",
+      "table": "FORM_DATASET",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0698",
+      "table": "HISTOR_ACES",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0730",
+      "table": "LINK_DOCTO_VIRTUAL",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0732",
+      "table": "LINK_DOCTO_VIRTUAL",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0748",
+      "table": "LOG_COP_CONTROLAD",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0758",
+      "table": "MARCA_DAGUA",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0784",
+      "table": "MOVTO_APROVAC",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0786",
+      "table": "NIVEL_APROVACAO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0938",
+      "table": "SOCIALFORMCONTROL",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0940",
+      "table": "SOCIALFORMEVENT",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0980",
+      "table": "TAR_DOCTO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1008",
+      "table": "TIPO_DOCUMENTO",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [
+    "DS_COMENTARIO_ADICIONAL",
+    "DS_PALAVRA_CHAVE",
+    "NM_ARQUIVOS_RELACIONADOS"
+  ],
+  "indexes": [
+    {
+      "name": "IDX_DOCTO_PAI",
+      "unique": false,
+      "columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO_PAI",
+        "NR_DOCUMENTO",
+        "NR_VERSAO"
+      ]
+    },
+    {
+      "name": "IDX_DOCTO_PART",
+      "unique": false,
+      "columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO_PAI",
+        "LOG_DOCTO_PARTIC",
+        "CD_MATRICULA"
+      ]
+    },
+    {
+      "name": "IDX_DOCTO_AUX",
+      "unique": false,
+      "columns": [
+        "COD_EMPRESA",
+        "LOG_DELETE",
+        "VERSAO_ATIVA",
+        "CD_DOCUMENTO_EXT",
+        "LOG_INDEXAD"
+      ]
+    },
+    {
+      "name": "IDX_MIME_TYPE",
+      "unique": false,
+      "columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO_PAI",
+        "CD_TIPO_DOC",
+        "COD_MIME_TYPE",
+        "LOG_DELETE",
+        "NR_VERSAO"
+      ]
+    },
+    {
+      "name": "IDX_METALIST",
+      "unique": false,
+      "columns": [
+        "COD_EMPRESA",
+        "COD_LISTA",
+        "COD_REG_LISTA"
+      ]
+    },
+    {
+      "name": "IDX_METALIST2",
+      "unique": false,
+      "columns": [
+        "COD_EMPRESA",
+        "COD_LISTA",
+        "VERSAO_ATIVA"
+      ]
+    },
+    {
+      "name": "IDX_DOCUMENT_TYPE2",
+      "unique": false,
+      "columns": [
+        "TP_DOCUMENTO",
+        "COD_EMPRESA"
+      ]
+    },
+    {
+      "name": "IDX_DOCTO_AUX2",
+      "unique": false,
+      "columns": [
+        "COD_EMPRESA",
+        "DT_EXPIRACAO",
+        "LOG_DOCTO_EXPIRA",
+        "TP_DOCUMENTO",
+        "VERSAO_ATIVA",
+        "NR_DIAS_NOT_EXP"
+      ]
+    },
+    {
+      "name": "IDX_DOCUMENT_AUX1",
+      "unique": false,
+      "columns": [
+        "CD_PUBLICADOR",
+        "VERSAO_ATIVA",
+        "COD_EMPRESA",
+        "LOG_APROVADO"
+      ]
+    },
+    {
+      "name": "IDX_DOCUMENT_AUX2",
+      "unique": false,
+      "columns": [
+        "COD_MATR_PARTIC"
+      ]
+    },
+    {
+      "name": "IDX_DOCUMENT_AUX3",
+      "unique": false,
+      "columns": [
+        "COD_EMPRESA"
+      ]
+    },
+    {
+      "name": "IDX_DOCUMENT_AUX4",
+      "unique": false,
+      "columns": [
+        "LOG_DOCTO_PARTIC"
+      ]
+    },
+    {
+      "name": "IDX_DOCUMENT_AUX5",
+      "unique": false,
+      "columns": [
+        "VERSAO_ATIVA",
+        "LOG_DELETE",
+        "LOG_INDEXAD",
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO"
+      ]
+    },
+    {
+      "name": "FK_DOCUMENTASSUNTO",
+      "unique": false,
+      "columns": [
+        "COD_EMPRESA",
+        "CD_ASSUNTO"
+      ]
+    },
+    {
+      "name": "IDX_DOCUMENT_AUX6",
+      "unique": false,
+      "columns": [
+        "DT_CRIACAO",
+        "TP_DOCUMENTO"
+      ]
+    },
+    {
+      "name": "IDX_DOCUMENT_AUX7",
+      "unique": false,
+      "columns": [
+        "VERSAO_ATIVA",
+        "NR_DOCUMENTO"
+      ]
+    },
+    {
+      "name": "IDX_DOCUMENT_AUX8",
+      "unique": false,
+      "columns": [
+        "COD_EMPRESA",
+        "DT_ATUALIZACAO"
+      ]
+    },
+    {
+      "name": "IDX_DOCUMENT_AUX9",
+      "unique": false,
+      "columns": [
+        "COD_EMPRESA",
+        "LOG_APROVADO"
+      ]
+    },
+    {
+      "name": "IDX_DOCUMENT_AUX10",
+      "unique": false,
+      "columns": [
+        "COD_EMPRESA",
+        "LOG_DELETE",
+        "TP_DOCUMENTO",
+        "NR_DOCUMENTO_PAI"
+      ]
+    }
+  ],
+  "query_examples": [
+    "recipes/workflow/process_attachments.sql",
+    "recipes/ecm/current_document.sql",
+    "recipes/ecm/document_versions.sql",
+    "recipes/ecm/folder_children.sql",
+    "recipes/ecm/deleted_documents.sql",
+    "recipes/ecm/files_by_publisher.sql",
+    "recipes/ecm/current_counts_by_type.sql",
+    "recipes/forms/current_form_definitions.sql",
+    "recipes/forms/metadata_form_versions.sql"
+  ],
+  "observed_queries_path": "agent/observed_queries/DOCUMENTO.json",
+  "observed_query_count": 65,
+  "warnings": [
+    "Parent joins need tenant and current-version filters on the parent alias; NR_DOCUMENTO alone is not unique.",
+    "Selecting a recorded attachment version must use NR_VERSAO, even if that version is no longer current."
+  ],
+  "query_semantics": {
+    "grain": {
+      "description": "Uma versão de um documento por tenant; não um documento lógico independentemente de versão.",
+      "columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "reviewed-schema-description",
+      "business_grain_reviewed": true
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {
+      "current": [
+        "VERSAO_ATIVA = 1",
+        "LOG_DELETE = 0"
+      ],
+      "not_deleted": [
+        "LOG_DELETE = 0"
+      ],
+      "folders": [
+        "TP_DOCUMENTO IN ('0', '1')"
+      ],
+      "files": [
+        "TP_DOCUMENTO = '2'"
+      ],
+      "form_definitions": [
+        "TP_DOCUMENTO = '4'"
+      ],
+      "form_records": [
+        "TP_DOCUMENTO = '5'"
+      ]
+    }
+  }
+}

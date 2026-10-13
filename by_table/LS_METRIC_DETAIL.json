@@ -25,6 +25,44 @@
  "jpa_entities": [
   "com.fluig.lsmetric.entity.LSMetricDetail"
  ],
+ "observed_queries": [
+  {
+   "name": "LSMetricDetail.findByProcessedStatus",
+   "query": "SELECT b FROM LSMetricDetail b WHERE b.processed = :processed ORDER BY b.metric.id, b.metricTime",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.lsmetric.entity.LSMetricDetail",
+   "source_file": "com/fluig/lsmetric/entity/LSMetricDetail.java",
+   "owner_table": "LS_METRIC_DETAIL",
+   "tables": [
+    "LS_METRIC_DETAIL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "LSMetricDetail.deleteProcessedBeforeDate",
+   "query": "DELETE FROM LSMetricDetail b WHERE b.processed = :processed AND b.metricTime < :metricTime",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.lsmetric.entity.LSMetricDetail",
+   "source_file": "com/fluig/lsmetric/entity/LSMetricDetail.java",
+   "owner_table": "LS_METRIC_DETAIL",
+   "tables": [
+    "LS_METRIC_DETAIL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "METRIC_DETAIL_ID",

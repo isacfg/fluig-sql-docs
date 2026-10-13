@@ -28,6 +28,80 @@
  "jpa_entities": [
   "com.totvs.technology.social.shareplace.post.entity.SocialPostUser"
  ],
+ "observed_queries": [
+  {
+   "name": "SocialPostUser.Update",
+   "query": "UPDATE SocialPostUser pu  SET pu.lastUpdateDate = :lastUpdateDate  WHERE pu.post.id = :postId ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.shareplace.post.entity.SocialPostUser",
+   "source_file": "com/totvs/technology/social/shareplace/post/entity/SocialPostUser.java",
+   "owner_table": "SOCIALPOSTUSER",
+   "tables": [
+    "SOCIALPOSTUSER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialPostUser.findBySocialIdPostId",
+   "query": "SELECT b FROM SocialPostUser b WHERE (post.id =:postId) and  user.id =:userId AND post.removed =:removed AND post.numberDenouncements = 0 ORDER BY post.lastUpdateDate DESC",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.shareplace.post.entity.SocialPostUser",
+   "source_file": "com/totvs/technology/social/shareplace/post/entity/SocialPostUser.java",
+   "owner_table": "SOCIALPOSTUSER",
+   "tables": [
+    "SOCIALPOSTUSER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialPostUser.ListUserIdsByPost",
+   "query": "SELECT b.user.id FROM SocialPostUser b WHERE post.id =:postId ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.shareplace.post.entity.SocialPostUser",
+   "source_file": "com/totvs/technology/social/shareplace/post/entity/SocialPostUser.java",
+   "owner_table": "SOCIALPOSTUSER",
+   "tables": [
+    "SOCIALPOSTUSER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SocialPostUser.ListUserAliasByPost",
+   "query": "SELECT b.user.alias FROM SocialPostUser b WHERE post.id =:postId ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.shareplace.post.entity.SocialPostUser",
+   "source_file": "com/totvs/technology/social/shareplace/post/entity/SocialPostUser.java",
+   "owner_table": "SOCIALPOSTUSER",
+   "tables": [
+    "SOCIALPOSTUSER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "ID",

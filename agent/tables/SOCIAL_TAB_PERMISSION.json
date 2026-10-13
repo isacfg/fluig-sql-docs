@@ -1,0 +1,74 @@
+{
+  "name": "SOCIAL_TAB_PERMISSION",
+  "domain": "social",
+  "purpose": "Permissão de abas do perfil/comunidade social (hoje só NOCODE_FORMS_APP), com tipo de acesso e flag de ativação.",
+  "schema_card": "by_table/SOCIAL_TAB_PERMISSION.json",
+  "business_concepts": [
+    "social",
+    "SOCIAL_TAB_PERMISSION"
+  ],
+  "grain": {
+    "description": "Permissão de abas do perfil/comunidade social (hoje só NOCODE_FORMS_APP), com tipo de acesso e flag de ativação. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "SOCIAL_TAB_PERMISSION_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/SOCIAL_TAB_PERMISSION.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0963",
+      "table": "SOCIAL",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/SOCIAL_TAB_PERMISSION.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Permissão de abas do perfil/comunidade social (hoje só NOCODE_FORMS_APP), com tipo de acesso e flag de ativação. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "SOCIAL_TAB_PERMISSION_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

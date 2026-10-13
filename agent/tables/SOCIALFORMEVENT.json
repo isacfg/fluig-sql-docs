@@ -1,0 +1,65 @@
+{
+  "name": "SOCIALFORMEVENT",
+  "domain": "social-forms",
+  "purpose": "Regra de evento de formulário social (habilitar/exibir/validar campo conforme condição) por documento e atividade.",
+  "schema_card": "by_table/SOCIALFORMEVENT.json",
+  "business_concepts": [
+    "social-forms",
+    "SOCIALFORMEVENT"
+  ],
+  "grain": {
+    "description": "Regra de evento de formulário social (habilitar/exibir/validar campo conforme condição) por documento e atividade. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "id"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/SOCIALFORMEVENT.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0939",
+      "table": "DOCUMENTO",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0942",
+      "table": "SOCIALFORMEVENTDETAIL",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/SOCIALFORMEVENT.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Regra de evento de formulário social (habilitar/exibir/validar campo conforme condição) por documento e atividade. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "id"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

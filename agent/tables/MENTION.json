@@ -1,0 +1,81 @@
+{
+  "name": "MENTION",
+  "domain": "social",
+  "purpose": "Menção (@usuário) feita em um objeto social (post/comentário); liga o autor ao perfil social mencionado.",
+  "schema_card": "by_table/MENTION.json",
+  "business_concepts": [
+    "social",
+    "MENTION"
+  ],
+  "grain": {
+    "description": "Menção (@usuário) feita em um objeto social (post/comentário); liga o autor ao perfil social mencionado. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "id"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/MENTION.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0759",
+      "table": "SOCIAL",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0761",
+      "table": "SOCIAL",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0763",
+      "table": "SOCIABLE",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "MentionI001",
+      "unique": false,
+      "columns": [
+        "mentioningId",
+        "mentioningClass"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/MENTION.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Menção (@usuário) feita em um objeto social (post/comentário); liga o autor ao perfil social mencionado. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "id"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

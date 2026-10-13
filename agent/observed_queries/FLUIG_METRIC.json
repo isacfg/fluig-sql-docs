@@ -1,0 +1,38 @@
+[
+  {
+    "name": "FluigMetric.findAll",
+    "query": "SELECT f FROM FluigMetric f",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.monitoring.usage.metrics.entity.FluigMetric",
+    "source_file": "com/fluig/monitoring/usage/metrics/entity/FluigMetric.java",
+    "owner_table": "FLUIG_METRIC",
+    "tables": [
+      "FLUIG_METRIC"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FluigMetric.removeBeforeDate",
+    "query": " DELETE FROM FluigMetric f WHERE f.date < :beforeDate ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.monitoring.usage.metrics.entity.FluigMetric",
+    "source_file": "com/fluig/monitoring/usage/metrics/entity/FluigMetric.java",
+    "owner_table": "FLUIG_METRIC",
+    "tables": [
+      "FLUIG_METRIC"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

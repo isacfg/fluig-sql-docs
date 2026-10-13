@@ -1,0 +1,97 @@
+{
+  "name": "ASSUNTO",
+  "domain": "ecm-documents",
+  "purpose": "Assuntos (tópicos) de classificação de documentos; define se preenchimento é obrigatório e se há e-mail ao eliminar/atualizar.",
+  "schema_card": "by_table/ASSUNTO.json",
+  "business_concepts": [
+    "ecm-documents",
+    "ASSUNTO"
+  ],
+  "grain": {
+    "description": "Assuntos (tópicos) de classificação de documentos; define se preenchimento é obrigatório e se há e-mail ao eliminar/atualizar. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "CD_ASSUNTO"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/ASSUNTO.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0029",
+      "table": "ASSUNTO_FAVORITO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0031",
+      "table": "CONFIGUR_OBRIG_ASSUNTO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0034",
+      "table": "ASSUNTO_FAVORITO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0054",
+      "table": "CONFIGUR_OBRIG_ASSUNTO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/ASSUNTO.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Assuntos (tópicos) de classificação de documentos; define se preenchimento é obrigatório e se há e-mail ao eliminar/atualizar. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "CD_ASSUNTO"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

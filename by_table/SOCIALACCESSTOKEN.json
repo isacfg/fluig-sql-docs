@@ -18,6 +18,7 @@
  ],
  "indexes": [],
  "jpa_entities": [],
+ "observed_queries": [],
  "columns": [
   {
    "name": "ID",

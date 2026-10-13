@@ -22,6 +22,188 @@
  "jpa_entities": [
   "com.fluig.foundation.mobile.entity.FDNPush"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNPush.findPushByAliasAndTenant",
+   "query": "SELECT p FROM FDNPush p WHERE  p.status = 'ACTIVE' AND p.applicationUser.token.expirationDate >= :currentDate AND p.tenantId = :tenantId AND p.applicationUser.login = :alias",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.mobile.entity.FDNPush",
+   "source_file": "com/fluig/foundation/mobile/entity/FDNPush.java",
+   "owner_table": "FDN_PUSH",
+   "tables": [
+    "FDN_PUSH"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNPush.findPushByAliasAndTenantAndPushApp",
+   "query": "SELECT p FROM FDNPush p WHERE  p.status = 'ACTIVE' AND p.applicationUser.token.expirationDate >= :currentDate AND p.tenantId = :tenantId AND p.applicationUser.login = :alias AND p.pushApp = :pushApp",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.mobile.entity.FDNPush",
+   "source_file": "com/fluig/foundation/mobile/entity/FDNPush.java",
+   "owner_table": "FDN_PUSH",
+   "tables": [
+    "FDN_PUSH"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNPush.findByApplicationUserId",
+   "query": "SELECT p FROM FDNPush p WHERE  p.applicationUser.token.expirationDate >= :currentDate AND p.applicationUser.id = :applicationUserId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.mobile.entity.FDNPush",
+   "source_file": "com/fluig/foundation/mobile/entity/FDNPush.java",
+   "owner_table": "FDN_PUSH",
+   "tables": [
+    "FDN_PUSH"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNPush.deletePushByMobileToken",
+   "query": "DELETE FDNPush p WHERE p.mobileToken =:mobileToken ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.mobile.entity.FDNPush",
+   "source_file": "com/fluig/foundation/mobile/entity/FDNPush.java",
+   "owner_table": "FDN_PUSH",
+   "tables": [
+    "FDN_PUSH"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNPush.deleteByPushAppPushServiceMobileToken",
+   "query": "DELETE FDNPush p WHERE p.pushApp =:pushApp AND p.pushService =:pushService AND p.mobileToken =:mobileToken ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.mobile.entity.FDNPush",
+   "source_file": "com/fluig/foundation/mobile/entity/FDNPush.java",
+   "owner_table": "FDN_PUSH",
+   "tables": [
+    "FDN_PUSH"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNPush.deletePushByImei",
+   "query": "DELETE FDNPush p WHERE p.mobileToken = :mobileToken and p.imei =:imei ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.mobile.entity.FDNPush",
+   "source_file": "com/fluig/foundation/mobile/entity/FDNPush.java",
+   "owner_table": "FDN_PUSH",
+   "tables": [
+    "FDN_PUSH"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNPush.deleteById",
+   "query": "DELETE FDNPush p WHERE  p.id = :id",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.mobile.entity.FDNPush",
+   "source_file": "com/fluig/foundation/mobile/entity/FDNPush.java",
+   "owner_table": "FDN_PUSH",
+   "tables": [
+    "FDN_PUSH"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNPush.findByAppUser",
+   "query": "SELECT p FROM FDNPush p WHERE p.applicationUser = :applicationUser",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.mobile.entity.FDNPush",
+   "source_file": "com/fluig/foundation/mobile/entity/FDNPush.java",
+   "owner_table": "FDN_PUSH",
+   "tables": [
+    "FDN_PUSH"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNPush.findByLoginAndTenantId",
+   "query": "SELECT P FROM FDNPush p WHERE p.tenantId = :tenantId AND  p.applicationUser.login = :login AND  p.applicationUser.token.clientData = :clientData",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.mobile.entity.FDNPush",
+   "source_file": "com/fluig/foundation/mobile/entity/FDNPush.java",
+   "owner_table": "FDN_PUSH",
+   "tables": [
+    "FDN_PUSH"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNPush.findActiveByApplicationUserId",
+   "query": "SELECT p FROM FDNPush p WHERE  p.status = 'ACTIVE' AND p.applicationUser.token.expirationDate >= :currentDate AND p.applicationUser.id = :applicationUserId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.mobile.entity.FDNPush",
+   "source_file": "com/fluig/foundation/mobile/entity/FDNPush.java",
+   "owner_table": "FDN_PUSH",
+   "tables": [
+    "FDN_PUSH"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "PUSH_ID",

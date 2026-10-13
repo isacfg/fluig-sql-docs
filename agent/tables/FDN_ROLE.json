@@ -1,0 +1,166 @@
+{
+  "name": "FDN_ROLE",
+  "domain": "foundation-identity-access",
+  "purpose": "Papel (role) de segurança do tenant, atribuído a usuários e grupos.",
+  "schema_card": "by_table/FDN_ROLE.json",
+  "business_concepts": [
+    "papel",
+    "role",
+    "perfil"
+  ],
+  "grain": {
+    "description": "Um papel por tenant; chave lógica única (TENANT_ID, ROLE_CODE).",
+    "columns": [
+      "ROLE_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "reviewed-schema-description",
+    "business_grain_reviewed": true
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_ROLE.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values",
+  "canonical_joins": [
+    {
+      "id": "join-0563",
+      "from_table": "FDN_ROLE",
+      "to_table": "FDN_TENANT",
+      "on": [
+        "FDN_ROLE.TENANT_ID = FDN_TENANT.TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Tenant ao qual o registro pertence.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0444",
+      "table": "FDN_GROUPUSERROLE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0512",
+      "table": "FDN_PERMISSION",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0563",
+      "table": "FDN_TENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0565",
+      "table": "FDN_USERROLE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0569",
+      "table": "FDN_PERMISSION",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0572",
+      "table": "FDN_ROLEDATA",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0618",
+      "table": "FDN_USERROLE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0672",
+      "table": "FILTER_GROUP",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FDNROLEI001",
+      "unique": false,
+      "columns": [
+        "DESCRIPTION",
+        "TENANT_ID"
+      ]
+    }
+  ],
+  "query_examples": [
+    "recipes/users/direct_user_roles.sql"
+  ],
+  "observed_queries_path": "agent/observed_queries/FDN_ROLE.json",
+  "observed_query_count": 11,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Um papel por tenant; chave lógica única (TENANT_ID, ROLE_CODE).",
+      "columns": [
+        "ROLE_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "reviewed-schema-description",
+      "business_grain_reviewed": true
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

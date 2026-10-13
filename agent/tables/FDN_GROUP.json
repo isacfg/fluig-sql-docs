@@ -1,0 +1,173 @@
+{
+  "name": "FDN_GROUP",
+  "domain": "foundation-identity-access",
+  "purpose": "Grupo de usuários do Fluig (de usuários, cloud ou comunidade), por tenant. Usado em permissões, papéis e agrupamento de usuários.",
+  "schema_card": "by_table/FDN_GROUP.json",
+  "business_concepts": [
+    "grupo de usuários",
+    "user group"
+  ],
+  "grain": {
+    "description": "Um grupo por tenant; chave lógica única (TENANT_ID, GROUP_CODE).",
+    "columns": [
+      "GROUP_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "reviewed-schema-description",
+    "business_grain_reviewed": true
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {
+    "visible": [
+      "INTERNAL = 0"
+    ]
+  },
+  "semantic_evidence": "by_table/FDN_GROUP.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values",
+  "canonical_joins": [
+    {
+      "id": "join-0433",
+      "from_table": "FDN_GROUP",
+      "to_table": "FDN_TENANT",
+      "on": [
+        "FDN_GROUP.TENANT_ID = FDN_TENANT.TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Tenant ao qual o registro pertence.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0433",
+      "table": "FDN_TENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0437",
+      "table": "FDN_PERMISSION",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0440",
+      "table": "FDN_GROUPDATA",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0446",
+      "table": "FDN_GROUPUSERROLE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0448",
+      "table": "FDN_GROUPUSERROLE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0510",
+      "table": "FDN_PERMISSION",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0670",
+      "table": "FILTER_GROUP",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0946",
+      "table": "SOCIALINVITEGROUP",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FDNGROUPI001",
+      "unique": false,
+      "columns": [
+        "DESCRIPTION",
+        "TENANT_ID"
+      ]
+    }
+  ],
+  "query_examples": [
+    "recipes/users/visible_groups.sql"
+  ],
+  "observed_queries_path": "agent/observed_queries/FDN_GROUP.json",
+  "observed_query_count": 15,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Um grupo por tenant; chave lógica única (TENANT_ID, GROUP_CODE).",
+      "columns": [
+        "GROUP_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "reviewed-schema-description",
+      "business_grain_reviewed": true
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {
+      "visible": [
+        "INTERNAL = 0"
+      ]
+    }
+  }
+}

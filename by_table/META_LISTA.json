@@ -15,6 +15,44 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.lists.model.MetaList"
  ],
+ "observed_queries": [
+  {
+   "name": "MetaList.findAll",
+   "query": "SELECT ml FROM MetaList ml WHERE ml.metaListPK.companyId=:companyId AND (ml.type = 0 OR ml.type is null) AND ml.deleted <> true",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.lists.model.MetaList",
+   "source_file": "com/datasul/technology/webdesk/lists/model/MetaList.java",
+   "owner_table": "META_LISTA",
+   "tables": [
+    "META_LISTA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "MetaList.countByTenant",
+   "query": "SELECT count(ml) FROM MetaList ml WHERE ml.metaListPK.companyId=:companyId AND ml.deleted <> true",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.lists.model.MetaList",
+   "source_file": "com/datasul/technology/webdesk/lists/model/MetaList.java",
+   "owner_table": "META_LISTA",
+   "tables": [
+    "META_LISTA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",

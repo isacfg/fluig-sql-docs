@@ -1,0 +1,38 @@
+[
+  {
+    "name": "FilterOrder.removeOrderFromFilter",
+    "query": "delete from FilterOrder fo where fo.filter.id = (select f.id from Filter f where f.tenantId = :tenantId and f.userId = :userId and f.id = :filterId)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.filter.model.FilterOrder",
+    "source_file": "com/datasul/technology/webdesk/filter/model/FilterOrder.java",
+    "owner_table": "FILTER_ORDER",
+    "tables": [
+      "FILTER_ORDER"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FilterOrder.findById",
+    "query": "select fo from FilterOrder fo where fo.filter.id = (select f.id from Filter f where f.tenantId = :tenantId and f.userId = :userId and f.id = :filterId) and fo.id = :id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.filter.model.FilterOrder",
+    "source_file": "com/datasul/technology/webdesk/filter/model/FilterOrder.java",
+    "owner_table": "FILTER_ORDER",
+    "tables": [
+      "FILTER_ORDER"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

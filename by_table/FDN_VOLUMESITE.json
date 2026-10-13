@@ -27,6 +27,98 @@
  "jpa_entities": [
   "com.fluig.foundation.volume.entity.FDNVolumeSite"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNVolumeSite.findByVolumeAndSite",
+   "query": "SELECT o FROM FDNVolumeSite o WHERE o.volumeId = :volumeId and o.siteId = :siteId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.volume.entity.FDNVolumeSite",
+   "source_file": "com/fluig/foundation/volume/entity/FDNVolumeSite.java",
+   "owner_table": "FDN_VOLUMESITE",
+   "tables": [
+    "FDN_VOLUMESITE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNVolumeSite.findByVolumePath",
+   "query": "SELECT o FROM FDNVolumeSite o WHERE LOWER(o.storage) in :pathList and o.site.siteCode = :siteCode",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.volume.entity.FDNVolumeSite",
+   "source_file": "com/fluig/foundation/volume/entity/FDNVolumeSite.java",
+   "owner_table": "FDN_VOLUMESITE",
+   "tables": [
+    "FDN_VOLUMESITE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNVolumeSite.findByVolume",
+   "query": "SELECT o FROM FDNVolumeSite o WHERE o.volumeId = :volumeId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.volume.entity.FDNVolumeSite",
+   "source_file": "com/fluig/foundation/volume/entity/FDNVolumeSite.java",
+   "owner_table": "FDN_VOLUMESITE",
+   "tables": [
+    "FDN_VOLUMESITE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNVolumeSite.findByTenantId",
+   "query": "SELECT o FROM FDNVolumeSite o WHERE o.volume.tenantId = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.volume.entity.FDNVolumeSite",
+   "source_file": "com/fluig/foundation/volume/entity/FDNVolumeSite.java",
+   "owner_table": "FDN_VOLUMESITE",
+   "tables": [
+    "FDN_VOLUMESITE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNVolume.findByVolumeId",
+   "query": "SELECT o FROM FDNVolumeSite o WHERE o.volumeId = :volumeId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.volume.entity.FDNVolumeSite",
+   "source_file": "com/fluig/foundation/volume/entity/FDNVolumeSite.java",
+   "owner_table": "FDN_VOLUMESITE",
+   "tables": [
+    "FDN_VOLUMESITE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "VOLUMESITE_ID",

@@ -1,0 +1,137 @@
+{
+  "name": "APONT_TAR_PROCES",
+  "domain": "bpm-workflow",
+  "purpose": "Apontamentos de esforço (tempo gasto) registrados por usuários em tarefas de instâncias de processo.",
+  "schema_card": "by_table/APONT_TAR_PROCES.json",
+  "business_concepts": [
+    "bpm-workflow",
+    "APONT_TAR_PROCES"
+  ],
+  "grain": {
+    "description": "Apontamentos de esforço (tempo gasto) registrados por usuários em tarefas de instâncias de processo. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "NUM_PROCES",
+      "NUM_SEQ_MOVTO",
+      "CD_MATRICULA",
+      "NUM_SEQ_TRANSF",
+      "NUM_SEQ_APONT"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/APONT_TAR_PROCES.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0019",
+      "from_table": "APONT_TAR_PROCES",
+      "to_table": "TAR_PROCES",
+      "on": [
+        "APONT_TAR_PROCES.COD_EMPRESA = TAR_PROCES.COD_EMPRESA",
+        "APONT_TAR_PROCES.NUM_PROCES = TAR_PROCES.NUM_PROCES",
+        "APONT_TAR_PROCES.NUM_SEQ_MOVTO = TAR_PROCES.NUM_SEQ_MOVTO",
+        "APONT_TAR_PROCES.NUM_SEQ_TRANSF = TAR_PROCES.NUM_SEQ_TRANSF",
+        "APONT_TAR_PROCES.CD_MATRICULA = TAR_PROCES.CD_MATRICULA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "NUM_PROCES",
+          "to_column": "NUM_PROCES"
+        },
+        {
+          "from_column": "NUM_SEQ_MOVTO",
+          "to_column": "NUM_SEQ_MOVTO"
+        },
+        {
+          "from_column": "NUM_SEQ_TRANSF",
+          "to_column": "NUM_SEQ_TRANSF"
+        },
+        {
+          "from_column": "CD_MATRICULA",
+          "to_column": "CD_MATRICULA"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Tarefa do usuário em que o tempo foi apontado.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0019",
+      "table": "TAR_PROCES",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Apontamentos de esforço (tempo gasto) registrados por usuários em tarefas de instâncias de processo. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "NUM_PROCES",
+        "NUM_SEQ_MOVTO",
+        "CD_MATRICULA",
+        "NUM_SEQ_TRANSF",
+        "NUM_SEQ_APONT"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

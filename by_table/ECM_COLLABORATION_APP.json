@@ -20,6 +20,80 @@
  "jpa_entities": [
   "com.fluig.ecm.collaboration.entity.CollaborationApp"
  ],
+ "observed_queries": [
+  {
+   "name": "CollaborationApp.findByAppCode",
+   "query": "SELECT app FROM CollaborationApp app WHERE app.code = :collaborationAppCode AND app.tenantId = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.ecm.collaboration.entity.CollaborationApp",
+   "source_file": "com/fluig/ecm/collaboration/entity/CollaborationApp.java",
+   "owner_table": "ECM_COLLABORATION_APP",
+   "tables": [
+    "ECM_COLLABORATION_APP"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "CollaborationApp.findAll",
+   "query": "SELECT o FROM CollaborationApp o",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.ecm.collaboration.entity.CollaborationApp",
+   "source_file": "com/fluig/ecm/collaboration/entity/CollaborationApp.java",
+   "owner_table": "ECM_COLLABORATION_APP",
+   "tables": [
+    "ECM_COLLABORATION_APP"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "CollaborationApp.findByTenantId",
+   "query": "SELECT o FROM CollaborationApp o WHERE o.tenantId= :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.ecm.collaboration.entity.CollaborationApp",
+   "source_file": "com/fluig/ecm/collaboration/entity/CollaborationApp.java",
+   "owner_table": "ECM_COLLABORATION_APP",
+   "tables": [
+    "ECM_COLLABORATION_APP"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "CollaborationApp.findAppByCollaborationId",
+   "query": "SELECT app FROM Collaboration c, CollaborationApp app WHERE c.app.id = app.id AND c.id = :collaborationId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.ecm.collaboration.entity.CollaborationApp",
+   "source_file": "com/fluig/ecm/collaboration/entity/CollaborationApp.java",
+   "owner_table": "ECM_COLLABORATION_APP",
+   "tables": [
+    "ECM_COLLABORATION_APP"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "ID",
@@ -169,6 +243,17 @@
    ],
    "cardinality": "N:1",
    "kind": "physical-fk"
+  },
+  {
+   "from_table": "ECM_COLLABORATION",
+   "from_cols": [
+    "COLLABORATION_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
   }
  ]
 }

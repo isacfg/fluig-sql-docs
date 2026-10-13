@@ -14,6 +14,7 @@
  "jpa_entities": [
   "com.fluig.foundation.scheduler.entity.quartz.QrtzCalendars"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "CALENDAR_NAME",

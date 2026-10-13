@@ -1,0 +1,65 @@
+{
+  "name": "SOCIABLEWATCH",
+  "domain": "social",
+  "purpose": "Acompanhamento (\"seguir\") de um conteúdo sociável por um perfil, para notificações.",
+  "schema_card": "by_table/SOCIABLEWATCH.json",
+  "business_concepts": [
+    "social",
+    "SOCIABLEWATCH"
+  ],
+  "grain": {
+    "description": "Acompanhamento (\"seguir\") de um conteúdo sociável por um perfil, para notificações. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "id"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/SOCIABLEWATCH.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0921",
+      "table": "SOCIABLE",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0923",
+      "table": "SOCIAL",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/SOCIABLEWATCH.json",
+  "observed_query_count": 12,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Acompanhamento (\"seguir\") de um conteúdo sociável por um perfil, para notificações. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "id"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

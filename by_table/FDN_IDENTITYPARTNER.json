@@ -18,6 +18,26 @@
  "jpa_entities": [
   "com.fluig.foundation.identitypartner.entity.FDNIdentityPartner"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNIdentityPartner.findByTenantId",
+   "query": "SELECT o FROM FDNIdentityPartner o WHERE o.tenantId= :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.identitypartner.entity.FDNIdentityPartner",
+   "source_file": "com/fluig/foundation/identitypartner/entity/FDNIdentityPartner.java",
+   "owner_table": "FDN_IDENTITYPARTNER",
+   "tables": [
+    "FDN_IDENTITYPARTNER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "ID",

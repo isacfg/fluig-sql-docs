@@ -1,0 +1,98 @@
+{
+  "name": "QRTZ_CRON_TRIGGERS",
+  "domain": "scheduler-quartz",
+  "purpose": "Detalhe de triggers do Quartz baseados em expressão cron, 1:1 com QRTZ_TRIGGERS.",
+  "schema_card": "by_table/QRTZ_CRON_TRIGGERS.json",
+  "business_concepts": [
+    "scheduler-quartz",
+    "QRTZ_CRON_TRIGGERS"
+  ],
+  "grain": {
+    "description": "Detalhe de triggers do Quartz baseados em expressão cron, 1:1 com QRTZ_TRIGGERS. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "TRIGGER_GROUP",
+      "TRIGGER_NAME"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/QRTZ_CRON_TRIGGERS.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0859",
+      "from_table": "QRTZ_CRON_TRIGGERS",
+      "to_table": "QRTZ_TRIGGERS",
+      "on": [
+        "QRTZ_CRON_TRIGGERS.TRIGGER_GROUP = QRTZ_TRIGGERS.TRIGGER_GROUP",
+        "QRTZ_CRON_TRIGGERS.TRIGGER_NAME = QRTZ_TRIGGERS.TRIGGER_NAME"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TRIGGER_GROUP",
+          "to_column": "TRIGGER_GROUP"
+        },
+        {
+          "from_column": "TRIGGER_NAME",
+          "to_column": "TRIGGER_NAME"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:1",
+      "confidence": "probable",
+      "source_kind": "logical-confirmed",
+      "evidence": "Detalhe cron do trigger; mesma PK de QRTZ_TRIGGERS.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0859",
+      "table": "QRTZ_TRIGGERS",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Detalhe de triggers do Quartz baseados em expressão cron, 1:1 com QRTZ_TRIGGERS. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "TRIGGER_GROUP",
+        "TRIGGER_NAME"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

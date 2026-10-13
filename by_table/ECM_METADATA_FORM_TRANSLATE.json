@@ -19,6 +19,26 @@
  "jpa_entities": [
   "com.fluig.metadataform.model.MetadataFormTranslate"
  ],
+ "observed_queries": [
+  {
+   "name": "MetadataFormTranslate.translateByMetadataForm",
+   "query": "SELECT t FROM MetadataFormTranslate t WHERE t.metadataForm = :metadataForm",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.metadataform.model.MetadataFormTranslate",
+   "source_file": "com/fluig/metadataform/model/MetadataFormTranslate.java",
+   "owner_table": "ECM_METADATA_FORM_TRANSLATE",
+   "tables": [
+    "ECM_METADATA_FORM_TRANSLATE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "ID",

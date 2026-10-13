@@ -18,6 +18,62 @@
  "jpa_entities": [
   "com.totvs.technology.foundation.security.entity.FDNProduct"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNProduct.findAll",
+   "query": "SELECT b FROM FDNProduct b",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNProduct",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNProduct.java",
+   "owner_table": "FDN_PRODUCT",
+   "tables": [
+    "FDN_PRODUCT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNProduct.findByCode",
+   "query": "SELECT b FROM FDNProduct b WHERE b.productCode = :productCode",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNProduct",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNProduct.java",
+   "owner_table": "FDN_PRODUCT",
+   "tables": [
+    "FDN_PRODUCT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNProduct.findById",
+   "query": "SELECT b FROM FDNProduct b WHERE b.id = :id",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNProduct",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNProduct.java",
+   "owner_table": "FDN_PRODUCT",
+   "tables": [
+    "FDN_PRODUCT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "PRODUCT_ID",

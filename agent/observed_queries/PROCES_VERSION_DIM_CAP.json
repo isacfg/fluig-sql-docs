@@ -1,0 +1,20 @@
+[
+  {
+    "name": "ProcesVersionDim.findAll",
+    "query": "SELECT p FROM ProcesVersionDim p WHERE p.procesVersionDimPK.companyId = :companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.cap.model.ProcesVersionDim",
+    "source_file": "com/datasul/technology/cap/model/ProcesVersionDim.java",
+    "owner_table": "PROCES_VERSION_DIM_CAP",
+    "tables": [
+      "PROCES_VERSION_DIM_CAP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

@@ -1,0 +1,113 @@
+{
+  "name": "WCM_STOREITEM_METRIC",
+  "domain": "wcm-store",
+  "purpose": "Métricas de uso (downloads e visualizações) de itens da loja de componentes WCM, por tenant.",
+  "schema_card": "by_table/WCM_STOREITEM_METRIC.json",
+  "business_concepts": [
+    "wcm-store",
+    "WCM_STOREITEM_METRIC"
+  ],
+  "grain": {
+    "description": "Métricas de uso (downloads e visualizações) de itens da loja de componentes WCM, por tenant. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "STOREITEM_METRIC_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/WCM_STOREITEM_METRIC.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-1117",
+      "from_table": "WCM_STOREITEM_METRIC",
+      "to_table": "FDN_TENANT",
+      "on": [
+        "WCM_STOREITEM_METRIC.TENANT_ID = FDN_TENANT.TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Tenant da métrica.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-1117",
+      "table": "FDN_TENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "WCMSTOREITEMMETRICI001",
+      "unique": false,
+      "columns": [
+        "COMPONENT_CODE"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/WCM_STOREITEM_METRIC.json",
+  "observed_query_count": 3,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Métricas de uso (downloads e visualizações) de itens da loja de componentes WCM, por tenant. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "STOREITEM_METRIC_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

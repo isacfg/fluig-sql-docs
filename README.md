@@ -2,7 +2,15 @@
 
 Referência para agentes de IA: 333 tabelas, 2809 colunas, finalidade de cada tabela/coluna, chaves, índices e relacionamentos.
 
-## Como consumir (ordem sugerida)
+## Gerar SQL com agentes
+
+Comece em [`agent/README.md`](agent/README.md): o protocolo agora é **planejar → montar → validar**. [`agent/index.json`](agent/index.json) localiza as 333 fichas com grain e escopo; [`agent/intents.json`](agent/intents.json) liga perguntas de negócio a 28 recipes SQL; [`agent/join_graph.json`](agent/join_graph.json) informa chaves completas, confiança e risco de multiplicação; [`agent/query_rules.json`](agent/query_rules.json) fornece as regras do planner.
+
+As fichas estruturam filtros de tenant, filtros por intenção, joins canônicos, colunas deprecated e exemplos. O grain estrutural cobre todas as tabelas; o grain de negócio foi revisado nas 22 principais. Há também 1.218 Named Queries/HQL preservadas com proveniência em `schema.json`, nas fichas originais e em `agent/observed_queries/`, carregadas separadamente das fichas compactas.
+
+O validador em [`method_scripts/validate_sql.py`](method_scripts/validate_sql.py) confere nomes, tenant, joins, versões e riscos de duplicação. As recipes passaram na validação estática; duas possuem avisos documentados de relação provável. Não foram executadas em uma instância real do Fluig. Veja [`method_scripts/README.md`](method_scripts/README.md) para regeneração e testes.
+
+## Como consumir o schema (ordem sugerida)
 1. `index.md` — uma linha por tabela (domínio, PK, finalidade). Comece aqui para localizar tabelas.
 2. `domains/<dominio>.md` — tabelas do domínio com colunas (tipo, null, finalidade, valores de enum/flag, referências) e relações.
 3. `by_table/<TABELA>.json` — ficha completa de UMA tabela (mais barato em contexto que o schema inteiro).

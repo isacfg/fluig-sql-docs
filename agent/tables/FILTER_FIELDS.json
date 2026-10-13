@@ -1,0 +1,96 @@
+{
+  "name": "FILTER_FIELDS",
+  "domain": "ecm-lists-filters",
+  "purpose": "Campos/critérios e opções de exibição (cor, fonte, largura, visibilidade) de um filtro salvo.",
+  "schema_card": "by_table/FILTER_FIELDS.json",
+  "business_concepts": [
+    "ecm-lists-filters",
+    "FILTER_FIELDS"
+  ],
+  "grain": {
+    "description": "Campos/critérios e opções de exibição (cor, fonte, largura, visibilidade) de um filtro salvo. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FILTER_FIELDS.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0665",
+      "from_table": "FILTER_FIELDS",
+      "to_table": "FILTERS",
+      "on": [
+        "FILTER_FIELDS.FILTER_ID = FILTERS.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "FILTER_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "FK ['FILTER_ID'] referencia FILTERS.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0665",
+      "table": "FILTERS",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0678",
+      "table": "FILTER_ORDER",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FILTER_FIELDS.json",
+  "observed_query_count": 3,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Campos/critérios e opções de exibição (cor, fonte, largura, visibilidade) de um filtro salvo. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

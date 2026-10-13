@@ -61,6 +61,260 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.workflow.model.ProcessTask"
  ],
+ "observed_queries": [
+  {
+   "name": "ProcessTask.findAll",
+   "query": "SELECT h FROM ProcessTask h WHERE h.processTaskPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessTask",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessTask.java",
+   "owner_table": "TAR_PROCES",
+   "tables": [
+    "TAR_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessTask.findByHistoryAndStatus",
+   "query": "SELECT h from ProcessTask h WHERE h.processTaskPK.processInstanceId = :processInstanceId AND h.processTaskPK.companyId = :companyId AND h.processTaskPK.movementSequence = :movementSequence AND h.status <> 0",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessTask",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessTask.java",
+   "owner_table": "TAR_PROCES",
+   "tables": [
+    "TAR_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessTask.countFindByHistoryAndStatus",
+   "query": "SELECT count(h) from ProcessTask h WHERE h.processTaskPK.processInstanceId = :processInstanceId AND h.processTaskPK.companyId = :companyId AND h.processTaskPK.movementSequence = :movementSequence AND h.status <> 0",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessTask",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessTask.java",
+   "owner_table": "TAR_PROCES",
+   "tables": [
+    "TAR_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessTask.findHistory",
+   "query": "SELECT h from ProcessTask h WHERE h.processTaskPK.processInstanceId = :processInstanceId AND h.processTaskPK.companyId = :companyId AND h.processTaskPK.movementSequence = :movementSequence AND h.active = :ative AND h.processTaskPK.colleagueId <> :colleagueId AND h.status <> 0 ORDER BY h.assignEndDate DESC, h.processTaskPK.colleagueId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessTask",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessTask.java",
+   "owner_table": "TAR_PROCES",
+   "tables": [
+    "TAR_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessTask.findByStatus",
+   "query": "select pt from ProcessTask pt where pt.processTaskPK.companyId = :companyId and pt.processTaskPK.processInstanceId = :processInstanceId and pt.processTaskPK.movementSequence = :movementSequence and pt.status = :status",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessTask",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessTask.java",
+   "owner_table": "TAR_PROCES",
+   "tables": [
+    "TAR_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessTask.findActiveTask",
+   "query": "SELECT t from ProcessTask t WHERE t.processTaskPK.companyId = :companyId AND t.processTaskPK.processInstanceId = :processInstanceId AND t.active = :active AND t.processTaskPK.colleagueId = :colleagueId ORDER BY t.assignEndDate DESC, t.processTaskPK.colleagueId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessTask",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessTask.java",
+   "owner_table": "TAR_PROCES",
+   "tables": [
+    "TAR_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessTask.findTasksToTransfer",
+   "query": "SELECT t FROM WorkflowProcess w, ProcessTask t WHERE t.processTaskPK.companyId = w.workflowProcessPK.companyId AND t.processTaskPK.processInstanceId = w.workflowProcessPK.processInstanceId AND t.processTaskPK.companyId = :companyId AND t.processTaskPK.colleagueId = :colleagueId AND t.active = :active AND t.processTaskPK.processInstanceId >= :instanceIdInitial AND t.processTaskPK.processInstanceId <= :instanceIdFinal AND (t.status = 0 OR t.status = 1 ) AND w.workflowProcessPK.companyId = :companyId AND w.active = :active ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessTask",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessTask.java",
+   "owner_table": "TAR_PROCES",
+   "tables": [
+    "TAR_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessTask.activeTasksByUser",
+   "query": "SELECT pt from ProcessTask pt WHERE pt.processTaskPK.companyId = :companyId AND pt.processTaskPK.processInstanceId = :processInstanceId AND pt.processTaskPK.movementSequence = :movementSequence AND pt.processTaskPK.colleagueId = :colleagueId AND pt.active = true",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessTask",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessTask.java",
+   "owner_table": "TAR_PROCES",
+   "tables": [
+    "TAR_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessTask.findTasksByPKWithoutTransferredSequence",
+   "query": "SELECT t FROM ProcessTask t WHERE t.processTaskPK.companyId = :companyId AND t.processTaskPK.movementSequence = :movementSequence AND t.processTaskPK.processInstanceId = :processInstanceId AND t.processTaskPK.colleagueId = :colleagueId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessTask",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessTask.java",
+   "owner_table": "TAR_PROCES",
+   "tables": [
+    "TAR_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessTask.findProcessTaskByMovementSequenceForTransfer",
+   "query": "SELECT pt FROM ProcessTask pt WHERE pt.processTaskPK.companyId = :companyId AND pt.processTaskPK.processInstanceId = :processId AND pt.processTaskPK.movementSequence = 1 AND pt.status > 0 ORDER BY pt.processTaskPK.movementSequence DESC",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessTask",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessTask.java",
+   "owner_table": "TAR_PROCES",
+   "tables": [
+    "TAR_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessTask.findProcessTaskPKByStatus",
+   "query": "SELECT pt.processTaskPK from ProcessTask pt WHERE pt.processTaskPK.companyId = :companyId AND pt.processTaskPK.processInstanceId = :processInstanceId AND pt.status = :status",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessTask",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessTask.java",
+   "owner_table": "TAR_PROCES",
+   "tables": [
+    "TAR_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessTask.findLastCompletedProcessTaskPK",
+   "query": "SELECT pt.processTaskPK FROM ProcessTask pt WHERE pt.processTaskPK.companyId = :companyId AND pt.processTaskPK.processInstanceId = :processInstanceId AND pt.status = 2 ORDER BY pt.assignEndDate DESC",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessTask",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessTask.java",
+   "owner_table": "TAR_PROCES",
+   "tables": [
+    "TAR_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessTask.findOpenWarningProcessTasks",
+   "query": "SELECT pt FROM ProcessTask pt, WorkflowProcess wp WHERE pt.processTaskPK.companyId = :companyId AND pt.status <= 1 AND pt.active = true AND pt.processTaskPK.processInstanceId = wp.workflowProcessPK.processInstanceId AND pt.processTaskPK.companyId = wp.workflowProcessPK.companyId AND wp.active = true AND wp.status = 0 AND wp.totalDeadline > 0 AND wp.closureStatus = 0 AND wp.deadlineDateProcess >= :deadlineDateProcess AND wp.warningDateProcess >= :warningDateProcess",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessTask",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessTask.java",
+   "owner_table": "TAR_PROCES",
+   "tables": [
+    "TAR_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessTask.findOpenExpiredProcessTasks",
+   "query": "SELECT pt FROM ProcessTask pt, WorkflowProcess wp WHERE pt.processTaskPK.companyId = :companyId AND pt.status <= 1 AND pt.active = true AND pt.processTaskPK.processInstanceId = wp.workflowProcessPK.processInstanceId AND pt.processTaskPK.companyId = wp.workflowProcessPK.companyId AND wp.active = true AND wp.notifyDelay = false AND wp.status = 0 AND wp.totalDeadline > 0 AND wp.closureStatus = 0 AND wp.deadlineDateProcess < :deadlineDateProcess",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessTask",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessTask.java",
+   "owner_table": "TAR_PROCES",
+   "tables": [
+    "TAR_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "CD_MATRICULA",

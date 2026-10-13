@@ -1,0 +1,200 @@
+{
+  "name": "FDN_PDATA_JUSTIFICATION",
+  "domain": "privacy-lgpd",
+  "purpose": "Justificativa de tratamento de um dado pessoal cadastrado, associada a uma classificação.",
+  "schema_card": "by_table/FDN_PDATA_JUSTIFICATION.json",
+  "business_concepts": [
+    "privacy-lgpd",
+    "FDN_PDATA_JUSTIFICATION"
+  ],
+  "grain": {
+    "description": "Justificativa de tratamento de um dado pessoal cadastrado, associada a uma classificação. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "PDATA_JUSTIFICATION_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_PDATA_JUSTIFICATION.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0498",
+      "from_table": "FDN_PDATA_JUSTIFICATION",
+      "to_table": "FDN_PDATA_CLASSIFICATION",
+      "on": [
+        "FDN_PDATA_JUSTIFICATION.PDATA_CLASSIFICATION_ID = FDN_PDATA_CLASSIFICATION.PDATA_CLASSIFICATION_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "PDATA_CLASSIFICATION_ID",
+          "to_column": "PDATA_CLASSIFICATION_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Justificativas que usam a classificação.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0501",
+      "from_table": "FDN_PDATA_JUSTIFICATION",
+      "to_table": "FDN_PERSONALDATA",
+      "on": [
+        "FDN_PDATA_JUSTIFICATION.PERSONALDATA_ID = FDN_PERSONALDATA.PERSONALDATA_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "PERSONALDATA_ID",
+          "to_column": "PERSONALDATA_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Dado pessoal (FK FK_FDNPDATAJUSTIFICATION001; JPA personalData).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0503",
+      "from_table": "FDN_PDATA_JUSTIFICATION",
+      "to_table": "FDN_PDATA_CLASSIFICATION",
+      "on": [
+        "FDN_PDATA_JUSTIFICATION.PDATA_CLASSIFICATION_ID = FDN_PDATA_CLASSIFICATION.PDATA_CLASSIFICATION_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "PDATA_CLASSIFICATION_ID",
+          "to_column": "PDATA_CLASSIFICATION_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Classificação (FK FK_FDNPDATAJUSTIFICATION002; JPA classification).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0534",
+      "from_table": "FDN_PDATA_JUSTIFICATION",
+      "to_table": "FDN_PERSONALDATA",
+      "on": [
+        "FDN_PDATA_JUSTIFICATION.PERSONALDATA_ID = FDN_PERSONALDATA.PERSONALDATA_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "PERSONALDATA_ID",
+          "to_column": "PERSONALDATA_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Justificativas do dado.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0498",
+      "table": "FDN_PDATA_CLASSIFICATION",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0501",
+      "table": "FDN_PERSONALDATA",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0503",
+      "table": "FDN_PDATA_CLASSIFICATION",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0534",
+      "table": "FDN_PERSONALDATA",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Justificativa de tratamento de um dado pessoal cadastrado, associada a uma classificação. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "PDATA_JUSTIFICATION_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

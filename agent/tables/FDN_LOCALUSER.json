@@ -1,0 +1,141 @@
+{
+  "name": "FDN_LOCALUSER",
+  "domain": "calendario-feriados",
+  "purpose": "Associação de usuários a locais (FDN_LOCAL). Cada linha vincula um código de usuário a um local.",
+  "schema_card": "by_table/FDN_LOCALUSER.json",
+  "business_concepts": [
+    "calendario-feriados",
+    "FDN_LOCALUSER"
+  ],
+  "grain": {
+    "description": "Associação de usuários a locais (FDN_LOCAL). Cada linha vincula um código de usuário a um local. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_LOCALUSER.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0464",
+      "from_table": "FDN_LOCALUSER",
+      "to_table": "FDN_LOCAL",
+      "on": [
+        "FDN_LOCALUSER.LOCAL_ID = FDN_LOCAL.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "LOCAL_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Usuários do local.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0471",
+      "from_table": "FDN_LOCALUSER",
+      "to_table": "FDN_LOCAL",
+      "on": [
+        "FDN_LOCALUSER.LOCAL_ID = FDN_LOCAL.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "LOCAL_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Local.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0464",
+      "table": "FDN_LOCAL",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0471",
+      "table": "FDN_LOCAL",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0473",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FK_FDNLOCALUSER_LOCAL",
+      "unique": false,
+      "columns": [
+        "LOCAL_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_LOCALUSER.json",
+  "observed_query_count": 5,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Associação de usuários a locais (FDN_LOCAL). Cada linha vincula um código de usuário a um local. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

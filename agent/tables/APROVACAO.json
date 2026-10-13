@@ -1,0 +1,205 @@
+{
+  "name": "APROVACAO",
+  "domain": "ged-documentos",
+  "purpose": "Registro da aprovação de um documento do GED por um aprovador em um nível de aprovação (resultado, data, observação, assinatura).",
+  "schema_card": "by_table/APROVACAO.json",
+  "business_concepts": [
+    "ged-documentos",
+    "APROVACAO"
+  ],
+  "grain": {
+    "description": "Registro da aprovação de um documento do GED por um aprovador em um nível de aprovação (resultado, data, observação, assinatura). Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "NR_DOCUMENTO",
+      "NR_VERSAO",
+      "CD_MATRICULA",
+      "NUM_NIV_APROVAC"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/APROVACAO.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0021",
+      "from_table": "APROVACAO",
+      "to_table": "DOCUMENTO",
+      "on": [
+        "APROVACAO.COD_EMPRESA = DOCUMENTO.COD_EMPRESA",
+        "APROVACAO.NR_DOCUMENTO = DOCUMENTO.NR_DOCUMENTO",
+        "APROVACAO.NR_VERSAO = DOCUMENTO.NR_VERSAO"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "NR_DOCUMENTO",
+          "to_column": "NR_DOCUMENTO"
+        },
+        {
+          "from_column": "NR_VERSAO",
+          "to_column": "NR_VERSAO"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Versão de documento sendo aprovada.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0023",
+      "from_table": "APROVACAO",
+      "to_table": "NIVEL_APROVACAO",
+      "on": [
+        "APROVACAO.COD_EMPRESA = NIVEL_APROVACAO.COD_EMPRESA",
+        "APROVACAO.NR_DOCUMENTO = NIVEL_APROVACAO.NR_DOCUMENTO",
+        "APROVACAO.NR_VERSAO = NIVEL_APROVACAO.NR_VERSAO",
+        "APROVACAO.NUM_NIV_APROVAC = NIVEL_APROVACAO.NUM_NIV_APROVAC"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "NR_DOCUMENTO",
+          "to_column": "NR_DOCUMENTO"
+        },
+        {
+          "from_column": "NR_VERSAO",
+          "to_column": "NR_VERSAO"
+        },
+        {
+          "from_column": "NUM_NIV_APROVAC",
+          "to_column": "NUM_NIV_APROVAC"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Nível de aprovação ao qual o registro pertence.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0021",
+      "table": "DOCUMENTO",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0023",
+      "table": "NIVEL_APROVACAO",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0028",
+      "table": "APROVADOR",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0780",
+      "table": "MOVTO_APROVAC",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [
+    "OBSERVACAO"
+  ],
+  "indexes": [
+    {
+      "name": "IDX_APROVACAO_MASTER_LIST",
+      "unique": false,
+      "columns": [
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "COD_EMPRESA"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/APROVACAO.json",
+  "observed_query_count": 4,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Registro da aprovação de um documento do GED por um aprovador em um nível de aprovação (resultado, data, observação, assinatura). Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "CD_MATRICULA",
+        "NUM_NIV_APROVAC"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

@@ -1,0 +1,251 @@
+{
+  "name": "FDN_USERROLE",
+  "domain": "foundation-identity-access",
+  "purpose": "Atribuição de papéis (FDN_ROLE) a usuários por tenant.",
+  "schema_card": "by_table/FDN_USERROLE.json",
+  "business_concepts": [
+    "papel do usuário",
+    "direct user role"
+  ],
+  "grain": {
+    "description": "Um vínculo direto de papel com login por tenant; não inclui papéis herdados de grupos.",
+    "columns": [
+      "USERROLE_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "reviewed-schema-description",
+    "business_grain_reviewed": true
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_USERROLE.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values",
+  "canonical_joins": [
+    {
+      "id": "join-0566",
+      "from_table": "FDN_USERROLE",
+      "to_table": "FDN_ROLE",
+      "on": [
+        "FDN_USERROLE.TENANT_ID = FDN_ROLE.TENANT_ID",
+        "FDN_USERROLE.ROLE_CODE = FDN_ROLE.ROLE_CODE"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "ROLE_CODE",
+          "to_column": "ROLE_CODE"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Usuários com este papel.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0615",
+      "from_table": "FDN_USERROLE",
+      "to_table": "FDN_USERTENANT",
+      "on": [
+        "FDN_USERROLE.TENANT_ID = FDN_USERTENANT.TENANT_ID",
+        "FDN_USERROLE.LOGIN = FDN_USERTENANT.LOGIN"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "LOGIN",
+          "to_column": "LOGIN"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Usuário.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0617",
+      "from_table": "FDN_USERROLE",
+      "to_table": "FDN_ROLE",
+      "on": [
+        "FDN_USERROLE.TENANT_ID = FDN_ROLE.TENANT_ID",
+        "FDN_USERROLE.ROLE_CODE = FDN_ROLE.ROLE_CODE"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "ROLE_CODE",
+          "to_column": "ROLE_CODE"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Papel.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0619",
+      "from_table": "FDN_USERROLE",
+      "to_table": "FDN_TENANT",
+      "on": [
+        "FDN_USERROLE.TENANT_ID = FDN_TENANT.TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Tenant ao qual o registro pertence.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0566",
+      "table": "FDN_ROLE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0615",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0617",
+      "table": "FDN_ROLE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0619",
+      "table": "FDN_TENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FK66blkq1gydb0wtn9iwv78kb0g",
+      "unique": false,
+      "columns": [
+        "TENANT_ID",
+        "ROLE_CODE"
+      ]
+    },
+    {
+      "name": "FK_NSBX10GBYISEOXI5QJCCELPNP",
+      "unique": false,
+      "columns": [
+        "LOGIN"
+      ]
+    }
+  ],
+  "query_examples": [
+    "recipes/users/direct_user_roles.sql"
+  ],
+  "observed_queries_path": "agent/observed_queries/FDN_USERROLE.json",
+  "observed_query_count": 14,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Um vínculo direto de papel com login por tenant; não inclui papéis herdados de grupos.",
+      "columns": [
+        "USERROLE_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "reviewed-schema-description",
+      "business_grain_reviewed": true
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

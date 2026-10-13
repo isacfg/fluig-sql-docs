@@ -17,6 +17,7 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.workflow.model.SwimLane"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "COD_EMPRESA",

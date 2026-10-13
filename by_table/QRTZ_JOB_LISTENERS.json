@@ -16,6 +16,7 @@
  "jpa_entities": [
   "com.fluig.foundation.scheduler.entity.quartz.QrtzJobListeners"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "JOB_GROUP",

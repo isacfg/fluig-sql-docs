@@ -1,0 +1,145 @@
+{
+  "name": "ECM_FIXED_TABLE_COLUMN",
+  "domain": "ecm-metadata-forms",
+  "purpose": "Colunas de um item tabela fixa do formulário de metadados.",
+  "schema_card": "by_table/ECM_FIXED_TABLE_COLUMN.json",
+  "business_concepts": [
+    "ecm-metadata-forms",
+    "ECM_FIXED_TABLE_COLUMN"
+  ],
+  "grain": {
+    "description": "Colunas de um item tabela fixa do formulário de metadados. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/ECM_FIXED_TABLE_COLUMN.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0173",
+      "from_table": "ECM_FIXED_TABLE_COLUMN",
+      "to_table": "ECM_FIXED_TABLE_FORM_ITEM",
+      "on": [
+        "ECM_FIXED_TABLE_COLUMN.METADATAFORM_ID = ECM_FIXED_TABLE_FORM_ITEM.METADATAFORM_ID",
+        "ECM_FIXED_TABLE_COLUMN.HTML_ID_FIXEDTABLE_ITEM = ECM_FIXED_TABLE_FORM_ITEM.HTML_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "METADATAFORM_ID",
+          "to_column": "METADATAFORM_ID"
+        },
+        {
+          "from_column": "HTML_ID_FIXEDTABLE_ITEM",
+          "to_column": "HTML_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "FK ['METADATAFORM_ID', 'HTML_ID_FIXEDTABLE_ITEM'] referencia ECM_FIXED_TABLE_FORM_ITEM.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0182",
+      "from_table": "ECM_FIXED_TABLE_COLUMN",
+      "to_table": "ECM_FIXED_TABLE_FORM_ITEM",
+      "on": [
+        "ECM_FIXED_TABLE_COLUMN.METADATAFORM_ID = ECM_FIXED_TABLE_FORM_ITEM.METADATAFORM_ID",
+        "ECM_FIXED_TABLE_COLUMN.HTML_ID_FIXEDTABLE_ITEM = ECM_FIXED_TABLE_FORM_ITEM.HTML_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "METADATAFORM_ID",
+          "to_column": "METADATAFORM_ID"
+        },
+        {
+          "from_column": "HTML_ID_FIXEDTABLE_ITEM",
+          "to_column": "HTML_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "probable",
+      "source_kind": "jpa-join",
+      "evidence": "Definição das colunas da tabela fixa (FixedTableColumn.fixedTable, mappedBy; nomes exatos das colunas da tabela filha não verificados).",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0173",
+      "table": "ECM_FIXED_TABLE_FORM_ITEM",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0182",
+      "table": "ECM_FIXED_TABLE_FORM_ITEM",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0186",
+      "table": "ECM_FIXED_TABLE_ROW",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Colunas de um item tabela fixa do formulário de metadados. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

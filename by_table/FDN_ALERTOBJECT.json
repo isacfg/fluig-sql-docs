@@ -23,6 +23,62 @@
  "jpa_entities": [
   "com.totvs.technology.foundation.alert.entity.FDNAlertObject"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNAlertObject.findById",
+   "query": "SELECT b FROM FDNAlertObject b WHERE b.id = :idObject",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertObject",
+   "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertObject.java",
+   "owner_table": "FDN_ALERTOBJECT",
+   "tables": [
+    "FDN_ALERTOBJECT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNAlertObject.findByObjectId",
+   "query": "SELECT b FROM FDNAlertObject b WHERE b.objectId = :idObject",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertObject",
+   "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertObject.java",
+   "owner_table": "FDN_ALERTOBJECT",
+   "tables": [
+    "FDN_ALERTOBJECT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNAlertObject.removeAlertObjectsByIdsList",
+   "query": " DELETE FROM FDNAlertObject alertObject WHERE alertObject.id IN ( :alertObjectIds ) ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertObject",
+   "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertObject.java",
+   "owner_table": "FDN_ALERTOBJECT",
+   "tables": [
+    "FDN_ALERTOBJECT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "ID",

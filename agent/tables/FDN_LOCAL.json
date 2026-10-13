@@ -1,0 +1,93 @@
+{
+  "name": "FDN_LOCAL",
+  "domain": "calendario-feriados",
+  "purpose": "Locais (unidades/filiais) com coordenadas geográficas, raio e fuso horário, usados para associar feriados e usuários. Pode haver um local padrão por empresa.",
+  "schema_card": "by_table/FDN_LOCAL.json",
+  "business_concepts": [
+    "calendario-feriados",
+    "FDN_LOCAL"
+  ],
+  "grain": {
+    "description": "Locais (unidades/filiais) com coordenadas geográficas, raio e fuso horário, usados para associar feriados e usuários. Pode haver um local padrão por empresa. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_LOCAL.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0461",
+      "table": "FDN_LOCALHOLIDAY",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0463",
+      "table": "FDN_LOCALUSER",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0465",
+      "table": "FDN_SITE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0468",
+      "table": "FDN_LOCALHOLIDAY",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0472",
+      "table": "FDN_LOCALUSER",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0580",
+      "table": "FDN_SITE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_LOCAL.json",
+  "observed_query_count": 7,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Locais (unidades/filiais) com coordenadas geográficas, raio e fuso horário, usados para associar feriados e usuários. Pode haver um local padrão por empresa. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

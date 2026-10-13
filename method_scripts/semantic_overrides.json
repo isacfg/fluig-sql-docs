@@ -1,0 +1,352 @@
+{
+  "PROCES_WORKFLOW": {
+    "grain_description": "Uma instância de processo por tenant.",
+    "business_concepts": [
+      "solicitação",
+      "instância de processo",
+      "workflow",
+      "process instance"
+    ],
+    "canonical_filters": {
+      "open": [
+        "LOG_ATIV = 1"
+      ],
+      "closed": [
+        "LOG_ATIV = 0"
+      ]
+    },
+    "evidence": "by_table/PROCES_WORKFLOW.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values"
+  },
+  "TAR_PROCES": {
+    "grain_description": "Uma atribuição de uma movimentação a um usuário, distinguida pela sequência de transferência e tenant.",
+    "business_concepts": [
+      "tarefa pendente",
+      "central de tarefas",
+      "responsável",
+      "workflow task"
+    ],
+    "canonical_filters": {
+      "open": [
+        "LOG_ATIV = 1",
+        "IDI_STATUS IN (0, 1)"
+      ],
+      "by_user": [
+        "CD_MATRICULA = :user_code"
+      ]
+    },
+    "evidence": "by_table/TAR_PROCES.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values",
+    "deprecated_columns": [
+      "DEADLINEDATE",
+      "DEADLINEHOUR",
+      "INITIALTERMDATE",
+      "INITIALTERMHOUR",
+      "TASKCOMPLETIONDATE",
+      "TASKCOMPLETIONHOUR"
+    ],
+    "preferred_columns": {
+      "deadline": "DEADLINE",
+      "started_at": "START_DATE",
+      "ended_at": "END_DATE"
+    },
+    "warnings": [
+      "Preserve all five PK columns for assignment identity; count processes at PROCES_WORKFLOW grain."
+    ]
+  },
+  "HISTOR_PROCES": {
+    "grain_description": "Uma movimentação de uma instância de processo por tenant; threads paralelas podem ter várias posições atuais.",
+    "business_concepts": [
+      "histórico de processo",
+      "movimentação",
+      "atividade atual"
+    ],
+    "canonical_filters": {
+      "current": [
+        "LOG_ATIV = 1"
+      ],
+      "by_process": [
+        "NUM_PROCES = :process_id"
+      ]
+    },
+    "evidence": "by_table/HISTOR_PROCES.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values"
+  },
+  "ANEXO_PROCES": {
+    "grain_description": "Um vínculo de anexo a uma solicitação por tenant e sequência de anexo.",
+    "business_concepts": [
+      "anexos da solicitação",
+      "process attachments"
+    ],
+    "canonical_filters": {
+      "by_process": [
+        "NUM_PROCES = :process_id"
+      ]
+    },
+    "evidence": "by_table/ANEXO_PROCES.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values"
+  },
+  "DOCUMENTO": {
+    "grain_description": "Uma versão de um documento por tenant; não um documento lógico independentemente de versão.",
+    "business_concepts": [
+      "GED",
+      "documento",
+      "pasta",
+      "ficha",
+      "ECM",
+      "document version"
+    ],
+    "canonical_filters": {
+      "current": [
+        "VERSAO_ATIVA = 1",
+        "LOG_DELETE = 0"
+      ],
+      "not_deleted": [
+        "LOG_DELETE = 0"
+      ],
+      "folders": [
+        "TP_DOCUMENTO IN ('0', '1')"
+      ],
+      "files": [
+        "TP_DOCUMENTO = '2'"
+      ],
+      "form_definitions": [
+        "TP_DOCUMENTO = '4'"
+      ],
+      "form_records": [
+        "TP_DOCUMENTO = '5'"
+      ]
+    },
+    "evidence": "by_table/DOCUMENTO.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values",
+    "warnings": [
+      "Parent joins need tenant and current-version filters on the parent alias; NR_DOCUMENTO alone is not unique.",
+      "Selecting a recorded attachment version must use NR_VERSAO, even if that version is no longer current."
+    ]
+  },
+  "DEF_PROCES": {
+    "grain_description": "Um cabeçalho de definição de processo por tenant; versões ficam em VERS_DEF_PROCES.",
+    "business_concepts": [
+      "definição de processo",
+      "process definition"
+    ],
+    "canonical_filters": {
+      "active": [
+        "LOG_ATIV = 1"
+      ]
+    },
+    "evidence": "by_table/DEF_PROCES.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values"
+  },
+  "VERS_DEF_PROCES": {
+    "grain_description": "Uma versão de definição de processo por tenant.",
+    "business_concepts": [
+      "versão do processo",
+      "process definition version"
+    ],
+    "canonical_filters": {
+      "active": [
+        "LOG_ATIV = 1"
+      ]
+    },
+    "evidence": "by_table/VERS_DEF_PROCES.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values"
+  },
+  "ESTADO_PROCES": {
+    "grain_description": "Uma atividade de uma versão de definição de processo por tenant e sequência.",
+    "business_concepts": [
+      "atividade",
+      "estado",
+      "BPMN",
+      "process state"
+    ],
+    "canonical_filters": {
+      "initial": [
+        "LOG_ESTADO_INICIAL = 1"
+      ],
+      "by_version": [
+        "COD_DEF_PROCES = :process_code",
+        "NUM_VERS = :process_version"
+      ]
+    },
+    "evidence": "by_table/ESTADO_PROCES.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values"
+  },
+  "FDN_USERTENANT": {
+    "grain_description": "Um vínculo de usuário global com tenant, identificado por USER_TENANT_ID; USER_CODE não possui UNIQUE declarado.",
+    "business_concepts": [
+      "usuário do tenant",
+      "matrícula",
+      "login",
+      "tenant user"
+    ],
+    "canonical_filters": {
+      "active": [
+        "USER_STATE = 1"
+      ],
+      "by_user_code": [
+        "USER_CODE = :user_code"
+      ]
+    },
+    "evidence": "by_table/FDN_USERTENANT.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values",
+    "warnings": [
+      "USER_CODE + TENANT_ID has a non-unique index, not a UNIQUE constraint; legacy matrícula joins require a data uniqueness check.",
+      "LOGIN is globally UNIQUE in this clean-install DDL; retain tenant predicates for scoped business queries."
+    ]
+  },
+  "FDN_USER": {
+    "grain_description": "Uma pessoa global, compartilhável entre tenants; o tenant deve ser delimitado via FDN_USERTENANT.",
+    "business_concepts": [
+      "pessoa",
+      "nome do usuário",
+      "global user"
+    ],
+    "canonical_filters": {},
+    "evidence": "by_table/FDN_USER.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values"
+  },
+  "FDN_TENANT": {
+    "grain_description": "Um tenant identificado por TENANT_ID.",
+    "business_concepts": [
+      "empresa",
+      "tenant",
+      "organização"
+    ],
+    "canonical_filters": {},
+    "evidence": "by_table/FDN_TENANT.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values"
+  },
+  "FDN_GROUP": {
+    "grain_description": "Um grupo por tenant; chave lógica única (TENANT_ID, GROUP_CODE).",
+    "business_concepts": [
+      "grupo de usuários",
+      "user group"
+    ],
+    "canonical_filters": {
+      "visible": [
+        "INTERNAL = 0"
+      ]
+    },
+    "evidence": "by_table/FDN_GROUP.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values"
+  },
+  "FDN_GROUPUSERROLE": {
+    "grain_description": "Um vínculo de grupo com usuário, subgrupo ou papel; não necessariamente um membro usuário.",
+    "business_concepts": [
+      "membro do grupo",
+      "subgrupo",
+      "group membership"
+    ],
+    "canonical_filters": {
+      "direct_users": [
+        "LOGIN IS NOT NULL"
+      ]
+    },
+    "evidence": "by_table/FDN_GROUPUSERROLE.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values",
+    "warnings": [
+      "Direct membership does not resolve nested groups or effective permissions."
+    ]
+  },
+  "FDN_ROLE": {
+    "grain_description": "Um papel por tenant; chave lógica única (TENANT_ID, ROLE_CODE).",
+    "business_concepts": [
+      "papel",
+      "role",
+      "perfil"
+    ],
+    "canonical_filters": {},
+    "evidence": "by_table/FDN_ROLE.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values"
+  },
+  "FDN_USERROLE": {
+    "grain_description": "Um vínculo direto de papel com login por tenant; não inclui papéis herdados de grupos.",
+    "business_concepts": [
+      "papel do usuário",
+      "direct user role"
+    ],
+    "canonical_filters": {},
+    "evidence": "by_table/FDN_USERROLE.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values"
+  },
+  "FICHA": {
+    "grain_description": "Um valor de campo de uma ficha e versão por tenant e tabela do formulário (EAV).",
+    "business_concepts": [
+      "valor do campo",
+      "ficha",
+      "form record field",
+      "EAV"
+    ],
+    "canonical_filters": {
+      "by_version": [
+        "NR_FICHA = :record_id",
+        "NR_VERSAO = :record_version"
+      ]
+    },
+    "evidence": "by_table/FICHA.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values",
+    "warnings": [
+      "EAV is field grain; do not count rows as form records. Dynamic ML tables and child-row identity require instance-specific metadata."
+    ]
+  },
+  "FICHARIO": {
+    "grain_description": "Uma tabela lógica de um fichário e versão por tenant, distinguida por COD_TABELA.",
+    "business_concepts": [
+      "fichário",
+      "tabela pai filha",
+      "form table"
+    ],
+    "canonical_filters": {
+      "by_version": [
+        "NR_FICHARIO = :form_id",
+        "NR_VERSAO = :form_version"
+      ]
+    },
+    "evidence": "by_table/FICHARIO.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values"
+  },
+  "FICHARIO_CAMPO": {
+    "grain_description": "Uma definição de campo em tabela de fichário e versão por tenant.",
+    "business_concepts": [
+      "campos do formulário",
+      "form field definition"
+    ],
+    "canonical_filters": {
+      "by_version": [
+        "NR_FICHARIO = :form_id",
+        "NR_VERSAO = :form_version"
+      ]
+    },
+    "evidence": "by_table/FICHARIO_CAMPO.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values"
+  },
+  "ECM_METADATA_FORM": {
+    "grain_description": "Uma versão de formulário de metadados, com ID e UNIQUE (TENANT_ID, DOCUMENT_ID, DCMNT_VRSN_NMBER).",
+    "business_concepts": [
+      "formulário de metadados",
+      "metadata form"
+    ],
+    "canonical_filters": {},
+    "evidence": "by_table/ECM_METADATA_FORM.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values"
+  },
+  "PROCESS_FORM_MAP": {
+    "grain_description": "Um mapeamento de campo entre processo pai e subprocesso por FORM_MAP_ID.",
+    "business_concepts": [
+      "mapeamento de formulário",
+      "subprocess form map"
+    ],
+    "canonical_filters": {
+      "by_version": [
+        "PROCESS_CODE = :process_code",
+        "VERSION = :process_version"
+      ]
+    },
+    "evidence": "by_table/PROCESS_FORM_MAP.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values"
+  },
+  "DOCTO_CAMPO_CUSTOM": {
+    "grain_description": "Um valor de campo customizado por versão de documento e tenant.",
+    "business_concepts": [
+      "metadados do documento",
+      "custom document field"
+    ],
+    "canonical_filters": {
+      "by_version": [
+        "NR_DOCUMENTO = :document_id",
+        "NR_VERSAO = :document_version"
+      ]
+    },
+    "evidence": "by_table/DOCTO_CAMPO_CUSTOM.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values"
+  },
+  "CAMPO_CUSTOM": {
+    "grain_description": "Uma definição de campo customizado por tenant.",
+    "business_concepts": [
+      "campo customizado",
+      "custom field"
+    ],
+    "canonical_filters": {},
+    "evidence": "by_table/CAMPO_CUSTOM.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values"
+  }
+}

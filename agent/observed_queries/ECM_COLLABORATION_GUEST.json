@@ -1,0 +1,56 @@
+[
+  {
+    "name": "CollaborationGuest.findByCollaborationId",
+    "query": "SELECT cg FROM CollaborationGuest cg WHERE cg.collaboration.id = :collaborationId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.ecm.collaboration.entity.CollaborationGuest",
+    "source_file": "com/fluig/ecm/collaboration/entity/CollaborationGuest.java",
+    "owner_table": "ECM_COLLABORATION_GUEST",
+    "tables": [
+      "ECM_COLLABORATION_GUEST"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "CollaborationGuest.findByCollaborationGuestId",
+    "query": "SELECT cg FROM CollaborationGuest cg WHERE cg.login = :login AND cg.collaboration.id = :collaborationId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.ecm.collaboration.entity.CollaborationGuest",
+    "source_file": "com/fluig/ecm/collaboration/entity/CollaborationGuest.java",
+    "owner_table": "ECM_COLLABORATION_GUEST",
+    "tables": [
+      "ECM_COLLABORATION_GUEST"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "CollaborationGuest.findByCollaborationGuestIdFilter",
+    "query": "SELECT b FROM FDNUserTenant b,CollaborationGuest cg WHERE cg.login = b.login AND cg.collaboration.id = :collaborationId AND b.user.fullName LIKE :pattern",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.ecm.collaboration.entity.CollaborationGuest",
+    "source_file": "com/fluig/ecm/collaboration/entity/CollaborationGuest.java",
+    "owner_table": "ECM_COLLABORATION_GUEST",
+    "tables": [
+      "ECM_COLLABORATION_GUEST"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

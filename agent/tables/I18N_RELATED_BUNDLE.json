@@ -1,0 +1,181 @@
+{
+  "name": "I18N_RELATED_BUNDLE",
+  "domain": "i18n",
+  "purpose": "Lista os bundles relacionados (por código) a um bundle, para herança/fallback de literais.",
+  "schema_card": "by_table/I18N_RELATED_BUNDLE.json",
+  "business_concepts": [
+    "i18n",
+    "I18N_RELATED_BUNDLE"
+  ],
+  "grain": {
+    "description": "Lista os bundles relacionados (por código) a um bundle, para herança/fallback de literais. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "RELATED_BUNDLE_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/I18N_RELATED_BUNDLE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0718",
+      "from_table": "I18N_RELATED_BUNDLE",
+      "to_table": "I18N_BUNDLE",
+      "on": [
+        "I18N_RELATED_BUNDLE.BUNDLE_ID = I18N_BUNDLE.BUNDLE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "BUNDLE_ID",
+          "to_column": "BUNDLE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Bundles relacionados.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0725",
+      "from_table": "I18N_RELATED_BUNDLE",
+      "to_table": "I18N_BUNDLE",
+      "on": [
+        "I18N_RELATED_BUNDLE.BUNDLE_ID = I18N_BUNDLE.BUNDLE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "BUNDLE_ID",
+          "to_column": "BUNDLE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Bundle dono (RelatedBundle.bundle).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0727",
+      "from_table": "I18N_RELATED_BUNDLE",
+      "to_table": "I18N_BUNDLE",
+      "on": [
+        "I18N_RELATED_BUNDLE.RELATED_BUNDLE_CODE = I18N_BUNDLE.BUNDLE_CODE"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "RELATED_BUNDLE_CODE",
+          "to_column": "BUNDLE_CODE"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Bundle referenciado pelo código.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0718",
+      "table": "I18N_BUNDLE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0725",
+      "table": "I18N_BUNDLE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0727",
+      "table": "I18N_BUNDLE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "IDX_RELATEDBUNDLE0002",
+      "unique": false,
+      "columns": [
+        "BUNDLE_ID"
+      ]
+    },
+    {
+      "name": "IDX_RELATEDBUNDLE0003",
+      "unique": false,
+      "columns": [
+        "BUNDLE_ID",
+        "RELATED_BUNDLE_CODE"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Lista os bundles relacionados (por código) a um bundle, para herança/fallback de literais. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "RELATED_BUNDLE_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

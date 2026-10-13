@@ -1,0 +1,89 @@
+{
+  "name": "FDN_USERTOKENRESOURCE",
+  "domain": "seguranca",
+  "purpose": "Recursos (hoje apenas URLs) liberados por um token de usuário.",
+  "schema_card": "by_table/FDN_USERTOKENRESOURCE.json",
+  "business_concepts": [
+    "seguranca",
+    "FDN_USERTOKENRESOURCE"
+  ],
+  "grain": {
+    "description": "Recursos (hoje apenas URLs) liberados por um token de usuário. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "USERTOKENRESOURCE_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_USERTOKENRESOURCE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0635",
+      "from_table": "FDN_USERTOKENRESOURCE",
+      "to_table": "FDN_USERTOKEN",
+      "on": [
+        "FDN_USERTOKENRESOURCE.USERTOKEN_ID = FDN_USERTOKEN.USERTOKEN_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "USERTOKEN_ID",
+          "to_column": "USERTOKEN_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Token dono do recurso (FDNUserTokenResource.userToken).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0635",
+      "table": "FDN_USERTOKEN",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_USERTOKENRESOURCE.json",
+  "observed_query_count": 4,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Recursos (hoje apenas URLs) liberados por um token de usuário. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "USERTOKENRESOURCE_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

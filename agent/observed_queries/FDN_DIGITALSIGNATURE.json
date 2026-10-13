@@ -1,0 +1,38 @@
+[
+  {
+    "name": "FDNDigitalSignature.findAll",
+    "query": "SELECT o FROM FDNDigitalSignature o",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.digitalsignature.entity.FDNDigitalSignature",
+    "source_file": "com/fluig/foundation/digitalsignature/entity/FDNDigitalSignature.java",
+    "owner_table": "FDN_DIGITALSIGNATURE",
+    "tables": [
+      "FDN_DIGITALSIGNATURE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNDigitalSignature.findByTenantId",
+    "query": "SELECT o FROM FDNDigitalSignature o WHERE o.tenantId= :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.digitalsignature.entity.FDNDigitalSignature",
+    "source_file": "com/fluig/foundation/digitalsignature/entity/FDNDigitalSignature.java",
+    "owner_table": "FDN_DIGITALSIGNATURE",
+    "tables": [
+      "FDN_DIGITALSIGNATURE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "name": "FLUIG_RUNTIMEDATA_PROCESS_MNGR",
+  "domain": "bpm-workflow",
+  "purpose": "Armazenamento chave/valor de dados de runtime do gerenciador de processos (BPM); sem entidade JPA no código.",
+  "schema_card": "by_table/FLUIG_RUNTIMEDATA_PROCESS_MNGR.json",
+  "business_concepts": [
+    "bpm-workflow",
+    "FLUIG_RUNTIMEDATA_PROCESS_MNGR"
+  ],
+  "grain": {
+    "description": "Armazenamento chave/valor de dados de runtime do gerenciador de processos (BPM); sem entidade JPA no código. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "DATA_KEY"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FLUIG_RUNTIMEDATA_PROCESS_MNGR.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Armazenamento chave/valor de dados de runtime do gerenciador de processos (BPM); sem entidade JPA no código. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "DATA_KEY"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

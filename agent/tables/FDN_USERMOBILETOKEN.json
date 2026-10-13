@@ -1,0 +1,66 @@
+{
+  "name": "FDN_USERMOBILETOKEN",
+  "domain": "mobile",
+  "purpose": "Tokens de acesso/refresh do app mobile por usuário do IdP.",
+  "schema_card": "by_table/FDN_USERMOBILETOKEN.json",
+  "business_concepts": [
+    "mobile",
+    "FDN_USERMOBILETOKEN"
+  ],
+  "grain": {
+    "description": "Tokens de acesso/refresh do app mobile por usuário do IdP. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "USER_IDIDP"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COMPANY_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COMPANY_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_USERMOBILETOKEN.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_USERMOBILETOKEN.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Tokens de acesso/refresh do app mobile por usuário do IdP. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "USER_IDIDP"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COMPANY_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

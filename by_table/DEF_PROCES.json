@@ -15,6 +15,188 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.workflow.model.ProcessDefinition"
  ],
+ "observed_queries": [
+  {
+   "name": "ProcessDefinition.findDefinitionWithManagerEngine",
+   "query": "select pd from ProcessDefinition pd WHERE pd.processDefinitionPK.companyId = :companyId and pd.managerEngineAllocationId <> ' '",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessDefinition",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessDefinition.java",
+   "owner_table": "DEF_PROCES",
+   "tables": [
+    "DEF_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessDefinition.findAllProcess",
+   "query": "SELECT d FROM ProcessDefinition d WHERE d.processDefinitionPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessDefinition",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessDefinition.java",
+   "owner_table": "DEF_PROCES",
+   "tables": [
+    "DEF_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessDefinition.findAllSlaProcess",
+   "query": "SELECT d FROM ProcessDefinition d WHERE d.processDefinitionPK.companyId = :companyId and d.deadlineTime is not null and d.deadlineTime > 0",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessDefinition",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessDefinition.java",
+   "owner_table": "DEF_PROCES",
+   "tables": [
+    "DEF_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessDefinition.findAllProcessWithFilter",
+   "query": "SELECT d FROM ProcessDefinition d WHERE d.processDefinitionPK.companyId = :companyId AND (d.processDefinitionPK.processId LIKE :pattern OR d.processDescription LIKE :pattern)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessDefinition",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessDefinition.java",
+   "owner_table": "DEF_PROCES",
+   "tables": [
+    "DEF_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessDefinition.countForIndex",
+   "query": "SELECT COUNT(*) FROM ProcessDefinition pd WHERE pd.processDefinitionPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessDefinition",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessDefinition.java",
+   "owner_table": "DEF_PROCES",
+   "tables": [
+    "DEF_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessDefinition.findForIndex",
+   "query": "SELECT pd FROM ProcessDefinition pd WHERE pd.processDefinitionPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessDefinition",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessDefinition.java",
+   "owner_table": "DEF_PROCES",
+   "tables": [
+    "DEF_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessDefinition.findAll",
+   "query": "SELECT pd FROM ProcessDefinition pd WHERE pd.processDefinitionPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessDefinition",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessDefinition.java",
+   "owner_table": "DEF_PROCES",
+   "tables": [
+    "DEF_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessDefinition.findAllProcessCode",
+   "query": "SELECT pd.processDefinitionPK.processId FROM ProcessDefinition pd WHERE pd.processDefinitionPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessDefinition",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessDefinition.java",
+   "owner_table": "DEF_PROCES",
+   "tables": [
+    "DEF_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessDefinition.findByProcessId",
+   "query": "SELECT pd FROM ProcessDefinition pd WHERE pd.processDefinitionPK.companyId = :companyId AND pd.processDefinitionPK.processId = :processId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessDefinition",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessDefinition.java",
+   "owner_table": "DEF_PROCES",
+   "tables": [
+    "DEF_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessDefinition.countByTenant",
+   "query": "SELECT COUNT(pd) FROM ProcessDefinition pd WHERE pd.processDefinitionPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessDefinition",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessDefinition.java",
+   "owner_table": "DEF_PROCES",
+   "tables": [
+    "DEF_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",

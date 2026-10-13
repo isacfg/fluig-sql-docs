@@ -1,0 +1,171 @@
+{
+  "name": "FDN_USERDATA",
+  "domain": "foundation-identity-access",
+  "purpose": "Propriedades chave/valor adicionais do vínculo usuário-tenant (perfil e preferências).",
+  "schema_card": "by_table/FDN_USERDATA.json",
+  "business_concepts": [
+    "foundation-identity-access",
+    "FDN_USERDATA"
+  ],
+  "grain": {
+    "description": "Propriedades chave/valor adicionais do vínculo usuário-tenant (perfil e preferências). Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "USERDATA_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_USERDATA.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0605",
+      "from_table": "FDN_USERDATA",
+      "to_table": "FDN_USERTENANT",
+      "on": [
+        "FDN_USERDATA.USER_TENANT_ID = FDN_USERTENANT.USER_TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "USER_TENANT_ID",
+          "to_column": "USER_TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Dono da propriedade (FDNUserData.user).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0607",
+      "from_table": "FDN_USERDATA",
+      "to_table": "FDN_USERTENANT",
+      "on": [
+        "FDN_USERDATA.ANONYMIZATION_USER_ID = FDN_USERTENANT.USER_TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "ANONYMIZATION_USER_ID",
+          "to_column": "USER_TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Quem anonimizou.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0628",
+      "from_table": "FDN_USERDATA",
+      "to_table": "FDN_USERTENANT",
+      "on": [
+        "FDN_USERDATA.USER_TENANT_ID = FDN_USERTENANT.USER_TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "USER_TENANT_ID",
+          "to_column": "USER_TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Propriedades do usuário.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0605",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0607",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0628",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "IDX_FDNUSERDATA001",
+      "unique": false,
+      "columns": [
+        "DATA_KEY"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_USERDATA.json",
+  "observed_query_count": 12,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Propriedades chave/valor adicionais do vínculo usuário-tenant (perfil e preferências). Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "USERDATA_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

@@ -15,6 +15,26 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.integration.model.ProgressLib"
  ],
+ "observed_queries": [
+  {
+   "name": "ProgressLib.findAll",
+   "query": "SELECT p FROM ProgressLib p WHERE p.progressLibPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.integration.model.ProgressLib",
+   "source_file": "com/datasul/technology/webdesk/integration/model/ProgressLib.java",
+   "owner_table": "AMBIEN_PROGRESS",
+   "tables": [
+    "AMBIEN_PROGRESS"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",

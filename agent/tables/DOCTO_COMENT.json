@@ -1,0 +1,125 @@
+{
+  "name": "DOCTO_COMENT",
+  "domain": "ecm-documents",
+  "purpose": "Comentários de colaboradores em uma versão de documento.",
+  "schema_card": "by_table/DOCTO_COMENT.json",
+  "business_concepts": [
+    "ecm-documents",
+    "DOCTO_COMENT"
+  ],
+  "grain": {
+    "description": "Comentários de colaboradores em uma versão de documento. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "NR_DOCUMENTO",
+      "NR_VERSAO",
+      "CD_MATRICULA",
+      "DTT_CRIAC"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/DOCTO_COMENT.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0087",
+      "from_table": "DOCTO_COMENT",
+      "to_table": "DOCUMENTO",
+      "on": [
+        "DOCTO_COMENT.COD_EMPRESA = DOCUMENTO.COD_EMPRESA",
+        "DOCTO_COMENT.NR_DOCUMENTO = DOCUMENTO.NR_DOCUMENTO",
+        "DOCTO_COMENT.NR_VERSAO = DOCUMENTO.NR_VERSAO"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "NR_DOCUMENTO",
+          "to_column": "NR_DOCUMENTO"
+        },
+        {
+          "from_column": "NR_VERSAO",
+          "to_column": "NR_VERSAO"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Versão comentada.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0087",
+      "table": "DOCUMENTO",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Comentários de colaboradores em uma versão de documento. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "CD_MATRICULA",
+        "DTT_CRIAC"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

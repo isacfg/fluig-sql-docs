@@ -14,6 +14,7 @@
  "jpa_entities": [
   "com.fluig.foundation.scheduler.entity.quartz.QrtzSchedulerState"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "INSTANCE_NAME",

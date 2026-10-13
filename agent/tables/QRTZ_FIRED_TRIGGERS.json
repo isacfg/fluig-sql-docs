@@ -1,0 +1,179 @@
+{
+  "name": "QRTZ_FIRED_TRIGGERS",
+  "domain": "scheduler-quartz",
+  "purpose": "Registro transitório de triggers em execução/adquiridos pelos nós do scheduler.",
+  "schema_card": "by_table/QRTZ_FIRED_TRIGGERS.json",
+  "business_concepts": [
+    "scheduler-quartz",
+    "QRTZ_FIRED_TRIGGERS"
+  ],
+  "grain": {
+    "description": "Registro transitório de triggers em execução/adquiridos pelos nós do scheduler. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ENTRY_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/QRTZ_FIRED_TRIGGERS.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0861",
+      "from_table": "QRTZ_FIRED_TRIGGERS",
+      "to_table": "QRTZ_TRIGGERS",
+      "on": [
+        "QRTZ_FIRED_TRIGGERS.TRIGGER_GROUP = QRTZ_TRIGGERS.TRIGGER_GROUP",
+        "QRTZ_FIRED_TRIGGERS.TRIGGER_NAME = QRTZ_TRIGGERS.TRIGGER_NAME"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TRIGGER_GROUP",
+          "to_column": "TRIGGER_GROUP"
+        },
+        {
+          "from_column": "TRIGGER_NAME",
+          "to_column": "TRIGGER_NAME"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Execução em andamento de um trigger (join lógico Quartz).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0863",
+      "from_table": "QRTZ_FIRED_TRIGGERS",
+      "to_table": "QRTZ_JOB_DETAILS",
+      "on": [
+        "QRTZ_FIRED_TRIGGERS.JOB_GROUP = QRTZ_JOB_DETAILS.JOB_GROUP",
+        "QRTZ_FIRED_TRIGGERS.JOB_NAME = QRTZ_JOB_DETAILS.JOB_NAME"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "JOB_GROUP",
+          "to_column": "JOB_GROUP"
+        },
+        {
+          "from_column": "JOB_NAME",
+          "to_column": "JOB_NAME"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Job em execução (campos nulos se job concorrente).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0865",
+      "from_table": "QRTZ_FIRED_TRIGGERS",
+      "to_table": "QRTZ_SCHEDULER_STATE",
+      "on": [
+        "QRTZ_FIRED_TRIGGERS.INSTANCE_NAME = QRTZ_SCHEDULER_STATE.INSTANCE_NAME"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "INSTANCE_NAME",
+          "to_column": "INSTANCE_NAME"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Nó do cluster que executa o disparo.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0861",
+      "table": "QRTZ_TRIGGERS",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0863",
+      "table": "QRTZ_JOB_DETAILS",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0865",
+      "table": "QRTZ_SCHEDULER_STATE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Registro transitório de triggers em execução/adquiridos pelos nós do scheduler. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ENTRY_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

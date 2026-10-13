@@ -1,0 +1,174 @@
+{
+  "name": "CONFIGUR_GRAF_COMPART",
+  "domain": "bpm-cap",
+  "purpose": "Compartilhamento de configurações de gráficos CAP (Controle e Acompanhamento de Processos) com usuários, grupos ou papéis.",
+  "schema_card": "by_table/CONFIGUR_GRAF_COMPART.json",
+  "business_concepts": [
+    "bpm-cap",
+    "CONFIGUR_GRAF_COMPART"
+  ],
+  "grain": {
+    "description": "Compartilhamento de configurações de gráficos CAP (Controle e Acompanhamento de Processos) com usuários, grupos ou papéis. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "IDI_TIP_COMPART",
+      "CD_MATRICULA",
+      "COD_EMPRESA",
+      "NUM_SEQ_GRAF",
+      "DES_VAL_COMPART"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/CONFIGUR_GRAF_COMPART.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0047",
+      "from_table": "CONFIGUR_GRAF_COMPART",
+      "to_table": "CONFIGUR_GRAF_USUAR_CAP",
+      "on": [
+        "CONFIGUR_GRAF_COMPART.CD_MATRICULA = CONFIGUR_GRAF_USUAR_CAP.CD_MATRICULA",
+        "CONFIGUR_GRAF_COMPART.COD_EMPRESA = CONFIGUR_GRAF_USUAR_CAP.COD_EMPRESA",
+        "CONFIGUR_GRAF_COMPART.NUM_SEQ_GRAF = CONFIGUR_GRAF_USUAR_CAP.NUM_SEQ"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "CD_MATRICULA",
+          "to_column": "CD_MATRICULA"
+        },
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "NUM_SEQ_GRAF",
+          "to_column": "NUM_SEQ"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Gráfico compartilhado.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0050",
+      "from_table": "CONFIGUR_GRAF_COMPART",
+      "to_table": "CONFIGUR_GRAF_USUAR_CAP",
+      "on": [
+        "CONFIGUR_GRAF_COMPART.CD_MATRICULA = CONFIGUR_GRAF_USUAR_CAP.CD_MATRICULA",
+        "CONFIGUR_GRAF_COMPART.COD_EMPRESA = CONFIGUR_GRAF_USUAR_CAP.COD_EMPRESA",
+        "CONFIGUR_GRAF_COMPART.NUM_SEQ_GRAF = CONFIGUR_GRAF_USUAR_CAP.NUM_SEQ"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "CD_MATRICULA",
+          "to_column": "CD_MATRICULA"
+        },
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "NUM_SEQ_GRAF",
+          "to_column": "NUM_SEQ"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Compartilhamentos do gráfico.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0047",
+      "table": "CONFIGUR_GRAF_USUAR_CAP",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0050",
+      "table": "CONFIGUR_GRAF_USUAR_CAP",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Compartilhamento de configurações de gráficos CAP (Controle e Acompanhamento de Processos) com usuários, grupos ou papéis. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "IDI_TIP_COMPART",
+        "CD_MATRICULA",
+        "COD_EMPRESA",
+        "NUM_SEQ_GRAF",
+        "DES_VAL_COMPART"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

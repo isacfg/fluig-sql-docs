@@ -15,6 +15,62 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.bpm.model.FormTheme"
  ],
+ "observed_queries": [
+  {
+   "name": "FormTheme.findAll",
+   "query": "SELECT ft FROM FormTheme ft WHERE ft.formThemePK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.bpm.model.FormTheme",
+   "source_file": "com/datasul/technology/webdesk/bpm/model/FormTheme.java",
+   "owner_table": "TEMA_FORMULARIO",
+   "tables": [
+    "TEMA_FORMULARIO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FormTheme.findByFormThemeId",
+   "query": "SELECT ft FROM FormTheme ft WHERE ft.formThemePK.companyId = :companyId AND ft.formThemePK.formThemeId = :formThemeId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.bpm.model.FormTheme",
+   "source_file": "com/datasul/technology/webdesk/bpm/model/FormTheme.java",
+   "owner_table": "TEMA_FORMULARIO",
+   "tables": [
+    "TEMA_FORMULARIO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FormTheme.findStandard",
+   "query": "SELECT ft FROM FormTheme ft WHERE ft.formThemePK.companyId = :companyId AND ft.standard = true",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.bpm.model.FormTheme",
+   "source_file": "com/datasul/technology/webdesk/bpm/model/FormTheme.java",
+   "owner_table": "TEMA_FORMULARIO",
+   "tables": [
+    "TEMA_FORMULARIO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",

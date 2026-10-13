@@ -16,6 +16,7 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.workflow.model.SignalInstance"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "COD_EMPRESA",

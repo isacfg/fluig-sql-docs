@@ -19,6 +19,98 @@
  "jpa_entities": [
   "com.totvs.technology.wcm.core.entity.WCMComponentPage"
  ],
+ "observed_queries": [
+  {
+   "name": "WCMComponentPage.findAll",
+   "query": "  SELECT b   FROM WCMComponentPage b",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMComponentPage",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMComponentPage.java",
+   "owner_table": "WCM_COMPONENTPAGE",
+   "tables": [
+    "WCM_COMPONENTPAGE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMComponentPage.findById",
+   "query": "  SELECT b   FROM WCMComponentPage b  WHERE b.id = :id",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMComponentPage",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMComponentPage.java",
+   "owner_table": "WCM_COMPONENTPAGE",
+   "tables": [
+    "WCM_COMPONENTPAGE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMComponentPage.findByComponent",
+   "query": "  SELECT b   FROM WCMComponentPage b  WHERE b.component.id = :componentId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMComponentPage",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMComponentPage.java",
+   "owner_table": "WCM_COMPONENTPAGE",
+   "tables": [
+    "WCM_COMPONENTPAGE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMComponentPage.findByTenantComponentFetchPageVersionPage",
+   "query": "  SELECT b   FROM WCMComponentPage b   JOIN FETCH b.pageVersion pv   JOIN FETCH pv.page p  WHERE b.tenant.id = :tenantId    AND b.component.id = :componentId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMComponentPage",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMComponentPage.java",
+   "owner_table": "WCM_COMPONENTPAGE",
+   "tables": [
+    "WCM_COMPONENTPAGE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMComponentPage.findByTenantPageVersionId",
+   "query": "  SELECT b   FROM WCMComponentPage b  WHERE b.pageVersion.id = :pageVersionId    AND b.tenant.id = :tenantId ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMComponentPage",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMComponentPage.java",
+   "owner_table": "WCM_COMPONENTPAGE",
+   "tables": [
+    "WCM_COMPONENTPAGE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COMPONENTPAGE_ID",

@@ -14,6 +14,62 @@
  "jpa_entities": [
   "com.totvs.technology.wcm.core.entity.WCMThemeHistory"
  ],
+ "observed_queries": [
+  {
+   "name": "WCMThemeHistory.findAll",
+   "query": "SELECT b FROM WCMThemeHistory b",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMThemeHistory",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMThemeHistory.java",
+   "owner_table": "WCM_THEME_HISTORY",
+   "tables": [
+    "WCM_THEME_HISTORY"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMThemeHistory.findById",
+   "query": "SELECT b FROM WCMThemeHistory b WHERE b.id = :themeHistoryId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMThemeHistory",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMThemeHistory.java",
+   "owner_table": "WCM_THEME_HISTORY",
+   "tables": [
+    "WCM_THEME_HISTORY"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMThemeHistory.findByTenantId",
+   "query": "SELECT b FROM WCMThemeHistory b WHERE b.tenant.id = :tenantId ORDER BY b.id DESC",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMThemeHistory",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMThemeHistory.java",
+   "owner_table": "WCM_THEME_HISTORY",
+   "tables": [
+    "WCM_THEME_HISTORY"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "THEME_HISTORY_ID",

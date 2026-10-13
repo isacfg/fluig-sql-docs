@@ -1,0 +1,156 @@
+{
+  "name": "I18N_LOCALE",
+  "domain": "i18n",
+  "purpose": "Locales (idiomas) disponíveis em um bundle, com indicação do padrão.",
+  "schema_card": "by_table/I18N_LOCALE.json",
+  "business_concepts": [
+    "i18n",
+    "I18N_LOCALE"
+  ],
+  "grain": {
+    "description": "Locales (idiomas) disponíveis em um bundle, com indicação do padrão. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "LOCALE_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/I18N_LOCALE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0716",
+      "from_table": "I18N_LOCALE",
+      "to_table": "I18N_BUNDLE",
+      "on": [
+        "I18N_LOCALE.BUNDLE_ID = I18N_BUNDLE.BUNDLE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "BUNDLE_ID",
+          "to_column": "BUNDLE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Locales do bundle.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0721",
+      "from_table": "I18N_LOCALE",
+      "to_table": "I18N_BUNDLE",
+      "on": [
+        "I18N_LOCALE.BUNDLE_ID = I18N_BUNDLE.BUNDLE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "BUNDLE_ID",
+          "to_column": "BUNDLE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Bundle do locale (Locale.bundle).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0716",
+      "table": "I18N_BUNDLE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0720",
+      "table": "I18N_LITERAL_TRANSLATED",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0721",
+      "table": "I18N_BUNDLE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0723",
+      "table": "I18N_LITERAL_TRANSLATED",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "IDX_LOCALE002",
+      "unique": false,
+      "columns": [
+        "BUNDLE_ID"
+      ]
+    },
+    {
+      "name": "IDX_LOCALE003",
+      "unique": false,
+      "columns": [
+        "BUNDLE_ID",
+        "LOCALE_CODE"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Locales (idiomas) disponíveis em um bundle, com indicação do padrão. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "LOCALE_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

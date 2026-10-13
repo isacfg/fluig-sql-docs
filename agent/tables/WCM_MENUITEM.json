@@ -1,0 +1,133 @@
+{
+  "name": "WCM_MENUITEM",
+  "domain": "wcm-portal",
+  "purpose": "Item de menu do portal, hierárquico, que aponta para página ou link externo.",
+  "schema_card": "by_table/WCM_MENUITEM.json",
+  "business_concepts": [
+    "wcm-portal",
+    "WCM_MENUITEM"
+  ],
+  "grain": {
+    "description": "Item de menu do portal, hierárquico, que aponta para página ou link externo. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "MENUITEM_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/WCM_MENUITEM.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-1079",
+      "from_table": "WCM_MENUITEM",
+      "to_table": "WCM_MENUITEM",
+      "on": [
+        "WCM_MENUITEM.PARENT_MENUITEM_ID = WCM_MENUITEM.MENUITEM_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "PARENT_MENUITEM_ID",
+          "to_column": "MENUITEM_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Pai.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1081",
+      "from_table": "WCM_MENUITEM",
+      "to_table": "FDN_RESOURCE",
+      "on": [
+        "WCM_MENUITEM.RESOURCE_ID = FDN_RESOURCE.RESOURCE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "RESOURCE_ID",
+          "to_column": "RESOURCE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Recurso de segurança.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-1079",
+      "table": "WCM_MENUITEM",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1080",
+      "table": "WCM_MENUITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1081",
+      "table": "FDN_RESOURCE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/WCM_MENUITEM.json",
+  "observed_query_count": 5,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Item de menu do portal, hierárquico, que aponta para página ou link externo. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "MENUITEM_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

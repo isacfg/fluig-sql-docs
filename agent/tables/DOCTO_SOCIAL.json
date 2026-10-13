@@ -1,0 +1,86 @@
+{
+  "name": "DOCTO_SOCIAL",
+  "domain": "ecm-documents",
+  "purpose": "Mapeia pastas sociais (espaços/comunidades) para pastas de documentos, por alias e tipo de pasta.",
+  "schema_card": "by_table/DOCTO_SOCIAL.json",
+  "business_concepts": [
+    "ecm-documents",
+    "DOCTO_SOCIAL"
+  ],
+  "grain": {
+    "description": "Mapeia pastas sociais (espaços/comunidades) para pastas de documentos, por alias e tipo de pasta. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "COD_APELIDO",
+      "TP_PASTA"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/DOCTO_SOCIAL.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0103",
+      "table": "DOCUMENTO",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "DOCTOSOCIALI001",
+      "unique": false,
+      "columns": [
+        "NR_DOCUMENTO"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/DOCTO_SOCIAL.json",
+  "observed_query_count": 4,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Mapeia pastas sociais (espaços/comunidades) para pastas de documentos, por alias e tipo de pasta. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "COD_APELIDO",
+        "TP_PASTA"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "name": "FDN_INTEGRATION",
+  "domain": "integracao-eventos",
+  "purpose": "Componentes de integração registrados (bean/EJB por nome JNDI) que recebem eventos de integração, ordenados por prioridade.",
+  "schema_card": "by_table/FDN_INTEGRATION.json",
+  "business_concepts": [
+    "integracao-eventos",
+    "FDN_INTEGRATION"
+  ],
+  "grain": {
+    "description": "Componentes de integração registrados (bean/EJB por nome JNDI) que recebem eventos de integração, ordenados por prioridade. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "INTEGRATION_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_INTEGRATION.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0453",
+      "table": "FDN_INTEGRATIONEVENT",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0456",
+      "table": "FDN_INTEGRATIONEVENT",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_INTEGRATION.json",
+  "observed_query_count": 4,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Componentes de integração registrados (bean/EJB por nome JNDI) que recebem eventos de integração, ordenados por prioridade. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "INTEGRATION_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

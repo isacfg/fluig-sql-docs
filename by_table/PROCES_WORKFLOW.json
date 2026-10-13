@@ -96,6 +96,98 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.workflow.model.WorkflowProcess"
  ],
+ "observed_queries": [
+  {
+   "name": "WorkflowProcess.findByProcessInstance",
+   "query": "SELECT w from WorkflowProcess w WHERE w.workflowProcessPK.processInstanceId = :processInstanceId AND w.workflowProcessPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.WorkflowProcess",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/WorkflowProcess.java",
+   "owner_table": "PROCES_WORKFLOW",
+   "tables": [
+    "PROCES_WORKFLOW"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WorkflowProcess.findPending",
+   "query": "SELECT w from WorkflowProcess w, ProcessTask t WHERE t.processTaskPK.companyId = w.workflowProcessPK.companyId AND t.processTaskPK.processInstanceId = w.workflowProcessPK.processInstanceId AND w.workflowProcessPK.companyId = :companyId AND w.active = :active AND t.processTaskPK.colleagueId = :colleagueId AND t.active = :active ORDER BY w.workflowProcessPK.processInstanceId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.WorkflowProcess",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/WorkflowProcess.java",
+   "owner_table": "PROCES_WORKFLOW",
+   "tables": [
+    "PROCES_WORKFLOW"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WorkflowProcess.findPendingBySubProcessId",
+   "query": "SELECT w from WorkflowProcess w where w.workflowProcessPK.companyId = :companyId AND processId = :processId AND version = :version AND active = :active",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.WorkflowProcess",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/WorkflowProcess.java",
+   "owner_table": "PROCES_WORKFLOW",
+   "tables": [
+    "PROCES_WORKFLOW"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WorkflowProcess.countOpenedByDate",
+   "query": "SELECT COUNT(w) from WorkflowProcess w where w.workflowProcessPK.companyId = :companyId AND w.startDateProcess BETWEEN :startDate AND :endDate",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.WorkflowProcess",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/WorkflowProcess.java",
+   "owner_table": "PROCES_WORKFLOW",
+   "tables": [
+    "PROCES_WORKFLOW"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WorkflowProcess.countClosedByDate",
+   "query": "SELECT COUNT(w) from WorkflowProcess w where w.workflowProcessPK.companyId = :companyId AND w.active = false AND w.endDateProcess BETWEEN :startDate AND :endDate",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.WorkflowProcess",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/WorkflowProcess.java",
+   "owner_table": "PROCES_WORKFLOW",
+   "tables": [
+    "PROCES_WORKFLOW"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",
@@ -490,6 +582,32 @@
    "kind": "logical-probable",
    "description": "Instancia pai (subprocesso).",
    "status": "probable"
+  },
+  {
+   "to_table": "ANEXO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "ProcessAttachment.countByProcessInstance",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "ANEXO_PROCES",
+   "from_cols": [
+    "NUM_PROCES"
+   ],
+   "to_cols": [
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "ProcessAttachment.countByProcessInstance",
+   "status": "confirmed"
   }
  ],
  "rejected_relationships": [],
@@ -543,6 +661,28 @@
    ],
    "cardinality": "N:1",
    "kind": "logical-probable"
+  },
+  {
+   "from_table": "ADHOC_PROCES_WORKFLOW",
+   "from_cols": [
+    "COD_EMPRESA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
+  },
+  {
+   "from_table": "ADHOC_PROCES_WORKFLOW",
+   "from_cols": [
+    "NUM_PROCES"
+   ],
+   "to_cols": [
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
   },
   {
    "from_table": "ANEXO_PROCES",

@@ -1,0 +1,50 @@
+{
+  "name": "FDN_BUNDLEVALUE",
+  "domain": "i18n",
+  "purpose": "Valores traduzidos de resource bundles (i18n) por bundle, chave e locale. Cada linha é uma tradução de uma chave.",
+  "schema_card": "by_table/FDN_BUNDLEVALUE.json",
+  "business_concepts": [
+    "i18n",
+    "FDN_BUNDLEVALUE"
+  ],
+  "grain": {
+    "description": "Valores traduzidos de resource bundles (i18n) por bundle, chave e locale. Cada linha é uma tradução de uma chave. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "BUNDLE_VALUE_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_BUNDLEVALUE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_BUNDLEVALUE.json",
+  "observed_query_count": 1,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Valores traduzidos de resource bundles (i18n) por bundle, chave e locale. Cada linha é uma tradução de uma chave. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "BUNDLE_VALUE_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

@@ -15,6 +15,7 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.taskmanager.model.ToDoTask"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "COD_EMPRESA",

@@ -1,0 +1,56 @@
+[
+  {
+    "name": "FavoritesProcess.findByColleagueId",
+    "query": "SELECT f FROM FavoritesProcess f WHERE f.favoritesProcessPK.colleagueId = :colleagueId AND f.favoritesProcessPK.companyId = :companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dm.model.FavoritesProcess",
+    "source_file": "com/datasul/technology/webdesk/dm/model/FavoritesProcess.java",
+    "owner_table": "FAVORITOS_PROCES",
+    "tables": [
+      "FAVORITOS_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FavoritesProcess.findByProcessId",
+    "query": "SELECT f FROM FavoritesProcess f WHERE f.favoritesProcessPK.processId = :processId AND f.favoritesProcessPK.companyId = :companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dm.model.FavoritesProcess",
+    "source_file": "com/datasul/technology/webdesk/dm/model/FavoritesProcess.java",
+    "owner_table": "FAVORITOS_PROCES",
+    "tables": [
+      "FAVORITOS_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FavoritesProcess.findByColleagueProcessId",
+    "query": "SELECT f FROM FavoritesProcess f WHERE f.favoritesProcessPK.colleagueId = :colleagueId AND f.favoritesProcessPK.companyId = :companyId AND f.favoritesProcessPK.processId = :processId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dm.model.FavoritesProcess",
+    "source_file": "com/datasul/technology/webdesk/dm/model/FavoritesProcess.java",
+    "owner_table": "FAVORITOS_PROCES",
+    "tables": [
+      "FAVORITOS_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

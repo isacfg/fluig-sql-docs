@@ -191,6 +191,1178 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.dm.model.Document"
  ],
+ "observed_queries": [
+  {
+   "name": "Document.findPublisherDocumentsInFolder",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.parentDocumentId = :parentDocumentId AND d.deleted = false AND d.publisherId= :publisherId ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findAll",
+   "query": "SELECT d from Document d where d.documentPK.companyId = :companyId AND d.deleted = false",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findByCurrentVersion",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.documentId = :documentId AND d.documentPK.companyId = :companyId AND d.activeVersion = :activeVersion AND d.deleted = false ORDER BY d.documentPK.version DESC",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findFolderCurrentVersion",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.documentId = :documentId AND d.documentPK.companyId = :companyId AND d.activeVersion = :activeVersion AND d.deleted = false AND d.documentType = '1' ORDER BY d.documentPK.version DESC",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findRootFolders",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.privateDocument = :privateDocument AND d.parentDocumentId = :parentDocumentId AND d.activeVersion = :activeVersion AND d.deleted = false  ORDER BY CASE WHEN d.documentType = '1' THEN 0 ELSE 1 END, CASE WHEN d.documentType = '4' THEN 0 ELSE 1 END, d.documentType asc, d.documentDescription asc",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findRootFoldersByDocumentId",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.privateDocument = :privateDocument AND d.parentDocumentId = :parentDocumentId AND d.activeVersion = :activeVersion AND d.deleted = false AND d.documentPK.documentId = :documentId ORDER BY CASE WHEN d.documentType = '1' THEN 0 ELSE 1 END, CASE WHEN d.documentType = '4' THEN 0 ELSE 1 END, d.documentType asc, d.documentDescription asc",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.countRootFolders",
+   "query": "SELECT COUNT(d.documentPK.companyId) FROM Document d WHERE d.documentPK.companyId = :companyId AND d.privateDocument = :privateDocument AND d.parentDocumentId = :parentDocumentId AND d.activeVersion = :activeVersion AND d.deleted = false ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findLinkDocuments",
+   "query": "SELECT d FROM Document d, LinkDocument ld WHERE d.documentPK.companyId = :companyId AND ld.linkDocumentPK.companyId = :companyId AND ld.linkDocumentPK.currentParentDocumentId = :parentDocumentId AND d.documentPK.documentId = ld.linkDocumentPK.documentId AND d.activeVersion = :activeVersion AND d.deleted = false AND ld.deleted = false ORDER BY d.documentType, d.documentDescription ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.countLinkDocuments",
+   "query": "SELECT COUNT(d.documentPK.companyId) FROM Document d, LinkDocument ld WHERE d.documentPK.companyId = :companyId AND ld.linkDocumentPK.companyId = :companyId AND ld.linkDocumentPK.currentParentDocumentId = :parentDocumentId AND d.documentPK.documentId = ld.linkDocumentPK.documentId AND d.activeVersion = :activeVersion AND d.deleted = false AND ld.deleted = false ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findPrivateFolders",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.privateDocument = :privateDocument AND d.parentDocumentId = :parentDocumentId AND d.activeVersion = :activeVersion AND d.privateColleagueId = :colleagueId AND d.deleted = false ORDER BY d.documentType, d.documentDescription",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findAllPrivateFolders",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.privateDocument = :privateDocument AND d.parentDocumentId = :parentDocumentId AND d.activeVersion = :activeVersion AND d.deleted = false ORDER BY d.documentType, d.documentDescription",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.sumDocumentsFilteredByPrivacy",
+   "query": "SELECT COALESCE(SUM(CASE WHEN(d.privateDocument = 0) THEN d.size END), 0), COALESCE(SUM(CASE WHEN(d.privateDocument = 1) THEN d.size END), 0) FROM Document d WHERE d.documentPK.companyId = :companyId AND d.deleted = true",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.countPrivateFolders",
+   "query": "SELECT COUNT(d.documentPK.companyId) FROM Document d WHERE d.documentPK.companyId = :companyId AND d.privateDocument = :privateDocument AND d.parentDocumentId = :parentDocumentId AND d.activeVersion = :activeVersion AND d.privateColleagueId = :colleagueId AND d.deleted = false ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findLastVersion",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.documentPK.documentId = :documentId AND d.deleted = false ORDER BY d.documentPK.version DESC",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findLastVersionUnAndDeleted",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.documentPK.documentId = :documentId ORDER BY d.documentPK.version DESC",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findFirstVersion",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.documentPK.documentId = :documentId AND d.deleted = false ORDER BY d.documentPK.version",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findByTopic",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.topicId = :topicId AND d.activeVersion = :activeVersion AND d.deleted = false",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.countByTopic",
+   "query": "SELECT COUNT(d.documentPK.companyId) FROM Document d WHERE d.documentPK.companyId = :companyId AND d.topicId = :topicId AND d.activeVersion = :activeVersion AND d.deleted = false ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findByDocumentProperty",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.documentPropertyNumber = :documentPropertyNumber AND d.documentType = '4' AND d.documentPropertyNumber <> d.documentPK.documentId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findFolders",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.privateDocument = :privateDocument AND d.parentDocumentId = :parentDocumentId AND d.activeVersion = :activeVersion AND d.deleted = false AND (d.documentType = '1') ORDER BY d.documentType, d.documentDescription",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findFoldersByColleague",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.privateDocument = :privateDocument AND d.parentDocumentId = :parentDocumentId AND d.activeVersion = :activeVersion AND d.colleagueId = :colleagueId AND d.deleted = false AND (d.documentType = '1' OR d.documentType = '4')  ORDER BY d.documentType, d.documentDescription",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findFoldersByColleagueDocumentType",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.privateDocument = :privateDocument AND d.parentDocumentId = :parentDocumentId AND d.activeVersion = :activeVersion AND d.colleagueId = :colleagueId AND d.deleted = false AND d.documentType = :documentType  ORDER BY d.documentType, d.documentDescription",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findRecycledLinkDocumentsByParent",
+   "query": "SELECT d FROM Document d, LinkDocument ld WHERE d.documentPK.companyId = :companyId AND ld.linkDocumentPK.companyId = :companyId AND ld.linkDocumentPK.currentParentDocumentId = :parentDocumentId AND d.documentPK.documentId = ld.linkDocumentPK.documentId AND d.deleted = false AND ld.deleted = true ORDER BY d.documentType, d.documentDescription",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findRecycledDocumentsByParent",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.parentDocumentId = :parentDocumentId AND d.deleted = true AND d.documentType IN('1','2','3','4','5','6','8','9','10') AND d.documentPK.version = (SELECT MAX(doc.documentPK.version) FROM Document doc WHERE doc.documentPK.documentId = d.documentPK.documentId AND doc.documentPK.companyId = :companyId) ORDER BY d.documentType, d.documentDescription",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findByParent",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.parentDocumentId = :parentDocumentId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findLastVersionByParent",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.parentDocumentId = :parentDocumentId  AND d.documentPK.version = (SELECT MAX(doc.documentPK.version) FROM Document doc  WHERE doc.documentPK.documentId = d.documentPK.documentId AND doc.documentPK.companyId = :companyId) ORDER BY d.documentPK.documentId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findByParentAndNotRecycled",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.deleted = false AND d.parentDocumentId = :parentDocumentId AND d.documentPK.version = (SELECT MAX(doc.documentPK.version) FROM Document doc WHERE doc.documentPK.documentId = d.documentPK.documentId AND doc.documentPK.companyId = :companyId) ORDER BY d.documentPK.documentId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findPreviousVersion",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.documentPK.documentId = :documentId AND d.deleted = false AND d.documentPK.version = (SELECT MAX(doc.documentPK.version) FROM Document doc WHERE doc.documentPK.documentId = d.documentPK.documentId AND doc.documentPK.companyId = d.documentPK.companyId AND doc.documentPK.version < :version)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findAllRecycledDocuments",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.deleted = true AND d.documentType IN('1','2','3','4','5','6','8','9','10') AND d.documentPK.version = (SELECT MAX(doc.documentPK.version) FROM Document doc WHERE doc.documentPK.documentId = d.documentPK.documentId AND doc.documentPK.companyId = :companyId)ORDER BY d.documentType, d.documentDescription",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findAllRecycledDocumentsUndeletedParents",
+   "query": " SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.deleted = true AND d.documentType IN('1','2','3','4','5','6','8','9','10') AND d.parentDocumentId <> 0 AND d.documentPK.version = (SELECT MAX(doc.documentPK.version) FROM Document doc WHERE doc.documentPK.documentId = d.documentPK.documentId AND doc.documentPK.companyId = :companyId) ORDER BY d.documentType, d.documentDescription",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findAllRecycledLinkDocumentsUndeletedParents",
+   "query": "SELECT ld FROM Document d, LinkDocument ld WHERE d.documentPK.companyId = :companyId AND ld.linkDocumentPK.companyId = :companyId AND d.documentPK.documentId = ld.linkDocumentPK.documentId AND d.deleted = false AND ld.deleted = true ORDER BY d.documentType, d.documentDescription",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findByDocumentDescriptionAndDocType",
+   "query": "select d from Document d where d.documentPK.companyId = :companyId and d.documentDescription = :description and d.deleted = :deleted and d.documentType = :documentType order by d.documentPK.version desc",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findDocumentAndFolderByParentAndMimeType",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.parentDocumentId = :parentDocumentId AND (d.documentType = '1' OR (d.documentType = '2' AND d.mimetype IN (:mimetype))) AND d.deleted = false AND d.documentPK.version = (SELECT MAX(doc.documentPK.version) FROM Document doc WHERE doc.documentPK.documentId = d.documentPK.documentId AND doc.documentPK.companyId = :companyId) ORDER BY d.documentPK.documentId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findDocumentNotDeleted",
+   "query": "SELECT docto FROM Document docto WHERE docto.documentPK.companyId = :companyId  AND docto.documentPK.documentId = :documentId AND docto.deleted = false",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findDocumentDeleted",
+   "query": "SELECT docto FROM Document docto WHERE docto.documentPK.companyId = :companyId AND docto.documentPK.documentId = :documentId AND docto.deleted = true",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.expiringByGlobalParam",
+   "query": "select d from Document d where d.documentPK.companyId = :companyId and d.expirationDate is not null and d.expirationDate <= :endDate and d.expirationDate >= :startDate and d.expires = :expires and d.documentType <> :type and d.activeVersion = :active and (d.notificationDays IS NULL OR d.notificationDays=:notificationDays)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.expiringByDocumentParam",
+   "query": "select d from Document d where d.documentPK.companyId = :companyId and d.expirationDate is not null and d.expirationDate >= :startDate and d.expires = :expires and d.documentType <> :type and d.activeVersion = :active and d.notificationDays IS NOT NULL and d.notificationDays > :notificationDays",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findByDocumentType",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.documentType = :documentType AND d.activeVersion = true",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findByDatasetName",
+   "query": " SELECT d    FROM Document d   WHERE d.documentPK.companyId = :companyId     AND d.activeVersion = true     AND d.datasetName = :datasetName",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findChildren",
+   "query": "SELECT d.documentPK.documentId FROM Document d WHERE d.documentPK.companyId = :companyId AND d.parentDocumentId = :parentDocumentId AND d.documentType = :documentType AND d.activeVersion = :activeVersion",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.resetIndexedProperty",
+   "query": "UPDATE Document d SET d.indexed = :indexed WHERE d.documentPK.companyId = :companyId AND d.parentDocumentId = :parentDocumentId AND d.activeVersion = :activeVersion",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.setIndexedProperty",
+   "query": "UPDATE Document d SET d.indexed = :indexed WHERE d.documentPK.companyId = :companyId AND d.documentPK.documentId = :documentId AND  d.documentPK.version = :version",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.sumSize",
+   "query": "SELECT SUM(doc.size) FROM Document doc WHERE doc.documentPK.documentId = :documentId  AND doc.documentPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.sumSizeChildren",
+   "query": "SELECT SUM(doc.size) FROM Document doc WHERE doc.documentType = '2' AND doc.parentDocumentId = :parentDocumentId  AND doc.documentPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findChildrenAllVersions",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.parentDocumentId = :parentDocumentId AND d.documentType = :documentType",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findPrivateFolderUsedQuota",
+   "query": "SELECT d.usedQuota FROM Document d WHERE d.documentPK.companyId = :companyId AND d.parentDocumentId = 0 AND d.privateDocument = true AND d.colleagueId= :colleagueId ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findFolderUsedQuota",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.privateDocument = false AND (d.quota IS NOT NULL AND d.quota <> 0) ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findFolderWithoutCalculateQuota",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.documentType = '1' AND (d.usedQuota IS NULL OR d.usedQuota = 0) ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findDuplicatedActiveVersion",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.activeVersion = true AND d.deleted = false AND d.documentPK.documentId = :documentId AND d.documentType = '4'",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.updatePrivateFolderQuota",
+   "query": "UPDATE Document d SET d.quota = :quota WHERE d.documentPK.companyId = :companyId AND d.parentDocumentId = 0 AND d.privateDocument = true AND d.colleagueId= :colleagueId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.updateFolderQuota",
+   "query": "UPDATE Document d SET d.quota = :quota WHERE d.documentPK.companyId = :companyId AND d.parentDocumentId = :parentDocumentId AND d.privateDocument = :privateDocument AND d.documentPK.documentId= :documentId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.updatePrivateFolderNewQuota",
+   "query": "UPDATE Document d SET d.quota = :newQuota WHERE d.documentPK.companyId = :companyId AND d.activeVersion = :activeVersion AND d.deleted = false AND d.parentDocumentId = :parentDocumentId AND d.privateDocument = :privateDocument AND (d.quota IS NULL OR d.quota = :oldQuota)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.updateDocument",
+   "query": "UPDATE Document d SET d.publicDocument = :isPublicDocument, d.downloadEnabled = :isDownloadEnabled WHERE d.documentPK.companyId = :companyId AND d.documentPK.documentId = :documentId AND d.documentPK.version = :version",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.updateCRC",
+   "query": "UPDATE Document d SET d.crc = :numCRC WHERE d.documentPK.companyId = :companyId AND d.documentPK.documentId = :documentId AND d.documentPK.version = :version",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findCheckoutFolderByUser",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.privateColleagueId = :privateColleagueId AND d.checkoutFolder = true AND d.privateDocument = true AND d.deleted = false",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findAllDocumentToTransfer",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND (d.colleagueId = :colleagueId OR d.publisherId = :colleagueId) AND d.documentPK.documentId >= :documentIdInitial AND d.documentPK.documentId <= :documentIdFinal AND d.privateDocument = false",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findAllVersionsToTransfer",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND (d.colleagueId = :colleagueId OR d.publisherId = :colleagueId) AND d.documentPK.documentId = :documentID AND d.documentPK.version < :documentVersion",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.approvalDocumentsFromColleague",
+   "query": "SELECT d FROM Document d WHERE d.publisherId = :publisherId AND d.documentPK.companyId = :companyId AND d.activeVersion = :activeVersion AND d.approved = false AND d.documentPK.documentId >= :documentIdInitial AND d.documentPK.documentId <= :documentIdFinal",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.findMostPopularDocuments",
+   "query": "SELECT d FROM Document d WHERE d.documentPK.companyId = :companyId AND d.deleted = false AND d.activeVersion = true AND d.draft = false AND d.documentType IN('2','8') ORDER BY d.accessCount DESC, d.documentPK.documentId DESC",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.countDocumentsByWatermark",
+   "query": "SELECT COUNT(d) FROM Document d WHERE d.documentPK.companyId = :companyId AND d.watermarkId = :watermarkId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.countDocumentsByHashAnnotations",
+   "query": "SELECT COUNT(d) FROM Document d WHERE d.documentPK.companyId = :companyId AND d.documentPK.documentId = :documentId AND d.documentPK.version <> :version AND d.hashAnnotations = :hashAnnotations",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.countActiveDocumentsByCreateDate",
+   "query": "SELECT COUNT(d) FROM Document d WHERE d.documentPK.companyId = :companyId AND d.activeVersion = true AND createDate BETWEEN :startDate AND :endDate",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.countDocumentsByModificationDate",
+   "query": "SELECT COUNT(d) FROM Document d WHERE d.documentPK.companyId = :companyId AND d.lastModifiedDate BETWEEN :startDate AND :endDate AND d.lastModifiedDate <> d.createDate",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.countDeletedDocuments",
+   "query": "SELECT COUNT(d) FROM Document d WHERE d.documentPK.companyId = :companyId AND d.deleted = true AND d.documentPK.version = (SELECT MAX(doc.documentPK.version) FROM Document doc WHERE doc.documentPK.documentId = d.documentPK.documentId AND doc.documentPK.companyId = d.documentPK.companyId)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Document.countNotApprovedDocuments",
+   "query": "SELECT COUNT(d) FROM Document d WHERE d.documentPK.companyId = :companyId AND d.approved = false",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Document",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Document.java",
+   "owner_table": "DOCUMENTO",
+   "tables": [
+    "DOCUMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",
@@ -1587,6 +2759,39 @@
    ],
    "cardinality": "N:1",
    "kind": "logical-probable"
+  },
+  {
+   "from_table": "FORM_DATASET",
+   "from_cols": [
+    "COD_EMPRESA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
+  },
+  {
+   "from_table": "FORM_DATASET",
+   "from_cols": [
+    "NR_DOCUMENTO"
+   ],
+   "to_cols": [
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
+  },
+  {
+   "from_table": "FORM_DATASET",
+   "from_cols": [
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
   },
   {
    "from_table": "HISTOR_ACES",

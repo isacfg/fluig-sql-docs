@@ -1,0 +1,176 @@
+{
+  "name": "SEGUR_ANEXO_PROCES",
+  "domain": "bpm-definicao-processo",
+  "purpose": "Regras de segurança de anexos por versão de processo: define quem (mecanismo de atribuição) tem qual nível de acesso aos anexos da solicitação.",
+  "schema_card": "by_table/SEGUR_ANEXO_PROCES.json",
+  "business_concepts": [
+    "bpm-definicao-processo",
+    "SEGUR_ANEXO_PROCES"
+  ],
+  "grain": {
+    "description": "Regras de segurança de anexos por versão de processo: define quem (mecanismo de atribuição) tem qual nível de acesso aos anexos da solicitação. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "COD_DEF_PROCES",
+      "NUM_VERS",
+      "NUM_SEQ"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/SEGUR_ANEXO_PROCES.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0881",
+      "from_table": "SEGUR_ANEXO_PROCES",
+      "to_table": "VERS_DEF_PROCES",
+      "on": [
+        "SEGUR_ANEXO_PROCES.COD_EMPRESA = VERS_DEF_PROCES.COD_EMPRESA",
+        "SEGUR_ANEXO_PROCES.COD_DEF_PROCES = VERS_DEF_PROCES.COD_DEF_PROCES",
+        "SEGUR_ANEXO_PROCES.NUM_VERS = VERS_DEF_PROCES.NUM_VERS"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_DEF_PROCES",
+          "to_column": "COD_DEF_PROCES"
+        },
+        {
+          "from_column": "NUM_VERS",
+          "to_column": "NUM_VERS"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Versão de processo dona da regra.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0883",
+      "from_table": "SEGUR_ANEXO_PROCES",
+      "to_table": "MECAN_ATRIBUIC",
+      "on": [
+        "SEGUR_ANEXO_PROCES.COD_EMPRESA = MECAN_ATRIBUIC.COD_EMPRESA",
+        "SEGUR_ANEXO_PROCES.COD_MECAN_ATRIBUIC = MECAN_ATRIBUIC.COD_MECAN_ATRIBUIC"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_MECAN_ATRIBUIC",
+          "to_column": "COD_MECAN_ATRIBUIC"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Mecanismo de atribuição referenciado por código; o mecanismo pode ser customizado e não necessariamente existir como linha.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0854",
+      "table": "PROPRIED_EXT",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0881",
+      "table": "VERS_DEF_PROCES",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0883",
+      "table": "MECAN_ATRIBUIC",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [
+    "DSL_CONFIGUR_MECAN_ATRIBUIC"
+  ],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/SEGUR_ANEXO_PROCES.json",
+  "observed_query_count": 1,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Regras de segurança de anexos por versão de processo: define quem (mecanismo de atribuição) tem qual nível de acesso aos anexos da solicitação. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "COD_DEF_PROCES",
+        "NUM_VERS",
+        "NUM_SEQ"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

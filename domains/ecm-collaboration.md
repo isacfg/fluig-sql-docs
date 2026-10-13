@@ -34,6 +34,7 @@ Sessão de colaboração externa (edição online em app de terceiros, ex. Offic
 - `(COLLABORATION_APP_ID)` → **ECM_COLLABORATION_APP** `(ID)` · N:1 · physical-fk/confirmed — App de colaboração usado.
 - `(TENANT_ID, DOCUMENT_ID, DOCUMENT_VERSION)` → **DOCUMENTO** `(COD_EMPRESA, NR_DOCUMENTO, NR_VERSAO)` · N:1 · logical-probable/probable — Versão do documento colaborada (sem FK).
 - `(COLLABORATION_ID)` → **ECM_COLLABORATION_GUEST** `(COLLABORATION_ID)` · 1:N · jpa-join/confirmed — Convidados da colaboração (OneToMany guests).
+- `(COLLABORATION_ID)` → **ECM_COLLABORATION_APP** `(ID)` · N:1 · hql-join/confirmed — CollaborationApp.findAppByCollaborationId
 
 **Dicas de consulta:** Filtrar por TENANT_ID. Ativa: IS_ACTIVE=1 por (DOCUMENT_ID, DOCUMENT_VERSION). Linha tem URLs/IDs externos; sem dado pessoal direto além de UPLOADER_LOGIN.
 

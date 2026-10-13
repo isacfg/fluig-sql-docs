@@ -16,6 +16,152 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.workflow.model.ProcessDefinitionVersion"
  ],
+ "observed_queries": [
+  {
+   "name": "ProcessDefinitionVersion.findAvailableProcess",
+   "query": "SELECT v FROM ProcessDefinitionVersion v, ProcessDefinition d WHERE v.active = true AND v.editionMode = false AND v.processDefinitionVersionPK.processId = d.processDefinitionPK.processId AND v.processDefinitionVersionPK.companyId = d.processDefinitionPK.companyId AND d.processDefinitionPK.companyId = :companyId AND d.active = true ORDER BY d.processDescription",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessDefinitionVersion",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessDefinitionVersion.java",
+   "owner_table": "VERS_DEF_PROCES",
+   "tables": [
+    "VERS_DEF_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessDefinitionVersion.findLastVersion",
+   "query": "select pdv from ProcessDefinitionVersion pdv where pdv.processDefinitionVersionPK.companyId = :companyId and pdv.processDefinitionVersionPK.processId = :processId and pdv.editionMode = :editionMode and pdv.active = true order by pdv.processDefinitionVersionPK.version desc",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessDefinitionVersion",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessDefinitionVersion.java",
+   "owner_table": "VERS_DEF_PROCES",
+   "tables": [
+    "VERS_DEF_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessDefinitionVersion.findFavoritesAvailableProcess",
+   "query": "SELECT v FROM ProcessDefinitionVersion v, ProcessDefinition d WHERE v.active = true AND v.editionMode = false AND v.processDefinitionVersionPK.processId = d.processDefinitionPK.processId AND v.processDefinitionVersionPK.companyId = d.processDefinitionPK.companyId AND d.processDefinitionPK.companyId = :companyId AND d.processDefinitionPK.processId = :processId AND d.active = true ORDER BY d.processDescription",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessDefinitionVersion",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessDefinitionVersion.java",
+   "owner_table": "VERS_DEF_PROCES",
+   "tables": [
+    "VERS_DEF_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessDefinitionVersion.findAllProcessWithoutSVG",
+   "query": "SELECT v FROM ProcessDefinitionVersion v WHERE v.editionMode = false AND v.processDefinitionVersionPK.companyId = :companyId AND v.processDiagram IS NULL AND (v.bpmnVersion IS NULL OR v.bpmnVersion != 2) ORDER BY v.processDefinitionVersionPK.processId, v.processDefinitionVersionPK.version",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessDefinitionVersion",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessDefinitionVersion.java",
+   "owner_table": "VERS_DEF_PROCES",
+   "tables": [
+    "VERS_DEF_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessDefinitionVersion.findAvailableProcessByCategory",
+   "query": "SELECT v FROM ProcessDefinitionVersion v, ProcessDefinition d WHERE v.active = true AND v.editionMode = false AND v.processDefinitionVersionPK.processId = d.processDefinitionPK.processId AND v.processDefinitionVersionPK.companyId = d.processDefinitionPK.companyId AND d.processDefinitionPK.companyId = :companyId AND d.active = true ORDER BY d.categoryId , d.processDescription",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessDefinitionVersion",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessDefinitionVersion.java",
+   "owner_table": "VERS_DEF_PROCES",
+   "tables": [
+    "VERS_DEF_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessDefinitionVersion.findAvailableProcessByCategoryFilteringReadyMobile",
+   "query": "SELECT v FROM ProcessDefinitionVersion v, ProcessDefinition d WHERE v.active = true AND v.mobileReady = :isReadyOnMobile AND v.editionMode = false AND v.processDefinitionVersionPK.processId = d.processDefinitionPK.processId AND v.processDefinitionVersionPK.companyId = d.processDefinitionPK.companyId AND d.processDefinitionPK.companyId = :companyId AND d.active = true ORDER BY d.categoryId , d.processDescription",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessDefinitionVersion",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessDefinitionVersion.java",
+   "owner_table": "VERS_DEF_PROCES",
+   "tables": [
+    "VERS_DEF_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessDefinitionVersion.searchFavoritesProcess",
+   "query": "SELECT v FROM ProcessDefinitionVersion v, ProcessDefinition d, FavoritesProcess f      WHERE f.favoritesProcessPK.companyId = v.processDefinitionVersionPK.companyId          AND f.favoritesProcessPK.processId = v.processDefinitionVersionPK.processId          AND v.active = true          AND v.editionMode = false          AND f.favoritesProcessPK.colleagueId = :colleagueId          AND f.favoritesProcessPK.companyId = :companyId         AND v.processDefinitionVersionPK.processId = d.processDefinitionPK.processId          AND v.processDefinitionVersionPK.companyId = d.processDefinitionPK.companyId          AND (d.processDescription LIKE :content                  OR d.categoryId LIKE :content                  OR d.processDefinitionPK.processId LIKE :content)      ORDER BY d.categoryId , d.processDescription ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessDefinitionVersion",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessDefinitionVersion.java",
+   "owner_table": "VERS_DEF_PROCES",
+   "tables": [
+    "VERS_DEF_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ProcessDefinitionVersion.searchProcess",
+   "query": "SELECT v FROM ProcessDefinitionVersion v, ProcessDefinition d      WHERE v.active = true          AND v.editionMode = false          AND v.processDefinitionVersionPK.companyId = :companyId         AND v.processDefinitionVersionPK.processId = d.processDefinitionPK.processId          AND v.processDefinitionVersionPK.companyId = d.processDefinitionPK.companyId          AND (d.processDescription LIKE :content                  OR d.categoryId LIKE :content                  OR d.processDefinitionPK.processId LIKE :content)      ORDER BY d.categoryId , d.processDescription ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessDefinitionVersion",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessDefinitionVersion.java",
+   "owner_table": "VERS_DEF_PROCES",
+   "tables": [
+    "VERS_DEF_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",

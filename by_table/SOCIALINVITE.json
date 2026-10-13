@@ -18,6 +18,62 @@
  "jpa_entities": [
   "com.totvs.technology.social.invite.entity.SocialInvite"
  ],
+ "observed_queries": [
+  {
+   "name": "FIND_BY_TOKEN",
+   "query": "select si from SocialInvite si where si.token=?1",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.invite.entity.SocialInvite",
+   "source_file": "com/totvs/technology/social/invite/entity/SocialInvite.java",
+   "owner_table": "SOCIALINVITE",
+   "tables": [
+    "SOCIALINVITE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FIND_BY_EMAIL",
+   "query": "select si from SocialInvite si where si.email=?1",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.invite.entity.SocialInvite",
+   "source_file": "com/totvs/technology/social/invite/entity/SocialInvite.java",
+   "owner_table": "SOCIALINVITE",
+   "tables": [
+    "SOCIALINVITE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "DELETE_BY_ID_LIST",
+   "query": "delete from SocialInvite si where si in (?1)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.invite.entity.SocialInvite",
+   "source_file": "com/totvs/technology/social/invite/entity/SocialInvite.java",
+   "owner_table": "SOCIALINVITE",
+   "tables": [
+    "SOCIALINVITE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "ID",

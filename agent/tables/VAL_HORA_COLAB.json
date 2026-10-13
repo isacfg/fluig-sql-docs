@@ -1,0 +1,80 @@
+{
+  "name": "VAL_HORA_COLAB",
+  "domain": "bpm-workflow",
+  "purpose": "Histórico do valor da hora de trabalho de um colaborador, usado para custeio de tarefas/processos; cada linha vale a partir do momento da atualização.",
+  "schema_card": "by_table/VAL_HORA_COLAB.json",
+  "business_concepts": [
+    "bpm-workflow",
+    "VAL_HORA_COLAB"
+  ],
+  "grain": {
+    "description": "Histórico do valor da hora de trabalho de um colaborador, usado para custeio de tarefas/processos; cada linha vale a partir do momento da atualização. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "DAT_ATUALIZ",
+      "HRA_ATUALIZ",
+      "CD_MATRICULA"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/VAL_HORA_COLAB.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-1019",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/VAL_HORA_COLAB.json",
+  "observed_query_count": 1,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Histórico do valor da hora de trabalho de um colaborador, usado para custeio de tarefas/processos; cada linha vale a partir do momento da atualização. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "DAT_ATUALIZ",
+        "HRA_ATUALIZ",
+        "CD_MATRICULA"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

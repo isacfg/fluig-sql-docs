@@ -19,6 +19,116 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.dm.model.Approver"
  ],
+ "observed_queries": [
+  {
+   "name": "Approver.findAll",
+   "query": "SELECT a FROM Approver a WHERE a.approverPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Approver",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Approver.java",
+   "owner_table": "APROVADOR",
+   "tables": [
+    "APROVADOR"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Approver.findByDocument",
+   "query": "SELECT a FROM Approver a WHERE a.approverPK.companyId = :companyId AND a.approverPK.documentId = :documentId AND a.approverPK.version = :version",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Approver",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Approver.java",
+   "owner_table": "APROVADOR",
+   "tables": [
+    "APROVADOR"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Approver.findByLevelId",
+   "query": "SELECT a FROM Approver a WHERE a.approverPK.companyId = :companyId AND a.approverPK.documentId = :documentId AND a.approverPK.version = :version AND a.approverPK.levelId = :levelId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Approver",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Approver.java",
+   "owner_table": "APROVADOR",
+   "tables": [
+    "APROVADOR"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Approver.findByDocumentForAllVersions",
+   "query": "SELECT a FROM Approver a WHERE a.approverPK.companyId = :companyId AND a.approverPK.documentId = :documentId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Approver",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Approver.java",
+   "owner_table": "APROVADOR",
+   "tables": [
+    "APROVADOR"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Approver.findDocumentsByApprover",
+   "query": "SELECT a FROM Approver a WHERE a.approverPK.companyId = :companyId AND a.approverPK.documentId >= :documentIdInitial AND a.approverPK.documentId <= :documentIdFinal AND a.approverPK.colleagueId = :colleagueId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Approver",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Approver.java",
+   "owner_table": "APROVADOR",
+   "tables": [
+    "APROVADOR"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Approver.findAllDocumentsByApprover",
+   "query": "SELECT a FROM Approver a WHERE a.approverPK.companyId = :companyId AND a.approverPK.colleagueId = :colleagueId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Approver",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Approver.java",
+   "owner_table": "APROVADOR",
+   "tables": [
+    "APROVADOR"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "IDI_TIP_APRVDOR",

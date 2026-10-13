@@ -1,0 +1,158 @@
+{
+  "name": "FDN_RESTORE_PERMISSION_MAPPING",
+  "domain": "foundation-identity-access",
+  "purpose": "Backup em XML das permissões de um recurso, usado para restaurar permissões.",
+  "schema_card": "by_table/FDN_RESTORE_PERMISSION_MAPPING.json",
+  "business_concepts": [
+    "foundation-identity-access",
+    "FDN_RESTORE_PERMISSION_MAPPING"
+  ],
+  "grain": {
+    "description": "Backup em XML das permissões de um recurso, usado para restaurar permissões. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_RESTORE_PERMISSION_MAPPING.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0554",
+      "from_table": "FDN_RESTORE_PERMISSION_MAPPING",
+      "to_table": "FDN_RESOURCE",
+      "on": [
+        "FDN_RESTORE_PERMISSION_MAPPING.TENANT_ID = FDN_RESOURCE.TENANT_ID",
+        "FDN_RESTORE_PERMISSION_MAPPING.RESOURCE_ID = FDN_RESOURCE.RESOURCE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "RESOURCE_ID",
+          "to_column": "RESOURCE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Backup de permissões do recurso.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0561",
+      "from_table": "FDN_RESTORE_PERMISSION_MAPPING",
+      "to_table": "FDN_RESOURCE",
+      "on": [
+        "FDN_RESTORE_PERMISSION_MAPPING.TENANT_ID = FDN_RESOURCE.TENANT_ID",
+        "FDN_RESTORE_PERMISSION_MAPPING.RESOURCE_ID = FDN_RESOURCE.RESOURCE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "RESOURCE_ID",
+          "to_column": "RESOURCE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Recurso cujas permissões são restauradas.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0554",
+      "table": "FDN_RESOURCE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0561",
+      "table": "FDN_RESOURCE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [
+    "XML_PERMISSION"
+  ],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_RESTORE_PERMISSION_MAPPING.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Backup em XML das permissões de um recurso, usado para restaurar permissões. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

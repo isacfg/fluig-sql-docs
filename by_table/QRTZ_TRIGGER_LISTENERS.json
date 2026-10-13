@@ -16,6 +16,7 @@
  "jpa_entities": [
   "com.fluig.foundation.scheduler.entity.quartz.QrtzTriggerListeners"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "TRIGGER_GROUP",

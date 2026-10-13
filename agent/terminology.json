@@ -1,0 +1,179 @@
+{
+  "format_version": 1,
+  "concepts": [
+    {
+      "table": "PROCES_WORKFLOW",
+      "aliases": [
+        "solicitação",
+        "instância de processo",
+        "workflow",
+        "process instance"
+      ]
+    },
+    {
+      "table": "TAR_PROCES",
+      "aliases": [
+        "tarefa pendente",
+        "central de tarefas",
+        "responsável",
+        "workflow task"
+      ]
+    },
+    {
+      "table": "HISTOR_PROCES",
+      "aliases": [
+        "histórico de processo",
+        "movimentação",
+        "atividade atual"
+      ]
+    },
+    {
+      "table": "ANEXO_PROCES",
+      "aliases": [
+        "anexos da solicitação",
+        "process attachments"
+      ]
+    },
+    {
+      "table": "DOCUMENTO",
+      "aliases": [
+        "GED",
+        "documento",
+        "pasta",
+        "ficha",
+        "ECM",
+        "document version"
+      ]
+    },
+    {
+      "table": "DEF_PROCES",
+      "aliases": [
+        "definição de processo",
+        "process definition"
+      ]
+    },
+    {
+      "table": "VERS_DEF_PROCES",
+      "aliases": [
+        "versão do processo",
+        "process definition version"
+      ]
+    },
+    {
+      "table": "ESTADO_PROCES",
+      "aliases": [
+        "atividade",
+        "estado",
+        "BPMN",
+        "process state"
+      ]
+    },
+    {
+      "table": "FDN_USERTENANT",
+      "aliases": [
+        "usuário do tenant",
+        "matrícula",
+        "login",
+        "tenant user"
+      ]
+    },
+    {
+      "table": "FDN_USER",
+      "aliases": [
+        "pessoa",
+        "nome do usuário",
+        "global user"
+      ]
+    },
+    {
+      "table": "FDN_TENANT",
+      "aliases": [
+        "empresa",
+        "tenant",
+        "organização"
+      ]
+    },
+    {
+      "table": "FDN_GROUP",
+      "aliases": [
+        "grupo de usuários",
+        "user group"
+      ]
+    },
+    {
+      "table": "FDN_GROUPUSERROLE",
+      "aliases": [
+        "membro do grupo",
+        "subgrupo",
+        "group membership"
+      ]
+    },
+    {
+      "table": "FDN_ROLE",
+      "aliases": [
+        "papel",
+        "role",
+        "perfil"
+      ]
+    },
+    {
+      "table": "FDN_USERROLE",
+      "aliases": [
+        "papel do usuário",
+        "direct user role"
+      ]
+    },
+    {
+      "table": "FICHA",
+      "aliases": [
+        "valor do campo",
+        "ficha",
+        "form record field",
+        "EAV"
+      ]
+    },
+    {
+      "table": "FICHARIO",
+      "aliases": [
+        "fichário",
+        "tabela pai filha",
+        "form table"
+      ]
+    },
+    {
+      "table": "FICHARIO_CAMPO",
+      "aliases": [
+        "campos do formulário",
+        "form field definition"
+      ]
+    },
+    {
+      "table": "ECM_METADATA_FORM",
+      "aliases": [
+        "formulário de metadados",
+        "metadata form"
+      ]
+    },
+    {
+      "table": "PROCESS_FORM_MAP",
+      "aliases": [
+        "mapeamento de formulário",
+        "subprocess form map"
+      ]
+    },
+    {
+      "table": "DOCTO_CAMPO_CUSTOM",
+      "aliases": [
+        "metadados do documento",
+        "custom document field"
+      ]
+    },
+    {
+      "table": "CAMPO_CUSTOM",
+      "aliases": [
+        "campo customizado",
+        "custom field"
+      ]
+    }
+  ]
+}

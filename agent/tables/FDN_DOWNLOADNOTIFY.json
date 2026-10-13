@@ -1,0 +1,179 @@
+{
+  "name": "FDN_DOWNLOADNOTIFY",
+  "domain": "volumes-sites",
+  "purpose": "Usuários a notificar quando um item da fila de download de site (FDN_SITEDOWNLOADQUEUE) concluir. Liga item da fila a usuário.",
+  "schema_card": "by_table/FDN_DOWNLOADNOTIFY.json",
+  "business_concepts": [
+    "volumes-sites",
+    "FDN_DOWNLOADNOTIFY"
+  ],
+  "grain": {
+    "description": "Usuários a notificar quando um item da fila de download de site (FDN_SITEDOWNLOADQUEUE) concluir. Liga item da fila a usuário. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "DOWNLOADNOTIFY_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_DOWNLOADNOTIFY.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0427",
+      "from_table": "FDN_DOWNLOADNOTIFY",
+      "to_table": "FDN_SITEDOWNLOADQUEUE",
+      "on": [
+        "FDN_DOWNLOADNOTIFY.QUEUE_ID = FDN_SITEDOWNLOADQUEUE.QUEUE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "QUEUE_ID",
+          "to_column": "QUEUE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Item da fila.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0429",
+      "from_table": "FDN_DOWNLOADNOTIFY",
+      "to_table": "FDN_USERTENANT",
+      "on": [
+        "FDN_DOWNLOADNOTIFY.USERTENANT_ID = FDN_USERTENANT.USER_TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "USERTENANT_ID",
+          "to_column": "USER_TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Usuário a notificar.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0586",
+      "from_table": "FDN_DOWNLOADNOTIFY",
+      "to_table": "FDN_SITEDOWNLOADQUEUE",
+      "on": [
+        "FDN_DOWNLOADNOTIFY.QUEUE_ID = FDN_SITEDOWNLOADQUEUE.QUEUE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "QUEUE_ID",
+          "to_column": "QUEUE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Notificações do item.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0427",
+      "table": "FDN_SITEDOWNLOADQUEUE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0429",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0586",
+      "table": "FDN_SITEDOWNLOADQUEUE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "DOWNLOADNOTIFY001",
+      "unique": false,
+      "columns": [
+        "QUEUE_ID",
+        "USERTENANT_ID"
+      ]
+    },
+    {
+      "name": "FK_2DGRLLL8TRAMNVXK1D4KCF50N",
+      "unique": false,
+      "columns": [
+        "USERTENANT_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_DOWNLOADNOTIFY.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Usuários a notificar quando um item da fila de download de site (FDN_SITEDOWNLOADQUEUE) concluir. Liga item da fila a usuário. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "DOWNLOADNOTIFY_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

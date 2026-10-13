@@ -35,6 +35,62 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.foundation.model.Knowledge"
  ],
+ "observed_queries": [
+  {
+   "name": "Knowledge.findByKey",
+   "query": "SELECT d FROM Knowledge d WHERE d.knowledgePK.companyId = :companyId AND d.knowledgePK.colleagueId = :colleagueId AND d.knowledgePK.documentId = :documentId AND d.knowledgePK.version = :version",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.foundation.model.Knowledge",
+   "source_file": "com/datasul/technology/webdesk/foundation/model/Knowledge.java",
+   "owner_table": "CONHECIMENTO",
+   "tables": [
+    "CONHECIMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Knowledge.deleteByDocumentAndCompany",
+   "query": "DELETE Knowledge k WHERE k.knowledgePK.documentId = :documentId AND k.knowledgePK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.foundation.model.Knowledge",
+   "source_file": "com/datasul/technology/webdesk/foundation/model/Knowledge.java",
+   "owner_table": "CONHECIMENTO",
+   "tables": [
+    "CONHECIMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Knowledge.countViewedByLastView",
+   "query": "SELECT COUNT(k) FROM Knowledge k WHERE k.knowledgePK.companyId = :companyId AND k.lastView BETWEEN :startDate AND :endDate",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.foundation.model.Knowledge",
+   "source_file": "com/datasul/technology/webdesk/foundation/model/Knowledge.java",
+   "owner_table": "CONHECIMENTO",
+   "tables": [
+    "CONHECIMENTO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "CD_MATRICULA",

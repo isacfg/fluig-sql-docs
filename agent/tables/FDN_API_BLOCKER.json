@@ -1,0 +1,50 @@
+{
+  "name": "FDN_API_BLOCKER",
+  "domain": "seguranca-api",
+  "purpose": "Padrões de URL/API bloqueados pelo filtro bloqueador de APIs do Fluig, com exceções. Cada linha é um padrão de bloqueio.",
+  "schema_card": "by_table/FDN_API_BLOCKER.json",
+  "business_concepts": [
+    "seguranca-api",
+    "FDN_API_BLOCKER"
+  ],
+  "grain": {
+    "description": "Padrões de URL/API bloqueados pelo filtro bloqueador de APIs do Fluig, com exceções. Cada linha é um padrão de bloqueio. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "API_BLOCKER_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_API_BLOCKER.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_API_BLOCKER.json",
+  "observed_query_count": 1,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Padrões de URL/API bloqueados pelo filtro bloqueador de APIs do Fluig, com exceções. Cada linha é um padrão de bloqueio. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "API_BLOCKER_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

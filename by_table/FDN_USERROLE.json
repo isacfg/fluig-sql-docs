@@ -36,6 +36,260 @@
  "jpa_entities": [
   "com.totvs.technology.foundation.security.entity.FDNUserRole"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNUserRole.findAll",
+   "query": "SELECT b FROM FDNUserRole b",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserRole",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserRole.java",
+   "owner_table": "FDN_USERROLE",
+   "tables": [
+    "FDN_USERROLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserRole.findByUniqueKey",
+   "query": "SELECT b FROM FDNUserRole b WHERE b.tenantId = :tenantId AND b.login = :login AND b.roleCode = :roleCode",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserRole",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserRole.java",
+   "owner_table": "FDN_USERROLE",
+   "tables": [
+    "FDN_USERROLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserRole.findByRole",
+   "query": "SELECT b FROM FDNUserRole b WHERE b.role = :role AND b.user.userState = com.totvs.technology.foundation.sdk.service.UserState.ACTIVE",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserRole",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserRole.java",
+   "owner_table": "FDN_USERROLE",
+   "tables": [
+    "FDN_USERROLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserRole.findByRoleCode",
+   "query": "SELECT b FROM FDNUserRole b WHERE b.roleCode = :roleCode AND b.tenantId = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserRole",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserRole.java",
+   "owner_table": "FDN_USERROLE",
+   "tables": [
+    "FDN_USERROLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserRole.findByRoleAndFilter",
+   "query": "SELECT b FROM FDNUserRole b WHERE b.role = :role AND (user.login LIKE :search OR user.user.fullName LIKE :search)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserRole",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserRole.java",
+   "owner_table": "FDN_USERROLE",
+   "tables": [
+    "FDN_USERROLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserRole.findByLogin",
+   "query": "SELECT b FROM FDNUserRole b WHERE b.login = :login",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserRole",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserRole.java",
+   "owner_table": "FDN_USERROLE",
+   "tables": [
+    "FDN_USERROLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserRole.findInternalByLogin",
+   "query": "SELECT b FROM FDNUserRole b WHERE b.login = :login AND b.role.internal = true",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserRole",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserRole.java",
+   "owner_table": "FDN_USERROLE",
+   "tables": [
+    "FDN_USERROLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserRole.findByLoginActive",
+   "query": "SELECT b FROM FDNUserRole b WHERE b.login = :login AND b.user.userState = com.totvs.technology.foundation.sdk.service.UserState.ACTIVE",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserRole",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserRole.java",
+   "owner_table": "FDN_USERROLE",
+   "tables": [
+    "FDN_USERROLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserRole.findUserInRole",
+   "query": "SELECT b FROM FDNUserRole b WHERE b.login = :login AND b.role.code = :roleCode",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserRole",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserRole.java",
+   "owner_table": "FDN_USERROLE",
+   "tables": [
+    "FDN_USERROLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserRole.findByTenantId",
+   "query": "SELECT b FROM FDNUserRole b WHERE b.tenantId = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserRole",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserRole.java",
+   "owner_table": "FDN_USERROLE",
+   "tables": [
+    "FDN_USERROLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserRole.findUnassignedUsersForRole",
+   "query": "SELECT b FROM FDNUserRole b WHERE b.user.login NOT IN (SELECT c.user.login FROM FDNUserRole c WHERE c.role.code = :code AND c.role.tenantId = :tenantId)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserRole",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserRole.java",
+   "owner_table": "FDN_USERROLE",
+   "tables": [
+    "FDN_USERROLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserRole.FindUserByRole",
+   "query": "SELECT b.user FROM FDNUserRole b WHERE b.tenantId = :tenantId AND b.roleCode = :roleCode ORDER BY b.login ASC ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserRole",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserRole.java",
+   "owner_table": "FDN_USERROLE",
+   "tables": [
+    "FDN_USERROLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserRole.FindAllUsersByRole",
+   "query": "SELECT b.user FROM FDNUserRole b WHERE b.tenantId > 0 AND b.roleCode = :roleCode ORDER BY b.login ASC ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserRole",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserRole.java",
+   "owner_table": "FDN_USERROLE",
+   "tables": [
+    "FDN_USERROLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserRole.countUsersWithRole",
+   "query": "SELECT COUNT(b) FROM FDNUserRole b WHERE b.tenantId = :tenantId AND b.roleCode = :roleCode",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserRole",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserRole.java",
+   "owner_table": "FDN_USERROLE",
+   "tables": [
+    "FDN_USERROLE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "USERROLE_ID",

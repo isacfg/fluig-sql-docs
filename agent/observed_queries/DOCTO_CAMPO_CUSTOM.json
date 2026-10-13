@@ -1,0 +1,38 @@
+[
+  {
+    "name": "DocumentCustomFields.findAll",
+    "query": "SELECT dcf from DocumentCustomFields dcf where dcf.documentCustomFieldsPK.companyId = :companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dm.model.DocumentCustomFields",
+    "source_file": "com/datasul/technology/webdesk/dm/model/DocumentCustomFields.java",
+    "owner_table": "DOCTO_CAMPO_CUSTOM",
+    "tables": [
+      "DOCTO_CAMPO_CUSTOM"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "DocumentCustomFields.findByDocument",
+    "query": "SELECT dcf FROM DocumentCustomFields dcf WHERE dcf.documentCustomFieldsPK.companyId = :companyId AND dcf.documentCustomFieldsPK.documentId = :documentId AND dcf.documentCustomFieldsPK.version = :version",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dm.model.DocumentCustomFields",
+    "source_file": "com/datasul/technology/webdesk/dm/model/DocumentCustomFields.java",
+    "owner_table": "DOCTO_CAMPO_CUSTOM",
+    "tables": [
+      "DOCTO_CAMPO_CUSTOM"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

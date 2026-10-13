@@ -1,0 +1,110 @@
+[
+  {
+    "name": "FDNCategoryResource.findById",
+    "query": "SELECT b FROM FDNCategoryResource b WHERE b.id = :id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.permission.entity.FDNCategoryResource",
+    "source_file": "com/totvs/technology/foundation/permission/entity/FDNCategoryResource.java",
+    "owner_table": "FDN_CATEGORY_RESOURCE",
+    "tables": [
+      "FDN_CATEGORY_RESOURCE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNCategoryResource.findByTenandAndId",
+    "query": "SELECT b FROM FDNCategoryResource b WHERE b.tenantId = :tenantId AND b.id = :id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.permission.entity.FDNCategoryResource",
+    "source_file": "com/totvs/technology/foundation/permission/entity/FDNCategoryResource.java",
+    "owner_table": "FDN_CATEGORY_RESOURCE",
+    "tables": [
+      "FDN_CATEGORY_RESOURCE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNCategoryResource.findByCategoryAndResource",
+    "query": "SELECT b FROM FDNCategoryResource b WHERE b.category.id = :categoryId AND b.resource.id = :resourceId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.permission.entity.FDNCategoryResource",
+    "source_file": "com/totvs/technology/foundation/permission/entity/FDNCategoryResource.java",
+    "owner_table": "FDN_CATEGORY_RESOURCE",
+    "tables": [
+      "FDN_CATEGORY_RESOURCE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNCategoryResource.findByTenantAndCategory",
+    "query": "SELECT b FROM FDNCategoryResource b WHERE b.tenantId = :tenantId AND b.category.id = :categoryId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.permission.entity.FDNCategoryResource",
+    "source_file": "com/totvs/technology/foundation/permission/entity/FDNCategoryResource.java",
+    "owner_table": "FDN_CATEGORY_RESOURCE",
+    "tables": [
+      "FDN_CATEGORY_RESOURCE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNCategoryResource.findByTenantAndResource",
+    "query": "SELECT b FROM FDNCategoryResource b WHERE b.tenantId = :tenantId AND b.resource.id = :resourceId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.permission.entity.FDNCategoryResource",
+    "source_file": "com/totvs/technology/foundation/permission/entity/FDNCategoryResource.java",
+    "owner_table": "FDN_CATEGORY_RESOURCE",
+    "tables": [
+      "FDN_CATEGORY_RESOURCE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNCategoryResource.findByResource",
+    "query": "SELECT b FROM FDNCategoryResource b WHERE b.resource.id = :resourceId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.permission.entity.FDNCategoryResource",
+    "source_file": "com/totvs/technology/foundation/permission/entity/FDNCategoryResource.java",
+    "owner_table": "FDN_CATEGORY_RESOURCE",
+    "tables": [
+      "FDN_CATEGORY_RESOURCE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

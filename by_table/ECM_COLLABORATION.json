@@ -22,6 +22,80 @@
  "jpa_entities": [
   "com.fluig.ecm.collaboration.entity.Collaboration"
  ],
+ "observed_queries": [
+  {
+   "name": "Collaboration.findByExternalFileId",
+   "query": "SELECT c FROM Collaboration c WHERE c.tenantId = :tenantId AND c.externalFileId = :externalFileId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.ecm.collaboration.entity.Collaboration",
+   "source_file": "com/fluig/ecm/collaboration/entity/Collaboration.java",
+   "owner_table": "ECM_COLLABORATION",
+   "tables": [
+    "ECM_COLLABORATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Collaboration.findByDocumentId",
+   "query": "SELECT c FROM Collaboration c WHERE c.tenantId = :tenantId AND c.documentId = :documentId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.ecm.collaboration.entity.Collaboration",
+   "source_file": "com/fluig/ecm/collaboration/entity/Collaboration.java",
+   "owner_table": "ECM_COLLABORATION",
+   "tables": [
+    "ECM_COLLABORATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Collaboration.findByDocumentIdAndVersion",
+   "query": "SELECT c FROM Collaboration c WHERE c.tenantId = :tenantId AND c.documentId = :documentId AND c.documentVersion = :documentVersion ORDER BY id ASC",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.ecm.collaboration.entity.Collaboration",
+   "source_file": "com/fluig/ecm/collaboration/entity/Collaboration.java",
+   "owner_table": "ECM_COLLABORATION",
+   "tables": [
+    "ECM_COLLABORATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Collaboration.findActiveCollaborationByDocumentIdAndVersion",
+   "query": "SELECT c FROM Collaboration c WHERE c.tenantId = :tenantId AND c.documentId = :documentId AND c.documentVersion = :documentVersion AND c.active = true",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.ecm.collaboration.entity.Collaboration",
+   "source_file": "com/fluig/ecm/collaboration/entity/Collaboration.java",
+   "owner_table": "ECM_COLLABORATION",
+   "tables": [
+    "ECM_COLLABORATION"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COLLABORATION_ID",
@@ -276,6 +350,19 @@
    "cardinality": "1:N",
    "kind": "jpa-join",
    "description": "Convidados da colaboração (OneToMany guests).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "ECM_COLLABORATION_APP",
+   "from_cols": [
+    "COLLABORATION_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "CollaborationApp.findAppByCollaborationId",
    "status": "confirmed"
   }
  ],

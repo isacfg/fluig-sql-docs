@@ -1,0 +1,123 @@
+{
+  "name": "DEFAULT_PROPRIED_DOCTO",
+  "domain": "ecm-documents",
+  "purpose": "Propriedades padrão (atributo/valor/formato) associadas a uma versão de documento.",
+  "schema_card": "by_table/DEFAULT_PROPRIED_DOCTO.json",
+  "business_concepts": [
+    "ecm-documents",
+    "DEFAULT_PROPRIED_DOCTO"
+  ],
+  "grain": {
+    "description": "Propriedades padrão (atributo/valor/formato) associadas a uma versão de documento. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "NR_DOCUMENTO",
+      "NR_VERSAO",
+      "NOM_ATRIBUTO"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/DEFAULT_PROPRIED_DOCTO.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0059",
+      "from_table": "DEFAULT_PROPRIED_DOCTO",
+      "to_table": "DOCUMENTO",
+      "on": [
+        "DEFAULT_PROPRIED_DOCTO.COD_EMPRESA = DOCUMENTO.COD_EMPRESA",
+        "DEFAULT_PROPRIED_DOCTO.NR_DOCUMENTO = DOCUMENTO.NR_DOCUMENTO",
+        "DEFAULT_PROPRIED_DOCTO.NR_VERSAO = DOCUMENTO.NR_VERSAO"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "NR_DOCUMENTO",
+          "to_column": "NR_DOCUMENTO"
+        },
+        {
+          "from_column": "NR_VERSAO",
+          "to_column": "NR_VERSAO"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Versão do documento dona da propriedade.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0059",
+      "table": "DOCUMENTO",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/DEFAULT_PROPRIED_DOCTO.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Propriedades padrão (atributo/valor/formato) associadas a uma versão de documento. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "NOM_ATRIBUTO"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

@@ -66,7 +66,12 @@ for n, t in d.items():
             else: unmatched.append((e['fqcn'].split('.')[-1], f['name'], f['col']))
     model[n] = dict(name=n, module=t['module'], domain=domain(n, t['module']), pk=t['pk'], columns=list(colmap.values()), indexes=t['indexes'], uniques=t['uniques'], fks=t['fks'],
         entities=[dict(fqcn=e['fqcn'], file=e['file'], kind=e['kind'], extends=e.get('extends')) for e in es],
-        queries=[q['name'] for e in es for q in e['queries']], _q=[q for e in es for q in e['queries']], rel=[])
+        queries=[q['name'] for e in es for q in e['queries']],
+        observed_queries=[dict(q, source='jpa-named-query', language='sql' if q.get('native') else 'hql',
+            source_entity=e['fqcn'], source_file=e['file'], owner_table=n, tables=[n],
+            tables_analysis='owner-only; referenced entities are not resolved', filters=[], joins=[],
+            analysis_status='unparsed-source; not a canonical SQL recipe') for e in es for q in e['queries']],
+        _q=[q for e in es for q in e['queries']], rel=[])
 # relations
 def add(src, scols, dst, dcols, kind, ev):
     if src not in model or dst not in model: return

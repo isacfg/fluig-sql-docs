@@ -16,6 +16,62 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.bpm.model.BPMProcessDefinition"
  ],
+ "observed_queries": [
+  {
+   "name": "BPMProcessDefinition.findAll",
+   "query": "SELECT pd FROM BPMProcessDefinition pd WHERE pd.BPMProcessDefinitionPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.bpm.model.BPMProcessDefinition",
+   "source_file": "com/datasul/technology/webdesk/bpm/model/BPMProcessDefinition.java",
+   "owner_table": "DOC_PROCES",
+   "tables": [
+    "DOC_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "BPMProcessDefinition.findActiveProcess",
+   "query": "SELECT pd FROM BPMProcessDefinition pd WHERE pd.BPMProcessDefinitionPK.companyId = :companyId AND pd.active = true",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.bpm.model.BPMProcessDefinition",
+   "source_file": "com/datasul/technology/webdesk/bpm/model/BPMProcessDefinition.java",
+   "owner_table": "DOC_PROCES",
+   "tables": [
+    "DOC_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "BPMProcessDefinition.findByProcessId",
+   "query": "SELECT pd FROM BPMProcessDefinition pd WHERE pd.BPMProcessDefinitionPK.companyId = :companyId AND pd.BPMProcessDefinitionPK.processId = :processId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.bpm.model.BPMProcessDefinition",
+   "source_file": "com/datasul/technology/webdesk/bpm/model/BPMProcessDefinition.java",
+   "owner_table": "DOC_PROCES",
+   "tables": [
+    "DOC_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",

@@ -1,0 +1,91 @@
+{
+  "name": "FDN_PERMISSION_MAPPING",
+  "domain": "foundation-identity-access",
+  "purpose": "Mapeamento entre permissões: ter PERMISSION em RESOURCE_CODE implica/concede TO_PERMISSION em TO_RESOURCE_CODE.",
+  "schema_card": "by_table/FDN_PERMISSION_MAPPING.json",
+  "business_concepts": [
+    "foundation-identity-access",
+    "FDN_PERMISSION_MAPPING"
+  ],
+  "grain": {
+    "description": "Mapeamento entre permissões: ter PERMISSION em RESOURCE_CODE implica/concede TO_PERMISSION em TO_RESOURCE_CODE. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "PERMISSION_MAPPING_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_PERMISSION_MAPPING.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0521",
+      "table": "FDN_RESOURCE",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0523",
+      "table": "FDN_RESOURCE",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FDNPERMMAP001",
+      "unique": false,
+      "columns": [
+        "TENANT_ID",
+        "TO_RESOURCE_CODE",
+        "TO_PERMISSION"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_PERMISSION_MAPPING.json",
+  "observed_query_count": 5,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Mapeamento entre permissões: ter PERMISSION em RESOURCE_CODE implica/concede TO_PERMISSION em TO_RESOURCE_CODE. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "PERMISSION_MAPPING_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

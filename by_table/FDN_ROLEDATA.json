@@ -27,6 +27,98 @@
  "jpa_entities": [
   "com.totvs.technology.foundation.security.entity.FDNRoleData"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNRoleData.findAll",
+   "query": "SELECT b FROM FDNRoleData b",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNRoleData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNRoleData.java",
+   "owner_table": "FDN_ROLEDATA",
+   "tables": [
+    "FDN_ROLEDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNRoleData.findById",
+   "query": "SELECT b FROM FDNRoleData b WHERE b.id = :id",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNRoleData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNRoleData.java",
+   "owner_table": "FDN_ROLEDATA",
+   "tables": [
+    "FDN_ROLEDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNRoleData.findByDataKey",
+   "query": "SELECT b FROM FDNRoleData b WHERE b.role.id = :roleId AND b.dataKey = :dataKey",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNRoleData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNRoleData.java",
+   "owner_table": "FDN_ROLEDATA",
+   "tables": [
+    "FDN_ROLEDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNRoleData.findByRole",
+   "query": "SELECT b FROM FDNRoleData b WHERE b.role.id = :roleId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNRoleData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNRoleData.java",
+   "owner_table": "FDN_ROLEDATA",
+   "tables": [
+    "FDN_ROLEDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNRoleData.findRoleByParam",
+   "query": "SELECT b FROM FDNRoleData b WHERE b.role.tenantId = :tenantId AND b.dataKey = :dataKey AND b.dataValue = :dataValue",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNRoleData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNRoleData.java",
+   "owner_table": "FDN_ROLEDATA",
+   "tables": [
+    "FDN_ROLEDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "ROLEDATA_ID",

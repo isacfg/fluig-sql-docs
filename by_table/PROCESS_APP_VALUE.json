@@ -35,6 +35,7 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.workflow.model.ProcessAppValue"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "ID",

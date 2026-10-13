@@ -1,0 +1,110 @@
+[
+  {
+    "name": "FDNAuthorizeClientData.findAll",
+    "query": "SELECT b FROM FDNAuthorizeClientData b",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.oauth.entity.FDNAuthorizeClientData",
+    "source_file": "com/totvs/technology/foundation/oauth/entity/FDNAuthorizeClientData.java",
+    "owner_table": "FDN_AUTHORIZECLIENTDATA",
+    "tables": [
+      "FDN_AUTHORIZECLIENTDATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNAuthorizeClientData.findByServiceName",
+    "query": "SELECT b FROM FDNAuthorizeClientData b where b.code = :code",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.oauth.entity.FDNAuthorizeClientData",
+    "source_file": "com/totvs/technology/foundation/oauth/entity/FDNAuthorizeClientData.java",
+    "owner_table": "FDN_AUTHORIZECLIENTDATA",
+    "tables": [
+      "FDN_AUTHORIZECLIENTDATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNAuthorizeClientData.findByTenantAndFilter",
+    "query": "SELECT a FROM FDNAuthorizeClientData a  WHERE a.tenantId = :tenantId AND (authenticationType = :authenticationType OR code LIKE :code OR accessToken = :accessToken OR redirectUri like :redirectUri OR clientId = :clientId OR consumerKey = :consumerKey OR username like :username)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.oauth.entity.FDNAuthorizeClientData",
+    "source_file": "com/totvs/technology/foundation/oauth/entity/FDNAuthorizeClientData.java",
+    "owner_table": "FDN_AUTHORIZECLIENTDATA",
+    "tables": [
+      "FDN_AUTHORIZECLIENTDATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNAuthorizeClientData.findByTenantAndCode",
+    "query": "SELECT a FROM FDNAuthorizeClientData a  WHERE a.tenantId = :tenantId AND code = :code",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.oauth.entity.FDNAuthorizeClientData",
+    "source_file": "com/totvs/technology/foundation/oauth/entity/FDNAuthorizeClientData.java",
+    "owner_table": "FDN_AUTHORIZECLIENTDATA",
+    "tables": [
+      "FDN_AUTHORIZECLIENTDATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNAuthorizeClientData.findByServiceCode",
+    "query": "SELECT a FROM FDNAuthorizeClientData a  WHERE code = :code",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.oauth.entity.FDNAuthorizeClientData",
+    "source_file": "com/totvs/technology/foundation/oauth/entity/FDNAuthorizeClientData.java",
+    "owner_table": "FDN_AUTHORIZECLIENTDATA",
+    "tables": [
+      "FDN_AUTHORIZECLIENTDATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNAuthorizeClientData.findAllByTenant",
+    "query": "SELECT a FROM FDNAuthorizeClientData a WHERE a.tenantId = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.oauth.entity.FDNAuthorizeClientData",
+    "source_file": "com/totvs/technology/foundation/oauth/entity/FDNAuthorizeClientData.java",
+    "owner_table": "FDN_AUTHORIZECLIENTDATA",
+    "tables": [
+      "FDN_AUTHORIZECLIENTDATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

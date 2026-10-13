@@ -1,0 +1,128 @@
+[
+  {
+    "name": "WCMTenantApplication.findAll",
+    "query": "SELECT b FROM WCMTenantApplication b",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMTenantApplication",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMTenantApplication.java",
+    "owner_table": "WCM_TENANTAPPLICATION",
+    "tables": [
+      "WCM_TENANTAPPLICATION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMTenantApplication.findById",
+    "query": "SELECT b FROM WCMTenantApplication b WHERE b.id = :id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMTenantApplication",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMTenantApplication.java",
+    "owner_table": "WCM_TENANTAPPLICATION",
+    "tables": [
+      "WCM_TENANTAPPLICATION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMTenantApplication.findByTenant",
+    "query": "SELECT b FROM WCMTenantApplication b WHERE b.tenant.id = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMTenantApplication",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMTenantApplication.java",
+    "owner_table": "WCM_TENANTAPPLICATION",
+    "tables": [
+      "WCM_TENANTAPPLICATION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMTenantApplication.findByApplication",
+    "query": "SELECT b FROM WCMTenantApplication b WHERE b.application.id = :applicationId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMTenantApplication",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMTenantApplication.java",
+    "owner_table": "WCM_TENANTAPPLICATION",
+    "tables": [
+      "WCM_TENANTAPPLICATION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMTenantApplication.findByTenantApplication",
+    "query": "SELECT b FROM WCMTenantApplication b WHERE b.tenant.id = :tenantId AND b.application.id = :applicationId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMTenantApplication",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMTenantApplication.java",
+    "owner_table": "WCM_TENANTAPPLICATION",
+    "tables": [
+      "WCM_TENANTAPPLICATION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMTenantApplication.findByTenantExtendedAppCode",
+    "query": "SELECT b FROM WCMTenantApplication b WHERE b.tenant.id = :tenantId AND b.appCodeExt = :extendedAppCode",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMTenantApplication",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMTenantApplication.java",
+    "owner_table": "WCM_TENANTAPPLICATION",
+    "tables": [
+      "WCM_TENANTAPPLICATION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMTenantApplication.findByApplicationCode",
+    "query": "SELECT b FROM WCMTenantApplication b WHERE b.tenant.id = :tenantId AND b.application.code = :applicationCode",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMTenantApplication",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMTenantApplication.java",
+    "owner_table": "WCM_TENANTAPPLICATION",
+    "tables": [
+      "WCM_TENANTAPPLICATION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

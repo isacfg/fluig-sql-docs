@@ -27,6 +27,98 @@
  "jpa_entities": [
   "com.fluig.local.entity.FDNLocalUser"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNLocalUser.findLocalByUser",
+   "query": "SELECT localUser.local FROM FDNLocalUser localUser WHERE localUser.companyId = :companyId AND localUser.userCode = :userCode",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.local.entity.FDNLocalUser",
+   "source_file": "com/fluig/local/entity/FDNLocalUser.java",
+   "owner_table": "FDN_LOCALUSER",
+   "tables": [
+    "FDN_LOCALUSER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNLocalUser.findLocalByUserFetchLocalUsers",
+   "query": "SELECT localUser.local FROM FDNLocalUser localUser LEFT JOIN FETCH localUser.local.localUsers WHERE localUser.companyId = :companyId AND localUser.userCode = :userCode",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.local.entity.FDNLocalUser",
+   "source_file": "com/fluig/local/entity/FDNLocalUser.java",
+   "owner_table": "FDN_LOCALUSER",
+   "tables": [
+    "FDN_LOCALUSER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNLocalUser.findLocalUserByUser",
+   "query": "SELECT localUser FROM FDNLocalUser localUser WHERE localUser.companyId = :companyId AND localUser.userCode = :userCode",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.local.entity.FDNLocalUser",
+   "source_file": "com/fluig/local/entity/FDNLocalUser.java",
+   "owner_table": "FDN_LOCALUSER",
+   "tables": [
+    "FDN_LOCALUSER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNLocalUser.findLocalUserByLocalAndUser",
+   "query": "SELECT localUser FROM FDNLocalUser localUser WHERE localUser.companyId = :companyId AND localUser.userCode = :userCode AND localUser.local.id = :localId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.local.entity.FDNLocalUser",
+   "source_file": "com/fluig/local/entity/FDNLocalUser.java",
+   "owner_table": "FDN_LOCALUSER",
+   "tables": [
+    "FDN_LOCALUSER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNLocalUser.findLocalUserByLocal",
+   "query": "SELECT localUser FROM FDNLocalUser localUser WHERE localUser.companyId = :companyId AND localUser.local.id = :localId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.local.entity.FDNLocalUser",
+   "source_file": "com/fluig/local/entity/FDNLocalUser.java",
+   "owner_table": "FDN_LOCALUSER",
+   "tables": [
+    "FDN_LOCALUSER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "ID",

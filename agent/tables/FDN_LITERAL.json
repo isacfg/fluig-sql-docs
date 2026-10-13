@@ -1,0 +1,59 @@
+{
+  "name": "FDN_LITERAL",
+  "domain": "i18n",
+  "purpose": "Literais (textos da interface) por produto e locale, com valor original e valor customizado pelo cliente.",
+  "schema_card": "by_table/FDN_LITERAL.json",
+  "business_concepts": [
+    "i18n",
+    "FDN_LITERAL"
+  ],
+  "grain": {
+    "description": "Literais (textos da interface) por produto e locale, com valor original e valor customizado pelo cliente. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "LITERAL_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_LITERAL.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FDNLITERAL001",
+      "unique": false,
+      "columns": [
+        "LOCALE",
+        "PRODUCT_CODE"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_LITERAL.json",
+  "observed_query_count": 7,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Literais (textos da interface) por produto e locale, com valor original e valor customizado pelo cliente. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "LITERAL_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

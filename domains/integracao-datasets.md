@@ -37,5 +37,7 @@ Cadastro de datasets (fontes de dados consultáveis por formulários/scripts), c
 **Relacionamentos (saem desta tabela):**
 
 - `(COD_EMPRESA, COD_LISTA)` → **META_LISTA** `(COD_EMPRESA, COD_LISTA)` · N:1 · logical-probable/probable — Lista de metadados que guarda os dados em cache do dataset.
+- `(COD_DATASET)` → **WCM_APPLICATION_DEPENDENCY** `(CODE)` · N:1 · hql-join/confirmed — Dataset.findByApplicationDependencyAndTenant
+- `(COD_EMPRESA)` → **WCM_APPLICATION_DEPENDENCY** `(ID)` · N:1 · hql-join/confirmed — Dataset.findByApplicationDependencyAndTenant
 
 **Dicas de consulta:** Consultar sempre por COD_EMPRESA. DSL_DATASET e SYNC_DETAILS são longtext.

@@ -1,0 +1,38 @@
+[
+  {
+    "name": "DELETE_GROUPS_BY_INVITES",
+    "query": "delete from SocialInviteGroup sig where sig.socialInvite in (?1) ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.invite.entity.SocialInviteGroup",
+    "source_file": "com/totvs/technology/social/invite/entity/SocialInviteGroup.java",
+    "owner_table": "SOCIALINVITEGROUP",
+    "tables": [
+      "SOCIALINVITEGROUP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FIND_BY_INVITE",
+    "query": "select si from SocialInviteGroup si where si.socialInvite.id=?1",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.invite.entity.SocialInviteGroup",
+    "source_file": "com/totvs/technology/social/invite/entity/SocialInviteGroup.java",
+    "owner_table": "SOCIALINVITEGROUP",
+    "tables": [
+      "SOCIALINVITEGROUP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

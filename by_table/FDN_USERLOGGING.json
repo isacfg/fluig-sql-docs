@@ -22,6 +22,80 @@
  "jpa_entities": [
   "com.totvs.technology.foundation.security.entity.FDNUserLogging"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNUserLogging.findAll",
+   "query": "SELECT b FROM FDNUserLogging b",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserLogging",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserLogging.java",
+   "owner_table": "FDN_USERLOGGING",
+   "tables": [
+    "FDN_USERLOGGING"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserLogging.findUsers",
+   "query": "SELECT new com.totvs.technology.foundation.security.vo.UserLogVO(F.login, U.fullName, log.id, log.dueDate) FROM FDNUserLogging log RIGHT OUTER JOIN log.user F RIGHT OUTER JOIN F.user U WHERE F.tenantId = :tenantId AND U.userType != :noLogin AND (F.login LIKE :filter OR U.fullName LIKE :filter)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserLogging",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserLogging.java",
+   "owner_table": "FDN_USERLOGGING",
+   "tables": [
+    "FDN_USERLOGGING"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserLogging.findByLogin",
+   "query": "SELECT b FROM FDNUserLogging b WHERE b.tenantId = :tenantId AND b.login = :login",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserLogging",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserLogging.java",
+   "owner_table": "FDN_USERLOGGING",
+   "tables": [
+    "FDN_USERLOGGING"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserLogging.findUsersWithActiveLog",
+   "query": "SELECT new com.totvs.technology.foundation.security.vo.UserLogVO(F.login, U.fullName, log.id, log.dueDate) FROM FDNUserLogging log RIGHT OUTER JOIN log.user F RIGHT OUTER JOIN F.user U WHERE F.tenantId = :tenantId and log.dueDate > :dueDate and (F.login LIKE :filter OR U.fullName LIKE :filter)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserLogging",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserLogging.java",
+   "owner_table": "FDN_USERLOGGING",
+   "tables": [
+    "FDN_USERLOGGING"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "USERLOGGING_ID",

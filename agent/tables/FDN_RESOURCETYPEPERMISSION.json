@@ -1,0 +1,141 @@
+{
+  "name": "FDN_RESOURCETYPEPERMISSION",
+  "domain": "foundation-identity-access",
+  "purpose": "Catálogo das permissões possíveis para cada tipo de recurso.",
+  "schema_card": "by_table/FDN_RESOURCETYPEPERMISSION.json",
+  "business_concepts": [
+    "foundation-identity-access",
+    "FDN_RESOURCETYPEPERMISSION"
+  ],
+  "grain": {
+    "description": "Catálogo das permissões possíveis para cada tipo de recurso. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "RESOURCE_PERMISSION_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_RESOURCETYPEPERMISSION.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0558",
+      "from_table": "FDN_RESOURCETYPEPERMISSION",
+      "to_table": "FDN_RESOURCETYPE",
+      "on": [
+        "FDN_RESOURCETYPEPERMISSION.RESOURCE_TYPE_ID = FDN_RESOURCETYPE.RESOURCE_TYPE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "RESOURCE_TYPE_ID",
+          "to_column": "RESOURCE_TYPE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Permissões válidas para o tipo.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0559",
+      "from_table": "FDN_RESOURCETYPEPERMISSION",
+      "to_table": "FDN_RESOURCETYPE",
+      "on": [
+        "FDN_RESOURCETYPEPERMISSION.RESOURCE_TYPE_ID = FDN_RESOURCETYPE.RESOURCE_TYPE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "RESOURCE_TYPE_ID",
+          "to_column": "RESOURCE_TYPE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Tipo de recurso.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0520",
+      "table": "FDN_PERMISSION",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0558",
+      "table": "FDN_RESOURCETYPE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0559",
+      "table": "FDN_RESOURCETYPE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FK_6I8YCEAGKPACM2FWKNIW0O7CN",
+      "unique": false,
+      "columns": [
+        "RESOURCE_TYPE_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_RESOURCETYPEPERMISSION.json",
+  "observed_query_count": 5,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Catálogo das permissões possíveis para cada tipo de recurso. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "RESOURCE_PERMISSION_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

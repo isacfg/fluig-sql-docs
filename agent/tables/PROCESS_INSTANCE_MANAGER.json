@@ -1,0 +1,130 @@
+{
+  "name": "PROCESS_INSTANCE_MANAGER",
+  "domain": "bpm-workflow",
+  "purpose": "Cache de usuarios gestores/participantes associados a uma instancia de processo, com data de cache.",
+  "schema_card": "by_table/PROCESS_INSTANCE_MANAGER.json",
+  "business_concepts": [
+    "bpm-workflow",
+    "PROCESS_INSTANCE_MANAGER"
+  ],
+  "grain": {
+    "description": "Cache de usuarios gestores/participantes associados a uma instancia de processo, com data de cache. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "id"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/PROCESS_INSTANCE_MANAGER.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0817",
+      "from_table": "PROCESS_INSTANCE_MANAGER",
+      "to_table": "PROCES_WORKFLOW",
+      "on": [
+        "PROCESS_INSTANCE_MANAGER.TENANT_ID = PROCES_WORKFLOW.COD_EMPRESA",
+        "PROCESS_INSTANCE_MANAGER.INSTANCE_ID = PROCES_WORKFLOW.NUM_PROCES"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "INSTANCE_ID",
+          "to_column": "NUM_PROCES"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Instancia de processo.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0817",
+      "table": "PROCES_WORKFLOW",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "PROCESSINSTANCEMANAGER01",
+      "unique": false,
+      "columns": [
+        "TENANT_ID",
+        "INSTANCE_ID"
+      ]
+    },
+    {
+      "name": "PROCESSINSTANCEMANAGER02",
+      "unique": false,
+      "columns": [
+        "TENANT_ID",
+        "INSTANCE_ID",
+        "USER_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Cache de usuarios gestores/participantes associados a uma instancia de processo, com data de cache. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "id"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

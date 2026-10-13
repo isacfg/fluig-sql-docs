@@ -1,0 +1,38 @@
+[
+  {
+    "name": "WCMPageData.findAll",
+    "query": "SELECT b FROM WCMPageData b",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageData",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageData.java",
+    "owner_table": "WCM_PAGEDATA",
+    "tables": [
+      "WCM_PAGEDATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMPageData.findByPageVersionId",
+    "query": "SELECT b FROM WCMPageData b WHERE b.pageVersion.id = :pageVersionId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMPageData",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMPageData.java",
+    "owner_table": "WCM_PAGEDATA",
+    "tables": [
+      "WCM_PAGEDATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

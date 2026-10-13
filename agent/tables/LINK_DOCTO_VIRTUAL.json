@@ -1,0 +1,102 @@
+{
+  "name": "LINK_DOCTO_VIRTUAL",
+  "domain": "ecm-documents",
+  "purpose": "Links virtuais (atalhos): um documento aparece em uma pasta adicional sem ser copiado.",
+  "schema_card": "by_table/LINK_DOCTO_VIRTUAL.json",
+  "business_concepts": [
+    "ecm-documents",
+    "LINK_DOCTO_VIRTUAL"
+  ],
+  "grain": {
+    "description": "Links virtuais (atalhos): um documento aparece em uma pasta adicional sem ser copiado. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "NR_DOCTO_PAI_CORREN",
+      "NR_DOCUMENTO"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/LINK_DOCTO_VIRTUAL.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0110",
+      "table": "DOCUMENTO",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0729",
+      "table": "DOCUMENTO",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0731",
+      "table": "DOCUMENTO",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "IDX_LINK_DOCTO_VIRTUAL_ML",
+      "unique": false,
+      "columns": [
+        "COD_EMPRESA",
+        "NR_DOCTO_PAI_CORREN",
+        "LOG_DELETE"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/LINK_DOCTO_VIRTUAL.json",
+  "observed_query_count": 1,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Links virtuais (atalhos): um documento aparece em uma pasta adicional sem ser copiado. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "NR_DOCTO_PAI_CORREN",
+        "NR_DOCUMENTO"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

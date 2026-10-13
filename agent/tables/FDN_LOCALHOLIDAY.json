@@ -1,0 +1,193 @@
+{
+  "name": "FDN_LOCALHOLIDAY",
+  "domain": "calendario-feriados",
+  "purpose": "Associação entre local (FDN_LOCAL) e feriado global (CALEND_GLOBAL): feriados que valem para cada local.",
+  "schema_card": "by_table/FDN_LOCALHOLIDAY.json",
+  "business_concepts": [
+    "calendario-feriados",
+    "FDN_LOCALHOLIDAY"
+  ],
+  "grain": {
+    "description": "Associação entre local (FDN_LOCAL) e feriado global (CALEND_GLOBAL): feriados que valem para cada local. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COMPANY_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COMPANY_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_LOCALHOLIDAY.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0462",
+      "from_table": "FDN_LOCALHOLIDAY",
+      "to_table": "FDN_LOCAL",
+      "on": [
+        "FDN_LOCALHOLIDAY.LOCAL_ID = FDN_LOCAL.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "LOCAL_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Feriados do local.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0467",
+      "from_table": "FDN_LOCALHOLIDAY",
+      "to_table": "FDN_LOCAL",
+      "on": [
+        "FDN_LOCALHOLIDAY.LOCAL_ID = FDN_LOCAL.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "LOCAL_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Local.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0469",
+      "from_table": "FDN_LOCALHOLIDAY",
+      "to_table": "CALEND_GLOBAL",
+      "on": [
+        "FDN_LOCALHOLIDAY.HOLIDAY_ID = CALEND_GLOBAL.ID",
+        "FDN_LOCALHOLIDAY.COMPANY_ID = CALEND_GLOBAL.COD_EMPRESA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "HOLIDAY_ID",
+          "to_column": "ID"
+        },
+        {
+          "from_column": "COMPANY_ID",
+          "to_column": "COD_EMPRESA"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Feriado global (join composto).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0462",
+      "table": "FDN_LOCAL",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0467",
+      "table": "FDN_LOCAL",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0469",
+      "table": "CALEND_GLOBAL",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FKwptl75siam95n7wpk7a78w1g",
+      "unique": false,
+      "columns": [
+        "HOLIDAY_ID",
+        "COMPANY_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_LOCALHOLIDAY.json",
+  "observed_query_count": 4,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Associação entre local (FDN_LOCAL) e feriado global (CALEND_GLOBAL): feriados que valem para cada local. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COMPANY_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

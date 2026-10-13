@@ -1,0 +1,164 @@
+[
+  {
+    "name": "FDNSiteDownloadQueue.findAll",
+    "query": "SELECT o FROM FDNSiteDownloadQueue o ORDER BY priority ASC",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.volume.entity.FDNSiteDownloadQueue",
+    "source_file": "com/fluig/foundation/volume/entity/FDNSiteDownloadQueue.java",
+    "owner_table": "FDN_SITEDOWNLOADQUEUE",
+    "tables": [
+      "FDN_SITEDOWNLOADQUEUE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNSiteDownloadQueue.findBySite",
+    "query": "SELECT o FROM FDNSiteDownloadQueue o WHERE o.userSiteId = :userSiteId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.volume.entity.FDNSiteDownloadQueue",
+    "source_file": "com/fluig/foundation/volume/entity/FDNSiteDownloadQueue.java",
+    "owner_table": "FDN_SITEDOWNLOADQUEUE",
+    "tables": [
+      "FDN_SITEDOWNLOADQUEUE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNSiteDownloadQueue.findByFileInfo",
+    "query": "SELECT o FROM FDNSiteDownloadQueue o WHERE o.userSiteId = :userSiteId AND o.fileSiteId = :fileSiteId AND o.documentId = :documentId AND o.version = :version",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.volume.entity.FDNSiteDownloadQueue",
+    "source_file": "com/fluig/foundation/volume/entity/FDNSiteDownloadQueue.java",
+    "owner_table": "FDN_SITEDOWNLOADQUEUE",
+    "tables": [
+      "FDN_SITEDOWNLOADQUEUE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNSiteDownloadQueue.findByStatus",
+    "query": "SELECT o FROM FDNSiteDownloadQueue o where o.status = :status",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.volume.entity.FDNSiteDownloadQueue",
+    "source_file": "com/fluig/foundation/volume/entity/FDNSiteDownloadQueue.java",
+    "owner_table": "FDN_SITEDOWNLOADQUEUE",
+    "tables": [
+      "FDN_SITEDOWNLOADQUEUE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNSiteDownloadQueue.findAllActive",
+    "query": "SELECT o FROM FDNSiteDownloadQueue o where o.status != :status",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.volume.entity.FDNSiteDownloadQueue",
+    "source_file": "com/fluig/foundation/volume/entity/FDNSiteDownloadQueue.java",
+    "owner_table": "FDN_SITEDOWNLOADQUEUE",
+    "tables": [
+      "FDN_SITEDOWNLOADQUEUE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNSiteDownloadQueue.findActiveCount",
+    "query": "SELECT COUNT(o) FROM FDNSiteDownloadQueue o where o.status != :status",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.volume.entity.FDNSiteDownloadQueue",
+    "source_file": "com/fluig/foundation/volume/entity/FDNSiteDownloadQueue.java",
+    "owner_table": "FDN_SITEDOWNLOADQUEUE",
+    "tables": [
+      "FDN_SITEDOWNLOADQUEUE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNSiteDownloadQueue.findQueuedDocument",
+    "query": "SELECT o FROM FDNSiteDownloadQueue o JOIN o.userSite s where s.tenantId = :tenantId and o.status != :status and o.documentId = :documentId ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.volume.entity.FDNSiteDownloadQueue",
+    "source_file": "com/fluig/foundation/volume/entity/FDNSiteDownloadQueue.java",
+    "owner_table": "FDN_SITEDOWNLOADQUEUE",
+    "tables": [
+      "FDN_SITEDOWNLOADQUEUE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNSiteDownloadQueue.findQueuedByDocumentAndUser",
+    "query": "SELECT o FROM FDNSiteDownloadQueue o JOIN o.userSite s where s.tenantId = :tenantId and  o.documentId = :documentId and o.version = :version and o.userSiteId = :userSiteId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.volume.entity.FDNSiteDownloadQueue",
+    "source_file": "com/fluig/foundation/volume/entity/FDNSiteDownloadQueue.java",
+    "owner_table": "FDN_SITEDOWNLOADQUEUE",
+    "tables": [
+      "FDN_SITEDOWNLOADQUEUE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNSiteDownloadQueue.findBySiteAndStatus",
+    "query": "SELECT o FROM FDNSiteDownloadQueue o WHERE o.userSiteId = :userSiteId and o.status = :status order by priority, id ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.volume.entity.FDNSiteDownloadQueue",
+    "source_file": "com/fluig/foundation/volume/entity/FDNSiteDownloadQueue.java",
+    "owner_table": "FDN_SITEDOWNLOADQUEUE",
+    "tables": [
+      "FDN_SITEDOWNLOADQUEUE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

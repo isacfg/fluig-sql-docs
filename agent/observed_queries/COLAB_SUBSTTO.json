@@ -1,0 +1,92 @@
+[
+  {
+    "name": "ColleagueReplacement.findAll",
+    "query": "SELECT cr from ColleagueReplacement cr where cr.companyId = :companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.foundation.model.ColleagueReplacement",
+    "source_file": "com/datasul/technology/webdesk/foundation/model/ColleagueReplacement.java",
+    "owner_table": "COLAB_SUBSTTO",
+    "tables": [
+      "COLAB_SUBSTTO"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ColleagueReplacement.findReplacementsOfUser",
+    "query": "SELECT cr FROM ColleagueReplacement cr WHERE cr.companyId = :companyId AND cr.colleagueId = :colleagueId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.foundation.model.ColleagueReplacement",
+    "source_file": "com/datasul/technology/webdesk/foundation/model/ColleagueReplacement.java",
+    "owner_table": "COLAB_SUBSTTO",
+    "tables": [
+      "COLAB_SUBSTTO"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ColleagueReplacement.findUserIsTheReplacement",
+    "query": "SELECT cr FROM ColleagueReplacement cr  WHERE cr.companyId = :companyId   AND cr.replacementId = :replacementId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.foundation.model.ColleagueReplacement",
+    "source_file": "com/datasul/technology/webdesk/foundation/model/ColleagueReplacement.java",
+    "owner_table": "COLAB_SUBSTTO",
+    "tables": [
+      "COLAB_SUBSTTO"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ColleagueReplacement.findReplacedByUser",
+    "query": "SELECT cr FROM ColleagueReplacement cr WHERE cr.companyId = :companyId AND cr.replacementId = :replacementId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.foundation.model.ColleagueReplacement",
+    "source_file": "com/datasul/technology/webdesk/foundation/model/ColleagueReplacement.java",
+    "owner_table": "COLAB_SUBSTTO",
+    "tables": [
+      "COLAB_SUBSTTO"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ColleagueReplacement.countReplacementByUserAndDate",
+    "query": "SELECT COUNT(cr.companyId) AS QTD FROM ColleagueReplacement cr WHERE cr.companyId = :companyId AND cr.replacementId = :colleagueReplacement AND (cr.validationStartDate >= :currentDate OR cr.validationFinalDate >= :currentDate)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.foundation.model.ColleagueReplacement",
+    "source_file": "com/datasul/technology/webdesk/foundation/model/ColleagueReplacement.java",
+    "owner_table": "COLAB_SUBSTTO",
+    "tables": [
+      "COLAB_SUBSTTO"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

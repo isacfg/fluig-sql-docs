@@ -1,0 +1,275 @@
+{
+  "name": "SOCIABLE",
+  "domain": "social",
+  "purpose": "Tabela única (SINGLE_TABLE) de conteúdos \"sociáveis\" da rede social: posts, comentários, objetos sociais (links/recomendações) e objetos no-code (formulários). O tipo é dado por SOCIABLETYPE.",
+  "schema_card": "by_table/SOCIABLE.json",
+  "business_concepts": [
+    "social",
+    "SOCIABLE"
+  ],
+  "grain": {
+    "description": "Tabela única (SINGLE_TABLE) de conteúdos \"sociáveis\" da rede social: posts, comentários, objetos sociais (links/recomendações) e objetos no-code (formulários). O tipo é dado por SOCIABLETYPE. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "id"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/SOCIABLE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0764",
+      "table": "MENTION",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0895",
+      "table": "SOCIAL",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0897",
+      "table": "SOCIAL",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0899",
+      "table": "SOCIABLE",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0900",
+      "table": "SOCIABLE",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0901",
+      "table": "SOCIABLE",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0902",
+      "table": "SOCIABLE",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0904",
+      "table": "SOCIABLEDENOUNCEMENT",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0912",
+      "table": "SOCIABLELIKE",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0916",
+      "table": "SOCIABLESHARE",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0922",
+      "table": "SOCIABLEWATCH",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0948",
+      "table": "SOCIALPOSTUSER",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0958",
+      "table": "SOCIAL_POSTATTACHMENT",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0960",
+      "table": "SOCIAL_POSTATTACHMENT",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [
+    "TEXT"
+  ],
+  "indexes": [
+    {
+      "name": "SociableCommentI001",
+      "unique": false,
+      "columns": [
+        "sociable_id",
+        "removed",
+        "numberDenouncements",
+        "id"
+      ]
+    },
+    {
+      "name": "SociableCommentI002",
+      "unique": false,
+      "columns": [
+        "sociable_id",
+        "removed",
+        "user_id"
+      ]
+    },
+    {
+      "name": "SocialObjectI001",
+      "unique": false,
+      "columns": [
+        "objectClass",
+        "removed",
+        "objectId"
+      ]
+    },
+    {
+      "name": "SocialPostI001",
+      "unique": false,
+      "columns": [
+        "removed",
+        "numberDenouncements",
+        "social_id",
+        "visibility"
+      ]
+    },
+    {
+      "name": "SocialPostI002",
+      "unique": false,
+      "columns": [
+        "removed",
+        "tenantid",
+        "numberDenouncements"
+      ]
+    },
+    {
+      "name": "SocialPostI003",
+      "unique": false,
+      "columns": [
+        "removed",
+        "social_id",
+        "lastupdatedate",
+        "visibility"
+      ]
+    },
+    {
+      "name": "SocialPostI004",
+      "unique": false,
+      "columns": [
+        "removed",
+        "numberDenouncements",
+        "linkedobject_id"
+      ]
+    },
+    {
+      "name": "SocialPostI005",
+      "unique": false,
+      "columns": [
+        "removed",
+        "tenantid",
+        "id"
+      ]
+    },
+    {
+      "name": "SocialPostI006",
+      "unique": false,
+      "columns": [
+        "sociableType",
+        "social_id",
+        "numberDenouncements",
+        "visibility",
+        "user_id"
+      ]
+    },
+    {
+      "name": "SocialPostI007",
+      "unique": false,
+      "columns": [
+        "sociableType",
+        "removed",
+        "numberDenouncements",
+        "lastupdatedate"
+      ]
+    },
+    {
+      "name": "SociableNoCodeObjectI001",
+      "unique": false,
+      "columns": [
+        "tenantid",
+        "NOCODE_EXTERNAL_ID"
+      ]
+    },
+    {
+      "name": "SocialPostI008",
+      "unique": false,
+      "columns": [
+        "objectId",
+        "objectClass"
+      ]
+    },
+    {
+      "name": "SocialPostI009",
+      "unique": false,
+      "columns": [
+        "objectId",
+        "objectClass",
+        "sociableType",
+        "removed",
+        "tenantid"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/SOCIABLE.json",
+  "observed_query_count": 30,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Tabela única (SINGLE_TABLE) de conteúdos \"sociáveis\" da rede social: posts, comentários, objetos sociais (links/recomendações) e objetos no-code (formulários). O tipo é dado por SOCIABLETYPE. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "id"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

@@ -24,5 +24,6 @@ Habilitação de uma aplicação WCM (widget/tema/layout) para um tenant, com c�
 
 - `(APPLICATION_ID)` → **WCM_APPLICATION** `(APPLICATION_ID)` · N:1 · physical-fk/confirmed — Aplicação habilitada.
 - `(TENANT_ID)` → **FDN_TENANT** `(TENANT_ID)` · N:1 · physical-fk/confirmed — Tenant.
+- `(TENANT_APPLICATION_ID)` → **WCM_APPLICATION** `(APPLICATION_ID)` · N:1 · hql-join/confirmed — WCMWidget.findEnabledWidgetsByInternalAndTenant
 
 **Dicas de consulta:** Named queries: findByTenant, findByApplication, findByTenantApplication, findByTenantExtendedAppCode, findByApplicationCode.

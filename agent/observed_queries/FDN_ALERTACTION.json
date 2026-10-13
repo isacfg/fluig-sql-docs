@@ -1,0 +1,74 @@
+[
+  {
+    "name": "FDNAlertAction.findById",
+    "query": "SELECT b FROM FDNAlertAction b WHERE b.id = :id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertAction",
+    "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertAction.java",
+    "owner_table": "FDN_ALERTACTION",
+    "tables": [
+      "FDN_ALERTACTION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNAlertAction.findExecutedByAlert",
+    "query": "SELECT b FROM FDNAlertAction b WHERE b.alert.id = :alertId and b.executed = true",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertAction",
+    "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertAction.java",
+    "owner_table": "FDN_ALERTACTION",
+    "tables": [
+      "FDN_ALERTACTION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNAlertAction.findByAlert",
+    "query": "SELECT b FROM FDNAlertAction b WHERE b.alert.id = :alertId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertAction",
+    "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertAction.java",
+    "owner_table": "FDN_ALERTACTION",
+    "tables": [
+      "FDN_ALERTACTION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNAlertAction.removeAlertActionsByAlertIdsList",
+    "query": " DELETE FROM FDNAlertAction alertAction WHERE alertAction.alertId IN ( :alertIds )",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertAction",
+    "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertAction.java",
+    "owner_table": "FDN_ALERTACTION",
+    "tables": [
+      "FDN_ALERTACTION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

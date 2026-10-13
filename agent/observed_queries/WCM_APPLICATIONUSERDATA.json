@@ -1,0 +1,110 @@
+[
+  {
+    "name": "WCMApplicationUserData.findAll",
+    "query": "SELECT b FROM WCMApplicationUserData b",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationUserData",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationUserData.java",
+    "owner_table": "WCM_APPLICATIONUSERDATA",
+    "tables": [
+      "WCM_APPLICATIONUSERDATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMApplicationUserData.findById",
+    "query": "SELECT b FROM WCMApplicationUserData b WHERE b.id = :id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationUserData",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationUserData.java",
+    "owner_table": "WCM_APPLICATIONUSERDATA",
+    "tables": [
+      "WCM_APPLICATIONUSERDATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMApplicationUserData.findByInstanceIdAndLogin",
+    "query": "SELECT b FROM WCMApplicationUserData b WHERE b.instance.id = :instanceId AND b.login = :login",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationUserData",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationUserData.java",
+    "owner_table": "WCM_APPLICATIONUSERDATA",
+    "tables": [
+      "WCM_APPLICATIONUSERDATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMApplicationUserData.findByInstanceIdLoginAndKey",
+    "query": "SELECT b FROM WCMApplicationUserData b WHERE b.instance.id = :instanceId AND b.login = :login AND b.dataKey = :key",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationUserData",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationUserData.java",
+    "owner_table": "WCM_APPLICATIONUSERDATA",
+    "tables": [
+      "WCM_APPLICATIONUSERDATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMApplicationUserData.countKeyByUsers",
+    "query": "SELECT COUNT(DISTINCT b.login) FROM WCMApplicationUserData b WHERE b.dataKey = :key",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationUserData",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationUserData.java",
+    "owner_table": "WCM_APPLICATIONUSERDATA",
+    "tables": [
+      "WCM_APPLICATIONUSERDATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMApplicationUserData.findByInstanceId",
+    "query": "SELECT b FROM WCMApplicationUserData b WHERE b.instance.id = :instanceId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationUserData",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationUserData.java",
+    "owner_table": "WCM_APPLICATIONUSERDATA",
+    "tables": [
+      "WCM_APPLICATIONUSERDATA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

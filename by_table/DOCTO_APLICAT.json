@@ -17,6 +17,7 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.dm.model.DocumentApplication"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "COD_APLICAT",

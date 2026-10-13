@@ -1,0 +1,126 @@
+{
+  "name": "WCM_RESOURCECOMPONENTFILE",
+  "domain": "wcm-resources",
+  "purpose": "Arquivos (JS/CSS etc.) pertencentes a um componente de recurso, com tipo, caminho e ordem de carga.",
+  "schema_card": "by_table/WCM_RESOURCECOMPONENTFILE.json",
+  "business_concepts": [
+    "wcm-resources",
+    "WCM_RESOURCECOMPONENTFILE"
+  ],
+  "grain": {
+    "description": "Arquivos (JS/CSS etc.) pertencentes a um componente de recurso, com tipo, caminho e ordem de carga. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "RESOURCE_COMPONENT_FILE_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/WCM_RESOURCECOMPONENTFILE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-1110",
+      "from_table": "WCM_RESOURCECOMPONENTFILE",
+      "to_table": "WCM_RESOURCECOMPONENT",
+      "on": [
+        "WCM_RESOURCECOMPONENTFILE.RESOURCE_COMPONENT_ID = WCM_RESOURCECOMPONENT.RESOURCE_COMPONENT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "RESOURCE_COMPONENT_ID",
+          "to_column": "RESOURCE_COMPONENT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Arquivos que compõem o componente.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1111",
+      "from_table": "WCM_RESOURCECOMPONENTFILE",
+      "to_table": "WCM_RESOURCECOMPONENT",
+      "on": [
+        "WCM_RESOURCECOMPONENTFILE.RESOURCE_COMPONENT_ID = WCM_RESOURCECOMPONENT.RESOURCE_COMPONENT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "RESOURCE_COMPONENT_ID",
+          "to_column": "RESOURCE_COMPONENT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Componente dono do arquivo.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-1110",
+      "table": "WCM_RESOURCECOMPONENT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1111",
+      "table": "WCM_RESOURCECOMPONENT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/WCM_RESOURCECOMPONENTFILE.json",
+  "observed_query_count": 3,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Arquivos (JS/CSS etc.) pertencentes a um componente de recurso, com tipo, caminho e ordem de carga. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "RESOURCE_COMPONENT_FILE_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

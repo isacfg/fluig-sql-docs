@@ -18,6 +18,62 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.workflow.model.WorkflowProcessEvent"
  ],
+ "observed_queries": [
+  {
+   "name": "WorkflowProcessEvent.findAll",
+   "query": "SELECT wp FROM WorkflowProcessEvent wp WHERE wp.workflowProcessEventPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.WorkflowProcessEvent",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/WorkflowProcessEvent.java",
+   "owner_table": "EVENT_PROCES",
+   "tables": [
+    "EVENT_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WorkflowProcessEvent.findWorkflowProcessEventByProcess",
+   "query": "SELECT wp FROM WorkflowProcessEvent wp WHERE wp.workflowProcessEventPK.companyId = :companyId and  wp.workflowProcessEventPK.processId = :processId and wp.workflowProcessEventPK.version = :version and wp.workflowProcessEventPK.scriptVersion = :scriptVersion",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.WorkflowProcessEvent",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/WorkflowProcessEvent.java",
+   "owner_table": "EVENT_PROCES",
+   "tables": [
+    "EVENT_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WorkflowProcessEvent.findAllProcessEventByProcessIgnoringScriptVersion",
+   "query": "SELECT wp FROM WorkflowProcessEvent wp WHERE wp.workflowProcessEventPK.companyId = :companyId and  wp.workflowProcessEventPK.processId = :processId and wp.workflowProcessEventPK.version = :version order by wp.workflowProcessEventPK.scriptVersion",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.WorkflowProcessEvent",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/WorkflowProcessEvent.java",
+   "owner_table": "EVENT_PROCES",
+   "tables": [
+    "EVENT_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",

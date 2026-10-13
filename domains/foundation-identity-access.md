@@ -24,6 +24,8 @@ Grupo de usuários do Fluig (de usuários, cloud ou comunidade), por tenant. Usa
 **Relacionamentos (saem desta tabela):**
 
 - `(TENANT_ID)` → **FDN_TENANT** `(TENANT_ID)` · N:1 · jpa-join/confirmed — Tenant ao qual o registro pertence.
+- `(TENANT_ID)` → **FDN_PERMISSION** `(TENANT_ID)` · N:1 · hql-join/confirmed — FDNGroup.findGroupsWithPermission
+- `(GROUP_CODE)` → **FDN_PERMISSION** `(GROUP_CODE)` · N:1 · hql-join/confirmed — FDNGroup.findGroupsWithPermission
 
 **Dicas de consulta:** Sempre filtrar por TENANT_ID. Para listar grupos visíveis use INTERNAL=0. Membros em FDN_GROUPUSERROLE (por GROUP_CODE+TENANT_ID). Propriedades extras em FDN_GROUPDATA.
 
@@ -136,6 +138,12 @@ Concessão de permissão sobre um recurso (FDN_RESOURCE) a um usuário, grupo ou
 - `(LOGIN)` → **FDN_USERTENANT** `(LOGIN)` · N:1 · logical-probable/probable — Usuário beneficiário, sem FK.
 - `(TENANT_ID, GROUP_CODE)` → **FDN_GROUP** `(TENANT_ID, GROUP_CODE)` · N:1 · hql-join/confirmed — Grupo beneficiário (FDNGroup join FDNPermission em HQL).
 - `(TENANT_ID, ROLE_CODE)` → **FDN_ROLE** `(TENANT_ID, ROLE_CODE)` · N:1 · logical-probable/probable — Papel beneficiário, sem FK.
+- `(TENANT_ID)` → **FDN_USERTENANT** `(TENANT_ID)` · N:1 · hql-join/confirmed — FDNResource.findAllWithPermissionToUserAndFilter
+- `(TENANT_ID)` → **FDN_GROUP** `(TENANT_ID)` · N:1 · hql-join/confirmed — FDNResource.findAllWithPermissionToGroupAndFilter
+- `(GROUP_CODE)` → **FDN_GROUP** `(GROUP_CODE)` · N:1 · hql-join/confirmed — FDNResource.findAllWithPermissionToGroupAndFilter
+- `(TENANT_ID)` → **FDN_ROLE** `(TENANT_ID)` · N:1 · hql-join/confirmed — FDNResource.findAllWithPermissionToRoleAndFilter
+- `(ROLE_CODE)` → **FDN_ROLE** `(ROLE_CODE)` · N:1 · hql-join/confirmed — FDNResource.findAllWithPermissionToRoleAndFilter
+- `(PERMISSION)` → **FDN_RESOURCETYPEPERMISSION** `(PERMISSION)` · N:1 · hql-join/confirmed — FDNUserTenant.findActiveUsersWithPermission
 
 **Dicas de consulta:** Para saber quem pode o quê: filtre por RESOURCE_ID e TENANT_ID e verifique qual das colunas LOGIN/GROUP_CODE/ROLE_CODE está preenchida.
 
@@ -288,6 +296,8 @@ Papel (role) de segurança do tenant, atribuído a usuários e grupos.
 
 - `(TENANT_ID)` → **FDN_TENANT** `(TENANT_ID)` · N:1 · jpa-join/confirmed — Tenant ao qual o registro pertence.
 - `(TENANT_ID, ROLE_CODE)` → **FDN_USERROLE** `(TENANT_ID, ROLE_CODE)` · 1:N · jpa-join/confirmed — Usuários com este papel.
+- `(TENANT_ID)` → **FDN_PERMISSION** `(TENANT_ID)` · N:1 · hql-join/confirmed — FDNRole.findRolesWithPermission
+- `(ROLE_CODE)` → **FDN_PERMISSION** `(ROLE_CODE)` · N:1 · hql-join/confirmed — FDNRole.findRolesWithPermission
 
 **Dicas de consulta:** Junte por (TENANT_ID, ROLE_CODE). Dados extras em FDN_ROLEDATA.
 
@@ -473,5 +483,7 @@ Vínculo do usuário (FDN_USER) com um tenant: contém login, e-mail, senha, est
 - `(TENANT_ID)` → **FDN_TENANT** `(TENANT_ID)` · N:1 · jpa-join/confirmed — Tenant ao qual o registro pertence.
 - `(ANONYMIZATION_USER_ID)` → **FDN_USERTENANT** `(USER_TENANT_ID)` · N:1 · physical-fk/confirmed — Quem anonimizou.
 - `(USER_TENANT_ID)` → **FDN_USERDATA** `(USER_TENANT_ID)` · 1:N · jpa-join/confirmed — Propriedades do usuário.
+- `(TENANT_ID)` → **FDN_PERMISSION** `(TENANT_ID)` · N:1 · hql-join/confirmed — FDNUserTenant.findActiveUsersWithPermission
+- `(LOGIN)` → **FDN_PERMISSION** `(LOGIN)` · N:1 · hql-join/confirmed — FDNUserTenant.findActiveUsersWithPermission
 
 **Dicas de consulta:** Filtre sempre por TENANT_ID. Dados sensíveis: EMAIL, PASSWORD (hash), IDP_ID. Filtre USER_STATE=1 para ativos.

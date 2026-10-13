@@ -1,0 +1,20 @@
+[
+  {
+    "name": "FIND_BY_DENOUNCE",
+    "query": "select h from SociableDenouncementHistory h where h.denouncement.id = :denounceId order by h.creationDate asc",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.sociable.entity.SociableDenouncementHistory",
+    "source_file": "com/totvs/technology/social/sociable/entity/SociableDenouncementHistory.java",
+    "owner_table": "SOCIABLEDENOUNCEMENTHISTORY",
+    "tables": [
+      "SOCIABLEDENOUNCEMENTHISTORY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

@@ -15,6 +15,98 @@
  "jpa_entities": [
   "com.fluig.foundation.scheduler.entity.quartz.QrtzJobDetails"
  ],
+ "observed_queries": [
+  {
+   "name": "QrtzJobDetails.findJobDetailsByFilterSearch",
+   "query": "SELECT j FROM QrtzJobDetails j WHERE j.jobGroup = :companyId AND (j.jobName like :jobName or j.description like :description)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.scheduler.entity.quartz.QrtzJobDetails",
+   "source_file": "com/fluig/foundation/scheduler/entity/quartz/QrtzJobDetails.java",
+   "owner_table": "QRTZ_JOB_DETAILS",
+   "tables": [
+    "QRTZ_JOB_DETAILS"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "QrtzJobDetails.findJobDetailsByGroupAndName",
+   "query": "SELECT j FROM QrtzJobDetails j WHERE j.jobGroup = :companyId AND j.jobName like :jobName",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.scheduler.entity.quartz.QrtzJobDetails",
+   "source_file": "com/fluig/foundation/scheduler/entity/quartz/QrtzJobDetails.java",
+   "owner_table": "QRTZ_JOB_DETAILS",
+   "tables": [
+    "QRTZ_JOB_DETAILS"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "QrtzJobDetails.findJobDetailsByType",
+   "query": "SELECT j FROM QrtzJobDetails j WHERE j.jobGroup = :companyId AND j.jobClassName like :jobClassName",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.scheduler.entity.quartz.QrtzJobDetails",
+   "source_file": "com/fluig/foundation/scheduler/entity/quartz/QrtzJobDetails.java",
+   "owner_table": "QRTZ_JOB_DETAILS",
+   "tables": [
+    "QRTZ_JOB_DETAILS"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "QrtzJobDetails.findJobDetailsByJobDescriptionByType",
+   "query": "SELECT j FROM QrtzJobDetails j WHERE j.jobGroup = :companyId AND j.description like :description AND j.jobClassName like :jobClassName",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.scheduler.entity.quartz.QrtzJobDetails",
+   "source_file": "com/fluig/foundation/scheduler/entity/quartz/QrtzJobDetails.java",
+   "owner_table": "QRTZ_JOB_DETAILS",
+   "tables": [
+    "QRTZ_JOB_DETAILS"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "QrtzJobDetails.findJobDetailsByJobNameAndType",
+   "query": "SELECT j FROM QrtzJobDetails j WHERE j.jobGroup = :companyId AND j.jobName like :jobName AND j.jobClassName like :jobClassName",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.foundation.scheduler.entity.quartz.QrtzJobDetails",
+   "source_file": "com/fluig/foundation/scheduler/entity/quartz/QrtzJobDetails.java",
+   "owner_table": "QRTZ_JOB_DETAILS",
+   "tables": [
+    "QRTZ_JOB_DETAILS"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "JOB_GROUP",

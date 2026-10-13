@@ -1,0 +1,89 @@
+{
+  "name": "WCM_APPLICATIONUSERDATA",
+  "domain": "wcm-portal",
+  "purpose": "Par chave/valor de preferência de widget por usuário (LOGIN) e instância (PAGE_WIDGET_ID).",
+  "schema_card": "by_table/WCM_APPLICATIONUSERDATA.json",
+  "business_concepts": [
+    "wcm-portal",
+    "WCM_APPLICATIONUSERDATA"
+  ],
+  "grain": {
+    "description": "Par chave/valor de preferência de widget por usuário (LOGIN) e instância (PAGE_WIDGET_ID). Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "APPLICATION_DATA_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/WCM_APPLICATIONUSERDATA.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-1055",
+      "from_table": "WCM_APPLICATIONUSERDATA",
+      "to_table": "WCM_PAGEWIDGET",
+      "on": [
+        "WCM_APPLICATIONUSERDATA.PAGE_WIDGET_ID = WCM_PAGEWIDGET.PAGE_WIDGET_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "PAGE_WIDGET_ID",
+          "to_column": "PAGE_WIDGET_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Instância de widget.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-1055",
+      "table": "WCM_PAGEWIDGET",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/WCM_APPLICATIONUSERDATA.json",
+  "observed_query_count": 6,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Par chave/valor de preferência de widget por usuário (LOGIN) e instância (PAGE_WIDGET_ID). Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "APPLICATION_DATA_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

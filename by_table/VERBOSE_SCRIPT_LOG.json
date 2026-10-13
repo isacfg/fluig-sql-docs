@@ -24,6 +24,7 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.workflow.model.VerboseScriptLog"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "ID",

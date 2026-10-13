@@ -1,0 +1,105 @@
+{
+  "name": "FDN_DIGITALSIGNATURE",
+  "domain": "assinatura-digital",
+  "purpose": "Configuração de assinatura digital por tenant: tipo de assinatura e número de licenças. Uma linha por tenant licenciado.",
+  "schema_card": "by_table/FDN_DIGITALSIGNATURE.json",
+  "business_concepts": [
+    "assinatura-digital",
+    "FDN_DIGITALSIGNATURE"
+  ],
+  "grain": {
+    "description": "Configuração de assinatura digital por tenant: tipo de assinatura e número de licenças. Uma linha por tenant licenciado. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "DIGITAL_SIGNATURE_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_DIGITALSIGNATURE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0425",
+      "from_table": "FDN_DIGITALSIGNATURE",
+      "to_table": "FDN_TENANT",
+      "on": [
+        "FDN_DIGITALSIGNATURE.TENANT_ID = FDN_TENANT.TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Tenant da licença.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0425",
+      "table": "FDN_TENANT",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_DIGITALSIGNATURE.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Configuração de assinatura digital por tenant: tipo de assinatura e número de licenças. Uma linha por tenant licenciado. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "DIGITAL_SIGNATURE_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

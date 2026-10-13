@@ -1,0 +1,149 @@
+{
+  "name": "FDN_USER",
+  "domain": "foundation-identity-access",
+  "purpose": "Pessoa/usuário global do Fluig (dados pessoais independentes de tenant); o vínculo com cada tenant está em FDN_USERTENANT.",
+  "schema_card": "by_table/FDN_USER.json",
+  "business_concepts": [
+    "pessoa",
+    "nome do usuário",
+    "global user"
+  ],
+  "grain": {
+    "description": "Uma pessoa global, compartilhável entre tenants; o tenant deve ser delimitado via FDN_USERTENANT.",
+    "columns": [
+      "USER_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "reviewed-schema-description",
+    "business_grain_reviewed": true
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_USER.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values",
+  "canonical_joins": [
+    {
+      "id": "join-0601",
+      "from_table": "FDN_USER",
+      "to_table": "FDN_USER",
+      "on": [
+        "FDN_USER.ANONYMIZATION_USER_ID = FDN_USER.USER_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "ANONYMIZATION_USER_ID",
+          "to_column": "USER_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Usuário que anonimizou este registro.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0070",
+      "table": "DIAGNOSIS_PROCESS_LOG",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0601",
+      "table": "FDN_USER",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0602",
+      "table": "FDN_USER",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0603",
+      "table": "FDN_USERTENANT",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0622",
+      "table": "FDN_USERTENANT",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0662",
+      "table": "FILTERS",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0928",
+      "table": "SOCIAL",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FDNUSERI001",
+      "unique": false,
+      "columns": [
+        "FULL_NAME"
+      ]
+    },
+    {
+      "name": "FDNUSERI002",
+      "unique": false,
+      "columns": [
+        "USER_TYPE"
+      ]
+    }
+  ],
+  "query_examples": [
+    "recipes/users/active_users.sql"
+  ],
+  "observed_queries_path": "agent/observed_queries/FDN_USER.json",
+  "observed_query_count": 4,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Uma pessoa global, compartilhável entre tenants; o tenant deve ser delimitado via FDN_USERTENANT.",
+      "columns": [
+        "USER_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "reviewed-schema-description",
+      "business_grain_reviewed": true
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

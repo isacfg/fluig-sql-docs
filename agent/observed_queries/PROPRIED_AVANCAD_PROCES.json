@@ -1,0 +1,38 @@
+[
+  {
+    "name": "AdvancedProcessProperties.findAll",
+    "query": "SELECT app FROM AdvancedProcessProperties app WHERE app.advancedProcessPropertiesPK.companyId = :companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.AdvancedProcessProperties",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/AdvancedProcessProperties.java",
+    "owner_table": "PROPRIED_AVANCAD_PROCES",
+    "tables": [
+      "PROPRIED_AVANCAD_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "AdvancedProcessProperties.findByProcess",
+    "query": "SELECT app FROM AdvancedProcessProperties app WHERE app.advancedProcessPropertiesPK.companyId = :companyId AND app.advancedProcessPropertiesPK.processId = :processId AND app.advancedProcessPropertiesPK.version = :version ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.AdvancedProcessProperties",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/AdvancedProcessProperties.java",
+    "owner_table": "PROPRIED_AVANCAD_PROCES",
+    "tables": [
+      "PROPRIED_AVANCAD_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

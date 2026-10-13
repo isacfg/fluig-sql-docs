@@ -1,0 +1,89 @@
+{
+  "name": "FDN_FLUIG_SERVER",
+  "domain": "integracao-servidores",
+  "purpose": "Servidores Fluig cadastrados (outras instâncias Fluig conectadas), cada um com credenciais OAuth em FDN_AUTHORIZECLIENTDATA.",
+  "schema_card": "by_table/FDN_FLUIG_SERVER.json",
+  "business_concepts": [
+    "integracao-servidores",
+    "FDN_FLUIG_SERVER"
+  ],
+  "grain": {
+    "description": "Servidores Fluig cadastrados (outras instâncias Fluig conectadas), cada um com credenciais OAuth em FDN_AUTHORIZECLIENTDATA. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_FLUIG_SERVER.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0431",
+      "from_table": "FDN_FLUIG_SERVER",
+      "to_table": "FDN_AUTHORIZECLIENTDATA",
+      "on": [
+        "FDN_FLUIG_SERVER.AUTHORIZECLIENTDATA_ID = FDN_AUTHORIZECLIENTDATA.AUTHORIZECLIENTDATA_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "AUTHORIZECLIENTDATA_ID",
+          "to_column": "AUTHORIZECLIENTDATA_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Credenciais OAuth do servidor (também FK física).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0431",
+      "table": "FDN_AUTHORIZECLIENTDATA",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Servidores Fluig cadastrados (outras instâncias Fluig conectadas), cada um com credenciais OAuth em FDN_AUTHORIZECLIENTDATA. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

@@ -19,6 +19,98 @@
  "jpa_entities": [
   "com.totvs.technology.foundation.security.entity.FDNParamGeral"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNParamGeral.findAll",
+   "query": "SELECT b FROM FDNParamGeral b",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNParamGeral",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNParamGeral.java",
+   "owner_table": "FDN_PARAMGERAL",
+   "tables": [
+    "FDN_PARAMGERAL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNParamGeral.findById",
+   "query": "SELECT b FROM FDNParamGeral b WHERE b.id = :id",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNParamGeral",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNParamGeral.java",
+   "owner_table": "FDN_PARAMGERAL",
+   "tables": [
+    "FDN_PARAMGERAL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNParamGeral.findByDataKey",
+   "query": "SELECT b FROM FDNParamGeral b WHERE b.tenant.id = :tenantId AND b.dataKey = :dataKey",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNParamGeral",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNParamGeral.java",
+   "owner_table": "FDN_PARAMGERAL",
+   "tables": [
+    "FDN_PARAMGERAL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNParamGeral.findByDataKeyList",
+   "query": "SELECT b FROM FDNParamGeral b WHERE b.tenant.id = :tenantId AND b.dataKey IN :dataKeyList",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNParamGeral",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNParamGeral.java",
+   "owner_table": "FDN_PARAMGERAL",
+   "tables": [
+    "FDN_PARAMGERAL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNParamGeral.findByTenant",
+   "query": "SELECT b FROM FDNParamGeral b WHERE b.tenant.id = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNParamGeral",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNParamGeral.java",
+   "owner_table": "FDN_PARAMGERAL",
+   "tables": [
+    "FDN_PARAMGERAL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "PARAMGERAL_ID",

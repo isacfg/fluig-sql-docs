@@ -1,0 +1,238 @@
+{
+  "name": "TAR_ESFOR",
+  "domain": "bpm-tarefas",
+  "purpose": "Subtipo de Task (EffortRecordedTask) para tarefas de esforço registrado; tabela marcadora sem colunas além da PK.",
+  "schema_card": "by_table/TAR_ESFOR.json",
+  "business_concepts": [
+    "bpm-tarefas",
+    "TAR_ESFOR"
+  ],
+  "grain": {
+    "description": "Subtipo de Task (EffortRecordedTask) para tarefas de esforço registrado; tabela marcadora sem colunas além da PK. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "COD_TAREFA"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/TAR_ESFOR.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0972",
+      "from_table": "TAR_ESFOR",
+      "to_table": "TAR_CTRAL",
+      "on": [
+        "TAR_ESFOR.COD_EMPRESA = TAR_CTRAL.COD_EMPRESA",
+        "TAR_ESFOR.COD_TAREFA = TAR_CTRAL.COD_TAREFA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_TAREFA",
+          "to_column": "COD_TAREFA"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Subtipo tarefa de esforço registrado.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0985",
+      "from_table": "TAR_ESFOR",
+      "to_table": "TAR_CTRAL",
+      "on": [
+        "TAR_ESFOR.COD_EMPRESA = TAR_CTRAL.COD_EMPRESA",
+        "TAR_ESFOR.COD_TAREFA = TAR_CTRAL.COD_TAREFA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_TAREFA",
+          "to_column": "COD_TAREFA"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Tarefa base.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0987",
+      "from_table": "TAR_ESFOR",
+      "to_table": "TAR_WORKFLOW",
+      "on": [
+        "TAR_ESFOR.COD_EMPRESA = TAR_WORKFLOW.COD_EMPRESA",
+        "TAR_ESFOR.COD_TAREFA = TAR_WORKFLOW.COD_TAREFA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_TAREFA",
+          "to_column": "COD_TAREFA"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "TAR_WORKFLOW herda de TAR_ESFOR (FK de TAR_WORKFLOW aponta para esta tabela).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1000",
+      "from_table": "TAR_ESFOR",
+      "to_table": "TAR_WORKFLOW",
+      "on": [
+        "TAR_ESFOR.COD_EMPRESA = TAR_WORKFLOW.COD_EMPRESA",
+        "TAR_ESFOR.COD_TAREFA = TAR_WORKFLOW.COD_TAREFA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_TAREFA",
+          "to_column": "COD_TAREFA"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Tarefa pai na hierarquia JOINED.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0972",
+      "table": "TAR_CTRAL",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0985",
+      "table": "TAR_CTRAL",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0987",
+      "table": "TAR_WORKFLOW",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1000",
+      "table": "TAR_WORKFLOW",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Subtipo de Task (EffortRecordedTask) para tarefas de esforço registrado; tabela marcadora sem colunas além da PK. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "COD_TAREFA"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

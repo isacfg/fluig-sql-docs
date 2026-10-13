@@ -20,6 +20,26 @@
  "jpa_entities": [
   "com.fluig.lsmetric.entity.LSMetric"
  ],
+ "observed_queries": [
+  {
+   "name": "LSMetric.findByKey",
+   "query": "SELECT b FROM LSMetric b WHERE b.tenantId = :tenantId AND b.routine = :routine AND b.subRoutine = :subRoutine",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.lsmetric.entity.LSMetric",
+   "source_file": "com/fluig/lsmetric/entity/LSMetric.java",
+   "owner_table": "LS_METRIC",
+   "tables": [
+    "LS_METRIC"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "METRIC_ID",

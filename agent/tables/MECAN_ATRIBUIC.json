@@ -1,0 +1,92 @@
+{
+  "name": "MECAN_ATRIBUIC",
+  "domain": "bpm-workflow",
+  "purpose": "Cadastro de mecanismos de atribuicao do workflow (quem recebe a tarefa de uma atividade). Inclui mecanismos padrao e customizados com classes de configuracao/controle.",
+  "schema_card": "by_table/MECAN_ATRIBUIC.json",
+  "business_concepts": [
+    "bpm-workflow",
+    "MECAN_ATRIBUIC"
+  ],
+  "grain": {
+    "description": "Cadastro de mecanismos de atribuicao do workflow (quem recebe a tarefa de uma atividade). Inclui mecanismos padrao e customizados com classes de configuracao/controle. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "COD_MECAN_ATRIBUIC"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/MECAN_ATRIBUIC.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0266",
+      "table": "ESTADO_PROCES",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0284",
+      "table": "ESTADO_PROCES_COND",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0884",
+      "table": "SEGUR_ANEXO_PROCES",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [
+    "DSL_MECAN_ATRIBUIC"
+  ],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/MECAN_ATRIBUIC.json",
+  "observed_query_count": 3,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Cadastro de mecanismos de atribuicao do workflow (quem recebe a tarefa de uma atividade). Inclui mecanismos padrao e customizados com classes de configuracao/controle. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "COD_MECAN_ATRIBUIC"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

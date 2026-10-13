@@ -17,6 +17,44 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.forms.model.TableForm"
  ],
+ "observed_queries": [
+  {
+   "name": "TableForm.findAll",
+   "query": "SELECT f FROM TableForm f WHERE f.TableFormPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.forms.model.TableForm",
+   "source_file": "com/datasul/technology/webdesk/forms/model/TableForm.java",
+   "owner_table": "FICHARIO",
+   "tables": [
+    "FICHARIO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "TableForm.findByDocument",
+   "query": "SELECT f FROM TableForm f WHERE f.TableFormPK.companyId = :companyId AND f.TableFormPK.formId = :formId AND f.TableFormPK.version = :version",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.forms.model.TableForm",
+   "source_file": "com/datasul/technology/webdesk/forms/model/TableForm.java",
+   "owner_table": "FICHARIO",
+   "tables": [
+    "FICHARIO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",

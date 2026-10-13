@@ -19,6 +19,7 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.workflow.model.ProcessTaskAppointment"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "NUM_SEQ_APONT",

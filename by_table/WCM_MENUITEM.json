@@ -14,6 +14,98 @@
  "jpa_entities": [
   "com.totvs.technology.wcm.core.entity.WCMMenuItem"
  ],
+ "observed_queries": [
+  {
+   "name": "WCMMenuItem.findAll",
+   "query": "SELECT b FROM WCMMenuItem b",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMMenuItem",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMMenuItem.java",
+   "owner_table": "WCM_MENUITEM",
+   "tables": [
+    "WCM_MENUITEM"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMMenuItem.findAllByTenant",
+   "query": "SELECT b FROM WCMMenuItem b WHERE b.resource.tenantId = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMMenuItem",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMMenuItem.java",
+   "owner_table": "WCM_MENUITEM",
+   "tables": [
+    "WCM_MENUITEM"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMMenuItem.findById",
+   "query": "SELECT b FROM WCMMenuItem b WHERE b.id = :id",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMMenuItem",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMMenuItem.java",
+   "owner_table": "WCM_MENUITEM",
+   "tables": [
+    "WCM_MENUITEM"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMMenuItem.findByParentOrder",
+   "query": "SELECT b FROM WCMMenuItem b WHERE b.parentMenuItem.id = :id AND b.displayOrder >= :order ORDER BY b.displayOrder",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMMenuItem",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMMenuItem.java",
+   "owner_table": "WCM_MENUITEM",
+   "tables": [
+    "WCM_MENUITEM"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMMenuItem.findByOrderFirstLevel",
+   "query": "SELECT b FROM WCMMenuItem b WHERE b.level = 0 AND b.resource.tenantId = :tenantId AND b.displayOrder >= :order ORDER BY b.displayOrder",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMMenuItem",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMMenuItem.java",
+   "owner_table": "WCM_MENUITEM",
+   "tables": [
+    "WCM_MENUITEM"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "MENUITEM_ID",

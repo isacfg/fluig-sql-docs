@@ -26,6 +26,26 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.workflow.model.ProcessElementTranslate"
  ],
+ "observed_queries": [
+  {
+   "name": "ProcessElementTranslate.findProcessElementTranslate",
+   "query": "select t from ProcessElementTranslate t where t.tenantId = :tenantId and t.processId in (:processId) and t.language = :language",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessElementTranslate",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessElementTranslate.java",
+   "owner_table": "PROCESS_ELEMENT_TRANSLATE",
+   "tables": [
+    "PROCESS_ELEMENT_TRANSLATE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "ID",

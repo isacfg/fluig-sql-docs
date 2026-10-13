@@ -17,6 +17,80 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.workflow.model.WorkflowAdHocProcess"
  ],
+ "observed_queries": [
+  {
+   "name": "WorkflowAdHocProcess.findByParentStateSequence",
+   "query": "SELECT wahp from WorkflowAdHocProcess wahp where wahp.workflowAdHocProcessPK.companyId = :companyId AND  wahp.workflowAdHocProcessPK.parentProcessInstanceId = :parentProcessInstanceId AND  wahp.workflowAdHocProcessPK.parentProcessStateSequence = :parentProcessStateSequence",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.WorkflowAdHocProcess",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/WorkflowAdHocProcess.java",
+   "owner_table": "ADHOC_PROCES_WORKFLOW",
+   "tables": [
+    "ADHOC_PROCES_WORKFLOW"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WorkflowAdHocProcess.findByParent",
+   "query": "SELECT wahp from WorkflowAdHocProcess wahp where wahp.workflowAdHocProcessPK.companyId = :companyId AND  wahp.workflowAdHocProcessPK.parentProcessInstanceId = :parentProcessInstanceId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.WorkflowAdHocProcess",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/WorkflowAdHocProcess.java",
+   "owner_table": "ADHOC_PROCES_WORKFLOW",
+   "tables": [
+    "ADHOC_PROCES_WORKFLOW"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WorkflowAdHocProcess.findActiveByParent",
+   "query": "SELECT wahp from WorkflowAdHocProcess wahp, WorkflowProcess wp where wahp.workflowAdHocProcessPK.companyId = :companyId AND  wahp.workflowAdHocProcessPK.parentProcessInstanceId = :parentProcessInstanceId AND wahp.workflowAdHocProcessPK.companyId = wp.workflowProcessPK.companyId AND wahp.workflowAdHocProcessPK.processInstanceId = wp.workflowProcessPK.processInstanceId AND wp.active = :active",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.WorkflowAdHocProcess",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/WorkflowAdHocProcess.java",
+   "owner_table": "ADHOC_PROCES_WORKFLOW",
+   "tables": [
+    "ADHOC_PROCES_WORKFLOW"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WorkflowAdHocProcess.findByInstanceId",
+   "query": "SELECT wahp from WorkflowAdHocProcess wahp where wahp.workflowAdHocProcessPK.companyId = :companyId AND  wahp.workflowAdHocProcessPK.processInstanceId = :instanceId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.WorkflowAdHocProcess",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/WorkflowAdHocProcess.java",
+   "owner_table": "ADHOC_PROCES_WORKFLOW",
+   "tables": [
+    "ADHOC_PROCES_WORKFLOW"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",
@@ -124,6 +198,32 @@
    "kind": "logical-probable",
    "description": "Instância pai (relação não listada pela heurística; deduzida do nome da coluna).",
    "status": "probable"
+  },
+  {
+   "to_table": "PROCES_WORKFLOW",
+   "from_cols": [
+    "COD_EMPRESA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "WorkflowAdHocProcess.findActiveByParent",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "PROCES_WORKFLOW",
+   "from_cols": [
+    "NUM_PROCES"
+   ],
+   "to_cols": [
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "WorkflowAdHocProcess.findActiveByParent",
+   "status": "confirmed"
   }
  ],
  "rejected_relationships": [],

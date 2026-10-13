@@ -1,0 +1,164 @@
+[
+  {
+    "name": "Filter.find",
+    "query": "select f from Filter f where tenantId = :tenantId and id = :id order by f.type, f.position",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.filter.model.Filter",
+    "source_file": "com/datasul/technology/webdesk/filter/model/Filter.java",
+    "owner_table": "FILTERS",
+    "tables": [
+      "FILTERS"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Filter.findAll",
+    "query": "select f from Filter f order by f.type, f.position",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.filter.model.Filter",
+    "source_file": "com/datasul/technology/webdesk/filter/model/Filter.java",
+    "owner_table": "FILTERS",
+    "tables": [
+      "FILTERS"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Filter.allByUserTenant",
+    "query": "select f from Filter f where f.userId = :userId and f.tenantId = :tenantId order by f.type, f.position",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.filter.model.Filter",
+    "source_file": "com/datasul/technology/webdesk/filter/model/Filter.java",
+    "owner_table": "FILTERS",
+    "tables": [
+      "FILTERS"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Filter.allByUserTenantAndType",
+    "query": "select f from Filter f where f.type = :type and f.userId = :userId and f.tenantId = :tenantId order by f.type, f.position",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.filter.model.Filter",
+    "source_file": "com/datasul/technology/webdesk/filter/model/Filter.java",
+    "owner_table": "FILTERS",
+    "tables": [
+      "FILTERS"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Filter.byUserTenantTypeAndName",
+    "query": "select f from Filter f where f.type = :type and f.userId = :userId and f.tenantId = :tenantId and f.name = :name order by f.type, f.position",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.filter.model.Filter",
+    "source_file": "com/datasul/technology/webdesk/filter/model/Filter.java",
+    "owner_table": "FILTERS",
+    "tables": [
+      "FILTERS"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Filter.nextPosition",
+    "query": "select max(f.position) from Filter f where f.type = :type and f.userId = :userId and f.tenantId = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.filter.model.Filter",
+    "source_file": "com/datasul/technology/webdesk/filter/model/Filter.java",
+    "owner_table": "FILTERS",
+    "tables": [
+      "FILTERS"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Filter.updatePositions",
+    "query": "update Filter f set f.position = f.position + 1 where f.position >= :newPosition and f.position < :oldPosition and f.type = :type and f.userId = :userId and f.tenantId = :tenantId ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.filter.model.Filter",
+    "source_file": "com/datasul/technology/webdesk/filter/model/Filter.java",
+    "owner_table": "FILTERS",
+    "tables": [
+      "FILTERS"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Filter.updatePositionsReversed",
+    "query": "update Filter f set f.position = f.position - 1 where f.position <= :newPosition and f.position > :oldPosition and f.type = :type and f.userId = :userId and f.tenantId = :tenantId ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.filter.model.Filter",
+    "source_file": "com/datasul/technology/webdesk/filter/model/Filter.java",
+    "owner_table": "FILTERS",
+    "tables": [
+      "FILTERS"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "Filter.onRemovePositionUpdate",
+    "query": "update Filter f set f.position = f.position - 1 where f.position > :newPosition and f.type = :type and f.userId = :userId and f.tenantId = :tenantId ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.filter.model.Filter",
+    "source_file": "com/datasul/technology/webdesk/filter/model/Filter.java",
+    "owner_table": "FILTERS",
+    "tables": [
+      "FILTERS"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

@@ -1,0 +1,90 @@
+{
+  "name": "PROCES_VERSION_DIM_CAP",
+  "domain": "bpm-analytics-dw",
+  "purpose": "Dimensão de versões de processos com a janela de vigência (início/fim em dia/mês/ano).",
+  "schema_card": "by_table/PROCES_VERSION_DIM_CAP.json",
+  "business_concepts": [
+    "bpm-analytics-dw",
+    "PROCES_VERSION_DIM_CAP"
+  ],
+  "grain": {
+    "description": "Dimensão de versões de processos com a janela de vigência (início/fim em dia/mês/ano). Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COMPANYID",
+      "PROCESSID",
+      "PROCESSVERSION"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/PROCES_VERSION_DIM_CAP.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0002",
+      "table": "ACTIVITY_DIM_CAP",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0336",
+      "table": "FACT_FLOW_VOLUME_CAP",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0340",
+      "table": "FACT_PROCES_COST_CAP",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0348",
+      "table": "FACT_PROCES_VOLUME_CAP",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0680",
+      "table": "FLOW_DIM_CAP",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/PROCES_VERSION_DIM_CAP.json",
+  "observed_query_count": 1,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Dimensão de versões de processos com a janela de vigência (início/fim em dia/mês/ano). Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COMPANYID",
+        "PROCESSID",
+        "PROCESSVERSION"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

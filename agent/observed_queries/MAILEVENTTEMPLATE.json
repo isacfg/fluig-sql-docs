@@ -1,0 +1,38 @@
+[
+  {
+    "name": "MailEventTemplate.findMailEvent",
+    "query": "SELECT a FROM MailEventTemplate a WHERE a.tenantId = :tenantId and a.eventKey = :eventKey and a.dialect = :dialect",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.mail.entity.MailEventTemplate",
+    "source_file": "com/fluig/foundation/mail/entity/MailEventTemplate.java",
+    "owner_table": "MAILEVENTTEMPLATE",
+    "tables": [
+      "MAILEVENTTEMPLATE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "MailEventTemplate.findMailTemplate",
+    "query": "SELECT a FROM MailEventTemplate a WHERE a.tenantId = :tenantId and a.eventKey = :eventKey and a.dialect = :dialect and a.templateName = :templateName",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.mail.entity.MailEventTemplate",
+    "source_file": "com/fluig/foundation/mail/entity/MailEventTemplate.java",
+    "owner_table": "MAILEVENTTEMPLATE",
+    "tables": [
+      "MAILEVENTTEMPLATE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

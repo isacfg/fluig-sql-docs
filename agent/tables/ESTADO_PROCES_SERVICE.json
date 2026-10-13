@@ -1,0 +1,122 @@
+{
+  "name": "ESTADO_PROCES_SERVICE",
+  "domain": "bpm-workflow",
+  "purpose": "Configuração de serviço (integração) executado por um estado de tarefa de serviço: nome do serviço, tentativas e frequência (ProcessStateService).",
+  "schema_card": "by_table/ESTADO_PROCES_SERVICE.json",
+  "business_concepts": [
+    "bpm-workflow",
+    "ESTADO_PROCES_SERVICE"
+  ],
+  "grain": {
+    "description": "Configuração de serviço (integração) executado por um estado de tarefa de serviço: nome do serviço, tentativas e frequência (ProcessStateService). Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "PROCESS_STATE_SERVICE_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/ESTADO_PROCES_SERVICE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0287",
+      "from_table": "ESTADO_PROCES_SERVICE",
+      "to_table": "ESTADO_PROCES",
+      "on": [
+        "ESTADO_PROCES_SERVICE.COD_EMPRESA = ESTADO_PROCES.COD_EMPRESA",
+        "ESTADO_PROCES_SERVICE.COD_DEF_PROCES = ESTADO_PROCES.COD_DEF_PROCES",
+        "ESTADO_PROCES_SERVICE.NUM_VERS = ESTADO_PROCES.NUM_VERS",
+        "ESTADO_PROCES_SERVICE.NUM_SEQ = ESTADO_PROCES.NUM_SEQ"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_DEF_PROCES",
+          "to_column": "COD_DEF_PROCES"
+        },
+        {
+          "from_column": "NUM_VERS",
+          "to_column": "NUM_VERS"
+        },
+        {
+          "from_column": "NUM_SEQ",
+          "to_column": "NUM_SEQ"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Estado/atividade do processo ao qual esta linha pertence.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0287",
+      "table": "ESTADO_PROCES",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Configuração de serviço (integração) executado por um estado de tarefa de serviço: nome do serviço, tentativas e frequência (ProcessStateService). Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "PROCESS_STATE_SERVICE_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

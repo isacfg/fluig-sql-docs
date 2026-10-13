@@ -1,0 +1,252 @@
+{
+  "name": "MOVTO_APROVAC",
+  "domain": "ecm-documentos",
+  "purpose": "Movimentos de aprovacao de documentos do GED: cada acao (analise, aprovacao, assinatura) de um aprovador numa iteracao e nivel de aprovacao de uma versao.",
+  "schema_card": "by_table/MOVTO_APROVAC.json",
+  "business_concepts": [
+    "ecm-documentos",
+    "MOVTO_APROVAC"
+  ],
+  "grain": {
+    "description": "Movimentos de aprovacao de documentos do GED: cada acao (analise, aprovacao, assinatura) de um aprovador numa iteracao e nivel de aprovacao de uma versao. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "NR_DOCUMENTO",
+      "NR_VERSAO",
+      "NUM_SEQ_ITERAC",
+      "NUM_NIV_APROVAC",
+      "NUM_SEQ_MOVTO"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/MOVTO_APROVAC.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0779",
+      "from_table": "MOVTO_APROVAC",
+      "to_table": "APROVACAO",
+      "on": [
+        "MOVTO_APROVAC.COD_EMPRESA = APROVACAO.COD_EMPRESA",
+        "MOVTO_APROVAC.NR_DOCUMENTO = APROVACAO.NR_DOCUMENTO",
+        "MOVTO_APROVAC.NR_VERSAO = APROVACAO.NR_VERSAO",
+        "MOVTO_APROVAC.CD_MATRICULA = APROVACAO.CD_MATRICULA",
+        "MOVTO_APROVAC.NUM_NIV_APROVAC = APROVACAO.NUM_NIV_APROVAC"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "NR_DOCUMENTO",
+          "to_column": "NR_DOCUMENTO"
+        },
+        {
+          "from_column": "NR_VERSAO",
+          "to_column": "NR_VERSAO"
+        },
+        {
+          "from_column": "CD_MATRICULA",
+          "to_column": "CD_MATRICULA"
+        },
+        {
+          "from_column": "NUM_NIV_APROVAC",
+          "to_column": "NUM_NIV_APROVAC"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Aprovador designado no nivel; todas as colunas da PK de APROVACAO existem aqui, sem FK fisica.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0781",
+      "from_table": "MOVTO_APROVAC",
+      "to_table": "NIVEL_APROVACAO",
+      "on": [
+        "MOVTO_APROVAC.COD_EMPRESA = NIVEL_APROVACAO.COD_EMPRESA",
+        "MOVTO_APROVAC.NR_DOCUMENTO = NIVEL_APROVACAO.NR_DOCUMENTO",
+        "MOVTO_APROVAC.NR_VERSAO = NIVEL_APROVACAO.NR_VERSAO",
+        "MOVTO_APROVAC.NUM_NIV_APROVAC = NIVEL_APROVACAO.NUM_NIV_APROVAC"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "NR_DOCUMENTO",
+          "to_column": "NR_DOCUMENTO"
+        },
+        {
+          "from_column": "NR_VERSAO",
+          "to_column": "NR_VERSAO"
+        },
+        {
+          "from_column": "NUM_NIV_APROVAC",
+          "to_column": "NUM_NIV_APROVAC"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Nivel de aprovacao ao qual o movimento pertence (adicionada: PK de NIVEL_APROVACAO coberta).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0783",
+      "from_table": "MOVTO_APROVAC",
+      "to_table": "DOCUMENTO",
+      "on": [
+        "MOVTO_APROVAC.COD_EMPRESA = DOCUMENTO.COD_EMPRESA",
+        "MOVTO_APROVAC.NR_DOCUMENTO = DOCUMENTO.NR_DOCUMENTO",
+        "MOVTO_APROVAC.NR_VERSAO = DOCUMENTO.NR_VERSAO"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "NR_DOCUMENTO",
+          "to_column": "NR_DOCUMENTO"
+        },
+        {
+          "from_column": "NR_VERSAO",
+          "to_column": "NR_VERSAO"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Documento/versao em aprovacao.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0779",
+      "table": "APROVACAO",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0781",
+      "table": "NIVEL_APROVACAO",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0783",
+      "table": "DOCUMENTO",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [
+    "DSL_OBS_MOVTO_APROVAC"
+  ],
+  "indexes": [
+    {
+      "name": "IDX_MOVTO_APROVAC_MASTER_LIST",
+      "unique": false,
+      "columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/MOVTO_APROVAC.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Movimentos de aprovacao de documentos do GED: cada acao (analise, aprovacao, assinatura) de um aprovador numa iteracao e nivel de aprovacao de uma versao. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "NUM_SEQ_ITERAC",
+        "NUM_NIV_APROVAC",
+        "NUM_SEQ_MOVTO"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

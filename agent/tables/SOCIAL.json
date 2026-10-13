@@ -1,0 +1,301 @@
+{
+  "name": "SOCIAL",
+  "domain": "social",
+  "purpose": "Tabela única (SINGLE_TABLE) de perfis sociais: usuários (SocialUser), comunidades, eventos e aplicações, com alias único por tenant. Raiz das FKs da rede social.",
+  "schema_card": "by_table/SOCIAL.json",
+  "business_concepts": [
+    "social",
+    "SOCIAL"
+  ],
+  "grain": {
+    "description": "Tabela única (SINGLE_TABLE) de perfis sociais: usuários (SocialUser), comunidades, eventos e aplicações, com alias único por tenant. Raiz das FKs da rede social. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "id"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/SOCIAL.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0927",
+      "from_table": "SOCIAL",
+      "to_table": "FDN_USER",
+      "on": [
+        "SOCIAL.FOUNDATIONUSERID = FDN_USER.USER_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "FOUNDATIONUSERID",
+          "to_column": "USER_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Perfil SocialUser -> usuário foundation; sem FK",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0760",
+      "table": "MENTION",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0762",
+      "table": "MENTION",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0896",
+      "table": "SOCIABLE",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0898",
+      "table": "SOCIABLE",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0906",
+      "table": "SOCIABLEDENOUNCEMENT",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0910",
+      "table": "SOCIABLEDENOUNCEMENTHISTORY",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0914",
+      "table": "SOCIABLELIKE",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0918",
+      "table": "SOCIABLESHARE",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0920",
+      "table": "SOCIABLESHARE",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0924",
+      "table": "SOCIABLEWATCH",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0925",
+      "table": "SOCIAL",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0926",
+      "table": "SOCIAL",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0927",
+      "table": "FDN_USER",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0930",
+      "table": "SOCIALACCESSTOKEN",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0932",
+      "table": "SOCIALDATA",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0934",
+      "table": "SOCIALFAVORITE",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0936",
+      "table": "SOCIALFAVORITE",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0950",
+      "table": "SOCIALPOSTUSER",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0952",
+      "table": "SOCIALRELATION",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0954",
+      "table": "SOCIALRELATION",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0956",
+      "table": "SOCIALRELATIONCOUNTER",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0962",
+      "table": "SOCIAL_SESSION_TOKEN",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0964",
+      "table": "SOCIAL_TAB_PERMISSION",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "SocialUserI001",
+      "unique": false,
+      "columns": [
+        "foundationUserId",
+        "tenantid"
+      ]
+    },
+    {
+      "name": "SocialUserI002",
+      "unique": false,
+      "columns": [
+        "tenantid",
+        "type",
+        "name"
+      ]
+    },
+    {
+      "name": "SocialI001",
+      "unique": false,
+      "columns": [
+        "tenantid",
+        "id"
+      ]
+    },
+    {
+      "name": "SocialI002",
+      "unique": false,
+      "columns": [
+        "tenantid",
+        "type",
+        "hidden"
+      ]
+    },
+    {
+      "name": "SocialI003",
+      "unique": false,
+      "columns": [
+        "tenantid",
+        "type",
+        "state",
+        "hidden"
+      ]
+    },
+    {
+      "name": "SocialI004",
+      "unique": false,
+      "columns": [
+        "tenantid",
+        "type",
+        "state",
+        "name",
+        "hidden"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/SOCIAL.json",
+  "observed_query_count": 20,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Tabela única (SINGLE_TABLE) de perfis sociais: usuários (SocialUser), comunidades, eventos e aplicações, com alias único por tenant. Raiz das FKs da rede social. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "id"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

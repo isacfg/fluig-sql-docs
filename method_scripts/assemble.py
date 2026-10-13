@@ -1,4 +1,4 @@
-import json, glob, os, collections, sys, shutil
+import json, glob, os, collections, sys, shutil, re
 OUT = sys.argv[1]
 model = json.load(open('model.json'))
 docs = {}
@@ -35,7 +35,15 @@ for n in sorted(model, key=lambda x: (docs.get(x, {}).get('domain') or model[x][
         rels.append(dict(to_table=r['to_table'], from_cols=r['from_cols'], to_cols=r['to_cols'], cardinality='N:1', kind=r['kind'], description=r['evidence'], status='confirmed'))
     final[n] = dict(name=n, domain=a.get('domain') or m['domain'], module=m['module'], purpose=a.get('purpose', ''), lifecycle=a.get('lifecycle', ''), key_notes=a.get('key_notes', ''),
         notes_for_agents=a.get('notes_for_agents', ''), primary_key=m['pk'], unique_constraints=m['uniques'], indexes=[dict(name=i['name'], unique=i['unique'], columns=i['cols']) for i in m['indexes']],
-        jpa_entities=[e['fqcn'] for e in m['entities']], columns=cols, relationships=rels, rejected_relationships=rejected)
+        jpa_entities=[e['fqcn'] for e in m['entities']], observed_queries=m.get('observed_queries', []), columns=cols, relationships=rels, rejected_relationships=rejected)
+# Keep the prior reviewed correction reproducible in every descriptive field.
+def normalize_user_refs(value):
+    if isinstance(value, str):
+        return re.sub(r'FDN_USER\.(USER_CODE|LOGIN)\b', r'FDN_USERTENANT.\1', value)
+    if isinstance(value, list): return [normalize_user_refs(v) for v in value]
+    if isinstance(value, dict): return {k: (v if k == 'observed_queries' else normalize_user_refs(v)) for k, v in value.items()}
+    return value
+final = normalize_user_refs(final)
 # post-fix of invalid agent edges
 for n, t in final.items():
     keep = []
@@ -100,3 +108,7 @@ for dom, ts in doms.items():
     L += ['```', '']
 open(OUT + '/relationships.md', 'w').write('\n'.join(L))
 print('edges', len(edges), collections.Counter(r.get('status') for _, r in edges), 'rejected', sum(len(t['rejected_relationships']) for t in final.values()))
+
+# Generate the SQL planning layer from the same final schema.
+from generate_agent import generate
+generate(OUT)

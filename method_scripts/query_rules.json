@@ -1,0 +1,71 @@
+{
+  "format_version": 1,
+  "rules": [
+    {
+      "id": "tenant-filter",
+      "severity": "error",
+      "rule": "Tenant equality must be guaranteed on every boolean branch in WHERE or INNER JOIN; propagate only through tenant equalities.",
+      "check": "tenant"
+    },
+    {
+      "id": "complete-join",
+      "severity": "error",
+      "rule": "Use every equality in a canonical join; include tenant and document/process version keys.",
+      "check": "join"
+    },
+    {
+      "id": "unknown-table-column",
+      "severity": "error",
+      "rule": "Resolve every table and column against schema.json.",
+      "check": "schema"
+    },
+    {
+      "id": "document-current-version",
+      "severity": "warning",
+      "rule": "For current DOCUMENTO state require VERSAO_ATIVA=1 and LOG_DELETE=0 on each alias; historical queries must declare historical mode.",
+      "check": "document"
+    },
+    {
+      "id": "row-multiplication",
+      "severity": "warning",
+      "rule": "A destination without a declared UNIQUE key can multiply rows. Prefer EXISTS, preaggregation, or deduplication at the requested full grain.",
+      "check": "join"
+    },
+    {
+      "id": "probable-relationship",
+      "severity": "warning",
+      "rule": "Declare and verify assumptions for relationships with confidence probable.",
+      "check": "join"
+    },
+    {
+      "id": "avoid-select-star-lob",
+      "severity": "warning",
+      "rule": "Use explicit projections when a participating table contains LOB columns.",
+      "check": "projection"
+    },
+    {
+      "id": "deprecated-column",
+      "severity": "warning",
+      "rule": "Prefer modern task timestamps over deprecated date/hour pairs.",
+      "check": "projection"
+    },
+    {
+      "id": "global-user-scope",
+      "severity": "warning",
+      "rule": "Scope FDN_USER through a tenant-filtered FDN_USERTENANT; global identity is not tenant ownership.",
+      "check": "tenant"
+    },
+    {
+      "id": "indexed-predicates",
+      "severity": "advisory",
+      "rule": "Prefer predicates matching index prefixes; inspect EXPLAIN on the instance.",
+      "check": "manual"
+    },
+    {
+      "id": "grain-count",
+      "severity": "advisory",
+      "rule": "Count at the requested grain. For multiple tenants COUNT(DISTINCT NUM_PROCES) is insufficient; distinct (COD_EMPRESA, NUM_PROCES) or aggregate root rows.",
+      "check": "manual"
+    }
+  ]
+}

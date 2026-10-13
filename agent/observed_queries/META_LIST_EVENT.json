@@ -1,0 +1,20 @@
+[
+  {
+    "name": "MetaListEvent.findAll",
+    "query": "SELECT mle FROM MetaListEvent mle WHERE mle.metaListEventPK.companyId=:companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.lists.model.MetaListEvent",
+    "source_file": "com/datasul/technology/webdesk/lists/model/MetaListEvent.java",
+    "owner_table": "META_LIST_EVENT",
+    "tables": [
+      "META_LIST_EVENT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

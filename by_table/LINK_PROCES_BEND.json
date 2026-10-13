@@ -18,6 +18,7 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.workflow.model.ProcessLinkBend"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "NUM_SEQ_CURV",

@@ -1,0 +1,74 @@
+[
+  {
+    "name": "FDNAlertModule.findAll",
+    "query": "SELECT b FROM FDNAlertModule b",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertModule",
+    "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertModule.java",
+    "owner_table": "FDN_ALERTMODULE",
+    "tables": [
+      "FDN_ALERTMODULE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNAlertModule.findById",
+    "query": "SELECT b FROM FDNAlertModule b WHERE b.id = :id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertModule",
+    "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertModule.java",
+    "owner_table": "FDN_ALERTMODULE",
+    "tables": [
+      "FDN_ALERTMODULE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNAlertModule.findByKey",
+    "query": "SELECT b FROM FDNAlertModule b WHERE b.moduleKey = :moduleKey and b.tenant.id = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertModule",
+    "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertModule.java",
+    "owner_table": "FDN_ALERTMODULE",
+    "tables": [
+      "FDN_ALERTMODULE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNAlertModule.findAllByTenant",
+    "query": "SELECT b FROM FDNAlertModule b where b.tenant.id = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertModule",
+    "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertModule.java",
+    "owner_table": "FDN_ALERTMODULE",
+    "tables": [
+      "FDN_ALERTMODULE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

@@ -27,6 +27,62 @@
  "jpa_entities": [
   "com.totvs.technology.wcm.core.entity.WCMStoreItemMetric"
  ],
+ "observed_queries": [
+  {
+   "name": "WCMStoreItemMetric.findAll",
+   "query": "SELECT b FROM WCMStoreItemMetric b",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMStoreItemMetric",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMStoreItemMetric.java",
+   "owner_table": "WCM_STOREITEM_METRIC",
+   "tables": [
+    "WCM_STOREITEM_METRIC"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMStoreItemMetric.findById",
+   "query": "SELECT b FROM WCMStoreItemMetric b WHERE b.id = :storeItemMetricId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMStoreItemMetric",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMStoreItemMetric.java",
+   "owner_table": "WCM_STOREITEM_METRIC",
+   "tables": [
+    "WCM_STOREITEM_METRIC"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMStoreItemMetric.findByComponentCode",
+   "query": "SELECT b FROM WCMStoreItemMetric b WHERE b.componentCode = :componentCode AND b.tenant.id = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMStoreItemMetric",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMStoreItemMetric.java",
+   "owner_table": "WCM_STOREITEM_METRIC",
+   "tables": [
+    "WCM_STOREITEM_METRIC"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "STOREITEM_METRIC_ID",

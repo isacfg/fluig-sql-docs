@@ -69,6 +69,728 @@
  "jpa_entities": [
   "com.totvs.technology.foundation.security.entity.FDNUserTenant"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNUserTenant.findUserByGenericId",
+   "query": "select * from FDN_USERTENANT u where u.LOGIN = :identifier UNION select * from FDN_USERTENANT u where u.IDP_ID = :identifier and u.TENANT_ID = :tenantId UNION select * from FDN_USERTENANT u where u.USER_CODE = :identifier  and u.TENANT_ID = :tenantId",
+   "native": true,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "sql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findAll",
+   "query": "SELECT b FROM FDNUserTenant b WHERE (b.user.userType = 0 OR b.user.userType = 3)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findByLogin",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.login = :login",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findByLoginAndTenant",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.login = :login and b.tenantId = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findByUUID",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.userUUID = :userUUID AND b.tenantId = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findByEmail",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.email = :email",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findUserByEmailAndTenant",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.email = :email and b.tenantId = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findByTenant",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.tenantId = :tenantId AND (b.user.userType = 0 OR b.user.userType = 3)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findByTenantUserState",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.tenantId = :tenantId AND b.userState = :userState AND (b.user.userType = 0 OR b.user.userType = 3) ORDER BY b.user.fullName",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findByTenantUserStateExcludeListUserCode",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.tenantId = :tenantId AND b.userState = :userState AND (b.user.userType = 0 OR b.user.userType = 3) AND b.userCode NOT IN (:excludeListUserCode)  ORDER BY b.user.fullName",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findById",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.id = :id",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findByIdpId",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.idpId = :idpId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findByNoLogin",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.login = :login AND b.userState = :userState AND b.user.userType = 2",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findByFilter",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.tenantId = :tenantId AND (b.login = :login OR b.user.fullName LIKE :fullName) AND (b.user.userType = 0 OR b.user.userType = 3)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findActiveByFilter",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.tenantId = :tenantId AND b.userState = :userState AND (b.login = :login OR b.user.fullName LIKE :fullName) AND (b.user.userType = 0 OR b.user.userType = 3) ORDER BY b.user.fullName",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findActiveByEmailExcludingTenant",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.userState = com.totvs.technology.foundation.sdk.service.UserState.ACTIVE AND (b.user.userType = 0 OR b.user.userType = 3) AND b.email = :email AND b.tenantId <> :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findActiveByEmail",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.userState = com.totvs.technology.foundation.sdk.service.UserState.ACTIVE AND (b.user.userType = 0 OR b.user.userType = 3) AND b.email = :email",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findAllActive",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.userState = com.totvs.technology.foundation.sdk.service.UserState.ACTIVE AND (b.user.userType = 0 OR b.user.userType = 3)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findByUserId",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.user.id = :userId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findByTenantAndLogin",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.tenantId = :tenantId AND (b.login LIKE :search OR b.email LIKE :search OR b.user.firstName LIKE :search OR b.user.lastName LIKE :search OR b.user.fullName LIKE :search OR CONCAT(b.user.firstName, ' ', b.user.lastName) LIKE :search ) AND (b.user.userType = 0) AND ((b.userState = com.totvs.technology.foundation.sdk.service.UserState.ACTIVE AND :onlyActive = TRUE) OR :onlyActive = FALSE ) ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findByTenantAndCode",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.tenantId = :tenantId AND b.userCode = :userCode",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findNologinByTenant",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.tenantId = :tenantId AND b.user.userType = 2",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.updateFirstAccess",
+   "query": "UPDATE FDNUserTenant SET firstAccess = :isFirstAccess, lastUpdateDate = :lastUpdateDate WHERE login = :login",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.updateUsersSite",
+   "query": "UPDATE FDNUserTenant SET locationId = :newSiteId WHERE tenantId = :tenantId AND locationId = :oldSiteId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findActiveByCode",
+   "query": "SELECT o.id FROM FDNUserTenant o WHERE o.tenantId = :tenantId AND o.userCode= :userCode and o.userState = 1",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.countUser",
+   "query": "SELECT COUNT(o) FROM FDNUserTenant o WHERE o.userState = 1 AND (o.user.userType = 0 OR o.user.userType = 3) AND o.tenantId > 0",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.countActiveUsersByTenant",
+   "query": "SELECT COUNT(o) FROM FDNUserTenant o WHERE o.userState = 1 AND (o.user.userType = 0 OR o.user.userType = 3) AND o.tenantId = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.countTotalUsersByTenant",
+   "query": "SELECT COUNT(o) FROM FDNUserTenant o WHERE (o.user.userType = 0 OR o.user.userType = 3) AND o.tenantId = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findAllByTenant",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.tenantId = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findAllByLocation",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.locationId = :locationId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findByTenantLoginNameState",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.tenantId = :tenantId AND b.user.userType = 0 AND b.userState IN (:userState) AND (UPPER(b.user.fullName) like :pattern OR UPPER(b.login) like :pattern)  ORDER BY b.login ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findAllNotIdpLinkedId",
+   "query": "SELECT b FROM FDNUserTenant b WHERE (b.idpId is null or b.idpId = '') AND b.tenantId = :tenantId AND b.user.userType <> 3 AND b.login not like 'nologin_%'",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findUserNameByUserId",
+   "query": "SELECT b.user.fullName FROM FDNUserTenant b WHERE b.tenantId = :tenantId AND b.userCode = :userCode",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findAnonymizationDateByLogin",
+   "query": "SELECT b.anonymizationDate FROM FDNUserTenant b WHERE b.login = :login",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findUserWithExcludeList",
+   "query": " SELECT b    FROM FDNUserTenant b   WHERE b.tenantId = :tenantId     AND (b.login LIKE :search          OR b.email LIKE :search          OR b.user.firstName LIKE :search          OR b.user.lastName LIKE :search          OR b.user.fullName LIKE :search          OR CONCAT(b.user.firstName, ' ', b.user.lastName) LIKE :search )     AND (b.user.userType    = 0          OR b.user.userType = 3)     AND ((b.userState = com.totvs.technology.foundation.sdk.service.UserState.ACTIVE AND :onlyActive = TRUE)          OR :onlyActive = FALSE )    AND b.id NOT IN(:excludelist)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findActiveUsersWithPermission",
+   "query": "SELECT NEW com.totvs.technology.foundation.security.vo.FDNUserVO(ut.id, ut.login, ut.userCode, ut.user.fullName)   FROM FDNUserTenant AS ut, FDNPermission p  , FDNResourceTypePermission rtp  WHERE ut.tenantId   = p.tenantId   AND ut.login      = p.login   AND ut.tenantId   = :tenantId    AND ut.userState  = :userState    AND ut.user.fullName LIKE :filter    AND p.resource.id = :resourceId    AND p.permission = rtp.permission  GROUP BY ut.id, ut.login, ut.userCode, ut.user.fullName  ORDER BY ut.login ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.isActiveByTenantAndCode",
+   "query": "SELECT id FROM FDNUserTenant b WHERE b.tenantId = :tenantId AND b.userCode = :userCode AND b.userState = com.totvs.technology.foundation.sdk.service.UserState.ACTIVE AND (b.user.userType = 0 OR b.user.userType = 3)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.isActiveByLogin",
+   "query": "SELECT id FROM FDNUserTenant b WHERE b.login = :login AND b.userState = com.totvs.technology.foundation.sdk.service.UserState.ACTIVE AND (b.user.userType = 0 OR b.user.userType = 3)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.findByUserCodeActive",
+   "query": "SELECT b FROM FDNUserTenant b WHERE b.userCode = :userCode AND b.userState = com.totvs.technology.foundation.sdk.service.UserState.ACTIVE",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNUserTenant.isActiveByIdAndTenantId",
+   "query": "SELECT id FROM FDNUserTenant b WHERE b.tenantId = :tenantId AND b.id = :userTenantId AND b.userState = com.totvs.technology.foundation.sdk.service.UserState.ACTIVE AND b.user.userType = 0",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserTenant",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserTenant.java",
+   "owner_table": "FDN_USERTENANT",
+   "tables": [
+    "FDN_USERTENANT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "USER_TENANT_ID",
@@ -363,6 +1085,32 @@
    "kind": "jpa-join",
    "description": "Propriedades do usuário.",
    "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_PERMISSION",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "FDNUserTenant.findActiveUsersWithPermission",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_PERMISSION",
+   "from_cols": [
+    "LOGIN"
+   ],
+   "to_cols": [
+    "LOGIN"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "FDNUserTenant.findActiveUsersWithPermission",
+   "status": "confirmed"
   }
  ],
  "rejected_relationships": [],
@@ -599,6 +1347,17 @@
    ],
    "cardinality": "N:1",
    "kind": "logical-probable"
+  },
+  {
+   "from_table": "FDN_PERMISSION",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
   },
   {
    "from_table": "FDN_USER",

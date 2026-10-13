@@ -1,0 +1,38 @@
+[
+  {
+    "name": "FDNLock.findById",
+    "query": "SELECT l from FDNLock l WHERE l.fdnLockPK.tenantId = :tenantId AND l.fdnLockPK.featureType = :featureType AND l.fdnLockPK.itemId = :itemId ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.lock.entity.FDNLock",
+    "source_file": "com/fluig/foundation/lock/entity/FDNLock.java",
+    "owner_table": "FDN_LOCK",
+    "tables": [
+      "FDN_LOCK"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNLock.removeAll",
+    "query": "DELETE FDNLock l WHERE l.fdnLockPK.tenantId = :tenantId ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.lock.entity.FDNLock",
+    "source_file": "com/fluig/foundation/lock/entity/FDNLock.java",
+    "owner_table": "FDN_LOCK",
+    "tables": [
+      "FDN_LOCK"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "name": "SociableLike.list",
+    "query": "SELECT b FROM SociableLike b WHERE sociable.id = :sociableId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.sociable.entity.SociableLike",
+    "source_file": "com/totvs/technology/social/sociable/entity/SociableLike.java",
+    "owner_table": "SOCIABLELIKE",
+    "tables": [
+      "SOCIABLELIKE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SociableLike.list.byClass",
+    "query": "SELECT b FROM SociableLike b WHERE b.sociable.objectClass = :objectClass AND b.sociable.tenantId = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.sociable.entity.SociableLike",
+    "source_file": "com/totvs/technology/social/sociable/entity/SociableLike.java",
+    "owner_table": "SOCIABLELIKE",
+    "tables": [
+      "SOCIABLELIKE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SociableLike.list.byClassId",
+    "query": "SELECT b FROM SociableLike b WHERE b.sociable.objectClass = :objectClass AND b.sociable.objectId = :objectId AND b.sociable.tenantId = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.sociable.entity.SociableLike",
+    "source_file": "com/totvs/technology/social/sociable/entity/SociableLike.java",
+    "owner_table": "SOCIABLELIKE",
+    "tables": [
+      "SOCIABLELIKE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SociableLike.Count",
+    "query": "SELECT COUNT(b.id) FROM SociableLike b WHERE sociable.id = :sociableId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.sociable.entity.SociableLike",
+    "source_file": "com/totvs/technology/social/sociable/entity/SociableLike.java",
+    "owner_table": "SOCIABLELIKE",
+    "tables": [
+      "SOCIABLELIKE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SociableLike.find",
+    "query": "SELECT b FROM SociableLike b WHERE sociable.id = :sociableId AND user.id = :userId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.sociable.entity.SociableLike",
+    "source_file": "com/totvs/technology/social/sociable/entity/SociableLike.java",
+    "owner_table": "SOCIABLELIKE",
+    "tables": [
+      "SOCIABLELIKE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SociableLike.removeAll",
+    "query": "DELETE FROM SociableLike b WHERE sociable.id = :sociableId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.sociable.entity.SociableLike",
+    "source_file": "com/totvs/technology/social/sociable/entity/SociableLike.java",
+    "owner_table": "SOCIABLELIKE",
+    "tables": [
+      "SOCIABLELIKE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

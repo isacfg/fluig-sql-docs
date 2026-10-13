@@ -1,0 +1,200 @@
+[
+  {
+    "name": "FDNTenant.findAll",
+    "query": "SELECT b FROM FDNTenant b WHERE b.tenantActive = true",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNTenant",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNTenant.java",
+    "owner_table": "FDN_TENANT",
+    "tables": [
+      "FDN_TENANT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNTenant.findAllTenantUUID",
+    "query": "SELECT b.UUID FROM FDNTenant b WHERE b.tenantActive = true AND b.id >= 0",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNTenant",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNTenant.java",
+    "owner_table": "FDN_TENANT",
+    "tables": [
+      "FDN_TENANT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNTenant.count",
+    "query": "SELECT count(b) FROM FDNTenant b WHERE b.tenantActive = true",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNTenant",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNTenant.java",
+    "owner_table": "FDN_TENANT",
+    "tables": [
+      "FDN_TENANT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNTenant.findTenants",
+    "query": "SELECT b FROM FDNTenant b WHERE b.id > 0 AND b.tenantActive = true",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNTenant",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNTenant.java",
+    "owner_table": "FDN_TENANT",
+    "tables": [
+      "FDN_TENANT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNTenant.findByFederalId",
+    "query": "SELECT b FROM FDNTenant b WHERE b.federalId = :federalId AND b.tenantActive = true",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNTenant",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNTenant.java",
+    "owner_table": "FDN_TENANT",
+    "tables": [
+      "FDN_TENANT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNTenant.findActiveByCode",
+    "query": "SELECT b FROM FDNTenant b WHERE b.code = :code AND b.tenantActive = true",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNTenant",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNTenant.java",
+    "owner_table": "FDN_TENANT",
+    "tables": [
+      "FDN_TENANT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNTenant.findByCode",
+    "query": "SELECT b FROM FDNTenant b WHERE b.code = :code",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNTenant",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNTenant.java",
+    "owner_table": "FDN_TENANT",
+    "tables": [
+      "FDN_TENANT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNTenant.findByIdpId",
+    "query": "SELECT b FROM FDNTenant b WHERE b.idpId = :idpId AND b.tenantActive = true",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNTenant",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNTenant.java",
+    "owner_table": "FDN_TENANT",
+    "tables": [
+      "FDN_TENANT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNTenant.findById",
+    "query": "SELECT b FROM FDNTenant b WHERE b.id = :tenantId AND b.tenantActive = true",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNTenant",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNTenant.java",
+    "owner_table": "FDN_TENANT",
+    "tables": [
+      "FDN_TENANT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNTenant.findByName",
+    "query": "SELECT b FROM FDNTenant b WHERE b.description LIKE :description AND b.tenantActive = true",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNTenant",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNTenant.java",
+    "owner_table": "FDN_TENANT",
+    "tables": [
+      "FDN_TENANT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNTenant.findByFilter",
+    "query": "SELECT b FROM FDNTenant b WHERE b.tenantActive = true AND (b.code = :code OR b.federalId = :federalId OR b.description LIKE :description)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNTenant",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNTenant.java",
+    "owner_table": "FDN_TENANT",
+    "tables": [
+      "FDN_TENANT"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

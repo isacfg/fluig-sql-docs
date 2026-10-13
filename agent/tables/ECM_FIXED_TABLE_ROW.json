@@ -1,0 +1,143 @@
+{
+  "name": "ECM_FIXED_TABLE_ROW",
+  "domain": "ecm-metadata-forms",
+  "purpose": "Valores (células) das linhas de um item de tabela fixa de formulário de metadados: cada linha guarda o valor de uma coluna (COLUMN_HTML_ID) em uma linha (ROW_ID).",
+  "schema_card": "by_table/ECM_FIXED_TABLE_ROW.json",
+  "business_concepts": [
+    "ecm-metadata-forms",
+    "ECM_FIXED_TABLE_ROW"
+  ],
+  "grain": {
+    "description": "Valores (células) das linhas de um item de tabela fixa de formulário de metadados: cada linha guarda o valor de uma coluna (COLUMN_HTML_ID) em uma linha (ROW_ID). Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/ECM_FIXED_TABLE_ROW.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0180",
+      "from_table": "ECM_FIXED_TABLE_ROW",
+      "to_table": "ECM_FIXED_TABLE_FORM_ITEM",
+      "on": [
+        "ECM_FIXED_TABLE_ROW.METADATAFORM_ID = ECM_FIXED_TABLE_FORM_ITEM.METADATAFORM_ID",
+        "ECM_FIXED_TABLE_ROW.HTML_ID_FIXEDTABLE_ITEM = ECM_FIXED_TABLE_FORM_ITEM.HTML_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "METADATAFORM_ID",
+          "to_column": "METADATAFORM_ID"
+        },
+        {
+          "from_column": "HTML_ID_FIXEDTABLE_ITEM",
+          "to_column": "HTML_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Valores de células/linhas da tabela fixa (rowsValues, EAGER).",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0183",
+      "from_table": "ECM_FIXED_TABLE_ROW",
+      "to_table": "ECM_FIXED_TABLE_FORM_ITEM",
+      "on": [
+        "ECM_FIXED_TABLE_ROW.METADATAFORM_ID = ECM_FIXED_TABLE_FORM_ITEM.METADATAFORM_ID",
+        "ECM_FIXED_TABLE_ROW.HTML_ID_FIXEDTABLE_ITEM = ECM_FIXED_TABLE_FORM_ITEM.HTML_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "METADATAFORM_ID",
+          "to_column": "METADATAFORM_ID"
+        },
+        {
+          "from_column": "HTML_ID_FIXEDTABLE_ITEM",
+          "to_column": "HTML_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Tabela fixa dona da célula (FK_ID_FX_TB_ITM_IN_ROW).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0180",
+      "table": "ECM_FIXED_TABLE_FORM_ITEM",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0183",
+      "table": "ECM_FIXED_TABLE_FORM_ITEM",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0185",
+      "table": "ECM_FIXED_TABLE_COLUMN",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Valores (células) das linhas de um item de tabela fixa de formulário de metadados: cada linha guarda o valor de uma coluna (COLUMN_HTML_ID) em uma linha (ROW_ID). Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

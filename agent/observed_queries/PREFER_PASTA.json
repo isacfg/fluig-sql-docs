@@ -1,0 +1,38 @@
+[
+  {
+    "name": "FolderPreferences.findAll",
+    "query": "SELECT p FROM FolderPreferences p WHERE p.folderPreferencesPK.companyId = :companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dm.model.FolderPreferences",
+    "source_file": "com/datasul/technology/webdesk/dm/model/FolderPreferences.java",
+    "owner_table": "PREFER_PASTA",
+    "tables": [
+      "PREFER_PASTA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FolderPreferences.findByColleagueDocumentId",
+    "query": "SELECT p FROM FolderPreferences p WHERE p.folderPreferencesPK.colleagueId = :colleagueId AND p.folderPreferencesPK.companyId = :companyId AND p.folderPreferencesPK.documentId = :documentId AND p.folderPreferencesPK.version = :version",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dm.model.FolderPreferences",
+    "source_file": "com/datasul/technology/webdesk/dm/model/FolderPreferences.java",
+    "owner_table": "PREFER_PASTA",
+    "tables": [
+      "PREFER_PASTA"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

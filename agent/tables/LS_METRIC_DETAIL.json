@@ -1,0 +1,137 @@
+{
+  "name": "LS_METRIC_DETAIL",
+  "domain": "monitoring-metrics",
+  "purpose": "Medições individuais (código, valor, instante) de métricas do License Server, com marca de processamento.",
+  "schema_card": "by_table/LS_METRIC_DETAIL.json",
+  "business_concepts": [
+    "monitoring-metrics",
+    "LS_METRIC_DETAIL"
+  ],
+  "grain": {
+    "description": "Medições individuais (código, valor, instante) de métricas do License Server, com marca de processamento. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "METRIC_DETAIL_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/LS_METRIC_DETAIL.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0752",
+      "from_table": "LS_METRIC_DETAIL",
+      "to_table": "LS_METRIC",
+      "on": [
+        "LS_METRIC_DETAIL.METRIC_ID = LS_METRIC.METRIC_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "METRIC_ID",
+          "to_column": "METRIC_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Medições individuais.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0753",
+      "from_table": "LS_METRIC_DETAIL",
+      "to_table": "LS_METRIC",
+      "on": [
+        "LS_METRIC_DETAIL.METRIC_ID = LS_METRIC.METRIC_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "METRIC_ID",
+          "to_column": "METRIC_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Cabeçalho da métrica (LSMetricDetail.metric).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0752",
+      "table": "LS_METRIC",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0753",
+      "table": "LS_METRIC",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "IDX_METRICDETAIL001",
+      "unique": false,
+      "columns": [
+        "LOG_PROCESSED",
+        "METRIC_ID",
+        "METRIC_CODE",
+        "METRIC_TIME"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/LS_METRIC_DETAIL.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Medições individuais (código, valor, instante) de métricas do License Server, com marca de processamento. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "METRIC_DETAIL_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

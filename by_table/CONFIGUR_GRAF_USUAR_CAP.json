@@ -16,6 +16,7 @@
  "jpa_entities": [
   "com.datasul.technology.cap.model.UserGraphicSetings"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "CD_MATRICULA",

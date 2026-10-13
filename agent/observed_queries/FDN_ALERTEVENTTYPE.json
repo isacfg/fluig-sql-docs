@@ -1,0 +1,146 @@
+[
+  {
+    "name": "FDNAlertEventType.findAll",
+    "query": "SELECT b FROM FDNAlertEventType b",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertEventType",
+    "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertEventType.java",
+    "owner_table": "FDN_ALERTEVENTTYPE",
+    "tables": [
+      "FDN_ALERTEVENTTYPE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNAlertEventType.findById",
+    "query": "SELECT b FROM FDNAlertEventType b WHERE b.id = :id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertEventType",
+    "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertEventType.java",
+    "owner_table": "FDN_ALERTEVENTTYPE",
+    "tables": [
+      "FDN_ALERTEVENTTYPE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNAlertEventType.findByEventKey",
+    "query": "SELECT b FROM FDNAlertEventType b WHERE b.eventKey = :eventKey and b.tenant.id = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertEventType",
+    "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertEventType.java",
+    "owner_table": "FDN_ALERTEVENTTYPE",
+    "tables": [
+      "FDN_ALERTEVENTTYPE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNAlertEventType.findAllByTenant",
+    "query": "SELECT b FROM FDNAlertEventType b WHERE b.tenant.id = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertEventType",
+    "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertEventType.java",
+    "owner_table": "FDN_ALERTEVENTTYPE",
+    "tables": [
+      "FDN_ALERTEVENTTYPE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNAlertEventType.findAllNotAdminByTenant",
+    "query": "SELECT b FROM FDNAlertEventType b WHERE b.tenant.id = :tenantId and b.onlyAdmin = false",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertEventType",
+    "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertEventType.java",
+    "owner_table": "FDN_ALERTEVENTTYPE",
+    "tables": [
+      "FDN_ALERTEVENTTYPE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNAlertEventType.findAllAdminByTenant",
+    "query": "SELECT b FROM FDNAlertEventType b WHERE b.tenant.id = :tenantId and b.onlyAdmin = true",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertEventType",
+    "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertEventType.java",
+    "owner_table": "FDN_ALERTEVENTTYPE",
+    "tables": [
+      "FDN_ALERTEVENTTYPE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNAlertEventType.findAllByModule",
+    "query": "SELECT b FROM FDNAlertEventType b WHERE b.tenant.id = :tenantId and b.module.id = :moduleId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertEventType",
+    "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertEventType.java",
+    "owner_table": "FDN_ALERTEVENTTYPE",
+    "tables": [
+      "FDN_ALERTEVENTTYPE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNAlertEventType.findAllNotAdminByModule",
+    "query": "SELECT b FROM FDNAlertEventType b WHERE b.tenant.id = :tenantId and b.module.id = :moduleId and b.onlyAdmin = false",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.alert.entity.FDNAlertEventType",
+    "source_file": "com/totvs/technology/foundation/alert/entity/FDNAlertEventType.java",
+    "owner_table": "FDN_ALERTEVENTTYPE",
+    "tables": [
+      "FDN_ALERTEVENTTYPE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

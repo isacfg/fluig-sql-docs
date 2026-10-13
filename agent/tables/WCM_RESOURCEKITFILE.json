@@ -1,0 +1,126 @@
+{
+  "name": "WCM_RESOURCEKITFILE",
+  "domain": "wcm-resources",
+  "purpose": "Arquivos que compõem um kit de recursos, com tipo, caminho e ordem.",
+  "schema_card": "by_table/WCM_RESOURCEKITFILE.json",
+  "business_concepts": [
+    "wcm-resources",
+    "WCM_RESOURCEKITFILE"
+  ],
+  "grain": {
+    "description": "Arquivos que compõem um kit de recursos, com tipo, caminho e ordem. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "RESOURCE_KIT_FILE_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/WCM_RESOURCEKITFILE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-1114",
+      "from_table": "WCM_RESOURCEKITFILE",
+      "to_table": "WCM_RESOURCEKIT",
+      "on": [
+        "WCM_RESOURCEKITFILE.RESOURCE_KIT_ID = WCM_RESOURCEKIT.RESOURCE_KIT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "RESOURCE_KIT_ID",
+          "to_column": "RESOURCE_KIT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Arquivos do kit.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1115",
+      "from_table": "WCM_RESOURCEKITFILE",
+      "to_table": "WCM_RESOURCEKIT",
+      "on": [
+        "WCM_RESOURCEKITFILE.RESOURCE_KIT_ID = WCM_RESOURCEKIT.RESOURCE_KIT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "RESOURCE_KIT_ID",
+          "to_column": "RESOURCE_KIT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Kit dono do arquivo.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-1114",
+      "table": "WCM_RESOURCEKIT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1115",
+      "table": "WCM_RESOURCEKIT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/WCM_RESOURCEKITFILE.json",
+  "observed_query_count": 3,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Arquivos que compõem um kit de recursos, com tipo, caminho e ordem. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "RESOURCE_KIT_FILE_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

@@ -20,6 +20,224 @@
  "jpa_entities": [
   "com.fluig.metadataform.model.MetadataForm"
  ],
+ "observed_queries": [
+  {
+   "name": "MetadataForm.metadataFormByDocument",
+   "query": "SELECT m FROM MetadataForm m WHERE m.document = :document",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.metadataform.model.MetadataForm",
+   "source_file": "com/fluig/metadataform/model/MetadataForm.java",
+   "owner_table": "ECM_METADATA_FORM",
+   "tables": [
+    "ECM_METADATA_FORM"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "MetadataForm.metadataFormByIdFetchChildrens",
+   "query": "SELECT m FROM MetadataForm m LEFT JOIN FETCH m.childrens WHERE m.id = :id",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.metadataform.model.MetadataForm",
+   "source_file": "com/fluig/metadataform/model/MetadataForm.java",
+   "owner_table": "ECM_METADATA_FORM",
+   "tables": [
+    "ECM_METADATA_FORM"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "MetadataForm.metadataFormByDocumentFetchChildrens",
+   "query": "SELECT m FROM MetadataForm m LEFT JOIN FETCH m.childrens WHERE m.document = :document",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.metadataform.model.MetadataForm",
+   "source_file": "com/fluig/metadataform/model/MetadataForm.java",
+   "owner_table": "ECM_METADATA_FORM",
+   "tables": [
+    "ECM_METADATA_FORM"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "MetadataForm.metadataFormByDocumentId",
+   "query": "SELECT m FROM MetadataForm m WHERE m.document.documentPK.documentId = :documentId AND m.document.documentPK.companyId = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.metadataform.model.MetadataForm",
+   "source_file": "com/fluig/metadataform/model/MetadataForm.java",
+   "owner_table": "ECM_METADATA_FORM",
+   "tables": [
+    "ECM_METADATA_FORM"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "MetadataForm.metadataFindAllCurrentByTenant",
+   "query": "SELECT m FROM MetadataForm m WHERE m.document.documentPK.companyId = :tenantId AND (:title IS NULL OR UPPER(m.title) LIKE :title) AND m.versionStatus = com.fluig.metadataform.model.MetadataFormVersionStatusEnum.CURRENT ORDER BY m.title",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.metadataform.model.MetadataForm",
+   "source_file": "com/fluig/metadataform/model/MetadataForm.java",
+   "owner_table": "ECM_METADATA_FORM",
+   "tables": [
+    "ECM_METADATA_FORM"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "MetadataForm.metadataFindAllCurrentByTenantById",
+   "query": "SELECT m FROM MetadataForm m WHERE m.document.documentPK.companyId = :tenantId AND (:title IS NULL OR UPPER(m.title) LIKE :title) AND m.versionStatus = com.fluig.metadataform.model.MetadataFormVersionStatusEnum.CURRENT ORDER BY m.id",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.metadataform.model.MetadataForm",
+   "source_file": "com/fluig/metadataform/model/MetadataForm.java",
+   "owner_table": "ECM_METADATA_FORM",
+   "tables": [
+    "ECM_METADATA_FORM"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "MetadataForm.metadataFindAllCurrentByTenantFetchChildrens",
+   "query": "SELECT m FROM MetadataForm m LEFT JOIN FETCH m.childrens WHERE m.document.documentPK.companyId = :tenantId AND (:title IS NULL OR UPPER(m.title) LIKE :title) AND m.versionStatus = com.fluig.metadataform.model.MetadataFormVersionStatusEnum.CURRENT ORDER BY m.title",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.metadataform.model.MetadataForm",
+   "source_file": "com/fluig/metadataform/model/MetadataForm.java",
+   "owner_table": "ECM_METADATA_FORM",
+   "tables": [
+    "ECM_METADATA_FORM"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "MetadataForm.metadataFindAllCurrentByTenantFetchChildrensById",
+   "query": "SELECT m FROM MetadataForm m LEFT JOIN FETCH m.childrens WHERE m.document.documentPK.companyId = :tenantId AND (:title IS NULL OR UPPER(m.title) LIKE :title) AND m.versionStatus = com.fluig.metadataform.model.MetadataFormVersionStatusEnum.CURRENT ORDER BY m.id",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.metadataform.model.MetadataForm",
+   "source_file": "com/fluig/metadataform/model/MetadataForm.java",
+   "owner_table": "ECM_METADATA_FORM",
+   "tables": [
+    "ECM_METADATA_FORM"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "MetadataForm.metadataCountAllByTenantFetchChildrens",
+   "query": "SELECT COUNT(m) FROM MetadataForm m WHERE m.document.documentPK.companyId = :tenantId AND (:title IS NULL OR UPPER(m.title) LIKE :title) ",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.metadataform.model.MetadataForm",
+   "source_file": "com/fluig/metadataform/model/MetadataForm.java",
+   "owner_table": "ECM_METADATA_FORM",
+   "tables": [
+    "ECM_METADATA_FORM"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "MetadataForm.getMetadataFormInternalIdByDocument",
+   "query": "SELECT m.id FROM MetadataForm m WHERE m.document.documentPK = :documentPK",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.metadataform.model.MetadataForm",
+   "source_file": "com/fluig/metadataform/model/MetadataForm.java",
+   "owner_table": "ECM_METADATA_FORM",
+   "tables": [
+    "ECM_METADATA_FORM"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "MetadataForm.getLastSpecifiedVersionMetadataFormByDocumentId",
+   "query": "SELECT m FROM MetadataForm m LEFT JOIN FETCH m.childrens WHERE m.id IN ( SELECT MAX(m2.id) FROM MetadataForm m2 WHERE m2.document.documentPK.documentId = :formDocumentId AND m2.versionStatus = :status)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.metadataform.model.MetadataForm",
+   "source_file": "com/fluig/metadataform/model/MetadataForm.java",
+   "owner_table": "ECM_METADATA_FORM",
+   "tables": [
+    "ECM_METADATA_FORM"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "MetadataForm.updateQuerySetOldFormsDeprecated",
+   "query": "UPDATE MetadataForm m SET m.versionStatus = com.fluig.metadataform.model.MetadataFormVersionStatusEnum.DEPRECATED WHERE m.document.documentPK.companyId = :tenantId AND m.document.documentPK.documentId = :documentId AND m.id != :id AND m.versionStatus != com.fluig.metadataform.model.MetadataFormVersionStatusEnum.DEPRECATED",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.metadataform.model.MetadataForm",
+   "source_file": "com/fluig/metadataform/model/MetadataForm.java",
+   "owner_table": "ECM_METADATA_FORM",
+   "tables": [
+    "ECM_METADATA_FORM"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "ID",

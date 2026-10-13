@@ -1,0 +1,110 @@
+[
+  {
+    "name": "FDNVolume.findByTenantId",
+    "query": "SELECT o FROM FDNVolume o WHERE o.tenantId= :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.volume.entity.FDNVolume",
+    "source_file": "com/fluig/foundation/volume/entity/FDNVolume.java",
+    "owner_table": "FDN_VOLUME",
+    "tables": [
+      "FDN_VOLUME"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNVolume.findByType",
+    "query": "SELECT o FROM FDNVolume o WHERE o.tenantId= :tenantId and (o.volumeType = :type or o.volumeType = 0)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.volume.entity.FDNVolume",
+    "source_file": "com/fluig/foundation/volume/entity/FDNVolume.java",
+    "owner_table": "FDN_VOLUME",
+    "tables": [
+      "FDN_VOLUME"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNVolume.addUsedSpace",
+    "query": "UPDATE FDNVolume  set usedSpace = usedSpace + :size WHERE tenantId= :tenantId and volumeCode = :volumeCode",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.volume.entity.FDNVolume",
+    "source_file": "com/fluig/foundation/volume/entity/FDNVolume.java",
+    "owner_table": "FDN_VOLUME",
+    "tables": [
+      "FDN_VOLUME"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNVolume.findByVolumeCode",
+    "query": "SELECT o FROM FDNVolume o WHERE o.tenantId = :tenantId and o.volumeCode = :volumeCode",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.volume.entity.FDNVolume",
+    "source_file": "com/fluig/foundation/volume/entity/FDNVolume.java",
+    "owner_table": "FDN_VOLUME",
+    "tables": [
+      "FDN_VOLUME"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNVolume.findByVolumeIdAndTenant",
+    "query": "SELECT o FROM FDNVolume o WHERE o.tenantId = :tenantId and o.id = :volumeId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.volume.entity.FDNVolume",
+    "source_file": "com/fluig/foundation/volume/entity/FDNVolume.java",
+    "owner_table": "FDN_VOLUME",
+    "tables": [
+      "FDN_VOLUME"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNVolume.removeDeletedSpace",
+    "query": "UPDATE FDNVolume set usedSpace = usedSpace - :size WHERE tenantId = :tenantId and volumeCode = :volumeCode",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.volume.entity.FDNVolume",
+    "source_file": "com/fluig/foundation/volume/entity/FDNVolume.java",
+    "owner_table": "FDN_VOLUME",
+    "tables": [
+      "FDN_VOLUME"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

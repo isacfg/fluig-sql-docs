@@ -43,6 +43,188 @@
  "jpa_entities": [
   "com.totvs.technology.foundation.oauth.entity.FDNOAuthProvider"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNOAuthProvider.findAll",
+   "query": "SELECT b FROM FDNOAuthProvider b",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.oauth.entity.FDNOAuthProvider",
+   "source_file": "com/totvs/technology/foundation/oauth/entity/FDNOAuthProvider.java",
+   "owner_table": "FDN_OAUTHPROVIDER",
+   "tables": [
+    "FDN_OAUTHPROVIDER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNOAuthProvider.findById",
+   "query": "SELECT b FROM FDNOAuthProvider b WHERE b.id = :id",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.oauth.entity.FDNOAuthProvider",
+   "source_file": "com/totvs/technology/foundation/oauth/entity/FDNOAuthProvider.java",
+   "owner_table": "FDN_OAUTHPROVIDER",
+   "tables": [
+    "FDN_OAUTHPROVIDER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNOAuthProvider.findByCode",
+   "query": "SELECT b FROM FDNOAuthProvider b WHERE b.code = :code",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.oauth.entity.FDNOAuthProvider",
+   "source_file": "com/totvs/technology/foundation/oauth/entity/FDNOAuthProvider.java",
+   "owner_table": "FDN_OAUTHPROVIDER",
+   "tables": [
+    "FDN_OAUTHPROVIDER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNOAuthProvider.findByTenantCode",
+   "query": "SELECT b FROM FDNOAuthProvider b WHERE b.tenantId = :tenantId AND b.code = :code",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.oauth.entity.FDNOAuthProvider",
+   "source_file": "com/totvs/technology/foundation/oauth/entity/FDNOAuthProvider.java",
+   "owner_table": "FDN_OAUTHPROVIDER",
+   "tables": [
+    "FDN_OAUTHPROVIDER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNOAuthProvider.findByProviderName",
+   "query": "SELECT b FROM FDNOAuthProvider b WHERE b.providerName = :providerName",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.oauth.entity.FDNOAuthProvider",
+   "source_file": "com/totvs/technology/foundation/oauth/entity/FDNOAuthProvider.java",
+   "owner_table": "FDN_OAUTHPROVIDER",
+   "tables": [
+    "FDN_OAUTHPROVIDER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNOAuthProvider.findByTenantProviderName",
+   "query": "SELECT b FROM FDNOAuthProvider b WHERE b.tenantId = :tenantId AND b.providerName = :providerName",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.oauth.entity.FDNOAuthProvider",
+   "source_file": "com/totvs/technology/foundation/oauth/entity/FDNOAuthProvider.java",
+   "owner_table": "FDN_OAUTHPROVIDER",
+   "tables": [
+    "FDN_OAUTHPROVIDER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNOAuthProvider.findAllByTenant",
+   "query": "SELECT oap FROM FDNOAuthProvider oap WHERE tenantId = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.oauth.entity.FDNOAuthProvider",
+   "source_file": "com/totvs/technology/foundation/oauth/entity/FDNOAuthProvider.java",
+   "owner_table": "FDN_OAUTHPROVIDER",
+   "tables": [
+    "FDN_OAUTHPROVIDER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNOAuthProvider.findByTenantAndFilter",
+   "query": "SELECT oap FROM FDNOAuthProvider oap WHERE tenantId = :tenantId AND (code = :code OR description LIKE :description)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.oauth.entity.FDNOAuthProvider",
+   "source_file": "com/totvs/technology/foundation/oauth/entity/FDNOAuthProvider.java",
+   "owner_table": "FDN_OAUTHPROVIDER",
+   "tables": [
+    "FDN_OAUTHPROVIDER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNOAuthProvider.findByDescription",
+   "query": "SELECT oap FROM FDNOAuthProvider oap WHERE description LIKE :description",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.oauth.entity.FDNOAuthProvider",
+   "source_file": "com/totvs/technology/foundation/oauth/entity/FDNOAuthProvider.java",
+   "owner_table": "FDN_OAUTHPROVIDER",
+   "tables": [
+    "FDN_OAUTHPROVIDER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNOAuthProvider.findByFilter",
+   "query": "SELECT b FROM FDNOAuthProvider b WHERE b.code = :code OR b.description LIKE :description",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.oauth.entity.FDNOAuthProvider",
+   "source_file": "com/totvs/technology/foundation/oauth/entity/FDNOAuthProvider.java",
+   "owner_table": "FDN_OAUTHPROVIDER",
+   "tables": [
+    "FDN_OAUTHPROVIDER"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "OAUTH_PROVIDER_ID",

@@ -1,0 +1,272 @@
+[
+  {
+    "name": "FDNGroup.findAll",
+    "query": "SELECT b FROM FDNGroup b",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroup",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroup.java",
+    "owner_table": "FDN_GROUP",
+    "tables": [
+      "FDN_GROUP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroup.findById",
+    "query": "SELECT b FROM FDNGroup b WHERE b.id = :id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroup",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroup.java",
+    "owner_table": "FDN_GROUP",
+    "tables": [
+      "FDN_GROUP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroup.findByCode",
+    "query": "SELECT b FROM FDNGroup b WHERE b.tenantId = :tenantId AND b.code = :code",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroup",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroup.java",
+    "owner_table": "FDN_GROUP",
+    "tables": [
+      "FDN_GROUP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroup.findByCodeWithoutTenant",
+    "query": "SELECT b FROM FDNGroup b WHERE b.code = :code AND b.tenantId = -1",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroup",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroup.java",
+    "owner_table": "FDN_GROUP",
+    "tables": [
+      "FDN_GROUP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroup.findByTenant",
+    "query": "SELECT b FROM FDNGroup b WHERE b.tenantId = :tenantId AND b.isInternal = false",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroup",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroup.java",
+    "owner_table": "FDN_GROUP",
+    "tables": [
+      "FDN_GROUP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroup.findAllByTenant",
+    "query": "SELECT b FROM FDNGroup b WHERE b.tenantId = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroup",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroup.java",
+    "owner_table": "FDN_GROUP",
+    "tables": [
+      "FDN_GROUP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroup.findByTenantCode",
+    "query": "SELECT b FROM FDNGroup b WHERE b.tenant.code = :tenantCode AND b.isInternal = false",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroup",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroup.java",
+    "owner_table": "FDN_GROUP",
+    "tables": [
+      "FDN_GROUP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroup.countByTenant",
+    "query": "SELECT COUNT(b.code) FROM FDNGroup b WHERE b.tenantId = :tenantId AND b.isInternal = false",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroup",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroup.java",
+    "owner_table": "FDN_GROUP",
+    "tables": [
+      "FDN_GROUP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroup.findAllByFilter",
+    "query": "SELECT b FROM FDNGroup b WHERE b.tenantId = :tenantId AND (b.code LIKE :code OR b.description LIKE :description) AND b.isInternal = false",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroup",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroup.java",
+    "owner_table": "FDN_GROUP",
+    "tables": [
+      "FDN_GROUP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroup.findByTenantAndFilter",
+    "query": "SELECT b FROM FDNGroup b WHERE b.tenantId = :tenantId  AND (b.code LIKE :filter OR b.description LIKE :filter) AND b.isInternal = false ORDER BY b.description",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroup",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroup.java",
+    "owner_table": "FDN_GROUP",
+    "tables": [
+      "FDN_GROUP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroup.findByDescription",
+    "query": "SELECT b FROM FDNGroup b WHERE b.tenantId = :tenantId AND b.description LIKE :description AND b.isInternal = false",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroup",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroup.java",
+    "owner_table": "FDN_GROUP",
+    "tables": [
+      "FDN_GROUP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroup.findGroupsWithExcludeList",
+    "query": " SELECT b    FROM FDNGroup b   WHERE b.tenantId = :tenantId     AND (b.code LIKE :filter OR b.description LIKE :filter)    AND b.isInternal = false     AND b.id NOT IN(:excludelist)  ORDER BY b.description",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroup",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroup.java",
+    "owner_table": "FDN_GROUP",
+    "tables": [
+      "FDN_GROUP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroup.findGroupIdsByCodes",
+    "query": " SELECT g.id FROM FDNGroup g   WHERE g.tenantId = :tenantId AND g.code IN (:codes)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroup",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroup.java",
+    "owner_table": "FDN_GROUP",
+    "tables": [
+      "FDN_GROUP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroup.findGroupsWithPermission",
+    "query": "SELECT NEW com.totvs.technology.foundation.security.vo.FDNGroupVO(g.description, g.id, g.code)  FROM FDNGroup g, FDNPermission p  WHERE g.tenantId = p.tenantId  AND g.code = p.groupCode  AND g.description LIKE :filter  AND g.tenantId = :tenantId  AND g.isInternal = false  AND p.resource.id = :resourceId  GROUP BY g.description, g.id, g.code  ORDER BY g.description",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroup",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroup.java",
+    "owner_table": "FDN_GROUP",
+    "tables": [
+      "FDN_GROUP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroup.countNonInternalGroups",
+    "query": "SELECT COUNT(b) FROM FDNGroup b WHERE b.tenantId = :tenantId AND b.isInternal = false",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroup",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroup.java",
+    "owner_table": "FDN_GROUP",
+    "tables": [
+      "FDN_GROUP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

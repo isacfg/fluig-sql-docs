@@ -32,6 +32,7 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.workflow.model.ProcessInstanceManager"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "ID",

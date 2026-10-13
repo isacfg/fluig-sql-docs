@@ -1,0 +1,238 @@
+{
+  "name": "WCM_PAGEVERSION",
+  "domain": "wcm-portal-pages",
+  "purpose": "Versão de uma página do portal WCM (título, ícone, layout, autorização, publicação). Cada edição/publicação gera nova versão ligada a WCM_PAGE.",
+  "schema_card": "by_table/WCM_PAGEVERSION.json",
+  "business_concepts": [
+    "wcm-portal-pages",
+    "WCM_PAGEVERSION"
+  ],
+  "grain": {
+    "description": "Versão de uma página do portal WCM (título, ícone, layout, autorização, publicação). Cada edição/publicação gera nova versão ligada a WCM_PAGE. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/WCM_PAGEVERSION.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-1095",
+      "from_table": "WCM_PAGEVERSION",
+      "to_table": "FDN_USERTENANT",
+      "on": [
+        "WCM_PAGEVERSION.LAST_EDIT_USER = FDN_USERTENANT.USER_TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "LAST_EDIT_USER",
+          "to_column": "USER_TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Último usuário que editou a versão.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1097",
+      "from_table": "WCM_PAGEVERSION",
+      "to_table": "WCM_APPLICATION",
+      "on": [
+        "WCM_PAGEVERSION.LAYOUT_ID = WCM_APPLICATION.APPLICATION_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "LAYOUT_ID",
+          "to_column": "APPLICATION_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Layout (aplicação WCM) usado pela página.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1099",
+      "from_table": "WCM_PAGEVERSION",
+      "to_table": "WCM_PAGE",
+      "on": [
+        "WCM_PAGEVERSION.PAGE_ID = WCM_PAGE.PAGE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "PAGE_ID",
+          "to_column": "PAGE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Página a que a versão pertence (também mapeada como jpa-join WCMPageVersion.page).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1103",
+      "from_table": "WCM_PAGEVERSION",
+      "to_table": "WCM_PAGE",
+      "on": [
+        "WCM_PAGEVERSION.ID = WCM_PAGE.PAGE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "ID",
+          "to_column": "PAGE_ID"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "hql-join",
+      "evidence": "WCMPage.findStartPage",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-1070",
+      "table": "WCM_COMPONENTPAGE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1094",
+      "table": "WCM_PAGEDATA",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1095",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1097",
+      "table": "WCM_APPLICATION",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1099",
+      "table": "WCM_PAGE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1101",
+      "table": "WCM_PAGEWIDGET",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1103",
+      "table": "WCM_PAGE",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1106",
+      "table": "WCM_PAGEWIDGET",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "WCMPAGEVERSION001",
+      "unique": false,
+      "columns": [
+        "ID",
+        "PAGE_ID",
+        "PUBLISHED"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/WCM_PAGEVERSION.json",
+  "observed_query_count": 22,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Versão de uma página do portal WCM (título, ícone, layout, autorização, publicação). Cada edição/publicação gera nova versão ligada a WCM_PAGE. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

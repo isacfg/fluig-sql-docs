@@ -1,0 +1,142 @@
+{
+  "name": "FDN_CATEGORY",
+  "domain": "permissoes-categorias",
+  "purpose": "Categorias hierárquicas usadas para agrupar recursos (FDN_RESOURCE) no modelo de permissões. Cada linha é uma categoria, possivelmente filha de outra.",
+  "schema_card": "by_table/FDN_CATEGORY.json",
+  "business_concepts": [
+    "permissoes-categorias",
+    "FDN_CATEGORY"
+  ],
+  "grain": {
+    "description": "Categorias hierárquicas usadas para agrupar recursos (FDN_RESOURCE) no modelo de permissões. Cada linha é uma categoria, possivelmente filha de outra. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "CATEGORY_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_CATEGORY.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0413",
+      "from_table": "FDN_CATEGORY",
+      "to_table": "FDN_CATEGORY",
+      "on": [
+        "FDN_CATEGORY.TENANT_ID = FDN_CATEGORY.TENANT_ID",
+        "FDN_CATEGORY.PARENT_CATEGORY_ID = FDN_CATEGORY.CATEGORY_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "PARENT_CATEGORY_ID",
+          "to_column": "CATEGORY_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "jpa-join",
+      "evidence": "Categoria pai (auto-relação hierárquica); inferida por nome da coluna e query findByParent.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance.",
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0413",
+      "table": "FDN_CATEGORY",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0414",
+      "table": "FDN_CATEGORY",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0415",
+      "table": "FDN_CATEGORY_RESOURCE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0420",
+      "table": "FDN_CATEGORY_RESOURCE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FDNCATEGORY001",
+      "unique": false,
+      "columns": [
+        "PARENT_CATEGORY_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_CATEGORY.json",
+  "observed_query_count": 5,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Categorias hierárquicas usadas para agrupar recursos (FDN_RESOURCE) no modelo de permissões. Cada linha é uma categoria, possivelmente filha de outra. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "CATEGORY_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

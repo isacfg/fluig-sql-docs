@@ -1,0 +1,38 @@
+[
+  {
+    "name": "FDNRequestNonce.findNonce",
+    "query": "SELECT r FROM FDNRequestNonce r WHERE r.tenantId = :tenantId AND r.id = :id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.request.entity.FDNRequestNonce",
+    "source_file": "com/fluig/request/entity/FDNRequestNonce.java",
+    "owner_table": "FDN_REQUEST_NONCE",
+    "tables": [
+      "FDN_REQUEST_NONCE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNRequestNonce.findNoncesToDelete",
+    "query": "SELECT r FROM FDNRequestNonce r WHERE r.createDate <= :beforeCreateDate",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.request.entity.FDNRequestNonce",
+    "source_file": "com/fluig/request/entity/FDNRequestNonce.java",
+    "owner_table": "FDN_REQUEST_NONCE",
+    "tables": [
+      "FDN_REQUEST_NONCE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

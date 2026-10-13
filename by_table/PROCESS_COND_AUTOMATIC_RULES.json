@@ -26,6 +26,7 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.workflow.model.ConditionProcessAutomaticRules"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "ID",

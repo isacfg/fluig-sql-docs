@@ -1,0 +1,56 @@
+[
+  {
+    "name": "MetaListRelation.findAll",
+    "query": "SELECT mlr FROM MetaListRelation mlr WHERE mlr.metaListRelationPK.companyId = :companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.lists.model.MetaListRelation",
+    "source_file": "com/datasul/technology/webdesk/lists/model/MetaListRelation.java",
+    "owner_table": "META_LISTA_REL",
+    "tables": [
+      "META_LISTA_REL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "MetaListRelation.findDetail",
+    "query": "SELECT mlr FROM MetaListRelation mlr WHERE mlr.metaListRelationPK.companyId = :companyId AND mlr.metaListRelationPK.masterList = :masterList",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.lists.model.MetaListRelation",
+    "source_file": "com/datasul/technology/webdesk/lists/model/MetaListRelation.java",
+    "owner_table": "META_LISTA_REL",
+    "tables": [
+      "META_LISTA_REL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "MetaListRelation.findDetailbyTable",
+    "query": "SELECT mlr FROM MetaListRelation mlr WHERE mlr.metaListRelationPK.companyId = :companyId AND mlr.metaListRelationPK.masterList = :masterList AND mlr.tableId = :tableId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.lists.model.MetaListRelation",
+    "source_file": "com/datasul/technology/webdesk/lists/model/MetaListRelation.java",
+    "owner_table": "META_LISTA_REL",
+    "tables": [
+      "META_LISTA_REL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

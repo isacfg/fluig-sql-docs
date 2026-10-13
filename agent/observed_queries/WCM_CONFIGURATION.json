@@ -1,0 +1,38 @@
+[
+  {
+    "name": "WCMConfiguration.findAll",
+    "query": "SELECT b FROM WCMConfiguration b",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMConfiguration",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMConfiguration.java",
+    "owner_table": "WCM_CONFIGURATION",
+    "tables": [
+      "WCM_CONFIGURATION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMConfiguration.findById",
+    "query": "SELECT b FROM WCMConfiguration b WHERE b.id = :configurationId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMConfiguration",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMConfiguration.java",
+    "owner_table": "WCM_CONFIGURATION",
+    "tables": [
+      "WCM_CONFIGURATION"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

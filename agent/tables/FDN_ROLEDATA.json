@@ -1,0 +1,97 @@
+{
+  "name": "FDN_ROLEDATA",
+  "domain": "foundation-identity-access",
+  "purpose": "Propriedades chave/valor adicionais de um papel (FDN_ROLE).",
+  "schema_card": "by_table/FDN_ROLEDATA.json",
+  "business_concepts": [
+    "foundation-identity-access",
+    "FDN_ROLEDATA"
+  ],
+  "grain": {
+    "description": "Propriedades chave/valor adicionais de um papel (FDN_ROLE). Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ROLEDATA_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_ROLEDATA.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0571",
+      "from_table": "FDN_ROLEDATA",
+      "to_table": "FDN_ROLE",
+      "on": [
+        "FDN_ROLEDATA.ROLE_ID = FDN_ROLE.ROLE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "ROLE_ID",
+          "to_column": "ROLE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Papel dono da propriedade.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0571",
+      "table": "FDN_ROLE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "FK_T7G5FWWSGGMB5NLU5V63J1NTA",
+      "unique": false,
+      "columns": [
+        "ROLE_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_ROLEDATA.json",
+  "observed_query_count": 5,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Propriedades chave/valor adicionais de um papel (FDN_ROLE). Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ROLEDATA_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

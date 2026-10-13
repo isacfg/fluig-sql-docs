@@ -1,0 +1,20 @@
+[
+  {
+    "name": "LinkDocument.findParent",
+    "query": "SELECT e FROM LinkDocument e WHERE e.linkDocumentPK.currentParentDocumentId = :currentParentDocumentId AND e.linkDocumentPK.documentId = :documentId AND e.linkDocumentPK.companyId = :companyId AND e.deleted = false",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dm.model.LinkDocument",
+    "source_file": "com/datasul/technology/webdesk/dm/model/LinkDocument.java",
+    "owner_table": "LINK_DOCTO_VIRTUAL",
+    "tables": [
+      "LINK_DOCTO_VIRTUAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

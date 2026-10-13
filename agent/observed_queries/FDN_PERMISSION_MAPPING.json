@@ -1,0 +1,92 @@
+[
+  {
+    "name": "FDNPermissionMapping.findById",
+    "query": "SELECT b FROM FDNPermissionMapping b WHERE b.id = :id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.permission.entity.FDNPermissionMapping",
+    "source_file": "com/totvs/technology/foundation/permission/entity/FDNPermissionMapping.java",
+    "owner_table": "FDN_PERMISSION_MAPPING",
+    "tables": [
+      "FDN_PERMISSION_MAPPING"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNPermissionMapping.findByTenantAndId",
+    "query": "SELECT b FROM FDNPermissionMapping b WHERE b.tenantId = :tenantId AND b.id = :id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.permission.entity.FDNPermissionMapping",
+    "source_file": "com/totvs/technology/foundation/permission/entity/FDNPermissionMapping.java",
+    "owner_table": "FDN_PERMISSION_MAPPING",
+    "tables": [
+      "FDN_PERMISSION_MAPPING"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNPermissionMapping.findByPermission",
+    "query": "SELECT b FROM FDNPermissionMapping b WHERE b.tenantId = :tenantId AND b.resource = :resource AND b.permission = :permission",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.permission.entity.FDNPermissionMapping",
+    "source_file": "com/totvs/technology/foundation/permission/entity/FDNPermissionMapping.java",
+    "owner_table": "FDN_PERMISSION_MAPPING",
+    "tables": [
+      "FDN_PERMISSION_MAPPING"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNPermissionMapping.findByToPermission",
+    "query": "SELECT b FROM FDNPermissionMapping b WHERE b.tenantId = :tenantId AND b.toResource = :toResource AND b.toPermission = :toPermission",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.permission.entity.FDNPermissionMapping",
+    "source_file": "com/totvs/technology/foundation/permission/entity/FDNPermissionMapping.java",
+    "owner_table": "FDN_PERMISSION_MAPPING",
+    "tables": [
+      "FDN_PERMISSION_MAPPING"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNPermissionMapping.findUnique",
+    "query": "SELECT b FROM FDNPermissionMapping b WHERE b.tenantId = :tenantId AND b.resource = :resource AND b.permission = :permission AND b.toResource = :toResource AND b.toPermission = :toPermission",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.permission.entity.FDNPermissionMapping",
+    "source_file": "com/totvs/technology/foundation/permission/entity/FDNPermissionMapping.java",
+    "owner_table": "FDN_PERMISSION_MAPPING",
+    "tables": [
+      "FDN_PERMISSION_MAPPING"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

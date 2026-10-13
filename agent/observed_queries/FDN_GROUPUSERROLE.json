@@ -1,0 +1,362 @@
+[
+  {
+    "name": "FDNGroupUserRole.findAll",
+    "query": "SELECT b FROM FDNGroupUserRole b",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroupUserRole",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroupUserRole.java",
+    "owner_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroupUserRole.findAllGroupsSubGroupsRole",
+    "query": "SELECT b FROM FDNGroupUserRole b WHERE groupCode <> '*' AND (roleCode IS NOT NULL OR childGroupCode IS NOT NULL) ORDER BY tenantId, groupCode",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroupUserRole",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroupUserRole.java",
+    "owner_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroupUserRole.findByRole",
+    "query": "SELECT b FROM FDNGroupUserRole b WHERE b.role = :role AND b.tenant.id = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroupUserRole",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroupUserRole.java",
+    "owner_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroupUserRole.findByLogin",
+    "query": "SELECT b FROM FDNGroupUserRole b WHERE b.login = :login",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroupUserRole",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroupUserRole.java",
+    "owner_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroupUserRole.findByGroup",
+    "query": "SELECT b FROM FDNGroupUserRole b WHERE b.group = :group",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroupUserRole",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroupUserRole.java",
+    "owner_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroupUserRole.findByGroupCode",
+    "query": "SELECT b FROM FDNGroupUserRole b WHERE b.groupCode = :groupCode and b.tenantId = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroupUserRole",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroupUserRole.java",
+    "owner_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroupUserRole.findAllChildGroupCodesByGroupCode",
+    "query": "SELECT b.childGroupCode FROM FDNGroupUserRole b WHERE b.tenantId = :tenantId AND b.groupCode = :groupCode AND b.childGroupCode IS NOT NULL",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroupUserRole",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroupUserRole.java",
+    "owner_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroupUserRole.findChildrenGroupsByGroupCode",
+    "query": "SELECT b.childGroup FROM FDNGroupUserRole b WHERE b.groupCode = :groupCode and b.tenantId = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroupUserRole",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroupUserRole.java",
+    "owner_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroupUserRole.findByChildGroup",
+    "query": "SELECT b FROM FDNGroupUserRole b WHERE b.childGroupCode = :childGroupCode",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroupUserRole",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroupUserRole.java",
+    "owner_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroupUserRole.findByLoginActive",
+    "query": "SELECT b FROM FDNGroupUserRole b WHERE b.login = :login AND b.user.userState = com.totvs.technology.foundation.sdk.service.UserState.ACTIVE",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroupUserRole",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroupUserRole.java",
+    "owner_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroupUserRole.findUserInGroup",
+    "query": "SELECT b FROM FDNGroupUserRole b WHERE b.login = :login AND b.group.id = :groupId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroupUserRole",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroupUserRole.java",
+    "owner_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroupUserRole.findUserInGroupByCode",
+    "query": "SELECT b FROM FDNGroupUserRole b WHERE b.login = :login AND b.groupCode = :groupCode",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroupUserRole",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroupUserRole.java",
+    "owner_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroupUserRole.findUsersInGroupCode",
+    "query": "SELECT DISTINCT b.user FROM FDNGroupUserRole b WHERE b.tenantId = :tenantId AND b.group.code = :groupCode",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroupUserRole",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroupUserRole.java",
+    "owner_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroupUserRole.countUsersByGroupCode",
+    "query": "SELECT COUNT(DISTINCT b.user) FROM FDNGroupUserRole b WHERE b.tenantId = :tenantId AND b.group.code = :groupCode",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroupUserRole",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroupUserRole.java",
+    "owner_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroupUserRole.findRoleInGroup",
+    "query": "SELECT b FROM FDNGroupUserRole b WHERE b.role.id = :roleId AND b.group.id = :groupId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroupUserRole",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroupUserRole.java",
+    "owner_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroupUserRole.findChildGroupInGroup",
+    "query": "SELECT b FROM FDNGroupUserRole b WHERE b.childGroupCode = :childGroupCode AND b.group.id = :groupId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroupUserRole",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroupUserRole.java",
+    "owner_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroupUserRole.findByTenantId",
+    "query": "SELECT b FROM FDNGroupUserRole b WHERE b.tenantId = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroupUserRole",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroupUserRole.java",
+    "owner_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroupUserRole.findByGroupAndSearch",
+    "query": "SELECT b FROM FDNGroupUserRole b WHERE b.group = :group AND b.login LIKE :search",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroupUserRole",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroupUserRole.java",
+    "owner_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroupUserRole.findFirstAddedUser",
+    "query": "SELECT b FROM FDNGroupUserRole b WHERE b.groupCode = :groupCode AND b.id = (select MIN(bm.id) FROM FDNGroupUserRole bm WHERE bm.groupCode = :groupCode)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroupUserRole",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroupUserRole.java",
+    "owner_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNGroupUserRole.findGroupsByUserAndData",
+    "query": "SELECT DISTINCT b.group FROM FDNGroupUserRole b INNER JOIN b.group.data gd WHERE b.tenantId = :tenantId AND b.login = :login AND gd.dataKey = :dataKey AND gd.dataValue = :dataValue ORDER BY b.group.code",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.foundation.security.entity.FDNGroupUserRole",
+    "source_file": "com/totvs/technology/foundation/security/entity/FDNGroupUserRole.java",
+    "owner_table": "FDN_GROUPUSERROLE",
+    "tables": [
+      "FDN_GROUPUSERROLE"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "name": "QrtzTriggers.findTriggersFromJob",
+    "query": "SELECT t FROM QrtzTriggers t WHERE t.jobGroup = :companyId AND t.jobName = :jobName",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.foundation.scheduler.entity.quartz.QrtzTriggers",
+    "source_file": "com/fluig/foundation/scheduler/entity/quartz/QrtzTriggers.java",
+    "owner_table": "QRTZ_TRIGGERS",
+    "tables": [
+      "QRTZ_TRIGGERS"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

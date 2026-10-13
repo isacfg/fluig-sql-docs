@@ -1,0 +1,20 @@
+[
+  {
+    "name": "ActivityDim.findAll",
+    "query": "SELECT a FROM ActivityDim a WHERE a.activityDimPK.companyId = :companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.cap.model.ActivityDim",
+    "source_file": "com/datasul/technology/cap/model/ActivityDim.java",
+    "owner_table": "ACTIVITY_DIM_CAP",
+    "tables": [
+      "ACTIVITY_DIM_CAP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

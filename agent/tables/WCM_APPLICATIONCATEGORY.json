@@ -1,0 +1,172 @@
+{
+  "name": "WCM_APPLICATIONCATEGORY",
+  "domain": "wcm-portal",
+  "purpose": "Categoria atribuída a uma aplicação WCM (agrupamento no catálogo de widgets).",
+  "schema_card": "by_table/WCM_APPLICATIONCATEGORY.json",
+  "business_concepts": [
+    "wcm-portal",
+    "WCM_APPLICATIONCATEGORY"
+  ],
+  "grain": {
+    "description": "Categoria atribuída a uma aplicação WCM (agrupamento no catálogo de widgets). Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "APPLICATION_CATEGORY_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/WCM_APPLICATIONCATEGORY.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-1034",
+      "from_table": "WCM_APPLICATIONCATEGORY",
+      "to_table": "WCM_APPLICATION",
+      "on": [
+        "WCM_APPLICATIONCATEGORY.APPLICATION_ID = WCM_APPLICATION.APPLICATION_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "APPLICATION_ID",
+          "to_column": "APPLICATION_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Categorias.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1041",
+      "from_table": "WCM_APPLICATIONCATEGORY",
+      "to_table": "WCM_APPLICATION",
+      "on": [
+        "WCM_APPLICATIONCATEGORY.APPLICATION_ID = WCM_APPLICATION.APPLICATION_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "APPLICATION_ID",
+          "to_column": "APPLICATION_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Aplicação WCM dona do registro.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1043",
+      "from_table": "WCM_APPLICATIONCATEGORY",
+      "to_table": "WCM_APPLICATION",
+      "on": [
+        "WCM_APPLICATIONCATEGORY.APPLICATION_CATEGORY_ID = WCM_APPLICATION.APPLICATION_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "APPLICATION_CATEGORY_ID",
+          "to_column": "APPLICATION_ID"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "hql-join",
+      "evidence": "findGroupedEnabledWidgetsCategoriesByTenant",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-1034",
+      "table": "WCM_APPLICATION",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1041",
+      "table": "WCM_APPLICATION",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1043",
+      "table": "WCM_APPLICATION",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "WCMAPPCATEGI001",
+      "unique": false,
+      "columns": [
+        "APPLICATION_CATEGORY",
+        "APPLICATION_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/WCM_APPLICATIONCATEGORY.json",
+  "observed_query_count": 10,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Categoria atribuída a uma aplicação WCM (agrupamento no catálogo de widgets). Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "APPLICATION_CATEGORY_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

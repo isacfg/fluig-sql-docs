@@ -14,6 +14,7 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.foundation.model.License"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "NUM_SEQ",

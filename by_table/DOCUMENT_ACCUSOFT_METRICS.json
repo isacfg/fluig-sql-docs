@@ -24,6 +24,26 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.dm.model.DocumentAccusoftMetrics"
  ],
+ "observed_queries": [
+  {
+   "name": "DocumentAccusoftMetrics.countMetrics",
+   "query": " select count(obj) from DocumentAccusoftMetrics obj where obj.tenantId = :tenantId and obj.metricKey = :metricKey AND (obj.metricTime BETWEEN :startDate AND :endDate)",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.DocumentAccusoftMetrics",
+   "source_file": "com/datasul/technology/webdesk/dm/model/DocumentAccusoftMetrics.java",
+   "owner_table": "DOCUMENT_ACCUSOFT_METRICS",
+   "tables": [
+    "DOCUMENT_ACCUSOFT_METRICS"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "ID",

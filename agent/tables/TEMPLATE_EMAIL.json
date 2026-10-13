@@ -1,0 +1,70 @@
+{
+  "name": "TEMPLATE_EMAIL",
+  "domain": "notificacao-email",
+  "purpose": "Cadastro de templates de e-mail do Fluig por empresa e idioma (dialeto), apontando o arquivo físico do template; inclui padrão e customizados.",
+  "schema_card": "by_table/TEMPLATE_EMAIL.json",
+  "business_concepts": [
+    "notificacao-email",
+    "TEMPLATE_EMAIL"
+  ],
+  "grain": {
+    "description": "Cadastro de templates de e-mail do Fluig por empresa e idioma (dialeto), apontando o arquivo físico do template; inclui padrão e customizados. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "COD_TEMPLATE_EMAIL",
+      "COD_DIALETO"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/TEMPLATE_EMAIL.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/TEMPLATE_EMAIL.json",
+  "observed_query_count": 7,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Cadastro de templates de e-mail do Fluig por empresa e idioma (dialeto), apontando o arquivo físico do template; inclui padrão e customizados. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "COD_TEMPLATE_EMAIL",
+        "COD_DIALETO"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

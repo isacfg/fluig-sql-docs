@@ -1,0 +1,139 @@
+{
+  "name": "PROCES_WORKFLOW_ERROR_LOG",
+  "domain": "bpm-workflow-erro",
+  "purpose": "Log de falhas ocorridas em operações assíncronas/de movimentação do workflow (envio, cancelamento, mover, timer etc.), guardando o payload serializado para reprocessamento e o stack trace.",
+  "schema_card": "by_table/PROCES_WORKFLOW_ERROR_LOG.json",
+  "business_concepts": [
+    "bpm-workflow-erro",
+    "PROCES_WORKFLOW_ERROR_LOG"
+  ],
+  "grain": {
+    "description": "Log de falhas ocorridas em operações assíncronas/de movimentação do workflow (envio, cancelamento, mover, timer etc.), guardando o payload serializado para reprocessamento e o stack trace. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/PROCES_WORKFLOW_ERROR_LOG.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0843",
+      "from_table": "PROCES_WORKFLOW_ERROR_LOG",
+      "to_table": "PROCES_WORKFLOW",
+      "on": [
+        "PROCES_WORKFLOW_ERROR_LOG.TENANT_ID = PROCES_WORKFLOW.COD_EMPRESA",
+        "PROCES_WORKFLOW_ERROR_LOG.INSTANCE_ID = PROCES_WORKFLOW.NUM_PROCES"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "INSTANCE_ID",
+          "to_column": "NUM_PROCES"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Instância de processo à qual o erro pertence (sem FK física).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0843",
+      "table": "PROCES_WORKFLOW",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0845",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [
+    "DATA",
+    "ERROR_LOG"
+  ],
+  "indexes": [
+    {
+      "name": "PROCES_WORKFLOW_ERROR_LOG_01",
+      "unique": true,
+      "columns": [
+        "TENANT_ID",
+        "INSTANCE_ID"
+      ]
+    },
+    {
+      "name": "PROCES_WORKFLOW_ERROR_LOG_USER",
+      "unique": false,
+      "columns": [
+        "TENANT_ID",
+        "EXECUTOR_USER_CODE"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Log de falhas ocorridas em operações assíncronas/de movimentação do workflow (envio, cancelamento, mover, timer etc.), guardando o payload serializado para reprocessamento e o stack trace. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

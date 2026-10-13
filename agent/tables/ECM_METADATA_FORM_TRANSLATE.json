@@ -1,0 +1,130 @@
+{
+  "name": "ECM_METADATA_FORM_TRANSLATE",
+  "domain": "ecm-metadata-forms",
+  "purpose": "Traduções (pt, en, es) de textos de um formulário de metadados, indexadas por chave de string.",
+  "schema_card": "by_table/ECM_METADATA_FORM_TRANSLATE.json",
+  "business_concepts": [
+    "ecm-metadata-forms",
+    "ECM_METADATA_FORM_TRANSLATE"
+  ],
+  "grain": {
+    "description": "Traduções (pt, en, es) de textos de um formulário de metadados, indexadas por chave de string. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/ECM_METADATA_FORM_TRANSLATE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0204",
+      "from_table": "ECM_METADATA_FORM_TRANSLATE",
+      "to_table": "ECM_METADATA_FORM",
+      "on": [
+        "ECM_METADATA_FORM_TRANSLATE.METADATAFORM_ID = ECM_METADATA_FORM.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "METADATAFORM_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Traduções dos textos do formulário.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0207",
+      "from_table": "ECM_METADATA_FORM_TRANSLATE",
+      "to_table": "ECM_METADATA_FORM",
+      "on": [
+        "ECM_METADATA_FORM_TRANSLATE.METADATAFORM_ID = ECM_METADATA_FORM.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "METADATAFORM_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Formulário traduzido (FK_TRASLTE_MTDT).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0204",
+      "table": "ECM_METADATA_FORM",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0207",
+      "table": "ECM_METADATA_FORM",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [
+    "STRING_EN",
+    "STRING_ES",
+    "STRING_PT"
+  ],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/ECM_METADATA_FORM_TRANSLATE.json",
+  "observed_query_count": 1,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Traduções (pt, en, es) de textos de um formulário de metadados, indexadas por chave de string. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

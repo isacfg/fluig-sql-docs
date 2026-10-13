@@ -18,6 +18,80 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.forms.model.FormField"
  ],
+ "observed_queries": [
+  {
+   "name": "FormField.findByAll",
+   "query": "SELECT f FROM FormField f WHERE f.formFieldPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.forms.model.FormField",
+   "source_file": "com/datasul/technology/webdesk/forms/model/FormField.java",
+   "owner_table": "FICHARIO_CAMPO",
+   "tables": [
+    "FICHARIO_CAMPO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FormField.findByDocument",
+   "query": "SELECT f FROM FormField f WHERE f.formFieldPK.companyId = :companyId AND f.formFieldPK.formId = :formId AND f.formFieldPK.version = :version",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.forms.model.FormField",
+   "source_file": "com/datasul/technology/webdesk/forms/model/FormField.java",
+   "owner_table": "FICHARIO_CAMPO",
+   "tables": [
+    "FICHARIO_CAMPO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FormField.findByTable",
+   "query": "SELECT f FROM FormField f WHERE f.formFieldPK.companyId = :companyId AND f.formFieldPK.formId = :formId AND f.formFieldPK.version = :version AND f.formFieldPK.tableId = :tableId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.forms.model.FormField",
+   "source_file": "com/datasul/technology/webdesk/forms/model/FormField.java",
+   "owner_table": "FICHARIO_CAMPO",
+   "tables": [
+    "FICHARIO_CAMPO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FormField.findPrincipalByDocument",
+   "query": "SELECT f FROM FormField f WHERE f.formFieldPK.companyId = :companyId AND f.formFieldPK.formId = :formId AND f.formFieldPK.version = :version AND f.formFieldPK.tableId = 'principal'",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.forms.model.FormField",
+   "source_file": "com/datasul/technology/webdesk/forms/model/FormField.java",
+   "owner_table": "FICHARIO_CAMPO",
+   "tables": [
+    "FICHARIO_CAMPO"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",

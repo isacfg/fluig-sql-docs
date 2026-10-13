@@ -1,0 +1,287 @@
+{
+  "name": "PROPRIED_EXT",
+  "domain": "bpm-process-definition",
+  "purpose": "Propriedades estendidas (nome/valor) de estados/atividades de uma definição de processo (BPM), por versão.",
+  "schema_card": "by_table/PROPRIED_EXT.json",
+  "business_concepts": [
+    "bpm-process-definition",
+    "PROPRIED_EXT"
+  ],
+  "grain": {
+    "description": "Propriedades estendidas (nome/valor) de estados/atividades de uma definição de processo (BPM), por versão. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "COD_DEF_PROCES",
+      "NUM_VERS",
+      "NUM_SEQ",
+      "COD_PROPRIED"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/PROPRIED_EXT.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0849",
+      "from_table": "PROPRIED_EXT",
+      "to_table": "ESTADO_PROCES",
+      "on": [
+        "PROPRIED_EXT.COD_EMPRESA = ESTADO_PROCES.COD_EMPRESA",
+        "PROPRIED_EXT.COD_DEF_PROCES = ESTADO_PROCES.COD_DEF_PROCES",
+        "PROPRIED_EXT.NUM_VERS = ESTADO_PROCES.NUM_VERS",
+        "PROPRIED_EXT.NUM_SEQ = ESTADO_PROCES.NUM_SEQ"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_DEF_PROCES",
+          "to_column": "COD_DEF_PROCES"
+        },
+        {
+          "from_column": "NUM_VERS",
+          "to_column": "NUM_VERS"
+        },
+        {
+          "from_column": "NUM_SEQ",
+          "to_column": "NUM_SEQ"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Estado/atividade dono da propriedade.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0851",
+      "from_table": "PROPRIED_EXT",
+      "to_table": "PROPRIED_AVANCAD_PROCES",
+      "on": [
+        "PROPRIED_EXT.COD_EMPRESA = PROPRIED_AVANCAD_PROCES.COD_EMPRESA",
+        "PROPRIED_EXT.COD_DEF_PROCES = PROPRIED_AVANCAD_PROCES.COD_DEF_PROCES",
+        "PROPRIED_EXT.NUM_VERS = PROPRIED_AVANCAD_PROCES.NUM_VERS",
+        "PROPRIED_EXT.COD_PROPRIED = PROPRIED_AVANCAD_PROCES.COD_PROPRIED"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_DEF_PROCES",
+          "to_column": "COD_DEF_PROCES"
+        },
+        {
+          "from_column": "NUM_VERS",
+          "to_column": "NUM_VERS"
+        },
+        {
+          "from_column": "COD_PROPRIED",
+          "to_column": "COD_PROPRIED"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Heurística de nome; não confirmada.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0853",
+      "from_table": "PROPRIED_EXT",
+      "to_table": "SEGUR_ANEXO_PROCES",
+      "on": [
+        "PROPRIED_EXT.COD_EMPRESA = SEGUR_ANEXO_PROCES.COD_EMPRESA",
+        "PROPRIED_EXT.COD_DEF_PROCES = SEGUR_ANEXO_PROCES.COD_DEF_PROCES",
+        "PROPRIED_EXT.NUM_VERS = SEGUR_ANEXO_PROCES.NUM_VERS",
+        "PROPRIED_EXT.NUM_SEQ = SEGUR_ANEXO_PROCES.NUM_SEQ"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_DEF_PROCES",
+          "to_column": "COD_DEF_PROCES"
+        },
+        {
+          "from_column": "NUM_VERS",
+          "to_column": "NUM_VERS"
+        },
+        {
+          "from_column": "NUM_SEQ",
+          "to_column": "NUM_SEQ"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Heurística; não confirmada.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0855",
+      "from_table": "PROPRIED_EXT",
+      "to_table": "VERS_DEF_PROCES",
+      "on": [
+        "PROPRIED_EXT.COD_EMPRESA = VERS_DEF_PROCES.COD_EMPRESA",
+        "PROPRIED_EXT.COD_DEF_PROCES = VERS_DEF_PROCES.COD_DEF_PROCES",
+        "PROPRIED_EXT.NUM_VERS = VERS_DEF_PROCES.NUM_VERS"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_DEF_PROCES",
+          "to_column": "COD_DEF_PROCES"
+        },
+        {
+          "from_column": "NUM_VERS",
+          "to_column": "NUM_VERS"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Versão do processo.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0849",
+      "table": "ESTADO_PROCES",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0851",
+      "table": "PROPRIED_AVANCAD_PROCES",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0853",
+      "table": "SEGUR_ANEXO_PROCES",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0855",
+      "table": "VERS_DEF_PROCES",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Propriedades estendidas (nome/valor) de estados/atividades de uma definição de processo (BPM), por versão. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "COD_DEF_PROCES",
+        "NUM_VERS",
+        "NUM_SEQ",
+        "COD_PROPRIED"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

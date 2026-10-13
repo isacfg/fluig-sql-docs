@@ -1,0 +1,144 @@
+{
+  "name": "DEF_PROCES",
+  "domain": "bpm-workflow",
+  "purpose": "Definição (cabeçalho) de processo de workflow BPM: dados comuns a todas as versões, como categoria, prazos, notificações e gestor.",
+  "schema_card": "by_table/DEF_PROCES.json",
+  "business_concepts": [
+    "definição de processo",
+    "process definition"
+  ],
+  "grain": {
+    "description": "Um cabeçalho de definição de processo por tenant; versões ficam em VERS_DEF_PROCES.",
+    "columns": [
+      "COD_EMPRESA",
+      "COD_DEF_PROCES"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "reviewed-schema-description",
+    "business_grain_reviewed": true
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {
+    "active": [
+      "LOG_ATIV = 1"
+    ]
+  },
+  "semantic_evidence": "by_table/DEF_PROCES.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0044",
+      "table": "COLAB_SUBSTTO_PROCESSO",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0052",
+      "table": "CONFIGUR_GRAF_USUAR_CAP",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0061",
+      "table": "VERS_DEF_PROCES",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0063",
+      "table": "DOC_PROCES",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0066",
+      "table": "DIAGNOSIS_PROCESS_LOG",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0362",
+      "table": "FAVORITOS_PROCES",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0656",
+      "table": "FICHARIO_CAMPO_PROCES",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0812",
+      "table": "PROCESS_DEFINITION_TRANSLATE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1026",
+      "table": "VERS_DEF_PROCES",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [
+    "DSL_CONFIGUR_MECAN_GEST"
+  ],
+  "indexes": [],
+  "query_examples": [
+    "recipes/workflow/process_definition_versions.sql"
+  ],
+  "observed_queries_path": "agent/observed_queries/DEF_PROCES.json",
+  "observed_query_count": 10,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Um cabeçalho de definição de processo por tenant; versões ficam em VERS_DEF_PROCES.",
+      "columns": [
+        "COD_EMPRESA",
+        "COD_DEF_PROCES"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "reviewed-schema-description",
+      "business_grain_reviewed": true
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {
+      "active": [
+        "LOG_ATIV = 1"
+      ]
+    }
+  }
+}

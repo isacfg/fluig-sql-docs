@@ -1,0 +1,160 @@
+{
+  "name": "CONFIGUR_OBRIG_ASSUNTO",
+  "domain": "ecm-documents",
+  "purpose": "Destinatários (usuário/grupo/todos) para os quais o assunto é obrigatório, por sequência.",
+  "schema_card": "by_table/CONFIGUR_OBRIG_ASSUNTO.json",
+  "business_concepts": [
+    "ecm-documents",
+    "CONFIGUR_OBRIG_ASSUNTO"
+  ],
+  "grain": {
+    "description": "Destinatários (usuário/grupo/todos) para os quais o assunto é obrigatório, por sequência. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "CD_ASSUNTO",
+      "NUM_SEQ"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/CONFIGUR_OBRIG_ASSUNTO.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0032",
+      "from_table": "CONFIGUR_OBRIG_ASSUNTO",
+      "to_table": "ASSUNTO",
+      "on": [
+        "CONFIGUR_OBRIG_ASSUNTO.COD_EMPRESA = ASSUNTO.COD_EMPRESA",
+        "CONFIGUR_OBRIG_ASSUNTO.CD_ASSUNTO = ASSUNTO.CD_ASSUNTO"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "CD_ASSUNTO",
+          "to_column": "CD_ASSUNTO"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Regras de obrigatoriedade por destinatário.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0053",
+      "from_table": "CONFIGUR_OBRIG_ASSUNTO",
+      "to_table": "ASSUNTO",
+      "on": [
+        "CONFIGUR_OBRIG_ASSUNTO.COD_EMPRESA = ASSUNTO.COD_EMPRESA",
+        "CONFIGUR_OBRIG_ASSUNTO.CD_ASSUNTO = ASSUNTO.CD_ASSUNTO"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "CD_ASSUNTO",
+          "to_column": "CD_ASSUNTO"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Assunto configurado (queries filtram por topicId).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0032",
+      "table": "ASSUNTO",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0053",
+      "table": "ASSUNTO",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/CONFIGUR_OBRIG_ASSUNTO.json",
+  "observed_query_count": 4,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Destinatários (usuário/grupo/todos) para os quais o assunto é obrigatório, por sequência. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "CD_ASSUNTO",
+        "NUM_SEQ"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

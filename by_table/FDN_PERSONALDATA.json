@@ -20,6 +20,80 @@
  "jpa_entities": [
   "com.totvs.technology.foundation.security.entity.FDNPersonalData"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNPersonalData.findMetaListTablesByInformationTypeId",
+   "query": "SELECT DISTINCT p.tableId FROM FDNPersonalData p WHERE p.tenant.id = :tenantId AND p.personalDataInfoType.id = :typeId AND p.tableId LIKE 'ML%'",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNPersonalData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNPersonalData.java",
+   "owner_table": "FDN_PERSONALDATA",
+   "tables": [
+    "FDN_PERSONALDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNPersonalData.findIdsByTableIdAndInfotype",
+   "query": "SELECT p.fieldId FROM FDNPersonalData p WHERE p.personalDataInfoType.id = :informationTypeId AND p.tableId = :tableId AND p.tenant.id = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNPersonalData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNPersonalData.java",
+   "owner_table": "FDN_PERSONALDATA",
+   "tables": [
+    "FDN_PERSONALDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNPersonalData.findByTableId",
+   "query": "SELECT p FROM FDNPersonalData p WHERE p.tableId = :tableId and p.tenant.id = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNPersonalData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNPersonalData.java",
+   "owner_table": "FDN_PERSONALDATA",
+   "tables": [
+    "FDN_PERSONALDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNPersonalData.findIdByTableIdAndFieldId",
+   "query": "SELECT p.id FROM FDNPersonalData p WHERE p.tableId = :tableId and p.fieldId = :fieldId and p.tenant.id = :tenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNPersonalData",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNPersonalData.java",
+   "owner_table": "FDN_PERSONALDATA",
+   "tables": [
+    "FDN_PERSONALDATA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "PERSONALDATA_ID",

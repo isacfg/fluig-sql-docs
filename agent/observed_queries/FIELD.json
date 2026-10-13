@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Field.findChildren",
+    "query": "SELECT f FROM Field f WHERE f.parent = :field",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.form.entities.Field",
+    "source_file": "com/totvs/technology/social/form/entities/Field.java",
+    "owner_table": "FIELD",
+    "tables": [
+      "FIELD"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

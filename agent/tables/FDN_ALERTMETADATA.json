@@ -1,0 +1,136 @@
+{
+  "name": "FDN_ALERTMETADATA",
+  "domain": "foundation-alert",
+  "purpose": "Pares chave/valor extras anexados a um alerta (parametros usados para montar a mensagem/link).",
+  "schema_card": "by_table/FDN_ALERTMETADATA.json",
+  "business_concepts": [
+    "foundation-alert",
+    "FDN_ALERTMETADATA"
+  ],
+  "grain": {
+    "description": "Pares chave/valor extras anexados a um alerta (parametros usados para montar a mensagem/link). Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_ALERTMETADATA.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0376",
+      "from_table": "FDN_ALERTMETADATA",
+      "to_table": "FDN_ALERT",
+      "on": [
+        "FDN_ALERTMETADATA.ALERT_ID = FDN_ALERT.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "ALERT_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Metadados chave/valor.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0397",
+      "from_table": "FDN_ALERTMETADATA",
+      "to_table": "FDN_ALERT",
+      "on": [
+        "FDN_ALERTMETADATA.ALERT_ID = FDN_ALERT.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "ALERT_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Alerta dono.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0376",
+      "table": "FDN_ALERT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0397",
+      "table": "FDN_ALERT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [
+    "METADATA_VALUE"
+  ],
+  "indexes": [
+    {
+      "name": "FK_RC31UACCJXJO6L1TMLH7PEK6",
+      "unique": false,
+      "columns": [
+        "ALERT_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_ALERTMETADATA.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Pares chave/valor extras anexados a um alerta (parametros usados para montar a mensagem/link). Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

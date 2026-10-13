@@ -1,0 +1,116 @@
+{
+  "name": "ADHOC_PROCES",
+  "domain": "bpm-workflow",
+  "purpose": "Tarefas ad hoc (atividades avulsas criadas em tempo de execução) vinculadas a um estado/atividade de uma instância de processo.",
+  "schema_card": "by_table/ADHOC_PROCES.json",
+  "business_concepts": [
+    "bpm-workflow",
+    "ADHOC_PROCES"
+  ],
+  "grain": {
+    "description": "Tarefas ad hoc (atividades avulsas criadas em tempo de execução) vinculadas a um estado/atividade de uma instância de processo. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "NUM_PROCES",
+      "NUM_SEQ"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/ADHOC_PROCES.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0005",
+      "from_table": "ADHOC_PROCES",
+      "to_table": "PROCES_WORKFLOW",
+      "on": [
+        "ADHOC_PROCES.COD_EMPRESA = PROCES_WORKFLOW.COD_EMPRESA",
+        "ADHOC_PROCES.NUM_PROCES = PROCES_WORKFLOW.NUM_PROCES"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "NUM_PROCES",
+          "to_column": "NUM_PROCES"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Instância de processo dona da tarefa ad hoc.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0005",
+      "table": "PROCES_WORKFLOW",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/ADHOC_PROCES.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Tarefas ad hoc (atividades avulsas criadas em tempo de execução) vinculadas a um estado/atividade de uma instância de processo. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "NUM_PROCES",
+        "NUM_SEQ"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

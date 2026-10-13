@@ -1,0 +1,136 @@
+{
+  "name": "ECM_TAB_ITEM",
+  "domain": "ecm-metadata-forms",
+  "purpose": "Abas individuais de um item de abas (TabMetadataFormItem) em formulário de metadados: título e ordem de cada aba.",
+  "schema_card": "by_table/ECM_TAB_ITEM.json",
+  "business_concepts": [
+    "ecm-metadata-forms",
+    "ECM_TAB_ITEM"
+  ],
+  "grain": {
+    "description": "Abas individuais de um item de abas (TabMetadataFormItem) em formulário de metadados: título e ordem de cada aba. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/ECM_TAB_ITEM.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0222",
+      "from_table": "ECM_TAB_ITEM",
+      "to_table": "ECM_TAB_FORM_ITEM",
+      "on": [
+        "ECM_TAB_ITEM.METADATAFORM_ID = ECM_TAB_FORM_ITEM.METADATAFORM_ID",
+        "ECM_TAB_ITEM.HTML_ID_TABFORM_ITEM = ECM_TAB_FORM_ITEM.HTML_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "METADATAFORM_ID",
+          "to_column": "METADATAFORM_ID"
+        },
+        {
+          "from_column": "HTML_ID_TABFORM_ITEM",
+          "to_column": "HTML_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Abas do item (TabMetadataFormItem.tabs).",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0223",
+      "from_table": "ECM_TAB_ITEM",
+      "to_table": "ECM_TAB_FORM_ITEM",
+      "on": [
+        "ECM_TAB_ITEM.METADATAFORM_ID = ECM_TAB_FORM_ITEM.METADATAFORM_ID",
+        "ECM_TAB_ITEM.HTML_ID_TABFORM_ITEM = ECM_TAB_FORM_ITEM.HTML_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "METADATAFORM_ID",
+          "to_column": "METADATAFORM_ID"
+        },
+        {
+          "from_column": "HTML_ID_TABFORM_ITEM",
+          "to_column": "HTML_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Item de abas dono da aba (FK_ID_TB_FRM_ITM).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0222",
+      "table": "ECM_TAB_FORM_ITEM",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0223",
+      "table": "ECM_TAB_FORM_ITEM",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Abas individuais de um item de abas (TabMetadataFormItem) em formulário de metadados: título e ordem de cada aba. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

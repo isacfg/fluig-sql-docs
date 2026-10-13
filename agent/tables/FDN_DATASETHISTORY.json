@@ -1,0 +1,161 @@
+{
+  "name": "FDN_DATASETHISTORY",
+  "domain": "datasets",
+  "purpose": "Histórico de versões de datasets customizados (implementação JavaScript). Cada linha é uma versão de um dataset.",
+  "schema_card": "by_table/FDN_DATASETHISTORY.json",
+  "business_concepts": [
+    "datasets",
+    "FDN_DATASETHISTORY"
+  ],
+  "grain": {
+    "description": "Histórico de versões de datasets customizados (implementação JavaScript). Cada linha é uma versão de um dataset. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "DATASET_HISTORY_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_DATASETHISTORY.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0421",
+      "from_table": "FDN_DATASETHISTORY",
+      "to_table": "FDN_TENANT",
+      "on": [
+        "FDN_DATASETHISTORY.TENANT_ID = FDN_TENANT.TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Tenant (FK_DATASETHISTORYTENANT).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0423",
+      "from_table": "FDN_DATASETHISTORY",
+      "to_table": "FDN_USERTENANT",
+      "on": [
+        "FDN_DATASETHISTORY.TENANT_ID = FDN_USERTENANT.TENANT_ID",
+        "FDN_DATASETHISTORY.USER_TENANT_ID = FDN_USERTENANT.USER_TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "USER_TENANT_ID",
+          "to_column": "USER_TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Autor da versão (FK_DATASETHISTORYUSERTENANT).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0421",
+      "table": "FDN_TENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0423",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [
+    "DATASET_IMPL"
+  ],
+  "indexes": [
+    {
+      "name": "UIDX_DATASETHISTORY_TENANT001",
+      "unique": true,
+      "columns": [
+        "TENANT_ID",
+        "DATASET_ID",
+        "VERSION"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_DATASETHISTORY.json",
+  "observed_query_count": 3,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Histórico de versões de datasets customizados (implementação JavaScript). Cada linha é uma versão de um dataset. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "DATASET_HISTORY_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

@@ -37,6 +37,7 @@ Versão de uma página do portal WCM (título, ícone, layout, autorização, pu
 - `(LAYOUT_ID)` → **WCM_APPLICATION** `(APPLICATION_ID)` · N:1 · physical-fk/confirmed — Layout (aplicação WCM) usado pela página.
 - `(PAGE_ID)` → **WCM_PAGE** `(PAGE_ID)` · N:1 · physical-fk/confirmed — Página a que a versão pertence (também mapeada como jpa-join WCMPageVersion.page).
 - `(ID)` → **WCM_PAGEWIDGET** `(PAGEVERSION_ID)` · 1:N · jpa-join/confirmed — Widgets posicionados nesta versão (OneToMany mappedBy pageVersion).
+- `(ID)` → **WCM_PAGE** `(PAGE_ID)` · N:1 · hql-join/confirmed — WCMPage.findStartPage
 
 **Dicas de consulta:** Para a versão vigente de uma página: WHERE PAGE_ID=? AND PUBLISHED=1. Índice WCMPAGEVERSION001 (ID,PAGE_ID,PUBLISHED). Filtrar tenant via WCM_PAGE.
 

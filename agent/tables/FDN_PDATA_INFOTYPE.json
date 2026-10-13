@@ -1,0 +1,65 @@
+{
+  "name": "FDN_PDATA_INFOTYPE",
+  "domain": "privacy-lgpd",
+  "purpose": "Catálogo de tipos de informação de dados pessoais (ex.: identificação, contato) usados em FDN_PERSONALDATA.",
+  "schema_card": "by_table/FDN_PDATA_INFOTYPE.json",
+  "business_concepts": [
+    "privacy-lgpd",
+    "FDN_PDATA_INFOTYPE"
+  ],
+  "grain": {
+    "description": "Catálogo de tipos de informação de dados pessoais (ex.: identificação, contato) usados em FDN_PERSONALDATA. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "INFORMATION_TYPE_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_PDATA_INFOTYPE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0499",
+      "table": "FDN_PERSONALDATA",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0528",
+      "table": "FDN_PERSONALDATA",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Catálogo de tipos de informação de dados pessoais (ex.: identificação, contato) usados em FDN_PERSONALDATA. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "INFORMATION_TYPE_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

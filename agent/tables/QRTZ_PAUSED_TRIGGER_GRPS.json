@@ -1,0 +1,50 @@
+{
+  "name": "QRTZ_PAUSED_TRIGGER_GRPS",
+  "domain": "scheduler-quartz",
+  "purpose": "Grupos de triggers pausados.",
+  "schema_card": "by_table/QRTZ_PAUSED_TRIGGER_GRPS.json",
+  "business_concepts": [
+    "scheduler-quartz",
+    "QRTZ_PAUSED_TRIGGER_GRPS"
+  ],
+  "grain": {
+    "description": "Grupos de triggers pausados. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "TRIGGER_GROUP"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/QRTZ_PAUSED_TRIGGER_GRPS.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Grupos de triggers pausados. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "TRIGGER_GROUP"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

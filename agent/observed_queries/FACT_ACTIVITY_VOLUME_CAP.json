@@ -1,0 +1,38 @@
+[
+  {
+    "name": "FactActivityVolume.findAll",
+    "query": "SELECT f FROM FactActivityVolume f WHERE f.factActivityVolumePK.companyId = :companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.cap.model.FactActivityVolume",
+    "source_file": "com/datasul/technology/cap/model/FactActivityVolume.java",
+    "owner_table": "FACT_ACTIVITY_VOLUME_CAP",
+    "tables": [
+      "FACT_ACTIVITY_VOLUME_CAP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FactActivityVolume.findDateLastSnapShot",
+    "query": "SELECT f.factActivityVolumePK.day, f.factActivityVolumePK.month, f.factActivityVolumePK.year FROM FactActivityVolume f WHERE f.factActivityVolumePK.companyId = :companyId AND f.factActivityVolumePK.processID = :processID ORDER BY f.factActivityVolumePK.year DESC, f.factActivityVolumePK.month DESC, f.factActivityVolumePK.day DESC",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.cap.model.FactActivityVolume",
+    "source_file": "com/datasul/technology/cap/model/FactActivityVolume.java",
+    "owner_table": "FACT_ACTIVITY_VOLUME_CAP",
+    "tables": [
+      "FACT_ACTIVITY_VOLUME_CAP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

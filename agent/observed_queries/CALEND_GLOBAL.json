@@ -1,0 +1,74 @@
+[
+  {
+    "name": "FDNHoliday.findAll",
+    "query": "SELECT g FROM FDNHoliday g WHERE g.companyId = :companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.holiday.entity.FDNHoliday",
+    "source_file": "com/fluig/holiday/entity/FDNHoliday.java",
+    "owner_table": "CALEND_GLOBAL",
+    "tables": [
+      "CALEND_GLOBAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNHoliday.validateDescription",
+    "query": "SELECT g FROM FDNHoliday g WHERE g.companyId = :companyId AND g.id != :id AND g.holidayCalendarId = :description",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.holiday.entity.FDNHoliday",
+    "source_file": "com/fluig/holiday/entity/FDNHoliday.java",
+    "owner_table": "CALEND_GLOBAL",
+    "tables": [
+      "CALEND_GLOBAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNHoliday.update",
+    "query": "UPDATE FDNHoliday holiday SET holiday.holidayCalendarId = :description, holiday.holidayDay = :day, holiday.holidayMonth = :month, holiday.holidayYear = :year WHERE holiday.id = :id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.holiday.entity.FDNHoliday",
+    "source_file": "com/fluig/holiday/entity/FDNHoliday.java",
+    "owner_table": "CALEND_GLOBAL",
+    "tables": [
+      "CALEND_GLOBAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "FDNHoliday.updateDescription",
+    "query": "UPDATE FDNHoliday holiday SET holiday.holidayCalendarId = :description WHERE holiday.id = :id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.fluig.holiday.entity.FDNHoliday",
+    "source_file": "com/fluig/holiday/entity/FDNHoliday.java",
+    "owner_table": "CALEND_GLOBAL",
+    "tables": [
+      "CALEND_GLOBAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

@@ -1,0 +1,200 @@
+{
+  "name": "FILTER_GROUP",
+  "domain": "ecm-lists-filters",
+  "purpose": "Compartilhamento de um filtro com grupo, papel ou usuário, com permissão.",
+  "schema_card": "by_table/FILTER_GROUP.json",
+  "business_concepts": [
+    "ecm-lists-filters",
+    "FILTER_GROUP"
+  ],
+  "grain": {
+    "description": "Compartilhamento de um filtro com grupo, papel ou usuário, com permissão. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FILTER_GROUP.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0667",
+      "from_table": "FILTER_GROUP",
+      "to_table": "FILTERS",
+      "on": [
+        "FILTER_GROUP.FILTER_ID = FILTERS.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "FILTER_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "FK ['FILTER_ID'] referencia FILTERS.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0669",
+      "from_table": "FILTER_GROUP",
+      "to_table": "FDN_GROUP",
+      "on": [
+        "FILTER_GROUP.GROUP_ID = FDN_GROUP.GROUP_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "GROUP_ID",
+          "to_column": "GROUP_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "FK ['GROUP_ID'] referencia FDN_GROUP.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0671",
+      "from_table": "FILTER_GROUP",
+      "to_table": "FDN_ROLE",
+      "on": [
+        "FILTER_GROUP.ROLE_ID = FDN_ROLE.ROLE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "ROLE_ID",
+          "to_column": "ROLE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "FK ['ROLE_ID'] referencia FDN_ROLE.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0673",
+      "from_table": "FILTER_GROUP",
+      "to_table": "FDN_USERTENANT",
+      "on": [
+        "FILTER_GROUP.USER_TENANT_ID = FDN_USERTENANT.USER_TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "USER_TENANT_ID",
+          "to_column": "USER_TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "FK ['USER_TENANT_ID'] referencia FDN_USERTENANT.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0667",
+      "table": "FILTERS",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0669",
+      "table": "FDN_GROUP",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0671",
+      "table": "FDN_ROLE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0673",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Compartilhamento de um filtro com grupo, papel ou usuário, com permissão. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

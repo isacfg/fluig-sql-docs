@@ -1,0 +1,20 @@
+[
+  {
+    "name": "FactProcesCost.findAll",
+    "query": "SELECT f FROM FactProcesCost f WHERE f.factProcesCostPK.companyId = :companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.cap.model.FactProcesCost",
+    "source_file": "com/datasul/technology/cap/model/FactProcesCost.java",
+    "owner_table": "FACT_PROCES_COST_CAP",
+    "tables": [
+      "FACT_PROCES_COST_CAP"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

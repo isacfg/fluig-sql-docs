@@ -1,0 +1,137 @@
+{
+  "name": "ECM_EVALUATION_FIELD_FORM_ITEM",
+  "domain": "ecm-metadata-forms",
+  "purpose": "Itens do tipo evaluation field dos formulários de metadados do ECM (subclasse JPA TABLE_PER_CLASS de AbstractMetadataFormItem); repete as colunas comuns do pai.",
+  "schema_card": "by_table/ECM_EVALUATION_FIELD_FORM_ITEM.json",
+  "business_concepts": [
+    "ecm-metadata-forms",
+    "ECM_EVALUATION_FIELD_FORM_ITEM"
+  ],
+  "grain": {
+    "description": "Itens do tipo evaluation field dos formulários de metadados do ECM (subclasse JPA TABLE_PER_CLASS de AbstractMetadataFormItem); repete as colunas comuns do pai. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "METADATAFORM_ID",
+      "HTML_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/ECM_EVALUATION_FIELD_FORM_ITEM.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0165",
+      "from_table": "ECM_EVALUATION_FIELD_FORM_ITEM",
+      "to_table": "ECM_METADATA_FORM",
+      "on": [
+        "ECM_EVALUATION_FIELD_FORM_ITEM.METADATAFORM_ID = ECM_METADATA_FORM.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "METADATAFORM_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "FK ['METADATAFORM_ID'] referencia ECM_METADATA_FORM.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0167",
+      "from_table": "ECM_EVALUATION_FIELD_FORM_ITEM",
+      "to_table": "ECM_ABSTRACT_FORM_ITEM",
+      "on": [
+        "ECM_EVALUATION_FIELD_FORM_ITEM.METADATAFORM_ID = ECM_ABSTRACT_FORM_ITEM.METADATAFORM_ID",
+        "ECM_EVALUATION_FIELD_FORM_ITEM.HTML_ID = ECM_ABSTRACT_FORM_ITEM.HTML_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "METADATAFORM_ID",
+          "to_column": "METADATAFORM_ID"
+        },
+        {
+          "from_column": "HTML_ID",
+          "to_column": "HTML_ID"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:1",
+      "confidence": "probable",
+      "source_kind": "logical-confirmed",
+      "evidence": "Subtipo JPA TABLE_PER_CLASS: tabela repete as colunas do pai abstrato; mesmo item aparece (METADATAFORM_ID,HTML_ID) na tabela base apenas se a base for populada (em TABLE_PER_CLASS as linhas ficam só na tabela concreta).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0165",
+      "table": "ECM_METADATA_FORM",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0167",
+      "table": "ECM_ABSTRACT_FORM_ITEM",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [
+    "HELP_TEXT"
+  ],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Itens do tipo evaluation field dos formulários de metadados do ECM (subclasse JPA TABLE_PER_CLASS de AbstractMetadataFormItem); repete as colunas comuns do pai. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "METADATAFORM_ID",
+        "HTML_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

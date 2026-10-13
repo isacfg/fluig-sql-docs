@@ -1,0 +1,220 @@
+{
+  "name": "FDN_TENANTPRODUCT",
+  "domain": "foundation-tenancy",
+  "purpose": "Associação tenant-produto: quais produtos (FDN_PRODUCT) estão habilitados em cada tenant.",
+  "schema_card": "by_table/FDN_TENANTPRODUCT.json",
+  "business_concepts": [
+    "foundation-tenancy",
+    "FDN_TENANTPRODUCT"
+  ],
+  "grain": {
+    "description": "Associação tenant-produto: quais produtos (FDN_PRODUCT) estão habilitados em cada tenant. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "TENANTPRODUCT_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_TENANTPRODUCT.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0536",
+      "from_table": "FDN_TENANTPRODUCT",
+      "to_table": "FDN_PRODUCT",
+      "on": [
+        "FDN_TENANTPRODUCT.PRODUCT_CODE = FDN_PRODUCT.PRODUCT_CODE"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "PRODUCT_CODE",
+          "to_column": "PRODUCT_CODE"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Produtos habilitados por tenant referenciam este código (FDNTenantProduct.product é String sem FK).",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0592",
+      "from_table": "FDN_TENANTPRODUCT",
+      "to_table": "FDN_TENANT",
+      "on": [
+        "FDN_TENANTPRODUCT.TENANT_ID = FDN_TENANT.TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Produtos habilitados.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0597",
+      "from_table": "FDN_TENANTPRODUCT",
+      "to_table": "FDN_TENANT",
+      "on": [
+        "FDN_TENANTPRODUCT.TENANT_ID = FDN_TENANT.TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Tenant ao qual o registro pertence.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0599",
+      "from_table": "FDN_TENANTPRODUCT",
+      "to_table": "FDN_PRODUCT",
+      "on": [
+        "FDN_TENANTPRODUCT.PRODUCT_CODE = FDN_PRODUCT.PRODUCT_CODE"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "PRODUCT_CODE",
+          "to_column": "PRODUCT_CODE"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Produto referenciado por código.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0536",
+      "table": "FDN_PRODUCT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0592",
+      "table": "FDN_TENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0597",
+      "table": "FDN_TENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0599",
+      "table": "FDN_PRODUCT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_TENANTPRODUCT.json",
+  "observed_query_count": 4,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Associação tenant-produto: quais produtos (FDN_PRODUCT) estão habilitados em cada tenant. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "TENANTPRODUCT_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

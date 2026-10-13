@@ -1,0 +1,110 @@
+[
+  {
+    "name": "WCMApplicationDependency.findAll",
+    "query": "SELECT b FROM WCMApplicationDependency b",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationDependency",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationDependency.java",
+    "owner_table": "WCM_APPLICATION_DEPENDENCY",
+    "tables": [
+      "WCM_APPLICATION_DEPENDENCY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMApplicationDependency.findById",
+    "query": "SELECT b FROM WCMApplicationDependency b WHERE b.id = :applicationDependencyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationDependency",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationDependency.java",
+    "owner_table": "WCM_APPLICATION_DEPENDENCY",
+    "tables": [
+      "WCM_APPLICATION_DEPENDENCY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMApplicationDependency.findByTenantId",
+    "query": "SELECT b FROM WCMApplicationDependency b WHERE b.tenant.id = :tenantId ORDER BY b.id DESC",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationDependency",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationDependency.java",
+    "owner_table": "WCM_APPLICATION_DEPENDENCY",
+    "tables": [
+      "WCM_APPLICATION_DEPENDENCY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMApplicationDependency.findByDependencyCode",
+    "query": "SELECT b FROM WCMApplicationDependency b WHERE b.code = :code ORDER BY b.id DESC",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationDependency",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationDependency.java",
+    "owner_table": "WCM_APPLICATION_DEPENDENCY",
+    "tables": [
+      "WCM_APPLICATION_DEPENDENCY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMApplicationDependency.findByDependencyCodeAndTenantId",
+    "query": "SELECT b FROM WCMApplicationDependency b WHERE b.code = :code and b.tenant.id = :tenantId ORDER BY b.id DESC",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationDependency",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationDependency.java",
+    "owner_table": "WCM_APPLICATION_DEPENDENCY",
+    "tables": [
+      "WCM_APPLICATION_DEPENDENCY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "WCMApplicationDependency.findByTenantIdAndComponentId",
+    "query": "SELECT b FROM WCMApplicationDependency b JOIN WCMApplicationAppDependency aad ON b.id = aad.applicationDependency.id WHERE aad.component.id = :componentId AND b.tenant.id = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationDependency",
+    "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationDependency.java",
+    "owner_table": "WCM_APPLICATION_DEPENDENCY",
+    "tables": [
+      "WCM_APPLICATION_DEPENDENCY"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

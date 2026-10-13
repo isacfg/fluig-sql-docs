@@ -16,6 +16,44 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.dm.model.ApplicationParameter"
  ],
+ "observed_queries": [
+  {
+   "name": "ApplicationParameter.findAll",
+   "query": "SELECT a FROM ApplicationParameter a WHERE a.applicationParameterPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.ApplicationParameter",
+   "source_file": "com/datasul/technology/webdesk/dm/model/ApplicationParameter.java",
+   "owner_table": "PARAM_APLICAT",
+   "tables": [
+    "PARAM_APLICAT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ApplicationParameter.findAllParameters",
+   "query": "SELECT a FROM ApplicationParameter a WHERE a.applicationParameterPK.companyId = :companyId AND a.applicationParameterPK.applicationId = :applicationId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.ApplicationParameter",
+   "source_file": "com/datasul/technology/webdesk/dm/model/ApplicationParameter.java",
+   "owner_table": "PARAM_APLICAT",
+   "tables": [
+    "PARAM_APLICAT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_APLICAT",

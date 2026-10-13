@@ -1,0 +1,4022 @@
+{
+  "format_version": 1,
+  "schema_version": "Fluig 1.8.2 clean-install MySQL",
+  "files": {
+    "intents": "agent/intents.json",
+    "joins": "agent/join_graph.json",
+    "rules": "agent/query_rules.json",
+    "terminology": "agent/terminology.json"
+  },
+  "counts": {
+    "tables": 333,
+    "reviewed_business_grains": 22,
+    "recipes": 28,
+    "observed_queries": 1218
+  },
+  "tables": [
+    {
+      "name": "ACTIVITY_DIM_CAP",
+      "path": "agent/tables/ACTIVITY_DIM_CAP.json",
+      "domain": "bpm-analytics-dw",
+      "tenant_column": null,
+      "grain_columns": [
+        "ACTIVITYID",
+        "COMPANYID",
+        "PROCESSID",
+        "PROCESSVERSION"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "ADAPTER",
+      "path": "agent/tables/ADAPTER.json",
+      "domain": "bpm-integracao",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_ADAPTER"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "ADHOC_PROCES",
+      "path": "agent/tables/ADHOC_PROCES.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NUM_PROCES",
+        "NUM_SEQ"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "ADHOC_PROCES_WORKFLOW",
+      "path": "agent/tables/ADHOC_PROCES_WORKFLOW.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NUM_PROCES_PAI",
+        "NUM_SEQ_PROCES_PAI",
+        "NUM_PROCES"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "AMBIEN_PROGRESS",
+      "path": "agent/tables/AMBIEN_PROGRESS.json",
+      "domain": "bpm-integracao",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_AMBIEN_PROGRES"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "ANEXO_PROCES",
+      "path": "agent/tables/ANEXO_PROCES.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NUM_PROCES",
+        "NUM_SEQ_ANEXO"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 4
+    },
+    {
+      "name": "APLICATIVO",
+      "path": "agent/tables/APLICATIVO.json",
+      "domain": "bpm-integracao",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_APLICAT"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "APONT_TAR_PROCES",
+      "path": "agent/tables/APONT_TAR_PROCES.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NUM_PROCES",
+        "NUM_SEQ_MOVTO",
+        "CD_MATRICULA",
+        "NUM_SEQ_TRANSF",
+        "NUM_SEQ_APONT"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "APROVACAO",
+      "path": "agent/tables/APROVACAO.json",
+      "domain": "ged-documentos",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "CD_MATRICULA",
+        "NUM_NIV_APROVAC"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "APROVADOR",
+      "path": "agent/tables/APROVADOR.json",
+      "domain": "ged-documentos",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "IDI_TIP_APRVDOR",
+        "CD_MATRICULA",
+        "NUM_NIV_APROVAC"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 6
+    },
+    {
+      "name": "AREA_DEST",
+      "path": "agent/tables/AREA_DEST.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_AREA"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "ASSUNTO",
+      "path": "agent/tables/ASSUNTO.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "CD_ASSUNTO"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "ASSUNTO_FAVORITO",
+      "path": "agent/tables/ASSUNTO_FAVORITO.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "CD_ASSUNTO",
+        "CD_MATRICULA"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "CALEND_GLOBAL",
+      "path": "agent/tables/CALEND_GLOBAL.json",
+      "domain": "calendario-feriados",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "CAMPO_CUSTOM",
+      "path": "agent/tables/CAMPO_CUSTOM.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_CAMPO_CUSTOM"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 2
+    },
+    {
+      "name": "COLAB_SUBSTTO",
+      "path": "agent/tables/COLAB_SUBSTTO.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COLLEAGUE_REPLACEMENT_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 5
+    },
+    {
+      "name": "COLAB_SUBSTTO_PROCESSO",
+      "path": "agent/tables/COLAB_SUBSTTO_PROCESSO.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COLLEAGUE_PROCESS_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "COMPON_GRAF_PROCES",
+      "path": "agent/tables/COMPON_GRAF_PROCES.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_DEF_PROCES",
+        "NUM_VERS",
+        "NUM_SEQ_COMPON_GRAF"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "CONFIGUR_GRAF_COMPART",
+      "path": "agent/tables/CONFIGUR_GRAF_COMPART.json",
+      "domain": "bpm-cap",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "IDI_TIP_COMPART",
+        "CD_MATRICULA",
+        "COD_EMPRESA",
+        "NUM_SEQ_GRAF",
+        "DES_VAL_COMPART"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "CONFIGUR_GRAF_USUAR_CAP",
+      "path": "agent/tables/CONFIGUR_GRAF_USUAR_CAP.json",
+      "domain": "bpm-cap",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "CD_MATRICULA",
+        "COD_EMPRESA",
+        "NUM_SEQ"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "CONFIGUR_OBRIG_ASSUNTO",
+      "path": "agent/tables/CONFIGUR_OBRIG_ASSUNTO.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "CD_ASSUNTO",
+        "NUM_SEQ"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "CONFIGUR_SEGUR_DOCTO",
+      "path": "agent/tables/CONFIGUR_SEGUR_DOCTO.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "NUM_SEQ"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 5
+    },
+    {
+      "name": "CONHECIMENTO",
+      "path": "agent/tables/CONHECIMENTO.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "CD_MATRICULA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "CONTROL_LICENC",
+      "path": "agent/tables/CONTROL_LICENC.json",
+      "domain": "foundation-licenciamento",
+      "tenant_column": null,
+      "grain_columns": [
+        "NUM_SEQ"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "DEFAULT_PROPRIED_DOCTO",
+      "path": "agent/tables/DEFAULT_PROPRIED_DOCTO.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "NOM_ATRIBUTO"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "DEF_PROCES",
+      "path": "agent/tables/DEF_PROCES.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_DEF_PROCES"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 10
+    },
+    {
+      "name": "DIAGNOSIS_PROCESS_LOG",
+      "path": "agent/tables/DIAGNOSIS_PROCESS_LOG.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "DOCTO_ALOCAD",
+      "path": "agent/tables/DOCTO_ALOCAD.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NUM_DOCTO_ORIG",
+        "NUM_VERS_ORIG",
+        "NUM_DOCTO_DEST"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 8
+    },
+    {
+      "name": "DOCTO_ANOTACAO_COLAB",
+      "path": "agent/tables/DOCTO_ANOTACAO_COLAB.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "CD_MATRICULA",
+        "NR_ANOTACAO"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "DOCTO_APLICAT",
+      "path": "agent/tables/DOCTO_APLICAT.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "COD_APLICAT"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "DOCTO_CAMPO_CUSTOM",
+      "path": "agent/tables/DOCTO_CAMPO_CUSTOM.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "COD_CAMPO_CUSTOM",
+        "NR_VERSAO"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 2
+    },
+    {
+      "name": "DOCTO_COMENT",
+      "path": "agent/tables/DOCTO_COMENT.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "CD_MATRICULA",
+        "DTT_CRIAC"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "DOCTO_CONTDO",
+      "path": "agent/tables/DOCTO_CONTDO.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "NOM_ARQ_FISIC"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "DOCTO_DESTAQ_COLAB",
+      "path": "agent/tables/DOCTO_DESTAQ_COLAB.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "CD_MATRICULA"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "DOCTO_NOTIF",
+      "path": "agent/tables/DOCTO_NOTIF.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "CD_MATRICULA"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "DOCTO_OBS_COLAB",
+      "path": "agent/tables/DOCTO_OBS_COLAB.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "CD_MATRICULA",
+        "DTT_CRIAC"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "DOCTO_RANKING",
+      "path": "agent/tables/DOCTO_RANKING.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "CD_MATRICULA"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "DOCTO_RELACDO",
+      "path": "agent/tables/DOCTO_RELACDO.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "NUM_DOCTO_RELACDO"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "DOCTO_SOCIAL",
+      "path": "agent/tables/DOCTO_SOCIAL.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_APELIDO",
+        "TP_PASTA"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "DOCTO_TAG",
+      "path": "agent/tables/DOCTO_TAG.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "COD_TAG"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "DOCUMENTO",
+      "path": "agent/tables/DOCUMENTO.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 65
+    },
+    {
+      "name": "DOCUMENT_ACCUSOFT_METRICS",
+      "path": "agent/tables/DOCUMENT_ACCUSOFT_METRICS.json",
+      "domain": "ecm-documents",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "DOC_PROCES",
+      "path": "agent/tables/DOC_PROCES.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_DOC_PROCES",
+        "NUM_VERS"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "ECM_ABSTRACT_FORM_ITEM",
+      "path": "agent/tables/ECM_ABSTRACT_FORM_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_BUTTON_FORM_ITEM",
+      "path": "agent/tables/ECM_BUTTON_FORM_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "HTML_ID",
+        "METADATAFORM_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_COLLABORATION",
+      "path": "agent/tables/ECM_COLLABORATION.json",
+      "domain": "ecm-collaboration",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "COLLABORATION_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "ECM_COLLABORATION_APP",
+      "path": "agent/tables/ECM_COLLABORATION_APP.json",
+      "domain": "ecm-collaboration",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "ECM_COLLABORATION_GUEST",
+      "path": "agent/tables/ECM_COLLABORATION_GUEST.json",
+      "domain": "ecm-collaboration",
+      "tenant_column": null,
+      "grain_columns": [
+        "COLLABORATION_GUEST_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "ECM_DATE_FIELD_FORM_ITEM",
+      "path": "agent/tables/ECM_DATE_FIELD_FORM_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "METADATAFORM_ID",
+        "HTML_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_DIVIDER_FORM_ITEM",
+      "path": "agent/tables/ECM_DIVIDER_FORM_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "METADATAFORM_ID",
+        "HTML_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_DOCTO_LANGUAGE",
+      "path": "agent/tables/ECM_DOCTO_LANGUAGE.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "ECM_DYNAMIC_TABLE_FORM_ITEM",
+      "path": "agent/tables/ECM_DYNAMIC_TABLE_FORM_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "METADATAFORM_ID",
+        "HTML_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_EVALUATION_FIELD_FORM_ITEM",
+      "path": "agent/tables/ECM_EVALUATION_FIELD_FORM_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "METADATAFORM_ID",
+        "HTML_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_EXTERNAL_LINK_FORM_ITEM",
+      "path": "agent/tables/ECM_EXTERNAL_LINK_FORM_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "METADATAFORM_ID",
+        "HTML_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_FIXED_TABLE_COLUMN",
+      "path": "agent/tables/ECM_FIXED_TABLE_COLUMN.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_FIXED_TABLE_FORM_ITEM",
+      "path": "agent/tables/ECM_FIXED_TABLE_FORM_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "METADATAFORM_ID",
+        "HTML_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_FIXED_TABLE_ROW",
+      "path": "agent/tables/ECM_FIXED_TABLE_ROW.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_IMAGE_FORM_ITEM",
+      "path": "agent/tables/ECM_IMAGE_FORM_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "METADATAFORM_ID",
+        "HTML_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_LABEL_FORM_ITEM",
+      "path": "agent/tables/ECM_LABEL_FORM_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "METADATAFORM_ID",
+        "HTML_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_LIST_FIELD_FORM_ITEM",
+      "path": "agent/tables/ECM_LIST_FIELD_FORM_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "METADATAFORM_ID",
+        "HTML_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_METADATA_FORM",
+      "path": "agent/tables/ECM_METADATA_FORM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 12
+    },
+    {
+      "name": "ECM_METADATA_FORM_TRANSLATE",
+      "path": "agent/tables/ECM_METADATA_FORM_TRANSLATE.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "ECM_NUMBER_FIELD_FORM_ITEM",
+      "path": "agent/tables/ECM_NUMBER_FIELD_FORM_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "METADATAFORM_ID",
+        "HTML_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_SECTION_FORM_ITEM",
+      "path": "agent/tables/ECM_SECTION_FORM_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "METADATAFORM_ID",
+        "HTML_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_TAB_FORM_ITEM",
+      "path": "agent/tables/ECM_TAB_FORM_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "METADATAFORM_ID",
+        "HTML_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_TAB_ITEM",
+      "path": "agent/tables/ECM_TAB_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_TEXT_AREA_FIELD_FORM_ITEM",
+      "path": "agent/tables/ECM_TEXT_AREA_FIELD_FORM_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "METADATAFORM_ID",
+        "HTML_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_TEXT_FIELD_FORM_ITEM",
+      "path": "agent/tables/ECM_TEXT_FIELD_FORM_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "METADATAFORM_ID",
+        "HTML_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_TITLE_FORM_ITEM",
+      "path": "agent/tables/ECM_TITLE_FORM_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "METADATAFORM_ID",
+        "HTML_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_UPLOAD_FILE_FORM_ITEM",
+      "path": "agent/tables/ECM_UPLOAD_FILE_FORM_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "METADATAFORM_ID",
+        "HTML_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_ZOOM_DISPLAY_FIELD",
+      "path": "agent/tables/ECM_ZOOM_DISPLAY_FIELD.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_ZOOM_FIELD_FORM_ITEM",
+      "path": "agent/tables/ECM_ZOOM_FIELD_FORM_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "METADATAFORM_ID",
+        "HTML_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_ZOOM_FILTER_FIELD",
+      "path": "agent/tables/ECM_ZOOM_FILTER_FIELD.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_ZOOM_OUTPUT_FIELD",
+      "path": "agent/tables/ECM_ZOOM_OUTPUT_FIELD.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ECM_ZOOM_USER_FORM_ITEM",
+      "path": "agent/tables/ECM_ZOOM_USER_FORM_ITEM.json",
+      "domain": "ecm-metadata-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "HTML_ID",
+        "METADATAFORM_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ESTADO_PROCES",
+      "path": "agent/tables/ESTADO_PROCES.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_DEF_PROCES",
+        "NUM_VERS",
+        "NUM_SEQ"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 4
+    },
+    {
+      "name": "ESTADO_PROCES_COND",
+      "path": "agent/tables/ESTADO_PROCES_COND.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_DEF_PROCES",
+        "NUM_VERS",
+        "NUM_SEQ",
+        "NUM_SEQ_ORD_FORMUL"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ESTADO_PROCES_SCRIPT",
+      "path": "agent/tables/ESTADO_PROCES_SCRIPT.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NUM_SEQ_CONDITION",
+        "COD_DEF_PROCES",
+        "NUM_SEQ",
+        "NUM_VERS"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ESTADO_PROCES_SERVICE",
+      "path": "agent/tables/ESTADO_PROCES_SERVICE.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "PROCESS_STATE_SERVICE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ESTADO_PROCES_SIGNAL",
+      "path": "agent/tables/ESTADO_PROCES_SIGNAL.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NUM_SEQ_CONDITION",
+        "COD_DEF_PROCES",
+        "NUM_SEQ",
+        "NUM_VERS"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ESTADO_PROCES_TRIGGER",
+      "path": "agent/tables/ESTADO_PROCES_TRIGGER.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_DEF_PROCES",
+        "NUM_VERS",
+        "NUM_SEQ",
+        "NUM_SEQ_TRIGGER"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "EVENT_FICHA",
+      "path": "agent/tables/EVENT_FICHA.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "COD_EVENT"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "EVENT_GERAL",
+      "path": "agent/tables/EVENT_GERAL.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_EVENT"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "EVENT_PROCES",
+      "path": "agent/tables/EVENT_PROCES.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_DEF_PROCES",
+        "NUM_VERS",
+        "COD_EVENT",
+        "SCRIPT_VERSION"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "FACT_ACTIVITY_COST_CAP",
+      "path": "agent/tables/FACT_ACTIVITY_COST_CAP.json",
+      "domain": "bpm-analytics-dw",
+      "tenant_column": null,
+      "grain_columns": [
+        "ACTIVITYID",
+        "COMPANYID",
+        "DAYID",
+        "MONTHID",
+        "PROCESSID",
+        "PROCESSVERSION",
+        "USERSEQUENCE",
+        "YEARID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "FACT_ACTIVITY_VOLUME_CAP",
+      "path": "agent/tables/FACT_ACTIVITY_VOLUME_CAP.json",
+      "domain": "bpm-analytics-dw",
+      "tenant_column": null,
+      "grain_columns": [
+        "ACTIVITYID",
+        "COMPANYID",
+        "DAYID",
+        "MONTHID",
+        "PROCESSID",
+        "PROCESSVERSION",
+        "USERSEQUENCE",
+        "YEARID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "FACT_FLOW_VOLUME_CAP",
+      "path": "agent/tables/FACT_FLOW_VOLUME_CAP.json",
+      "domain": "bpm-analytics-dw",
+      "tenant_column": null,
+      "grain_columns": [
+        "COMPANYID",
+        "DAYID",
+        "MONTHID",
+        "PROCESSID",
+        "PROCESSVERSION",
+        "SOURCEACTIVITY",
+        "TARGETACTIVITY",
+        "USERSEQUENCE",
+        "YEARID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "FACT_PROCES_COST_CAP",
+      "path": "agent/tables/FACT_PROCES_COST_CAP.json",
+      "domain": "bpm-analytics-dw",
+      "tenant_column": null,
+      "grain_columns": [
+        "COMPANYID",
+        "DAYID",
+        "MONTHID",
+        "PROCESSID",
+        "PROCESSVERSION",
+        "USERSEQUENCE",
+        "YEARID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "FACT_PROCES_VOLUME_CAP",
+      "path": "agent/tables/FACT_PROCES_VOLUME_CAP.json",
+      "domain": "bpm-analytics-dw",
+      "tenant_column": null,
+      "grain_columns": [
+        "COMPANYID",
+        "DAYID",
+        "MONTHID",
+        "PROCESSID",
+        "PROCESSVERSION",
+        "USERSEQUENCE",
+        "YEARID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "FAVORITOS",
+      "path": "agent/tables/FAVORITOS.json",
+      "domain": "ecm-lists-filters",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "CD_MATRICULA",
+        "NR_DOCUMENTO"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 5
+    },
+    {
+      "name": "FAVORITOS_PROCES",
+      "path": "agent/tables/FAVORITOS_PROCES.json",
+      "domain": "ecm-lists-filters",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "CD_MATRICULA",
+        "COD_DEF_PROCES"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "FDN_ACCESSLOG",
+      "path": "agent/tables/FDN_ACCESSLOG.json",
+      "domain": "seguranca-auditoria",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "ACCESSLOG_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "FDN_ALERT",
+      "path": "agent/tables/FDN_ALERT.json",
+      "domain": "foundation-alert",
+      "tenant_column": null,
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 26
+    },
+    {
+      "name": "FDN_ALERTACTION",
+      "path": "agent/tables/FDN_ALERTACTION.json",
+      "domain": "foundation-alert",
+      "tenant_column": null,
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "FDN_ALERTAPPSENDER",
+      "path": "agent/tables/FDN_ALERTAPPSENDER.json",
+      "domain": "foundation-alert",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 7
+    },
+    {
+      "name": "FDN_ALERTCONFIG",
+      "path": "agent/tables/FDN_ALERTCONFIG.json",
+      "domain": "foundation-alert",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 11
+    },
+    {
+      "name": "FDN_ALERTEVENTTYPE",
+      "path": "agent/tables/FDN_ALERTEVENTTYPE.json",
+      "domain": "foundation-alert",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 8
+    },
+    {
+      "name": "FDN_ALERTMETADATA",
+      "path": "agent/tables/FDN_ALERTMETADATA.json",
+      "domain": "foundation-alert",
+      "tenant_column": null,
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "FDN_ALERTMODULE",
+      "path": "agent/tables/FDN_ALERTMODULE.json",
+      "domain": "foundation-alert",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "FDN_ALERTOBJECT",
+      "path": "agent/tables/FDN_ALERTOBJECT.json",
+      "domain": "foundation-alert",
+      "tenant_column": null,
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "FDN_ALERTSENDER",
+      "path": "agent/tables/FDN_ALERTSENDER.json",
+      "domain": "foundation-alert",
+      "tenant_column": null,
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 10
+    },
+    {
+      "name": "FDN_API_BLOCKER",
+      "path": "agent/tables/FDN_API_BLOCKER.json",
+      "domain": "seguranca-api",
+      "tenant_column": null,
+      "grain_columns": [
+        "API_BLOCKER_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "FDN_AUTHORIZECLIENTDATA",
+      "path": "agent/tables/FDN_AUTHORIZECLIENTDATA.json",
+      "domain": "oauth-integracao",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "AUTHORIZECLIENTDATA_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 6
+    },
+    {
+      "name": "FDN_BUNDLEVALUE",
+      "path": "agent/tables/FDN_BUNDLEVALUE.json",
+      "domain": "i18n",
+      "tenant_column": null,
+      "grain_columns": [
+        "BUNDLE_VALUE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "FDN_CATEGORY",
+      "path": "agent/tables/FDN_CATEGORY.json",
+      "domain": "permissoes-categorias",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "CATEGORY_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 5
+    },
+    {
+      "name": "FDN_CATEGORY_RESOURCE",
+      "path": "agent/tables/FDN_CATEGORY_RESOURCE.json",
+      "domain": "permissoes-categorias",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "CATEGORY_RESOURCE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 6
+    },
+    {
+      "name": "FDN_DATASETHISTORY",
+      "path": "agent/tables/FDN_DATASETHISTORY.json",
+      "domain": "datasets",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "DATASET_HISTORY_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "FDN_DIGITALSIGNATURE",
+      "path": "agent/tables/FDN_DIGITALSIGNATURE.json",
+      "domain": "assinatura-digital",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "DIGITAL_SIGNATURE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "FDN_DOWNLOADNOTIFY",
+      "path": "agent/tables/FDN_DOWNLOADNOTIFY.json",
+      "domain": "volumes-sites",
+      "tenant_column": null,
+      "grain_columns": [
+        "DOWNLOADNOTIFY_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "FDN_FLUIG_SERVER",
+      "path": "agent/tables/FDN_FLUIG_SERVER.json",
+      "domain": "integracao-servidores",
+      "tenant_column": null,
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "FDN_GROUP",
+      "path": "agent/tables/FDN_GROUP.json",
+      "domain": "foundation-identity-access",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "GROUP_ID"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 15
+    },
+    {
+      "name": "FDN_GROUPDATA",
+      "path": "agent/tables/FDN_GROUPDATA.json",
+      "domain": "foundation-identity-access",
+      "tenant_column": null,
+      "grain_columns": [
+        "GROUPDATA_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 8
+    },
+    {
+      "name": "FDN_GROUPUSERROLE",
+      "path": "agent/tables/FDN_GROUPUSERROLE.json",
+      "domain": "foundation-identity-access",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "GROUPUSERROLE_ID"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 20
+    },
+    {
+      "name": "FDN_IDENTITYPARTNER",
+      "path": "agent/tables/FDN_IDENTITYPARTNER.json",
+      "domain": "foundation-identity-access",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "FDN_INTEGRATION",
+      "path": "agent/tables/FDN_INTEGRATION.json",
+      "domain": "integracao-eventos",
+      "tenant_column": null,
+      "grain_columns": [
+        "INTEGRATION_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "FDN_INTEGRATIONEVENT",
+      "path": "agent/tables/FDN_INTEGRATIONEVENT.json",
+      "domain": "integracao-eventos",
+      "tenant_column": null,
+      "grain_columns": [
+        "INTEGRATIONEVENT_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 7
+    },
+    {
+      "name": "FDN_INTEGRATIONLISTENEREVT",
+      "path": "agent/tables/FDN_INTEGRATIONLISTENEREVT.json",
+      "domain": "integracao-eventos",
+      "tenant_column": null,
+      "grain_columns": [
+        "INTEGRATION_LISTENER_EVT_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 5
+    },
+    {
+      "name": "FDN_JAASUSERGROUP",
+      "path": "agent/tables/FDN_JAASUSERGROUP.json",
+      "domain": "seguranca",
+      "tenant_column": null,
+      "grain_columns": [
+        "JAAS_USERGROUP_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "FDN_LITERAL",
+      "path": "agent/tables/FDN_LITERAL.json",
+      "domain": "i18n",
+      "tenant_column": null,
+      "grain_columns": [
+        "LITERAL_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 7
+    },
+    {
+      "name": "FDN_LOCAL",
+      "path": "agent/tables/FDN_LOCAL.json",
+      "domain": "calendario-feriados",
+      "tenant_column": null,
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 7
+    },
+    {
+      "name": "FDN_LOCALHOLIDAY",
+      "path": "agent/tables/FDN_LOCALHOLIDAY.json",
+      "domain": "calendario-feriados",
+      "tenant_column": "COMPANY_ID",
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "FDN_LOCALUSER",
+      "path": "agent/tables/FDN_LOCALUSER.json",
+      "domain": "calendario-feriados",
+      "tenant_column": null,
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 5
+    },
+    {
+      "name": "FDN_LOCK",
+      "path": "agent/tables/FDN_LOCK.json",
+      "domain": "concorrencia-lock",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "TENANT_ID",
+        "FEATURE_TYPE",
+        "ITEM_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "FDN_OAUTHAPP",
+      "path": "agent/tables/FDN_OAUTHAPP.json",
+      "domain": "oauth-provider",
+      "tenant_column": null,
+      "grain_columns": [
+        "OAUTH_APP_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 8
+    },
+    {
+      "name": "FDN_OAUTHAPPDATA",
+      "path": "agent/tables/FDN_OAUTHAPPDATA.json",
+      "domain": "oauth-provider",
+      "tenant_column": null,
+      "grain_columns": [
+        "OAUTH_APP_DATA_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "FDN_OAUTHAPPTOKEN",
+      "path": "agent/tables/FDN_OAUTHAPPTOKEN.json",
+      "domain": "oauth-provider",
+      "tenant_column": null,
+      "grain_columns": [
+        "OAUTH_APP_TOKEN_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 6
+    },
+    {
+      "name": "FDN_OAUTHAPPUSER",
+      "path": "agent/tables/FDN_OAUTHAPPUSER.json",
+      "domain": "oauth-provider",
+      "tenant_column": null,
+      "grain_columns": [
+        "OAUTH_APP_USER_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 11
+    },
+    {
+      "name": "FDN_OAUTHPROVIDER",
+      "path": "agent/tables/FDN_OAUTHPROVIDER.json",
+      "domain": "oauth-provider",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "OAUTH_PROVIDER_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 10
+    },
+    {
+      "name": "FDN_PARAMGERAL",
+      "path": "agent/tables/FDN_PARAMGERAL.json",
+      "domain": "configuracao-parametros",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "PARAMGERAL_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 5
+    },
+    {
+      "name": "FDN_PDATATRACE",
+      "path": "agent/tables/FDN_PDATATRACE.json",
+      "domain": "privacy-lgpd",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "PDATATRACE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 5
+    },
+    {
+      "name": "FDN_PDATATRACE_CONFIG",
+      "path": "agent/tables/FDN_PDATATRACE_CONFIG.json",
+      "domain": "privacy-lgpd",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "PDATATRACE_CONFIG_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "FDN_PDATA_CLASSIFICATION",
+      "path": "agent/tables/FDN_PDATA_CLASSIFICATION.json",
+      "domain": "privacy-lgpd",
+      "tenant_column": null,
+      "grain_columns": [
+        "PDATA_CLASSIFICATION_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "FDN_PDATA_INFOTYPE",
+      "path": "agent/tables/FDN_PDATA_INFOTYPE.json",
+      "domain": "privacy-lgpd",
+      "tenant_column": null,
+      "grain_columns": [
+        "INFORMATION_TYPE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "FDN_PDATA_JUSTIFICATION",
+      "path": "agent/tables/FDN_PDATA_JUSTIFICATION.json",
+      "domain": "privacy-lgpd",
+      "tenant_column": null,
+      "grain_columns": [
+        "PDATA_JUSTIFICATION_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "FDN_PERMISSION",
+      "path": "agent/tables/FDN_PERMISSION.json",
+      "domain": "foundation-identity-access",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "PERMISSION_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 47
+    },
+    {
+      "name": "FDN_PERMISSION_MAPPING",
+      "path": "agent/tables/FDN_PERMISSION_MAPPING.json",
+      "domain": "foundation-identity-access",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "PERMISSION_MAPPING_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 5
+    },
+    {
+      "name": "FDN_PERSONALDATA",
+      "path": "agent/tables/FDN_PERSONALDATA.json",
+      "domain": "privacy-lgpd",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "PERSONALDATA_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "FDN_PRODUCT",
+      "path": "agent/tables/FDN_PRODUCT.json",
+      "domain": "foundation-tenancy",
+      "tenant_column": null,
+      "grain_columns": [
+        "PRODUCT_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "FDN_PUSH",
+      "path": "agent/tables/FDN_PUSH.json",
+      "domain": "mobile-push",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "PUSH_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 10
+    },
+    {
+      "name": "FDN_RECENTLY_VIEWED",
+      "path": "agent/tables/FDN_RECENTLY_VIEWED.json",
+      "domain": "acesso-recente",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "RECENTLY_VIEWED_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "FDN_REQUEST_NONCE",
+      "path": "agent/tables/FDN_REQUEST_NONCE.json",
+      "domain": "seguranca",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "REQUEST_NONCE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "FDN_RESOURCE",
+      "path": "agent/tables/FDN_RESOURCE.json",
+      "domain": "foundation-identity-access",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "RESOURCE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 26
+    },
+    {
+      "name": "FDN_RESOURCETYPE",
+      "path": "agent/tables/FDN_RESOURCETYPE.json",
+      "domain": "foundation-identity-access",
+      "tenant_column": null,
+      "grain_columns": [
+        "RESOURCE_TYPE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "FDN_RESOURCETYPEPERMISSION",
+      "path": "agent/tables/FDN_RESOURCETYPEPERMISSION.json",
+      "domain": "foundation-identity-access",
+      "tenant_column": null,
+      "grain_columns": [
+        "RESOURCE_PERMISSION_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 5
+    },
+    {
+      "name": "FDN_RESTORE_PERMISSION_MAPPING",
+      "path": "agent/tables/FDN_RESTORE_PERMISSION_MAPPING.json",
+      "domain": "foundation-identity-access",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "FDN_ROLE",
+      "path": "agent/tables/FDN_ROLE.json",
+      "domain": "foundation-identity-access",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "ROLE_ID"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 11
+    },
+    {
+      "name": "FDN_ROLEDATA",
+      "path": "agent/tables/FDN_ROLEDATA.json",
+      "domain": "foundation-identity-access",
+      "tenant_column": null,
+      "grain_columns": [
+        "ROLEDATA_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 5
+    },
+    {
+      "name": "FDN_SERVER_INFO",
+      "path": "agent/tables/FDN_SERVER_INFO.json",
+      "domain": "infraestrutura-servidor",
+      "tenant_column": null,
+      "grain_columns": [
+        "DATA_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "FDN_SERVICE_OPERATION",
+      "path": "agent/tables/FDN_SERVICE_OPERATION.json",
+      "domain": "foundation-dataservice",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "OPERATION_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "FDN_SITE",
+      "path": "agent/tables/FDN_SITE.json",
+      "domain": "volumes-sites",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "SITE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 7
+    },
+    {
+      "name": "FDN_SITEDOWNLOADQUEUE",
+      "path": "agent/tables/FDN_SITEDOWNLOADQUEUE.json",
+      "domain": "volumes-sites",
+      "tenant_column": null,
+      "grain_columns": [
+        "QUEUE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 9
+    },
+    {
+      "name": "FDN_SITESCHEDULER",
+      "path": "agent/tables/FDN_SITESCHEDULER.json",
+      "domain": "foundation-platform",
+      "tenant_column": null,
+      "grain_columns": [
+        "SITESCHEDULER_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "FDN_TENANT",
+      "path": "agent/tables/FDN_TENANT.json",
+      "domain": "foundation-tenancy",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "TENANT_ID"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 11
+    },
+    {
+      "name": "FDN_TENANTDATA",
+      "path": "agent/tables/FDN_TENANTDATA.json",
+      "domain": "foundation-tenancy",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "TENANTDATA_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 7
+    },
+    {
+      "name": "FDN_TENANTPRODUCT",
+      "path": "agent/tables/FDN_TENANTPRODUCT.json",
+      "domain": "foundation-tenancy",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "TENANTPRODUCT_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "FDN_UPDATE_HOTFIX",
+      "path": "agent/tables/FDN_UPDATE_HOTFIX.json",
+      "domain": "foundation-platform",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "FDN_USER",
+      "path": "agent/tables/FDN_USER.json",
+      "domain": "foundation-identity-access",
+      "tenant_column": null,
+      "grain_columns": [
+        "USER_ID"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 4
+    },
+    {
+      "name": "FDN_USERDATA",
+      "path": "agent/tables/FDN_USERDATA.json",
+      "domain": "foundation-identity-access",
+      "tenant_column": null,
+      "grain_columns": [
+        "USERDATA_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 12
+    },
+    {
+      "name": "FDN_USERLOGGING",
+      "path": "agent/tables/FDN_USERLOGGING.json",
+      "domain": "foundation-identity-access",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "USERLOGGING_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "FDN_USERMOBILETOKEN",
+      "path": "agent/tables/FDN_USERMOBILETOKEN.json",
+      "domain": "mobile",
+      "tenant_column": "COMPANY_ID",
+      "grain_columns": [
+        "USER_IDIDP"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "FDN_USERPICTURE",
+      "path": "agent/tables/FDN_USERPICTURE.json",
+      "domain": "foundation-identity-access",
+      "tenant_column": null,
+      "grain_columns": [
+        "USERPICTURE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "FDN_USERROLE",
+      "path": "agent/tables/FDN_USERROLE.json",
+      "domain": "foundation-identity-access",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "USERROLE_ID"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 14
+    },
+    {
+      "name": "FDN_USERTENANT",
+      "path": "agent/tables/FDN_USERTENANT.json",
+      "domain": "foundation-identity-access",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "USER_TENANT_ID"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 40
+    },
+    {
+      "name": "FDN_USERTOKEN",
+      "path": "agent/tables/FDN_USERTOKEN.json",
+      "domain": "seguranca",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "USERTOKEN_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 5
+    },
+    {
+      "name": "FDN_USERTOKENRESOURCE",
+      "path": "agent/tables/FDN_USERTOKENRESOURCE.json",
+      "domain": "seguranca",
+      "tenant_column": null,
+      "grain_columns": [
+        "USERTOKENRESOURCE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "FDN_VOLUME",
+      "path": "agent/tables/FDN_VOLUME.json",
+      "domain": "foundation-platform",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "VOLUME_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 6
+    },
+    {
+      "name": "FDN_VOLUMESITE",
+      "path": "agent/tables/FDN_VOLUMESITE.json",
+      "domain": "foundation-platform",
+      "tenant_column": null,
+      "grain_columns": [
+        "VOLUMESITE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 5
+    },
+    {
+      "name": "FICHA",
+      "path": "agent/tables/FICHA.json",
+      "domain": "ecm-forms",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_FICHA",
+        "NR_VERSAO",
+        "COD_TABELA",
+        "COD_CAMPO"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 2
+    },
+    {
+      "name": "FICHARIO",
+      "path": "agent/tables/FICHARIO.json",
+      "domain": "ecm-forms",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_FICHARIO",
+        "NR_VERSAO",
+        "COD_TABELA"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 2
+    },
+    {
+      "name": "FICHARIO_CAMPO",
+      "path": "agent/tables/FICHARIO_CAMPO.json",
+      "domain": "ecm-forms",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_CAMPO",
+        "NR_FICHARIO",
+        "COD_TABELA",
+        "NR_VERSAO"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 4
+    },
+    {
+      "name": "FICHARIO_CAMPO_PROCES",
+      "path": "agent/tables/FICHARIO_CAMPO_PROCES.json",
+      "domain": "bpm-forms",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_CAMPO",
+        "COD_DEF_PROCES"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "FIELD",
+      "path": "agent/tables/FIELD.json",
+      "domain": "social-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "FILTERS",
+      "path": "agent/tables/FILTERS.json",
+      "domain": "ecm-lists-filters",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 9
+    },
+    {
+      "name": "FILTER_FIELDS",
+      "path": "agent/tables/FILTER_FIELDS.json",
+      "domain": "ecm-lists-filters",
+      "tenant_column": null,
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "FILTER_GROUP",
+      "path": "agent/tables/FILTER_GROUP.json",
+      "domain": "ecm-lists-filters",
+      "tenant_column": null,
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "FILTER_ORDER",
+      "path": "agent/tables/FILTER_ORDER.json",
+      "domain": "ecm-lists-filters",
+      "tenant_column": null,
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "FLOW_DIM_CAP",
+      "path": "agent/tables/FLOW_DIM_CAP.json",
+      "domain": "bpm-analytics-dw",
+      "tenant_column": null,
+      "grain_columns": [
+        "COMPANYID",
+        "PROCESSID",
+        "PROCESSVERSION",
+        "SOURCEACTIVITY",
+        "TARGETACTIVITY"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "FLUIG_AUDIT",
+      "path": "agent/tables/FLUIG_AUDIT.json",
+      "domain": "audit",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "AUDIT_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "FLUIG_AUDIT_CONFIG",
+      "path": "agent/tables/FLUIG_AUDIT_CONFIG.json",
+      "domain": "audit",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "AUDIT_CONFIG_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "FLUIG_METRIC",
+      "path": "agent/tables/FLUIG_METRIC.json",
+      "domain": "monitoring-metrics",
+      "tenant_column": null,
+      "grain_columns": [
+        "METRIC_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "FLUIG_RUNTIMEDATA_PROCESS_MNGR",
+      "path": "agent/tables/FLUIG_RUNTIMEDATA_PROCESS_MNGR.json",
+      "domain": "bpm-workflow",
+      "tenant_column": null,
+      "grain_columns": [
+        "DATA_KEY"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "FORM_DATASET",
+      "path": "agent/tables/FORM_DATASET.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "FORM_DATASET_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 10
+    },
+    {
+      "name": "HISTOR_ACES",
+      "path": "agent/tables/HISTOR_ACES.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "CD_MATRICULA",
+        "DAT_ACES",
+        "NR_DOCUMENTO"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "HISTOR_CONVER",
+      "path": "agent/tables/HISTOR_CONVER.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NUM_SEQ_CONVER"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "HISTOR_CONVER_ESTADO",
+      "path": "agent/tables/HISTOR_CONVER_ESTADO.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NUM_SEQ_CONVER",
+        "NUM_SEQ_ESTADO"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "HISTOR_PROCES",
+      "path": "agent/tables/HISTOR_PROCES.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NUM_PROCES",
+        "NUM_SEQ_MOVTO"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 17
+    },
+    {
+      "name": "HISTOR_TRANSF_PENDCIA",
+      "path": "agent/tables/HISTOR_TRANSF_PENDCIA.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NUM_PROCES",
+        "NUM_SEQ_MOVTO",
+        "CD_MATRICULA",
+        "NUM_SEQ_TRANSF",
+        "SEQ_MOVTO"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "I18N_BUNDLE",
+      "path": "agent/tables/I18N_BUNDLE.json",
+      "domain": "i18n",
+      "tenant_column": null,
+      "grain_columns": [
+        "BUNDLE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "I18N_LITERAL_TRANSLATED",
+      "path": "agent/tables/I18N_LITERAL_TRANSLATED.json",
+      "domain": "i18n",
+      "tenant_column": null,
+      "grain_columns": [
+        "LITERAL_TRANSLATED_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "I18N_LOCALE",
+      "path": "agent/tables/I18N_LOCALE.json",
+      "domain": "i18n",
+      "tenant_column": null,
+      "grain_columns": [
+        "LOCALE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "I18N_RELATED_BUNDLE",
+      "path": "agent/tables/I18N_RELATED_BUNDLE.json",
+      "domain": "i18n",
+      "tenant_column": null,
+      "grain_columns": [
+        "RELATED_BUNDLE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "ICONE",
+      "path": "agent/tables/ICONE.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_ICONE"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "LINK_DOCTO_VIRTUAL",
+      "path": "agent/tables/LINK_DOCTO_VIRTUAL.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCTO_PAI_CORREN",
+        "NR_DOCUMENTO"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "LINK_PROCES",
+      "path": "agent/tables/LINK_PROCES.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_DEF_PROCES",
+        "NUM_VERS",
+        "NUM_SEQ_LINK"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "LINK_PROCES_ASSOC",
+      "path": "agent/tables/LINK_PROCES_ASSOC.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_DEF_PROCES",
+        "NUM_VERS",
+        "NUM_SEQ_LINK"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "LINK_PROCES_BEND",
+      "path": "agent/tables/LINK_PROCES_BEND.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_DEF_PROCES",
+        "NUM_VERS",
+        "NUM_SEQ_LINK",
+        "NUM_SEQ_CURV"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "LIN_PROCES",
+      "path": "agent/tables/LIN_PROCES.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_DEF_PROCES",
+        "NUM_VERS",
+        "NUM_SEQ"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "LOCK_RESOURCE",
+      "path": "agent/tables/LOCK_RESOURCE.json",
+      "domain": "document-management",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "TOKEN_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "LOG_ACESSO",
+      "path": "agent/tables/LOG_ACESSO.json",
+      "domain": "security-audit",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "CD_MATRICULA",
+        "DAT_CLIEN_SERVID",
+        "DES_CLIEN_IP"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "LOG_COP_CONTROLAD",
+      "path": "agent/tables/LOG_COP_CONTROLAD.json",
+      "domain": "ecm-documentos",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "NUM_PROTOC",
+        "COD_EMPRESA"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "LS_METRIC",
+      "path": "agent/tables/LS_METRIC.json",
+      "domain": "monitoring-metrics",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "METRIC_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "LS_METRIC_DETAIL",
+      "path": "agent/tables/LS_METRIC_DETAIL.json",
+      "domain": "monitoring-metrics",
+      "tenant_column": null,
+      "grain_columns": [
+        "METRIC_DETAIL_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "MAILEVENTTEMPLATE",
+      "path": "agent/tables/MAILEVENTTEMPLATE.json",
+      "domain": "mail",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "MARCA_DAGUA",
+      "path": "agent/tables/MARCA_DAGUA.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_MARCA_DAGUA"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "MECAN_ATRIBUIC",
+      "path": "agent/tables/MECAN_ATRIBUIC.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_MECAN_ATRIBUIC"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "MENTION",
+      "path": "agent/tables/MENTION.json",
+      "domain": "social",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "META_LISTA",
+      "path": "agent/tables/META_LISTA.json",
+      "domain": "ecm-lists-filters",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_LISTA"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "META_LISTA_CAMPO",
+      "path": "agent/tables/META_LISTA_CAMPO.json",
+      "domain": "ecm-lists-filters",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_LISTA",
+        "NUM_SEQ_CAMPO"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "META_LISTA_PERSPECT",
+      "path": "agent/tables/META_LISTA_PERSPECT.json",
+      "domain": "ecm-lists-filters",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_LISTA",
+        "COD_PERSPECT"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "META_LISTA_PERSPECT_CAMPO",
+      "path": "agent/tables/META_LISTA_PERSPECT_CAMPO.json",
+      "domain": "ecm-lists-filters",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_LISTA",
+        "COD_PERSPECT",
+        "NUM_SEQ_CAMPO"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "META_LISTA_PERSPECT_FILTRO",
+      "path": "agent/tables/META_LISTA_PERSPECT_FILTRO.json",
+      "domain": "ecm-lists-filters",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_LISTA",
+        "COD_PERSPECT",
+        "COD_FILTRO"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "META_LISTA_REL",
+      "path": "agent/tables/META_LISTA_REL.json",
+      "domain": "ecm-lists-filters",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_LISTA_PAI",
+        "COD_LISTA_FILHO"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "META_LIST_EVENT",
+      "path": "agent/tables/META_LIST_EVENT.json",
+      "domain": "ecm-lists-filters",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_LISTA",
+        "COD_EVENT"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "MOVTO_APROVAC",
+      "path": "agent/tables/MOVTO_APROVAC.json",
+      "domain": "ecm-documentos",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "NUM_SEQ_ITERAC",
+        "NUM_NIV_APROVAC",
+        "NUM_SEQ_MOVTO"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "NIVEL_APROVACAO",
+      "path": "agent/tables/NIVEL_APROVACAO.json",
+      "domain": "ecm-documentos",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "NUM_NIV_APROVAC"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "PARAM_APLICAT",
+      "path": "agent/tables/PARAM_APLICAT.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_APLICAT",
+        "NOM_PARAM"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "PARAM_APLICAT_USUAR",
+      "path": "agent/tables/PARAM_APLICAT_USUAR.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "CD_MATRICULA",
+        "NOM_PARAM",
+        "COD_APLICAT"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "PENDCIA_NOTIF_EMAIL",
+      "path": "agent/tables/PENDCIA_NOTIF_EMAIL.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NUM_SEQ"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "PERIOD_EXPED",
+      "path": "agent/tables/PERIOD_EXPED.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_PERIOD_EXPED",
+        "NUM_DIA_PERIOD",
+        "NUM_SEQ_PERIOD"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "POLICYDOCUMENT",
+      "path": "agent/tables/POLICYDOCUMENT.json",
+      "domain": "use-policy",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "POLICYDOCUMENT_POLICYUSER",
+      "path": "agent/tables/POLICYDOCUMENT_POLICYUSER.json",
+      "domain": "use-policy",
+      "tenant_column": null,
+      "grain_columns": [
+        "POLICYDOCUMENT_ID",
+        "USERSACCEPTED_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "POLICYUSER",
+      "path": "agent/tables/POLICYUSER.json",
+      "domain": "use-policy",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "PREFER_PASTA",
+      "path": "agent/tables/PREFER_PASTA.json",
+      "domain": "ecm-lists-filters",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "CD_MATRICULA"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "PROCESS_APP_CONFIG",
+      "path": "agent/tables/PROCESS_APP_CONFIG.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "PROCESS_APP_VALUE",
+      "path": "agent/tables/PROCESS_APP_VALUE.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "PROCESS_ATTACHMENT_RULES",
+      "path": "agent/tables/PROCESS_ATTACHMENT_RULES.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "PROCESS_COND_AUTOMATIC_RULES",
+      "path": "agent/tables/PROCESS_COND_AUTOMATIC_RULES.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "PROCESS_CUSTOM_TRANSLATE",
+      "path": "agent/tables/PROCESS_CUSTOM_TRANSLATE.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "PROCESS_DEFINITION_TRANSLATE",
+      "path": "agent/tables/PROCESS_DEFINITION_TRANSLATE.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "PROCESS_ELEMENT_TRANSLATE",
+      "path": "agent/tables/PROCESS_ELEMENT_TRANSLATE.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "PROCESS_FORM_MAP",
+      "path": "agent/tables/PROCESS_FORM_MAP.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "FORM_MAP_ID"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 0
+    },
+    {
+      "name": "PROCESS_INSTANCE_MANAGER",
+      "path": "agent/tables/PROCESS_INSTANCE_MANAGER.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "PROCESS_OBSERVATION",
+      "path": "agent/tables/PROCESS_OBSERVATION.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "OBSERVATION_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "PROCESS_VERSION_TRANSLATE",
+      "path": "agent/tables/PROCESS_VERSION_TRANSLATE.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "PROCES_SIGNAL",
+      "path": "agent/tables/PROCES_SIGNAL.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_SINAL"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "PROCES_SIGNAL_INSTANCE",
+      "path": "agent/tables/PROCES_SIGNAL_INSTANCE.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_SINAL",
+        "COD_SINAL_INSTANCE"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "PROCES_SIGNAL_RECEIVERS",
+      "path": "agent/tables/PROCES_SIGNAL_RECEIVERS.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_DEF_PROCES",
+        "NUM_VERS",
+        "NUM_SEQ",
+        "COD_SINAL",
+        "NUM_PROCES",
+        "NUM_SEQ_THREAD"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "PROCES_VERSION_DIM_CAP",
+      "path": "agent/tables/PROCES_VERSION_DIM_CAP.json",
+      "domain": "bpm-analytics-dw",
+      "tenant_column": null,
+      "grain_columns": [
+        "COMPANYID",
+        "PROCESSID",
+        "PROCESSVERSION"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "PROCES_WORKFLOW",
+      "path": "agent/tables/PROCES_WORKFLOW.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NUM_PROCES"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 5
+    },
+    {
+      "name": "PROCES_WORKFLOW_ERROR_LOG",
+      "path": "agent/tables/PROCES_WORKFLOW_ERROR_LOG.json",
+      "domain": "bpm-workflow-erro",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "PROFANITY",
+      "path": "agent/tables/PROFANITY.json",
+      "domain": "social",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "PROPRIED_AVANCAD_PROCES",
+      "path": "agent/tables/PROPRIED_AVANCAD_PROCES.json",
+      "domain": "bpm-definicao-processo",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_DEF_PROCES",
+        "NUM_VERS",
+        "COD_PROPRIED"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "PROPRIED_EXT",
+      "path": "agent/tables/PROPRIED_EXT.json",
+      "domain": "bpm-process-definition",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_DEF_PROCES",
+        "NUM_VERS",
+        "NUM_SEQ",
+        "COD_PROPRIED"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "QRTZ_BLOB_TRIGGERS",
+      "path": "agent/tables/QRTZ_BLOB_TRIGGERS.json",
+      "domain": "scheduler-quartz",
+      "tenant_column": null,
+      "grain_columns": [
+        "TRIGGER_GROUP",
+        "TRIGGER_NAME"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "QRTZ_CALENDARS",
+      "path": "agent/tables/QRTZ_CALENDARS.json",
+      "domain": "scheduler-quartz",
+      "tenant_column": null,
+      "grain_columns": [
+        "CALENDAR_NAME"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "QRTZ_CRON_TRIGGERS",
+      "path": "agent/tables/QRTZ_CRON_TRIGGERS.json",
+      "domain": "scheduler-quartz",
+      "tenant_column": null,
+      "grain_columns": [
+        "TRIGGER_GROUP",
+        "TRIGGER_NAME"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "QRTZ_FIRED_TRIGGERS",
+      "path": "agent/tables/QRTZ_FIRED_TRIGGERS.json",
+      "domain": "scheduler-quartz",
+      "tenant_column": null,
+      "grain_columns": [
+        "ENTRY_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "QRTZ_JOB_DETAILS",
+      "path": "agent/tables/QRTZ_JOB_DETAILS.json",
+      "domain": "scheduler-quartz",
+      "tenant_column": null,
+      "grain_columns": [
+        "JOB_GROUP",
+        "JOB_NAME"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 5
+    },
+    {
+      "name": "QRTZ_JOB_LISTENERS",
+      "path": "agent/tables/QRTZ_JOB_LISTENERS.json",
+      "domain": "scheduler-quartz",
+      "tenant_column": null,
+      "grain_columns": [
+        "JOB_GROUP",
+        "JOB_LISTENER",
+        "JOB_NAME"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "QRTZ_LOCKS",
+      "path": "agent/tables/QRTZ_LOCKS.json",
+      "domain": "scheduler-quartz",
+      "tenant_column": null,
+      "grain_columns": [
+        "LOCK_NAME"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "QRTZ_PAUSED_TRIGGER_GRPS",
+      "path": "agent/tables/QRTZ_PAUSED_TRIGGER_GRPS.json",
+      "domain": "scheduler-quartz",
+      "tenant_column": null,
+      "grain_columns": [
+        "TRIGGER_GROUP"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "QRTZ_SCHEDULER_STATE",
+      "path": "agent/tables/QRTZ_SCHEDULER_STATE.json",
+      "domain": "scheduler-quartz",
+      "tenant_column": null,
+      "grain_columns": [
+        "INSTANCE_NAME"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "QRTZ_SIMPLE_TRIGGERS",
+      "path": "agent/tables/QRTZ_SIMPLE_TRIGGERS.json",
+      "domain": "scheduler-quartz",
+      "tenant_column": null,
+      "grain_columns": [
+        "TRIGGER_GROUP",
+        "TRIGGER_NAME"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "QRTZ_TRIGGERS",
+      "path": "agent/tables/QRTZ_TRIGGERS.json",
+      "domain": "scheduler-quartz",
+      "tenant_column": null,
+      "grain_columns": [
+        "TRIGGER_GROUP",
+        "TRIGGER_NAME"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "QRTZ_TRIGGER_LISTENERS",
+      "path": "agent/tables/QRTZ_TRIGGER_LISTENERS.json",
+      "domain": "scheduler-quartz",
+      "tenant_column": null,
+      "grain_columns": [
+        "TRIGGER_GROUP",
+        "TRIGGER_LISTENER",
+        "TRIGGER_NAME"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "RATING",
+      "path": "agent/tables/RATING.json",
+      "domain": "rating",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "RESET_PASSWORD_TOKEN",
+      "path": "agent/tables/RESET_PASSWORD_TOKEN.json",
+      "domain": "security-oauth-tokens",
+      "tenant_column": null,
+      "grain_columns": [
+        "TOKEN_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "SEGUR_ANEXO_PROCES",
+      "path": "agent/tables/SEGUR_ANEXO_PROCES.json",
+      "domain": "bpm-definicao-processo",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_DEF_PROCES",
+        "NUM_VERS",
+        "NUM_SEQ"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "SEQ_ECM",
+      "path": "agent/tables/SEQ_ECM.json",
+      "domain": "infraestrutura-sequencias",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "CD_TABELA"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "SERV_DADOS",
+      "path": "agent/tables/SERV_DADOS.json",
+      "domain": "integracao-servicos-dados",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NOM_SERV_DADOS"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "SERV_DATASET",
+      "path": "agent/tables/SERV_DATASET.json",
+      "domain": "integracao-datasets",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_DATASET"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 8
+    },
+    {
+      "name": "SESSAO_TOKEN",
+      "path": "agent/tables/SESSAO_TOKEN.json",
+      "domain": "security-oauth-tokens",
+      "tenant_column": null,
+      "grain_columns": [
+        "COD_TOKEN"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "SINONIMO",
+      "path": "agent/tables/SINONIMO.json",
+      "domain": "ecm-search",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "IND_IDIOMA",
+        "COD_TERMO",
+        "COD_TERMO_SINONIMO"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "SOCIABLE",
+      "path": "agent/tables/SOCIABLE.json",
+      "domain": "social",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 30
+    },
+    {
+      "name": "SOCIABLEDENOUNCEMENT",
+      "path": "agent/tables/SOCIABLEDENOUNCEMENT.json",
+      "domain": "social",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "SOCIABLEDENOUNCEMENTHISTORY",
+      "path": "agent/tables/SOCIABLEDENOUNCEMENTHISTORY.json",
+      "domain": "social",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "SOCIABLELIKE",
+      "path": "agent/tables/SOCIABLELIKE.json",
+      "domain": "social",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 6
+    },
+    {
+      "name": "SOCIABLESHARE",
+      "path": "agent/tables/SOCIABLESHARE.json",
+      "domain": "social",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "SOCIABLEWATCH",
+      "path": "agent/tables/SOCIABLEWATCH.json",
+      "domain": "social",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 12
+    },
+    {
+      "name": "SOCIAL",
+      "path": "agent/tables/SOCIAL.json",
+      "domain": "social",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 20
+    },
+    {
+      "name": "SOCIALACCESSTOKEN",
+      "path": "agent/tables/SOCIALACCESSTOKEN.json",
+      "domain": "social",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "SOCIALDATA",
+      "path": "agent/tables/SOCIALDATA.json",
+      "domain": "social",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 6
+    },
+    {
+      "name": "SOCIALFAVORITE",
+      "path": "agent/tables/SOCIALFAVORITE.json",
+      "domain": "social",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "SOCIALFORMCONTROL",
+      "path": "agent/tables/SOCIALFORMCONTROL.json",
+      "domain": "social-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "SOCIALFORMEVENT",
+      "path": "agent/tables/SOCIALFORMEVENT.json",
+      "domain": "social-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "SOCIALFORMEVENTDETAIL",
+      "path": "agent/tables/SOCIALFORMEVENTDETAIL.json",
+      "domain": "social-forms",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "SOCIALINVITE",
+      "path": "agent/tables/SOCIALINVITE.json",
+      "domain": "social",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "SOCIALINVITEGROUP",
+      "path": "agent/tables/SOCIALINVITEGROUP.json",
+      "domain": "social",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "SOCIALPOSTUSER",
+      "path": "agent/tables/SOCIALPOSTUSER.json",
+      "domain": "social",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "SOCIALRELATION",
+      "path": "agent/tables/SOCIALRELATION.json",
+      "domain": "social",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 8
+    },
+    {
+      "name": "SOCIALRELATIONCOUNTER",
+      "path": "agent/tables/SOCIALRELATIONCOUNTER.json",
+      "domain": "social",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 7
+    },
+    {
+      "name": "SOCIALWIZARDUSER",
+      "path": "agent/tables/SOCIALWIZARDUSER.json",
+      "domain": "social",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "SOCIAL_POSTATTACHMENT",
+      "path": "agent/tables/SOCIAL_POSTATTACHMENT.json",
+      "domain": "social",
+      "tenant_column": null,
+      "grain_columns": [],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "SOCIAL_SESSION_TOKEN",
+      "path": "agent/tables/SOCIAL_SESSION_TOKEN.json",
+      "domain": "social",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "SESSION_TOKEN_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "SOCIAL_TAB_PERMISSION",
+      "path": "agent/tables/SOCIAL_TAB_PERMISSION.json",
+      "domain": "social",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "SOCIAL_TAB_PERMISSION_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "TAG",
+      "path": "agent/tables/TAG.json",
+      "domain": "ecm-search",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_TAG"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "TAR_CONHECIMENTO_USUARIO",
+      "path": "agent/tables/TAR_CONHECIMENTO_USUARIO.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NUM_PROCES",
+        "CD_MATRICULA",
+        "NUM_SEQ_MOVTO",
+        "NUM_SEQ_TRANSF"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "TAR_CTRAL",
+      "path": "agent/tables/TAR_CTRAL.json",
+      "domain": "bpm-tarefas",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_TAREFA"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "TAR_DOCTO",
+      "path": "agent/tables/TAR_DOCTO.json",
+      "domain": "bpm-tarefas",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_TAREFA"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "TAR_DOCTO_EDIC",
+      "path": "agent/tables/TAR_DOCTO_EDIC.json",
+      "domain": "bpm-tarefas",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_TAREFA"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "TAR_DOCTO_REVIS",
+      "path": "agent/tables/TAR_DOCTO_REVIS.json",
+      "domain": "bpm-tarefas",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_TAREFA"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "TAR_ESFOR",
+      "path": "agent/tables/TAR_ESFOR.json",
+      "domain": "bpm-tarefas",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_TAREFA"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "TAR_PARTIC",
+      "path": "agent/tables/TAR_PARTIC.json",
+      "domain": "bpm-tarefas",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_TAREFA"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "TAR_PROCES",
+      "path": "agent/tables/TAR_PROCES.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NUM_PROCES",
+        "NUM_SEQ_MOVTO",
+        "NUM_SEQ_TRANSF",
+        "CD_MATRICULA"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 14
+    },
+    {
+      "name": "TAR_WORKFLOW",
+      "path": "agent/tables/TAR_WORKFLOW.json",
+      "domain": "bpm-tarefas",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_TAREFA"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "TEMA_FORMULARIO",
+      "path": "agent/tables/TEMA_FORMULARIO.json",
+      "domain": "bpm-forms",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NUM_TEMA_FORM"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "TEMPLATE_EMAIL",
+      "path": "agent/tables/TEMPLATE_EMAIL.json",
+      "domain": "notificacao-email",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_TEMPLATE_EMAIL",
+        "COD_DIALETO"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 7
+    },
+    {
+      "name": "TERMO",
+      "path": "agent/tables/TERMO.json",
+      "domain": "ecm-search",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "IND_IDIOMA",
+        "COD_TERMO"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "THREAD_PROCES",
+      "path": "agent/tables/THREAD_PROCES.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "NUM_PROCES",
+        "NUM_SEQ_THREAD"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "TIME_DIM_CAP",
+      "path": "agent/tables/TIME_DIM_CAP.json",
+      "domain": "bpm-analytics-dw",
+      "tenant_column": null,
+      "grain_columns": [
+        "COMPANYID",
+        "DAYID",
+        "MONTHID",
+        "YEARID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "TIPO_DOCUMENTO",
+      "path": "agent/tables/TIPO_DOCUMENTO.json",
+      "domain": "ecm-documents",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "CD_TIPO_DOC"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "USEPOLICY",
+      "path": "agent/tables/USEPOLICY.json",
+      "domain": "use-policy",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "USEPOLICY_POLICYDOCUMENT",
+      "path": "agent/tables/USEPOLICY_POLICYDOCUMENT.json",
+      "domain": "use-policy",
+      "tenant_column": null,
+      "grain_columns": [
+        "USEPOLICY_ID",
+        "DOCUMENTS_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "USER_DIM_CAP",
+      "path": "agent/tables/USER_DIM_CAP.json",
+      "domain": "bpm-analytics-dw",
+      "tenant_column": null,
+      "grain_columns": [
+        "COMPANYID",
+        "USERSEQUENCE"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "VAL_HORA_COLAB",
+      "path": "agent/tables/VAL_HORA_COLAB.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "DAT_ATUALIZ",
+        "HRA_ATUALIZ",
+        "CD_MATRICULA"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 1
+    },
+    {
+      "name": "VERBOSE_SCRIPT_LOG",
+      "path": "agent/tables/VERBOSE_SCRIPT_LOG.json",
+      "domain": "bpm-workflow",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "VERS_DEF_PROCES",
+      "path": "agent/tables/VERS_DEF_PROCES.json",
+      "domain": "bpm-process-definition",
+      "tenant_column": "COD_EMPRESA",
+      "grain_columns": [
+        "COD_EMPRESA",
+        "COD_DEF_PROCES",
+        "NUM_VERS"
+      ],
+      "business_grain_reviewed": true,
+      "observed_query_count": 8
+    },
+    {
+      "name": "VERS_DEF_PROCES_ALERT",
+      "path": "agent/tables/VERS_DEF_PROCES_ALERT.json",
+      "domain": "bpm-process-definition",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 0
+    },
+    {
+      "name": "WCM_APPLICATION",
+      "path": "agent/tables/WCM_APPLICATION.json",
+      "domain": "wcm-portal",
+      "tenant_column": null,
+      "grain_columns": [
+        "APPLICATION_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 36
+    },
+    {
+      "name": "WCM_APPLICATIONCATEGORY",
+      "path": "agent/tables/WCM_APPLICATIONCATEGORY.json",
+      "domain": "wcm-portal",
+      "tenant_column": null,
+      "grain_columns": [
+        "APPLICATION_CATEGORY_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 10
+    },
+    {
+      "name": "WCM_APPLICATIONDATA",
+      "path": "agent/tables/WCM_APPLICATIONDATA.json",
+      "domain": "wcm-portal",
+      "tenant_column": null,
+      "grain_columns": [
+        "APPLICATION_DATA_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "WCM_APPLICATIONLOCALE",
+      "path": "agent/tables/WCM_APPLICATIONLOCALE.json",
+      "domain": "wcm-portal",
+      "tenant_column": null,
+      "grain_columns": [
+        "APPLICATION_LOCALE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "WCM_APPLICATIONPRODUCT",
+      "path": "agent/tables/WCM_APPLICATIONPRODUCT.json",
+      "domain": "wcm-portal",
+      "tenant_column": null,
+      "grain_columns": [
+        "APPLICATION_PRODUCT_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "WCM_APPLICATIONRESOURCE",
+      "path": "agent/tables/WCM_APPLICATIONRESOURCE.json",
+      "domain": "wcm-portal",
+      "tenant_column": null,
+      "grain_columns": [
+        "APPLICATION_RESOURCE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "WCM_APPLICATIONSERVICE",
+      "path": "agent/tables/WCM_APPLICATIONSERVICE.json",
+      "domain": "wcm-portal",
+      "tenant_column": null,
+      "grain_columns": [
+        "APPLICATION_SERVICE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "WCM_APPLICATIONUSERDATA",
+      "path": "agent/tables/WCM_APPLICATIONUSERDATA.json",
+      "domain": "wcm-portal",
+      "tenant_column": null,
+      "grain_columns": [
+        "APPLICATION_DATA_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 6
+    },
+    {
+      "name": "WCM_APPLICATION_APP_DEPENDENCY",
+      "path": "agent/tables/WCM_APPLICATION_APP_DEPENDENCY.json",
+      "domain": "wcm-portal",
+      "tenant_column": null,
+      "grain_columns": [
+        "id"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 7
+    },
+    {
+      "name": "WCM_APPLICATION_DEPENDENCY",
+      "path": "agent/tables/WCM_APPLICATION_DEPENDENCY.json",
+      "domain": "wcm-portal",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 6
+    },
+    {
+      "name": "WCM_COMPONENTPAGE",
+      "path": "agent/tables/WCM_COMPONENTPAGE.json",
+      "domain": "wcm-portal",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "COMPONENTPAGE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 5
+    },
+    {
+      "name": "WCM_CONFIGURATION",
+      "path": "agent/tables/WCM_CONFIGURATION.json",
+      "domain": "wcm-portal",
+      "tenant_column": null,
+      "grain_columns": [
+        "CONFIGURATION_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "WCM_LAYOUTSLOT",
+      "path": "agent/tables/WCM_LAYOUTSLOT.json",
+      "domain": "wcm-portal",
+      "tenant_column": null,
+      "grain_columns": [
+        "LAYOUT_SLOT_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 4
+    },
+    {
+      "name": "WCM_MENUITEM",
+      "path": "agent/tables/WCM_MENUITEM.json",
+      "domain": "wcm-portal",
+      "tenant_column": null,
+      "grain_columns": [
+        "MENUITEM_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 5
+    },
+    {
+      "name": "WCM_PAGE",
+      "path": "agent/tables/WCM_PAGE.json",
+      "domain": "wcm-portal",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "PAGE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 44
+    },
+    {
+      "name": "WCM_PAGEDATA",
+      "path": "agent/tables/WCM_PAGEDATA.json",
+      "domain": "wcm-portal",
+      "tenant_column": null,
+      "grain_columns": [
+        "PAGE_DATA_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 2
+    },
+    {
+      "name": "WCM_PAGEVERSION",
+      "path": "agent/tables/WCM_PAGEVERSION.json",
+      "domain": "wcm-portal-pages",
+      "tenant_column": null,
+      "grain_columns": [
+        "ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 22
+    },
+    {
+      "name": "WCM_PAGEWIDGET",
+      "path": "agent/tables/WCM_PAGEWIDGET.json",
+      "domain": "wcm-portal-pages",
+      "tenant_column": null,
+      "grain_columns": [
+        "PAGE_WIDGET_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 16
+    },
+    {
+      "name": "WCM_RESOURCECOMPONENT",
+      "path": "agent/tables/WCM_RESOURCECOMPONENT.json",
+      "domain": "wcm-resources",
+      "tenant_column": null,
+      "grain_columns": [
+        "RESOURCE_COMPONENT_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "WCM_RESOURCECOMPONENTFILE",
+      "path": "agent/tables/WCM_RESOURCECOMPONENTFILE.json",
+      "domain": "wcm-resources",
+      "tenant_column": null,
+      "grain_columns": [
+        "RESOURCE_COMPONENT_FILE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "WCM_RESOURCEKIT",
+      "path": "agent/tables/WCM_RESOURCEKIT.json",
+      "domain": "wcm-resources",
+      "tenant_column": null,
+      "grain_columns": [
+        "RESOURCE_KIT_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "WCM_RESOURCEKITFILE",
+      "path": "agent/tables/WCM_RESOURCEKITFILE.json",
+      "domain": "wcm-resources",
+      "tenant_column": null,
+      "grain_columns": [
+        "RESOURCE_KIT_FILE_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "WCM_STOREITEM_METRIC",
+      "path": "agent/tables/WCM_STOREITEM_METRIC.json",
+      "domain": "wcm-store",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "STOREITEM_METRIC_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    },
+    {
+      "name": "WCM_TENANTAPPLICATION",
+      "path": "agent/tables/WCM_TENANTAPPLICATION.json",
+      "domain": "wcm-portal-apps",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "TENANT_APPLICATION_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 7
+    },
+    {
+      "name": "WCM_THEME_HISTORY",
+      "path": "agent/tables/WCM_THEME_HISTORY.json",
+      "domain": "wcm-theme",
+      "tenant_column": "TENANT_ID",
+      "grain_columns": [
+        "THEME_HISTORY_ID"
+      ],
+      "business_grain_reviewed": false,
+      "observed_query_count": 3
+    }
+  ]
+}

@@ -14,6 +14,7 @@
  "jpa_entities": [
   "com.totvs.technology.foundation.security.entity.FDNPersonalDataJustification"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "PDATA_JUSTIFICATION_ID",

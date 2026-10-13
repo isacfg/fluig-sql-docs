@@ -1,0 +1,65 @@
+{
+  "name": "WCM_RESOURCECOMPONENT",
+  "domain": "wcm-resources",
+  "purpose": "Catálogo de componentes de recursos estáticos (bibliotecas JS/CSS) identificados por código, que temas/widgets podem referenciar.",
+  "schema_card": "by_table/WCM_RESOURCECOMPONENT.json",
+  "business_concepts": [
+    "wcm-resources",
+    "WCM_RESOURCECOMPONENT"
+  ],
+  "grain": {
+    "description": "Catálogo de componentes de recursos estáticos (bibliotecas JS/CSS) identificados por código, que temas/widgets podem referenciar. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "RESOURCE_COMPONENT_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/WCM_RESOURCECOMPONENT.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-1109",
+      "table": "WCM_RESOURCECOMPONENTFILE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1112",
+      "table": "WCM_RESOURCECOMPONENTFILE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/WCM_RESOURCECOMPONENT.json",
+  "observed_query_count": 3,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Catálogo de componentes de recursos estáticos (bibliotecas JS/CSS) identificados por código, que temas/widgets podem referenciar. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "RESOURCE_COMPONENT_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

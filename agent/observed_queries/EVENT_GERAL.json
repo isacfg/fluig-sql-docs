@@ -1,0 +1,38 @@
+[
+  {
+    "name": "GlobalEvent.findAll",
+    "query": "SELECT ge FROM GlobalEvent ge WHERE ge.globalEventPK.companyId = :companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.foundation.model.GlobalEvent",
+    "source_file": "com/datasul/technology/webdesk/foundation/model/GlobalEvent.java",
+    "owner_table": "EVENT_GERAL",
+    "tables": [
+      "EVENT_GERAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "GlobalEvent.getEvent",
+    "query": "SELECT ge FROM GlobalEvent ge WHERE ge.globalEventPK.companyId = :companyId AND ge.globalEventPK.eventId = :eventId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.foundation.model.GlobalEvent",
+    "source_file": "com/datasul/technology/webdesk/foundation/model/GlobalEvent.java",
+    "owner_table": "EVENT_GERAL",
+    "tables": [
+      "EVENT_GERAL"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

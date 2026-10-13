@@ -1,0 +1,126 @@
+{
+  "name": "I18N_LITERAL_TRANSLATED",
+  "domain": "i18n",
+  "purpose": "Tradução de um literal (chave) para um locale específico.",
+  "schema_card": "by_table/I18N_LITERAL_TRANSLATED.json",
+  "business_concepts": [
+    "i18n",
+    "I18N_LITERAL_TRANSLATED"
+  ],
+  "grain": {
+    "description": "Tradução de um literal (chave) para um locale específico. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "LITERAL_TRANSLATED_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/I18N_LITERAL_TRANSLATED.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0719",
+      "from_table": "I18N_LITERAL_TRANSLATED",
+      "to_table": "I18N_LOCALE",
+      "on": [
+        "I18N_LITERAL_TRANSLATED.LOCALE_ID = I18N_LOCALE.LOCALE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "LOCALE_ID",
+          "to_column": "LOCALE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Locale da tradução (LiteralTranslated.locale).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0724",
+      "from_table": "I18N_LITERAL_TRANSLATED",
+      "to_table": "I18N_LOCALE",
+      "on": [
+        "I18N_LITERAL_TRANSLATED.LOCALE_ID = I18N_LOCALE.LOCALE_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "LOCALE_ID",
+          "to_column": "LOCALE_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Traduções do locale.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0719",
+      "table": "I18N_LOCALE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0724",
+      "table": "I18N_LOCALE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Tradução de um literal (chave) para um locale específico. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "LITERAL_TRANSLATED_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

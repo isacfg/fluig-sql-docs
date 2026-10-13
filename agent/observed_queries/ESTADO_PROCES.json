@@ -1,0 +1,74 @@
+[
+  {
+    "name": "ProcessState.findByKey",
+    "query": "SELECT p from ProcessState p where p.processStatePK.companyId = :companyId AND p.processStatePK.processId = :processId AND p.processStatePK.version = :version AND p.processStatePK.sequence = :sequence",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessState",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessState.java",
+    "owner_table": "ESTADO_PROCES",
+    "tables": [
+      "ESTADO_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessState.findInitialActivityDigitalSignatureActive",
+    "query": "SELECT p.digitalSignature FROM ProcessState p WHERE p.processStatePK.companyId = :companyId AND p.processStatePK.processId = :processId AND p.processStatePK.version = :version AND p.initialState = true",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessState",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessState.java",
+    "owner_table": "ESTADO_PROCES",
+    "tables": [
+      "ESTADO_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessState.findBySubProcessId",
+    "query": "SELECT p from ProcessState p where p.processStatePK.companyId = :companyId AND p.subProcessId = :subProcessId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessState",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessState.java",
+    "owner_table": "ESTADO_PROCES",
+    "tables": [
+      "ESTADO_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessState.findStateDescriptionById",
+    "query": "SELECT p.stateDescription from ProcessState p where p.processStatePK.companyId = :companyId AND p.processStatePK.processId = :processId AND p.processStatePK.version = :version AND p.processStatePK.sequence = :sequence",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessState",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessState.java",
+    "owner_table": "ESTADO_PROCES",
+    "tables": [
+      "ESTADO_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

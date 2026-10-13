@@ -15,6 +15,62 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.dm.model.Watermark"
  ],
+ "observed_queries": [
+  {
+   "name": "Watermark.findByWatermarkId",
+   "query": "SELECT w FROM Watermark w WHERE w.watermarkPK.watermarkId = :watermarkId AND w.watermarkPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Watermark",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Watermark.java",
+   "owner_table": "MARCA_DAGUA",
+   "tables": [
+    "MARCA_DAGUA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Watermark.findAll",
+   "query": "SELECT w FROM Watermark w WHERE w.watermarkPK.companyId = :companyId ORDER BY w.watermarkPK.watermarkId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Watermark",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Watermark.java",
+   "owner_table": "MARCA_DAGUA",
+   "tables": [
+    "MARCA_DAGUA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "Watermark.nextId",
+   "query": "SELECT coalesce(max(w.watermarkPK.watermarkId),0) FROM Watermark w WHERE w.watermarkPK.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.Watermark",
+   "source_file": "com/datasul/technology/webdesk/dm/model/Watermark.java",
+   "owner_table": "MARCA_DAGUA",
+   "tables": [
+    "MARCA_DAGUA"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",

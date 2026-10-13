@@ -1,0 +1,218 @@
+[
+  {
+    "name": "SociableWatch.list",
+    "query": "SELECT b FROM SociableWatch b WHERE sociable.id = :sociableId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.sociable.entity.SociableWatch",
+    "source_file": "com/totvs/technology/social/sociable/entity/SociableWatch.java",
+    "owner_table": "SOCIABLEWATCH",
+    "tables": [
+      "SOCIABLEWATCH"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SociableWatch.list.ByUserAndSocial",
+    "query": "SELECT b FROM SociableWatch b WHERE user.id = :userId and sociable.social.id = :socialId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.sociable.entity.SociableWatch",
+    "source_file": "com/totvs/technology/social/sociable/entity/SociableWatch.java",
+    "owner_table": "SOCIABLEWATCH",
+    "tables": [
+      "SOCIABLEWATCH"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SociableWatch.list.ByUser",
+    "query": "SELECT b FROM SociableWatch b WHERE user.id = :userId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.sociable.entity.SociableWatch",
+    "source_file": "com/totvs/technology/social/sociable/entity/SociableWatch.java",
+    "owner_table": "SOCIABLEWATCH",
+    "tables": [
+      "SOCIABLEWATCH"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SociableWatch.list.byClassId",
+    "query": "SELECT b FROM SociableWatch b WHERE b.sociable.objectClass = :objectClass AND b.sociable.objectId = :objectId AND b.sociable.tenantId = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.sociable.entity.SociableWatch",
+    "source_file": "com/totvs/technology/social/sociable/entity/SociableWatch.java",
+    "owner_table": "SOCIABLEWATCH",
+    "tables": [
+      "SOCIABLEWATCH"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SociableWatch.Count",
+    "query": "SELECT COUNT(b.id) FROM SociableWatch b WHERE sociable.id = :sociableId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.sociable.entity.SociableWatch",
+    "source_file": "com/totvs/technology/social/sociable/entity/SociableWatch.java",
+    "owner_table": "SOCIABLEWATCH",
+    "tables": [
+      "SOCIABLEWATCH"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SociableWatch.find",
+    "query": "SELECT b FROM SociableWatch b WHERE sociable.id = :sociableId AND user.id = :userId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.sociable.entity.SociableWatch",
+    "source_file": "com/totvs/technology/social/sociable/entity/SociableWatch.java",
+    "owner_table": "SOCIABLEWATCH",
+    "tables": [
+      "SOCIABLEWATCH"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SociableWatch.findByUserAndClass",
+    "query": "SELECT b FROM SociableWatch b WHERE sociable.objectClass = :objectClass AND user.id = :userId ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.sociable.entity.SociableWatch",
+    "source_file": "com/totvs/technology/social/sociable/entity/SociableWatch.java",
+    "owner_table": "SOCIABLEWATCH",
+    "tables": [
+      "SOCIABLEWATCH"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SociableWatch.CountByClass",
+    "query": "SELECT COUNT(b.id) FROM SociableWatch b WHERE sociable.objectClass = :objectClass AND sociable.tenantId = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.sociable.entity.SociableWatch",
+    "source_file": "com/totvs/technology/social/sociable/entity/SociableWatch.java",
+    "owner_table": "SOCIABLEWATCH",
+    "tables": [
+      "SOCIABLEWATCH"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SociableWatch.findByClassAndUser",
+    "query": "SELECT b FROM SociableWatch b WHERE sociable.objectClass = :objectClass AND user.id = :userId AND sociable.tenantId = :tenantId order by b.id desc",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.sociable.entity.SociableWatch",
+    "source_file": "com/totvs/technology/social/sociable/entity/SociableWatch.java",
+    "owner_table": "SOCIABLEWATCH",
+    "tables": [
+      "SOCIABLEWATCH"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SociableWatch.list.byClass",
+    "query": "SELECT b FROM SociableWatch b WHERE b.sociable.objectClass = :objectClass AND b.sociable.tenantId = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.sociable.entity.SociableWatch",
+    "source_file": "com/totvs/technology/social/sociable/entity/SociableWatch.java",
+    "owner_table": "SOCIABLEWATCH",
+    "tables": [
+      "SOCIABLEWATCH"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SociableWatch.listByTenant",
+    "query": "SELECT b FROM SociableWatch b WHERE sociable.tenantId = :tenantId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.sociable.entity.SociableWatch",
+    "source_file": "com/totvs/technology/social/sociable/entity/SociableWatch.java",
+    "owner_table": "SOCIABLEWATCH",
+    "tables": [
+      "SOCIABLEWATCH"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "SociableWatch.ListAllUserRelatedSociable",
+    "query": "  SELECT s FROM SocialUser s WHERE s.id in (SELECT sw.user.id FROM SociableWatch sw where sw.sociable.id = :sociableId)  OR s.id in (SELECT sl.user.id FROM SociableLike sl where sl.sociable.id = :sociableId)  OR s.id in (SELECT sp.user.id FROM Sociable sp where sp.linkedObject.id = :sociableId) ORDER BY s.id",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.totvs.technology.social.sociable.entity.SociableWatch",
+    "source_file": "com/totvs/technology/social/sociable/entity/SociableWatch.java",
+    "owner_table": "SOCIABLEWATCH",
+    "tables": [
+      "SOCIABLEWATCH"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

@@ -36,6 +36,26 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.workflow.model.ProcessLink"
  ],
+ "observed_queries": [
+  {
+   "name": "ProcessLink.findProcessDefaultLinkByInitState",
+   "query": "SELECT pl FROM ProcessLink pl WHERE pl.processLinkPK.companyId = :companyId AND pl.processLinkPK.processId = :processId AND pl.processLinkPK.version = :version AND pl.initialStateSequence = :initSequence AND pl.defaultLink = :defaultLink",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessLink",
+   "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessLink.java",
+   "owner_table": "LINK_PROCES",
+   "tables": [
+    "LINK_PROCES"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",

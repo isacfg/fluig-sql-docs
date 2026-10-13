@@ -1,0 +1,99 @@
+{
+  "name": "WCM_APPLICATIONDATA",
+  "domain": "wcm-portal",
+  "purpose": "Par chave/valor de configuração de uma instância de widget em página (por PAGE_WIDGET_ID), compartilhado entre usuários.",
+  "schema_card": "by_table/WCM_APPLICATIONDATA.json",
+  "business_concepts": [
+    "wcm-portal",
+    "WCM_APPLICATIONDATA"
+  ],
+  "grain": {
+    "description": "Par chave/valor de configuração de uma instância de widget em página (por PAGE_WIDGET_ID), compartilhado entre usuários. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "APPLICATION_DATA_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/WCM_APPLICATIONDATA.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-1045",
+      "from_table": "WCM_APPLICATIONDATA",
+      "to_table": "WCM_PAGEWIDGET",
+      "on": [
+        "WCM_APPLICATIONDATA.PAGE_WIDGET_ID = WCM_PAGEWIDGET.PAGE_WIDGET_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "PAGE_WIDGET_ID",
+          "to_column": "PAGE_WIDGET_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Instância de widget dona do dado.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-1045",
+      "table": "WCM_PAGEWIDGET",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [
+    "DATA_VALUE"
+  ],
+  "indexes": [
+    {
+      "name": "WCMAPPDATAI001",
+      "unique": false,
+      "columns": [
+        "DATA_KEY"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/WCM_APPLICATIONDATA.json",
+  "observed_query_count": 4,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Par chave/valor de configuração de uma instância de widget em página (por PAGE_WIDGET_ID), compartilhado entre usuários. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "APPLICATION_DATA_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

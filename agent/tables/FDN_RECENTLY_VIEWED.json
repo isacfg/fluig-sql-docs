@@ -1,0 +1,109 @@
+{
+  "name": "FDN_RECENTLY_VIEWED",
+  "domain": "acesso-recente",
+  "purpose": "Itens vistos recentemente por usuário (documento, instância de processo ou página), para o atalho de recentes.",
+  "schema_card": "by_table/FDN_RECENTLY_VIEWED.json",
+  "business_concepts": [
+    "acesso-recente",
+    "FDN_RECENTLY_VIEWED"
+  ],
+  "grain": {
+    "description": "Itens vistos recentemente por usuário (documento, instância de processo ou página), para o atalho de recentes. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "RECENTLY_VIEWED_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_RECENTLY_VIEWED.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0541",
+      "table": "DOCUMENTO",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0543",
+      "table": "PROCES_WORKFLOW",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "IDX_RECENTLY_VIEWED001",
+      "unique": false,
+      "columns": [
+        "LOGIN",
+        "TENANT_ID"
+      ]
+    },
+    {
+      "name": "IDX_RECENTLY_VIEWED002",
+      "unique": false,
+      "columns": [
+        "DAT_ACCESS"
+      ]
+    },
+    {
+      "name": "IDX_RECENTLY_VIEWED003",
+      "unique": false,
+      "columns": [
+        "LOGIN",
+        "TENANT_ID",
+        "OBJECT_TYPE",
+        "NUM_DOCUMENT",
+        "NUM_PROCESS_INSTANCE",
+        "PAGE_CODE"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_RECENTLY_VIEWED.json",
+  "observed_query_count": 1,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Itens vistos recentemente por usuário (documento, instância de processo ou página), para o atalho de recentes. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "RECENTLY_VIEWED_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

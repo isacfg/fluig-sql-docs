@@ -1,0 +1,65 @@
+{
+  "name": "FDN_PRODUCT",
+  "domain": "foundation-tenancy",
+  "purpose": "Catálogo de produtos TOTVS/Fluig que podem ser habilitados para um tenant.",
+  "schema_card": "by_table/FDN_PRODUCT.json",
+  "business_concepts": [
+    "foundation-tenancy",
+    "FDN_PRODUCT"
+  ],
+  "grain": {
+    "description": "Catálogo de produtos TOTVS/Fluig que podem ser habilitados para um tenant. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "PRODUCT_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_PRODUCT.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0535",
+      "table": "FDN_TENANTPRODUCT",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0600",
+      "table": "FDN_TENANTPRODUCT",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_PRODUCT.json",
+  "observed_query_count": 3,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Catálogo de produtos TOTVS/Fluig que podem ser habilitados para um tenant. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "PRODUCT_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

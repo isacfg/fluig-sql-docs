@@ -19,6 +19,134 @@
  "jpa_entities": [
   "com.fluig.local.entity.FDNLocal"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNLocal.findByCompanyId",
+   "query": "SELECT local FROM FDNLocal local WHERE local.id = :id AND local.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.local.entity.FDNLocal",
+   "source_file": "com/fluig/local/entity/FDNLocal.java",
+   "owner_table": "FDN_LOCAL",
+   "tables": [
+    "FDN_LOCAL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNLocal.findByCompanyIdFetchLocalUsers",
+   "query": "SELECT local FROM FDNLocal local LEFT JOIN FETCH local.localUsers WHERE local.id = :id AND local.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.local.entity.FDNLocal",
+   "source_file": "com/fluig/local/entity/FDNLocal.java",
+   "owner_table": "FDN_LOCAL",
+   "tables": [
+    "FDN_LOCAL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNLocal.findByCompanyIdWithUsers",
+   "query": "SELECT local FROM FDNLocal local LEFT JOIN FETCH local.localUsers WHERE local.id = :id AND local.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.local.entity.FDNLocal",
+   "source_file": "com/fluig/local/entity/FDNLocal.java",
+   "owner_table": "FDN_LOCAL",
+   "tables": [
+    "FDN_LOCAL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNLocal.findByCompanyIdAndName",
+   "query": "SELECT local FROM FDNLocal local WHERE local.companyId = :companyId AND local.name = :name",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.local.entity.FDNLocal",
+   "source_file": "com/fluig/local/entity/FDNLocal.java",
+   "owner_table": "FDN_LOCAL",
+   "tables": [
+    "FDN_LOCAL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNLocal.findByCompanyIdAndNameWithoutId",
+   "query": "SELECT local FROM FDNLocal local WHERE local.id != :id AND local.companyId = :companyId AND local.name = :name",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.local.entity.FDNLocal",
+   "source_file": "com/fluig/local/entity/FDNLocal.java",
+   "owner_table": "FDN_LOCAL",
+   "tables": [
+    "FDN_LOCAL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNLocal.findAllByCompanyId",
+   "query": "SELECT local FROM FDNLocal local WHERE local.companyId = :companyId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.local.entity.FDNLocal",
+   "source_file": "com/fluig/local/entity/FDNLocal.java",
+   "owner_table": "FDN_LOCAL",
+   "tables": [
+    "FDN_LOCAL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "FDNLocal.findDefaultByCompanyId",
+   "query": "SELECT local FROM FDNLocal local WHERE local.companyId = :companyId AND local.defaultLocale = true",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.fluig.local.entity.FDNLocal",
+   "source_file": "com/fluig/local/entity/FDNLocal.java",
+   "owner_table": "FDN_LOCAL",
+   "tables": [
+    "FDN_LOCAL"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "ID",

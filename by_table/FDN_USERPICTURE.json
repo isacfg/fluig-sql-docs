@@ -18,6 +18,26 @@
  "jpa_entities": [
   "com.totvs.technology.foundation.security.entity.FDNUserPicture"
  ],
+ "observed_queries": [
+  {
+   "name": "FDNUserPicture.findByUserTenantId",
+   "query": "SELECT b FROM FDNUserPicture b WHERE b.user.id = :userTenantId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.foundation.security.entity.FDNUserPicture",
+   "source_file": "com/totvs/technology/foundation/security/entity/FDNUserPicture.java",
+   "owner_table": "FDN_USERPICTURE",
+   "tables": [
+    "FDN_USERPICTURE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "USERPICTURE_ID",

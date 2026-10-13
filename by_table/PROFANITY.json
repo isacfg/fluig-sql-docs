@@ -18,6 +18,26 @@
  "jpa_entities": [
   "com.totvs.technology.social.profanityfilter.entity.Profanity"
  ],
+ "observed_queries": [
+  {
+   "name": "FIND_BY_TENANT_ID",
+   "query": "select profanity from Profanity profanity where profanity.tenantId=?1",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.profanityfilter.entity.Profanity",
+   "source_file": "com/totvs/technology/social/profanityfilter/entity/Profanity.java",
+   "owner_table": "PROFANITY",
+   "tables": [
+    "PROFANITY"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "ID",

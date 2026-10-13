@@ -14,6 +14,80 @@
  "jpa_entities": [
   "com.totvs.technology.social.sociable.entity.SociableDenouncement"
  ],
+ "observed_queries": [
+  {
+   "name": "SociableDenouncement.list",
+   "query": "SELECT b FROM SociableDenouncement b WHERE sociable.id = :sociableId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.SociableDenouncement",
+   "source_file": "com/totvs/technology/social/sociable/entity/SociableDenouncement.java",
+   "owner_table": "SOCIABLEDENOUNCEMENT",
+   "tables": [
+    "SOCIABLEDENOUNCEMENT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SociableDenouncement.find",
+   "query": "SELECT b FROM SociableDenouncement b WHERE sociable.id = :sociableId AND user.id = :userId",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.SociableDenouncement",
+   "source_file": "com/totvs/technology/social/sociable/entity/SociableDenouncement.java",
+   "owner_table": "SOCIABLEDENOUNCEMENT",
+   "tables": [
+    "SOCIABLEDENOUNCEMENT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SociableDenouncement.mostDenouncedUsers",
+   "query": "select new com.totvs.technology.social.sociable.vo.SociableDenouncementStatisticVO(so.id, so.alias, so.name, count(so.id)) from SociableDenouncement sd, Sociable s, Social so where s.tenantId=:tenantId and sd.sociable.id=s.id and s.user.id=so.id group by so.id, so.alias, so.name order by count(so.id) desc",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.SociableDenouncement",
+   "source_file": "com/totvs/technology/social/sociable/entity/SociableDenouncement.java",
+   "owner_table": "SOCIABLEDENOUNCEMENT",
+   "tables": [
+    "SOCIABLEDENOUNCEMENT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "SociableDenouncement.mostDenouncerUsers",
+   "query": "select new com.totvs.technology.social.sociable.vo.SociableDenouncementStatisticVO(so.id, so.alias, so.name, count(so.id)) from SociableDenouncement sd, Social so where so.tenantId=:tenantId and sd.user.id=so.id group by so.id, so.alias, so.name order by count(so.id) desc",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.social.sociable.entity.SociableDenouncement",
+   "source_file": "com/totvs/technology/social/sociable/entity/SociableDenouncement.java",
+   "owner_table": "SOCIABLEDENOUNCEMENT",
+   "tables": [
+    "SOCIABLEDENOUNCEMENT"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "ID",

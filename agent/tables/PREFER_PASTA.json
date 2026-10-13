@@ -1,0 +1,128 @@
+{
+  "name": "PREFER_PASTA",
+  "domain": "ecm-lists-filters",
+  "purpose": "Preferência de classificação (ordenação) de conteúdo de uma pasta por usuário.",
+  "schema_card": "by_table/PREFER_PASTA.json",
+  "business_concepts": [
+    "ecm-lists-filters",
+    "PREFER_PASTA"
+  ],
+  "grain": {
+    "description": "Preferência de classificação (ordenação) de conteúdo de uma pasta por usuário. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "NR_DOCUMENTO",
+      "NR_VERSAO",
+      "CD_MATRICULA"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/PREFER_PASTA.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0126",
+      "from_table": "PREFER_PASTA",
+      "to_table": "DOCUMENTO",
+      "on": [
+        "PREFER_PASTA.COD_EMPRESA = DOCUMENTO.COD_EMPRESA",
+        "PREFER_PASTA.NR_DOCUMENTO = DOCUMENTO.NR_DOCUMENTO",
+        "PREFER_PASTA.NR_VERSAO = DOCUMENTO.NR_VERSAO",
+        "PREFER_PASTA.CD_MATRICULA = DOCUMENTO.CD_MATRICULA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "NR_DOCUMENTO",
+          "to_column": "NR_DOCUMENTO"
+        },
+        {
+          "from_column": "NR_VERSAO",
+          "to_column": "NR_VERSAO"
+        },
+        {
+          "from_column": "CD_MATRICULA",
+          "to_column": "CD_MATRICULA"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:N",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Heurística; preferências de pasta por usuário referenciam o documento.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0126",
+      "table": "DOCUMENTO",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/PREFER_PASTA.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Preferência de classificação (ordenação) de conteúdo de uma pasta por usuário. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "NR_DOCUMENTO",
+        "NR_VERSAO",
+        "CD_MATRICULA"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

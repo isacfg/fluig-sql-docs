@@ -1,0 +1,38 @@
+[
+  {
+    "name": "DocumentDefaultProperty.findAll",
+    "query": "SELECT d from DocumentDefaultProperty d where d.documentDefaultPropertyPK.companyId = :companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dm.model.DocumentDefaultProperty",
+    "source_file": "com/datasul/technology/webdesk/dm/model/DocumentDefaultProperty.java",
+    "owner_table": "DEFAULT_PROPRIED_DOCTO",
+    "tables": [
+      "DEFAULT_PROPRIED_DOCTO"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "DocumentDefaultProperty.findAllByDocument",
+    "query": "SELECT d FROM DocumentDefaultProperty d WHERE d.documentDefaultPropertyPK.companyId = :companyId AND d.documentDefaultPropertyPK.documentId = :documentId AND d.documentDefaultPropertyPK.version = :version",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.dm.model.DocumentDefaultProperty",
+    "source_file": "com/datasul/technology/webdesk/dm/model/DocumentDefaultProperty.java",
+    "owner_table": "DEFAULT_PROPRIED_DOCTO",
+    "tables": [
+      "DEFAULT_PROPRIED_DOCTO"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

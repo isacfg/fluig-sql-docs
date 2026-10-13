@@ -29,6 +29,44 @@
  "jpa_entities": [
   "com.datasul.technology.webdesk.dm.model.ApprovalMovement"
  ],
+ "observed_queries": [
+  {
+   "name": "ApprovalMovement.findApproversByLevel",
+   "query": "SELECT a FROM ApprovalMovement a WHERE a.approvalMovementPK.companyId = :companyId AND a.approvalMovementPK.documentId = :documentId AND a.approvalMovementPK.version = :version AND a.approvalMovementPK.iterationSequence = :iterationSequence AND a.approvalMovementPK.levelId = :levelId AND a.approved = :approved AND a.analised = :analised",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.ApprovalMovement",
+   "source_file": "com/datasul/technology/webdesk/dm/model/ApprovalMovement.java",
+   "owner_table": "MOVTO_APROVAC",
+   "tables": [
+    "MOVTO_APROVAC"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "ApprovalMovement.findApproversByUser",
+   "query": "SELECT m FROM ApprovalMovement m WHERE m.approvalMovementPK.companyId = :companyId AND m.approvalMovementPK.documentId = :documentId AND m.approvalMovementPK.version = :version AND m.colleagueId = :colleagueId ORDER BY m.approvalMovementPK.iterationSequence DESC, m.approvalMovementPK.movementSequence DESC",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.datasul.technology.webdesk.dm.model.ApprovalMovement",
+   "source_file": "com/datasul/technology/webdesk/dm/model/ApprovalMovement.java",
+   "owner_table": "MOVTO_APROVAC",
+   "tables": [
+    "MOVTO_APROVAC"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "COD_EMPRESA",

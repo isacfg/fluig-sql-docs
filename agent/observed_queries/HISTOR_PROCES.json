@@ -1,0 +1,308 @@
+[
+  {
+    "name": "ProcessHistory.findAll",
+    "query": "SELECT h from ProcessHistory h where h.processHistoryPK.companyId = :companyId",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessHistory",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessHistory.java",
+    "owner_table": "HISTOR_PROCES",
+    "tables": [
+      "HISTOR_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessHistory.findHistoryOrderDesc",
+    "query": "SELECT h from ProcessHistory h WHERE h.processHistoryPK.companyId = :companyId    AND h.processHistoryPK.processInstanceId = :processInstanceId  ORDER BY h.processHistoryPK.movementSequence DESC",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessHistory",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessHistory.java",
+    "owner_table": "HISTOR_PROCES",
+    "tables": [
+      "HISTOR_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessHistory.findFirsProcessHistory",
+    "query": "SELECT h from ProcessHistory h  WHERE h.processHistoryPK.companyId = :tenantId    AND h.processHistoryPK.processInstanceId = :processInstanceId    AND h.processHistoryPK.movementSequence = 1 ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessHistory",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessHistory.java",
+    "owner_table": "HISTOR_PROCES",
+    "tables": [
+      "HISTOR_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessHistory.findProcessHistoryByMovementSequence",
+    "query": "select ph from ProcessHistory ph where ph.processHistoryPK.companyId = :companyId   and ph.processHistoryPK.processInstanceId = :processInstanceId   and ph.processHistoryPK.movementSequence = :movementSequence",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessHistory",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessHistory.java",
+    "owner_table": "HISTOR_PROCES",
+    "tables": [
+      "HISTOR_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessHistory.findSequenceStateByMovementSequence",
+    "query": "select ph.stateSequence from ProcessHistory ph where ph.processHistoryPK.companyId = :companyId   and ph.processHistoryPK.processInstanceId = :processInstanceId   and ph.processHistoryPK.movementSequence in (:movementSequences)",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessHistory",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessHistory.java",
+    "owner_table": "HISTOR_PROCES",
+    "tables": [
+      "HISTOR_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessHistory.findStateSequenceByMovementSequence",
+    "query": "select ph.stateSequence from ProcessHistory ph where ph.processHistoryPK.companyId = :companyId   and ph.processHistoryPK.processInstanceId = :processInstanceId   and ph.processHistoryPK.movementSequence = :movementSequence",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessHistory",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessHistory.java",
+    "owner_table": "HISTOR_PROCES",
+    "tables": [
+      "HISTOR_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessHistory.findProcessHistoryByProcessInstanceIdAndMovementSequence",
+    "query": "select ph from ProcessHistory ph where ph.processHistoryPK.companyId = :companyId   and ph.processHistoryPK.processInstanceId = :processInstanceId   and ph.processHistoryPK.movementSequence = :movementSequence   and ph.active = :active",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessHistory",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessHistory.java",
+    "owner_table": "HISTOR_PROCES",
+    "tables": [
+      "HISTOR_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessHistory.findProcessHistoryByPreviousMovementSequence",
+    "query": "select ph from ProcessHistory ph where ph.processHistoryPK.companyId = :companyId   and ph.processHistoryPK.processInstanceId = :processInstanceId   and ph.previousMovementSequence = :previousMovementSequence   and ph.active = :active",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessHistory",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessHistory.java",
+    "owner_table": "HISTOR_PROCES",
+    "tables": [
+      "HISTOR_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessHistory.findProcessHistory",
+    "query": "select ph from ProcessHistory ph where ph.processHistoryPK.companyId = :companyId   and ph.processHistoryPK.processInstanceId = :processInstanceId   and ph.threadSequence = :threadSequence  ORDER BY ph.processHistoryPK.movementSequence DESC",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessHistory",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessHistory.java",
+    "owner_table": "HISTOR_PROCES",
+    "tables": [
+      "HISTOR_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessHistory.findActiveProcessHistoryByThread",
+    "query": "select ph from ProcessHistory ph where ph.processHistoryPK.companyId = :companyId   and ph.processHistoryPK.processInstanceId = :processInstanceId   and ph.threadSequence = :threadSequence   and ph.active = :active",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessHistory",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessHistory.java",
+    "owner_table": "HISTOR_PROCES",
+    "tables": [
+      "HISTOR_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessHistory.findAllActiveStateSequence",
+    "query": "select ph.stateSequence from ProcessHistory ph where ph.processHistoryPK.companyId = :companyId   and ph.processHistoryPK.processInstanceId = :processInstanceId    and ph.active = :active ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessHistory",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessHistory.java",
+    "owner_table": "HISTOR_PROCES",
+    "tables": [
+      "HISTOR_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessHistory.findActiveProcessHistory",
+    "query": "select ph from ProcessHistory ph where ph.processHistoryPK.companyId = :companyId   and ph.processHistoryPK.processInstanceId = :processInstanceId    and ph.active = :active order by ph.processHistoryPK.movementSequence desc ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessHistory",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessHistory.java",
+    "owner_table": "HISTOR_PROCES",
+    "tables": [
+      "HISTOR_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessHistory.findAllConvertionSequences",
+    "query": "select ph.conversionSequence from ProcessHistory ph where ph.processHistoryPK.companyId = :companyId   and ph.processHistoryPK.processInstanceId = :processInstanceId  AND ph.conversionSequence > 0 ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessHistory",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessHistory.java",
+    "owner_table": "HISTOR_PROCES",
+    "tables": [
+      "HISTOR_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessHistory.findLastProcessHistory",
+    "query": "select ph from ProcessHistory ph where ph.processHistoryPK.companyId = :companyId   and ph.processHistoryPK.processInstanceId = :processInstanceId ORDER BY ph.processHistoryPK.movementSequence DESC",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessHistory",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessHistory.java",
+    "owner_table": "HISTOR_PROCES",
+    "tables": [
+      "HISTOR_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessHistory.findConversionSequenceById",
+    "query": "SELECT ph FROM ProcessHistory ph  WHERE ph.processHistoryPK.companyId = :companyId    AND ph.processHistoryPK.processInstanceId = :processInstanceId    AND ph.processHistoryPK.movementSequence >= :movementSequence    AND ph.conversionSequence IS NOT NULL AND ph.conversionSequence > 0 ",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessHistory",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessHistory.java",
+    "owner_table": "HISTOR_PROCES",
+    "tables": [
+      "HISTOR_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessHistory.findLastStateSequence",
+    "query": "SELECT ph.stateSequence FROM ProcessHistory ph WHERE ph.processHistoryPK.companyId = :companyId AND ph.processHistoryPK.processInstanceId = :processInstanceId ORDER BY ph.processHistoryPK.movementSequence desc",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessHistory",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessHistory.java",
+    "owner_table": "HISTOR_PROCES",
+    "tables": [
+      "HISTOR_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+    "name": "ProcessHistory.countByMovtoDate",
+    "query": "SELECT COUNT(ph) FROM ProcessHistory ph WHERE ph.processHistoryPK.companyId = :companyId AND ph.movementDate BETWEEN :startDate AND :endDate",
+    "native": false,
+    "extraction_status": "literal-or-resolved-constant",
+    "source": "jpa-named-query",
+    "language": "hql",
+    "source_entity": "com.datasul.technology.webdesk.workflow.model.ProcessHistory",
+    "source_file": "com/datasul/technology/webdesk/workflow/model/ProcessHistory.java",
+    "owner_table": "HISTOR_PROCES",
+    "tables": [
+      "HISTOR_PROCES"
+    ],
+    "tables_analysis": "owner-only; referenced entities are not resolved",
+    "filters": [],
+    "joins": [],
+    "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+]

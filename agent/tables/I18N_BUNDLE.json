@@ -1,0 +1,86 @@
+{
+  "name": "I18N_BUNDLE",
+  "domain": "i18n",
+  "purpose": "Bundle de internacionalização: agrupador de locales e literais traduzidos identificado por código.",
+  "schema_card": "by_table/I18N_BUNDLE.json",
+  "business_concepts": [
+    "i18n",
+    "I18N_BUNDLE"
+  ],
+  "grain": {
+    "description": "Bundle de internacionalização: agrupador de locales e literais traduzidos identificado por código. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "BUNDLE_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/I18N_BUNDLE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0715",
+      "table": "I18N_LOCALE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0717",
+      "table": "I18N_RELATED_BUNDLE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0722",
+      "table": "I18N_LOCALE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0726",
+      "table": "I18N_RELATED_BUNDLE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0728",
+      "table": "I18N_RELATED_BUNDLE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": null,
+  "observed_query_count": 0,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Bundle de internacionalização: agrupador de locales e literais traduzidos identificado por código. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "BUNDLE_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

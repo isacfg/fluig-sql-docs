@@ -1,0 +1,245 @@
+{
+  "name": "TAR_WORKFLOW",
+  "domain": "bpm-tarefas",
+  "purpose": "Subtipo de tarefa que liga uma tarefa do gerenciador à movimentação (etapa) de uma instância de processo de workflow.",
+  "schema_card": "by_table/TAR_WORKFLOW.json",
+  "business_concepts": [
+    "bpm-tarefas",
+    "TAR_WORKFLOW"
+  ],
+  "grain": {
+    "description": "Subtipo de tarefa que liga uma tarefa do gerenciador à movimentação (etapa) de uma instância de processo de workflow. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "COD_TAREFA"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/TAR_WORKFLOW.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0976",
+      "from_table": "TAR_WORKFLOW",
+      "to_table": "TAR_CTRAL",
+      "on": [
+        "TAR_WORKFLOW.COD_EMPRESA = TAR_CTRAL.COD_EMPRESA",
+        "TAR_WORKFLOW.COD_TAREFA = TAR_CTRAL.COD_TAREFA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_TAREFA",
+          "to_column": "COD_TAREFA"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Subtipo tarefa de workflow.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0988",
+      "from_table": "TAR_WORKFLOW",
+      "to_table": "TAR_ESFOR",
+      "on": [
+        "TAR_WORKFLOW.COD_EMPRESA = TAR_ESFOR.COD_EMPRESA",
+        "TAR_WORKFLOW.COD_TAREFA = TAR_ESFOR.COD_TAREFA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_TAREFA",
+          "to_column": "COD_TAREFA"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "TAR_WORKFLOW herda de TAR_ESFOR (FK de TAR_WORKFLOW aponta para esta tabela).",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0999",
+      "from_table": "TAR_WORKFLOW",
+      "to_table": "TAR_ESFOR",
+      "on": [
+        "TAR_WORKFLOW.COD_EMPRESA = TAR_ESFOR.COD_EMPRESA",
+        "TAR_WORKFLOW.COD_TAREFA = TAR_ESFOR.COD_TAREFA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_TAREFA",
+          "to_column": "COD_TAREFA"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Tarefa pai na hierarquia JOINED.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1001",
+      "from_table": "TAR_WORKFLOW",
+      "to_table": "HISTOR_PROCES",
+      "on": [
+        "TAR_WORKFLOW.COD_EMPRESA = HISTOR_PROCES.COD_EMPRESA",
+        "TAR_WORKFLOW.NUM_PROCES = HISTOR_PROCES.NUM_PROCES",
+        "TAR_WORKFLOW.NUM_SEQ_MOVTO = HISTOR_PROCES.NUM_SEQ_MOVTO"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "NUM_PROCES",
+          "to_column": "NUM_PROCES"
+        },
+        {
+          "from_column": "NUM_SEQ_MOVTO",
+          "to_column": "NUM_SEQ_MOVTO"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Movimentação do processo; sem FK física.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0976",
+      "table": "TAR_CTRAL",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0988",
+      "table": "TAR_ESFOR",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0999",
+      "table": "TAR_ESFOR",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1001",
+      "table": "HISTOR_PROCES",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/TAR_WORKFLOW.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Subtipo de tarefa que liga uma tarefa do gerenciador à movimentação (etapa) de uma instância de processo de workflow. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "COD_TAREFA"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

@@ -1,0 +1,375 @@
+{
+  "name": "TAR_CTRAL",
+  "domain": "bpm-tarefas",
+  "purpose": "Tabela raiz (herança JOINED, entidade Task) das tarefas do gerenciador de tarefas: um registro por tarefa com dono, prazo e status. Subtipos em TAR_DOCTO, TAR_ESFOR, TAR_PARTIC, TAR_WORKFLOW.",
+  "schema_card": "by_table/TAR_CTRAL.json",
+  "business_concepts": [
+    "bpm-tarefas",
+    "TAR_CTRAL"
+  ],
+  "grain": {
+    "description": "Tabela raiz (herança JOINED, entidade Task) das tarefas do gerenciador de tarefas: um registro por tarefa com dono, prazo e status. Subtipos em TAR_DOCTO, TAR_ESFOR, TAR_PARTIC, TAR_WORKFLOW. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "COD_EMPRESA",
+      "COD_TAREFA"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "COD_EMPRESA",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "COD_EMPRESA",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/TAR_CTRAL.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0969",
+      "from_table": "TAR_CTRAL",
+      "to_table": "TAR_DOCTO",
+      "on": [
+        "TAR_CTRAL.COD_EMPRESA = TAR_DOCTO.COD_EMPRESA",
+        "TAR_CTRAL.COD_TAREFA = TAR_DOCTO.COD_TAREFA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_TAREFA",
+          "to_column": "COD_TAREFA"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Subtipo tarefa de documento.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0971",
+      "from_table": "TAR_CTRAL",
+      "to_table": "TAR_ESFOR",
+      "on": [
+        "TAR_CTRAL.COD_EMPRESA = TAR_ESFOR.COD_EMPRESA",
+        "TAR_CTRAL.COD_TAREFA = TAR_ESFOR.COD_TAREFA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_TAREFA",
+          "to_column": "COD_TAREFA"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Subtipo tarefa de esforço registrado.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0973",
+      "from_table": "TAR_CTRAL",
+      "to_table": "TAR_PARTIC",
+      "on": [
+        "TAR_CTRAL.COD_EMPRESA = TAR_PARTIC.COD_EMPRESA",
+        "TAR_CTRAL.COD_TAREFA = TAR_PARTIC.COD_TAREFA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_TAREFA",
+          "to_column": "COD_TAREFA"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Subtipo tarefa to-do.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0975",
+      "from_table": "TAR_CTRAL",
+      "to_table": "TAR_WORKFLOW",
+      "on": [
+        "TAR_CTRAL.COD_EMPRESA = TAR_WORKFLOW.COD_EMPRESA",
+        "TAR_CTRAL.COD_TAREFA = TAR_WORKFLOW.COD_TAREFA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_TAREFA",
+          "to_column": "COD_TAREFA"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Subtipo tarefa de workflow.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0978",
+      "from_table": "TAR_CTRAL",
+      "to_table": "TAR_DOCTO",
+      "on": [
+        "TAR_CTRAL.COD_EMPRESA = TAR_DOCTO.COD_EMPRESA",
+        "TAR_CTRAL.COD_TAREFA = TAR_DOCTO.COD_TAREFA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_TAREFA",
+          "to_column": "COD_TAREFA"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Tarefa base (herança JOINED).",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0986",
+      "from_table": "TAR_CTRAL",
+      "to_table": "TAR_ESFOR",
+      "on": [
+        "TAR_CTRAL.COD_EMPRESA = TAR_ESFOR.COD_EMPRESA",
+        "TAR_CTRAL.COD_TAREFA = TAR_ESFOR.COD_TAREFA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_TAREFA",
+          "to_column": "COD_TAREFA"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Tarefa base.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0990",
+      "from_table": "TAR_CTRAL",
+      "to_table": "TAR_PARTIC",
+      "on": [
+        "TAR_CTRAL.COD_EMPRESA = TAR_PARTIC.COD_EMPRESA",
+        "TAR_CTRAL.COD_TAREFA = TAR_PARTIC.COD_TAREFA"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COD_EMPRESA",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "COD_TAREFA",
+          "to_column": "COD_TAREFA"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "1:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Tarefa base.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0969",
+      "table": "TAR_DOCTO",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0971",
+      "table": "TAR_ESFOR",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0973",
+      "table": "TAR_PARTIC",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0975",
+      "table": "TAR_WORKFLOW",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0978",
+      "table": "TAR_DOCTO",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0986",
+      "table": "TAR_ESFOR",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0990",
+      "table": "TAR_PARTIC",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "CENTRAL_TC",
+      "unique": false,
+      "columns": [
+        "COD_EMPRESA",
+        "CD_MATRICULA",
+        "IDI_STATUS",
+        "NUM_HRS_CONCLUS_TAR"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/TAR_CTRAL.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Tabela raiz (herança JOINED, entidade Task) das tarefas do gerenciador de tarefas: um registro por tarefa com dono, prazo e status. Subtipos em TAR_DOCTO, TAR_ESFOR, TAR_PARTIC, TAR_WORKFLOW. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "COD_EMPRESA",
+        "COD_TAREFA"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "COD_EMPRESA",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

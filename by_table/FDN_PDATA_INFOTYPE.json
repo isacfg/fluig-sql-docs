@@ -14,6 +14,7 @@
  "jpa_entities": [
   "com.totvs.technology.foundation.security.entity.FDNPersonalDataInfoType"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "INFORMATION_TYPE_ID",

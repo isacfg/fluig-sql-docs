@@ -14,6 +14,7 @@
  "jpa_entities": [
   "com.fluig.foundation.scheduler.entity.quartz.QrtzFiredTriggers"
  ],
+ "observed_queries": [],
  "columns": [
   {
    "name": "ENTRY_ID",

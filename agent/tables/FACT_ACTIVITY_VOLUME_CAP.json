@@ -1,0 +1,363 @@
+{
+  "name": "FACT_ACTIVITY_VOLUME_CAP",
+  "domain": "bpm-analytics-dw",
+  "purpose": "Fato de volume de tarefas por atividade, dia e usuário: abertas/concluídas/canceladas, dentro/fora do prazo.",
+  "schema_card": "by_table/FACT_ACTIVITY_VOLUME_CAP.json",
+  "business_concepts": [
+    "bpm-analytics-dw",
+    "FACT_ACTIVITY_VOLUME_CAP"
+  ],
+  "grain": {
+    "description": "Fato de volume de tarefas por atividade, dia e usuário: abertas/concluídas/canceladas, dentro/fora do prazo. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ACTIVITYID",
+      "COMPANYID",
+      "DAYID",
+      "MONTHID",
+      "PROCESSID",
+      "PROCESSVERSION",
+      "USERSEQUENCE",
+      "YEARID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FACT_ACTIVITY_VOLUME_CAP.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0313",
+      "from_table": "FACT_ACTIVITY_VOLUME_CAP",
+      "to_table": "ACTIVITY_DIM_CAP",
+      "on": [
+        "FACT_ACTIVITY_VOLUME_CAP.ACTIVITYID = ACTIVITY_DIM_CAP.ACTIVITYID",
+        "FACT_ACTIVITY_VOLUME_CAP.COMPANYID = ACTIVITY_DIM_CAP.COMPANYID",
+        "FACT_ACTIVITY_VOLUME_CAP.PROCESSID = ACTIVITY_DIM_CAP.PROCESSID",
+        "FACT_ACTIVITY_VOLUME_CAP.PROCESSVERSION = ACTIVITY_DIM_CAP.PROCESSVERSION"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "ACTIVITYID",
+          "to_column": "ACTIVITYID"
+        },
+        {
+          "from_column": "COMPANYID",
+          "to_column": "COMPANYID"
+        },
+        {
+          "from_column": "PROCESSID",
+          "to_column": "PROCESSID"
+        },
+        {
+          "from_column": "PROCESSVERSION",
+          "to_column": "PROCESSVERSION"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Atividade da versão do processo a que o fato se refere.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0315",
+      "from_table": "FACT_ACTIVITY_VOLUME_CAP",
+      "to_table": "FACT_PROCES_COST_CAP",
+      "on": [
+        "FACT_ACTIVITY_VOLUME_CAP.COMPANYID = FACT_PROCES_COST_CAP.COMPANYID",
+        "FACT_ACTIVITY_VOLUME_CAP.DAYID = FACT_PROCES_COST_CAP.DAYID",
+        "FACT_ACTIVITY_VOLUME_CAP.MONTHID = FACT_PROCES_COST_CAP.MONTHID",
+        "FACT_ACTIVITY_VOLUME_CAP.PROCESSID = FACT_PROCES_COST_CAP.PROCESSID",
+        "FACT_ACTIVITY_VOLUME_CAP.PROCESSVERSION = FACT_PROCES_COST_CAP.PROCESSVERSION",
+        "FACT_ACTIVITY_VOLUME_CAP.USERSEQUENCE = FACT_PROCES_COST_CAP.USERSEQUENCE",
+        "FACT_ACTIVITY_VOLUME_CAP.YEARID = FACT_PROCES_COST_CAP.YEARID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COMPANYID",
+          "to_column": "COMPANYID"
+        },
+        {
+          "from_column": "DAYID",
+          "to_column": "DAYID"
+        },
+        {
+          "from_column": "MONTHID",
+          "to_column": "MONTHID"
+        },
+        {
+          "from_column": "PROCESSID",
+          "to_column": "PROCESSID"
+        },
+        {
+          "from_column": "PROCESSVERSION",
+          "to_column": "PROCESSVERSION"
+        },
+        {
+          "from_column": "USERSEQUENCE",
+          "to_column": "USERSEQUENCE"
+        },
+        {
+          "from_column": "YEARID",
+          "to_column": "YEARID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Mesmo dia/processo/versão/usuário no fato de nível de processo; grão diferente (atividade vs processo), útil para drill-down, sem FK.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0317",
+      "from_table": "FACT_ACTIVITY_VOLUME_CAP",
+      "to_table": "FACT_PROCES_VOLUME_CAP",
+      "on": [
+        "FACT_ACTIVITY_VOLUME_CAP.COMPANYID = FACT_PROCES_VOLUME_CAP.COMPANYID",
+        "FACT_ACTIVITY_VOLUME_CAP.DAYID = FACT_PROCES_VOLUME_CAP.DAYID",
+        "FACT_ACTIVITY_VOLUME_CAP.MONTHID = FACT_PROCES_VOLUME_CAP.MONTHID",
+        "FACT_ACTIVITY_VOLUME_CAP.PROCESSID = FACT_PROCES_VOLUME_CAP.PROCESSID",
+        "FACT_ACTIVITY_VOLUME_CAP.PROCESSVERSION = FACT_PROCES_VOLUME_CAP.PROCESSVERSION",
+        "FACT_ACTIVITY_VOLUME_CAP.USERSEQUENCE = FACT_PROCES_VOLUME_CAP.USERSEQUENCE",
+        "FACT_ACTIVITY_VOLUME_CAP.YEARID = FACT_PROCES_VOLUME_CAP.YEARID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COMPANYID",
+          "to_column": "COMPANYID"
+        },
+        {
+          "from_column": "DAYID",
+          "to_column": "DAYID"
+        },
+        {
+          "from_column": "MONTHID",
+          "to_column": "MONTHID"
+        },
+        {
+          "from_column": "PROCESSID",
+          "to_column": "PROCESSID"
+        },
+        {
+          "from_column": "PROCESSVERSION",
+          "to_column": "PROCESSVERSION"
+        },
+        {
+          "from_column": "USERSEQUENCE",
+          "to_column": "USERSEQUENCE"
+        },
+        {
+          "from_column": "YEARID",
+          "to_column": "YEARID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Mesmo dia/processo/versão/usuário no fato de nível de processo; grão diferente (atividade vs processo), útil para drill-down, sem FK.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0319",
+      "from_table": "FACT_ACTIVITY_VOLUME_CAP",
+      "to_table": "TIME_DIM_CAP",
+      "on": [
+        "FACT_ACTIVITY_VOLUME_CAP.COMPANYID = TIME_DIM_CAP.COMPANYID",
+        "FACT_ACTIVITY_VOLUME_CAP.DAYID = TIME_DIM_CAP.DAYID",
+        "FACT_ACTIVITY_VOLUME_CAP.MONTHID = TIME_DIM_CAP.MONTHID",
+        "FACT_ACTIVITY_VOLUME_CAP.YEARID = TIME_DIM_CAP.YEARID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COMPANYID",
+          "to_column": "COMPANYID"
+        },
+        {
+          "from_column": "DAYID",
+          "to_column": "DAYID"
+        },
+        {
+          "from_column": "MONTHID",
+          "to_column": "MONTHID"
+        },
+        {
+          "from_column": "YEARID",
+          "to_column": "YEARID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Dia do snapshot na dimensão de tempo (relação lógica, sem FK).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0321",
+      "from_table": "FACT_ACTIVITY_VOLUME_CAP",
+      "to_table": "USER_DIM_CAP",
+      "on": [
+        "FACT_ACTIVITY_VOLUME_CAP.COMPANYID = USER_DIM_CAP.COMPANYID",
+        "FACT_ACTIVITY_VOLUME_CAP.USERSEQUENCE = USER_DIM_CAP.USERSEQUENCE"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "COMPANYID",
+          "to_column": "COMPANYID"
+        },
+        {
+          "from_column": "USERSEQUENCE",
+          "to_column": "USERSEQUENCE"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "probable",
+      "source_kind": "logical-probable",
+      "evidence": "Usuário na dimensão (relação lógica, sem FK).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": false,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Relationship is probable; disclose this assumption and verify on the instance."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0313",
+      "table": "ACTIVITY_DIM_CAP",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0315",
+      "table": "FACT_PROCES_COST_CAP",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0317",
+      "table": "FACT_PROCES_VOLUME_CAP",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0319",
+      "table": "TIME_DIM_CAP",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0321",
+      "table": "USER_DIM_CAP",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0323",
+      "table": "FDN_USERTENANT",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FACT_ACTIVITY_VOLUME_CAP.json",
+  "observed_query_count": 2,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Fato de volume de tarefas por atividade, dia e usuário: abertas/concluídas/canceladas, dentro/fora do prazo. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ACTIVITYID",
+        "COMPANYID",
+        "DAYID",
+        "MONTHID",
+        "PROCESSID",
+        "PROCESSVERSION",
+        "USERSEQUENCE",
+        "YEARID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

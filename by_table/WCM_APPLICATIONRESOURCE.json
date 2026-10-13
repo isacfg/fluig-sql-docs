@@ -20,6 +20,62 @@
  "jpa_entities": [
   "com.totvs.technology.wcm.core.entity.WCMApplicationResource"
  ],
+ "observed_queries": [
+  {
+   "name": "WCMApplicationResource.findAll",
+   "query": "SELECT b FROM WCMApplicationResource b",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationResource",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationResource.java",
+   "owner_table": "WCM_APPLICATIONRESOURCE",
+   "tables": [
+    "WCM_APPLICATIONRESOURCE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMApplicationResource.findById",
+   "query": "SELECT b FROM WCMApplicationResource b WHERE b.id = :id",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationResource",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationResource.java",
+   "owner_table": "WCM_APPLICATIONRESOURCE",
+   "tables": [
+    "WCM_APPLICATIONRESOURCE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  },
+  {
+   "name": "WCMApplicationResource.findByApplication",
+   "query": "SELECT b FROM WCMApplicationResource b WHERE b.application.id = :appId ORDER BY order",
+   "native": false,
+   "extraction_status": "literal-or-resolved-constant",
+   "source": "jpa-named-query",
+   "language": "hql",
+   "source_entity": "com.totvs.technology.wcm.core.entity.WCMApplicationResource",
+   "source_file": "com/totvs/technology/wcm/core/entity/WCMApplicationResource.java",
+   "owner_table": "WCM_APPLICATIONRESOURCE",
+   "tables": [
+    "WCM_APPLICATIONRESOURCE"
+   ],
+   "tables_analysis": "owner-only; referenced entities are not resolved",
+   "filters": [],
+   "joins": [],
+   "analysis_status": "unparsed-source; not a canonical SQL recipe"
+  }
+ ],
  "columns": [
   {
    "name": "APPLICATION_RESOURCE_ID",

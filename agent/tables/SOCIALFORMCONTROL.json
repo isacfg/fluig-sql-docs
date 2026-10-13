@@ -1,0 +1,65 @@
+{
+  "name": "SOCIALFORMCONTROL",
+  "domain": "social-forms",
+  "purpose": "Controle de formulário/enquete social vinculado a um documento do ECM, com hash e versão do formulário.",
+  "schema_card": "by_table/SOCIALFORMCONTROL.json",
+  "business_concepts": [
+    "social-forms",
+    "SOCIALFORMCONTROL"
+  ],
+  "grain": {
+    "description": "Controle de formulário/enquete social vinculado a um documento do ECM, com hash e versão do formulário. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "id"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/SOCIALFORMCONTROL.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [],
+  "join_effects": [
+    {
+      "join_id": "join-0660",
+      "table": "FIELD",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0937",
+      "table": "DOCUMENTO",
+      "cardinality": "N:unknown",
+      "multiplies_rows": null,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/SOCIALFORMCONTROL.json",
+  "observed_query_count": 1,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Controle de formulário/enquete social vinculado a um documento do ECM, com hash e versão do formulário. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "id"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

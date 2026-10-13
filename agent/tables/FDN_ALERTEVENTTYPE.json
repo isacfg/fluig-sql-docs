@@ -1,0 +1,229 @@
+{
+  "name": "FDN_ALERTEVENTTYPE",
+  "domain": "foundation-alert",
+  "purpose": "Catalogo de tipos de evento de alerta (ex.: tarefa atribuida) por tenant e modulo, com chaves i18n e regras de agrupamento/remocao.",
+  "schema_card": "by_table/FDN_ALERTEVENTTYPE.json",
+  "business_concepts": [
+    "foundation-alert",
+    "FDN_ALERTEVENTTYPE"
+  ],
+  "grain": {
+    "description": "Catalogo de tipos de evento de alerta (ex.: tarefa atribuida) por tenant e modulo, com chaves i18n e regras de agrupamento/remocao. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/FDN_ALERTEVENTTYPE.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-0393",
+      "from_table": "FDN_ALERTEVENTTYPE",
+      "to_table": "FDN_ALERTMODULE",
+      "on": [
+        "FDN_ALERTEVENTTYPE.TENANT_ID = FDN_ALERTMODULE.TENANT_ID",
+        "FDN_ALERTEVENTTYPE.MODULE_ID = FDN_ALERTMODULE.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "MODULE_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Modulo do evento.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0395",
+      "from_table": "FDN_ALERTEVENTTYPE",
+      "to_table": "FDN_TENANT",
+      "on": [
+        "FDN_ALERTEVENTTYPE.TENANT_ID = FDN_TENANT.TENANT_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Tenant.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-0402",
+      "from_table": "FDN_ALERTEVENTTYPE",
+      "to_table": "FDN_ALERTMODULE",
+      "on": [
+        "FDN_ALERTEVENTTYPE.TENANT_ID = FDN_ALERTMODULE.TENANT_ID",
+        "FDN_ALERTEVENTTYPE.MODULE_ID = FDN_ALERTMODULE.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "TENANT_ID"
+        },
+        {
+          "from_column": "MODULE_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Eventos do modulo.",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": true,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [
+        "Same-name tenant equality added by planning policy; not copied from the original relationship."
+      ],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0368",
+      "table": "FDN_ALERT",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0388",
+      "table": "FDN_ALERTCONFIG",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0393",
+      "table": "FDN_ALERTMODULE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0395",
+      "table": "FDN_TENANT",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0402",
+      "table": "FDN_ALERTMODULE",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [
+    {
+      "name": "INDEX_ALERT_EVENT_KEY",
+      "unique": false,
+      "columns": [
+        "EVENT_KEY"
+      ]
+    },
+    {
+      "name": "FK_RKD6KYG1IDFUYKTLIUH39DE94",
+      "unique": false,
+      "columns": [
+        "MODULE_ID"
+      ]
+    },
+    {
+      "name": "FK_KFIDX71UOO2CKUOX01CM9Y1X1",
+      "unique": false,
+      "columns": [
+        "TENANT_ID"
+      ]
+    }
+  ],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/FDN_ALERTEVENTTYPE.json",
+  "observed_query_count": 8,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Catalogo de tipos de evento de alerta (ex.: tarefa atribuida) por tenant e modulo, com chaves i18n e regras de agrupamento/remocao. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}

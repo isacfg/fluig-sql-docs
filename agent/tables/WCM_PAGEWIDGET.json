@@ -1,0 +1,177 @@
+{
+  "name": "WCM_PAGEWIDGET",
+  "domain": "wcm-portal-pages",
+  "purpose": "Posicionamento de um widget (aplicação WCM) em um slot de uma versão de página.",
+  "schema_card": "by_table/WCM_PAGEWIDGET.json",
+  "business_concepts": [
+    "wcm-portal-pages",
+    "WCM_PAGEWIDGET"
+  ],
+  "grain": {
+    "description": "Posicionamento de um widget (aplicação WCM) em um slot de uma versão de página. Stored-row grain follows the declared primary key; business grain needs review.",
+    "columns": [
+      "PAGE_WIDGET_ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "structural-only",
+    "business_grain_reviewed": false
+  },
+  "tenant": {
+    "column": null,
+    "required": false,
+    "scope": "no-direct-tenant-column; determine ownership via related scoped tables"
+  },
+  "required_filters": [],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/WCM_PAGEWIDGET.json: primary_key; lifecycle; key_notes; notes_for_agents",
+  "canonical_joins": [
+    {
+      "id": "join-1102",
+      "from_table": "WCM_PAGEWIDGET",
+      "to_table": "WCM_PAGEVERSION",
+      "on": [
+        "WCM_PAGEWIDGET.PAGEVERSION_ID = WCM_PAGEVERSION.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "PAGEVERSION_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "1:N",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Widgets posicionados nesta versão (OneToMany mappedBy pageVersion).",
+      "direction": "reverse",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1105",
+      "from_table": "WCM_PAGEWIDGET",
+      "to_table": "WCM_PAGEVERSION",
+      "on": [
+        "WCM_PAGEWIDGET.PAGEVERSION_ID = WCM_PAGEVERSION.ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "PAGEVERSION_ID",
+          "to_column": "ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Versão da página dona do widget.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    },
+    {
+      "id": "join-1107",
+      "from_table": "WCM_PAGEWIDGET",
+      "to_table": "WCM_APPLICATION",
+      "on": [
+        "WCM_PAGEWIDGET.WIDGET_ID = WCM_APPLICATION.APPLICATION_ID"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "WIDGET_ID",
+          "to_column": "APPLICATION_ID"
+        }
+      ],
+      "cardinality": "N:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "physical-fk",
+      "evidence": "Aplicação/widget colocado no slot.",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-1046",
+      "table": "WCM_APPLICATIONDATA",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1056",
+      "table": "WCM_APPLICATIONUSERDATA",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-1102",
+      "table": "WCM_PAGEVERSION",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1105",
+      "table": "WCM_PAGEVERSION",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-1107",
+      "table": "WCM_APPLICATION",
+      "cardinality": "N:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [],
+  "observed_queries_path": "agent/observed_queries/WCM_PAGEWIDGET.json",
+  "observed_query_count": 16,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Posicionamento de um widget (aplicação WCM) em um slot de uma versão de página. Stored-row grain follows the declared primary key; business grain needs review.",
+      "columns": [
+        "PAGE_WIDGET_ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "structural-only",
+      "business_grain_reviewed": false
+    },
+    "required_filters": [],
+    "canonical_filters": {}
+  }
+}

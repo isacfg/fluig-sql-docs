@@ -1,0 +1,278 @@
+{
+  "name": "ECM_METADATA_FORM",
+  "domain": "ecm-metadata-forms",
+  "purpose": "Cabeçalho de um formulário de metadados do ECM Fluig (tipo de documento com campos configuráveis, 'metadata form'). Uma linha por versão do formulário, ligada a um documento ECM.",
+  "schema_card": "by_table/ECM_METADATA_FORM.json",
+  "business_concepts": [
+    "formulário de metadados",
+    "metadata form"
+  ],
+  "grain": {
+    "description": "Uma versão de formulário de metadados, com ID e UNIQUE (TENANT_ID, DOCUMENT_ID, DCMNT_VRSN_NMBER).",
+    "columns": [
+      "ID"
+    ],
+    "basis": "declared-primary-key",
+    "confidence": "reviewed-schema-description",
+    "business_grain_reviewed": true
+  },
+  "tenant": {
+    "column": "TENANT_ID",
+    "required": true,
+    "scope": "direct"
+  },
+  "required_filters": [
+    {
+      "column": "TENANT_ID",
+      "operator": "=",
+      "parameter": "tenant_id",
+      "reason": "tenant isolation",
+      "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+    }
+  ],
+  "canonical_filters": {},
+  "semantic_evidence": "by_table/ECM_METADATA_FORM.json: purpose; lifecycle; key_notes; notes_for_agents; columns.values",
+  "canonical_joins": [
+    {
+      "id": "join-0201",
+      "from_table": "ECM_METADATA_FORM",
+      "to_table": "DOCUMENTO",
+      "on": [
+        "ECM_METADATA_FORM.TENANT_ID = DOCUMENTO.COD_EMPRESA",
+        "ECM_METADATA_FORM.DOCUMENT_ID = DOCUMENTO.NR_DOCUMENTO",
+        "ECM_METADATA_FORM.DCMNT_VRSN_NMBER = DOCUMENTO.NR_VERSAO"
+      ],
+      "column_pairs": [
+        {
+          "from_column": "TENANT_ID",
+          "to_column": "COD_EMPRESA"
+        },
+        {
+          "from_column": "DOCUMENT_ID",
+          "to_column": "NR_DOCUMENTO"
+        },
+        {
+          "from_column": "DCMNT_VRSN_NMBER",
+          "to_column": "NR_VERSAO"
+        }
+      ],
+      "cardinality": "1:1",
+      "observed_cardinality": "N:1",
+      "confidence": "confirmed",
+      "source_kind": "jpa-join",
+      "evidence": "Documento ECM (formulário) associado a esta versão (FK_METDTFORM_DCMNT, @ManyToOne Document).",
+      "direction": "forward",
+      "tenant_complete": true,
+      "tenant_policy_added": false,
+      "destination_unique": true,
+      "safe": true,
+      "preserves_grain": true,
+      "row_multiplication_risk": false,
+      "aggregation_warning": false,
+      "warnings": [],
+      "superseded_by": [],
+      "canonical": true
+    }
+  ],
+  "join_effects": [
+    {
+      "join_id": "join-0132",
+      "table": "ECM_ABSTRACT_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0136",
+      "table": "ECM_BUTTON_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0152",
+      "table": "ECM_DATE_FIELD_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0156",
+      "table": "ECM_DIVIDER_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0162",
+      "table": "ECM_DYNAMIC_TABLE_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0166",
+      "table": "ECM_EVALUATION_FIELD_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0170",
+      "table": "ECM_EXTERNAL_LINK_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0176",
+      "table": "ECM_FIXED_TABLE_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0188",
+      "table": "ECM_IMAGE_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0194",
+      "table": "ECM_LABEL_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0198",
+      "table": "ECM_LIST_FIELD_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0201",
+      "table": "DOCUMENTO",
+      "cardinality": "1:1",
+      "multiplies_rows": false,
+      "aggregation_warning": false
+    },
+    {
+      "join_id": "join-0203",
+      "table": "ECM_METADATA_FORM_TRANSLATE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0205",
+      "table": "ECM_ABSTRACT_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0208",
+      "table": "ECM_METADATA_FORM_TRANSLATE",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0210",
+      "table": "ECM_NUMBER_FIELD_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0214",
+      "table": "ECM_SECTION_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0218",
+      "table": "ECM_TAB_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0226",
+      "table": "ECM_TEXT_AREA_FIELD_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0230",
+      "table": "ECM_TEXT_FIELD_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0234",
+      "table": "ECM_TITLE_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0238",
+      "table": "ECM_UPLOAD_FILE_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0244",
+      "table": "ECM_ZOOM_FIELD_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    },
+    {
+      "join_id": "join-0260",
+      "table": "ECM_ZOOM_USER_FORM_ITEM",
+      "cardinality": "1:N",
+      "multiplies_rows": true,
+      "aggregation_warning": true
+    }
+  ],
+  "deprecated_columns": [],
+  "preferred_columns": {},
+  "lob_columns": [],
+  "indexes": [],
+  "query_examples": [
+    "recipes/forms/metadata_form_versions.sql"
+  ],
+  "observed_queries_path": "agent/observed_queries/ECM_METADATA_FORM.json",
+  "observed_query_count": 12,
+  "warnings": [],
+  "query_semantics": {
+    "grain": {
+      "description": "Uma versão de formulário de metadados, com ID e UNIQUE (TENANT_ID, DOCUMENT_ID, DCMNT_VRSN_NMBER).",
+      "columns": [
+        "ID"
+      ],
+      "basis": "declared-primary-key",
+      "confidence": "reviewed-schema-description",
+      "business_grain_reviewed": true
+    },
+    "required_filters": [
+      {
+        "column": "TENANT_ID",
+        "operator": "=",
+        "parameter": "tenant_id",
+        "reason": "tenant isolation",
+        "exceptions": "Cross-tenant administration requires an explicit, authorized scope."
+      }
+    ],
+    "canonical_filters": {}
+  }
+}
