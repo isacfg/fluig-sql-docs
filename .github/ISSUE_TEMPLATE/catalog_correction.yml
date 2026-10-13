@@ -1,0 +1,32 @@
+name: Correção do catálogo
+description: Corrigir grain, filtros, colunas, relações ou recipes.
+title: '[Catálogo] '
+body:
+  - type: input
+    id: tables
+    attributes:
+      label: Tabelas, colunas ou recipe
+      placeholder: TAR_PROCES, PROCES_WORKFLOW ou workflow/pending_tasks_by_user
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Versão e banco
+      placeholder: Fluig 1.8.2, MySQL; indique hotfix quando relevante.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Comportamento atual e correção proposta
+      description: Explique o efeito em grain, tenant, versões e multiplicação de linhas.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidência reproduzível
+      description: DDL mínimo, constraint, referência ou verificação com dados sintéticos. Não envie dados de produção ou materiais sem direito de redistribuição.
+    validations:
+      required: true

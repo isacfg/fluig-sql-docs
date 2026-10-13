@@ -4,7 +4,7 @@
  "module": "02001-fluig-database-ecm",
  "purpose": "Dimensão de tempo (calendário): uma linha por dia com data completa, feriado e dia da semana.",
  "lifecycle": "Populada pela extração do CAP; volume = dias x empresas.",
- "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.",
+ "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.",
  "notes_for_agents": "Sempre filtrar por COMPANYID. Para agregar por período use YEARID/MONTHID/DAYID ou junte com TIME_DIM_CAP. Linhas de fato são snapshots (use o snapshot mais recente/um dia específico para não somar duplicado).",
  "primary_key": [
   "COMPANYID",

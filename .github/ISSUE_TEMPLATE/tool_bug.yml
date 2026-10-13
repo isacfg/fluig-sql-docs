@@ -1,0 +1,23 @@
+name: Problema nas ferramentas
+description: Falha de geração, parsing ou validação SQL.
+title: '[Ferramentas] '
+body:
+  - type: input
+    id: commit
+    attributes:
+      label: Commit e versão do Python
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Como reproduzir
+      description: Informe comando, query ou fixture mínima. Use parâmetros e dados sintéticos; remova credenciais e informações pessoais.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Resultado observado e esperado
+    validations:
+      required: true

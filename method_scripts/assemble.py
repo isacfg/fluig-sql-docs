@@ -44,6 +44,11 @@ def normalize_user_refs(value):
     if isinstance(value, dict): return {k: (v if k == 'observed_queries' else normalize_user_refs(v)) for k, v in value.items()}
     return value
 final = normalize_user_refs(final)
+# Reviewed catalog annotations override enrichment output deterministically.
+with open(os.path.join(os.path.dirname(__file__), 'catalog_overrides.json'), encoding='utf-8') as source:
+    annotations = json.load(source)
+for name, fields in annotations.items():
+    final[name].update(fields)
 # post-fix of invalid agent edges
 for n, t in final.items():
     keep = []
@@ -64,7 +69,7 @@ for n, t in final.items():
         if x is not None: x['referenced_by'].append(dict(from_table=n, from_cols=r['from_cols'], to_cols=r['to_cols'], cardinality=r['cardinality'], kind=r['kind']))
 print('column gaps', len(gaps), gaps[:10])
 os.makedirs(OUT + '/by_table', exist_ok=True); os.makedirs(OUT + '/domains', exist_ok=True)
-json.dump(dict(generated_from='TOTVS Fluig 1.8.2 (DDL MySQL de createtable + entidades JPA decompiladas)', tables=final), open(OUT + '/schema.json', 'w'), indent=1, ensure_ascii=False)
+json.dump(dict(generated_from='TOTVS Fluig 1.8.2 (DDL MySQL de createtable + mapeamentos JPA)', tables=final), open(OUT + '/schema.json', 'w'), indent=1, ensure_ascii=False)
 for n, t in final.items(): json.dump(t, open(f'{OUT}/by_table/{n}.json', 'w'), indent=1, ensure_ascii=False)
 esc = lambda s: (s or '').replace('|', '\\|').replace('\n', ' ')
 doms = collections.defaultdict(list)

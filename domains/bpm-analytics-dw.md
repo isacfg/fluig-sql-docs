@@ -8,7 +8,7 @@ Dimensão (modelo estrela do CAP, analytics de BPM) com as atividades de cada ve
 
 **Ciclo de vida:** Populada/regravada pela extração de dados do CAP (CAPDataExtractorBI) a partir das definições de processo; volume = atividades x versões.
 
-**Atenção:** Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.
+**Atenção:** Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.
 
 **PK:** ACTIVITYID, COMPANYID, PROCESSID, PROCESSVERSION
 
@@ -34,7 +34,7 @@ Fato de custo, esforço e prazo por atividade, dia e usuário (planejado/baselin
 
 **Ciclo de vida:** Linhas geradas por snapshot diário (named query findDateLastSnapShot busca a última data) pela extração do CAP; cresce por dia x atividade x usuário.
 
-**Atenção:** Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.
+**Atenção:** Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.
 
 **PK:** ACTIVITYID, COMPANYID, DAYID, MONTHID, PROCESSID, PROCESSVERSION, USERSEQUENCE, YEARID
 
@@ -89,7 +89,7 @@ Fato de volume de tarefas por atividade, dia e usuário: abertas/concluídas/can
 
 **Ciclo de vida:** Snapshot diário gerado pela extração do CAP; crescimento por dia x atividade x usuário.
 
-**Atenção:** Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.
+**Atenção:** Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.
 
 **PK:** ACTIVITYID, COMPANYID, DAYID, MONTHID, PROCESSID, PROCESSVERSION, USERSEQUENCE, YEARID
 
@@ -130,7 +130,7 @@ Fato de volume de transições entre atividades (fluxos normais vs retornos) por
 
 **Ciclo de vida:** Snapshot diário gerado pela extração do CAP.
 
-**Atenção:** Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.
+**Atenção:** Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.
 
 **PK:** COMPANYID, DAYID, MONTHID, PROCESSID, PROCESSVERSION, SOURCEACTIVITY, TARGETACTIVITY, USERSEQUENCE, YEARID
 
@@ -169,7 +169,7 @@ Fato de custo/esforço por processo, dia e usuário (baseline vs realizado) para
 
 **Ciclo de vida:** Snapshot diário gerado pela extração do CAP.
 
-**Atenção:** Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.
+**Atenção:** Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.
 
 **PK:** COMPANYID, DAYID, MONTHID, PROCESSID, PROCESSVERSION, USERSEQUENCE, YEARID
 
@@ -214,7 +214,7 @@ Fato de volume de processos por dia e usuário: em aberto/concluídos dentro e f
 
 **Ciclo de vida:** Snapshot diário gerado pela extração do CAP (named query findDateLastSnapShot).
 
-**Atenção:** Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.
+**Atenção:** Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.
 
 **PK:** COMPANYID, DAYID, MONTHID, PROCESSID, PROCESSVERSION, USERSEQUENCE, YEARID
 
@@ -250,7 +250,7 @@ Dimensão de fluxos (transições origem->destino entre atividades) de cada vers
 
 **Ciclo de vida:** Populada pela extração do CAP a partir da definição do processo.
 
-**Atenção:** Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.
+**Atenção:** Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.
 
 **PK:** COMPANYID, PROCESSID, PROCESSVERSION, SOURCEACTIVITY, TARGETACTIVITY
 
@@ -277,7 +277,7 @@ Dimensão de versões de processos com a janela de vigência (início/fim em dia
 
 **Ciclo de vida:** Populada pela extração do CAP; uma linha por versão de processo e empresa.
 
-**Atenção:** Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.
+**Atenção:** Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.
 
 **PK:** COMPANYID, PROCESSID, PROCESSVERSION
 
@@ -301,7 +301,7 @@ Dimensão de tempo (calendário): uma linha por dia com data completa, feriado e
 
 **Ciclo de vida:** Populada pela extração do CAP; volume = dias x empresas.
 
-**Atenção:** Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.
+**Atenção:** Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.
 
 **PK:** COMPANYID, DAYID, MONTHID, YEARID
 
@@ -323,7 +323,7 @@ Dimensão de usuários do CAP com chave substituta USERSEQUENCE, código do usu�
 
 **Ciclo de vida:** Populada pela extração do CAP; HOURCOST alimenta cálculos de custo.
 
-**Atenção:** Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.
+**Atenção:** Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.
 
 **PK:** COMPANYID, USERSEQUENCE
 

@@ -1,5 +1,5 @@
 {
- "generated_from": "TOTVS Fluig 1.8.2 (DDL MySQL de createtable + entidades JPA decompiladas)",
+ "generated_from": "TOTVS Fluig 1.8.2 (DDL MySQL de createtable + mapeamentos JPA)",
  "tables": {
   "FDN_RECENTLY_VIEWED": {
    "name": "FDN_RECENTLY_VIEWED",
@@ -799,7 +799,7 @@
    "module": "02001-fluig-database-ecm",
    "purpose": "Dimensão (modelo estrela do CAP, analytics de BPM) com as atividades de cada versão de processo.",
    "lifecycle": "Populada/regravada pela extração de dados do CAP (CAPDataExtractorBI) a partir das definições de processo; volume = atividades x versões.",
-   "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.",
+   "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.",
    "notes_for_agents": "Sempre filtrar por COMPANYID. Para agregar por período use YEARID/MONTHID/DAYID ou junte com TIME_DIM_CAP. Linhas de fato são snapshots (use o snapshot mais recente/um dia específico para não somar duplicado).",
    "primary_key": [
     "ACTIVITYID",
@@ -1002,7 +1002,7 @@
    "module": "02001-fluig-database-ecm",
    "purpose": "Fato de custo, esforço e prazo por atividade, dia e usuário (planejado/baseline vs realizado), separado por tarefas abertas, concluídas e canceladas.",
    "lifecycle": "Linhas geradas por snapshot diário (named query findDateLastSnapShot busca a última data) pela extração do CAP; cresce por dia x atividade x usuário.",
-   "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.",
+   "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.",
    "notes_for_agents": "Sempre filtrar por COMPANYID. Para agregar por período use YEARID/MONTHID/DAYID ou junte com TIME_DIM_CAP. Linhas de fato são snapshots (use o snapshot mais recente/um dia específico para não somar duplicado). USERCODE identifica usuário (dado pessoal indireto).",
    "primary_key": [
     "ACTIVITYID",
@@ -1651,7 +1651,7 @@
    "module": "02001-fluig-database-ecm",
    "purpose": "Fato de volume de tarefas por atividade, dia e usuário: abertas/concluídas/canceladas, dentro/fora do prazo.",
    "lifecycle": "Snapshot diário gerado pela extração do CAP; crescimento por dia x atividade x usuário.",
-   "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.",
+   "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.",
    "notes_for_agents": "Sempre filtrar por COMPANYID. Para agregar por período use YEARID/MONTHID/DAYID ou junte com TIME_DIM_CAP. Linhas de fato são snapshots (use o snapshot mais recente/um dia específico para não somar duplicado). USERCODE identifica usuário (dado pessoal indireto).",
    "primary_key": [
     "ACTIVITYID",
@@ -2090,7 +2090,7 @@
    "module": "02001-fluig-database-ecm",
    "purpose": "Fato de volume de transições entre atividades (fluxos normais vs retornos) por dia e usuário.",
    "lifecycle": "Snapshot diário gerado pela extração do CAP.",
-   "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.",
+   "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.",
    "notes_for_agents": "Sempre filtrar por COMPANYID. Para agregar por período use YEARID/MONTHID/DAYID ou junte com TIME_DIM_CAP. Linhas de fato são snapshots (use o snapshot mais recente/um dia específico para não somar duplicado). USERCODE identifica usuário (dado pessoal indireto).",
    "primary_key": [
     "COMPANYID",
@@ -2486,7 +2486,7 @@
    "module": "02001-fluig-database-ecm",
    "purpose": "Fato de custo/esforço por processo, dia e usuário (baseline vs realizado) para processos abertos, concluídos e cancelados.",
    "lifecycle": "Snapshot diário gerado pela extração do CAP.",
-   "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.",
+   "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.",
    "notes_for_agents": "Sempre filtrar por COMPANYID. Para agregar por período use YEARID/MONTHID/DAYID ou junte com TIME_DIM_CAP. Linhas de fato são snapshots (use o snapshot mais recente/um dia específico para não somar duplicado). USERCODE identifica usuário (dado pessoal indireto).",
    "primary_key": [
     "COMPANYID",
@@ -3014,7 +3014,7 @@
    "module": "02001-fluig-database-ecm",
    "purpose": "Fato de volume de processos por dia e usuário: em aberto/concluídos dentro e fora do prazo, cancelados e aberturas.",
    "lifecycle": "Snapshot diário gerado pela extração do CAP (named query findDateLastSnapShot).",
-   "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.",
+   "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.",
    "notes_for_agents": "Sempre filtrar por COMPANYID. Para agregar por período use YEARID/MONTHID/DAYID ou junte com TIME_DIM_CAP. Linhas de fato são snapshots (use o snapshot mais recente/um dia específico para não somar duplicado). USERCODE identifica usuário (dado pessoal indireto).",
    "primary_key": [
     "COMPANYID",
@@ -3443,7 +3443,7 @@
    "module": "02001-fluig-database-ecm",
    "purpose": "Dimensão de fluxos (transições origem->destino entre atividades) de cada versão de processo.",
    "lifecycle": "Populada pela extração do CAP a partir da definição do processo.",
-   "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.",
+   "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.",
    "notes_for_agents": "Sempre filtrar por COMPANYID. Para agregar por período use YEARID/MONTHID/DAYID ou junte com TIME_DIM_CAP. Linhas de fato são snapshots (use o snapshot mais recente/um dia específico para não somar duplicado).",
    "primary_key": [
     "COMPANYID",
@@ -3647,7 +3647,7 @@
    "module": "02001-fluig-database-ecm",
    "purpose": "Dimensão de versões de processos com a janela de vigência (início/fim em dia/mês/ano).",
    "lifecycle": "Populada pela extração do CAP; uma linha por versão de processo e empresa.",
-   "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.",
+   "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.",
    "notes_for_agents": "Sempre filtrar por COMPANYID. Para agregar por período use YEARID/MONTHID/DAYID ou junte com TIME_DIM_CAP. Linhas de fato são snapshots (use o snapshot mais recente/um dia específico para não somar duplicado).",
    "primary_key": [
     "COMPANYID",
@@ -3902,7 +3902,7 @@
    "module": "02001-fluig-database-ecm",
    "purpose": "Dimensão de tempo (calendário): uma linha por dia com data completa, feriado e dia da semana.",
    "lifecycle": "Populada pela extração do CAP; volume = dias x empresas.",
-   "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.",
+   "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.",
    "notes_for_agents": "Sempre filtrar por COMPANYID. Para agregar por período use YEARID/MONTHID/DAYID ou junte com TIME_DIM_CAP. Linhas de fato são snapshots (use o snapshot mais recente/um dia específico para não somar duplicado).",
    "primary_key": [
     "COMPANYID",
@@ -4156,7 +4156,7 @@
    "module": "02001-fluig-database-ecm",
    "purpose": "Dimensão de usuários do CAP com chave substituta USERSEQUENCE, código do usuário e custo por hora.",
    "lifecycle": "Populada pela extração do CAP; HOURCOST alimenta cálculos de custo.",
-   "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.",
+   "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância.",
    "notes_for_agents": "Sempre filtrar por COMPANYID. Para agregar por período use YEARID/MONTHID/DAYID ou junte com TIME_DIM_CAP. Linhas de fato são snapshots (use o snapshot mais recente/um dia específico para não somar duplicado). USERCODE identifica usuário (dado pessoal indireto). HOURCOST é dado sensível (custo por hora do colaborador).",
    "primary_key": [
     "COMPANYID",

@@ -1,0 +1,32 @@
+{
+  "ACTIVITY_DIM_CAP": {
+    "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância."
+  },
+  "FACT_ACTIVITY_COST_CAP": {
+    "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância."
+  },
+  "FACT_ACTIVITY_VOLUME_CAP": {
+    "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância."
+  },
+  "FACT_FLOW_VOLUME_CAP": {
+    "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância."
+  },
+  "FACT_PROCES_COST_CAP": {
+    "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância."
+  },
+  "FACT_PROCES_VOLUME_CAP": {
+    "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância."
+  },
+  "FLOW_DIM_CAP": {
+    "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância."
+  },
+  "PROCES_VERSION_DIM_CAP": {
+    "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância."
+  },
+  "TIME_DIM_CAP": {
+    "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância."
+  },
+  "USER_DIM_CAP": {
+    "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. O ETL que popula estas tabelas não foi identificado; a semântica das métricas é inferida dos nomes e precisa de validação na instância."
+  }
+}

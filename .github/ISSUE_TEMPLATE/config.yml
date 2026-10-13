@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Guia de planejamento SQL
+    url: https://github.com/isacfg/fluig-sql-docs/blob/main/agent/README.md
+    about: Consulte os contratos, exemplos e limites da validação.

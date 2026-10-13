@@ -1,99 +1,136 @@
-# Mapa do schema do banco — TOTVS Fluig 1.8.2
+# fluig-sql-docs
 
-Referência para agentes de IA: 333 tabelas, 2809 colunas, finalidade de cada tabela/coluna, chaves, índices e relacionamentos.
+[Licença MIT](LICENSE) · [Como contribuir](CONTRIBUTING.md) · [Histórico](CHANGELOG.md)
 
-## Gerar SQL com agentes
+Catálogo comunitário do banco de dados do **Fluig 1.8.2**, com documentação por tabela e uma camada de planejamento de SQL para agentes de IA.
 
-Comece em [`agent/README.md`](agent/README.md): o protocolo agora é **planejar → montar → validar**. [`agent/index.json`](agent/index.json) localiza as 333 fichas com grain e escopo; [`agent/intents.json`](agent/intents.json) liga perguntas de negócio a 28 recipes SQL; [`agent/join_graph.json`](agent/join_graph.json) informa chaves completas, confiança e risco de multiplicação; [`agent/query_rules.json`](agent/query_rules.json) fornece as regras do planner.
+**333 tabelas · 2.809 colunas · 28 recipes SQL · 1.218 queries de referência**
 
-As fichas estruturam filtros de tenant, filtros por intenção, joins canônicos, colunas deprecated e exemplos. O grain estrutural cobre todas as tabelas; o grain de negócio foi revisado nas 22 principais. Há também 1.218 Named Queries/HQL preservadas com proveniência em `schema.json`, nas fichas originais e em `agent/observed_queries/`, carregadas separadamente das fichas compactas.
+O projeto ajuda desenvolvedores, analistas e agentes a localizar dados, escolher o grain do resultado, montar joins completos e validar consultas antes de usá-las em uma instância. É um projeto independente, sem vínculo oficial com a TOTVS.
 
-O validador em [`method_scripts/validate_sql.py`](method_scripts/validate_sql.py) confere nomes, tenant, joins, versões e riscos de duplicação. As recipes passaram na validação estática; duas possuem avisos documentados de relação provável. Não foram executadas em uma instância real do Fluig. Veja [`method_scripts/README.md`](method_scripts/README.md) para regeneração e testes.
+## Comece aqui
 
-## Como consumir o schema (ordem sugerida)
-1. `index.md` — uma linha por tabela (domínio, PK, finalidade). Comece aqui para localizar tabelas.
-2. `domains/<dominio>.md` — tabelas do domínio com colunas (tipo, null, finalidade, valores de enum/flag, referências) e relações.
-3. `by_table/<TABELA>.json` — ficha completa de UMA tabela (mais barato em contexto que o schema inteiro).
-4. `relationships.md` — lista plana de arestas + diagramas Mermaid ER por domínio.
-5. `schema.json` — tudo em um arquivo (máquina).
+- **Consultar o schema:** abra o [índice de tabelas](index.md) e carregue a ficha em [`by_table/`](by_table/).
+- **Gerar SQL com um agente:** siga o [protocolo de planejamento](agent/README.md), começando por [`agent/intents.json`](agent/intents.json).
+- **Adaptar uma consulta:** escolha um dos [exemplos SQL](agent/recipes/) e confira seus parâmetros, grain e suposições.
+- **Contribuir:** leia [CONTRIBUTING.md](CONTRIBUTING.md).
 
-| Arquivo de domínio | Tabelas |
-|---|---|
-| `domains/acesso-recente.md` | 1 |
-| `domains/assinatura-digital.md` | 1 |
-| `domains/audit.md` | 2 |
-| `domains/bpm-analytics-dw.md` | 10 |
-| `domains/bpm-cap.md` | 2 |
-| `domains/bpm-definicao-processo.md` | 2 |
-| `domains/bpm-forms.md` | 2 |
-| `domains/bpm-integracao.md` | 3 |
-| `domains/bpm-process-definition.md` | 3 |
-| `domains/bpm-tarefas.md` | 7 |
-| `domains/bpm-workflow.md` | 56 |
-| `domains/bpm-workflow-erro.md` | 1 |
-| `domains/calendario-feriados.md` | 4 |
-| `domains/concorrencia-lock.md` | 1 |
-| `domains/configuracao-parametros.md` | 1 |
-| `domains/datasets.md` | 1 |
-| `domains/document-management.md` | 1 |
-| `domains/ecm-collaboration.md` | 3 |
-| `domains/ecm-documentos.md` | 3 |
-| `domains/ecm-documents.md` | 26 |
-| `domains/ecm-forms.md` | 3 |
-| `domains/ecm-lists-filters.md` | 14 |
-| `domains/ecm-metadata-forms.md` | 29 |
-| `domains/ecm-search.md` | 3 |
-| `domains/foundation-alert.md` | 9 |
-| `domains/foundation-dataservice.md` | 1 |
-| `domains/foundation-identity-access.md` | 18 |
-| `domains/foundation-licenciamento.md` | 1 |
-| `domains/foundation-platform.md` | 4 |
-| `domains/foundation-tenancy.md` | 4 |
-| `domains/ged-documentos.md` | 2 |
-| `domains/i18n.md` | 6 |
-| `domains/infraestrutura-sequencias.md` | 1 |
-| `domains/infraestrutura-servidor.md` | 1 |
-| `domains/integracao-datasets.md` | 1 |
-| `domains/integracao-eventos.md` | 3 |
-| `domains/integracao-servicos-dados.md` | 1 |
-| `domains/integracao-servidores.md` | 1 |
-| `domains/mail.md` | 1 |
-| `domains/mobile.md` | 1 |
-| `domains/mobile-push.md` | 1 |
-| `domains/monitoring-metrics.md` | 3 |
-| `domains/notificacao-email.md` | 1 |
-| `domains/oauth-integracao.md` | 1 |
-| `domains/oauth-provider.md` | 5 |
-| `domains/permissoes-categorias.md` | 2 |
-| `domains/privacy-lgpd.md` | 6 |
-| `domains/rating.md` | 1 |
-| `domains/scheduler-quartz.md` | 12 |
-| `domains/security-audit.md` | 1 |
-| `domains/security-oauth-tokens.md` | 2 |
-| `domains/seguranca.md` | 4 |
-| `domains/seguranca-api.md` | 1 |
-| `domains/seguranca-auditoria.md` | 1 |
-| `domains/social.md` | 21 |
-| `domains/social-forms.md` | 4 |
-| `domains/use-policy.md` | 5 |
-| `domains/volumes-sites.md` | 3 |
-| `domains/wcm-portal.md` | 16 |
-| `domains/wcm-portal-apps.md` | 1 |
-| `domains/wcm-portal-pages.md` | 2 |
-| `domains/wcm-resources.md` | 4 |
-| `domains/wcm-store.md` | 1 |
-| `domains/wcm-theme.md` | 1 |
+## Instalação e uso
 
-## Convenções do Fluig (úteis para montar queries)
-- **Multi-tenant:** `COD_EMPRESA` (tabelas ECM/BPM legadas) e `TENANT_ID` (tabelas FDN_/WCM_) identificam o tenant e quase sempre fazem parte da PK. Filtre sempre.
-- **Prefixos:** `FDN_*` foundation (usuários, papéis, permissões, OAuth, alertas, LGPD); `WCM_*` portal/páginas/widgets/temas; `ECM_*` formulários de metadados e colaboração; `QRTZ_*` Quartz; nomes em português abreviado (`DEF_PROCES`, `PROCES_WORKFLOW`, `DOCUMENTO`, `TAR_*`, `HISTOR_*`) = workflow (BPM) e gestão de documentos (GED).
-- **Prefixos de coluna (legado):** `COD_`=código, `NUM_`/`NR_`=número, `DES_`/`DSL_`=descrição/texto, `IDI_`=indicador inteiro (enum), `LOG_`=booleano, `CD_MATRICULA`/`COD_MATR_*`=código (matrícula) do usuário, `DAT_`/`DT_`=data.
-- **Usuários:** `FDN_USER` é a pessoa global; `FDN_USERTENANT` é o vínculo com o tenant e guarda `USER_CODE`/`LOGIN`. Colunas de "matrícula" nas tabelas legadas referenciam `FDN_USERTENANT.USER_CODE` (+ tenant), não `FDN_USER`.
-- **Tabelas dinâmicas fora deste mapa:** cada formulário/ficha publicado cria tabelas próprias em runtime (`ml<empresa><n>...`), e datasets internos não são tabelas. Não constam no DDL de instalação.
+A documentação e os arquivos JSON podem ser lidos diretamente, sem instalar dependências. Os scripts de geração e validação usam Python 3.10 ou superior; os testes foram executados com Python 3.14, e o template de CI usa Python 3.12.
 
-## Como foi gerado e limites (leia antes de confiar cegamente)
-- **Estrutura (tabelas, colunas, tipos, PK, índices, FKs físicas):** extraída dos scripts `createtable/mysql` dos jars `*-fluig-database-*` do Fluig 1.8.2. É o schema de instalação limpa; alterações dos `Update*Tables_*` (migrações em código) não foram reaplicadas. Variantes Oracle/SQL Server podem diferir em tipos.
-- **Mapeamento Java:** entidades JPA decompiladas (jadx) cruzadas por nome de coluna (`java_field`/`java_type` em cada coluna; 707 colunas sem entidade correspondente).
-- **Relacionamentos:** o banco tem poucas FKs físicas. `kind`: `physical-fk` (DDL), `jpa-join`/`hql-join` (código), `table-per-class-subtype`, `logical-*` (inferidas por nome de coluna e validadas/rejeitadas por agente lendo o código). `status`: `confirmed` ou `probable`. Relações inferidas e rejeitadas ficam em `rejected_relationships` na ficha da tabela.
-- **Finalidade/valores de colunas:** redigidas por agentes de IA a partir do código decompilado; `confidence=low` em 136 colunas. Valores de enum só aparecem quando confirmados no código — vazio ≠ inexistente.
-- Para dados reais, confirme no banco da instância (versões/hotfixes podem ter colunas extras).
+```bash
+git clone https://github.com/isacfg/fluig-sql-docs.git
+cd fluig-sql-docs
+python3 -m venv .venv
+.venv/bin/python -m pip install -r method_scripts/requirements.txt
+```
+
+Valide uma recipe de tarefas pendentes:
+
+```bash
+.venv/bin/python method_scripts/validate_sql.py \
+  agent/recipes/workflow/pending_tasks_by_user.sql
+```
+
+Para consultar versões históricas, declare a intenção temporal:
+
+```bash
+.venv/bin/python method_scripts/validate_sql.py \
+  agent/recipes/ecm/document_versions.sql --document-mode historical
+```
+
+O validador retorna JSON. Erros produzem código de saída `1`; `--strict` também trata avisos como falha. A validação é estática: ela não conecta ao banco nem executa SQL.
+
+As recipes usam MySQL e parâmetros nomeados como `:tenant_id` e `:user_code`. Adapte o binding ao seu driver e passe valores como parâmetros. Oracle e SQL Server exigem conferir o dialeto e o schema da instância.
+
+## Um exemplo: solicitações sem duplicação
+
+Para listar solicitações com tarefas pendentes de um usuário, use a solicitação como raiz e `EXISTS` para testar tarefas. Isso preserva uma linha por `(COD_EMPRESA, NUM_PROCES)` mesmo quando existem várias tarefas para a mesma solicitação.
+
+```sql
+SELECT p.COD_EMPRESA, p.NUM_PROCES, p.COD_DEF_PROCES
+FROM PROCES_WORKFLOW AS p
+WHERE p.COD_EMPRESA = :tenant_id
+  AND p.LOG_ATIV = 1
+  AND EXISTS (
+    SELECT 1
+    FROM TAR_PROCES AS t
+    WHERE t.COD_EMPRESA = p.COD_EMPRESA
+      AND t.NUM_PROCES = p.NUM_PROCES
+      AND t.CD_MATRICULA = :user_code
+      AND t.LOG_ATIV = 1
+      AND t.IDI_STATUS IN (0, 1)
+  );
+```
+
+A [recipe completa](agent/recipes/workflow/processes_with_pending_tasks.sql) inclui metadados e ordenação. Veja o [protocolo do agente](agent/README.md) para escolher joins, versões e filtros.
+
+## Conteúdo do repositório
+
+| Caminho | Conteúdo |
+| --- | --- |
+| [`index.md`](index.md) | Tabela → domínio, PK e finalidade |
+| [`by_table/`](by_table/) | Fichas completas de cada tabela: tipos, colunas, chaves, índices e relações |
+| [`domains/`](domains/) | Documentação agrupada por domínio funcional |
+| [`relationships.md`](relationships.md) | Relações estruturais e diagramas ER |
+| [`schema.json`](schema.json) | Catálogo completo para consumo por máquina |
+| [`agent/index.json`](agent/index.json) | Índice das 333 fichas compactas para agentes |
+| [`agent/intents.json`](agent/intents.json) | Intenção de negócio → tabelas → recipe |
+| [`agent/tables/`](agent/tables/) | Grain, tenant, filtros, joins canônicos e riscos |
+| [`agent/join_graph.json`](agent/join_graph.json) | Grafo direcional com completude de chaves e efeito sobre o grain |
+| [`agent/query_rules.json`](agent/query_rules.json) | Regras de planejamento e validação |
+| [`agent/terminology.json`](agent/terminology.json) | Conceitos e sinônimos de negócio |
+| [`agent/recipes/`](agent/recipes/) | 28 consultas: workflow, GED, usuários e formulários |
+| [`agent/observed_queries/`](agent/observed_queries/) | Queries SQL/HQL de referência, com linguagem e proveniência |
+| [`method_scripts/`](method_scripts/) | Fontes editáveis, geração, validação e template de CI |
+| [`tests/`](tests/) | Regressões do parser, do validador e das recipes |
+
+Para economizar contexto, carregue primeiro a intenção e as fichas pertinentes. Consulte o `schema.json` completo apenas quando necessário.
+
+## Conceitos importantes
+
+- **Grain:** a unidade representada por uma linha. Solicitação, atribuição de tarefa, movimentação e versão de documento são unidades diferentes.
+- **Tenant:** delimite `COD_EMPRESA` nas tabelas legadas e `TENANT_ID` nas tabelas de plataforma. Consulte a ficha para outros identificadores de escopo.
+- **Documentos:** `DOCUMENTO` guarda versões. Para estado corrente, use `VERSAO_ATIVA = 1 AND LOG_DELETE = 0`; anexos históricos podem exigir uma versão específica.
+- **Usuários:** `FDN_USER` representa a pessoa global; `FDN_USERTENANT` guarda seu vínculo com tenant, login e matrícula. `(TENANT_ID, USER_CODE)` não possui UNIQUE declarado neste catálogo.
+- **Joins:** um relacionamento documentado pode estar incompleto ou multiplicar linhas. Confira `canonical`, `superseded_by`, `confidence` e `preserves_grain` antes de usá-lo.
+- **HQL:** queries de referência com `language = "hql"` usam entidades e propriedades Java; precisam de tradução antes de execução como SQL.
+
+## Cobertura e limites
+
+A referência estrutural usa o DDL MySQL de instalação do Fluig 1.8.2 e mapeamentos JPA. Chaves físicas, relações de aplicação e relações lógicas possuem classificação e confiança explícitas.
+
+- As 333 tabelas têm grain estrutural documentado; o grain de negócio foi revisado nas 22 tabelas principais. Uma tabela não tem PK declarada e recebe aviso específico.
+- Há 707 colunas sem correspondência com campo JPA e 136 colunas com confiança baixa. Valores de enum desconhecidos ficam vazios.
+- As 28 recipes passaram nas verificações estáticas. Duas mantêm avisos documentados de relação provável; nenhuma foi executada em uma instância real do Fluig.
+- Migrações e hotfixes não foram reaplicados ao catálogo. Tipos e colunas podem diferir no banco de uma instalação.
+- Tabelas dinâmicas de formulários (`ml...`) e datasets internos estão fora do mapa.
+- O validador sinaliza casos que precisam de revisão manual, como linhagem de CTEs e certos outer joins. Não estima desempenho nem comprova autorização.
+
+Confira sempre os resultados e o plano de execução na instância que será consultada. Este repositório contém documentação e ferramentas; não distribui instaladores, JARs ou dados de produção do Fluig.
+
+## Desenvolvimento
+
+```bash
+# Regenerar a camada agent/ a partir do catálogo versionado
+python3 method_scripts/generate_agent.py
+
+# Validar todas as fichas e recipes
+.venv/bin/python method_scripts/check_catalog.py
+
+# Executar a suíte de regressão
+.venv/bin/python -m unittest discover -s tests -v
+```
+
+Os detalhes do pipeline e as fontes editáveis estão em [`method_scripts/README.md`](method_scripts/README.md). A configuração de GitHub Actions está disponível como [`template`](method_scripts/github_actions.example.yml).
+
+## Comunidade
+
+Correções de relações, novos exemplos e evidências de versões são bem-vindos. Use as [issues](https://github.com/isacfg/fluig-sql-docs/issues) para discutir alterações e abra um pull request seguindo o [guia de contribuição](CONTRIBUTING.md).
+
+A convivência segue o [Código de Conduta](CODE_OF_CONDUCT.md). Para questões de segurança, consulte [SECURITY.md](SECURITY.md). Consulte também [CHANGELOG.md](CHANGELOG.md) para acompanhar a evolução do catálogo e [THIRD_PARTY.md](THIRD_PARTY.md) para referências de terceiros.
+
+## Licença
+
+As contribuições originais de código e documentação deste projeto são disponibilizadas sob a [licença MIT](LICENSE). Referências e materiais de terceiros mantêm seus próprios direitos e avisos; veja [THIRD_PARTY.md](THIRD_PARTY.md).

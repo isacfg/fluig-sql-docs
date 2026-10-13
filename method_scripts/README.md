@@ -1,6 +1,6 @@
 # Pipeline e fontes da camada de SQL
 
-`generate_agent.py` funciona em um clone comum deste repositório, sem fontes decompiladas nem banco:
+`generate_agent.py` funciona em um clone comum deste repositório, usando os arquivos versionados, sem conexão com banco:
 
 ```bash
 python3 method_scripts/generate_agent.py
@@ -8,11 +8,12 @@ python3 method_scripts/generate_agent.py
 
 Fontes versionadas:
 
+- `catalog_overrides.json`: anotações revisadas aplicadas pelo pipeline ao catálogo base.
 - `semantic_overrides.json`: grain de negócio revisado, conceitos, filtros, datas preferidas e avisos. Cada regra referencia a ficha original; semânticas desconhecidas continuam explícitas.
 - `recipe_catalog.json`: 28 recipes, SQL completo, intenção, parâmetros, grain, modo temporal, fontes e avisos esperados.
 - `query_rules.json`: política do planner, incluindo verificações estáticas implementadas e recomendações manuais.
 
-`validate_sql.py` e `check_catalog.py` requerem a versão de SQLGlot fixada em `requirements.txt`. O template `github_actions.example.yml` instala essa dependência, valida o catálogo, testa casos de erro e verifica que os artefatos gerados não mudam. Para ativá-lo, copie para `.github/workflows/validate.yml` usando uma credencial com escopo `workflow`; o token `gh` desta sessão não permite publicar workflows. As mesmas verificações podem ser executadas localmente.
+`validate_sql.py` e `check_catalog.py` requerem a versão de SQLGlot fixada em `requirements.txt`. O template `github_actions.example.yml` instala essa dependência, valida o catálogo, testa casos de erro e verifica que os artefatos gerados não mudam. Para ativá-lo, copie para `.github/workflows/validate.yml` usando uma credencial com escopo `workflow`; as mesmas verificações também podem ser executadas localmente.
 
 ## Pipeline completo com os intermediários locais
 
@@ -20,7 +21,7 @@ Os intermediários e os binários do Fluig não estão versionados. É preciso f
 
 ```bash
 # A partir da raiz do clone; substitua os caminhos pelos seus intermediários.
-python3 method_scripts/parse_entities.py /caminho/fontes-decompiladas /caminho/work/entities.json
+python3 method_scripts/parse_entities.py /caminho/mapeamentos-java /caminho/work/entities.json
 # Execute os próximos comandos com cwd=/caminho/work:
 python3 /caminho/clone/method_scripts/merge.py
 python3 /caminho/clone/method_scripts/assemble.py /caminho/clone
