@@ -1,0 +1,191 @@
+{
+ "name": "DOC_PROCES",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Diagramas BPMN (XML) publicados de processos, uma linha por versão.",
+ "lifecycle": "Criada em cada publicação do diagrama.",
+ "key_notes": "PK (COD_EMPRESA, COD_DOC_PROCES, NUM_VERS). CLB_XML_PROCES é LOB grande.",
+ "notes_for_agents": "Evitar SELECT * por causa de CLB_XML_PROCES.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_DOC_PROCES",
+  "NUM_VERS"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.bpm.model.BPMProcessDefinition"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant (empresa) dono da linha; sempre filtrar por este valor.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "BPMProcessDefinition"
+  },
+  {
+   "name": "COD_DOC_PROCES",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Identificador do processo BPMN (processId).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "BPMProcessDefinition"
+  },
+  {
+   "name": "NUM_VERS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número da versão do diagrama.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "BPMProcessDefinition"
+  },
+  {
+   "name": "LOG_ATIV",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versão ativa.",
+   "semantic_type": "flag",
+   "values": "1=ativa; 0=inativa",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "active",
+   "java_type": "Boolean",
+   "java_entity": "BPMProcessDefinition"
+  },
+  {
+   "name": "DAT_DOC_PROCES",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data e hora de criação/publicação do diagrama.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "processDate",
+   "java_type": "Date",
+   "java_entity": "BPMProcessDefinition"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Definição de processo associada.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processDefinitionId",
+   "java_type": "String",
+   "java_entity": "BPMProcessDefinition"
+  },
+  {
+   "name": "DES_DOC_PROCES",
+   "type": "varchar(250)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição do processo, até 250 caracteres.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "processDescription",
+   "java_type": "String",
+   "java_entity": "BPMProcessDefinition"
+  },
+  {
+   "name": "CLB_XML_PROCES",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "XML BPMN completo do diagrama.",
+   "semantic_type": "xml",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "processDiagramXML",
+   "java_type": "String",
+   "java_entity": "BPMProcessDefinition"
+  },
+  {
+   "name": "CD_PUBLICADOR",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrícula do usuário que publicou.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "high",
+   "java_field": "publisherId",
+   "java_type": "String",
+   "java_entity": "BPMProcessDefinition"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "VERS_DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão da definição; NUM_VERS pode divergir do diagrama (heurística).",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable"
+  }
+ ]
+}

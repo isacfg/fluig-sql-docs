@@ -1,0 +1,180 @@
+{
+ "name": "EVENT_PROCES",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Scripts de evento (JavaScript) de uma versão de processo, com histórico de versões do script (WorkflowProcessEvent).",
+ "lifecycle": "Criada ao salvar eventos do processo; nova SCRIPT_VERSION a cada alteração.",
+ "key_notes": "Várias linhas por evento (SCRIPT_VERSION); a mais alta é a atual.",
+ "notes_for_agents": "Filtrar a maior SCRIPT_VERSION para o script vigente (HISTOR_PROCES.SCRIPT_VERSION registra a usada). Código executável.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_DEF_PROCES",
+  "NUM_VERS",
+  "COD_EVENT",
+  "SCRIPT_VERSION"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.WorkflowProcessEvent"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK e filtro obrigatório de multi-tenancy.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "WorkflowProcessEvent"
+  },
+  {
+   "name": "COD_EVENT",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Nome do evento de processo (ex.: beforeTaskSave, afterProcessCreate).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "EVENT_GERAL.COD_EVENT",
+   "confidence": "medium",
+   "java_field": "eventId",
+   "java_type": "String",
+   "java_entity": "WorkflowProcessEvent"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código (processId) da definição de processo BPM a que a linha pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "WorkflowProcessEvent"
+  },
+  {
+   "name": "NUM_VERS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número da versão da definição de processo (versionamento do processo).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "WorkflowProcessEvent"
+  },
+  {
+   "name": "SCRIPT_VERSION",
+   "type": "integer",
+   "nullable": false,
+   "default": "0",
+   "pk_position": 5,
+   "purpose": "Versão do script do evento; incrementa a cada edição.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "scriptVersion",
+   "java_type": "int",
+   "java_entity": "WorkflowProcessEvent"
+  },
+  {
+   "name": "DSL_EVENT",
+   "type": "longtext",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código-fonte (longtext) do script.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "eventDescription",
+   "java_type": "String",
+   "java_entity": "WorkflowProcessEvent"
+  },
+  {
+   "name": "AUTHOR_ID",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrícula do usuário autor da versão do script.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USER.COLLEAGUE_ID",
+   "confidence": "medium",
+   "java_field": "authorId",
+   "java_type": "String",
+   "java_entity": "WorkflowProcessEvent"
+  },
+  {
+   "name": "CREATE_DATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de criação da versão do script.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "createDate",
+   "java_type": "Date",
+   "java_entity": "WorkflowProcessEvent"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "VERS_DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão do processo dona do evento.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "EVENT_GERAL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_EVENT"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_EVENT"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: coincidência de nome do evento; eventos de processo são independentes dos globais.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

@@ -1,0 +1,132 @@
+{
+ "name": "WCM_LAYOUTSLOT",
+ "domain": "wcm-portal",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Slot (região) de um layout WCM onde widgets podem ser colocados.",
+ "lifecycle": "Povoada na instalação/publicação da aplicação.",
+ "key_notes": "Filha de WCM_APPLICATION; sem tenant.",
+ "notes_for_agents": "",
+ "primary_key": [
+  "LAYOUT_SLOT_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "WCMLAYSLOT001",
+   "unique": false,
+   "columns": [
+    "LAYOUT_SLOT",
+    "APPLICATION_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.wcm.core.entity.WCMLayoutSlot"
+ ],
+ "columns": [
+  {
+   "name": "LAYOUT_SLOT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "WCMLayoutSlot"
+  },
+  {
+   "name": "LAYOUT_DECORATOR",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Slot é decorador.",
+   "semantic_type": "flag",
+   "values": "1=sim; 0=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "decorator",
+   "java_type": "Boolean",
+   "java_entity": "WCMLayoutSlot"
+  },
+  {
+   "name": "EDITABLE_SLOT",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Slot editável.",
+   "semantic_type": "flag",
+   "values": "1=sim; 0=não",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "editableSlot",
+   "java_type": "Boolean",
+   "java_entity": "WCMLayoutSlot"
+  },
+  {
+   "name": "LAYOUT_SLOT",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do slot.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "slot",
+   "java_type": "String",
+   "java_entity": "WCMLayoutSlot"
+  },
+  {
+   "name": "APPLICATION_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Layout (WCM_APPLICATION tipo layout).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "WCM_APPLICATION.APPLICATION_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "WCM_APPLICATION",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Aplicação WCM dona do registro.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "WCM_APPLICATION",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk"
+  }
+ ]
+}

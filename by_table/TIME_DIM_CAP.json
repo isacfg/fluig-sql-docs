@@ -1,0 +1,216 @@
+{
+ "name": "TIME_DIM_CAP",
+ "domain": "bpm-analytics-dw",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Dimensão de tempo (calendário): uma linha por dia com data completa, feriado e dia da semana.",
+ "lifecycle": "Populada pela extração do CAP; volume = dias x empresas.",
+ "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.",
+ "notes_for_agents": "Sempre filtrar por COMPANYID. Para agregar por período use YEARID/MONTHID/DAYID ou junte com TIME_DIM_CAP. Linhas de fato são snapshots (use o snapshot mais recente/um dia específico para não somar duplicado).",
+ "primary_key": [
+  "COMPANYID",
+  "DAYID",
+  "MONTHID",
+  "YEARID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.cap.model.TimeDim"
+ ],
+ "columns": [
+  {
+   "name": "COMPANYID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa (tenant) do Fluig; faz parte da PK de todas as tabelas *_CAP.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "TimeDim"
+  },
+  {
+   "name": "DAYID",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Dia do mês (1-31) do snapshot; componente da chave de tempo, não é surrogate key.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "day",
+   "java_type": "int",
+   "java_entity": "TimeDim"
+  },
+  {
+   "name": "MONTHID",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Mês (1-12) do snapshot; componente da chave de tempo.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "month",
+   "java_type": "int",
+   "java_entity": "TimeDim"
+  },
+  {
+   "name": "YEARID",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Ano (4 dígitos) do snapshot; componente da chave de tempo.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "year",
+   "java_type": "int",
+   "java_entity": "TimeDim"
+  },
+  {
+   "name": "COMPLEXDATE",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data completa (DATE) correspondente a ANO/MÊS/DIA da linha de tempo.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "complexDate",
+   "java_type": "Date",
+   "java_entity": "TimeDim"
+  },
+  {
+   "name": "ISHOLIDAY",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o dia é feriado.",
+   "semantic_type": "flag",
+   "values": "true=feriado",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "isHoliday",
+   "java_type": "boolean",
+   "java_entity": "TimeDim"
+  },
+  {
+   "name": "WEEKDAY",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Dia da semana do dia; codificação (domingo=1 ou segunda=1) não confirmada no código.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "weekDay",
+   "java_type": "int",
+   "java_entity": "TimeDim"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FACT_ACTIVITY_COST_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "DAYID",
+    "MONTHID",
+    "YEARID"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "DAYID",
+    "MONTHID",
+    "YEARID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FACT_ACTIVITY_VOLUME_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "DAYID",
+    "MONTHID",
+    "YEARID"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "DAYID",
+    "MONTHID",
+    "YEARID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FACT_FLOW_VOLUME_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "DAYID",
+    "MONTHID",
+    "YEARID"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "DAYID",
+    "MONTHID",
+    "YEARID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FACT_PROCES_COST_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "DAYID",
+    "MONTHID",
+    "YEARID"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "DAYID",
+    "MONTHID",
+    "YEARID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FACT_PROCES_VOLUME_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "DAYID",
+    "MONTHID",
+    "YEARID"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "DAYID",
+    "MONTHID",
+    "YEARID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

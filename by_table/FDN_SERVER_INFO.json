@@ -1,0 +1,109 @@
+{
+ "name": "FDN_SERVER_INFO",
+ "domain": "infraestrutura-servidor",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Informações de diagnóstico publicadas por instâncias do servidor Fluig (nome, IP e valor da informação) em data de inserção.",
+ "lifecycle": "Escrita periódica pelas instâncias; sem entidade JPA mapeada (acesso por SQL nativo).",
+ "key_notes": "Sem entidade JPA. A relação inferida com QRTZ_SCHEDULER_STATE é por coincidência de nome e não foi confirmada.",
+ "notes_for_agents": "Sem coluna de tenant; global.",
+ "primary_key": [
+  "DATA_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [],
+ "columns": [
+  {
+   "name": "DATA_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária do registro.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "INSTANCE_NAME",
+   "type": "VARCHAR(250)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome da instância/nó do servidor Fluig.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "INSTANCE_IP",
+   "type": "VARCHAR(250)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Endereço IP da instância (dado de infraestrutura).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "INFORMATION_VALUE",
+   "type": "VARCHAR(4000)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor da informação publicada (texto até 4000 caracteres).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "DATE_INSERT",
+   "type": "DATE",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data de inserção do registro.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "QRTZ_SCHEDULER_STATE",
+   "from_cols": [
+    "INSTANCE_NAME"
+   ],
+   "to_cols": [
+    "INSTANCE_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Provável mesmo nome de nó em cluster, mas não confirmado no código.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

@@ -1,0 +1,498 @@
+{
+ "name": "DEF_PROCES",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Definição (cabeçalho) de processo de workflow BPM: dados comuns a todas as versões, como categoria, prazos, notificações e gestor.",
+ "lifecycle": "Criada ao cadastrar o processo; versões ficam em VERS_DEF_PROCES.",
+ "key_notes": "PK (COD_EMPRESA, COD_DEF_PROCES). Metadados por versão estão em VERS_DEF_PROCES.",
+ "notes_for_agents": "Filtrar COD_EMPRESA. Algumas FKs lógicas de baixa confiança.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_DEF_PROCES"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessDefinition"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant (empresa) dono da linha; sempre filtrar por este valor.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código/identificador do processo (processId).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "LOG_ATIV",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Processo ativo.",
+   "semantic_type": "flag",
+   "values": "1=ativo; 0=inativo",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "active",
+   "java_type": "Boolean",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "NUM_DIA_BASE",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Dia base para cálculo de prazo/SLA.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "baseDay",
+   "java_type": "Integer",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "NUM_MES_BASE",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Mês base para cálculo de prazo/SLA.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "baseMonth",
+   "java_type": "Integer",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "COD_CATEG",
+   "type": "varchar(250)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código da categoria do processo.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "CATEG_PROCES.COD_CATEG",
+   "confidence": "low",
+   "java_field": "categoryId",
+   "java_type": "String",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "IDI_TIP_COMPLEMENTO",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nível de permissão de complementos (complementsLevel).",
+   "semantic_type": "enum",
+   "values": "0=desabilitado; 1=solicitante, responsável e gestor; 2=todos os participantes e gestor; 3=todos os usuários",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "complementsLevel",
+   "java_type": "Integer",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "NUM_HRS_PRAZ",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Prazo padrão em horas.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "deadlineTime",
+   "java_type": "Integer",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "DSL_INSTRUC",
+   "type": "varchar(2000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Instruções do processo, até 2000 caracteres.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "instruction",
+   "java_type": "String",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "DES_KEYWORD",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Palavras-chave para busca do processo.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "keyWord",
+   "java_type": "String",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "DSL_CONFIGUR_MECAN_GEST",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Configuração do mecanismo de atribuição do gestor do processo (texto longo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "managerEngineAllocationConfiguration",
+   "java_type": "String",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "COD_MECAN_ATRIBUIC_GESTOR",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do mecanismo de atribuição que determina o gestor.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "MECAN_ATRIBUIC.COD_MECAN_ATRIBUIC",
+   "confidence": "low",
+   "java_field": "managerEngineAllocationId",
+   "java_type": "String",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "LOG_NOTIF_RESPONS_COMPL",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Notifica o responsável em complementos.",
+   "semantic_type": "flag",
+   "values": "1=sim; 0=não",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "notifyAuthorityComplements",
+   "java_type": "Boolean",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "LOG_NOTIF_GESTOR_COMPL",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Notifica o gestor em complementos.",
+   "semantic_type": "flag",
+   "values": "1=sim; 0=não",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "notifyManagerComplements",
+   "java_type": "Boolean",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "LOG_NOTIF_REQUISIT_COMPL",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Notifica o solicitante em complementos.",
+   "semantic_type": "flag",
+   "values": "1=sim; 0=não",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "notifyRequisitionerComplements",
+   "java_type": "Boolean",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "COD_PERIOD_EXPED",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do período de expediente usado nos prazos.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "PERIOD_EXPED.COD_PERIOD_EXPED",
+   "confidence": "low",
+   "java_field": "periodId",
+   "java_type": "String",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "DES_DEF_PROCES",
+   "type": "varchar(250)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição do processo, até 250 caracteres.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "processDescription",
+   "java_type": "String",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "LOG_PROCES_PUBLIC",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Processo público (acessível sem autenticação/ampla).",
+   "semantic_type": "flag",
+   "values": "1=público; 0=restrito",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "publicProcess",
+   "java_type": "Boolean",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "IDI_FREQ_SNAPSHOT",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Frequência de snapshot do CAP.",
+   "semantic_type": "enum",
+   "values": "0=nunca; 1=diária; 2=semanal; 3=mensal; 4=anual",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "snapshotFrequency",
+   "java_type": "Integer",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "LOG_ATUALIZA_VERS_FICHA",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Atualiza a versão do cartão do formulário (ficha) única.",
+   "semantic_type": "flag",
+   "values": "1=sim; 0=não",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "uniqueCardVersion",
+   "java_type": "Boolean",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "COD_VOL_FISIC",
+   "type": "varchar(20)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do volume físico de armazenamento.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "volumeId",
+   "java_type": "String",
+   "java_entity": "ProcessDefinition"
+  },
+  {
+   "name": "NUM_HRS_PRAZ_WARNING",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Horas de antecedência para aviso de prazo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "warningDeadlineTime",
+   "java_type": "Integer",
+   "java_entity": "ProcessDefinition"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "VERS_DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable",
+   "description": "Versões da definição.",
+   "status": "probable"
+  },
+  {
+   "to_table": "DOC_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable",
+   "description": "Diagramas BPMN publicados.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "CONFIGUR_GRAF_USUAR_CAP",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FICHARIO_CAMPO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-confirmed"
+  },
+  {
+   "from_table": "VERS_DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
+  },
+  {
+   "from_table": "VERS_DEF_PROCES",
+   "from_cols": [
+    "COD_DEF_PROCES"
+   ],
+   "to_cols": [
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
+  },
+  {
+   "from_table": "VERS_DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
+  },
+  {
+   "from_table": "COLAB_SUBSTTO_PROCESSO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_PROCESS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DIAGNOSIS_PROCESS_LOG",
+   "from_cols": [
+    "TENANT_ID",
+    "PROCESS_ID"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PROCESS_DEFINITION_TRANSLATE",
+   "from_cols": [
+    "TENANT_ID",
+    "PROCESS_ID"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FAVORITOS_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

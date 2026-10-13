@@ -1,0 +1,239 @@
+{
+ "name": "DOCTO_ALOCAD",
+ "domain": "ecm-documents",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Check-out/alocação de documentos: documento de origem alocado a um colaborador gerando um documento de destino (cópia de trabalho), usado também em edição WebDAV.",
+ "lifecycle": "Criada no check-out, LOG_ATIVO=false no check-in/devolução.",
+ "key_notes": "PK (COD_EMPRESA, NUM_DOCTO_ORIG, NUM_VERS_ORIG, NUM_DOCTO_DEST). Duas entidades JPA (AllocatedDocument, LockedDocument).",
+ "notes_for_agents": "Ativos: LOG_ATIVO=1 (findActive* por origem/destino). Entidade cacheável.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NUM_DOCTO_ORIG",
+  "NUM_VERS_ORIG",
+  "NUM_DOCTO_DEST"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.AllocatedDocument",
+  "com.datasul.technology.webdesk.dm.model.LockedDocument"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); parte da PK, sempre filtrar por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "AllocatedDocument"
+  },
+  {
+   "name": "NUM_DOCTO_DEST",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Documento de destino (cópia de trabalho) gerada na alocação.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "destinationDocument",
+   "java_type": "int",
+   "java_entity": "AllocatedDocument"
+  },
+  {
+   "name": "NUM_DOCTO_ORIG",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Documento de origem alocado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "sourceDocument",
+   "java_type": "int",
+   "java_entity": "AllocatedDocument"
+  },
+  {
+   "name": "NUM_VERS_ORIG",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Versão do documento de origem.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "sourceVersion",
+   "java_type": "int",
+   "java_entity": "AllocatedDocument"
+  },
+  {
+   "name": "LOG_ATIVO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a alocação está ativa.",
+   "semantic_type": "flag",
+   "values": "1=ativa; 0=encerrada",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "active",
+   "java_type": "Boolean",
+   "java_entity": "AllocatedDocument"
+  },
+  {
+   "name": "DAT_DEVOL",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data da devolução (check-in).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "checkinDate",
+   "java_type": "Date",
+   "java_entity": "AllocatedDocument"
+  },
+  {
+   "name": "HRA_DEVOL",
+   "type": "varchar(12)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Hora da devolução em texto (varchar 12).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "checkinTime",
+   "java_type": "String",
+   "java_entity": "AllocatedDocument"
+  },
+  {
+   "name": "LOG_PERMITE_BUSCA",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o check-out é permitido (checkoutAllowed).",
+   "semantic_type": "flag",
+   "values": "1=permitido; 0=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "checkoutAllowed",
+   "java_type": "Boolean",
+   "java_entity": "AllocatedDocument"
+  },
+  {
+   "name": "DAT_BUSCA",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data do check-out (busca).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "checkoutDate",
+   "java_type": "Date",
+   "java_entity": "AllocatedDocument"
+  },
+  {
+   "name": "HRA_BUSCA",
+   "type": "varchar(12)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Hora do check-out em texto (varchar 12).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "checkoutTime",
+   "java_type": "String",
+   "java_entity": "AllocatedDocument"
+  },
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrícula do colaborador que alocou o documento.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "medium",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "AllocatedDocument"
+  },
+  {
+   "name": "DSL_COMENT",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Comentário informado na alocação/devolução.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "comment",
+   "java_type": "String",
+   "java_entity": "AllocatedDocument"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_DOCTO_ORIG",
+    "NUM_VERS_ORIG"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Documento/versão de origem.",
+   "status": "probable"
+  },
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_DOCTO_DEST"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Documento de destino (cópia de trabalho).",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

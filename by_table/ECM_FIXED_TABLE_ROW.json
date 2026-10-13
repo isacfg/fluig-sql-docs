@@ -1,0 +1,172 @@
+{
+ "name": "ECM_FIXED_TABLE_ROW",
+ "domain": "ecm-metadata-forms",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Valores (células) das linhas de um item de tabela fixa de formulário de metadados: cada linha guarda o valor de uma coluna (COLUMN_HTML_ID) em uma linha (ROW_ID).",
+ "lifecycle": "Criada/atualizada ao salvar o formulário; removida em cascata (CascadeType.REMOVE) com o item de tabela fixa.",
+ "key_notes": "PK própria ID; vínculo ao item via (METADATAFORM_ID, HTML_ID_FIXEDTABLE_ITEM). Sem COD_EMPRESA. Uma linha lógica da tabela = várias linhas aqui com mesmo ROW_ID.",
+ "notes_for_agents": "Reconstruir a tabela: filtrar por METADATAFORM_ID + HTML_ID_FIXEDTABLE_ITEM, agrupar por ROW_ID, ordenar por ROW_ORDER, colunas por COLUMN_HTML_ID.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.metadataform.model.FixedTableRowValue"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK sintética (bigint gerado) da célula/linha de valor da tabela fixa.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "COLUMN_HTML_ID",
+   "type": "varchar(10)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "HTML_ID da coluna (ECM_FIXED_TABLE_COLUMN) à qual o valor pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ECM_FIXED_TABLE_COLUMN.HTML_ID",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "ROW_ID",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador da linha da tabela fixa (até 50 chars); agrupa as células da mesma linha.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "ROW_ORDER",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Ordem da linha dentro da tabela fixa.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "COLUMN_VALUE",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor de texto da célula (linha x coluna).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "HTML_ID_FIXEDTABLE_ITEM",
+   "type": "varchar(10)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "HTML_ID do item de tabela fixa dono da linha; FK composta com METADATAFORM_ID.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ECM_FIXED_TABLE_FORM_ITEM.HTML_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "METADATAFORM_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "ID do formulário dono; FK composta com HTML_ID_FIXEDTABLE_ITEM.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ECM_FIXED_TABLE_FORM_ITEM.METADATAFORM_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ECM_FIXED_TABLE_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID_FIXEDTABLE_ITEM"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Tabela fixa dona da célula (FK_ID_FX_TB_ITM_IN_ROW).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "ECM_FIXED_TABLE_COLUMN",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "COLUMN_HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "COLUMN_HTML_ID identifica a coluna da tabela fixa; sem FK física, nomes das colunas de ECM_FIXED_TABLE_COLUMN não verificados.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "ECM_FIXED_TABLE_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID_FIXEDTABLE_ITEM"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join"
+  }
+ ]
+}

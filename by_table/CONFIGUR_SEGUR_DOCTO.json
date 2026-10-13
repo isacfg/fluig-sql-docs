@@ -1,0 +1,224 @@
+{
+ "name": "CONFIGUR_SEGUR_DOCTO",
+ "domain": "ecm-documents",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Lista de permissões/restrições de segurança por documento e versão: quem (usuário, grupo ou todos) tem qual nível de acesso.",
+ "lifecycle": "Várias linhas por versão de documento, criadas ao definir segurança; volume alto.",
+ "key_notes": "PK (COD_EMPRESA, NR_DOCUMENTO, NR_VERSAO, NUM_SEQ). LOG_PERMIS=false representa restrição explícita (findRestrictions). LOG_EXCLUSIV_VERS_ANT mapeia o campo securityVersion.",
+ "notes_for_agents": "Sempre filtrar por COD_EMPRESA+NR_DOCUMENTO+NR_VERSAO. DES_VAL_ATRIBUIC contém matrícula/grupo (user_ref/group ref).",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NR_DOCUMENTO",
+  "NR_VERSAO",
+  "NUM_SEQ"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.DocumentSecurityConfig"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); parte da PK, sempre filtrar por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "DocumentSecurityConfig"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Número (ID lógico) do documento ECM, sem FK física para DOCUMENTO.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "int",
+   "java_entity": "DocumentSecurityConfig"
+  },
+  {
+   "name": "NUM_SEQ",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Sequência da linha de segurança dentro da versão do documento.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "sequence",
+   "java_type": "int",
+   "java_entity": "DocumentSecurityConfig"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número da versão do documento; par com NR_DOCUMENTO identifica a versão.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "DocumentSecurityConfig"
+  },
+  {
+   "name": "IDI_TIP_ATRIBUIC",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do destinatário da atribuição: usuário, grupo ou todos, definindo como interpretar DES_VAL_ATRIBUIC.",
+   "semantic_type": "enum",
+   "values": "1=usuário; 2=grupo; 3=todos (DocumentSecurityConfigTypeEnum)",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "attributionType",
+   "java_type": "Integer",
+   "java_entity": "DocumentSecurityConfig"
+  },
+  {
+   "name": "DES_VAL_ATRIBUIC",
+   "type": "varchar(2000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor da atribuição: matrícula do usuário ou código do grupo conforme IDI_TIP_ATRIBUIC; para tipo 3 (todos) é valor genérico.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "attributionValue",
+   "java_type": "String",
+   "java_entity": "DocumentSecurityConfig"
+  },
+  {
+   "name": "LOG_PERMITE_DOWNLOAD",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o destinatário pode baixar o arquivo.",
+   "semantic_type": "flag",
+   "values": "1=permite; 0=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "downloadEnabled",
+   "java_type": "Boolean",
+   "java_entity": "DocumentSecurityConfig"
+  },
+  {
+   "name": "LOG_PERMIS",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a linha concede (true) ou restringe (false) a permissão.",
+   "semantic_type": "flag",
+   "values": "1=permissão concedida; 0=restrição",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "permission",
+   "java_type": "Boolean",
+   "java_entity": "DocumentSecurityConfig"
+  },
+  {
+   "name": "IDI_NIV_PERMIS_SEGUR",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nível de permissão de segurança concedido.",
+   "semantic_type": "enum",
+   "values": "-1=sem permissão; 0=leitura; 1=gravação; 2=modificação; 3=total (SolvedPermission)",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "securityLevel",
+   "java_type": "Integer",
+   "java_entity": "DocumentSecurityConfig"
+  },
+  {
+   "name": "LOG_EXCLUSIV_VERS_ANT",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Flag securityVersion; exclusivo/herdado da versão anterior (semântica não confirmada).",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "securityVersion",
+   "java_type": "Boolean",
+   "java_entity": "DocumentSecurityConfig"
+  },
+  {
+   "name": "LOG_LISTA_CONTDO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o destinatário pode listar o conteúdo (showContent); default true quando nulo.",
+   "semantic_type": "flag",
+   "values": "1=lista; 0=oculta",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "showContent",
+   "java_type": "Boolean",
+   "java_entity": "DocumentSecurityConfig"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão do documento protegida.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "PENDCIA_NOTIF_EMAIL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: coincidência de nome; NUM_SEQ é sequência local.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

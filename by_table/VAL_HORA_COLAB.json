@@ -1,0 +1,144 @@
+{
+ "name": "VAL_HORA_COLAB",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Histórico do valor da hora de trabalho de um colaborador, usado para custeio de tarefas/processos; cada linha vale a partir do momento da atualização.",
+ "lifecycle": "Nova linha a cada alteração do valor-hora; mantém histórico. Volume baixo.",
+ "key_notes": "Dado financeiro/sensível. Valor vigente = linha ativa mais recente.",
+ "notes_for_agents": "Informação salarial sensível. Named query: findAll.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "DAT_ATUALIZ",
+  "HRA_ATUALIZ",
+  "CD_MATRICULA"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ColleagueHourValue"
+ ],
+ "columns": [
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Matrícula do colaborador ao qual o valor-hora pertence.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE (colleagueId; matrícula/login)",
+   "confidence": "medium",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "ColleagueHourValue"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK. Filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ColleagueHourValue"
+  },
+  {
+   "name": "DAT_ATUALIZ",
+   "type": "date",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Data da atualização do valor-hora.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "updateDate",
+   "java_type": "Date",
+   "java_entity": "ColleagueHourValue"
+  },
+  {
+   "name": "HRA_ATUALIZ",
+   "type": "varchar(8)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Hora da atualização, texto (formato HH:mm:ss ou similar).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "updateHour",
+   "java_type": "String",
+   "java_entity": "ColleagueHourValue"
+  },
+  {
+   "name": "LOG_ATIV",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o registro é o valor vigente.",
+   "semantic_type": "flag",
+   "values": "1=ativo; 0=histórico",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "active",
+   "java_type": "Boolean",
+   "java_entity": "ColleagueHourValue"
+  },
+  {
+   "name": "CD_MATRICULA_RESPONS",
+   "type": "varchar(150)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrícula do responsável que registrou a alteração.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE (colleagueId; matrícula/login)",
+   "confidence": "medium",
+   "java_field": "authorityColleagueId",
+   "java_type": "String",
+   "java_entity": "ColleagueHourValue"
+  },
+  {
+   "name": "VAL_HORA",
+   "type": "double",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor monetário da hora do colaborador.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "hourValue",
+   "java_type": "double",
+   "java_entity": "ColleagueHourValue"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "USER_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Colaborador. [alvo corrigido: USER_CODE/LOGIN pertencem a FDN_USERTENANT]",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

@@ -1,0 +1,220 @@
+{
+ "name": "FDN_CATEGORY",
+ "domain": "permissoes-categorias",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Categorias hierárquicas usadas para agrupar recursos (FDN_RESOURCE) no modelo de permissões. Cada linha é uma categoria, possivelmente filha de outra.",
+ "lifecycle": "Criadas por módulos/administração; baixo volume.",
+ "key_notes": "Hierarquia por PARENT_CATEGORY_ID (auto-relação). IS_INTERNAL e IS_HIDDEN controlam visibilidade (findByTenantAndIdIncludeHidden inclui ocultas). TENANT_ID é anulável.",
+ "notes_for_agents": "Filtrar por TENANT_ID; use IS_HIDDEN=0 para listagens de usuário.",
+ "primary_key": [
+  "CATEGORY_ID"
+ ],
+ "unique_constraints": [
+  [
+   "TENANT_ID",
+   "CATEGORY_CODE"
+  ]
+ ],
+ "indexes": [
+  {
+   "name": "FDNCATEGORY001",
+   "unique": false,
+   "columns": [
+    "PARENT_CATEGORY_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.permission.entity.FDNCategory"
+ ],
+ "columns": [
+  {
+   "name": "CATEGORY_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária da categoria.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNCategory"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Tenant dono da categoria.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNCategory"
+  },
+  {
+   "name": "PARENT_CATEGORY_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Categoria pai na hierarquia; nulo para categoria raiz.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_CATEGORY.CATEGORY_ID",
+   "confidence": "high",
+   "java_field": "parentId",
+   "java_type": "Long",
+   "java_entity": "FDNCategory"
+  },
+  {
+   "name": "CATEGORY_CODE",
+   "type": "varchar(128)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código único da categoria, usado em findByCode.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "code",
+   "java_type": "String",
+   "java_entity": "FDNCategory"
+  },
+  {
+   "name": "CATEGORY_NAME",
+   "type": "varchar(128)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome de exibição da categoria.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "name",
+   "java_type": "String",
+   "java_entity": "FDNCategory"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Descrição livre da categoria.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "FDNCategory"
+  },
+  {
+   "name": "ICON_URL",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "URL/caminho do ícone da categoria.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "iconUrl",
+   "java_type": "String",
+   "java_entity": "FDNCategory"
+  },
+  {
+   "name": "IS_INTERNAL",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica categoria interna do sistema (não criada pelo usuário).",
+   "semantic_type": "flag",
+   "values": "1=interna; 0=não interna",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "isInternal",
+   "java_type": "Boolean",
+   "java_entity": "FDNCategory"
+  },
+  {
+   "name": "IS_HIDDEN",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica categoria oculta nas listagens padrão.",
+   "semantic_type": "flag",
+   "values": "1=oculta; 0=visível",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "isHidden",
+   "java_type": "Boolean",
+   "java_entity": "FDNCategory"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_CATEGORY",
+   "from_cols": [
+    "PARENT_CATEGORY_ID"
+   ],
+   "to_cols": [
+    "CATEGORY_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Categoria pai (auto-relação hierárquica); inferida por nome da coluna e query findByParent.",
+   "status": "probable"
+  },
+  {
+   "to_table": "FDN_CATEGORY_RESOURCE",
+   "from_cols": [
+    "CATEGORY_ID"
+   ],
+   "to_cols": [
+    "CATEGORY_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Recursos vinculados à categoria.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_CATEGORY",
+   "from_cols": [
+    "PARENT_CATEGORY_ID"
+   ],
+   "to_cols": [
+    "CATEGORY_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_CATEGORY_RESOURCE",
+   "from_cols": [
+    "CATEGORY_ID"
+   ],
+   "to_cols": [
+    "CATEGORY_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

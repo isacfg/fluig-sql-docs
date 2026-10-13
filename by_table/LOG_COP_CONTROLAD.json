@@ -1,0 +1,221 @@
+{
+ "name": "LOG_COP_CONTROLAD",
+ "domain": "ecm-documentos",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Log de emissao de copias controladas (impressao controlada) de documentos do GED. Cada linha registra protocolo, documento/versao, area, emissor e impressora.",
+ "lifecycle": "Inserida a cada emissao de copia controlada; apenas append, sem atualizacao esperada.",
+ "key_notes": "PK (NUM_PROTOC, COD_EMPRESA). Entidade ControlledCopyLog. Documento identificado por NR_DOCUMENTO+NR_VERSAO.",
+ "notes_for_agents": "Filtrar por COD_EMPRESA. Join com DOCUMENTO por (COD_EMPRESA, NR_DOCUMENTO, NR_VERSAO). Contem matriculas de usuario.",
+ "primary_key": [
+  "NUM_PROTOC",
+  "COD_EMPRESA"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.ControlledCopyLog"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Tenant (empresa) dona da linha; faz parte da PK e deve ser filtrada em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ControlledCopyLog"
+  },
+  {
+   "name": "NUM_PROTOC",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Numero de protocolo sequencial da copia controlada emitida.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "protocolNumber",
+   "java_type": "int",
+   "java_entity": "ControlledCopyLog"
+  },
+  {
+   "name": "CD_MATR_RESPONS_AREA",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matricula do responsavel pela area atribuida a copia controlada.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE (via matricula)",
+   "confidence": "medium",
+   "java_field": "areaAssignColleagueId",
+   "java_type": "String",
+   "java_entity": "ControlledCopyLog"
+  },
+  {
+   "name": "COD_AREA",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Codigo da area destinataria da copia controlada.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "AREA_DEST.COD_AREA",
+   "confidence": "medium",
+   "java_field": "areaCode",
+   "java_type": "String",
+   "java_entity": "ControlledCopyLog"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Numero (id) do documento do GED cuja copia foi emitida.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "int",
+   "java_entity": "ControlledCopyLog"
+  },
+  {
+   "name": "COD_SERVID_EXEC",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador do servidor que executou a emissao da copia.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "execServerId",
+   "java_type": "String",
+   "java_entity": "ControlledCopyLog"
+  },
+  {
+   "name": "CD_MATR_EMISSOR",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matricula do usuario que emitiu a copia controlada.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE (via matricula)",
+   "confidence": "high",
+   "java_field": "issueColleagueId",
+   "java_type": "String",
+   "java_entity": "ControlledCopyLog"
+  },
+  {
+   "name": "DAT_EMIS",
+   "type": "date",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data de emissao da copia controlada.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "issueDate",
+   "java_type": "Date",
+   "java_entity": "ControlledCopyLog"
+  },
+  {
+   "name": "HRA_EMIS",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Hora de emissao no formato texto (HH:mm:ss provavel).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "issueTime",
+   "java_type": "String",
+   "java_entity": "ControlledCopyLog"
+  },
+  {
+   "name": "NOM_LOCALIZ_IMPRSOR",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome/localizacao da impressora usada na emissao.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "printer",
+   "java_type": "String",
+   "java_entity": "ControlledCopyLog"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versao do documento cuja copia foi emitida.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "ControlledCopyLog"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "AREA_DEST",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_AREA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_AREA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Area destinataria da copia; nome coincide, sem FK fisica nem join no codigo verificado.",
+   "status": "probable"
+  },
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Documento/versao cuja copia foi emitida.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

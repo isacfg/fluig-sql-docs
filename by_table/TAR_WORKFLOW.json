@@ -1,0 +1,143 @@
+{
+ "name": "TAR_WORKFLOW",
+ "domain": "bpm-tarefas",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Subtipo de tarefa que liga uma tarefa do gerenciador à movimentação (etapa) de uma instância de processo de workflow.",
+ "lifecycle": "Uma linha por tarefa do subtipo, criada junto com a linha de TAR_CTRAL.",
+ "key_notes": "Herda de TAR_ESFOR (herança JOINED).",
+ "notes_for_agents": "Usar named queries findWorkflowTaskByMovementSequence[AndUser].",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_TAREFA"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.WorkflowTask"
+ ],
+ "columns": [
+  {
+   "name": "NUM_SEQ_MOVTO",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sequência da movimentação (etapa) do processo a que a tarefa se refere.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "HISTOR_PROCES.NUM_SEQ_MOVTO",
+   "confidence": "high",
+   "java_field": "movementSequence",
+   "java_type": "int",
+   "java_entity": "WorkflowTask"
+  },
+  {
+   "name": "NUM_PROCES",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Número da instância (solicitação) de processo de workflow.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_WORKFLOW.NUM_PROCES",
+   "confidence": "high",
+   "java_field": "processInstanceId",
+   "java_type": "int",
+   "java_entity": "WorkflowTask"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK. Filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "WorkflowTask"
+  },
+  {
+   "name": "COD_TAREFA",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código da tarefa (taskId); parte da PK e elo da herança JOINED com TAR_CTRAL.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "TAR_CTRAL.COD_TAREFA",
+   "confidence": "high",
+   "java_field": "taskId",
+   "java_type": "int",
+   "java_entity": "WorkflowTask"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "TAR_ESFOR",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "cardinality": "1:1",
+   "kind": "physical-fk",
+   "description": "Tarefa pai na hierarquia JOINED.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "HISTOR_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Movimentação do processo; sem FK física.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "TAR_CTRAL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "cardinality": "1:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "TAR_ESFOR",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "cardinality": "1:1",
+   "kind": "jpa-join"
+  }
+ ]
+}

@@ -1,0 +1,37 @@
+{
+ "name": "QRTZ_LOCKS",
+ "domain": "scheduler-quartz",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Linhas de lock usadas pelo Quartz em modo cluster (SELECT FOR UPDATE) para sincronizar nós.",
+ "lifecycle": "Poucas linhas fixas; semeadas na instalação.",
+ "key_notes": "",
+ "notes_for_agents": "Não consultar para negócio.",
+ "primary_key": [
+  "LOCK_NAME"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.scheduler.entity.quartz.QrtzLocks"
+ ],
+ "columns": [
+  {
+   "name": "LOCK_NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Nome do lock global do Quartz (ex.: TRIGGER_ACCESS, JOB_ACCESS, STATE_ACCESS) usado em SELECT FOR UPDATE para sincronizar nós.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "lockName",
+   "java_type": "String",
+   "java_entity": "QrtzLocks"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

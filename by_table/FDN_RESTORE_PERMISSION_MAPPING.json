@@ -1,0 +1,108 @@
+{
+ "name": "FDN_RESTORE_PERMISSION_MAPPING",
+ "domain": "foundation-identity-access",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Backup em XML das permissões de um recurso, usado para restaurar permissões.",
+ "lifecycle": "Criada quando permissões de um recurso são salvas para restauração; volume baixo.",
+ "key_notes": "Conteúdo em LOB (XML_PERMISSION).",
+ "notes_for_agents": "Evite selecionar XML_PERMISSION em varreduras (LOB).",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.permission.entity.FDNRestorePermissionMapping"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNRestorePermissionMapping"
+  },
+  {
+   "name": "RESOURCE_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Recurso cujas permissões foram salvas.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_RESOURCE.RESOURCE_ID",
+   "confidence": "high",
+   "java_field": "resourceId",
+   "java_type": "Long",
+   "java_entity": "FDNRestorePermissionMapping"
+  },
+  {
+   "name": "XML_PERMISSION",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "XML serializado com as permissões do recurso a restaurar (longtext).",
+   "semantic_type": "xml",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "xmlPermission",
+   "java_type": "String",
+   "java_entity": "FDNRestorePermissionMapping"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant do recurso (sem FK declarada).",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNRestorePermissionMapping"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_RESOURCE",
+   "from_cols": [
+    "RESOURCE_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Recurso cujas permissões são restauradas.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_RESOURCE",
+   "from_cols": [
+    "RESOURCE_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk"
+  }
+ ]
+}

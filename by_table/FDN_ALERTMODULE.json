@@ -1,0 +1,136 @@
+{
+ "name": "FDN_ALERTMODULE",
+ "domain": "foundation-alert",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Modulo/aplicacao do Fluig que agrupa tipos de evento de alerta, por tenant.",
+ "lifecycle": "Registrado na instalacao ou por tenant; raramente muda. Volume baixo.",
+ "key_notes": "Multi-tenant via TENANT_ID. KEY/CONSTRAINT do input sao artefatos do DDL.",
+ "notes_for_agents": "Filtre por TENANT_ID.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "INDEX_ALERT_MODULE_KEY",
+   "unique": false,
+   "columns": [
+    "MODULE_KEY"
+   ]
+  },
+  {
+   "name": "FK_KLLTETF2YJBVVHXPPUPB7UWRQ",
+   "unique": false,
+   "columns": [
+    "TENANT_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.alert.entity.FDNAlertModule"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador sequencial do modulo (PK).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNAlertModule"
+  },
+  {
+   "name": "DESCRIPTION_KEY",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave i18n do nome/descricao do modulo.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "descriptionKey",
+   "java_type": "String",
+   "java_entity": "FDNAlertModule"
+  },
+  {
+   "name": "MODULE_KEY",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave logica unica do modulo (findByKey).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "moduleKey",
+   "java_type": "String",
+   "java_entity": "FDNAlertModule"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dono do registro.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNAlertModule"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Tenant.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_ALERTEVENTTYPE",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "MODULE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Eventos do modulo.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_ALERTEVENTTYPE",
+   "from_cols": [
+    "MODULE_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

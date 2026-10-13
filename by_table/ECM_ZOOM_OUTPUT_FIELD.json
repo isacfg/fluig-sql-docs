@@ -1,0 +1,428 @@
+{
+ "name": "ECM_ZOOM_OUTPUT_FIELD",
+ "domain": "ecm-metadata-forms",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Mapeia um campo (DISPLAY_KEY) do dataset do zoom para outro item do formulario (HTML_ID) que sera preenchido quando um registro e selecionado.",
+ "lifecycle": "Criada ao configurar saidas do zoom; recriada ao salvar o formulario. Volume baixo.",
+ "key_notes": "Sem FK fisica visivel no input; JPA @JoinColumns (FK_ID_ZM_OUT_DSPLY) para ECM_ZOOM_FIELD_FORM_ITEM via (METADATAFORM_ID,HTML_ID_ZOOM_ITEM). HTML_ID e varchar(255) aqui (mas 10 nas tabelas de item) e NAO e FK; as relacoes inferidas para as tabelas *_FORM_ITEM sao heuristicas erradas.",
+ "notes_for_agents": "Para achar o item de destino faca lookup por (METADATAFORM_ID, HTML_ID) em todas as tabelas *_FORM_ITEM.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.metadataform.model.ZoomOutputField"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador sequencial da linha (PK).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "HTML_ID",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "HTML_ID do item do formulario de destino que recebe o valor do campo de saida (referencia logica, sem FK).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "ECM_ABSTRACT_FORM_ITEM.HTML_ID",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "DISPLAY_KEY",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Campo do dataset cujo valor e copiado para o item de destino.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "HTML_ID_ZOOM_ITEM",
+   "type": "varchar(10)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "HTML_ID do item zoom pai; parte da FK composta.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ECM_ZOOM_FIELD_FORM_ITEM.HTML_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "METADATAFORM_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Formulario do item zoom pai (e do item de destino).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ECM_ZOOM_FIELD_FORM_ITEM.METADATAFORM_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ECM_ZOOM_FIELD_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID_ZOOM_ITEM"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Item zoom dono do mapeamento de saida (@JoinColumns, FK_ID_ZM_OUT_DSPLY).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "ECM_ABSTRACT_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Item de destino preenchido; polimorfico entre as tabelas *_FORM_ITEM, sem FK.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "ECM_BUTTON_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heuristica por nome de coluna: tabela concreta nao e alvo unico; o destino e polimorfico (ver ECM_ABSTRACT_FORM_ITEM).",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_DATE_FIELD_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heuristica por nome de coluna: tabela concreta nao e alvo unico; o destino e polimorfico (ver ECM_ABSTRACT_FORM_ITEM).",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_DIVIDER_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heuristica por nome de coluna: tabela concreta nao e alvo unico; o destino e polimorfico (ver ECM_ABSTRACT_FORM_ITEM).",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_DYNAMIC_TABLE_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heuristica por nome de coluna: tabela concreta nao e alvo unico; o destino e polimorfico (ver ECM_ABSTRACT_FORM_ITEM).",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_EVALUATION_FIELD_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heuristica por nome de coluna: tabela concreta nao e alvo unico; o destino e polimorfico (ver ECM_ABSTRACT_FORM_ITEM).",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_EXTERNAL_LINK_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heuristica por nome de coluna: tabela concreta nao e alvo unico; o destino e polimorfico (ver ECM_ABSTRACT_FORM_ITEM).",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_FIXED_TABLE_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heuristica por nome de coluna: tabela concreta nao e alvo unico; o destino e polimorfico (ver ECM_ABSTRACT_FORM_ITEM).",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_IMAGE_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heuristica por nome de coluna: tabela concreta nao e alvo unico; o destino e polimorfico (ver ECM_ABSTRACT_FORM_ITEM).",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_LABEL_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heuristica por nome de coluna: tabela concreta nao e alvo unico; o destino e polimorfico (ver ECM_ABSTRACT_FORM_ITEM).",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_LIST_FIELD_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heuristica por nome de coluna: tabela concreta nao e alvo unico; o destino e polimorfico (ver ECM_ABSTRACT_FORM_ITEM).",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_NUMBER_FIELD_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heuristica por nome de coluna: tabela concreta nao e alvo unico; o destino e polimorfico (ver ECM_ABSTRACT_FORM_ITEM).",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_SECTION_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heuristica por nome de coluna: tabela concreta nao e alvo unico; o destino e polimorfico (ver ECM_ABSTRACT_FORM_ITEM).",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_TAB_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heuristica por nome de coluna: tabela concreta nao e alvo unico; o destino e polimorfico (ver ECM_ABSTRACT_FORM_ITEM).",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_TEXT_AREA_FIELD_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heuristica por nome de coluna: tabela concreta nao e alvo unico; o destino e polimorfico (ver ECM_ABSTRACT_FORM_ITEM).",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_TEXT_FIELD_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heuristica por nome de coluna: tabela concreta nao e alvo unico; o destino e polimorfico (ver ECM_ABSTRACT_FORM_ITEM).",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_TITLE_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heuristica por nome de coluna: tabela concreta nao e alvo unico; o destino e polimorfico (ver ECM_ABSTRACT_FORM_ITEM).",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_UPLOAD_FILE_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heuristica por nome de coluna: tabela concreta nao e alvo unico; o destino e polimorfico (ver ECM_ABSTRACT_FORM_ITEM).",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_ZOOM_FIELD_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heuristica por nome de coluna: tabela concreta nao e alvo unico; o destino e polimorfico (ver ECM_ABSTRACT_FORM_ITEM).",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_ZOOM_USER_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heuristica por nome de coluna: tabela concreta nao e alvo unico; o destino e polimorfico (ver ECM_ABSTRACT_FORM_ITEM).",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": [
+  {
+   "from_table": "ECM_ZOOM_FIELD_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID_ZOOM_ITEM"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join"
+  }
+ ]
+}

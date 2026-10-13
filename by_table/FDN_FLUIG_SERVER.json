@@ -1,0 +1,81 @@
+{
+ "name": "FDN_FLUIG_SERVER",
+ "domain": "integracao-servidores",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Servidores Fluig cadastrados (outras instâncias Fluig conectadas), cada um com credenciais OAuth em FDN_AUTHORIZECLIENTDATA.",
+ "lifecycle": "Cadastro administrativo; poucas linhas.",
+ "key_notes": "Credenciais ficam na tabela referenciada, não aqui.",
+ "notes_for_agents": "Dados sensíveis (consumer key/secret) em FDN_AUTHORIZECLIENTDATA.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.fluigserver.entity.FluigServer"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "BIGINT(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária do servidor Fluig cadastrado.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FluigServer"
+  },
+  {
+   "name": "NAME",
+   "type": "VARCHAR(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do servidor Fluig.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "name",
+   "java_type": "String",
+   "java_entity": "FluigServer"
+  },
+  {
+   "name": "AUTHORIZECLIENTDATA_ID",
+   "type": "BIGINT(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Dados de cliente OAuth usados para autenticar neste servidor.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_AUTHORIZECLIENTDATA.AUTHORIZECLIENTDATA_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_AUTHORIZECLIENTDATA",
+   "from_cols": [
+    "AUTHORIZECLIENTDATA_ID"
+   ],
+   "to_cols": [
+    "AUTHORIZECLIENTDATA_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Credenciais OAuth do servidor (também FK física).",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

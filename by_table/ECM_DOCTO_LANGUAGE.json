@@ -1,0 +1,101 @@
+{
+ "name": "ECM_DOCTO_LANGUAGE",
+ "domain": "ecm-metadata-forms",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Idiomas disponíveis para documentos por tenant (ECM).",
+ "lifecycle": "Poucas linhas por tenant.",
+ "key_notes": "Multi-tenant por TENANT_ID.",
+ "notes_for_agents": "",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [
+  [
+   "TENANT_ID",
+   "LANGUAGE_CODE"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.DocumentLanguage"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador do idioma de documento.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "DocumentLanguage"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição do idioma.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "DocumentLanguage"
+  },
+  {
+   "name": "LANGUAGE_CODE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do idioma (ex. pt_BR); único por tenant.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "languageCode",
+   "java_type": "String",
+   "java_entity": "DocumentLanguage"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant do idioma.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "long",
+   "java_entity": "DocumentLanguage"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Tenant.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

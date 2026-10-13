@@ -1,0 +1,129 @@
+{
+ "name": "WCM_RESOURCEKITFILE",
+ "domain": "wcm-resources",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Arquivos que compõem um kit de recursos, com tipo, caminho e ordem.",
+ "lifecycle": "Carga de catálogo; poucas linhas.",
+ "key_notes": "Unique (RESOURCE_KIT_ID, RESOURCE_TYPE, RESOURCE_PATH).",
+ "notes_for_agents": "Named query findByKit.",
+ "primary_key": [
+  "RESOURCE_KIT_FILE_ID"
+ ],
+ "unique_constraints": [
+  [
+   "RESOURCE_KIT_ID",
+   "RESOURCE_TYPE",
+   "RESOURCE_PATH"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.wcm.core.entity.WCMResourceKitFile"
+ ],
+ "columns": [
+  {
+   "name": "RESOURCE_KIT_FILE_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK surrogate do arquivo do kit.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "WCMResourceKitFile"
+  },
+  {
+   "name": "RESOURCE_ORDER",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Ordem de carga do arquivo no kit.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "order",
+   "java_type": "Integer",
+   "java_entity": "WCMResourceKitFile"
+  },
+  {
+   "name": "RESOURCE_PATH",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Caminho/URL do arquivo do recurso.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "resource",
+   "java_type": "String",
+   "java_entity": "WCMResourceKitFile"
+  },
+  {
+   "name": "RESOURCE_TYPE",
+   "type": "varchar(16)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do recurso (String livre até 16 caracteres, ex.: JS/CSS).",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "type",
+   "java_type": "String",
+   "java_entity": "WCMResourceKitFile"
+  },
+  {
+   "name": "RESOURCE_KIT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Kit dono do arquivo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "WCM_RESOURCEKIT.RESOURCE_KIT_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "WCM_RESOURCEKIT",
+   "from_cols": [
+    "RESOURCE_KIT_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_KIT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Kit dono do arquivo.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "WCM_RESOURCEKIT",
+   "from_cols": [
+    "RESOURCE_KIT_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_KIT_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk"
+  }
+ ]
+}

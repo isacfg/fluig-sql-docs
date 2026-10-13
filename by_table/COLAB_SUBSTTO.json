@@ -1,0 +1,198 @@
+{
+ "name": "COLAB_SUBSTTO",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Configuração de substituição de usuário (delegação): quem é substituído, quem substitui, período e quais tipos de tarefa (GED/workflow) são delegados.",
+ "lifecycle": "Criada por usuário/admin ao cadastrar ausência; mantida após fim da vigência.",
+ "key_notes": "PK substituta COLLEAGUE_REPLACEMENT_ID. Vigência por DAT_INIC_VALID/DAT_FIM_VALID (datas sem hora).",
+ "notes_for_agents": "Substituição vigente: hoje entre DAT_INIC_VALID e DAT_FIM_VALID. Quem é substituto: COD_SUBSTTO; substituído: CD_MATRICULA. Ver COLAB_SUBSTTO_PROCESSO para restrição a processos.",
+ "primary_key": [
+  "COLLEAGUE_REPLACEMENT_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.foundation.model.ColleagueReplacement"
+ ],
+ "columns": [
+  {
+   "name": "COLLEAGUE_REPLACEMENT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador único (surrogate) da substituição.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "ColleagueReplacement"
+  },
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrícula do usuário substituído (ausente).",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "high",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "ColleagueReplacement"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dono da linha; sempre filtrar por este valor.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ColleagueReplacement"
+  },
+  {
+   "name": "COD_SUBSTTO",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrícula do usuário substituto.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "high",
+   "java_field": "replacementId",
+   "java_type": "String",
+   "java_entity": "ColleagueReplacement"
+  },
+  {
+   "name": "DAT_FIM_VALID",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data final de vigência da substituição.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "validationFinalDate",
+   "java_type": "Date",
+   "java_entity": "ColleagueReplacement"
+  },
+  {
+   "name": "DAT_INIC_VALID",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data inicial de vigência da substituição.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "validationStartDate",
+   "java_type": "Date",
+   "java_entity": "ColleagueReplacement"
+  },
+  {
+   "name": "LOG_TAR_GED",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Substituto visualiza tarefas do GED (aprovações) do substituído.",
+   "semantic_type": "flag",
+   "values": "1=sim; 0=não",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "viewGEDTasks",
+   "java_type": "Boolean",
+   "java_entity": "ColleagueReplacement"
+  },
+  {
+   "name": "LOG_TAR_WORKFLOW",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Substituto visualiza tarefas de workflow do substituído.",
+   "semantic_type": "flag",
+   "values": "1=sim; 0=não",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "viewWorkflowTasks",
+   "java_type": "Boolean",
+   "java_entity": "ColleagueReplacement"
+  },
+  {
+   "name": "DSL_REPLACEMENT_JUSTIFY",
+   "type": "varchar(500)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Justificativa da substituição, até 500 caracteres.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "replacementJustify",
+   "java_type": "String",
+   "java_entity": "ColleagueReplacement"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "COLAB_SUBSTTO_PROCESSO",
+   "from_cols": [
+    "COLLEAGUE_REPLACEMENT_ID"
+   ],
+   "to_cols": [
+    "COLLEAGUE_REPLACEMENT_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable",
+   "description": "Processos específicos delegados nesta substituição.",
+   "status": "probable"
+  },
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_SUBSTTO"
+   ],
+   "to_cols": [
+    "TENANT_ID",
+    "USER_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Usuário substituto. [alvo corrigido: USER_CODE/LOGIN pertencem a FDN_USERTENANT]",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "COLAB_SUBSTTO_PROCESSO",
+   "from_cols": [
+    "COLLEAGUE_REPLACEMENT_ID"
+   ],
+   "to_cols": [
+    "COLLEAGUE_REPLACEMENT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

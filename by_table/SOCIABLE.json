@@ -1,0 +1,868 @@
+{
+ "name": "SOCIABLE",
+ "domain": "social",
+ "module": "03001-fluig-database-social",
+ "purpose": "Tabela única (SINGLE_TABLE) de conteúdos \"sociáveis\" da rede social: posts, comentários, objetos sociais (links/recomendações) e objetos no-code (formulários). O tipo é dado por SOCIABLETYPE.",
+ "lifecycle": "Linhas criadas ao publicar post/comentário/objeto; contadores (curtidas, comentários etc.) incrementados via UPDATE; remoção lógica por REMOVED.",
+ "key_notes": "Herança SINGLE_TABLE: colunas de cada subclasse (SociableNoCodeObject, SocialObject, SociableComment, SocialPost) são NULL nas outras. Soft-delete em REMOVED. Multi-tenant por TENANTID. Discriminador SOCIABLETYPE = nome simples da entidade.",
+ "notes_for_agents": "Sempre filtrar REMOVED=0, TENANTID e SOCIABLETYPE. Colunas de imagem/arquivo (HEIGHT, WIDTH, MIMETYPE) pertencem a anexos. Conteúdo livre em TEXT/COMMENTS pode ter dados pessoais.",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "SociableCommentI001",
+   "unique": false,
+   "columns": [
+    "sociable_id",
+    "removed",
+    "numberDenouncements",
+    "id"
+   ]
+  },
+  {
+   "name": "SociableCommentI002",
+   "unique": false,
+   "columns": [
+    "sociable_id",
+    "removed",
+    "user_id"
+   ]
+  },
+  {
+   "name": "SocialObjectI001",
+   "unique": false,
+   "columns": [
+    "objectClass",
+    "removed",
+    "objectId"
+   ]
+  },
+  {
+   "name": "SocialPostI001",
+   "unique": false,
+   "columns": [
+    "removed",
+    "numberDenouncements",
+    "social_id",
+    "visibility"
+   ]
+  },
+  {
+   "name": "SocialPostI002",
+   "unique": false,
+   "columns": [
+    "removed",
+    "tenantid",
+    "numberDenouncements"
+   ]
+  },
+  {
+   "name": "SocialPostI003",
+   "unique": false,
+   "columns": [
+    "removed",
+    "social_id",
+    "lastupdatedate",
+    "visibility"
+   ]
+  },
+  {
+   "name": "SocialPostI004",
+   "unique": false,
+   "columns": [
+    "removed",
+    "numberDenouncements",
+    "linkedobject_id"
+   ]
+  },
+  {
+   "name": "SocialPostI005",
+   "unique": false,
+   "columns": [
+    "removed",
+    "tenantid",
+    "id"
+   ]
+  },
+  {
+   "name": "SocialPostI006",
+   "unique": false,
+   "columns": [
+    "sociableType",
+    "social_id",
+    "numberDenouncements",
+    "visibility",
+    "user_id"
+   ]
+  },
+  {
+   "name": "SocialPostI007",
+   "unique": false,
+   "columns": [
+    "sociableType",
+    "removed",
+    "numberDenouncements",
+    "lastupdatedate"
+   ]
+  },
+  {
+   "name": "SociableNoCodeObjectI001",
+   "unique": false,
+   "columns": [
+    "tenantid",
+    "NOCODE_EXTERNAL_ID"
+   ]
+  },
+  {
+   "name": "SocialPostI008",
+   "unique": false,
+   "columns": [
+    "objectId",
+    "objectClass"
+   ]
+  },
+  {
+   "name": "SocialPostI009",
+   "unique": false,
+   "columns": [
+    "objectId",
+    "objectClass",
+    "sociableType",
+    "removed",
+    "tenantid"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.social.sociable.entity.SociableNoCodeObject",
+  "com.totvs.technology.social.sociable.entity.Sociable",
+  "com.totvs.technology.social.sociable.entity.SocialObject",
+  "com.totvs.technology.social.sociable.entity.SociableComment",
+  "com.totvs.technology.social.shareplace.post.entity.SocialPost"
+ ],
+ "columns": [
+  {
+   "name": "SOCIABLETYPE",
+   "type": "varchar(128)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Discriminador de herança: nome da entidade da linha.",
+   "semantic_type": "enum",
+   "values": "SociableComment=comentário; SocialPost=post; SocialObject=objeto social/recomendação; SociableNoCodeObject=objeto no-code (formulário); (valores confirmados pelas queries/entidades)",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id do conteúdo; PK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "CREATIONDATE",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de criação da linha (timestamp).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "LASTUPDATEDATE",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora da última alteração da linha (timestamp).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TENANTID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id do tenant (empresa) dono da linha; filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "CUSTOMDATA",
+   "type": "varchar(1000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Dados customizados em texto livre (até 1000 chars) anexados ao conteúdo.",
+   "semantic_type": "json",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "EDITIONDATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora da última edição pelo autor (distinta de LASTUPDATEDATE, que muda também com contadores).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "editionDate",
+   "java_type": "Date",
+   "java_entity": "SociableNoCodeObject"
+  },
+  {
+   "name": "NUMBERCOMMENTS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Contador denormalizado de comentários do conteúdo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "NUMBERDENOUNCEMENTS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Contador denormalizado de denúncias; conteúdo com valor >0 é filtrado em listagens.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "NUMBERLIKES",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Contador denormalizado de curtidas.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "NUMBERSHARES",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Contador denormalizado de compartilhamentos.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "NUMBERWATCHERS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Contador denormalizado de seguidores/observadores do conteúdo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "REMOVED",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Remoção lógica do conteúdo.",
+   "semantic_type": "flag",
+   "values": "1=removido; 0=ativo",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TAGS",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tags do conteúdo em texto (varchar 255).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "URL",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "URL associada ao conteúdo/anexo.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "NOCODE_EXTERNAL_ID",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "(SociableNoCodeObject) Id do objeto externo no app no-code (ex.: documento/formulário).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "externalId",
+   "java_type": "String",
+   "java_entity": "SociableNoCodeObject"
+  },
+  {
+   "name": "NOCODE_APP_ID",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "(SociableNoCodeObject) Aplicação no-code de origem.",
+   "semantic_type": "enum",
+   "values": "FORMS=formulários",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "appId",
+   "java_type": "SociableNoCodeApp",
+   "java_entity": "SociableNoCodeObject"
+  },
+  {
+   "name": "NOCODE_TYPE_ID",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "(SociableNoCodeObject) Tipo do objeto no-code.",
+   "semantic_type": "enum",
+   "values": "FORM=formulário",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "typeId",
+   "java_type": "SociableNoCodeObjectType",
+   "java_entity": "SociableNoCodeObject"
+  },
+  {
+   "name": "NOCODE_TITLE",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "(SociableNoCodeObject) Título exibido do objeto no-code.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "title",
+   "java_type": "String",
+   "java_entity": "SociableNoCodeObject"
+  },
+  {
+   "name": "COMMENTS",
+   "type": "varchar(700)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "(SociableComment) Texto do comentário (até 700 chars).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "comment",
+   "java_type": "String",
+   "java_entity": "SociableComment"
+  },
+  {
+   "name": "HASMENTIONS",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "(SocialPost) Indica que o conteúdo contém @menções (ver MENTION).",
+   "semantic_type": "flag",
+   "values": "1=sim; 0=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "LINK",
+   "type": "varchar(2048)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "(SocialPost) Link anexado ao post (até 2048 chars).",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "SOCIABLE_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "(SociableComment) Conteúdo ao qual o comentário pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIABLE.ID",
+   "confidence": "high",
+   "java_field": "sociableId",
+   "java_type": "Long",
+   "java_entity": "SociableComment"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "varchar(4000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "(SocialObject) Descrição do objeto social (até 4000 chars).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "OBJECTCLASS",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "(SocialObject) Classe do objeto externo referenciado (polimórfico).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "OBJECTID",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "(SocialObject) Id (texto) do objeto externo referenciado; par com OBJECTCLASS.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TEXT",
+   "type": "TEXT",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Texto do post ou objeto social (SocialPost até 10000; SocialObject até 700).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "THUMBURL",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "(SocialObject) URL da miniatura.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TYPE",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "(SocialPost) Tipo do post, ordinal de SocialPostType.",
+   "semantic_type": "enum",
+   "values": "0=DEFAULT; 1=RECOMMENDATION",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "VISIBILITY",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "(SocialPost) Visibilidade, ordinal de SocialPostVisibility.",
+   "semantic_type": "enum",
+   "values": "0=PUBLIC; 1=PRIVATE; 2=CUSTOM",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "SOCIAL_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Perfil/comunidade social onde o conteúdo foi publicado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIAL.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "USER_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Perfil social (SocialUser) autor do conteúdo; não é FDN_USER.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIAL.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "LINKEDOBJECT_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "(SocialPost) Objeto sociável vinculado ao post (ex.: recomendação).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIABLE.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "HEIGHT",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Altura em pixels da mídia/anexo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "WIDTH",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Largura em pixels da mídia/anexo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "MIMETYPE",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "MIME type do anexo.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "SOCIAL",
+   "from_cols": [
+    "SOCIAL_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Perfil/comunidade onde foi publicado",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "SOCIAL",
+   "from_cols": [
+    "USER_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Autor (SocialUser)",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "SOCIABLE",
+   "from_cols": [
+    "SOCIABLE_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Comentário -> conteúdo pai (auto-relação)",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "SOCIABLE",
+   "from_cols": [
+    "LINKEDOBJECT_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Post -> objeto sociável vinculado (auto-relação)",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "FDN_USER",
+   "from_cols": [
+    "USER_ID"
+   ],
+   "to_cols": [
+    "USER_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome de coluna rejeitada: USER_ID nesta tabela é SOCIAL.ID (perfil social), não FDN_USER.USER_ID.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": [
+  {
+   "from_table": "MENTION",
+   "from_cols": [
+    "MENTIONINGID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "SOCIABLE",
+   "from_cols": [
+    "SOCIABLE_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "SOCIABLE",
+   "from_cols": [
+    "LINKEDOBJECT_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "SOCIABLEDENOUNCEMENT",
+   "from_cols": [
+    "SOCIABLE_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "SOCIABLELIKE",
+   "from_cols": [
+    "SOCIABLE_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "SOCIABLESHARE",
+   "from_cols": [
+    "SOCIABLE_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "SOCIABLEWATCH",
+   "from_cols": [
+    "SOCIABLE_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "SOCIALPOSTUSER",
+   "from_cols": [
+    "POST_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "SOCIAL_POSTATTACHMENT",
+   "from_cols": [
+    "POST_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:M-via-this-table",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "SOCIAL_POSTATTACHMENT",
+   "from_cols": [
+    "ATTACHMENT_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:M-via-this-table",
+   "kind": "physical-fk"
+  }
+ ]
+}

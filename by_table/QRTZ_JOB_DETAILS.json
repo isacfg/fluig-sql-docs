@@ -1,0 +1,198 @@
+{
+ "name": "QRTZ_JOB_DETAILS",
+ "domain": "scheduler-quartz",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Definição dos jobs agendados no Quartz (classe, grupo, nome, dados). Entidade com named queries usadas pelo painel de agendamentos do Fluig.",
+ "lifecycle": "Criada ao registrar um job; removida ao desagendar.",
+ "key_notes": "Sem tenant; JOB_GROUP/JOB_NAME identificam o job.",
+ "notes_for_agents": "JOB_DATA é BLOB serializado. Join com QRTZ_TRIGGERS por (JOB_GROUP, JOB_NAME).",
+ "primary_key": [
+  "JOB_GROUP",
+  "JOB_NAME"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.scheduler.entity.quartz.QrtzJobDetails"
+ ],
+ "columns": [
+  {
+   "name": "JOB_GROUP",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Grupo do job Quartz; parte da chave do job em QRTZ_JOB_DETAILS.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "QRTZ_JOB_DETAILS.JOB_GROUP",
+   "confidence": "high",
+   "java_field": "jobGroup",
+   "java_type": "String",
+   "java_entity": "QrtzJobDetails"
+  },
+  {
+   "name": "JOB_NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Nome do job Quartz dentro do grupo; parte da chave do job em QRTZ_JOB_DETAILS.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "QRTZ_JOB_DETAILS.JOB_NAME",
+   "confidence": "high",
+   "java_field": "jobName",
+   "java_type": "String",
+   "java_entity": "QrtzJobDetails"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição textual do job, usada em buscas por filtro (named query findJobDetailsByFilterSearch).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "QrtzJobDetails"
+  },
+  {
+   "name": "IS_DURABLE",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Se true, o job permanece armazenado mesmo sem triggers associados.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "isDurable",
+   "java_type": "boolean",
+   "java_entity": "QrtzJobDetails"
+  },
+  {
+   "name": "IS_STATEFUL",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Legado Quartz: job stateful (execução não concorrente, persiste JobDataMap).",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "isStateful",
+   "java_type": "boolean",
+   "java_entity": "QrtzJobDetails"
+  },
+  {
+   "name": "IS_VOLATILE",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Legado Quartz: job volátil (não sobrevive a reinício).",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "isVolatile",
+   "java_type": "boolean",
+   "java_entity": "QrtzJobDetails"
+  },
+  {
+   "name": "JOB_CLASS_NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome completo da classe Java que implementa o job executado pelo scheduler.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "jobClassName",
+   "java_type": "String",
+   "java_entity": "QrtzJobDetails"
+  },
+  {
+   "name": "JOB_DATA",
+   "type": "longblob",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "JobDataMap serializado (binário) com parâmetros passados ao job.",
+   "semantic_type": "blob",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "jobData",
+   "java_type": "byte[]",
+   "java_entity": "QrtzJobDetails"
+  },
+  {
+   "name": "REQUESTS_RECOVERY",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Se true, o job é reexecutado quando a instância que o rodava falha.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "requestsRecovery",
+   "java_type": "boolean",
+   "java_entity": "QrtzJobDetails"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "QRTZ_FIRED_TRIGGERS",
+   "from_cols": [
+    "JOB_GROUP",
+    "JOB_NAME"
+   ],
+   "to_cols": [
+    "JOB_GROUP",
+    "JOB_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "QRTZ_JOB_LISTENERS",
+   "from_cols": [
+    "JOB_GROUP",
+    "JOB_NAME"
+   ],
+   "to_cols": [
+    "JOB_GROUP",
+    "JOB_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "QRTZ_TRIGGERS",
+   "from_cols": [
+    "JOB_GROUP",
+    "JOB_NAME"
+   ],
+   "to_cols": [
+    "JOB_GROUP",
+    "JOB_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

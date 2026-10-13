@@ -1,0 +1,320 @@
+{
+ "name": "MOVTO_APROVAC",
+ "domain": "ecm-documentos",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Movimentos de aprovacao de documentos do GED: cada acao (analise, aprovacao, assinatura) de um aprovador numa iteracao e nivel de aprovacao de uma versao.",
+ "lifecycle": "Inserida a cada acao de aprovador no fluxo de aprovacao do documento; cresce com o uso de aprovacao.",
+ "key_notes": "PK composta de 6 colunas (tenant, documento, versao, iteracao, nivel, sequencia de movimento).",
+ "notes_for_agents": "Filtrar por COD_EMPRESA+NR_DOCUMENTO+NR_VERSAO. Flags LOG_* sao bit (0/1) anulaveis.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NR_DOCUMENTO",
+  "NR_VERSAO",
+  "NUM_SEQ_ITERAC",
+  "NUM_NIV_APROVAC",
+  "NUM_SEQ_MOVTO"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "IDX_MOVTO_APROVAC_MASTER_LIST",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.ApprovalMovement"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant (empresa) dona da linha; faz parte da PK e deve ser filtrada em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ApprovalMovement"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Numero do documento do GED em aprovacao.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "int",
+   "java_entity": "ApprovalMovement"
+  },
+  {
+   "name": "NUM_SEQ_ITERAC",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Sequencial da iteracao (rodada) de aprovacao do documento.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "iterationSequence",
+   "java_type": "int",
+   "java_entity": "ApprovalMovement"
+  },
+  {
+   "name": "NUM_NIV_APROVAC",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 5,
+   "purpose": "Numero do nivel de aprovacao onde ocorreu o movimento.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "NIVEL_APROVACAO.NUM_NIV_APROVAC",
+   "confidence": "high",
+   "java_field": "levelId",
+   "java_type": "int",
+   "java_entity": "ApprovalMovement"
+  },
+  {
+   "name": "NUM_SEQ_MOVTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 6,
+   "purpose": "Sequencial do movimento dentro da iteracao/nivel.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "movementSequence",
+   "java_type": "int",
+   "java_entity": "ApprovalMovement"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Versao do documento em aprovacao.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "ApprovalMovement"
+  },
+  {
+   "name": "LOG_ANALIS",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o aprovador ja analisou o documento neste movimento.",
+   "semantic_type": "flag",
+   "values": "1=analisado; 0=nao",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "analised",
+   "java_type": "Boolean",
+   "java_entity": "ApprovalMovement"
+  },
+  {
+   "name": "LOG_APROVADO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o movimento resultou em aprovacao.",
+   "semantic_type": "flag",
+   "values": "1=aprovado; 0=reprovado/nao aprovado",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "approved",
+   "java_type": "Boolean",
+   "java_entity": "ApprovalMovement"
+  },
+  {
+   "name": "LOG_ITERAC_FECHADA",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se este movimento fechou a iteracao de aprovacao.",
+   "semantic_type": "flag",
+   "values": "1=iteracao fechada; 0=aberta",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "closeIteration",
+   "java_type": "Boolean",
+   "java_entity": "ApprovalMovement"
+  },
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matricula do aprovador que realizou o movimento.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE (via matricula)",
+   "confidence": "high",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "ApprovalMovement"
+  },
+  {
+   "name": "DAT_MOVTO_APROVAC",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data do movimento de aprovacao.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "movementDate",
+   "java_type": "Date",
+   "java_entity": "ApprovalMovement"
+  },
+  {
+   "name": "HRA_MOVTO_APROVAC",
+   "type": "varchar(8)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Hora do movimento em texto (HH:mm:ss).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "movementTime",
+   "java_type": "String",
+   "java_entity": "ApprovalMovement"
+  },
+  {
+   "name": "DSL_OBS_MOVTO_APROVAC",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Observacao textual (LOB) registrada pelo aprovador.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "observation",
+   "java_type": "String",
+   "java_entity": "ApprovalMovement"
+  },
+  {
+   "name": "DAT_ENVIO_APROVAC",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data em que o documento foi enviado para aprovacao.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "sentDate",
+   "java_type": "Date",
+   "java_entity": "ApprovalMovement"
+  },
+  {
+   "name": "LOG_ASSINADO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o movimento foi assinado digitalmente/eletronicamente.",
+   "semantic_type": "flag",
+   "values": "1=assinado; 0=nao",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "signed",
+   "java_type": "Boolean",
+   "java_entity": "ApprovalMovement"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "APROVACAO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA",
+    "NUM_NIV_APROVAC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA",
+    "NUM_NIV_APROVAC"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Aprovador designado no nivel; todas as colunas da PK de APROVACAO existem aqui, sem FK fisica.",
+   "status": "probable"
+  },
+  {
+   "to_table": "NIVEL_APROVACAO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "NUM_NIV_APROVAC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "NUM_NIV_APROVAC"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Nivel de aprovacao ao qual o movimento pertence (adicionada: PK de NIVEL_APROVACAO coberta).",
+   "status": "probable"
+  },
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Documento/versao em aprovacao.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

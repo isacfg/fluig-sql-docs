@@ -1,0 +1,173 @@
+{
+ "name": "APROVADOR",
+ "domain": "ged-documentos",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Define os aprovadores (usuário ou grupo) designados para cada nível de aprovação de uma versão de documento do GED.",
+ "lifecycle": "Criada ao configurar o fluxo de aprovação do documento; removida/recriada ao alterar aprovadores.",
+ "key_notes": "PK inclui IDI_TIP_APRVDOR: CD_MATRICULA pode ser matrícula de usuário ou código de grupo conforme o tipo.",
+ "notes_for_agents": "Para obter usuários de aprovadores tipo grupo é preciso expandir o grupo.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NR_DOCUMENTO",
+  "NR_VERSAO",
+  "IDI_TIP_APRVDOR",
+  "CD_MATRICULA",
+  "NUM_NIV_APROVAC"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.Approver"
+ ],
+ "columns": [
+  {
+   "name": "IDI_TIP_APRVDOR",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Tipo do aprovador; define se CD_MATRICULA é usuário ou grupo.",
+   "semantic_type": "enum",
+   "values": "0=usuário; 1=grupo",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "approverType",
+   "java_type": "int",
+   "java_entity": "Approver"
+  },
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 5,
+   "purpose": "Matrícula do usuário ou código do grupo aprovador, conforme IDI_TIP_APRVDOR.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE ou FDN_GROUP.GROUP_CODE",
+   "confidence": "medium",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "Approver"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant (empresa) dono da linha; sempre filtrar por este valor.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "Approver"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Número do documento do GED.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "int",
+   "java_entity": "Approver"
+  },
+  {
+   "name": "NUM_NIV_APROVAC",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 6,
+   "purpose": "Número do nível de aprovação.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "NIVEL_APROVACAO.NUM_NIV_APROVAC",
+   "confidence": "high",
+   "java_field": "levelId",
+   "java_type": "int",
+   "java_entity": "Approver"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Versão do documento.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "Approver"
+  },
+  {
+   "name": "LOG_ASS_OBRIGATORIA",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a assinatura eletrônica é obrigatória para este aprovador.",
+   "semantic_type": "flag",
+   "values": "1=obrigatória; 0=não",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "mandatorySignature",
+   "java_type": "Boolean",
+   "java_entity": "Approver"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "NIVEL_APROVACAO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "NUM_NIV_APROVAC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "NUM_NIV_APROVAC"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Nível ao qual o aprovador pertence.",
+   "status": "probable"
+  },
+  {
+   "to_table": "APROVACAO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA",
+    "NUM_NIV_APROVAC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA",
+    "NUM_NIV_APROVAC"
+   ],
+   "cardinality": "1:1",
+   "kind": "logical-probable",
+   "description": "Registro de decisão do aprovador; só existe para tipo usuário (para grupo a decisão é gravada pelo usuário que aprova).",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

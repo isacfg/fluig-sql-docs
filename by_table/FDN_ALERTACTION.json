@@ -1,0 +1,206 @@
+{
+ "name": "FDN_ALERTACTION",
+ "domain": "foundation-alert",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Acoes executaveis associadas a um alerta (ex.: aprovar, abrir link), com descricao i18n e integracao opcional via JMS/HTTP.",
+ "lifecycle": "Criada junto com o alerta; IS_EXECUTED marcado ao executar; removida com o alerta.",
+ "key_notes": "ACTION_TYPE e INTEGRATION_TYPE sao enums JPA ORDINAL (indice baseado em 0). KEY/CONSTRAINT do input sao artefatos do DDL.",
+ "notes_for_agents": "URL pode conter parametros/links internos; tratar com cuidado.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "FK_4TY618CY2A66ORWTK7S49GL7H",
+   "unique": false,
+   "columns": [
+    "ALERT_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.alert.entity.FDNAlertAction"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador sequencial da acao (PK).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNAlertAction"
+  },
+  {
+   "name": "ACTION_KEY",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave identificadora da acao, interpretada pela aplicacao emissora.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "actionKey",
+   "java_type": "String",
+   "java_entity": "FDNAlertAction"
+  },
+  {
+   "name": "ACTION_TYPE",
+   "type": "int(11)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo da acao (enum FDNAlertActionType, ordinal).",
+   "semantic_type": "enum",
+   "values": "0=MAIN (acao principal); 1=DEFAULT",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "actionType",
+   "java_type": "FDNAlertActionType",
+   "java_entity": "FDNAlertAction"
+  },
+  {
+   "name": "ALERT_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Alerta dono da acao.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_ALERT.ID",
+   "confidence": "high",
+   "java_field": "alertId",
+   "java_type": "Long",
+   "java_entity": "FDNAlertAction"
+  },
+  {
+   "name": "DESCRIPTION_AFTER_EXEC_KEY",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Chave i18n da descricao exibida apos a execucao da acao.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "descriptionAfterExecKey",
+   "java_type": "String",
+   "java_entity": "FDNAlertAction"
+  },
+  {
+   "name": "DESCRIPTION_KEY",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave i18n da descricao/rotulo da acao.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "descriptionKey",
+   "java_type": "String",
+   "java_entity": "FDNAlertAction"
+  },
+  {
+   "name": "IS_EXECUTED",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Flag: acao ja executada.",
+   "semantic_type": "flag",
+   "values": "1=executada; 0=pendente",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "executed",
+   "java_type": "Boolean",
+   "java_entity": "FDNAlertAction"
+  },
+  {
+   "name": "HTTP_METHOD",
+   "type": "varchar(10)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Metodo HTTP usado quando INTEGRATION_TYPE=HTTP (ex.: GET/POST).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "httpMethod",
+   "java_type": "String",
+   "java_entity": "FDNAlertAction"
+  },
+  {
+   "name": "INTEGRATION_TYPE",
+   "type": "int(11)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Forma de integracao da acao (enum FDNAlertIntegrationType, ordinal).",
+   "semantic_type": "enum",
+   "values": "0=JMS; 1=HTTP; 2=NONE",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "integrationType",
+   "java_type": "FDNAlertIntegrationType",
+   "java_entity": "FDNAlertAction"
+  },
+  {
+   "name": "URL",
+   "type": "varchar(500)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "URL chamada/aberta pela acao (integracao HTTP ou link).",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "url",
+   "java_type": "String",
+   "java_entity": "FDNAlertAction"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_ALERT",
+   "from_cols": [
+    "ALERT_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Alerta dono da acao.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_ALERT",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "ALERT_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join"
+  }
+ ]
+}

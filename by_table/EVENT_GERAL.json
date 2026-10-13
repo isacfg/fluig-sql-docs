@@ -1,0 +1,82 @@
+{
+ "name": "EVENT_GERAL",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Eventos globais (scripts JavaScript) disponíveis a todo o ambiente do tenant, ex.: eventos globais de workflow (GlobalEvent).",
+ "lifecycle": "Criada/atualizada pelo administrador em Eventos Globais.",
+ "key_notes": "",
+ "notes_for_agents": "Código executável; não executar.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_EVENT"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.foundation.model.GlobalEvent"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK e filtro obrigatório de multi-tenancy.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "GlobalEvent"
+  },
+  {
+   "name": "COD_EVENT",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Nome do evento global (chave com COD_EMPRESA).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "eventId",
+   "java_type": "String",
+   "java_entity": "GlobalEvent"
+  },
+  {
+   "name": "DSL_EVENT",
+   "type": "longtext",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código-fonte (longtext) do script do evento global.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "eventDescription",
+   "java_type": "String",
+   "java_entity": "GlobalEvent"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "EVENT_FICHA",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_EVENT"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_EVENT"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

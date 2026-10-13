@@ -1,0 +1,191 @@
+{
+ "name": "APONT_TAR_PROCES",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Apontamentos de esforço (tempo gasto) registrados por usuários em tarefas de instâncias de processo.",
+ "lifecycle": "Uma linha por apontamento; cresce com uso de apontamento de horas.",
+ "key_notes": "PK de 6 colunas identifica a tarefa (processo, movimento, usuário, transferência) mais a sequência do apontamento.",
+ "notes_for_agents": "Somar NUM_SEGS_APONT para esforço total. Filtrar COD_EMPRESA.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NUM_PROCES",
+  "NUM_SEQ_MOVTO",
+  "CD_MATRICULA",
+  "NUM_SEQ_TRANSF",
+  "NUM_SEQ_APONT"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessTaskAppointment"
+ ],
+ "columns": [
+  {
+   "name": "NUM_SEQ_APONT",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 6,
+   "purpose": "Sequência do apontamento dentro da tarefa/usuário.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "appointmentSequence",
+   "java_type": "int",
+   "java_entity": "ProcessTaskAppointment"
+  },
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Matrícula do usuário que apontou o tempo.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "high",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "ProcessTaskAppointment"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant (empresa) dono da linha; sempre filtrar por este valor.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ProcessTaskAppointment"
+  },
+  {
+   "name": "NUM_SEQ_MOVTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Sequência do movimento do processo (tarefa).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "MOVTO_PROCES.NUM_SEQ_MOVTO",
+   "confidence": "medium",
+   "java_field": "movementSequence",
+   "java_type": "int",
+   "java_entity": "ProcessTaskAppointment"
+  },
+  {
+   "name": "NUM_PROCES",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Número da instância de processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_WORKFLOW.NUM_PROCES",
+   "confidence": "high",
+   "java_field": "processInstanceId",
+   "java_type": "int",
+   "java_entity": "ProcessTaskAppointment"
+  },
+  {
+   "name": "NUM_SEQ_TRANSF",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 5,
+   "purpose": "Sequência de transferência da tarefa entre usuários.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "TAR_PROCES.NUM_SEQ_TRANSF",
+   "confidence": "medium",
+   "java_field": "transferenceSequence",
+   "java_type": "int",
+   "java_entity": "ProcessTaskAppointment"
+  },
+  {
+   "name": "DAT_APONT",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data do apontamento (sem hora).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "appointmentDate",
+   "java_type": "Date",
+   "java_entity": "ProcessTaskAppointment"
+  },
+  {
+   "name": "NUM_SEGS_APONT",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Duração apontada em segundos.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "appointmentSeconds",
+   "java_type": "Integer",
+   "java_entity": "ProcessTaskAppointment"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "TAR_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO",
+    "NUM_SEQ_TRANSF",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO",
+    "NUM_SEQ_TRANSF",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Tarefa do usuário em que o tempo foi apontado.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "TAR_CONHECIMENTO_USUARIO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "CD_MATRICULA",
+    "NUM_SEQ_MOVTO",
+    "NUM_SEQ_TRANSF"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "CD_MATRICULA",
+    "NUM_SEQ_MOVTO",
+    "NUM_SEQ_TRANSF"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Coincidência de nomes; tabela de conhecimento de tarefa, não alvo semântico do apontamento.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

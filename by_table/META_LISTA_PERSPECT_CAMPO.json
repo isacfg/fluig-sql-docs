@@ -1,0 +1,165 @@
+{
+ "name": "META_LISTA_PERSPECT_CAMPO",
+ "domain": "ecm-lists-filters",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Campos incluídos em uma perspectiva da meta-lista, com ordem e indicação de agrupador.",
+ "lifecycle": "",
+ "key_notes": "Multi-tenant por COD_EMPRESA (parte da PK).",
+ "notes_for_agents": "Sempre filtrar COD_EMPRESA e, nas filhas, COD_LISTA; ignore LOG_DELETE=1 em META_LISTA/CAMPO.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_LISTA",
+  "COD_PERSPECT",
+  "NUM_SEQ_CAMPO"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.lists.model.MetaListPerspectiveField"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "MetaListPerspectiveField"
+  },
+  {
+   "name": "NUM_SEQ_CAMPO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Sequencial do campo da meta-lista incluído na perspectiva.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "META_LISTA_CAMPO.NUM_SEQ_CAMPO",
+   "confidence": "high",
+   "java_field": "fieldSeq",
+   "java_type": "int",
+   "java_entity": "MetaListPerspectiveField"
+  },
+  {
+   "name": "COD_LISTA",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Meta-lista.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "META_LISTA.COD_LISTA",
+   "confidence": "high",
+   "java_field": "listId",
+   "java_type": "int",
+   "java_entity": "MetaListPerspectiveField"
+  },
+  {
+   "name": "COD_PERSPECT",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Perspectiva.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "META_LISTA_PERSPECT.COD_PERSPECT",
+   "confidence": "high",
+   "java_field": "perspectiveId",
+   "java_type": "int",
+   "java_entity": "MetaListPerspectiveField"
+  },
+  {
+   "name": "NOM_CAMPO",
+   "type": "varchar(70)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do campo na perspectiva.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "fieldName",
+   "java_type": "String",
+   "java_entity": "MetaListPerspectiveField"
+  },
+  {
+   "name": "LOG_AGRUPADOR",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o campo é usado como agrupador na perspectiva.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "grouping",
+   "java_type": "Boolean",
+   "java_entity": "MetaListPerspectiveField"
+  },
+  {
+   "name": "NUM_ORDEM",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Ordem do campo na perspectiva.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "sortOrder",
+   "java_type": "int",
+   "java_entity": "MetaListPerspectiveField"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "META_LISTA_CAMPO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA",
+    "NUM_SEQ_CAMPO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA",
+    "NUM_SEQ_CAMPO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Chaves compostas coincidem com a PK do alvo; sem FK física.",
+   "status": "probable"
+  },
+  {
+   "to_table": "META_LISTA_PERSPECT",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA",
+    "COD_PERSPECT"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA",
+    "COD_PERSPECT"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Chaves compostas coincidem com a PK do alvo; sem FK física.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

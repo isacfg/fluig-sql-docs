@@ -1,0 +1,256 @@
+{
+ "name": "PROPRIED_EXT",
+ "domain": "bpm-process-definition",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Propriedades estendidas (nome/valor) de estados/atividades de uma definição de processo (BPM), por versão.",
+ "lifecycle": "Gravada na publicação da versão do processo; imutável após a versão publicada.",
+ "key_notes": "PK (COD_EMPRESA, COD_DEF_PROCES, NUM_VERS, NUM_SEQ, COD_PROPRIED). NUM_SEQ é a sequência do estado (atividade).",
+ "notes_for_agents": "Filtrar por COD_DEF_PROCES e NUM_VERS.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_DEF_PROCES",
+  "NUM_VERS",
+  "NUM_SEQ",
+  "COD_PROPRIED"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ExtendedPropertyField"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa (tenant) dona do registro; faz parte da PK e deve ser filtrado em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ExtendedPropertyField"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código da definição de processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ExtendedPropertyField"
+  },
+  {
+   "name": "COD_PROPRIED",
+   "type": "varchar(200)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 5,
+   "purpose": "Nome da propriedade estendida.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "propertyName",
+   "java_type": "String",
+   "java_entity": "ExtendedPropertyField"
+  },
+  {
+   "name": "NUM_SEQ",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Sequência do estado/atividade do processo dono da propriedade.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "high",
+   "java_field": "stateSequence",
+   "java_type": "int",
+   "java_entity": "ExtendedPropertyField"
+  },
+  {
+   "name": "NUM_VERS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Versão da definição do processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "ExtendedPropertyField"
+  },
+  {
+   "name": "LOG_DEFAULT_PROPRIED",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica propriedade padrão do produto (vs. definida pelo usuário).",
+   "semantic_type": "flag",
+   "values": "1=padrão",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "isDefaultProperty",
+   "java_type": "boolean",
+   "java_entity": "ExtendedPropertyField"
+  },
+  {
+   "name": "DS_PRINCIPAL_PROPRIED",
+   "type": "varchar(2000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição da propriedade.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "propertyDescription",
+   "java_type": "String",
+   "java_entity": "ExtendedPropertyField"
+  },
+  {
+   "name": "CD_TIPO_PROPRIED",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo da propriedade (inteiro); valores não confirmados.",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "propertyType",
+   "java_type": "int",
+   "java_entity": "ExtendedPropertyField"
+  },
+  {
+   "name": "DSL_VAL_PROPRIED",
+   "type": "varchar(2000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor da propriedade.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "propertyValue",
+   "java_type": "String",
+   "java_entity": "ExtendedPropertyField"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ESTADO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Estado/atividade dono da propriedade.",
+   "status": "probable"
+  },
+  {
+   "to_table": "PROPRIED_AVANCAD_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "COD_PROPRIED"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "COD_PROPRIED"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística de nome; não confirmada.",
+   "status": "probable"
+  },
+  {
+   "to_table": "SEGUR_ANEXO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística; não confirmada.",
+   "status": "probable"
+  },
+  {
+   "to_table": "VERS_DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão do processo.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "LIN_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística; NUM_SEQ é estado, não linha de transição.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

@@ -1,0 +1,85 @@
+{
+ "name": "FAVORITOS",
+ "domain": "ecm-lists-filters",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Documentos marcados como favoritos por usuário.",
+ "lifecycle": "Linha criada ao favoritar, removida ao desfavoritar.",
+ "key_notes": "Multi-tenant por COD_EMPRESA (parte da PK).",
+ "notes_for_agents": "Contém referência a usuário (matrícula/id); dado pessoal indireto.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "CD_MATRICULA",
+  "NR_DOCUMENTO"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.Favorites"
+ ],
+ "columns": [
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Matrícula do usuário que favoritou o documento.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "medium",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "Favorites"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "Favorites"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número do documento favoritado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "int",
+   "java_entity": "Favorites"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Documento favoritado (qualquer versão).",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

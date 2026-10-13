@@ -1,0 +1,129 @@
+{
+ "name": "WCM_RESOURCECOMPONENTFILE",
+ "domain": "wcm-resources",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Arquivos (JS/CSS etc.) pertencentes a um componente de recurso, com tipo, caminho e ordem de carga.",
+ "lifecycle": "Carga de catálogo junto com o componente; poucas linhas.",
+ "key_notes": "Unique (RESOURCE_COMPONENT_ID, RESOURCE_TYPE, RESOURCE_PATH).",
+ "notes_for_agents": "Named query findByComponent. Ordenar por RESOURCE_ORDER para carga.",
+ "primary_key": [
+  "RESOURCE_COMPONENT_FILE_ID"
+ ],
+ "unique_constraints": [
+  [
+   "RESOURCE_COMPONENT_ID",
+   "RESOURCE_TYPE",
+   "RESOURCE_PATH"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.wcm.core.entity.WCMResourceComponentFile"
+ ],
+ "columns": [
+  {
+   "name": "RESOURCE_COMPONENT_FILE_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK surrogate do arquivo.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "WCMResourceComponentFile"
+  },
+  {
+   "name": "RESOURCE_ORDER",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Ordem de carga do arquivo dentro do componente.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "order",
+   "java_type": "Integer",
+   "java_entity": "WCMResourceComponentFile"
+  },
+  {
+   "name": "RESOURCE_PATH",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Caminho/URL do arquivo do recurso.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "resource",
+   "java_type": "String",
+   "java_entity": "WCMResourceComponentFile"
+  },
+  {
+   "name": "RESOURCE_TYPE",
+   "type": "varchar(16)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do recurso (String livre até 16 caracteres, ex.: tipo de arquivo JS/CSS).",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "type",
+   "java_type": "String",
+   "java_entity": "WCMResourceComponentFile"
+  },
+  {
+   "name": "RESOURCE_COMPONENT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Componente dono do arquivo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "WCM_RESOURCECOMPONENT.RESOURCE_COMPONENT_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "WCM_RESOURCECOMPONENT",
+   "from_cols": [
+    "RESOURCE_COMPONENT_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_COMPONENT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Componente dono do arquivo.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "WCM_RESOURCECOMPONENT",
+   "from_cols": [
+    "RESOURCE_COMPONENT_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_COMPONENT_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk"
+  }
+ ]
+}

@@ -1,0 +1,227 @@
+{
+ "name": "FDN_OAUTHPROVIDER",
+ "domain": "oauth-provider",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Provedor OAuth (URLs de request/access/autorização e método de assinatura), por tenant.",
+ "lifecycle": "Criada ao cadastrar provedor.",
+ "key_notes": "TENANT_ID nulo pode indicar provedor global. CODE único.",
+ "notes_for_agents": "Filtrar por TENANT_ID ou NULL.",
+ "primary_key": [
+  "OAUTH_PROVIDER_ID"
+ ],
+ "unique_constraints": [
+  [
+   "CODE"
+  ]
+ ],
+ "indexes": [
+  {
+   "name": "FDNOAUTHPROVI001",
+   "unique": false,
+   "columns": [
+    "CODE",
+    "TENANT_ID"
+   ]
+  },
+  {
+   "name": "FDNOAUTHPROVI002",
+   "unique": false,
+   "columns": [
+    "OAUTH_PROVIDER_NAME",
+    "TENANT_ID"
+   ]
+  },
+  {
+   "name": "FDNOAUTHPROVI003",
+   "unique": false,
+   "columns": [
+    "DESCRIPTION",
+    "TENANT_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.oauth.entity.FDNOAuthProvider"
+ ],
+ "columns": [
+  {
+   "name": "OAUTH_PROVIDER_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador do provedor OAuth (PK).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNOAuthProvider"
+  },
+  {
+   "name": "ACCESS_TOKEN_URL",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "URL do endpoint de access token do provedor.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "accessTokenURL",
+   "java_type": "String",
+   "java_entity": "FDNOAuthProvider"
+  },
+  {
+   "name": "CODE",
+   "type": "varchar(120)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código único do provedor (UK global).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "code",
+   "java_type": "String",
+   "java_entity": "FDNOAuthProvider"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "varchar(120)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição do provedor; único por tenant junto com TENANT_ID (índice FDNOAUTHPROVI003).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "FDNOAuthProvider"
+  },
+  {
+   "name": "OAUTH_PROVIDER_NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do provedor OAuth.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "providerName",
+   "java_type": "String",
+   "java_entity": "FDNOAuthProvider"
+  },
+  {
+   "name": "REQUEST_METHOD",
+   "type": "varchar(6)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Método HTTP usado nas requisições de token (ex.: GET/POST).",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "requestMethod",
+   "java_type": "String",
+   "java_entity": "FDNOAuthProvider"
+  },
+  {
+   "name": "REQUEST_TOKEN_URL",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "URL do endpoint de request token.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "requestTokenURL",
+   "java_type": "String",
+   "java_entity": "FDNOAuthProvider"
+  },
+  {
+   "name": "SIGNATURE_METHOD",
+   "type": "varchar(40)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Método de assinatura OAuth 1.0 (ex.: HMAC-SHA1).",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "signatureMethod",
+   "java_type": "String",
+   "java_entity": "FDNOAuthProvider"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Tenant dono do provedor; nulo = provedor global/padrão do sistema.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNOAuthProvider"
+  },
+  {
+   "name": "USER_AUTHORIZATION_URL",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "URL onde o usuário autoriza o acesso.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "userAuthorizationURL",
+   "java_type": "String",
+   "java_entity": "FDNOAuthProvider"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Tenant dono (nulo = global).",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_OAUTHAPP",
+   "from_cols": [
+    "OAUTH_PROVIDER_ID"
+   ],
+   "to_cols": [
+    "OAUTH_PROVIDER_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

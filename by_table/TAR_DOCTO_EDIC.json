@@ -1,0 +1,84 @@
+{
+ "name": "TAR_DOCTO_EDIC",
+ "domain": "bpm-tarefas",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Subtipo de TAR_DOCTO para tarefas de edição de documento; guarda o documento de destino da edição.",
+ "lifecycle": "Uma linha por tarefa do subtipo, criada junto com a linha de TAR_CTRAL.",
+ "key_notes": "Herança JOINED em dois níveis (TAR_CTRAL > TAR_DOCTO > TAR_DOCTO_EDIC).",
+ "notes_for_agents": "Join via TAR_DOCTO e TAR_CTRAL.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_TAREFA"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.task.DocumentEditingTask"
+ ],
+ "columns": [
+  {
+   "name": "NUM_DOCTO_DEST",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Número do documento de destino da edição.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "medium",
+   "java_field": "destinationDocument",
+   "java_type": "int",
+   "java_entity": "DocumentEditingTask"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK. Filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "DocumentEditingTask"
+  },
+  {
+   "name": "COD_TAREFA",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código da tarefa (taskId); parte da PK e elo da herança JOINED com TAR_CTRAL.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "TAR_CTRAL.COD_TAREFA",
+   "confidence": "high",
+   "java_field": "taskId",
+   "java_type": "int",
+   "java_entity": "DocumentEditingTask"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "TAR_DOCTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "cardinality": "1:1",
+   "kind": "physical-fk",
+   "description": "Tarefa de documento base.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

@@ -1,0 +1,690 @@
+{
+ "name": "WCM_APPLICATION",
+ "domain": "wcm-portal",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Catálogo de aplicações do portal WCM em herança single-table: temas, layouts, widgets, componentes (páginas) e aplicações; APPLICATION_TYPE discrimina o tipo.",
+ "lifecycle": "Registrada ao instalar/publicar pacotes (EAR) de widget/tema/layout; poucas centenas de linhas; sem tenant.",
+ "key_notes": "Herança JPA SINGLE_TABLE por APPLICATION_TYPE (theme/layout/widget/component/application). Colunas específicas (PAGE_DESCRIPTOR, WIDGET_EDIT_FILE, MOBILEAPP_WIDGET) ficam NULL nos outros tipos; APPLICATION_FILE mapeia themeFile/pageFile/viewFile/layoutFile conforme o tipo. Único por APPLICATION_CODE.",
+ "notes_for_agents": "Sempre filtre por APPLICATION_TYPE ao buscar temas/widgets/layouts. Sem COD_EMPRESA/tenant. Colunas LOB: EXTENDED_DATA, PAGE_DESCRIPTOR.",
+ "primary_key": [
+  "APPLICATION_ID"
+ ],
+ "unique_constraints": [
+  [
+   "APPLICATION_CODE"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.wcm.core.entity.WCMTheme",
+  "com.totvs.technology.wcm.core.entity.WCMComponent",
+  "com.totvs.technology.wcm.core.entity.WCMWidget",
+  "com.totvs.technology.wcm.core.entity.WCMApplication",
+  "com.totvs.technology.wcm.core.entity.WCMLayout"
+ ],
+ "columns": [
+  {
+   "name": "APPLICATION_TYPE",
+   "type": "varchar(31)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Discriminador da herança: tipo da aplicação WCM.",
+   "semantic_type": "enum",
+   "values": "theme=tema; layout=layout; widget=widget (RESOURCE_TYPE_WIDGET); demais (component/application) não confirmados",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "APPLICATION_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária da aplicação WCM (referenciada por páginas, temas, layouts, widgets).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "ACTIVATION_CLASS",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Classe Java de ativação invocada ao instalar/ativar a aplicação.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "activationClass",
+   "java_type": "String",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "APPLICATION_EXTENSIBLE",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a aplicação pode ser estendida por outras.",
+   "semantic_type": "flag",
+   "values": "1=extensível; 0=não",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "applicationExtensible",
+   "java_type": "Boolean",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "APPLICATION_PUBLIC",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a aplicação é pública (disponível a todos/sem autenticação).",
+   "semantic_type": "flag",
+   "values": "1=pública; 0=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "applicationPublic",
+   "java_type": "Boolean",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "APPLICATION_VERSION",
+   "type": "varchar(80)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versão do pacote da aplicação (texto).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "applicationVersion",
+   "java_type": "String",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "APPLICATION_CODE",
+   "type": "varchar(40)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código único da aplicação, usado em URLs e referências.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "code",
+   "java_type": "String",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "APPLICATION_CONTEXT",
+   "type": "varchar(60)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Contexto web (context root) onde a aplicação é servida.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "context",
+   "java_type": "String",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "varchar(4000)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição da aplicação (até 4000).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "DEVELOPER_CODE",
+   "type": "varchar(80)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do desenvolvedor/fabricante da aplicação.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "developerCode",
+   "java_type": "String",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "DEVELOPER_NAME",
+   "type": "varchar(80)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do desenvolvedor/fabricante.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "developerName",
+   "java_type": "String",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "DEVELOPER_URL",
+   "type": "varchar(120)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "URL do desenvolvedor/fabricante.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "developerUrl",
+   "java_type": "String",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "EXTENDED_DATA",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Dados estendidos da aplicação em texto longo (LOB).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "extendedData",
+   "java_type": "String",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "FILE_NAME",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Nome do arquivo de origem da aplicação.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "fileName",
+   "java_type": "String",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "EAR_FILE_NAME",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Nome do arquivo EAR implantado da aplicação.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "earFileName",
+   "java_type": "String",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "APPLICATION_ICON",
+   "type": "varchar(80)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Ícone da aplicação (nome/classe).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "icon",
+   "java_type": "String",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "INTERNAL",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica aplicação interna da plataforma (fornecida pelo Fluig).",
+   "semantic_type": "flag",
+   "values": "1=interna; 0=externa",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "internal",
+   "java_type": "Boolean",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "IS_EXTENSION",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a aplicação estende outra aplicação.",
+   "semantic_type": "flag",
+   "values": "1=extensão; 0=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "isExtension",
+   "java_type": "Boolean",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "LOCALE_FILE",
+   "type": "varchar(40)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Nome-base do arquivo de internacionalização (localeFileBaseName).",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "localeFileBaseName",
+   "java_type": "String",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "MAX_HEIGHT",
+   "type": "int(11)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Altura máxima (px) do widget/componente.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "maxHeight",
+   "java_type": "Integer",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "MAX_WIDTH",
+   "type": "int(11)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Largura máxima (px).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "maxWidth",
+   "java_type": "Integer",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "MIN_HEIGHT",
+   "type": "int(11)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Altura mínima (px).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "minHeight",
+   "java_type": "Integer",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "MIN_WIDTH",
+   "type": "int(11)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Largura mínima (px).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "minWidth",
+   "java_type": "Integer",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "PRODUCT",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Produto associado à aplicação (texto livre).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "product",
+   "java_type": "String",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "APPLICATION_RENDERER",
+   "type": "varchar(40)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Renderizador usado para exibir a aplicação.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "renderer",
+   "java_type": "String",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "APPLICATION_TITLE",
+   "type": "varchar(60)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Título exibido da aplicação.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "title",
+   "java_type": "String",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "APPLICATION_FILE",
+   "type": "varchar(40)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Arquivo principal: themeFile (tema), pageFile (componente), viewFile (widget) ou layoutFile (layout).",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "themeFile",
+   "java_type": "String",
+   "java_entity": "WCMTheme"
+  },
+  {
+   "name": "PAGE_DESCRIPTOR",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descritor de página (LOB) apenas para componentes.",
+   "semantic_type": "xml",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "pageDescriptor",
+   "java_type": "String",
+   "java_entity": "WCMComponent"
+  },
+  {
+   "name": "WIDGET_EDIT_FILE",
+   "type": "varchar(40)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Arquivo de edição do widget (editFile); só widgets.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "editFile",
+   "java_type": "String",
+   "java_entity": "WCMWidget"
+  },
+  {
+   "name": "MOBILEAPP_WIDGET",
+   "type": "bit(1)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Indica widget para app mobile; só widgets.",
+   "semantic_type": "flag",
+   "values": "1=sim; 0/NULL=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "mobileAppWidget",
+   "java_type": "Boolean",
+   "java_entity": "WCMWidget"
+  },
+  {
+   "name": "UI_WIDGET",
+   "type": "bit(1)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Indica widget de UI (uiWidget) ou layout de UI (uiLayout), conforme tipo.",
+   "semantic_type": "flag",
+   "values": "1=sim; 0/NULL=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "uiWidget",
+   "java_type": "Boolean",
+   "java_entity": "WCMWidget"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "WCM_APPLICATIONCATEGORY",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Categorias.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "WCM_LAYOUTSLOT",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Slots de layout.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "WCM_PAGE",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "THEME_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Páginas que usam este tema.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "WCM_APPLICATIONCATEGORY",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_APPLICATIONLOCALE",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_APPLICATIONPRODUCT",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_APPLICATIONRESOURCE",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_APPLICATIONSERVICE",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_APPLICATION_APP_DEPENDENCY",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "WCM_COMPONENTPAGE",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_CONFIGURATION",
+   "from_cols": [
+    "DEFAULT_LAYOUT_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_CONFIGURATION",
+   "from_cols": [
+    "DEFAULT_THEME_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_LAYOUTSLOT",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_PAGE",
+   "from_cols": [
+    "THEME_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_TENANTAPPLICATION",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_PAGEVERSION",
+   "from_cols": [
+    "LAYOUT_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_PAGEWIDGET",
+   "from_cols": [
+    "WIDGET_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

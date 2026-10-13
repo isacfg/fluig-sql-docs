@@ -1,0 +1,199 @@
+{
+ "name": "FDN_OAUTHAPPTOKEN",
+ "domain": "oauth-provider",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Tokens OAuth (request/access) emitidos para uma aplicação OAuth, com data de criação e expiração.",
+ "lifecycle": "Criada nas etapas do fluxo OAuth; expiradas devem ser limpas.",
+ "key_notes": "",
+ "notes_for_agents": "TOKEN, TOKEN_ACCESS e TOKEN_SECRET são sensíveis.",
+ "primary_key": [
+  "OAUTH_APP_TOKEN_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "FDNOAUTHAPPTOKENI001",
+   "unique": false,
+   "columns": [
+    "TOKEN",
+    "EXPIRATION_DATE"
+   ]
+  },
+  {
+   "name": "FK_NC30TVO018M2DXQMR8MBG6O9X",
+   "unique": false,
+   "columns": [
+    "OAUTH_APP_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.oauth.entity.FDNOAuthApplicationToken"
+ ],
+ "columns": [
+  {
+   "name": "OAUTH_APP_TOKEN_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador do token emitido para a aplicação (PK).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNOAuthApplicationToken"
+  },
+  {
+   "name": "CLIENT_DATA",
+   "type": "varchar(1023)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Dados adicionais do cliente associados ao token (texto livre).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "clientData",
+   "java_type": "String",
+   "java_entity": "FDNOAuthApplicationToken"
+  },
+  {
+   "name": "CREATION_DATE",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de emissão do token.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "creationDate",
+   "java_type": "Date",
+   "java_entity": "FDNOAuthApplicationToken"
+  },
+  {
+   "name": "EXPIRATION_DATE",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de expiração do token.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "expirationDate",
+   "java_type": "Date",
+   "java_entity": "FDNOAuthApplicationToken"
+  },
+  {
+   "name": "TOKEN",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Valor do token (request/authorize/access token conforme OAUTH_TYPE). SENSÍVEL.",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "token",
+   "java_type": "String",
+   "java_entity": "FDNOAuthApplicationToken"
+  },
+  {
+   "name": "TOKEN_ACCESS",
+   "type": "varchar(1023)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Access token propriamente dito, após autorização. SENSÍVEL.",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "tokenAccess",
+   "java_type": "String",
+   "java_entity": "FDNOAuthApplicationToken"
+  },
+  {
+   "name": "TOKEN_SECRET",
+   "type": "varchar(1023)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Token secret OAuth 1.0 pareado ao token. SENSÍVEL.",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "tokenSecret",
+   "java_type": "String",
+   "java_entity": "FDNOAuthApplicationToken"
+  },
+  {
+   "name": "OAUTH_TYPE",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Fase/tipo do token OAuth (ex.: request vs access); valores exatos não confirmados.",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "type",
+   "java_type": "String",
+   "java_entity": "FDNOAuthApplicationToken"
+  },
+  {
+   "name": "OAUTH_APP_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Aplicação OAuth a que o token pertence (FK física).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_OAUTHAPP.OAUTH_APP_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_OAUTHAPP",
+   "from_cols": [
+    "OAUTH_APP_ID"
+   ],
+   "to_cols": [
+    "OAUTH_APP_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Tokens emitidos para a aplicação.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_OAUTHAPPUSER",
+   "from_cols": [
+    "OAUTH_APP_TOKEN_ID"
+   ],
+   "to_cols": [
+    "OAUTH_APP_TOKEN_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

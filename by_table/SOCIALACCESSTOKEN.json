@@ -1,0 +1,160 @@
+{
+ "name": "SOCIALACCESSTOKEN",
+ "domain": "social",
+ "module": "03001-fluig-database-social",
+ "purpose": "Token de acesso (OAuth) armazenado por perfil social para integração com organização externa. Sem entidade JPA localizada.",
+ "lifecycle": "Provável criação ao autorizar integração; expira em EXPIRESIN.",
+ "key_notes": "Unique (SOCIALID, TENANTID, ORGID). Sem entidade no código: semântica inferida pelos nomes.",
+ "notes_for_agents": "Dado sensível: ACCESSTOKEN é credencial.",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [
+  [
+   "SOCIALID",
+   "TENANTID",
+   "ORGID"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id do registro; PK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "ACCESSTOKEN",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Token de acesso à organização externa (credencial).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "EXPIRESIN",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de expiração do token.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "ORGID",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id da organização externa à qual o token dá acesso.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "SCOOPE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Escopo (grafia \"scoope\") autorizado do token.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TENANTID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id do tenant (empresa) dono da linha; filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TOKENTYPE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do token (ex.: bearer).",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "SOCIALID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Perfil social dono do token.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIAL.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "SOCIAL",
+   "from_cols": [
+    "SOCIALID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Perfil dono do token",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

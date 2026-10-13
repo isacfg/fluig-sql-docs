@@ -1,0 +1,182 @@
+{
+ "name": "SOCIALPOSTUSER",
+ "domain": "social",
+ "module": "03001-fluig-database-social",
+ "purpose": "Permissões por usuário em um post (usado em posts privados/personalizados).",
+ "lifecycle": "Criada ao compartilhar post com usuários específicos.",
+ "key_notes": "Unique (POST_ID, USER_ID).",
+ "notes_for_agents": "",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [
+  [
+   "post_id",
+   "user_id"
+  ]
+ ],
+ "indexes": [
+  {
+   "name": "SocialPostUserI001",
+   "unique": false,
+   "columns": [
+    "user_id",
+    "lastUpdateDate"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.social.shareplace.post.entity.SocialPostUser"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id; PK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "CREATIONDATE",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de criação da linha (timestamp).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "LASTUPDATEDATE",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora da última alteração da linha (timestamp).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "PERMISSIONS",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Permissões do usuário no post (texto).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TENANTID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id do tenant (empresa) dono da linha; filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "POST_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Post (SOCIABLE tipo SocialPost).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIABLE.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "USER_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Perfil social com permissão.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "SOCIAL.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "SOCIABLE",
+   "from_cols": [
+    "POST_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Post",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "SOCIAL",
+   "from_cols": [
+    "USER_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Usuário com acesso",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "FDN_USER",
+   "from_cols": [
+    "USER_ID"
+   ],
+   "to_cols": [
+    "USER_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome de coluna rejeitada: USER_ID nesta tabela é SOCIAL.ID (perfil social), não FDN_USER.USER_ID.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

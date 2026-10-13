@@ -1,0 +1,104 @@
+{
+ "name": "FLUIG_METRIC",
+ "domain": "monitoring-metrics",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Métricas de uso agregadas por dia: nome da métrica e contagem.",
+ "lifecycle": "Gravada periodicamente (por dia); volume moderado.",
+ "key_notes": "Sem tenant. Índice IDX_FMETRIC001 em METRIC_DATE.",
+ "notes_for_agents": "Filtrar por METRIC_DATE e METRIC.",
+ "primary_key": [
+  "METRIC_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "IDX_FMETRIC001",
+   "unique": false,
+   "columns": [
+    "METRIC_DATE"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.fluig.monitoring.usage.metrics.entity.FluigMetric"
+ ],
+ "columns": [
+  {
+   "name": "METRIC_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK surrogate da métrica.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FluigMetric"
+  },
+  {
+   "name": "METRIC_COUNT",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Contagem/valor da métrica na data.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "count",
+   "java_type": "Integer",
+   "java_entity": "FluigMetric"
+  },
+  {
+   "name": "METRIC_DATE",
+   "type": "date",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Dia a que a métrica se refere.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "date",
+   "java_type": "Date",
+   "java_entity": "FluigMetric"
+  },
+  {
+   "name": "METRIC",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome/código da métrica de uso.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "metric",
+   "java_type": "String",
+   "java_entity": "FluigMetric"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [
+  {
+   "to_table": "LS_METRIC",
+   "from_cols": [
+    "METRIC_ID"
+   ],
+   "to_cols": [
+    "METRIC_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-confirmed",
+   "description": "Relação inferida por nome rejeitada: METRIC_ID aqui é PK própria, sem relação com LS_METRIC.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

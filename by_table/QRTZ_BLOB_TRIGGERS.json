@@ -1,0 +1,98 @@
+{
+ "name": "QRTZ_BLOB_TRIGGERS",
+ "domain": "scheduler-quartz",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Tabela padrão do Quartz para triggers de tipo customizado serializados em BLOB.",
+ "lifecycle": "Normalmente vazia (Fluig usa cron/simple).",
+ "key_notes": "Sem FK física para QRTZ_TRIGGERS neste schema.",
+ "notes_for_agents": "Tabela de infraestrutura do Quartz; não alterar manualmente.",
+ "primary_key": [
+  "TRIGGER_GROUP",
+  "TRIGGER_NAME"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.scheduler.entity.quartz.QrtzBlobTriggers"
+ ],
+ "columns": [
+  {
+   "name": "TRIGGER_GROUP",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Nome do grupo do trigger Quartz; compõe a PK (TRIGGER_GROUP, TRIGGER_NAME) e liga ao QRTZ_TRIGGERS.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "QRTZ_TRIGGERS.TRIGGER_GROUP",
+   "confidence": "high",
+   "java_field": "triggerGroup",
+   "java_type": "String",
+   "java_entity": "QrtzBlobTriggers"
+  },
+  {
+   "name": "TRIGGER_NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Nome do trigger Quartz dentro do grupo; compõe a PK e liga ao QRTZ_TRIGGERS.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "QRTZ_TRIGGERS.TRIGGER_NAME",
+   "confidence": "high",
+   "java_field": "triggerName",
+   "java_type": "String",
+   "java_entity": "QrtzBlobTriggers"
+  },
+  {
+   "name": "BLOB_DATA",
+   "type": "longblob",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Dados serializados (BLOB) de triggers customizados que o Quartz não persiste em tabela própria.",
+   "semantic_type": "blob",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "blobData",
+   "java_type": "byte[]",
+   "java_entity": "QrtzBlobTriggers"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "QRTZ_TRIGGERS",
+   "from_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "to_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "cardinality": "1:1",
+   "kind": "logical-confirmed",
+   "description": "Detalhe do trigger tipo BLOB; mesma PK de QRTZ_TRIGGERS (sem FK física no schema).",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "QRTZ_PAUSED_TRIGGER_GRPS",
+   "from_cols": [
+    "TRIGGER_GROUP"
+   ],
+   "to_cols": [
+    "TRIGGER_GROUP"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: coincidência de nome; grupo pausado não é pai do trigger",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

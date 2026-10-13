@@ -1,0 +1,202 @@
+{
+ "name": "FDN_OAUTHAPP",
+ "domain": "oauth-provider",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Aplicação (consumidor) OAuth registrada no Fluig, com consumer key/secret e provedor.",
+ "lifecycle": "Criada ao registrar app OAuth; poucas linhas.",
+ "key_notes": "CONSUMER_KEY único globalmente.",
+ "notes_for_agents": "CONSUMER_SECRET é sensível.",
+ "primary_key": [
+  "OAUTH_APP_ID"
+ ],
+ "unique_constraints": [
+  [
+   "CONSUMER_KEY"
+  ]
+ ],
+ "indexes": [
+  {
+   "name": "FDNOAUTHAPPI001",
+   "unique": false,
+   "columns": [
+    "CONSUMER_KEY",
+    "OAUTH_PROVIDER_ID"
+   ]
+  },
+  {
+   "name": "FDNOAUTHAPPI002",
+   "unique": false,
+   "columns": [
+    "DESCRIPTION"
+   ]
+  },
+  {
+   "name": "FK_NKFDPK7TDMLR0MHHMNCCLW6DD",
+   "unique": false,
+   "columns": [
+    "OAUTH_PROVIDER_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.oauth.entity.FDNOAuthApplication"
+ ],
+ "columns": [
+  {
+   "name": "OAUTH_APP_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da aplicação OAuth registrada (consumidor) (PK).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNOAuthApplication"
+  },
+  {
+   "name": "CALLBACK_URL",
+   "type": "varchar(1023)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "URL de callback da aplicação OAuth.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "callbackUrl",
+   "java_type": "String",
+   "java_entity": "FDNOAuthApplication"
+  },
+  {
+   "name": "CONSUMER_KEY",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Consumer key da aplicação; único globalmente (UK).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "consumerKey",
+   "java_type": "String",
+   "java_entity": "FDNOAuthApplication"
+  },
+  {
+   "name": "CONSUMER_SECRET",
+   "type": "varchar(1023)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Consumer secret da aplicação. SENSÍVEL.",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "consumerSecret",
+   "java_type": "String",
+   "java_entity": "FDNOAuthApplication"
+  },
+  {
+   "name": "DEFAULT_APP",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se é a aplicação OAuth padrão do provedor.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "defaultAPP",
+   "java_type": "boolean",
+   "java_entity": "FDNOAuthApplication"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "varchar(120)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição/nome amigável da aplicação OAuth.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "FDNOAuthApplication"
+  },
+  {
+   "name": "OAUTH_PROVIDER_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Provedor OAuth ao qual a aplicação pertence (FK física).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_OAUTHPROVIDER.OAUTH_PROVIDER_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_OAUTHPROVIDER",
+   "from_cols": [
+    "OAUTH_PROVIDER_ID"
+   ],
+   "to_cols": [
+    "OAUTH_PROVIDER_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Provedor da aplicação (JPA FDNOAuthApplication.provider).",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_OAUTHAPPDATA",
+   "from_cols": [
+    "OAUTH_APP_ID"
+   ],
+   "to_cols": [
+    "OAUTH_APP_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_OAUTHAPPTOKEN",
+   "from_cols": [
+    "OAUTH_APP_ID"
+   ],
+   "to_cols": [
+    "OAUTH_APP_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_OAUTHAPPUSER",
+   "from_cols": [
+    "OAUTH_APP_ID"
+   ],
+   "to_cols": [
+    "OAUTH_APP_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  }
+ ]
+}

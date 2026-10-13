@@ -1,0 +1,97 @@
+{
+ "name": "FDN_PRODUCT",
+ "domain": "foundation-tenancy",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Catálogo de produtos TOTVS/Fluig que podem ser habilitados para um tenant.",
+ "lifecycle": "Populada na instalação/atualização; poucas linhas.",
+ "key_notes": "PRODUCT_CODE é a chave de negócio usada por FDN_TENANTPRODUCT.PRODUCT_CODE.",
+ "notes_for_agents": "Tabela de domínio pequena.",
+ "primary_key": [
+  "PRODUCT_ID"
+ ],
+ "unique_constraints": [
+  [
+   "PRODUCT_CODE"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.security.entity.FDNProduct"
+ ],
+ "columns": [
+  {
+   "name": "PRODUCT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária surrogate.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNProduct"
+  },
+  {
+   "name": "PRODUCT_CODE",
+   "type": "varchar(32)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do produto (chave de negócio, único).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "productCode",
+   "java_type": "String",
+   "java_entity": "FDNProduct"
+  },
+  {
+   "name": "PRODUCT_NAME",
+   "type": "varchar(132)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome exibido do produto.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "productName",
+   "java_type": "String",
+   "java_entity": "FDNProduct"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANTPRODUCT",
+   "from_cols": [
+    "PRODUCT_CODE"
+   ],
+   "to_cols": [
+    "PRODUCT_CODE"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable",
+   "description": "Produtos habilitados por tenant referenciam este código (FDNTenantProduct.product é String sem FK).",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_TENANTPRODUCT",
+   "from_cols": [
+    "PRODUCT_CODE"
+   ],
+   "to_cols": [
+    "PRODUCT_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

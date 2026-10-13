@@ -1,0 +1,185 @@
+{
+ "name": "NIVEL_APROVACAO",
+ "domain": "ecm-documentos",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Niveis de aprovacao configurados para uma versao de documento do GED, com modo de aprovacao e descricao do nivel.",
+ "lifecycle": "Criada ao configurar o fluxo de aprovacao do documento; poucas linhas por versao.",
+ "key_notes": "PK (COD_EMPRESA, NR_DOCUMENTO, NR_VERSAO, NUM_NIV_APROVAC). Named query ApprovalLevel.findApprovalLevelsForDocument.",
+ "notes_for_agents": "Filtrar por COD_EMPRESA+NR_DOCUMENTO+NR_VERSAO.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NR_DOCUMENTO",
+  "NR_VERSAO",
+  "NUM_NIV_APROVAC"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.ApprovalLevel"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant (empresa) dona da linha; faz parte da PK e deve ser filtrada em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ApprovalLevel"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Numero do documento do GED ao qual o nivel pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "int",
+   "java_entity": "ApprovalLevel"
+  },
+  {
+   "name": "NUM_NIV_APROVAC",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Numero (ordem) do nivel de aprovacao.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "levelId",
+   "java_type": "int",
+   "java_entity": "ApprovalLevel"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Versao do documento ao qual o nivel pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "ApprovalLevel"
+  },
+  {
+   "name": "IDI_TIP_APROVAC",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Modo de aprovacao do nivel (campo approvalMode); valores nao confirmados no codigo lido.",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "approvalMode",
+   "java_type": "int",
+   "java_entity": "ApprovalLevel"
+  },
+  {
+   "name": "DES_TIP_APROVAC",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descricao textual do nivel de aprovacao (campo levelDescription).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "levelDescription",
+   "java_type": "String",
+   "java_entity": "ApprovalLevel"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versao do documento dona do nivel.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "MOVTO_APROVAC",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "NUM_NIV_APROVAC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "NUM_NIV_APROVAC"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "APROVACAO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "NUM_NIV_APROVAC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "NUM_NIV_APROVAC"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "APROVADOR",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "NUM_NIV_APROVAC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "NUM_NIV_APROVAC"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

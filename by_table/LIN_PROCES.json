@@ -1,0 +1,239 @@
+{
+ "name": "LIN_PROCES",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Raias (swimlanes), pools e grupos do diagrama de uma versão de processo (SwimLane).",
+ "lifecycle": "Criada ao modelar o processo.",
+ "key_notes": "NUM_SEQ pode ser usado como NUM_SEQ_PAI em ESTADO_PROCES.",
+ "notes_for_agents": "",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_DEF_PROCES",
+  "NUM_VERS",
+  "NUM_SEQ"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.SwimLane"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK e filtro obrigatório de multi-tenancy.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "SwimLane"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código (processId) da definição de processo BPM a que a linha pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "SwimLane"
+  },
+  {
+   "name": "NUM_SEQ",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Sequência (id numérico dentro da versão do processo) do estado/atividade do diagrama.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "high",
+   "java_field": "sequence",
+   "java_type": "int",
+   "java_entity": "SwimLane"
+  },
+  {
+   "name": "NUM_VERS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número da versão da definição de processo (versionamento do processo).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "SwimLane"
+  },
+  {
+   "name": "COD_COR_LIN",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Cor da raia (código/hex).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "color",
+   "java_type": "String",
+   "java_entity": "SwimLane"
+  },
+  {
+   "name": "NUM_ALT_LIN",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Altura da raia em pixels.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "height",
+   "java_type": "Integer",
+   "java_entity": "SwimLane"
+  },
+  {
+   "name": "SEQ_PAI",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "NUM_SEQ da raia/pool pai.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "LIN_PROCES.NUM_SEQ",
+   "confidence": "medium",
+   "java_field": "parentSequence",
+   "java_type": "Integer",
+   "java_entity": "SwimLane"
+  },
+  {
+   "name": "NUM_POS_X",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Posição horizontal (X, em pixels) do elemento no diagrama do processo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "positionX",
+   "java_type": "Integer",
+   "java_entity": "SwimLane"
+  },
+  {
+   "name": "NUM_POS_Y",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Posição vertical (Y, em pixels) do elemento no diagrama do processo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "positionY",
+   "java_type": "Integer",
+   "java_entity": "SwimLane"
+  },
+  {
+   "name": "NOM_LIN",
+   "type": "varchar(200)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome da raia (campo Java stateName).",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "stateName",
+   "java_type": "String",
+   "java_entity": "SwimLane"
+  },
+  {
+   "name": "TIP_LIN",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo da raia (SwimLaneType).",
+   "semantic_type": "enum",
+   "values": "1=pool;2=simples;3=grupo",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "type",
+   "java_type": "Integer",
+   "java_entity": "SwimLane"
+  },
+  {
+   "name": "NUM_LAR_LIN",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Largura da raia em pixels.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "width",
+   "java_type": "Integer",
+   "java_entity": "SwimLane"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "VERS_DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão do processo.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "PENDCIA_NOTIF_EMAIL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: coincidência de nomes.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

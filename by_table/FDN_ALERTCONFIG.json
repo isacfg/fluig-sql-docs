@@ -1,0 +1,238 @@
+{
+ "name": "FDN_ALERTCONFIG",
+ "domain": "foundation-alert",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Preferencia de recebimento de alertas: para um tenant/usuario, evento e canal, define se o alerta e recebido (ligado/desligado/bloqueado).",
+ "lifecycle": "Criada ao configurar notificacoes (por tenant com USER_ID nulo = padrao do tenant, ou por usuario); RECEIVE atualizado ao alterar preferencias. Volume medio/alto.",
+ "key_notes": "USER_ID NULL = configuracao padrao do tenant (queries com b.user IS NULL). Ha um unique key no DDL (colunas nao detalhadas no input, provavelmente combinando evento, canal, tenant e usuario). A coluna USER_ID mapeia userTenantId.",
+ "notes_for_agents": "Sempre filtrar por TENANT_ID. USER_ID IS NULL retorna o padrao do tenant.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [
+  [
+   "USER_ID",
+   "EVENT_TYPE_ID",
+   "SENDER_APP_ID"
+  ]
+ ],
+ "indexes": [
+  {
+   "name": "INDEX_ALERT_CONFIG_USER",
+   "unique": false,
+   "columns": [
+    "USER_ID",
+    "EVENT_TYPE_ID",
+    "SENDER_APP_ID",
+    "TENANT_ID"
+   ]
+  },
+  {
+   "name": "IDX_FDNALERTCFG001",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "USER_ID",
+    "EVENT_TYPE_ID"
+   ]
+  },
+  {
+   "name": "FK_S8I22S6LGF56AG553O46HGWLY",
+   "unique": false,
+   "columns": [
+    "SENDER_APP_ID"
+   ]
+  },
+  {
+   "name": "FK_OYT9OVQOKGT6XQ2M8UW84G0GA",
+   "unique": false,
+   "columns": [
+    "EVENT_TYPE_ID"
+   ]
+  },
+  {
+   "name": "FK_FVYGX95H5FDHBA4DHWVI10LLT",
+   "unique": false,
+   "columns": [
+    "TENANT_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.alert.entity.FDNAlertConfig"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador sequencial da configuracao (PK).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNAlertConfig"
+  },
+  {
+   "name": "SENDER_APP_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Canal/aplicacao emissora a que a preferencia se aplica.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_ALERTAPPSENDER.ID",
+   "confidence": "high",
+   "java_field": "appSenderId",
+   "java_type": "Long",
+   "java_entity": "FDNAlertConfig"
+  },
+  {
+   "name": "EVENT_TYPE_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Tipo de evento a que a preferencia se aplica.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_ALERTEVENTTYPE.ID",
+   "confidence": "high",
+   "java_field": "eventTypeId",
+   "java_type": "Long",
+   "java_entity": "FDNAlertConfig"
+  },
+  {
+   "name": "RECEIVE",
+   "type": "int(11)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Estado de recebimento (enum FDNAlertSenderEventStatus, ordinal; consultas usam receive=1 para ativo).",
+   "semantic_type": "enum",
+   "values": "0=OFF; 1=ON; 2=BLOCKED",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "receive",
+   "java_type": "FDNAlertSenderEventStatus",
+   "java_entity": "FDNAlertConfig"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Tenant (empresa) da configuracao.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNAlertConfig"
+  },
+  {
+   "name": "USER_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Usuario da preferencia (USER_TENANT_ID); NULL para padrao do tenant.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_TENANT_ID",
+   "confidence": "high",
+   "java_field": "userTenantId",
+   "java_type": "Long",
+   "java_entity": "FDNAlertConfig"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "USER_ID"
+   ],
+   "to_cols": [
+    "USER_TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Usuario dono da preferencia (a relacao e com FDN_USERTENANT, nao FDN_USER).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_ALERTEVENTTYPE",
+   "from_cols": [
+    "EVENT_TYPE_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Evento configurado.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_ALERTAPPSENDER",
+   "from_cols": [
+    "SENDER_APP_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Canal configurado.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Tenant.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "FDN_USER",
+   "from_cols": [
+    "USER_ID"
+   ],
+   "to_cols": [
+    "USER_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Inferencia por nome: USER_ID aqui e USER_TENANT_ID de FDN_USERTENANT, nao FDN_USER.USER_ID.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": [
+  {
+   "from_table": "FDN_ALERTAPPSENDER",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "SENDER_APP_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk"
+  }
+ ]
+}

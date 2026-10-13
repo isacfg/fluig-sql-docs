@@ -1,0 +1,186 @@
+{
+ "name": "PROCESS_VERSION_TRANSLATE",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Traducao por idioma e versao de descricao, instrucao, instrucao de versao e categoria do processo.",
+ "lifecycle": "Criada ao salvar traducoes da versao do processo.",
+ "key_notes": "PK ID; indice PROCESSVERSIONTRANSLATE01.",
+ "notes_for_agents": "Complementa PROCESS_DEFINITION_TRANSLATE (nivel definicao).",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "PROCESSVERSIONTRANSLATE01",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "VERSION",
+    "LANGUAGE"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessVersionTranslate"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador sequencial da traducao.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "long",
+   "java_entity": "ProcessVersionTranslate"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dona da linha; faz parte da PK e deve ser filtrada em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "long",
+   "java_entity": "ProcessVersionTranslate"
+  },
+  {
+   "name": "PROCESS_ID",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Codigo da definicao de processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ProcessVersionTranslate"
+  },
+  {
+   "name": "LANGUAGE",
+   "type": "varchar(5)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Codigo do idioma (ex.: pt_BR).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "language",
+   "java_type": "String",
+   "java_entity": "ProcessVersionTranslate"
+  },
+  {
+   "name": "VERSION",
+   "type": "int(11)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versao do processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "ProcessVersionTranslate"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "varchar(250)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Descricao da versao traduzida.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "ProcessVersionTranslate"
+  },
+  {
+   "name": "INSTRUCTION",
+   "type": "varchar(2000)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Instrucao do processo traduzida.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "instruction",
+   "java_type": "String",
+   "java_entity": "ProcessVersionTranslate"
+  },
+  {
+   "name": "VERSION_INSTRUCTION",
+   "type": "varchar(2000)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Instrucao especifica da versao traduzida.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "versionInstruction",
+   "java_type": "String",
+   "java_entity": "ProcessVersionTranslate"
+  },
+  {
+   "name": "CATEGORY",
+   "type": "varchar(250)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Categoria do processo traduzida (campo categoryId).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "categoryId",
+   "java_type": "String",
+   "java_entity": "ProcessVersionTranslate"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "VERS_DEF_PROCES",
+   "from_cols": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "VERSION"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versao do processo traduzida.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

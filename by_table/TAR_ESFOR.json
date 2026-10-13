@@ -1,0 +1,111 @@
+{
+ "name": "TAR_ESFOR",
+ "domain": "bpm-tarefas",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Subtipo de Task (EffortRecordedTask) para tarefas de esforço registrado; tabela marcadora sem colunas além da PK.",
+ "lifecycle": "Uma linha por tarefa do subtipo, criada junto com a linha de TAR_CTRAL.",
+ "key_notes": "Tipo indicado pela existência da linha.",
+ "notes_for_agents": "WorkflowTask é filha desta tabela, portanto tarefas de workflow também têm linha aqui.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_TAREFA"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.taskmanager.model.EffortRecordedTask"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK. Filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "EffortRecordedTask"
+  },
+  {
+   "name": "COD_TAREFA",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código da tarefa (taskId); parte da PK e elo da herança JOINED com TAR_CTRAL.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "TAR_CTRAL.COD_TAREFA",
+   "confidence": "high",
+   "java_field": "taskId",
+   "java_type": "int",
+   "java_entity": "EffortRecordedTask"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "TAR_CTRAL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "cardinality": "1:1",
+   "kind": "physical-fk",
+   "description": "Tarefa base.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "TAR_WORKFLOW",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "cardinality": "1:1",
+   "kind": "jpa-join",
+   "description": "TAR_WORKFLOW herda de TAR_ESFOR (FK de TAR_WORKFLOW aponta para esta tabela).",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "TAR_CTRAL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "cardinality": "1:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "TAR_WORKFLOW",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "cardinality": "1:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

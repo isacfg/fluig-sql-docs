@@ -1,0 +1,113 @@
+{
+ "name": "ADAPTER",
+ "domain": "bpm-integracao",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Cadastro de adapters (conectores externos) do Fluig; cada adapter aponta para um caminho de implementação e é referenciado por APLICATIVO.",
+ "lifecycle": "Linhas criadas via administração; volume muito baixo (dezenas).",
+ "key_notes": "PK composta (COD_EMPRESA, COD_ADAPTER). Sem soft-delete.",
+ "notes_for_agents": "Sempre filtrar COD_EMPRESA. Tabela de configuração, sem dados pessoais.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_ADAPTER"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.Adapter"
+ ],
+ "columns": [
+  {
+   "name": "COD_ADAPTER",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Identificador textual do adapter, único dentro do tenant.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "adapterId",
+   "java_type": "String",
+   "java_entity": "Adapter"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant (empresa) dono da linha; sempre filtrar por este valor.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "Adapter"
+  },
+  {
+   "name": "NOM_ADAPTER",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição/nome exibido do adapter (campo Java description).",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "Adapter"
+  },
+  {
+   "name": "CAMINHO_ADAPTER",
+   "type": "varchar(2000)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Caminho (path) do artefato/implementação do adapter, até 2000 caracteres.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "path",
+   "java_type": "String",
+   "java_entity": "Adapter"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "APLICATIVO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_ADAPTER"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_ADAPTER"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable",
+   "description": "APLICATIVO.COD_ADAPTER referencia o adapter usado pelo aplicativo (inferido pelo nome de colunas; entidade sem @JoinColumn).",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "APLICATIVO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_ADAPTER"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_ADAPTER"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

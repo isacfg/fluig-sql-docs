@@ -1,0 +1,98 @@
+{
+ "name": "TIPO_DOCUMENTO",
+ "domain": "ecm-documents",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Cadastro de tipos de documento (classificação definida pelo cliente) aplicados a documentos do GED.",
+ "lifecycle": "Criada pelo administrador; baixo volume.",
+ "key_notes": "PK (COD_EMPRESA, CD_TIPO_DOC). Não confundir com DOCUMENTO.TP_DOCUMENTO (tipo estrutural).",
+ "notes_for_agents": "Join com DOCUMENTO por COD_EMPRESA e CD_TIPO_DOC.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "CD_TIPO_DOC"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.DocumentType"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa (tenant) dona do registro; faz parte da PK e deve ser filtrado em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "DocumentType"
+  },
+  {
+   "name": "CD_TIPO_DOC",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código do tipo de documento.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "typeId",
+   "java_type": "String",
+   "java_entity": "DocumentType"
+  },
+  {
+   "name": "DS_TIPO_DOC",
+   "type": "varchar(2000)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição do tipo de documento.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "DocumentType"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "CD_TIPO_DOC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "CD_TIPO_DOC"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable",
+   "description": "Documentos classificados neste tipo.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "CD_TIPO_DOC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "CD_TIPO_DOC"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

@@ -1,0 +1,156 @@
+{
+ "name": "POLICYDOCUMENT",
+ "domain": "use-policy",
+ "module": "04001-fluig-database-use-policy",
+ "purpose": "Documento de política de uso (termos) em um idioma, com versão de documento, flag de padrão e exigência de consentimento.",
+ "lifecycle": "Criado ao cadastrar documentos na política de uso de um tenant; poucas linhas.",
+ "key_notes": "DOCUMENTID é o ID lógico do documento (ECM), não PK desta tabela.",
+ "notes_for_agents": "Pertence a USEPOLICY via USEPOLICY_POLICYDOCUMENT (tenant vem de USEPOLICY).",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.global.usepolicy.entities.PolicyDocument"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave primária do documento de política (AUTO).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "DOCUMENTDEFAULT",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Marca o documento como padrão da política.",
+   "semantic_type": "flag",
+   "values": "1=padrão; 0/NULL=não",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "CONSENTREQUIRED",
+   "type": "bit",
+   "nullable": false,
+   "default": "b'0'",
+   "pk_position": null,
+   "purpose": "Se o aceite explícito do usuário é obrigatório.",
+   "semantic_type": "flag",
+   "values": "1=obrigatório; 0=não",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "DOCUMENTID",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "ID do documento (ECM) que contém o texto da política.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "low",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "LANGUAGE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Idioma do documento (ex.: pt_BR).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "POLICYUSER",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "POLICYDOCUMENTID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join",
+   "description": "Aceites de usuários deste documento.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "POLICYDOCUMENT_POLICYUSER",
+   "from_cols": [
+    "POLICYDOCUMENT_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "POLICYUSER",
+   "from_cols": [
+    "POLICYDOCUMENTID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "USEPOLICY",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:M-via-this-table",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "USEPOLICY_POLICYDOCUMENT",
+   "from_cols": [
+    "DOCUMENTS_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

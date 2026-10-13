@@ -1,0 +1,181 @@
+{
+ "name": "COMPON_GRAF_PROCES",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Componentes gráficos (nós do diagrama) de uma versão de definição de processo, com posição e tipo.",
+ "lifecycle": "Gerada ao salvar/publicar a versão do processo no modelador; imutável por versão.",
+ "key_notes": "PK (COD_EMPRESA, COD_DEF_PROCES, NUM_VERS, NUM_SEQ_COMPON_GRAF).",
+ "notes_for_agents": "Filtrar por COD_DEF_PROCES+NUM_VERS.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_DEF_PROCES",
+  "NUM_VERS",
+  "NUM_SEQ_COMPON_GRAF"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessComponGraf"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant (empresa) dono da linha; sempre filtrar por este valor.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ProcessComponGraf"
+  },
+  {
+   "name": "NUM_SEQ_COMPON_GRAF",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Sequência do componente gráfico dentro da versão do processo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "componGrafSequence",
+   "java_type": "int",
+   "java_entity": "ProcessComponGraf"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código da definição de processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ProcessComponGraf"
+  },
+  {
+   "name": "NUM_VERS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número da versão da definição de processo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "ProcessComponGraf"
+  },
+  {
+   "name": "IDI_TIP_COMPON_GRAF",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do componente gráfico do diagrama (ex.: atividade, gateway); valores não confirmados no código.",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "componType",
+   "java_type": "Integer",
+   "java_entity": "ProcessComponGraf"
+  },
+  {
+   "name": "NUM_POS_X",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Posição horizontal (X) do componente no diagrama, em pixels.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "positionX",
+   "java_type": "Integer",
+   "java_entity": "ProcessComponGraf"
+  },
+  {
+   "name": "NUM_POS_Y",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Posição vertical (Y) do componente no diagrama, em pixels.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "positionY",
+   "java_type": "Integer",
+   "java_entity": "ProcessComponGraf"
+  },
+  {
+   "name": "DES_COMPON_GRAF",
+   "type": "varchar(4000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome/rótulo do componente (stateName), até 4000 caracteres.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "stateName",
+   "java_type": "String",
+   "java_entity": "ProcessComponGraf"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "VERS_DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão do processo dona do componente.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "LINK_PROCES_ASSOC",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ_COMPON_GRAF"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ_COMPON_GRAF"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

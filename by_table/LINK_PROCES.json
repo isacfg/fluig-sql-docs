@@ -1,0 +1,373 @@
+{
+ "name": "LINK_PROCES",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Link (transição/seta) entre dois estados do fluxo de uma versão de processo, com rótulos, tipo e flags de fluxo (ProcessLink).",
+ "lifecycle": "Criada ao modelar o fluxo.",
+ "key_notes": "Índice PROCESLINK02 (COD_EMPRESA, NUM_VERS, NUM_SEQ_ESTADO_INICIAL, COD_DEF_PROCES).",
+ "notes_for_agents": "Para o grafo, juntar duas vezes a ESTADO_PROCES (inicial/final).",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_DEF_PROCES",
+  "NUM_VERS",
+  "NUM_SEQ_LINK"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "PROCESLINK01",
+   "unique": false,
+   "columns": [
+    "LOG_FLUXO_AUTOM",
+    "COD_EMPRESA"
+   ]
+  },
+  {
+   "name": "PROCESLINK02",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "NUM_VERS",
+    "NUM_SEQ_ESTADO_INICIAL",
+    "COD_DEF_PROCES"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessLink"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK e filtro obrigatório de multi-tenancy.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ProcessLink"
+  },
+  {
+   "name": "NUM_SEQ_LINK",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Sequência do link dentro da versão do processo.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "linkSequence",
+   "java_type": "int",
+   "java_entity": "ProcessLink"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código (processId) da definição de processo BPM a que a linha pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ProcessLink"
+  },
+  {
+   "name": "NUM_VERS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número da versão da definição de processo (versionamento do processo).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "ProcessLink"
+  },
+  {
+   "name": "DES_LABEL_ACAO",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Rótulo da ação exibido ao usuário para tomar esta transição.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "actionLabel",
+   "java_type": "String",
+   "java_entity": "ProcessLink"
+  },
+  {
+   "name": "LOG_FLUXO_AUTOM",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Link automático (seguido pelo motor).",
+   "semantic_type": "flag",
+   "values": "1=automático",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "automaticLink",
+   "java_type": "Boolean",
+   "java_entity": "ProcessLink"
+  },
+  {
+   "name": "LOG_FLUXO_PADRAO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Link padrão (default) de uma decisão.",
+   "semantic_type": "flag",
+   "values": "1=padrão",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "defaultLink",
+   "java_type": "Boolean",
+   "java_entity": "ProcessLink"
+  },
+  {
+   "name": "DES_EXPRESSAO",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Expressão da condição do link.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "expression",
+   "java_type": "String",
+   "java_entity": "ProcessLink"
+  },
+  {
+   "name": "NUM_SEQ_ESTADO_FINAL",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "NUM_SEQ do estado de destino.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "high",
+   "java_field": "finalStateSequence",
+   "java_type": "Integer",
+   "java_entity": "ProcessLink"
+  },
+  {
+   "name": "NUM_SEQ_ESTADO_INICIAL",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "NUM_SEQ do estado de origem.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "high",
+   "java_field": "initialStateSequence",
+   "java_type": "Integer",
+   "java_entity": "ProcessLink"
+  },
+  {
+   "name": "DES_LABEL_NOME",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome/rótulo do link no diagrama.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "name",
+   "java_type": "String",
+   "java_entity": "ProcessLink"
+  },
+  {
+   "name": "DES_LABEL_RET",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Rótulo da ação de retorno.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "returnLabel",
+   "java_type": "String",
+   "java_entity": "ProcessLink"
+  },
+  {
+   "name": "LOG_PERMITE_RET",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Permite retornar por este link.",
+   "semantic_type": "flag",
+   "values": "1=permite",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "returnPermited",
+   "java_type": "Boolean",
+   "java_entity": "ProcessLink"
+  },
+  {
+   "name": "IDI_FLUXO",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do link.",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "type",
+   "java_type": "Integer",
+   "java_entity": "ProcessLink"
+  },
+  {
+   "name": "MOVEMENT_TITLE",
+   "type": "varchar(70)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Título da movimentação gerada ao seguir o link.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "movementTitle",
+   "java_type": "String",
+   "java_entity": "ProcessLink"
+  },
+  {
+   "name": "MOVEMENT_DESCRIPTION",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição da movimentação gerada pelo link.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "movementDescription",
+   "java_type": "String",
+   "java_entity": "ProcessLink"
+  },
+  {
+   "name": "MOVEMENT_ACCESS_LINK",
+   "type": "varchar(70)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição do link de acesso da movimentação.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "movementAccessLinkDescription",
+   "java_type": "String",
+   "java_entity": "ProcessLink"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "VERS_DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão do processo.",
+   "status": "probable"
+  },
+  {
+   "to_table": "ESTADO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ_ESTADO_INICIAL"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Estado de origem.",
+   "status": "probable"
+  },
+  {
+   "to_table": "ESTADO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ_ESTADO_FINAL"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Estado de destino.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "LINK_PROCES_BEND",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ_LINK"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ_LINK"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

@@ -1,0 +1,164 @@
+{
+ "name": "PROCESS_APP_VALUE",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Valores em runtime de campos de aplicativo por instancia e movimentacao de processo.",
+ "lifecycle": "Inserida durante a execucao de instancias de processo.",
+ "key_notes": "PK ID; indice PROCESAPPVALUE02 em (INSTANCE_ID, MOVEMENT_SEQUENCE, TENANT_ID, APP_FIELD, APP_KEY).",
+ "notes_for_agents": "Consultar por TENANT_ID+INSTANCE_ID+MOVEMENT_SEQUENCE.",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "PROCESAPPVALUE01",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "INSTANCE_ID",
+    "MOVEMENT_SEQUENCE"
+   ]
+  },
+  {
+   "name": "PROCESAPPVALUE02",
+   "unique": false,
+   "columns": [
+    "INSTANCE_ID",
+    "MOVEMENT_SEQUENCE",
+    "TENANT_ID",
+    "APP_FIELD",
+    "APP_KEY"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessAppValue"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador sequencial do valor.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "long",
+   "java_entity": "ProcessAppValue"
+  },
+  {
+   "name": "APP_FIELD",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do campo do aplicativo (ver PROCESS_APP_CONFIG.APP_FIELD).",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "PROCESS_APP_CONFIG.APP_FIELD",
+   "confidence": "medium",
+   "java_field": "appField",
+   "java_type": "String",
+   "java_entity": "ProcessAppValue"
+  },
+  {
+   "name": "APP_KEY",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave do aplicativo (ver PROCESS_APP_CONFIG.APP_KEY).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "PROCESS_APP_CONFIG.APP_KEY",
+   "confidence": "medium",
+   "java_field": "appKey",
+   "java_type": "String",
+   "java_entity": "ProcessAppValue"
+  },
+  {
+   "name": "INSTANCE_ID",
+   "type": "int(11)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Numero da instancia de processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_WORKFLOW.NUM_PROCES",
+   "confidence": "high",
+   "java_field": "instanceId",
+   "java_type": "int",
+   "java_entity": "ProcessAppValue"
+  },
+  {
+   "name": "MOVEMENT_SEQUENCE",
+   "type": "int(11)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sequencia da movimentacao da instancia a que o valor pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "MOVTO_PROCES.NUM_SEQ_MOVTO",
+   "confidence": "medium",
+   "java_field": "movementSequence",
+   "java_type": "int",
+   "java_entity": "ProcessAppValue"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dona da linha; faz parte da PK e deve ser filtrada em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "long",
+   "java_entity": "ProcessAppValue"
+  },
+  {
+   "name": "VALUE",
+   "type": "varchar(4000)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Valor gravado (ate 4000 caracteres).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "value",
+   "java_type": "String",
+   "java_entity": "ProcessAppValue"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "PROCES_WORKFLOW",
+   "from_cols": [
+    "TENANT_ID",
+    "INSTANCE_ID"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Instancia de processo dona do valor.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

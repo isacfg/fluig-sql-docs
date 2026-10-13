@@ -1,0 +1,121 @@
+{
+ "name": "PROCES_SIGNAL",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Cadastro de sinais (eventos de sinal BPMN) que processos podem emitir e aguardar.",
+ "lifecycle": "Criada ao definir sinal; baixo volume.",
+ "key_notes": "PK (COD_EMPRESA, COD_SINAL). Named query Signal.findAll.",
+ "notes_for_agents": "",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_SINAL"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.Signal"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant (empresa) dona da linha; faz parte da PK e deve ser filtrada em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "Signal"
+  },
+  {
+   "name": "COD_SINAL",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Codigo numerico do sinal.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "signalId",
+   "java_type": "int",
+   "java_entity": "Signal"
+  },
+  {
+   "name": "DES_SINAL",
+   "type": "varchar(200)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descricao/nome do sinal.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "Signal"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "ESTADO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_SINAL"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_SINAL"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "ESTADO_PROCES_SIGNAL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_SINAL"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_SINAL"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PROCES_SIGNAL_INSTANCE",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_SINAL"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_SINAL"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PROCES_SIGNAL_RECEIVERS",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_SINAL"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_SINAL"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

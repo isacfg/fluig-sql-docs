@@ -1,0 +1,202 @@
+{
+ "name": "FDN_ROLE",
+ "domain": "foundation-identity-access",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Papel (role) de segurança do tenant, atribuído a usuários e grupos.",
+ "lifecycle": "Criado na administração de papéis ou internamente; volume baixo.",
+ "key_notes": "Identificado logicamente por (TENANT_ID, ROLE_CODE), referenciado por código em FDN_USERROLE, FDN_GROUPUSERROLE e FDN_PERMISSION. Unique key provável em (TENANT_ID, ROLE_CODE).",
+ "notes_for_agents": "Junte por (TENANT_ID, ROLE_CODE). Dados extras em FDN_ROLEDATA.",
+ "primary_key": [
+  "ROLE_ID"
+ ],
+ "unique_constraints": [
+  [
+   "TENANT_ID",
+   "ROLE_CODE"
+  ]
+ ],
+ "indexes": [
+  {
+   "name": "FDNROLEI001",
+   "unique": false,
+   "columns": [
+    "DESCRIPTION",
+    "TENANT_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.security.entity.FDNRole"
+ ],
+ "columns": [
+  {
+   "name": "ROLE_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária surrogate.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNRole"
+  },
+  {
+   "name": "ROLE_CODE",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Código do papel, único por tenant.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "code",
+   "java_type": "String",
+   "java_entity": "FDNRole"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Nome/descrição do papel.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "FDNRole"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dono do registro; FK para FDN_TENANT.TENANT_ID. Valor -1 indica registro global/sem tenant em consultas do código.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNRole"
+  },
+  {
+   "name": "INTERNAL",
+   "type": "BIT(1)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Indica papel interno do sistema.",
+   "semantic_type": "flag",
+   "values": "1=interno; 0=não interno",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "internal",
+   "java_type": "Boolean",
+   "java_entity": "FDNRole"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Tenant ao qual o registro pertence.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_USERROLE",
+   "from_cols": [
+    "TENANT_ID",
+    "ROLE_CODE"
+   ],
+   "to_cols": [
+    "TENANT_ID",
+    "ROLE_CODE"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join",
+   "description": "Usuários com este papel.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FILTER_GROUP",
+   "from_cols": [
+    "ROLE_ID"
+   ],
+   "to_cols": [
+    "ROLE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_GROUPUSERROLE",
+   "from_cols": [
+    "TENANT_ID",
+    "ROLE_CODE"
+   ],
+   "to_cols": [
+    "TENANT_ID",
+    "ROLE_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_PERMISSION",
+   "from_cols": [
+    "TENANT_ID",
+    "ROLE_CODE"
+   ],
+   "to_cols": [
+    "TENANT_ID",
+    "ROLE_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FDN_ROLEDATA",
+   "from_cols": [
+    "ROLE_ID"
+   ],
+   "to_cols": [
+    "ROLE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_USERROLE",
+   "from_cols": [
+    "TENANT_ID",
+    "ROLE_CODE"
+   ],
+   "to_cols": [
+    "TENANT_ID",
+    "ROLE_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  }
+ ]
+}

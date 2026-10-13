@@ -1,0 +1,249 @@
+{
+ "name": "PROCESS_ELEMENT_TRANSLATE",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Traducao por idioma de elementos (atividades) do processo: nome, rotulos de acao, titulo/descricao de movimentacao e instrucao.",
+ "lifecycle": "Criada ao salvar traducoes do processo; por versao.",
+ "key_notes": "PK ID; indice PROCESSELEMENTTRANSLATE01. Named query findProcessElementTranslate.",
+ "notes_for_agents": "SEQUENCE e a sequencia da atividade (ESTADO_PROCES.NUM_SEQ).",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "PROCESSELEMENTTRANSLATE01",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "VERSION",
+    "SEQUENCE",
+    "LANGUAGE"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessElementTranslate"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador sequencial da traducao.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "long",
+   "java_entity": "ProcessElementTranslate"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dona da linha; faz parte da PK e deve ser filtrada em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "long",
+   "java_entity": "ProcessElementTranslate"
+  },
+  {
+   "name": "PROCESS_ID",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Codigo da definicao de processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ProcessElementTranslate"
+  },
+  {
+   "name": "LANGUAGE",
+   "type": "varchar(5)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Codigo do idioma (ex.: pt_BR).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "language",
+   "java_type": "String",
+   "java_entity": "ProcessElementTranslate"
+  },
+  {
+   "name": "SEQUENCE",
+   "type": "int(11)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sequencia da atividade/elemento do processo traduzido.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "high",
+   "java_field": "sequence",
+   "java_type": "int",
+   "java_entity": "ProcessElementTranslate"
+  },
+  {
+   "name": "VERSION",
+   "type": "int(11)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versao do processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "ProcessElementTranslate"
+  },
+  {
+   "name": "NAME",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Nome da atividade traduzido.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "name",
+   "java_type": "String",
+   "java_entity": "ProcessElementTranslate"
+  },
+  {
+   "name": "ACTION_LABEL",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Rotulo traduzido do botao de acao (enviar) da atividade.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "actionLabel",
+   "java_type": "String",
+   "java_entity": "ProcessElementTranslate"
+  },
+  {
+   "name": "RETURN_LABEL",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Rotulo traduzido da acao de retorno.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "returnLabel",
+   "java_type": "String",
+   "java_entity": "ProcessElementTranslate"
+  },
+  {
+   "name": "MOVEMENT_TITLE",
+   "type": "varchar(70)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Titulo traduzido da movimentacao (max 70 caracteres).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "movementTitle",
+   "java_type": "String",
+   "java_entity": "ProcessElementTranslate"
+  },
+  {
+   "name": "MOVEMENT_DESCRIPTION",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Descricao traduzida da movimentacao.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "movementDescription",
+   "java_type": "String",
+   "java_entity": "ProcessElementTranslate"
+  },
+  {
+   "name": "MOVEMENT_ACCESS_LINK",
+   "type": "varchar(70)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Descricao traduzida do link de acesso da movimentacao.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "movementAccessLinkDescription",
+   "java_type": "String",
+   "java_entity": "ProcessElementTranslate"
+  },
+  {
+   "name": "INSTRUCTION",
+   "type": "varchar(4000)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Instrucao traduzida da atividade.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "instruction",
+   "java_type": "String",
+   "java_entity": "ProcessElementTranslate"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ESTADO_PROCES",
+   "from_cols": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "VERSION",
+    "SEQUENCE"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Atividade traduzida.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

@@ -1,0 +1,123 @@
+{
+ "name": "FDN_ROLEDATA",
+ "domain": "foundation-identity-access",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Propriedades chave/valor adicionais de um papel (FDN_ROLE).",
+ "lifecycle": "Criadas junto com o papel; volume baixo.",
+ "key_notes": "Padrão EAV.",
+ "notes_for_agents": "Junte com FDN_ROLE via ROLE_ID.",
+ "primary_key": [
+  "ROLEDATA_ID"
+ ],
+ "unique_constraints": [
+  [
+   "ROLEDATA_ID",
+   "DATA_KEY"
+  ]
+ ],
+ "indexes": [
+  {
+   "name": "FK_T7G5FWWSGGMB5NLU5V63J1NTA",
+   "unique": false,
+   "columns": [
+    "ROLE_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.security.entity.FDNRoleData"
+ ],
+ "columns": [
+  {
+   "name": "ROLEDATA_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária surrogate.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNRoleData"
+  },
+  {
+   "name": "DATA_KEY",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome da propriedade do papel.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "dataKey",
+   "java_type": "String",
+   "java_entity": "FDNRoleData"
+  },
+  {
+   "name": "DATA_VALUE",
+   "type": "varchar(4000)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Valor textual da propriedade (até 4000).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "dataValue",
+   "java_type": "String",
+   "java_entity": "FDNRoleData"
+  },
+  {
+   "name": "ROLE_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Papel dono da propriedade.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_ROLE.ROLE_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_ROLE",
+   "from_cols": [
+    "ROLE_ID"
+   ],
+   "to_cols": [
+    "ROLE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Papel dono da propriedade.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "FLUIG_RUNTIMEDATA_PROCESS_MNGR",
+   "from_cols": [
+    "DATA_KEY"
+   ],
+   "to_cols": [
+    "DATA_KEY"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: inferência apenas por nome DATA_KEY; chave de propriedade livre, sem relação com a tabela de runtime de processo.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

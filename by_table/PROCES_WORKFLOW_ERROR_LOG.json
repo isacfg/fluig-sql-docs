@@ -1,0 +1,218 @@
+{
+ "name": "PROCES_WORKFLOW_ERROR_LOG",
+ "domain": "bpm-workflow-erro",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Log de falhas ocorridas em operações assíncronas/de movimentação do workflow (envio, cancelamento, mover, timer etc.), guardando o payload serializado para reprocessamento e o stack trace.",
+ "lifecycle": "Uma linha por falha de instância; inserida pelo motor de workflow ao capturar exceção e removida/reprocessada pela tela de erros de processo. Volume baixo.",
+ "key_notes": "Usa TENANT_ID (não COD_EMPRESA). Índice único (TENANT_ID, INSTANCE_ID): no máximo um erro registrado por instância.",
+ "notes_for_agents": "Filtrar por TENANT_ID. DATA e ERROR_LOG são longtext e podem conter dados do formulário/stack trace; evitar selecioná-los em listagens. Pode conter dados sensíveis do processo.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "PROCES_WORKFLOW_ERROR_LOG_01",
+   "unique": true,
+   "columns": [
+    "TENANT_ID",
+    "INSTANCE_ID"
+   ]
+  },
+  {
+   "name": "PROCES_WORKFLOW_ERROR_LOG_USER",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "EXECUTOR_USER_CODE"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.WorkflowProcessErrorLog"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária sequencial do registro de erro (ID gerado via metalist rowid).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "WorkflowProcessErrorLog"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant/empresa dona da instância com erro.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "tenantId",
+   "java_type": "long",
+   "java_entity": "WorkflowProcessErrorLog"
+  },
+  {
+   "name": "INSTANCE_ID",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Número da instância de processo que falhou; único por tenant.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_WORKFLOW.NUM_PROCES",
+   "confidence": "medium",
+   "java_field": "instanceId",
+   "java_type": "int",
+   "java_entity": "WorkflowProcessErrorLog"
+  },
+  {
+   "name": "STATE_SEQUENCE",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sequência de movimentação/estado (NUM_SEQ_MOVTO) em que o erro ocorreu.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "HISTOR_PROCES.NUM_SEQ_MOVTO",
+   "confidence": "medium",
+   "java_field": "stateSequence",
+   "java_type": "int",
+   "java_entity": "WorkflowProcessErrorLog"
+  },
+  {
+   "name": "EXECUTOR_USER_CODE",
+   "type": "varchar(150)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do usuário que executava a operação quando falhou.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE (colleagueId; matrícula/login)",
+   "confidence": "medium",
+   "java_field": "executorId",
+   "java_type": "String",
+   "java_entity": "WorkflowProcessErrorLog"
+  },
+  {
+   "name": "METHOD",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código da operação do workflow que falhou, conforme enum ProcessWorkflowErrorMethod.",
+   "semantic_type": "enum",
+   "values": "100=send; 200=saveAndSendTask; 300=run async; 400=continueProcessThroughIntermediateError; 401=executeConditionTask; 402=runBpmnTimerTask; 403=completeExpiredTask; 500=cancelInstance (engine); 600=cancelInstance (service); 700=move; 800=saveAndSendTaskBatch; 900=takeTask",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "methodId",
+   "java_type": "int",
+   "java_entity": "WorkflowProcessErrorLog"
+  },
+  {
+   "name": "DATA",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Payload serializado (VO de parâmetros do método) usado para reexecutar a operação.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "data",
+   "java_type": "String",
+   "java_entity": "WorkflowProcessErrorLog"
+  },
+  {
+   "name": "ERROR_MESSAGE",
+   "type": "varchar(512)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Mensagem curta da exceção (até 512 caracteres).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "errorMessage",
+   "java_type": "String",
+   "java_entity": "WorkflowProcessErrorLog"
+  },
+  {
+   "name": "ERROR_LOG",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Stack trace/log completo do erro.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "errorLog",
+   "java_type": "String",
+   "java_entity": "WorkflowProcessErrorLog"
+  },
+  {
+   "name": "CREATED_AT",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora em que o erro foi registrado.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "createdAt",
+   "java_type": "Date",
+   "java_entity": "WorkflowProcessErrorLog"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "PROCES_WORKFLOW",
+   "from_cols": [
+    "TENANT_ID",
+    "INSTANCE_ID"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "1:1",
+   "kind": "logical-probable",
+   "description": "Instância de processo à qual o erro pertence (sem FK física).",
+   "status": "probable"
+  },
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "EXECUTOR_USER_CODE"
+   ],
+   "to_cols": [
+    "USER_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Usuário executor da operação. [alvo corrigido: USER_CODE/LOGIN pertencem a FDN_USERTENANT]",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

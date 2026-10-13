@@ -1,0 +1,161 @@
+{
+ "name": "RATING",
+ "domain": "rating",
+ "module": "08001-fluig-database-rating",
+ "purpose": "Avaliação (nota) que um usuário deu a um app mobile do Fluig (MY_FLUIG ou MY_APPROVAL), uma linha por usuário e app.",
+ "lifecycle": "Criada na primeira avaliação e atualizada (LAST_RATING_DATE, RATING_NOTE) nas seguintes; volume baixo.",
+ "key_notes": "Multi-tenant por TENANT_ID. Único por (USER_CODE, APP_IDENTIFIER).",
+ "notes_for_agents": "Filtrar por TENANT_ID. USER_CODE é dado pessoal indireto.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [
+  [
+   "USER_CODE",
+   "APP_IDENTIFIER"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.rating.api.entity.Rating"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador surrogate da avaliação do app (PK).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant (empresa Fluig) do usuário que avaliou.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "Rating"
+  },
+  {
+   "name": "USER_CODE",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código (login) do usuário que avaliou o app; único junto com APP_IDENTIFIER.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "medium",
+   "java_field": "userCode",
+   "java_type": "String",
+   "java_entity": "Rating"
+  },
+  {
+   "name": "FIRST_RATING_DATE",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora da primeira avaliação do usuário para o app.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "firstRatingDate",
+   "java_type": "Date",
+   "java_entity": "Rating"
+  },
+  {
+   "name": "LAST_RATING_DATE",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora da avaliação mais recente do usuário para o app.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "lastRatingDate",
+   "java_type": "Date",
+   "java_entity": "Rating"
+  },
+  {
+   "name": "RATING_NOTE",
+   "type": "tinyint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nota atribuída pelo usuário (inteiro pequeno, tipicamente estrelas); escala exata não confirmada no código.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "ratingNote",
+   "java_type": "Integer",
+   "java_entity": "Rating"
+  },
+  {
+   "name": "RATED_BY_STORE",
+   "type": "bit",
+   "nullable": false,
+   "default": "false",
+   "pk_position": null,
+   "purpose": "Indica se a avaliação foi feita via loja de apps (true) ou dentro do próprio app (false).",
+   "semantic_type": "flag",
+   "values": "true=avaliado pela loja; false=avaliado no app (default)",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "ratedByStore",
+   "java_type": "Boolean",
+   "java_entity": "Rating"
+  },
+  {
+   "name": "APP_IDENTIFIER",
+   "type": "varchar(30)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Aplicativo mobile avaliado; enum AppIdentifier gravado como STRING (nome da constante Java).",
+   "semantic_type": "enum",
+   "values": "MY_FLUIG=app Fluig mobile (appName MYFLUIG); MY_APPROVAL=app de aprovações mobile (appName MYAPPROVAL)",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "appIdentifier",
+   "java_type": "AppIdentifier",
+   "java_entity": "Rating"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Tenant do avaliador.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

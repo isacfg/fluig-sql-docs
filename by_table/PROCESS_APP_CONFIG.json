@@ -1,0 +1,162 @@
+{
+ "name": "PROCESS_APP_CONFIG",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Configuracao de mapeamento de campos de aplicativo por atividade de processo (APP_FIELD/APP_KEY) definida na modelagem do processo.",
+ "lifecycle": "Criada ao salvar o processo na modelagem; fixa por versao de processo.",
+ "key_notes": "PK ID. Por versao de processo (PROCESS_ID, PROCESS_VERSION) e atividade (STATE_SEQUENCE).",
+ "notes_for_agents": "Filtrar por TENANT_ID+PROCESS_ID+PROCESS_VERSION. Valores em runtime ficam em PROCESS_APP_VALUE.",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessAppConfiguration"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador sequencial da configuracao.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "long",
+   "java_entity": "ProcessAppConfiguration"
+  },
+  {
+   "name": "APP_FIELD",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do campo do aplicativo configurado.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "appField",
+   "java_type": "String",
+   "java_entity": "ProcessAppConfiguration"
+  },
+  {
+   "name": "APP_KEY",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave do aplicativo associada ao campo.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "appKey",
+   "java_type": "String",
+   "java_entity": "ProcessAppConfiguration"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descricao longa (LOB) da configuracao.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "ProcessAppConfiguration"
+  },
+  {
+   "name": "PROCESS_ID",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Codigo da definicao de processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ProcessAppConfiguration"
+  },
+  {
+   "name": "PROCESS_VERSION",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versao da definicao de processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "processVersion",
+   "java_type": "int",
+   "java_entity": "ProcessAppConfiguration"
+  },
+  {
+   "name": "STATE_SEQUENCE",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sequencia da atividade (estado) do processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "high",
+   "java_field": "stateSequence",
+   "java_type": "int",
+   "java_entity": "ProcessAppConfiguration"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dona da linha; faz parte da PK e deve ser filtrada em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "long",
+   "java_entity": "ProcessAppConfiguration"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ESTADO_PROCES",
+   "from_cols": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "PROCESS_VERSION",
+    "STATE_SEQUENCE"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Atividade do processo a que a configuracao se aplica.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

@@ -1,0 +1,127 @@
+{
+ "name": "AREA_DEST",
+ "domain": "ecm-documents",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Cadastro legado de áreas de destino (destinatários/áreas organizacionais) do módulo de documentos, com responsável e servidor de execução.",
+ "lifecycle": "Baixo volume, cadastro manual/legado (Datasul/Webdesk).",
+ "key_notes": "PK (COD_EMPRESA, COD_AREA).",
+ "notes_for_agents": "Tabela legada; uso residual. Entidade DestinationArea (named query findAll).",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_AREA"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.foundation.model.DestinationArea"
+ ],
+ "columns": [
+  {
+   "name": "COD_AREA",
+   "type": "varchar(15)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código da área de destino.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "areaID",
+   "java_type": "String",
+   "java_entity": "DestinationArea"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); parte da PK, sempre filtrar por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "DestinationArea"
+  },
+  {
+   "name": "DES_AREA",
+   "type": "varchar(2000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição da área de destino.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "areaDescription",
+   "java_type": "String",
+   "java_entity": "DestinationArea"
+  },
+  {
+   "name": "COD_SERVID_EXEC",
+   "type": "varchar(20)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do servidor de execução associado à área.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "executionServerId",
+   "java_type": "String",
+   "java_entity": "DestinationArea"
+  },
+  {
+   "name": "CD_MATR_RESPONS_AREA",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrícula do responsável pela área.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "medium",
+   "java_field": "managerId",
+   "java_type": "String",
+   "java_entity": "DestinationArea"
+  },
+  {
+   "name": "COD_USUARIO",
+   "type": "varchar(20)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do usuário associado/criador do registro.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "low",
+   "java_field": "userId",
+   "java_type": "String",
+   "java_entity": "DestinationArea"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "LOG_COP_CONTROLAD",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_AREA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_AREA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

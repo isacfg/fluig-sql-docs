@@ -1,0 +1,233 @@
+{
+ "name": "FDN_GROUPUSERROLE",
+ "domain": "foundation-identity-access",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Tabela de associação de membros de grupo: liga um grupo a um usuário (LOGIN), a um papel (ROLE_CODE) ou a um subgrupo (CHILD_GROUPCODE).",
+ "lifecycle": "Linhas criadas ao adicionar membros/papéis a um grupo, removidas ao remover; volume proporcional ao número de membros.",
+ "key_notes": "Cada linha usa tipicamente apenas UM de LOGIN, ROLE_CODE ou CHILD_GROUPCODE (os demais NULL) -- inferido da nulabilidade; conferir ao consultar. Referencia grupos por código+tenant, não por ID.",
+ "notes_for_agents": "Junte sempre por (TENANT_ID, código). LOGIN é a ponte para FDN_USERTENANT.",
+ "primary_key": [
+  "GROUPUSERROLE_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "FDNUSERGROUPRI001",
+   "unique": false,
+   "columns": [
+    "LOGIN",
+    "GROUP_CODE"
+   ]
+  },
+  {
+   "name": "FDNUSERGROUPRI002",
+   "unique": false,
+   "columns": [
+    "ROLE_CODE",
+    "GROUP_CODE"
+   ]
+  },
+  {
+   "name": "FDNUSERGROUPRI003",
+   "unique": false,
+   "columns": [
+    "CHILD_GROUPCODE",
+    "GROUP_CODE"
+   ]
+  },
+  {
+   "name": "FDNUSERGROUPRI004",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "GROUP_CODE"
+   ]
+  },
+  {
+   "name": "FDNUSERGROUPRI005",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "ROLE_CODE"
+   ]
+  },
+  {
+   "name": "FKfwbai78xt64hryxiljewqu98e",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "CHILD_GROUPCODE"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.security.entity.FDNGroupUserRole"
+ ],
+ "columns": [
+  {
+   "name": "GROUPUSERROLE_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária surrogate.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNGroupUserRole"
+  },
+  {
+   "name": "CHILD_GROUPCODE",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Código do subgrupo membro do grupo (grupo aninhado); NULL se a linha for de usuário ou papel.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "FDN_GROUP.GROUP_CODE",
+   "confidence": "medium",
+   "java_field": "childGroupCode",
+   "java_type": "String",
+   "java_entity": "FDNGroupUserRole"
+  },
+  {
+   "name": "GROUP_CODE",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do grupo pai ao qual a linha pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_GROUP.GROUP_CODE",
+   "confidence": "high",
+   "java_field": "groupCode",
+   "java_type": "String",
+   "java_entity": "FDNGroupUserRole"
+  },
+  {
+   "name": "LOGIN",
+   "type": "varchar(150)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Login do usuário membro do grupo; NULL se for papel ou subgrupo.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.LOGIN",
+   "confidence": "high",
+   "java_field": "login",
+   "java_type": "String",
+   "java_entity": "FDNGroupUserRole"
+  },
+  {
+   "name": "ROLE_CODE",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Código do papel associado ao grupo; NULL se for usuário ou subgrupo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_ROLE.ROLE_CODE",
+   "confidence": "high",
+   "java_field": "roleCode",
+   "java_type": "String",
+   "java_entity": "FDNGroupUserRole"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant do grupo/membro; compõe a chave lógica junto com os códigos.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNGroupUserRole"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "LOGIN"
+   ],
+   "to_cols": [
+    "LOGIN"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Usuário membro (FDNGroupUserRole.user); junção apenas por LOGIN.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_ROLE",
+   "from_cols": [
+    "TENANT_ID",
+    "ROLE_CODE"
+   ],
+   "to_cols": [
+    "TENANT_ID",
+    "ROLE_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Papel associado ao grupo.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_GROUP",
+   "from_cols": [
+    "TENANT_ID",
+    "CHILD_GROUPCODE"
+   ],
+   "to_cols": [
+    "TENANT_ID",
+    "GROUP_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Subgrupo membro.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_GROUP",
+   "from_cols": [
+    "TENANT_ID",
+    "GROUP_CODE"
+   ],
+   "to_cols": [
+    "TENANT_ID",
+    "GROUP_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Grupo pai (FK física composta).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Tenant ao qual o registro pertence.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

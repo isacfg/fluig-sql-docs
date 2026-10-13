@@ -1,0 +1,231 @@
+{
+ "name": "ESTADO_PROCES_SERVICE",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Configuração de serviço (integração) executado por um estado de tarefa de serviço: nome do serviço, tentativas e frequência (ProcessStateService).",
+ "lifecycle": "Criada ao modelar tarefa de serviço no processo.",
+ "key_notes": "PK substituta (PROCESS_STATE_SERVICE_ID).",
+ "notes_for_agents": "Juntar a ESTADO_PROCES pelas 4 colunas-chave. Tipo de execução (manual/posterior/imediata) está em ESTADO_PROCES.TIPO_EXEC (ProcessStateServiceExecutionType 0=MANUAL,1=POSTERIOR,2=IMMEDIATE, mapeamento provável).",
+ "primary_key": [
+  "PROCESS_STATE_SERVICE_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessStateService"
+ ],
+ "columns": [
+  {
+   "name": "PROCESS_STATE_SERVICE_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave substituta da configuração de serviço do estado.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "ProcessStateService"
+  },
+  {
+   "name": "NUM_TENTATIVAS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Número máximo de tentativas de execução do serviço em caso de falha.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "attempts",
+   "java_type": "int",
+   "java_entity": "ProcessStateService"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK e filtro obrigatório de multi-tenancy.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ProcessStateService"
+  },
+  {
+   "name": "NUM_TEMPO",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Intervalo/frequência entre execuções ou tentativas (unidade em IDI_TEMPO).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "frequency",
+   "java_type": "Integer",
+   "java_entity": "ProcessStateService"
+  },
+  {
+   "name": "IDI_TEMPO",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Unidade de tempo de NUM_TEMPO (default 0 quando nulo).",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "frequencyType",
+   "java_type": "Integer",
+   "java_entity": "ProcessStateService"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código (processId) da definição de processo BPM a que a linha pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ProcessStateService"
+  },
+  {
+   "name": "NUM_SEQ",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "NUM_SEQ do estado dono do serviço.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "high",
+   "java_field": "sequence",
+   "java_type": "int",
+   "java_entity": "ProcessStateService"
+  },
+  {
+   "name": "NOM_SERVICE",
+   "type": "varchar(200)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do serviço cadastrado (serviço corporativo/integração) chamado pela tarefa.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "serviceName",
+   "java_type": "String",
+   "java_entity": "ProcessStateService"
+  },
+  {
+   "name": "MSG_SUCESS",
+   "type": "varchar(200)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Mensagem de sucesso associada à execução do serviço.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "sucessFullMessage",
+   "java_type": "String",
+   "java_entity": "ProcessStateService"
+  },
+  {
+   "name": "NUM_VERS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Número da versão da definição de processo (versionamento do processo).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "ProcessStateService"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ESTADO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Estado/atividade do processo ao qual esta linha pertence.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "LIN_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: LIN_PROCES é raia (swimlane) do diagrama; coincidência de forma da PK.",
+   "status": "rejected"
+  },
+  {
+   "to_table": "SEGUR_ANEXO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: segurança de anexo apenas compartilha as colunas-chave por nome; sem vínculo no código desta entidade.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

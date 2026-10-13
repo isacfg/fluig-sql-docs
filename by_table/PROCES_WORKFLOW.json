@@ -1,0 +1,726 @@
+{
+ "name": "PROCES_WORKFLOW",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Instancia (solicitacao) de processo de workflow: dados de abertura, solicitante, prazo, status e vinculo com a versao da definicao e com o formulario.",
+ "lifecycle": "Uma linha por solicitacao, criada ao iniciar o processo; atualizada em andamento e ao encerrar/cancelar. Tabela central e de alto volume.",
+ "key_notes": "PK (COD_EMPRESA, NUM_PROCES). LOG_ATIV indica instancia aberta. Muitas tabelas de workflow referenciam NUM_PROCES.",
+ "notes_for_agents": "Filtrar sempre por COD_EMPRESA. Para abertas use LOG_ATIV=1; indices WORKFLOWPROCES01-06 favorecem filtros por COD_DEF_PROCES, STATUS, CLOSURE_STATUS, DEADLINE_DATE. Contem matricula do solicitante.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NUM_PROCES"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "CENTRAL_PW",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "COD_MATR_REQUISIT",
+    "LOG_ATIV"
+   ]
+  },
+  {
+   "name": "CENTRAL_MANAGER",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "LOG_ATIV"
+   ]
+  },
+  {
+   "name": "WORKFLOWPROCES01",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "STATUS",
+    "CLOSURE_STATUS",
+    "DEADLINE_DATE"
+   ]
+  },
+  {
+   "name": "WORKFLOWPROCES02",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "CLOSURE_STATUS",
+    "STATUS",
+    "DEADLINE_DATE"
+   ]
+  },
+  {
+   "name": "WORKFLOWPROCES03",
+   "unique": false,
+   "columns": [
+    "COD_MATR_REQUISIT"
+   ]
+  },
+  {
+   "name": "WORKFLOWPROCES04",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "LOG_ATIV",
+    "COD_DEF_PROCES"
+   ]
+  },
+  {
+   "name": "WORKFLOWPROCES05",
+   "unique": false,
+   "columns": [
+    "LOG_ATIV",
+    "COD_DEF_PROCES"
+   ]
+  },
+  {
+   "name": "WORKFLOWPROCES06",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "START_DATE"
+   ]
+  },
+  {
+   "name": "WORKFLOWPROCES07",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO_CARD"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.WorkflowProcess"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant (empresa) dona da linha; faz parte da PK e deve ser filtrada em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "NUM_PROCES",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Numero da instancia de processo (numero da solicitacao).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "processInstanceId",
+   "java_type": "int",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "LOG_ATIV",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a instancia ainda esta ativa (aberta).",
+   "semantic_type": "flag",
+   "values": "1=ativa; 0=encerrada",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "active",
+   "java_type": "Boolean",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "NUM_SEQ_ANEXO_PRINC",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sequencia do anexo principal da solicitacao.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "attachmentSeqId",
+   "java_type": "Integer",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "NR_DOCUMENTO_CARD",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Numero do documento de registro (card) de formulario associado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "medium",
+   "java_field": "cardDocumentId",
+   "java_type": "Integer",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "NR_DOCUMENTO_CARD_INDEX",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Numero do documento do fichario (card index) do formulario.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "medium",
+   "java_field": "cardIndexDocumentId",
+   "java_type": "Integer",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "CLOSURE_STATUS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Situacao do prazo da instancia (enum WorkflowProcessClosureStatus).",
+   "semantic_type": "enum",
+   "values": "0=OPEN; 1=ON_TIME; 2=WARNING; 3=EXPIRED",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "closureStatus",
+   "java_type": "Integer",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "DEADLINE_DATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora limite (prazo) da instancia.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "deadlineDateProcess",
+   "java_type": "Date",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "END_DATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de encerramento da instancia.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "endDateProcess",
+   "java_type": "Date",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "NOTIFY_DELAY",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a notificacao de atraso ja foi/deve ser enviada.",
+   "semantic_type": "flag",
+   "values": "1=sim; 0=nao",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "notifyDelay",
+   "java_type": "Boolean",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "PERIOD_ID",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Codigo do periodo de expediente usado no calculo de prazo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PERIOD_EXPED.COD_PERIOD_EXPED",
+   "confidence": "medium",
+   "java_field": "periodId",
+   "java_type": "String",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Codigo da definicao do processo instanciado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "COD_MATR_REQUISIT",
+   "type": "varchar(150)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matricula do solicitante que abriu a instancia.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE (via matricula)",
+   "confidence": "high",
+   "java_field": "requesterId",
+   "java_type": "String",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "NUM_PROCES_ORIG",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Numero da instancia pai quando esta e um subprocesso.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_WORKFLOW.NUM_PROCES",
+   "confidence": "medium",
+   "java_field": "sourceProcess",
+   "java_type": "Integer",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "NUM_SEQ_THREAD_ORIG",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sequencia da thread do processo pai que originou o subprocesso.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "THREAD_PROCES.NUM_SEQ_THREAD",
+   "confidence": "medium",
+   "java_field": "sourceThreadSequence",
+   "java_type": "Integer",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "START_DATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de abertura da instancia.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "startDateProcess",
+   "java_type": "Date",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "STATUS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Situacao da instancia; codigos nao confirmados nos fontes lidos (provavel: aberta/cancelada/finalizada).",
+   "semantic_type": "status",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "status",
+   "java_type": "Integer",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "TOTAL_DEADLINE",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Prazo total da instancia, em unidade nao confirmada (provavel segundos/minutos).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "totalDeadline",
+   "java_type": "Integer",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "TOTAL_RUNTIME",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tempo total de execucao acumulado, em unidade nao confirmada.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "totalRuntime",
+   "java_type": "Long",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "TOTAL_WARNING",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tempo total ate o aviso de prazo, em unidade nao confirmada.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "totalWarning",
+   "java_type": "Integer",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "COD_UUID",
+   "type": "varchar(36)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "UUID da instancia (36 caracteres).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "uuid",
+   "java_type": "String",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "NUM_VERS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versao da definicao de processo usada.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "Integer",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "WARNING_DATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora em que o prazo entra em aviso.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "warningDateProcess",
+   "java_type": "Date",
+   "java_entity": "WorkflowProcess"
+  },
+  {
+   "name": "SCRIPT_VERSION",
+   "type": "integer",
+   "nullable": false,
+   "default": "0",
+   "pk_position": null,
+   "purpose": "Versao do script de processo aplicada a instancia (NOT NULL).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "scriptVersion",
+   "java_type": "Integer",
+   "java_entity": "WorkflowProcess"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "VERS_DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versao da definicao de processo da instancia.",
+   "status": "probable"
+  },
+  {
+   "to_table": "PROCES_WORKFLOW",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES_ORIG"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Instancia pai (subprocesso).",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_RECENTLY_VIEWED",
+   "from_cols": [
+    "NUM_PROCESS_INSTANCE"
+   ],
+   "to_cols": [
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "ADHOC_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "ADHOC_PROCES_WORKFLOW",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "ADHOC_PROCES_WORKFLOW",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES_PAI"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "ANEXO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DIAGNOSIS_PROCESS_LOG",
+   "from_cols": [
+    "TENANT_ID",
+    "INSTANCE_ID"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "HISTOR_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PROCESS_APP_VALUE",
+   "from_cols": [
+    "TENANT_ID",
+    "INSTANCE_ID"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PROCESS_INSTANCE_MANAGER",
+   "from_cols": [
+    "TENANT_ID",
+    "INSTANCE_ID"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PROCESS_OBSERVATION",
+   "from_cols": [
+    "TENANT_ID",
+    "NUM_PROCESS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PROCES_SIGNAL_INSTANCE",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PROCES_WORKFLOW",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES_ORIG"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "TAR_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
+  },
+  {
+   "from_table": "TAR_PROCES",
+   "from_cols": [
+    "COD_EMPRESA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
+  },
+  {
+   "from_table": "TAR_PROCES",
+   "from_cols": [
+    "NUM_PROCES"
+   ],
+   "to_cols": [
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
+  },
+  {
+   "from_table": "THREAD_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "VERBOSE_SCRIPT_LOG",
+   "from_cols": [
+    "TENANT_ID",
+    "IDENTIFIER"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PROCES_WORKFLOW_ERROR_LOG",
+   "from_cols": [
+    "TENANT_ID",
+    "INSTANCE_ID"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "1:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

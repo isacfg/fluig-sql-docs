@@ -1,0 +1,221 @@
+{
+ "name": "FDN_LOCAL",
+ "domain": "calendario-feriados",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Locais (unidades/filiais) com coordenadas geográficas, raio e fuso horário, usados para associar feriados e usuários. Pode haver um local padrão por empresa.",
+ "lifecycle": "Cadastro administrativo; poucas linhas.",
+ "key_notes": "Usa COMPANYID (não COD_EMPRESA/TENANT_ID). DEFAULT_LOCALE marca o local padrão.",
+ "notes_for_agents": "Filtrar por COMPANYID.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [
+  [
+   "COMPANYID",
+   "NAME"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.local.entity.FDNLocal"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária do local.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNLocal"
+  },
+  {
+   "name": "COMPANYID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Empresa/tenant dona do local.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "companyId",
+   "java_type": "Long",
+   "java_entity": "FDNLocal"
+  },
+  {
+   "name": "DEFAULT_LOCALE",
+   "type": "bit(1)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Indica o local padrão da empresa.",
+   "semantic_type": "flag",
+   "values": "1=local padrão; 0/NULL=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "defaultLocale",
+   "java_type": "boolean",
+   "java_entity": "FDNLocal"
+  },
+  {
+   "name": "LATITUDE",
+   "type": "double",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Latitude em graus decimais.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "latitude",
+   "java_type": "double",
+   "java_entity": "FDNLocal"
+  },
+  {
+   "name": "LONGITUDE",
+   "type": "double",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Longitude em graus decimais.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "longitude",
+   "java_type": "double",
+   "java_entity": "FDNLocal"
+  },
+  {
+   "name": "NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do local.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "name",
+   "java_type": "String",
+   "java_entity": "FDNLocal"
+  },
+  {
+   "name": "RADIUS",
+   "type": "double",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Raio de abrangência em torno das coordenadas (unidade não confirmada, provável metros/km).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "radius",
+   "java_type": "double",
+   "java_entity": "FDNLocal"
+  },
+  {
+   "name": "TIMEZONE",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Identificador de fuso horário (ex.: America/Sao_Paulo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "timezone",
+   "java_type": "String",
+   "java_entity": "FDNLocal"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_LOCALHOLIDAY",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "LOCAL_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Feriados do local.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_LOCALUSER",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "LOCAL_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Usuários do local.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_SITE",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "LOCAL_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Sites de volume do local.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_LOCALHOLIDAY",
+   "from_cols": [
+    "LOCAL_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_LOCALUSER",
+   "from_cols": [
+    "LOCAL_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_SITE",
+   "from_cols": [
+    "LOCAL_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  }
+ ]
+}

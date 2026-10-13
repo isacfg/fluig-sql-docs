@@ -1,0 +1,75 @@
+{
+ "name": "SOCIAL_POSTATTACHMENT",
+ "domain": "social",
+ "module": "03001-fluig-database-social",
+ "purpose": "Tabela de junção entre uma postagem social e seus anexos; ambas as pontas apontam para SOCIABLE (entidade base de itens sociais).",
+ "lifecycle": "Linha criada ao anexar um item (arquivo/imagem) a uma postagem; removida junto com a postagem ou o anexo.",
+ "key_notes": "Sem PK declarada no DDL; sem coluna de tenant (tenant vem de SOCIABLE).",
+ "notes_for_agents": "Junte duas vezes com SOCIABLE (alias post/attachment). Não há tenant aqui.",
+ "primary_key": [],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [],
+ "columns": [
+  {
+   "name": "POST_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "ID da postagem social (SOCIABLE.ID) à qual o anexo pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIABLE.ID",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "ATTACHMENT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "ID do item anexado (SOCIABLE.ID) vinculado à postagem.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIABLE.ID",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "SOCIABLE",
+   "from_cols": [
+    "POST_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:M-via-this-table",
+   "kind": "physical-fk",
+   "description": "Postagem dona dos anexos.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "SOCIABLE",
+   "from_cols": [
+    "ATTACHMENT_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:M-via-this-table",
+   "kind": "physical-fk",
+   "description": "Item anexado à postagem.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

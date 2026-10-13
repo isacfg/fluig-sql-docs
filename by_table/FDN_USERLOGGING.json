@@ -1,0 +1,117 @@
+{
+ "name": "FDN_USERLOGGING",
+ "domain": "foundation-identity-access",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Registro de usuário logado/sessão com data de vencimento (due date), por login e tenant.",
+ "lifecycle": "Linha criada no login e removida/expirada; volume proporcional a usuários ativos.",
+ "key_notes": "Semântica exata inferida do nome e colunas; DUE_DATE em epoch.",
+ "notes_for_agents": "Contém LOGIN (identificador do usuário).",
+ "primary_key": [
+  "USERLOGGING_ID"
+ ],
+ "unique_constraints": [
+  [
+   "LOGIN"
+  ],
+  [
+   "TENANT_ID",
+   "LOGIN"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.security.entity.FDNUserLogging"
+ ],
+ "columns": [
+  {
+   "name": "USERLOGGING_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária surrogate.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNUserLogging"
+  },
+  {
+   "name": "DUE_DATE",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de expiração do registro, em epoch (provavelmente ms).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "dueDate",
+   "java_type": "Long",
+   "java_entity": "FDNUserLogging"
+  },
+  {
+   "name": "LOGIN",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Login do usuário (FDN_USERTENANT.LOGIN).",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.LOGIN",
+   "confidence": "high",
+   "java_field": "login",
+   "java_type": "String",
+   "java_entity": "FDNUserLogging"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dono do registro; FK para FDN_TENANT.TENANT_ID. Valor -1 indica registro global/sem tenant em consultas do código.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNUserLogging"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "LOGIN"
+   ],
+   "to_cols": [
+    "LOGIN"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Usuário (FK por LOGIN).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Tenant, sem FK.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

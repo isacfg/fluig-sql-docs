@@ -1,0 +1,340 @@
+{
+ "name": "FDN_PERSONALDATA",
+ "domain": "privacy-lgpd",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Catálogo de dados pessoais por tenant: tabela e campo que contêm dado pessoal, sensibilidade e se permitem anonimização.",
+ "lifecycle": "Cadastrado por usuário; removido logicamente (REMOVED=1 e REMOVAL_DATE).",
+ "key_notes": "Soft-delete via REMOVED/REMOVAL_DATE. Unique key (artefato UNIQUE) provavelmente em tenant+tabela+campo.",
+ "notes_for_agents": "Filtrar por TENANT_ID e REMOVED (NULL ou 0) para ativos. Descreve metadados, não contém os dados pessoais em si.",
+ "primary_key": [
+  "PERSONALDATA_ID"
+ ],
+ "unique_constraints": [
+  [
+   "TENANT_ID",
+   "TABLE_ID",
+   "FIELD_ID"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.security.entity.FDNPersonalData"
+ ],
+ "columns": [
+  {
+   "name": "PERSONALDATA_ID",
+   "type": "BIGINT",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK do dado pessoal cadastrado.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNPersonalData"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant do cadastro.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TABLE_ID",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador/nome da tabela que contém o dado pessoal.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "tableId",
+   "java_type": "String",
+   "java_entity": "FDNPersonalData"
+  },
+  {
+   "name": "FIELD_ID",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador/nome do campo com dado pessoal.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "fieldId",
+   "java_type": "String",
+   "java_entity": "FDNPersonalData"
+  },
+  {
+   "name": "ALLOWS_ANONYMIZATION",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o dado pode ser anonimizado.",
+   "semantic_type": "flag",
+   "values": "1=permite; 0=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "allowsAnonymization",
+   "java_type": "Boolean",
+   "java_entity": "FDNPersonalData"
+  },
+  {
+   "name": "CREATION_DATE",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data e hora do cadastro.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "creationDate",
+   "java_type": "Date",
+   "java_entity": "FDNPersonalData"
+  },
+  {
+   "name": "REMOVED",
+   "type": "bit",
+   "nullable": true,
+   "default": "null",
+   "pk_position": null,
+   "purpose": "Marca de remoção lógica.",
+   "semantic_type": "flag",
+   "values": "1=removido; 0/NULL=ativo",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "removed",
+   "java_type": "Boolean",
+   "java_entity": "FDNPersonalData"
+  },
+  {
+   "name": "REMOVAL_DATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": "null",
+   "pk_position": null,
+   "purpose": "Data e hora da remoção lógica.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "removalDate",
+   "java_type": "Date",
+   "java_entity": "FDNPersonalData"
+  },
+  {
+   "name": "SENSITIVE_DATA",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica dado pessoal sensível (LGPD).",
+   "semantic_type": "flag",
+   "values": "1=sensível; 0=comum",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "sensitiveData",
+   "java_type": "Boolean",
+   "java_entity": "FDNPersonalData"
+  },
+  {
+   "name": "TABLE_DESCRIPTION",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição legível da tabela.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "tableDescription",
+   "java_type": "String",
+   "java_entity": "FDNPersonalData"
+  },
+  {
+   "name": "FIELD_DESCRIPTION",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição legível do campo.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "fieldDescription",
+   "java_type": "String",
+   "java_entity": "FDNPersonalData"
+  },
+  {
+   "name": "USER_TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Usuário que cadastrou o dado pessoal.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_TENANT_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "REMOVED_BY_USER_TENANT_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": "null",
+   "pk_position": null,
+   "purpose": "Usuário que removeu o cadastro.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_TENANT_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "INFORMATION_TYPE_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo de informação do dado pessoal.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_PDATA_INFOTYPE.INFORMATION_TYPE_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Tenant.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_PDATA_INFOTYPE",
+   "from_cols": [
+    "INFORMATION_TYPE_ID"
+   ],
+   "to_cols": [
+    "INFORMATION_TYPE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Tipo de informação.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "USER_TENANT_ID"
+   ],
+   "to_cols": [
+    "USER_TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Usuário que cadastrou.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "REMOVED_BY_USER_TENANT_ID"
+   ],
+   "to_cols": [
+    "USER_TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Usuário que removeu.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_PDATA_JUSTIFICATION",
+   "from_cols": [
+    "PERSONALDATA_ID"
+   ],
+   "to_cols": [
+    "PERSONALDATA_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Justificativas do dado.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_PDATATRACE",
+   "from_cols": [
+    "RESOURCE_TABLE",
+    "FIELDS"
+   ],
+   "to_cols": [
+    "TABLE_ID",
+    "FIELD_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FDN_PDATA_INFOTYPE",
+   "from_cols": [
+    "INFORMATION_TYPE_ID"
+   ],
+   "to_cols": [
+    "INFORMATION_TYPE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_PDATA_JUSTIFICATION",
+   "from_cols": [
+    "PERSONALDATA_ID"
+   ],
+   "to_cols": [
+    "PERSONALDATA_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

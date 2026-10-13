@@ -1,0 +1,188 @@
+{
+ "name": "PREFER_PASTA",
+ "domain": "ecm-lists-filters",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Preferência de classificação (ordenação) de conteúdo de uma pasta por usuário.",
+ "lifecycle": "Uma linha por usuário/pasta/versão.",
+ "key_notes": "Multi-tenant por COD_EMPRESA (parte da PK).",
+ "notes_for_agents": "Contém referência a usuário (matrícula/id); dado pessoal indireto.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NR_DOCUMENTO",
+  "NR_VERSAO",
+  "CD_MATRICULA"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.FolderPreferences"
+ ],
+ "columns": [
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Matrícula do usuário dono da preferência.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "medium",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "FolderPreferences"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "FolderPreferences"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Número da pasta (documento tipo pasta).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "int",
+   "java_entity": "FolderPreferences"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Versão do documento/pasta.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "FolderPreferences"
+  },
+  {
+   "name": "IDI_CLASSIF_PASTA",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Índice/critério de classificação (ordenação) escolhido pelo usuário para o conteúdo da pasta.",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "folderOrderIndex",
+   "java_type": "int",
+   "java_entity": "FolderPreferences"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Pasta cuja preferência de classificação foi salva.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "DOCTO_NOTIF",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; PREFER_PASTA refere o documento (pasta) por NR_DOCUMENTO/NR_VERSAO; DOCTO_NOTIF e FAVORITOS têm semântica distinta",
+   "status": "rejected"
+  },
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; PREFER_PASTA refere o documento (pasta) por NR_DOCUMENTO/NR_VERSAO; DOCTO_NOTIF e FAVORITOS têm semântica distinta",
+   "status": "rejected"
+  },
+  {
+   "to_table": "FAVORITOS",
+   "from_cols": [
+    "COD_EMPRESA",
+    "CD_MATRICULA",
+    "NR_DOCUMENTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "CD_MATRICULA",
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; PREFER_PASTA refere o documento (pasta) por NR_DOCUMENTO/NR_VERSAO; DOCTO_NOTIF e FAVORITOS têm semântica distinta",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": [
+  {
+   "from_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable"
+  }
+ ]
+}

@@ -1,0 +1,359 @@
+{
+ "name": "FDN_RESOURCE",
+ "domain": "foundation-identity-access",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Recurso protegido por permissão (tela, serviço, documento, método de API etc.), organizado em hierarquia e classificado por tipo.",
+ "lifecycle": "Registrado na instalação/deploy de módulos e dinamicamente para itens do usuário; volume médio a alto.",
+ "key_notes": "Hierarquia por PARENT_ID. RESOURCE_CODE é a chave de negócio referenciada por código em FDN_PERMISSION_MAPPING. TENANT_ID NULL indica recurso global.",
+ "notes_for_agents": "Percorra a árvore com PARENT_ID. Combine com FDN_PERMISSION por RESOURCE_ID.",
+ "primary_key": [
+  "RESOURCE_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "FDNRESOURCEI001",
+   "unique": false,
+   "columns": [
+    "RESOURCE_CODE",
+    "RESOURCE_TYPE_ID",
+    "TENANT_ID"
+   ]
+  },
+  {
+   "name": "FDNRESOURCEI002",
+   "unique": false,
+   "columns": [
+    "RESOURCE_CODE",
+    "TENANT_ID"
+   ]
+  },
+  {
+   "name": "FDNRESOURCEI003",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "RESOURCE_TYPE_ID",
+    "RESOURCE_ID"
+   ]
+  },
+  {
+   "name": "FDNRESOURCEI004",
+   "unique": false,
+   "columns": [
+    "INTERNAL",
+    "TENANT_ID"
+   ]
+  },
+  {
+   "name": "FK_BUUI78YNPCODCCXS9LBOI427F",
+   "unique": false,
+   "columns": [
+    "PARENT_ID"
+   ]
+  },
+  {
+   "name": "FK_58BWMDKLR41YJ7UEL2P01RJN7",
+   "unique": false,
+   "columns": [
+    "RESOURCE_TYPE_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.permission.entity.FDNResource"
+ ],
+ "columns": [
+  {
+   "name": "RESOURCE_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária surrogate.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNResource"
+  },
+  {
+   "name": "RESOURCE_CODE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código único do recurso protegido (até 255 chars).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "code",
+   "java_type": "String",
+   "java_entity": "FDNResource"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Descrição curta do recurso.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "FDNResource"
+  },
+  {
+   "name": "LONG_DESCRIPTION",
+   "type": "varchar(4000)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Descrição longa do recurso (até 4000 chars).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "longDescription",
+   "java_type": "String",
+   "java_entity": "FDNResource"
+  },
+  {
+   "name": "INTERNAL",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica recurso interno do sistema.",
+   "semantic_type": "flag",
+   "values": "1=interno; 0=não interno",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "isInternal",
+   "java_type": "Boolean",
+   "java_entity": "FDNResource"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dono do registro; FK para FDN_TENANT.TENANT_ID. Valor -1 indica registro global/sem tenant em consultas do código.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNResource"
+  },
+  {
+   "name": "PARENT_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Recurso pai na hierarquia; NULL para raiz.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_RESOURCE.RESOURCE_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "RESOURCE_TYPE_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do recurso.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_RESOURCETYPE.RESOURCE_TYPE_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "METHOD",
+   "type": "varchar(20)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Método HTTP (GET, POST etc.) quando o recurso representa endpoint de API; NULL caso contrário.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "method",
+   "java_type": "String",
+   "java_entity": "FDNResource"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_RESOURCETYPE",
+   "from_cols": [
+    "RESOURCE_TYPE_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_TYPE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Tipo do recurso.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_RESOURCE",
+   "from_cols": [
+    "PARENT_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Recurso pai (hierarquia).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_PERMISSION",
+   "from_cols": [
+    "RESOURCE_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Permissões concedidas sobre o recurso.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_RESTORE_PERMISSION_MAPPING",
+   "from_cols": [
+    "RESOURCE_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Backup de permissões do recurso.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_PERMISSION",
+   "from_cols": [
+    "RESOURCE_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_PERMISSION_MAPPING",
+   "from_cols": [
+    "RESOURCE_CODE"
+   ],
+   "to_cols": [
+    "RESOURCE_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FDN_PERMISSION_MAPPING",
+   "from_cols": [
+    "TO_RESOURCE_CODE"
+   ],
+   "to_cols": [
+    "RESOURCE_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FDN_RESOURCE",
+   "from_cols": [
+    "PARENT_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_RESOURCETYPE",
+   "from_cols": [
+    "RESOURCE_TYPE_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_TYPE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_RESTORE_PERMISSION_MAPPING",
+   "from_cols": [
+    "RESOURCE_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_CATEGORY_RESOURCE",
+   "from_cols": [
+    "RESOURCE_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "WCM_MENUITEM",
+   "from_cols": [
+    "RESOURCE_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_PAGE",
+   "from_cols": [
+    "RESOURCE_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

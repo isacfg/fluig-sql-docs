@@ -1,0 +1,274 @@
+{
+ "name": "FDN_PERMISSION",
+ "domain": "foundation-identity-access",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Concessão de permissão sobre um recurso (FDN_RESOURCE) a um usuário, grupo ou papel.",
+ "lifecycle": "Linhas criadas ao conceder permissões na administração/painel de permissões; volume potencialmente alto.",
+ "key_notes": "Beneficiário identificado por UM de LOGIN, GROUP_CODE ou ROLE_CODE (os outros NULL). PERMISSION é o nome da permissão (ex.: leitura/gravação) definida em FDN_RESOURCETYPEPERMISSION.",
+ "notes_for_agents": "Para saber quem pode o quê: filtre por RESOURCE_ID e TENANT_ID e verifique qual das colunas LOGIN/GROUP_CODE/ROLE_CODE está preenchida.",
+ "primary_key": [
+  "PERMISSION_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "FDNPERMISSIONI001",
+   "unique": false,
+   "columns": [
+    "PERMISSION",
+    "PERMISSION_ID"
+   ]
+  },
+  {
+   "name": "FDNPERMISSIONI002",
+   "unique": false,
+   "columns": [
+    "ROLE_CODE",
+    "TENANT_ID",
+    "RESOURCE_ID"
+   ]
+  },
+  {
+   "name": "FDNPERMISSIONI003",
+   "unique": false,
+   "columns": [
+    "LOGIN",
+    "TENANT_ID",
+    "RESOURCE_ID"
+   ]
+  },
+  {
+   "name": "FDNPERMISSIONI004",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "RESOURCE_ID",
+    "LOGIN",
+    "ROLE_CODE",
+    "GROUP_CODE"
+   ]
+  },
+  {
+   "name": "FDNPERMISSIONI005",
+   "unique": false,
+   "columns": [
+    "GROUP_CODE",
+    "TENANT_ID",
+    "RESOURCE_ID"
+   ]
+  },
+  {
+   "name": "FDNPERMISSIONI006",
+   "unique": false,
+   "columns": [
+    "PERMISSION",
+    "TENANT_ID",
+    "GROUP_CODE"
+   ]
+  },
+  {
+   "name": "FK_1E1Q3G0LJX41YF0IUNGU1L4PK",
+   "unique": false,
+   "columns": [
+    "RESOURCE_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.permission.entity.FDNPermission"
+ ],
+ "columns": [
+  {
+   "name": "PERMISSION_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária surrogate.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNPermission"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição textual da concessão/permissão.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "FDNPermission"
+  },
+  {
+   "name": "GROUP_CODE",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Código do grupo beneficiário; NULL se for usuário ou papel.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_GROUP.GROUP_CODE",
+   "confidence": "high",
+   "java_field": "groupCode",
+   "java_type": "String",
+   "java_entity": "FDNPermission"
+  },
+  {
+   "name": "LOGIN",
+   "type": "varchar(150)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Login do usuário beneficiário; NULL se for grupo ou papel.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.LOGIN",
+   "confidence": "high",
+   "java_field": "login",
+   "java_type": "String",
+   "java_entity": "FDNPermission"
+  },
+  {
+   "name": "PERMISSION",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome/código da permissão concedida (até 150 chars), tipicamente de FDN_RESOURCETYPEPERMISSION.PERMISSION.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "FDN_RESOURCETYPEPERMISSION.PERMISSION",
+   "confidence": "medium",
+   "java_field": "permission",
+   "java_type": "String",
+   "java_entity": "FDNPermission"
+  },
+  {
+   "name": "ROLE_CODE",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Código do papel beneficiário; NULL se for usuário ou grupo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_ROLE.ROLE_CODE",
+   "confidence": "high",
+   "java_field": "roleCode",
+   "java_type": "String",
+   "java_entity": "FDNPermission"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dono do registro; FK para FDN_TENANT.TENANT_ID. Valor -1 indica registro global/sem tenant em consultas do código.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNPermission"
+  },
+  {
+   "name": "RESOURCE_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Recurso sobre o qual a permissão é concedida.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_RESOURCE.RESOURCE_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_RESOURCE",
+   "from_cols": [
+    "RESOURCE_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Recurso protegido.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "LOGIN"
+   ],
+   "to_cols": [
+    "LOGIN"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Usuário beneficiário, sem FK.",
+   "status": "probable"
+  },
+  {
+   "to_table": "FDN_GROUP",
+   "from_cols": [
+    "TENANT_ID",
+    "GROUP_CODE"
+   ],
+   "to_cols": [
+    "TENANT_ID",
+    "GROUP_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "Grupo beneficiário (FDNGroup join FDNPermission em HQL).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_ROLE",
+   "from_cols": [
+    "TENANT_ID",
+    "ROLE_CODE"
+   ],
+   "to_cols": [
+    "TENANT_ID",
+    "ROLE_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Papel beneficiário, sem FK.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_RESOURCE",
+   "from_cols": [
+    "RESOURCE_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk"
+  }
+ ]
+}

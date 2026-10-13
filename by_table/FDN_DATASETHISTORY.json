@@ -1,0 +1,224 @@
+{
+ "name": "FDN_DATASETHISTORY",
+ "domain": "datasets",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Histórico de versões de datasets customizados (implementação JavaScript). Cada linha é uma versão de um dataset.",
+ "lifecycle": "Nova linha a cada salvamento/publicação de dataset; versões antigas permanecem. Volume moderado.",
+ "key_notes": "Unicidade (TENANT_ID, DATASET_ID, VERSION). VERSION_STATUS é enum ordinal. DATASET_IMPL é LOB (longtext) com o código.",
+ "notes_for_agents": "Para o dataset vigente, filtrar VERSION_STATUS pelo publicado e maior VERSION. Não selecionar DATASET_IMPL em listagens.",
+ "primary_key": [
+  "DATASET_HISTORY_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "UIDX_DATASETHISTORY_TENANT001",
+   "unique": true,
+   "columns": [
+    "TENANT_ID",
+    "DATASET_ID",
+    "VERSION"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.fluig.foundation.dataset.entity.FDNDatasetHistory"
+ ],
+ "columns": [
+  {
+   "name": "DATASET_HISTORY_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária da versão do dataset.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNDatasetHistory"
+  },
+  {
+   "name": "DATASET_DESCRIPTION",
+   "type": "varchar(100)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição do dataset.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "datasetDescription",
+   "java_type": "String",
+   "java_entity": "FDNDatasetHistory"
+  },
+  {
+   "name": "DATASET_ID",
+   "type": "varchar(100)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador (nome) do dataset, ex. usado em consultas de dataset.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "datasetId",
+   "java_type": "String",
+   "java_entity": "FDNDatasetHistory"
+  },
+  {
+   "name": "DATASET_IMPL",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código-fonte (JavaScript) da implementação do dataset; LOB longtext.",
+   "semantic_type": "blob",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "datasetImpl",
+   "java_type": "String",
+   "java_entity": "FDNDatasetHistory"
+  },
+  {
+   "name": "TYPE",
+   "type": "varchar(20)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do dataset (ex.: customizado/builtin); texto de até 20 caracteres.",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "type",
+   "java_type": "String",
+   "java_entity": "FDNDatasetHistory"
+  },
+  {
+   "name": "BUILDER",
+   "type": "varchar(200)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do builder/classe construtora do dataset, quando não é implementação JS.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "datasetBuilder",
+   "java_type": "String",
+   "java_entity": "FDNDatasetHistory"
+  },
+  {
+   "name": "VERSION",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Número sequencial da versão do dataset dentro do tenant.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "Long",
+   "java_entity": "FDNDatasetHistory"
+  },
+  {
+   "name": "VERSION_STATUS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Status da versão (enum DatasetHistoryStatus, ordinal).",
+   "semantic_type": "status",
+   "values": "0=DRAFT; 1=PUBLISHED; 2=INACTIVE (ordinal do enum; assumindo EnumType.ORDINAL)",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "status",
+   "java_type": "DatasetHistoryStatus",
+   "java_entity": "FDNDatasetHistory"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant dono do dataset.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNDatasetHistory"
+  },
+  {
+   "name": "UPDATE_TIME",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora da gravação desta versão.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "updateTime",
+   "java_type": "Date",
+   "java_entity": "FDNDatasetHistory"
+  },
+  {
+   "name": "USER_TENANT_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Usuário (FDN_USERTENANT) que gravou a versão.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_TENANT_ID",
+   "confidence": "high",
+   "java_field": "userTenantId",
+   "java_type": "Long",
+   "java_entity": "FDNDatasetHistory"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Tenant (FK_DATASETHISTORYTENANT).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "USER_TENANT_ID"
+   ],
+   "to_cols": [
+    "USER_TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Autor da versão (FK_DATASETHISTORYUSERTENANT).",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

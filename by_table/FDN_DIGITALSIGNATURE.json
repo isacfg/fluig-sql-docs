@@ -1,0 +1,100 @@
+{
+ "name": "FDN_DIGITALSIGNATURE",
+ "domain": "assinatura-digital",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Configuração de assinatura digital por tenant: tipo de assinatura e número de licenças. Uma linha por tenant licenciado.",
+ "lifecycle": "Configurada na ativação de licença; pouquíssimas linhas.",
+ "key_notes": "Unique (provável) por TENANT_ID.",
+ "notes_for_agents": "Consultar por TENANT_ID (findByTenantId).",
+ "primary_key": [
+  "DIGITAL_SIGNATURE_ID"
+ ],
+ "unique_constraints": [
+  [
+   "TENANT_ID"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.digitalsignature.entity.FDNDigitalSignature"
+ ],
+ "columns": [
+  {
+   "name": "DIGITAL_SIGNATURE_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNDigitalSignature"
+  },
+  {
+   "name": "DIGITAL_SIGNATURE_TYPE",
+   "type": "int(11)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Tipo de assinatura digital (enum DigitalSignatureType).",
+   "semantic_type": "enum",
+   "values": "CADES e CMS (enum; mapeamento ordinal/string não confirmado)",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "digitalSignatureType",
+   "java_type": "DigitalSignatureType",
+   "java_entity": "FDNDigitalSignature"
+  },
+  {
+   "name": "LICENSE_NUMBER",
+   "type": "int(11)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Quantidade de licenças de assinatura digital contratadas.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "licenseNumber",
+   "java_type": "int",
+   "java_entity": "FDNDigitalSignature"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant licenciado.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNDigitalSignature"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Tenant da licença.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

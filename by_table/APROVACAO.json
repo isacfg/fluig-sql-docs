@@ -1,0 +1,339 @@
+{
+ "name": "APROVACAO",
+ "domain": "ged-documentos",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Registro da aprovação de um documento do GED por um aprovador em um nível de aprovação (resultado, data, observação, assinatura).",
+ "lifecycle": "Linhas criadas ao enviar versão de documento para aprovação; atualizadas quando o aprovador decide.",
+ "key_notes": "PK (COD_EMPRESA, NR_DOCUMENTO, NR_VERSAO, CD_MATRICULA, NUM_NIV_APROVAC). Resultado nulo = pendente.",
+ "notes_for_agents": "Filtrar COD_EMPRESA; juntar com APROVADOR pela mesma PK (tipo usuário). OBSERVACAO é LOB.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NR_DOCUMENTO",
+  "NR_VERSAO",
+  "CD_MATRICULA",
+  "NUM_NIV_APROVAC"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "IDX_APROVACAO_MASTER_LIST",
+   "unique": false,
+   "columns": [
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "COD_EMPRESA"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.Approval"
+ ],
+ "columns": [
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Matrícula do aprovador.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "high",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "Approval"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant (empresa) dono da linha; sempre filtrar por este valor.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "Approval"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Número do documento aprovado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "int",
+   "java_entity": "Approval"
+  },
+  {
+   "name": "NUM_NIV_APROVAC",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 5,
+   "purpose": "Número do nível de aprovação do documento.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "NIVEL_APROVACAO.NUM_NIV_APROVAC",
+   "confidence": "high",
+   "java_field": "levelId",
+   "java_type": "int",
+   "java_entity": "Approval"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Versão do documento em aprovação.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "Approval"
+  },
+  {
+   "name": "APROVADO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o aprovador aprovou o documento (true) ou não/ainda pendente.",
+   "semantic_type": "flag",
+   "values": "1=aprovado; 0/NULL=não aprovado ou pendente",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "approved",
+   "java_type": "Boolean",
+   "java_entity": "Approval"
+  },
+  {
+   "name": "DT_APROVA",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data em que a aprovação foi registrada.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "approvedDate",
+   "java_type": "Date",
+   "java_entity": "Approval"
+  },
+  {
+   "name": "LOG_ASS_OBRIGATORIA",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a assinatura eletrônica é obrigatória nesta aprovação.",
+   "semantic_type": "flag",
+   "values": "1=obrigatória; 0=não",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "mandatorySignature",
+   "java_type": "Boolean",
+   "java_entity": "Approval"
+  },
+  {
+   "name": "OBSERVACAO",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Observação/justificativa do aprovador (texto longo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "observation",
+   "java_type": "String",
+   "java_entity": "Approval"
+  },
+  {
+   "name": "LOG_ASSINADO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o aprovador assinou eletronicamente.",
+   "semantic_type": "flag",
+   "values": "1=assinado; 0=não",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "signed",
+   "java_type": "Boolean",
+   "java_entity": "Approval"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão de documento sendo aprovada.",
+   "status": "probable"
+  },
+  {
+   "to_table": "NIVEL_APROVACAO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "NUM_NIV_APROVAC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "NUM_NIV_APROVAC"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Nível de aprovação ao qual o registro pertence.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "CONHECIMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Inferência por nomes de coluna; sem relação semântica com aprovação.",
+   "status": "rejected"
+  },
+  {
+   "to_table": "DOCTO_DESTAQ_COLAB",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Inferência por nomes de coluna; sem relação semântica com aprovação.",
+   "status": "rejected"
+  },
+  {
+   "to_table": "DOCTO_RANKING",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Inferência por nomes de coluna; sem relação semântica com aprovação.",
+   "status": "rejected"
+  },
+  {
+   "to_table": "PREFER_PASTA",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Inferência por nomes de coluna; sem relação semântica com aprovação.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": [
+  {
+   "from_table": "MOVTO_APROVAC",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA",
+    "NUM_NIV_APROVAC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA",
+    "NUM_NIV_APROVAC"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "APROVADOR",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA",
+    "NUM_NIV_APROVAC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA",
+    "NUM_NIV_APROVAC"
+   ],
+   "cardinality": "1:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

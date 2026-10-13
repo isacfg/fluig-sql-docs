@@ -1,0 +1,112 @@
+{
+ "name": "FDN_USERMOBILETOKEN",
+ "domain": "mobile",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Tokens de acesso/refresh do app mobile por usuário do IdP.",
+ "lifecycle": "Upsert por usuário ao autenticar no mobile.",
+ "key_notes": "Sem TENANT_ID; COMPANY_ID é string do IdP.",
+ "notes_for_agents": "ACCESSTOKEN e REFRESHTOKEN são sensíveis.",
+ "primary_key": [
+  "USER_IDIDP"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.security.entity.FDNUserMobileToken"
+ ],
+ "columns": [
+  {
+   "name": "USER_IDIDP",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Id do usuário no IdP (provedor de identidade); PK.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_IDIDP",
+   "confidence": "medium",
+   "java_field": "userIdIdp",
+   "java_type": "String",
+   "java_entity": "FDNUserMobileToken"
+  },
+  {
+   "name": "ACCESSTOKEN",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Access token do app mobile para o usuário. SENSÍVEL.",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "accessToken",
+   "java_type": "String",
+   "java_entity": "FDNUserMobileToken"
+  },
+  {
+   "name": "COMPANY_ID",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador da empresa/tenant no IdP (string).",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "companyId",
+   "java_type": "String",
+   "java_entity": "FDNUserMobileToken"
+  },
+  {
+   "name": "EXPIRESIN",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Validade do token em segundos (OAuth expires_in).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "expiresIn",
+   "java_type": "Long",
+   "java_entity": "FDNUserMobileToken"
+  },
+  {
+   "name": "ISSUEDTIME",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Instante de emissão do token, ms desde epoch (provável).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "issuedTime",
+   "java_type": "Long",
+   "java_entity": "FDNUserMobileToken"
+  },
+  {
+   "name": "REFRESHTOKEN",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Refresh token do app mobile. SENSÍVEL.",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "refreshToken",
+   "java_type": "String",
+   "java_entity": "FDNUserMobileToken"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

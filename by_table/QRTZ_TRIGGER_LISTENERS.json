@@ -1,0 +1,131 @@
+{
+ "name": "QRTZ_TRIGGER_LISTENERS",
+ "domain": "scheduler-quartz",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Listeners de trigger registrados por trigger.",
+ "lifecycle": "Normalmente vazia.",
+ "key_notes": "",
+ "notes_for_agents": "FK física para QRTZ_TRIGGERS.",
+ "primary_key": [
+  "TRIGGER_GROUP",
+  "TRIGGER_LISTENER",
+  "TRIGGER_NAME"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.scheduler.entity.quartz.QrtzTriggerListeners"
+ ],
+ "columns": [
+  {
+   "name": "TRIGGER_GROUP",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Nome do grupo do trigger Quartz; compõe a PK (TRIGGER_GROUP, TRIGGER_NAME) e liga ao QRTZ_TRIGGERS.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "QRTZ_TRIGGERS.TRIGGER_GROUP",
+   "confidence": "high",
+   "java_field": "triggerGroup",
+   "java_type": "String",
+   "java_entity": "QrtzTriggerListeners"
+  },
+  {
+   "name": "TRIGGER_LISTENER",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Nome do TriggerListener registrado para o trigger; parte da PK.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "triggerListener",
+   "java_type": "String",
+   "java_entity": "QrtzTriggerListeners"
+  },
+  {
+   "name": "TRIGGER_NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Nome do trigger Quartz dentro do grupo; compõe a PK e liga ao QRTZ_TRIGGERS.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "QRTZ_TRIGGERS.TRIGGER_NAME",
+   "confidence": "high",
+   "java_field": "triggerName",
+   "java_type": "String",
+   "java_entity": "QrtzTriggerListeners"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "QRTZ_TRIGGERS",
+   "from_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "to_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Listener registrado para o trigger.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "QRTZ_BLOB_TRIGGERS",
+   "from_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "to_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: vínculo é via QRTZ_TRIGGERS",
+   "status": "rejected"
+  },
+  {
+   "to_table": "QRTZ_CRON_TRIGGERS",
+   "from_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "to_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: vínculo é via QRTZ_TRIGGERS",
+   "status": "rejected"
+  },
+  {
+   "to_table": "QRTZ_SIMPLE_TRIGGERS",
+   "from_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "to_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: vínculo é via QRTZ_TRIGGERS",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

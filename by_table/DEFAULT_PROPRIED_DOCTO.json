@@ -1,0 +1,133 @@
+{
+ "name": "DEFAULT_PROPRIED_DOCTO",
+ "domain": "ecm-documents",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Propriedades padrão (atributo/valor/formato) associadas a uma versão de documento.",
+ "lifecycle": "Linhas criadas ao gravar o documento com propriedades padrão.",
+ "key_notes": "PK (COD_EMPRESA, NR_DOCUMENTO, NR_VERSAO, NOM_ATRIBUTO).",
+ "notes_for_agents": "Entidade DocumentDefaultProperty; consulta por documento.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NR_DOCUMENTO",
+  "NR_VERSAO",
+  "NOM_ATRIBUTO"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.DocumentDefaultProperty"
+ ],
+ "columns": [
+  {
+   "name": "NOM_ATRIBUTO",
+   "type": "varchar(30)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Nome da propriedade/atributo padrão.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "attribute",
+   "java_type": "String",
+   "java_entity": "DocumentDefaultProperty"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); parte da PK, sempre filtrar por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "DocumentDefaultProperty"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Número (ID lógico) do documento ECM, sem FK física para DOCUMENTO.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "int",
+   "java_entity": "DocumentDefaultProperty"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número da versão do documento; par com NR_DOCUMENTO identifica a versão.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "DocumentDefaultProperty"
+  },
+  {
+   "name": "FORMAT_ATRIBUTO",
+   "type": "varchar(30)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Formato do valor do atributo (tipo/máscara).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "format",
+   "java_type": "String",
+   "java_entity": "DocumentDefaultProperty"
+  },
+  {
+   "name": "DES_VAL_ATRIBUIC",
+   "type": "varchar(2000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor do atributo em texto.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "value",
+   "java_type": "String",
+   "java_entity": "DocumentDefaultProperty"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão do documento dona da propriedade.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

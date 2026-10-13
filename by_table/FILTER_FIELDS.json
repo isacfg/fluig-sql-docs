@@ -1,0 +1,288 @@
+{
+ "name": "FILTER_FIELDS",
+ "domain": "ecm-lists-filters",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Campos/critérios e opções de exibição (cor, fonte, largura, visibilidade) de um filtro salvo.",
+ "lifecycle": "Removidos em bloco ao editar/excluir o filtro (removeAllFieldsFromFilter).",
+ "key_notes": "",
+ "notes_for_agents": "",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.filter.model.FilterField"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador do campo do filtro.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FilterField"
+  },
+  {
+   "name": "FKEY",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave do campo do filtro (nome do campo/atributo filtrado); coluna FKEY pois KEY é reservada.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "key",
+   "java_type": "String",
+   "java_entity": "FilterField"
+  },
+  {
+   "name": "PROCESS_ID",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código da definição de processo associada ao campo do filtro (cópia de VALUE no construtor).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "medium",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "FilterField"
+  },
+  {
+   "name": "SLOT_ID",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Slot/posição do campo na visão do filtro de processo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "slotId",
+   "java_type": "Integer",
+   "java_entity": "FilterField"
+  },
+  {
+   "name": "TYPE",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do campo do filtro (texto livre definido pela aplicação).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "type",
+   "java_type": "String",
+   "java_entity": "FilterField"
+  },
+  {
+   "name": "VALUE",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor do critério do filtro para a chave FKEY.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "value",
+   "java_type": "String",
+   "java_entity": "FilterField"
+  },
+  {
+   "name": "VISIBLE",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o campo é exibido como coluna na lista.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "visible",
+   "java_type": "Boolean",
+   "java_entity": "FilterField"
+  },
+  {
+   "name": "FILTER_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Filtro ao qual o campo pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FILTERS.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "COLOR_FIELD",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Cor aplicada ao campo na exibição.",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "colorField",
+   "java_type": "String",
+   "java_entity": "FilterField"
+  },
+  {
+   "name": "FONT_STYLE",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Estilo da fonte do campo (ex.: itálico).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "fontStyle",
+   "java_type": "String",
+   "java_entity": "FilterField"
+  },
+  {
+   "name": "ORDER_POSITION",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Posição de ordenação da coluna.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "orderPosition",
+   "java_type": "Integer",
+   "java_entity": "FilterField"
+  },
+  {
+   "name": "SIZE_FIELD",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tamanho/largura da coluna do campo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "sizeField",
+   "java_type": "Integer",
+   "java_entity": "FilterField"
+  },
+  {
+   "name": "SENSITIVE_DATA",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Marca o campo como dado sensível.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "sensitiveData",
+   "java_type": "Boolean",
+   "java_entity": "FilterField"
+  },
+  {
+   "name": "FONT_WEIGHT",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Peso da fonte (ex.: bold).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "fontWeight",
+   "java_type": "String",
+   "java_entity": "FilterField"
+  },
+  {
+   "name": "TEXT_DECORATION",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Decoração do texto (ex.: underline).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "textDecoration",
+   "java_type": "String",
+   "java_entity": "FilterField"
+  },
+  {
+   "name": "LABEL",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Rótulo exibido do campo.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "label",
+   "java_type": "String",
+   "java_entity": "FilterField"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FILTERS",
+   "from_cols": [
+    "FILTER_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "FK ['FILTER_ID'] referencia FILTERS.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FILTER_ORDER",
+   "from_cols": [
+    "FIELD_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

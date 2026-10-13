@@ -1,0 +1,376 @@
+{
+ "name": "FACT_FLOW_VOLUME_CAP",
+ "domain": "bpm-analytics-dw",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Fato de volume de transições entre atividades (fluxos normais vs retornos) por dia e usuário.",
+ "lifecycle": "Snapshot diário gerado pela extração do CAP.",
+ "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. As colunas DAYID/MONTHID/YEARID são mapeadas nos campos Java day/month/year. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.",
+ "notes_for_agents": "Sempre filtrar por COMPANYID. Para agregar por período use YEARID/MONTHID/DAYID ou junte com TIME_DIM_CAP. Linhas de fato são snapshots (use o snapshot mais recente/um dia específico para não somar duplicado). USERCODE identifica usuário (dado pessoal indireto).",
+ "primary_key": [
+  "COMPANYID",
+  "DAYID",
+  "MONTHID",
+  "PROCESSID",
+  "PROCESSVERSION",
+  "SOURCEACTIVITY",
+  "TARGETACTIVITY",
+  "USERSEQUENCE",
+  "YEARID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.cap.model.FactFlowVolume"
+ ],
+ "columns": [
+  {
+   "name": "COMPANYID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa (tenant) do Fluig; faz parte da PK de todas as tabelas *_CAP.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "FactFlowVolume"
+  },
+  {
+   "name": "DAYID",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Dia do mês (1-31) do snapshot; componente da chave de tempo, não é surrogate key.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "TIME_DIM_CAP.DAYID",
+   "confidence": "medium",
+   "java_field": "day",
+   "java_type": "int",
+   "java_entity": "FactFlowVolume"
+  },
+  {
+   "name": "MONTHID",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Mês (1-12) do snapshot; componente da chave de tempo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "TIME_DIM_CAP.MONTHID",
+   "confidence": "medium",
+   "java_field": "month",
+   "java_type": "int",
+   "java_entity": "FactFlowVolume"
+  },
+  {
+   "name": "PROCESSID",
+   "type": "varchar(100)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Código do processo BPM (definição de workflow) ao qual o registro se refere; parte da PK.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_VERSION_DIM_CAP.PROCESSID",
+   "confidence": "high",
+   "java_field": "processID",
+   "java_type": "String",
+   "java_entity": "FactFlowVolume"
+  },
+  {
+   "name": "PROCESSVERSION",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 5,
+   "purpose": "Número da versão da definição do processo BPM; parte da PK.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_VERSION_DIM_CAP.PROCESSVERSION",
+   "confidence": "high",
+   "java_field": "processVersion",
+   "java_type": "int",
+   "java_entity": "FactFlowVolume"
+  },
+  {
+   "name": "SOURCEACTIVITY",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 6,
+   "purpose": "ID da atividade de origem da transição (fluxo) do processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ACTIVITY_DIM_CAP.ACTIVITYID",
+   "confidence": "medium",
+   "java_field": "sourceActivity",
+   "java_type": "int",
+   "java_entity": "FactFlowVolume"
+  },
+  {
+   "name": "TARGETACTIVITY",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 7,
+   "purpose": "ID da atividade de destino da transição (fluxo) do processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ACTIVITY_DIM_CAP.ACTIVITYID",
+   "confidence": "medium",
+   "java_field": "targetActivity",
+   "java_type": "int",
+   "java_entity": "FactFlowVolume"
+  },
+  {
+   "name": "USERSEQUENCE",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 8,
+   "purpose": "Sequência numérica do usuário na dimensão USER_DIM_CAP (chave substituta por empresa, não é a matrícula).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "USER_DIM_CAP.USERSEQUENCE",
+   "confidence": "medium",
+   "java_field": "userSequence",
+   "java_type": "int",
+   "java_entity": "FactFlowVolume"
+  },
+  {
+   "name": "YEARID",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 9,
+   "purpose": "Ano (4 dígitos) do snapshot; componente da chave de tempo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "TIME_DIM_CAP.YEARID",
+   "confidence": "medium",
+   "java_field": "year",
+   "java_type": "int",
+   "java_entity": "FactFlowVolume"
+  },
+  {
+   "name": "NORMALFLOWS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Quantidade de transições normais (avanço) da atividade de origem para a de destino.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "normalFlows",
+   "java_type": "int",
+   "java_entity": "FactFlowVolume"
+  },
+  {
+   "name": "RETURNEDFLOWS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Quantidade de transições de retorno (volta) da origem para o destino.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "returnedFlows",
+   "java_type": "int",
+   "java_entity": "FactFlowVolume"
+  },
+  {
+   "name": "SOURCEACTIVITYNAME",
+   "type": "varchar(100)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome da atividade de origem da transição, desnormalizado.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "sourceActivityName",
+   "java_type": "String",
+   "java_entity": "FactFlowVolume"
+  },
+  {
+   "name": "TARGETACTIVITYNAME",
+   "type": "varchar(100)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome da atividade de destino da transição, desnormalizado.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "targetActivityName",
+   "java_type": "String",
+   "java_entity": "FactFlowVolume"
+  },
+  {
+   "name": "USERCODE",
+   "type": "varchar(100)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código/login do usuário (colaborador) desnormalizado na linha de fato; corresponde a FDN_USERTENANT.USER_CODE.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "medium",
+   "java_field": "userCode",
+   "java_type": "String",
+   "java_entity": "FactFlowVolume"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FACT_PROCES_COST_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "DAYID",
+    "MONTHID",
+    "PROCESSID",
+    "PROCESSVERSION",
+    "USERSEQUENCE",
+    "YEARID"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "DAYID",
+    "MONTHID",
+    "PROCESSID",
+    "PROCESSVERSION",
+    "USERSEQUENCE",
+    "YEARID"
+   ],
+   "cardinality": "1:1",
+   "kind": "logical-probable",
+   "description": "Mesmo grão (empresa/dia/processo/versão/usuário) de outro fato do processo; join por grão, não FK.",
+   "status": "probable"
+  },
+  {
+   "to_table": "FACT_PROCES_VOLUME_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "DAYID",
+    "MONTHID",
+    "PROCESSID",
+    "PROCESSVERSION",
+    "USERSEQUENCE",
+    "YEARID"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "DAYID",
+    "MONTHID",
+    "PROCESSID",
+    "PROCESSVERSION",
+    "USERSEQUENCE",
+    "YEARID"
+   ],
+   "cardinality": "1:1",
+   "kind": "logical-probable",
+   "description": "Mesmo grão (empresa/dia/processo/versão/usuário) de outro fato do processo; join por grão, não FK.",
+   "status": "probable"
+  },
+  {
+   "to_table": "FLOW_DIM_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION",
+    "SOURCEACTIVITY",
+    "TARGETACTIVITY"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION",
+    "SOURCEACTIVITY",
+    "TARGETACTIVITY"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Transição origem->destino na dimensão de fluxos.",
+   "status": "probable"
+  },
+  {
+   "to_table": "TIME_DIM_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "DAYID",
+    "MONTHID",
+    "YEARID"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "DAYID",
+    "MONTHID",
+    "YEARID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Dia do snapshot na dimensão de tempo (relação lógica, sem FK).",
+   "status": "probable"
+  },
+  {
+   "to_table": "USER_DIM_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "USERSEQUENCE"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "USERSEQUENCE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Usuário na dimensão (relação lógica, sem FK).",
+   "status": "probable"
+  },
+  {
+   "to_table": "PROCES_VERSION_DIM_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão do processo na dimensão.",
+   "status": "probable"
+  },
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "USERCODE"
+   ],
+   "to_cols": [
+    "USER_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Código do usuário; sem FK, join lógico por código (com empresa) -- apenas se a tabela tiver USERCODE. [alvo corrigido: USER_CODE/LOGIN pertencem a FDN_USERTENANT]",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

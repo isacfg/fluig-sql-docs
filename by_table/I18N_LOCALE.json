@@ -1,0 +1,148 @@
+{
+ "name": "I18N_LOCALE",
+ "domain": "i18n",
+ "module": "06001-fluig-database-addon-i18n-dbupdate",
+ "purpose": "Locales (idiomas) disponíveis em um bundle, com indicação do padrão.",
+ "lifecycle": "Criado por bundle; baixo volume.",
+ "key_notes": "Índice IDX_LOCALE003 (BUNDLE_ID, LOCALE_CODE).",
+ "notes_for_agents": "Procurar por BUNDLE_ID + LOCALE_CODE.",
+ "primary_key": [
+  "LOCALE_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "IDX_LOCALE002",
+   "unique": false,
+   "columns": [
+    "BUNDLE_ID"
+   ]
+  },
+  {
+   "name": "IDX_LOCALE003",
+   "unique": false,
+   "columns": [
+    "BUNDLE_ID",
+    "LOCALE_CODE"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.fluig.core.i18n.domain.Locale"
+ ],
+ "columns": [
+  {
+   "name": "LOCALE_ID",
+   "type": "varchar(36)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK UUID do locale.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "String",
+   "java_entity": "Locale"
+  },
+  {
+   "name": "BUNDLE_ID",
+   "type": "varchar(36)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Bundle ao qual o locale pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "I18N_BUNDLE.BUNDLE_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "LOCALE_CODE",
+   "type": "varchar(40)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do locale (ex.: pt_BR, en_US).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "localeCode",
+   "java_type": "String",
+   "java_entity": "Locale"
+  },
+  {
+   "name": "IS_DEFAULT",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": "0",
+   "pk_position": null,
+   "purpose": "Indica se é o locale padrão do bundle.",
+   "semantic_type": "flag",
+   "values": "1=padrão; 0=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "isDefault",
+   "java_type": "boolean",
+   "java_entity": "Locale"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "I18N_BUNDLE",
+   "from_cols": [
+    "BUNDLE_ID"
+   ],
+   "to_cols": [
+    "BUNDLE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Bundle do locale (Locale.bundle).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "I18N_LITERAL_TRANSLATED",
+   "from_cols": [
+    "LOCALE_ID"
+   ],
+   "to_cols": [
+    "LOCALE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Traduções do locale.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "I18N_BUNDLE",
+   "from_cols": [
+    "BUNDLE_ID"
+   ],
+   "to_cols": [
+    "BUNDLE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "I18N_LITERAL_TRANSLATED",
+   "from_cols": [
+    "LOCALE_ID"
+   ],
+   "to_cols": [
+    "LOCALE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

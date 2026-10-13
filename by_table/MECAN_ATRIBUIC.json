@@ -1,0 +1,198 @@
+{
+ "name": "MECAN_ATRIBUIC",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Cadastro de mecanismos de atribuicao do workflow (quem recebe a tarefa de uma atividade). Inclui mecanismos padrao e customizados com classes de configuracao/controle.",
+ "lifecycle": "Linhas criadas ao cadastrar mecanismo customizado; poucas linhas por tenant.",
+ "key_notes": "PK (COD_EMPRESA, COD_MECAN_ATRIBUIC). IDI_TIP_PROG_CONFIG segue enum AssignmentType.",
+ "notes_for_agents": "Filtrar por COD_EMPRESA. Referenciado por atividades de processo via codigo do mecanismo.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_MECAN_ATRIBUIC"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.AttributionMecanism"
+ ],
+ "columns": [
+  {
+   "name": "COD_MECAN_ATRIBUIC",
+   "type": "varchar(25)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Codigo identificador do mecanismo de atribuicao (ex.: usado nas atividades do processo).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "attributionMecanismId",
+   "java_type": "String",
+   "java_entity": "AttributionMecanism"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant (empresa) dona da linha; faz parte da PK e deve ser filtrada em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "AttributionMecanism"
+  },
+  {
+   "name": "IDI_TIP_PROG_CONFIG",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do mecanismo: padrao ou customizado (enum AssignmentType).",
+   "semantic_type": "enum",
+   "values": "0=DEFAULT_ASSIGNMENT; 1=CUSTOM_ASSIGNMENT",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "assignmentType",
+   "java_type": "int",
+   "java_entity": "AttributionMecanism"
+  },
+  {
+   "name": "DSL_MECAN_ATRIBUIC",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descricao longa (LOB) do mecanismo, exibida ao configurar a atividade.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "attributionMecanismDescription",
+   "java_type": "String",
+   "java_entity": "AttributionMecanism"
+  },
+  {
+   "name": "DES_PROG_CONFIG",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome da classe/programa Java de configuracao do mecanismo.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "configurationClass",
+   "java_type": "String",
+   "java_entity": "AttributionMecanism"
+  },
+  {
+   "name": "DES_PROG_CONTROL",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome da classe/programa Java que executa a logica de atribuicao.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "controlClass",
+   "java_type": "String",
+   "java_entity": "AttributionMecanism"
+  },
+  {
+   "name": "DES_MECAN_ATRIBUIC",
+   "type": "varchar(2000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descricao curta do mecanismo de atribuicao.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "AttributionMecanism"
+  },
+  {
+   "name": "NOM_MECAN_ATRIBUIC",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do mecanismo de atribuicao exibido ao usuario.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "name",
+   "java_type": "String",
+   "java_entity": "AttributionMecanism"
+  },
+  {
+   "name": "DES_PROG_PRE_SEL",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome da classe Java de pre-selecao de usuarios do mecanismo.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "preSelectionClass",
+   "java_type": "String",
+   "java_entity": "AttributionMecanism"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "SEGUR_ANEXO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_MECAN_ATRIBUIC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_MECAN_ATRIBUIC"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "ESTADO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_MECAN_ATRIBUIC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_MECAN_ATRIBUIC"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "ESTADO_PROCES_COND",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_MECAN_ATRIBUIC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_MECAN_ATRIBUIC"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

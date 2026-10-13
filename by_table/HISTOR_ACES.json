@@ -1,0 +1,136 @@
+{
+ "name": "HISTOR_ACES",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Histórico de acessos de usuários a documentos por dia (AccessLog).",
+ "lifecycle": "Uma linha por usuário/documento/dia de acesso.",
+ "key_notes": "PK inclui a data; sem hora.",
+ "notes_for_agents": "Registra comportamento de usuário (dado pessoal indireto).",
+ "primary_key": [
+  "COD_EMPRESA",
+  "CD_MATRICULA",
+  "DAT_ACES",
+  "NR_DOCUMENTO"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.AccessLog"
+ ],
+ "columns": [
+  {
+   "name": "DAT_ACES",
+   "type": "date",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Data do acesso ao documento.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "accessDate",
+   "java_type": "Date",
+   "java_entity": "AccessLog"
+  },
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Matrícula do usuário que acessou o documento.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USER.COLLEAGUE_ID",
+   "confidence": "high",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "AccessLog"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK e filtro obrigatório de multi-tenancy.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "AccessLog"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Número do documento acessado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "int",
+   "java_entity": "AccessLog"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Documento acessado (NR_DOCUMENTO).",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "DOCTO_NOTIF",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: coincidência de colunas; não é FK.",
+   "status": "rejected"
+  },
+  {
+   "to_table": "FAVORITOS",
+   "from_cols": [
+    "COD_EMPRESA",
+    "CD_MATRICULA",
+    "NR_DOCUMENTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "CD_MATRICULA",
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: coincidência de colunas; não é FK.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

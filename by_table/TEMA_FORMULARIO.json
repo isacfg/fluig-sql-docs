@@ -1,0 +1,113 @@
+{
+ "name": "TEMA_FORMULARIO",
+ "domain": "bpm-forms",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Temas visuais (arquivos de tema) aplicáveis a formulários.",
+ "lifecycle": "Cadastrada pelo administrador; baixo volume.",
+ "key_notes": "PK (COD_EMPRESA, NUM_TEMA_FORM). Apenas um tema deve estar como padrão (FormTheme.findStandard).",
+ "notes_for_agents": "Consulta do padrão: TEMA_PADRAO=1.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NUM_TEMA_FORM"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.bpm.model.FormTheme"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa (tenant) dona do registro; faz parte da PK e deve ser filtrado em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "FormTheme"
+  },
+  {
+   "name": "NUM_TEMA_FORM",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Identificador do tema de formulário.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "formThemeId",
+   "java_type": "int",
+   "java_entity": "FormTheme"
+  },
+  {
+   "name": "ATIVO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o tema está ativo.",
+   "semantic_type": "flag",
+   "values": "1=ativo",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "active",
+   "java_type": "Boolean",
+   "java_entity": "FormTheme"
+  },
+  {
+   "name": "NOM_ARQUIVO_TEMA",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do arquivo do tema (CSS/pacote).",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "file",
+   "java_type": "String",
+   "java_entity": "FormTheme"
+  },
+  {
+   "name": "NOM_TEMA_FORM",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome exibido do tema.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "name",
+   "java_type": "String",
+   "java_entity": "FormTheme"
+  },
+  {
+   "name": "TEMA_PADRAO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica o tema padrão.",
+   "semantic_type": "flag",
+   "values": "1=tema padrão",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "standard",
+   "java_type": "Boolean",
+   "java_entity": "FormTheme"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

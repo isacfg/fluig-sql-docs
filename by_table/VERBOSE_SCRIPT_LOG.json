@@ -1,0 +1,151 @@
+{
+ "name": "VERBOSE_SCRIPT_LOG",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Registra habilitação do log detalhado (verbose) de scripts para um item (ex.: uma instância de processo) solicitada por um usuário.",
+ "lifecycle": "Linha criada quando o usuário ativa o log verboso; consultada pelo motor ao executar scripts. Volume baixo.",
+ "key_notes": "Usa TENANT_ID. Único tipo definido: SCRIPT_TYPE=1 (PROCESS_INSTANCE), onde IDENTIFIER é o número da instância.",
+ "notes_for_agents": "Filtrar por TENANT_ID e SCRIPT_TYPE. Índice VERBOSESCRIPTLOG01 (TENANT_ID, SCRIPT_TYPE, IDENTIFIER).",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "VERBOSESCRIPTLOG01",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "SCRIPT_TYPE",
+    "IDENTIFIER"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.VerboseScriptLog"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária gerada do registro.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant/empresa.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "VerboseScriptLog"
+  },
+  {
+   "name": "SCRIPT_TYPE",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do alvo do log verboso, enum VerboseScriptLogType.",
+   "semantic_type": "enum",
+   "values": "1=PROCESS_INSTANCE",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "scriptTypeId",
+   "java_type": "int",
+   "java_entity": "VerboseScriptLog"
+  },
+  {
+   "name": "IDENTIFIER",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador do alvo conforme SCRIPT_TYPE (para tipo 1, NUM_PROCES da instância).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_WORKFLOW.NUM_PROCES",
+   "confidence": "medium",
+   "java_field": "identifier",
+   "java_type": "Integer",
+   "java_entity": "VerboseScriptLog"
+  },
+  {
+   "name": "USER_ID",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Usuário que solicitou o log verboso.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE (colleagueId; matrícula/login)",
+   "confidence": "medium",
+   "java_field": "userId",
+   "java_type": "String",
+   "java_entity": "VerboseScriptLog"
+  },
+  {
+   "name": "CREATE_DATE",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de criação do registro.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "createDate",
+   "java_type": "Date",
+   "java_entity": "VerboseScriptLog"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "USER_ID"
+   ],
+   "to_cols": [
+    "USER_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "USER_ID guarda o código do usuário (varchar), não o USER_ID numérico de FDN_USER; a heurística por nome é enganosa. [alvo corrigido: USER_CODE/LOGIN pertencem a FDN_USERTENANT]",
+   "status": "probable"
+  },
+  {
+   "to_table": "PROCES_WORKFLOW",
+   "from_cols": [
+    "TENANT_ID",
+    "IDENTIFIER"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Quando SCRIPT_TYPE=1, IDENTIFIER é a instância.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

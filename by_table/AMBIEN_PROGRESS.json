@@ -1,0 +1,68 @@
+{
+ "name": "AMBIEN_PROGRESS",
+ "domain": "bpm-integracao",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Cadastro de ambientes/bibliotecas Progress (ProgressLib) usados para integração com sistemas Datasul/Progress.",
+ "lifecycle": "Config administrativa, volume baixo.",
+ "key_notes": "PK (COD_EMPRESA, COD_AMBIEN_PROGRES).",
+ "notes_for_agents": "Filtrar COD_EMPRESA.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_AMBIEN_PROGRES"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.integration.model.ProgressLib"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant (empresa) dono da linha; sempre filtrar por este valor.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ProgressLib"
+  },
+  {
+   "name": "COD_AMBIEN_PROGRES",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Identificador do ambiente Progress (progressLibId).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "progressLibId",
+   "java_type": "String",
+   "java_entity": "ProgressLib"
+  },
+  {
+   "name": "DES_AMBIEN_PROGRESS",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição do ambiente Progress.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "ProgressLib"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

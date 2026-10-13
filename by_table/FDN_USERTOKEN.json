@@ -1,0 +1,187 @@
+{
+ "name": "FDN_USERTOKEN",
+ "domain": "seguranca",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Tokens temporários enviados por e-mail a usuários para liberar recursos (ex.: acesso por link), com limite de uso e status.",
+ "lifecycle": "Criado ao gerar o token; STATUS atualizado ao usar/expirar.",
+ "key_notes": "Multi-tenant por TENANT_ID; TOKEN único.",
+ "notes_for_agents": "EMAIL e TOKEN são sensíveis. Filtrar STATUS/TENANT_ID.",
+ "primary_key": [
+  "USERTOKEN_ID"
+ ],
+ "unique_constraints": [
+  [
+   "TOKEN"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.security.entity.FDNUserToken"
+ ],
+ "columns": [
+  {
+   "name": "USERTOKEN_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador do token de usuário (PK).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNUserToken"
+  },
+  {
+   "name": "CREATION_DATE",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de criação do token.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "creationDate",
+   "java_type": "Date",
+   "java_entity": "FDNUserToken"
+  },
+  {
+   "name": "EMAIL",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "E-mail do destinatário ao qual o token foi enviado. DADO PESSOAL.",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "email",
+   "java_type": "String",
+   "java_entity": "FDNUserToken"
+  },
+  {
+   "name": "EXPIRATION_DATE",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de expiração do token.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "expirationDate",
+   "java_type": "Date",
+   "java_entity": "FDNUserToken"
+  },
+  {
+   "name": "MAX_TOKEN",
+   "type": "int(11)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Número máximo de usos permitidos do token.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "maxToken",
+   "java_type": "Integer",
+   "java_entity": "FDNUserToken"
+  },
+  {
+   "name": "STATUS",
+   "type": "int(11)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Status do token (enum UserTokenStatus, código inteiro).",
+   "semantic_type": "status",
+   "values": "0=CREATED; 1=FAILED; 2=SUCCESS; 3=EXPIRED",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "status",
+   "java_type": "UserTokenStatus",
+   "java_entity": "FDNUserToken"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant do token.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNUserToken"
+  },
+  {
+   "name": "TOKEN",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor do token (único, UK_FDNUSERTOKEN001). SENSÍVEL.",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "token",
+   "java_type": "String",
+   "java_entity": "FDNUserToken"
+  },
+  {
+   "name": "USED_TOKEN",
+   "type": "int(11)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Quantidade de usos já realizados do token.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "usedToken",
+   "java_type": "Integer",
+   "java_entity": "FDNUserToken"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Tenant do token.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_USERTOKENRESOURCE",
+   "from_cols": [
+    "USERTOKEN_ID"
+   ],
+   "to_cols": [
+    "USERTOKEN_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  }
+ ]
+}

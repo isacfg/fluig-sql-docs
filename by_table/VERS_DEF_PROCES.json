@@ -1,0 +1,569 @@
+{
+ "name": "VERS_DEF_PROCES",
+ "domain": "bpm-process-definition",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Versões de definições de processo (BPM): uma linha por versão publicada/em edição do processo com seu diagrama e opções.",
+ "lifecycle": "Criada ao salvar/publicar nova versão no Fluig Studio/modelador; LOG_ATIV marca a vigente.",
+ "key_notes": "PK (COD_EMPRESA, COD_DEF_PROCES, NUM_VERS). CLB_IMG_PROCES é longtext grande.",
+ "notes_for_agents": "Filtrar por COD_DEF_PROCES e LOG_ATIV=1 para versão vigente. CLB_IMG_PROCES é grande: evitar SELECT *.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_DEF_PROCES",
+  "NUM_VERS"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessDefinitionVersion"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa (tenant) dona do registro; faz parte da PK e deve ser filtrado em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ProcessDefinitionVersion"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código da definição de processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ProcessDefinitionVersion"
+  },
+  {
+   "name": "NUM_VERS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número da versão do processo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "ProcessDefinitionVersion"
+  },
+  {
+   "name": "LOG_ATIV",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versão ativa (vigente) do processo.",
+   "semantic_type": "flag",
+   "values": "1=ativa",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "active",
+   "java_type": "Boolean",
+   "java_entity": "ProcessDefinitionVersion"
+  },
+  {
+   "name": "LOG_BLOQDO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versão bloqueada (não permite novas solicitações/edição).",
+   "semantic_type": "flag",
+   "values": "1=bloqueada",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "blockedVersion",
+   "java_type": "Boolean",
+   "java_entity": "ProcessDefinitionVersion"
+  },
+  {
+   "name": "BPMN_VERS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versão do modelo BPMN usado.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "bpmnVersion",
+   "java_type": "Integer",
+   "java_entity": "ProcessDefinitionVersion"
+  },
+  {
+   "name": "LOG_CONTROLA_SEGUR_ANEXO",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Controla segurança de anexos do processo.",
+   "semantic_type": "flag",
+   "values": "1=controla",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "controlsAttachmentsSecurity",
+   "java_type": "boolean",
+   "java_entity": "ProcessDefinitionVersion"
+  },
+  {
+   "name": "LOG_SOLICIT_CONTRA_SENHA",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Exige contra-senha (confirmação de senha) para movimentação.",
+   "semantic_type": "flag",
+   "values": "1=exige",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "counterSign",
+   "java_type": "Boolean",
+   "java_entity": "ProcessDefinitionVersion"
+  },
+  {
+   "name": "LOG_EDIC",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versão em modo de edição (não publicada).",
+   "semantic_type": "flag",
+   "values": "1=em edição",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "editionMode",
+   "java_type": "Boolean",
+   "java_entity": "ProcessDefinitionVersion"
+  },
+  {
+   "name": "NUM_PASTA_FORM",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "NR_DOCUMENTO do formulário (fichário) associado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "formId",
+   "java_type": "Integer",
+   "java_entity": "ProcessDefinitionVersion"
+  },
+  {
+   "name": "LOG_HERDA_SEGUR_FORM",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Formulário herda segurança do processo.",
+   "semantic_type": "flag",
+   "values": "1=herda",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "inheritFormSecurity",
+   "java_type": "Boolean",
+   "java_entity": "ProcessDefinitionVersion"
+  },
+  {
+   "name": "MOBILE_READY",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Processo preparado para mobile.",
+   "semantic_type": "flag",
+   "values": "1=pronto",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "mobileReady",
+   "java_type": "Boolean",
+   "java_entity": "ProcessDefinitionVersion"
+  },
+  {
+   "name": "CLB_IMG_PROCES",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Diagrama do processo serializado (XML/imagem em texto longo).",
+   "semantic_type": "xml",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "processDiagram",
+   "java_type": "String",
+   "java_entity": "ProcessDefinitionVersion"
+  },
+  {
+   "name": "LOG_ATUALIZA_VERS_DOCTO_ANEXO",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Atualiza versão dos documentos anexos ao movimentar.",
+   "semantic_type": "flag",
+   "values": "1=atualiza",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "updateAttachmentsVersion",
+   "java_type": "boolean",
+   "java_entity": "ProcessDefinitionVersion"
+  },
+  {
+   "name": "DES_VERS",
+   "type": "varchar(200)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição da versão.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "versionDescription",
+   "java_type": "String",
+   "java_entity": "ProcessDefinitionVersion"
+  },
+  {
+   "name": "SCRIPT_VERSION",
+   "type": "integer",
+   "nullable": false,
+   "default": "0",
+   "pk_position": null,
+   "purpose": "Versão do script/modelo de eventos do processo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "scriptVersion",
+   "java_type": "Integer",
+   "java_entity": "ProcessDefinitionVersion"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "Definição do processo (findAvailableProcess).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "VERS_DEF_PROCES_ALERT",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "PROCESS_VERSION"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-confirmed",
+   "description": "Alertas de análise estática da versão.",
+   "status": "probable"
+  },
+  {
+   "to_table": "DEF_PROCES",
+   "from_cols": [
+    "COD_DEF_PROCES"
+   ],
+   "to_cols": [
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "ProcessDefinitionVersion.findAvailableProcess",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "ProcessDefinitionVersion.findAvailableProcess",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "PROPRIED_AVANCAD_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "SEGUR_ANEXO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PROPRIED_EXT",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "VERS_DEF_PROCES_ALERT",
+   "from_cols": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "PROCESS_VERSION"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-confirmed"
+  },
+  {
+   "from_table": "COMPON_GRAF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DOC_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "ESTADO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-confirmed"
+  },
+  {
+   "from_table": "EVENT_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "HISTOR_CONVER",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "LINK_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "LIN_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PROCESS_CUSTOM_TRANSLATE",
+   "from_cols": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "VERSION"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PROCESS_VERSION_TRANSLATE",
+   "from_cols": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "VERSION"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PROCES_WORKFLOW",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FAVORITOS_PROCES",
+   "from_cols": [
+    "COD_EMPRESA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
+  },
+  {
+   "from_table": "FAVORITOS_PROCES",
+   "from_cols": [
+    "COD_DEF_PROCES"
+   ],
+   "to_cols": [
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
+  }
+ ]
+}

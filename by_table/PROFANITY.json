@@ -1,0 +1,86 @@
+{
+ "name": "PROFANITY",
+ "domain": "social",
+ "module": "03001-fluig-database-social",
+ "purpose": "Configuração do filtro de palavrões da rede social por tenant: liga/desliga e lista de palavras proibidas.",
+ "lifecycle": "Uma linha por tenant (unique TENANT_ID), criada/alterada pelo administrador.",
+ "key_notes": "Unique em TENANT_ID: no máximo uma linha por tenant.",
+ "notes_for_agents": "Lista de palavras em campo único varchar(4000) (formato do separador não confirmado).",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [
+  [
+   "tenant_id"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.social.profanityfilter.entity.Profanity"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id da configuração; PK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "ENABLED",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o filtro de palavrões está ativo no tenant.",
+   "semantic_type": "flag",
+   "values": "1=ativo; 0=inativo",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "enabled",
+   "java_type": "Boolean",
+   "java_entity": "Profanity"
+  },
+  {
+   "name": "PROFANITY_WORDS",
+   "type": "varchar(4000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Lista de palavras proibidas (até 4000 chars) usada para filtrar posts/comentários.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "profanityWords",
+   "java_type": "String",
+   "java_entity": "Profanity"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id do tenant; único (uma configuração por tenant).",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "Profanity"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

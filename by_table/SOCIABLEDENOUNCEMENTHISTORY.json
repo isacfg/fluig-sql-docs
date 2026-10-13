@@ -1,0 +1,153 @@
+{
+ "name": "SOCIABLEDENOUNCEMENTHISTORY",
+ "domain": "social",
+ "module": "03001-fluig-database-social",
+ "purpose": "Histórico de mudanças de status de uma denúncia, com texto e usuário que agiu.",
+ "lifecycle": "Uma linha por transição/ação de moderação.",
+ "key_notes": "Sem TENANTID; tenant via denúncia/conteúdo.",
+ "notes_for_agents": "Ordenar por CREATIONDATE para a linha do tempo.",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.social.sociable.entity.SociableDenouncementHistory"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id do registro de histórico; PK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "CREATIONDATE",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora da ação registrada.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "creationDate",
+   "java_type": "Date",
+   "java_entity": "SociableDenouncementHistory"
+  },
+  {
+   "name": "STATUS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Status da denúncia resultante da ação, ordinal de SociableDenouncementStatus.",
+   "semantic_type": "status",
+   "values": "0=PENDING; 1=ARCHIVED; 2=REVOKED",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TEXT",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Justificativa/comentário da ação.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "DENOUNCE_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Denúncia à qual o histórico pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIABLEDENOUNCEMENT.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "USER_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Perfil social do usuário que executou a ação.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "SOCIAL.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "SOCIABLEDENOUNCEMENT",
+   "from_cols": [
+    "DENOUNCE_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Denúncia à qual a ação pertence",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "SOCIAL",
+   "from_cols": [
+    "USER_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Usuário que agiu",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "FDN_USER",
+   "from_cols": [
+    "USER_ID"
+   ],
+   "to_cols": [
+    "USER_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome de coluna rejeitada: USER_ID nesta tabela é SOCIAL.ID (perfil social), não FDN_USER.USER_ID.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

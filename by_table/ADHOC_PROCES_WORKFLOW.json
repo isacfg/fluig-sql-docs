@@ -1,0 +1,131 @@
+{
+ "name": "ADHOC_PROCES_WORKFLOW",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Relaciona a instância de processo pai (e seu estado) às instâncias de sub-processo geradas para tarefas ad hoc.",
+ "lifecycle": "Uma linha por tarefa ad hoc que gerou instância de workflow própria.",
+ "key_notes": "PK de 4 colunas: pai (NUM_PROCES_PAI + NUM_SEQ_PROCES_PAI) e filho (NUM_PROCES).",
+ "notes_for_agents": "Dois joins distintos a PROCES_WORKFLOW (pai e filho); use aliases.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NUM_PROCES_PAI",
+  "NUM_SEQ_PROCES_PAI",
+  "NUM_PROCES"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.WorkflowAdHocProcess"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant (empresa) dono da linha; sempre filtrar por este valor.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "WorkflowAdHocProcess"
+  },
+  {
+   "name": "NUM_PROCES_PAI",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Número da instância de processo pai onde a tarefa ad hoc foi criada.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_WORKFLOW.NUM_PROCES",
+   "confidence": "high",
+   "java_field": "parentProcessInstanceId",
+   "java_type": "int",
+   "java_entity": "WorkflowAdHocProcess"
+  },
+  {
+   "name": "NUM_SEQ_PROCES_PAI",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Sequência do estado/atividade da instância pai à qual a tarefa ad hoc está ligada.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "medium",
+   "java_field": "parentProcessStateSequence",
+   "java_type": "int",
+   "java_entity": "WorkflowAdHocProcess"
+  },
+  {
+   "name": "NUM_PROCES",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Número da instância de processo (workflow) criada para a tarefa ad hoc.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_WORKFLOW.NUM_PROCES",
+   "confidence": "high",
+   "java_field": "processInstanceId",
+   "java_type": "int",
+   "java_entity": "WorkflowAdHocProcess"
+  },
+  {
+   "name": "NOM_TAR_ADHOC_PROCES",
+   "type": "varchar(200)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome da tarefa ad hoc, até 200 caracteres.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "name",
+   "java_type": "String",
+   "java_entity": "WorkflowAdHocProcess"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "PROCES_WORKFLOW",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Instância filha criada para a tarefa ad hoc.",
+   "status": "probable"
+  },
+  {
+   "to_table": "PROCES_WORKFLOW",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES_PAI"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Instância pai (relação não listada pela heurística; deduzida do nome da coluna).",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

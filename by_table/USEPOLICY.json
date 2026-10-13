@@ -1,0 +1,95 @@
+{
+ "name": "USEPOLICY",
+ "domain": "use-policy",
+ "module": "04001-fluig-database-use-policy",
+ "purpose": "Política de uso de um tenant; agrega os documentos de política via USEPOLICY_POLICYDOCUMENT.",
+ "lifecycle": "Uma linha por tenant.",
+ "key_notes": "TENANTID é único: uma política por tenant.",
+ "notes_for_agents": "Consulta típica: WHERE TENANTID=:tenant.",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [
+  [
+   "tenantId"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.global.usepolicy.entities.UsePolicy"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave primária.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TENANTID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant dono da política (único).",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANTID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "1:1",
+   "kind": "logical-probable",
+   "description": "Tenant da política (sem FK física).",
+   "status": "probable"
+  },
+  {
+   "to_table": "POLICYDOCUMENT",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:M-via-this-table",
+   "kind": "jpa-join",
+   "description": "Documentos via USEPOLICY_POLICYDOCUMENT.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "USEPOLICY_POLICYDOCUMENT",
+   "from_cols": [
+    "USEPOLICY_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

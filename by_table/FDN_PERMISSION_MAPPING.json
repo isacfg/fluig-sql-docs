@@ -1,0 +1,157 @@
+{
+ "name": "FDN_PERMISSION_MAPPING",
+ "domain": "foundation-identity-access",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Mapeamento entre permissões: ter PERMISSION em RESOURCE_CODE implica/concede TO_PERMISSION em TO_RESOURCE_CODE.",
+ "lifecycle": "Cadastrado por configuração/instalação; volume baixo.",
+ "key_notes": "Referencia recursos por código (FDN_RESOURCE.RESOURCE_CODE), não por ID. O índice FDNPERMMAP001 sugere consulta pelo destino (TO_*). Semântica exata (herança de permissão) inferida.",
+ "notes_for_agents": "Sem FK; junte por código de recurso (e TENANT_ID quando aplicável).",
+ "primary_key": [
+  "PERMISSION_MAPPING_ID"
+ ],
+ "unique_constraints": [
+  [
+   "TENANT_ID",
+   "RESOURCE_CODE",
+   "PERMISSION",
+   "TO_RESOURCE_CODE",
+   "TO_PERMISSION"
+  ]
+ ],
+ "indexes": [
+  {
+   "name": "FDNPERMMAP001",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "TO_RESOURCE_CODE",
+    "TO_PERMISSION"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.permission.entity.FDNPermissionMapping"
+ ],
+ "columns": [
+  {
+   "name": "PERMISSION_MAPPING_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária surrogate.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNPermissionMapping"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dono do registro; FK para FDN_TENANT.TENANT_ID. Valor -1 indica registro global/sem tenant em consultas do código.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNPermissionMapping"
+  },
+  {
+   "name": "RESOURCE_CODE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do recurso de origem do mapeamento.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "FDN_RESOURCE.RESOURCE_CODE",
+   "confidence": "medium",
+   "java_field": "resource",
+   "java_type": "String",
+   "java_entity": "FDNPermissionMapping"
+  },
+  {
+   "name": "PERMISSION",
+   "type": "varchar(60)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Permissão de origem no recurso de origem.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "FDN_RESOURCETYPEPERMISSION.PERMISSION",
+   "confidence": "medium",
+   "java_field": "permission",
+   "java_type": "String",
+   "java_entity": "FDNPermissionMapping"
+  },
+  {
+   "name": "TO_RESOURCE_CODE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do recurso de destino ao qual a permissão é mapeada.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "FDN_RESOURCE.RESOURCE_CODE",
+   "confidence": "medium",
+   "java_field": "toResource",
+   "java_type": "String",
+   "java_entity": "FDNPermissionMapping"
+  },
+  {
+   "name": "TO_PERMISSION",
+   "type": "varchar(60)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Permissão equivalente concedida no recurso de destino.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "FDN_RESOURCETYPEPERMISSION.PERMISSION",
+   "confidence": "medium",
+   "java_field": "toPermission",
+   "java_type": "String",
+   "java_entity": "FDNPermissionMapping"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_RESOURCE",
+   "from_cols": [
+    "RESOURCE_CODE"
+   ],
+   "to_cols": [
+    "RESOURCE_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Recurso de origem por código.",
+   "status": "probable"
+  },
+  {
+   "to_table": "FDN_RESOURCE",
+   "from_cols": [
+    "TO_RESOURCE_CODE"
+   ],
+   "to_cols": [
+    "RESOURCE_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Recurso de destino por código.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

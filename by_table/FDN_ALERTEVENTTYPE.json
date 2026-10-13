@@ -1,0 +1,315 @@
+{
+ "name": "FDN_ALERTEVENTTYPE",
+ "domain": "foundation-alert",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Catalogo de tipos de evento de alerta (ex.: tarefa atribuida) por tenant e modulo, com chaves i18n e regras de agrupamento/remocao.",
+ "lifecycle": "Registrado por aplicacoes/modulos na instalacao ou por tenant; raramente alterado. Volume baixo.",
+ "key_notes": "Multi-tenant via TENANT_ID. EVENT_KEY e a chave logica usada nas consultas. KEY/CONSTRAINT do input sao artefatos do DDL.",
+ "notes_for_agents": "Filtre por TENANT_ID; use ONLY_ADMIN para separar eventos administrativos.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "INDEX_ALERT_EVENT_KEY",
+   "unique": false,
+   "columns": [
+    "EVENT_KEY"
+   ]
+  },
+  {
+   "name": "FK_RKD6KYG1IDFUYKTLIUH39DE94",
+   "unique": false,
+   "columns": [
+    "MODULE_ID"
+   ]
+  },
+  {
+   "name": "FK_KFIDX71UOO2CKUOX01CM9Y1X1",
+   "unique": false,
+   "columns": [
+    "TENANT_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.alert.entity.FDNAlertEventType"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador sequencial do tipo de evento (PK).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNAlertEventType"
+  },
+  {
+   "name": "IS_ACTIVE",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Flag: tipo de evento ativo.",
+   "semantic_type": "flag",
+   "values": "1=ativo; 0=inativo",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "active",
+   "java_type": "Boolean",
+   "java_entity": "FDNAlertEventType"
+  },
+  {
+   "name": "CAN_REMOVE",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Flag: o alerta deste tipo pode ser removido pelo usuario.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "canRemove",
+   "java_type": "Boolean",
+   "java_entity": "FDNAlertEventType"
+  },
+  {
+   "name": "DESCRIPTION_KEY",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave i18n da descricao do evento.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "descriptionKey",
+   "java_type": "String",
+   "java_entity": "FDNAlertEventType"
+  },
+  {
+   "name": "EVENT_KEY",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave unica do evento usada pelas aplicacoes para disparar alertas (ate 50 chars).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "eventKey",
+   "java_type": "String",
+   "java_entity": "FDNAlertEventType"
+  },
+  {
+   "name": "GROUP_DESCRIPTION_KEY",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Chave i18n da descricao quando varios alertas sao agrupados.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "groupDescriptionKey",
+   "java_type": "String",
+   "java_entity": "FDNAlertEventType"
+  },
+  {
+   "name": "GROUPED",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Flag: alertas deste tipo sao exibidos agrupados.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "grouped",
+   "java_type": "Boolean",
+   "java_entity": "FDNAlertEventType"
+  },
+  {
+   "name": "ICON",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Nome/classe do icone exibido para o evento.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "icon",
+   "java_type": "String",
+   "java_entity": "FDNAlertEventType"
+  },
+  {
+   "name": "MODULE_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Modulo ao qual o evento pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_ALERTMODULE.ID",
+   "confidence": "high",
+   "java_field": "moduleId",
+   "java_type": "Long",
+   "java_entity": "FDNAlertEventType"
+  },
+  {
+   "name": "ONLY_ADMIN",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Flag: evento visivel/configuravel apenas por administradores.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "onlyAdmin",
+   "java_type": "Boolean",
+   "java_entity": "FDNAlertEventType"
+  },
+  {
+   "name": "REMOVE_AFTER_EXEC_ACTION",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Flag: alerta e removido apos a execucao de sua acao.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "removeAfterExecAction",
+   "java_type": "Boolean",
+   "java_entity": "FDNAlertEventType"
+  },
+  {
+   "name": "IS_REQUIRED",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Flag: evento obrigatorio, usuario nao pode desativar o recebimento.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "required",
+   "java_type": "Boolean",
+   "java_entity": "FDNAlertEventType"
+  },
+  {
+   "name": "SINGLE_DESCRIPTION_KEY",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave i18n da descricao quando ha um unico alerta.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "singleDescriptionKey",
+   "java_type": "String",
+   "java_entity": "FDNAlertEventType"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dono do registro.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNAlertEventType"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_ALERTMODULE",
+   "from_cols": [
+    "MODULE_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Modulo do evento.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Tenant.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_ALERT",
+   "from_cols": [
+    "EVENT_TYPE_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_ALERTCONFIG",
+   "from_cols": [
+    "EVENT_TYPE_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_ALERTMODULE",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "MODULE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk"
+  }
+ ]
+}

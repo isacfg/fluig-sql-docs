@@ -1,0 +1,177 @@
+{
+ "name": "PROCESS_FORM_MAP",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Mapeamento de campos de formulario entre processo pai e subprocesso, por atividade.",
+ "lifecycle": "Criada ao configurar atividade de subprocesso na modelagem.",
+ "key_notes": "PK FORM_MAP_ID (gerado). Por versao de processo pai.",
+ "notes_for_agents": "MAP_FLOW indica direcao (pai->sub ou sub->pai); codificacao nao confirmada.",
+ "primary_key": [
+  "FORM_MAP_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessFormMap"
+ ],
+ "columns": [
+  {
+   "name": "FORM_MAP_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador sequencial do mapeamento.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "formMapId",
+   "java_type": "Long",
+   "java_entity": "ProcessFormMap"
+  },
+  {
+   "name": "MAP_FLOW",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Direcao do mapeamento entre pai e subprocesso; codificacao nao confirmada.",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "mapFlow",
+   "java_type": "int",
+   "java_entity": "ProcessFormMap"
+  },
+  {
+   "name": "PROCESS_CODE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Codigo do processo pai.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processCode",
+   "java_type": "String",
+   "java_entity": "ProcessFormMap"
+  },
+  {
+   "name": "PROCESS_FIELD",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Campo do formulario do processo pai.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "processField",
+   "java_type": "String",
+   "java_entity": "ProcessFormMap"
+  },
+  {
+   "name": "STATE_SEQUENCE",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sequencia da atividade de subprocesso no processo pai.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "high",
+   "java_field": "stateSequence",
+   "java_type": "int",
+   "java_entity": "ProcessFormMap"
+  },
+  {
+   "name": "SUB_PROCESS_CODE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Codigo do subprocesso.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "subProcessCode",
+   "java_type": "String",
+   "java_entity": "ProcessFormMap"
+  },
+  {
+   "name": "SUB_PROCESS_FIELD",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Campo do formulario do subprocesso.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "subProcessField",
+   "java_type": "String",
+   "java_entity": "ProcessFormMap"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dona da linha; faz parte da PK e deve ser filtrada em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "long",
+   "java_entity": "ProcessFormMap"
+  },
+  {
+   "name": "VERSION",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versao do processo pai.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "ProcessFormMap"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ESTADO_PROCES",
+   "from_cols": [
+    "TENANT_ID",
+    "PROCESS_CODE",
+    "VERSION",
+    "STATE_SEQUENCE"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Atividade de subprocesso do processo pai.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

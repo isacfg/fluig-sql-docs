@@ -1,0 +1,292 @@
+{
+ "name": "QRTZ_FIRED_TRIGGERS",
+ "domain": "scheduler-quartz",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Registro transitório de triggers em execução/adquiridos pelos nós do scheduler.",
+ "lifecycle": "Inserida ao adquirir o trigger e removida ao concluir; poucas linhas.",
+ "key_notes": "Linhas órfãs podem ficar após queda de nó; Quartz limpa na recuperação.",
+ "notes_for_agents": "Útil para ver jobs rodando agora por INSTANCE_NAME.",
+ "primary_key": [
+  "ENTRY_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.scheduler.entity.quartz.QrtzFiredTriggers"
+ ],
+ "columns": [
+  {
+   "name": "ENTRY_ID",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador único da execução em andamento (instância + contador); PK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "entryId",
+   "java_type": "String",
+   "java_entity": "QrtzFiredTriggers"
+  },
+  {
+   "name": "FIRED_TIME",
+   "type": "decimal(19,2)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Instante em que o trigger disparou, em milissegundos desde epoch.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "firedTime",
+   "java_type": "BigInteger",
+   "java_entity": "QrtzFiredTriggers"
+  },
+  {
+   "name": "INSTANCE_NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome da instância do scheduler (nó do cluster) que está executando o disparo.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "QRTZ_SCHEDULER_STATE.INSTANCE_NAME",
+   "confidence": "high",
+   "java_field": "instanceName",
+   "java_type": "String",
+   "java_entity": "QrtzFiredTriggers"
+  },
+  {
+   "name": "IS_STATEFUL",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Legado Quartz 1.x: job stateful (não concorrente). Nulo em linhas novas.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "isStateful",
+   "java_type": "boolean",
+   "java_entity": "QrtzFiredTriggers"
+  },
+  {
+   "name": "IS_VOLATILE",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Legado Quartz 1.x: trigger volátil (não persistido entre reinícios).",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "isVolatile",
+   "java_type": "boolean",
+   "java_entity": "QrtzFiredTriggers"
+  },
+  {
+   "name": "JOB_GROUP",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Grupo do job disparado; nulo se o job não exige não-concorrência.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "QRTZ_JOB_DETAILS.JOB_GROUP",
+   "confidence": "medium",
+   "java_field": "jobGroup",
+   "java_type": "String",
+   "java_entity": "QrtzFiredTriggers"
+  },
+  {
+   "name": "JOB_NAME",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do job disparado; nulo se o job não exige não-concorrência.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "QRTZ_JOB_DETAILS.JOB_NAME",
+   "confidence": "medium",
+   "java_field": "jobName",
+   "java_type": "String",
+   "java_entity": "QrtzFiredTriggers"
+  },
+  {
+   "name": "PRIORITY",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Prioridade do trigger no momento do disparo (inteiro; maior executa primeiro).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "priority",
+   "java_type": "Integer",
+   "java_entity": "QrtzFiredTriggers"
+  },
+  {
+   "name": "REQUESTS_RECOVERY",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o job deve ser reexecutado se a instância cair durante a execução.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "requestsRecovery",
+   "java_type": "boolean",
+   "java_entity": "QrtzFiredTriggers"
+  },
+  {
+   "name": "STATE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Estado da execução no Quartz (ex.: EXECUTING, ACQUIRED, BLOCKED); valores não enumerados no código do Fluig.",
+   "semantic_type": "status",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "state",
+   "java_type": "String",
+   "java_entity": "QrtzFiredTriggers"
+  },
+  {
+   "name": "TRIGGER_GROUP",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Grupo do trigger disparado.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "QRTZ_TRIGGERS.TRIGGER_GROUP",
+   "confidence": "high",
+   "java_field": "triggerGroup",
+   "java_type": "String",
+   "java_entity": "QrtzFiredTriggers"
+  },
+  {
+   "name": "TRIGGER_NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do trigger disparado.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "QRTZ_TRIGGERS.TRIGGER_NAME",
+   "confidence": "high",
+   "java_field": "triggerName",
+   "java_type": "String",
+   "java_entity": "QrtzFiredTriggers"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "QRTZ_TRIGGERS",
+   "from_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "to_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Execução em andamento de um trigger (join lógico Quartz).",
+   "status": "probable"
+  },
+  {
+   "to_table": "QRTZ_JOB_DETAILS",
+   "from_cols": [
+    "JOB_GROUP",
+    "JOB_NAME"
+   ],
+   "to_cols": [
+    "JOB_GROUP",
+    "JOB_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Job em execução (campos nulos se job concorrente).",
+   "status": "probable"
+  },
+  {
+   "to_table": "QRTZ_SCHEDULER_STATE",
+   "from_cols": [
+    "INSTANCE_NAME"
+   ],
+   "to_cols": [
+    "INSTANCE_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Nó do cluster que executa o disparo.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "QRTZ_BLOB_TRIGGERS",
+   "from_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "to_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: tabela de detalhe por tipo, o vínculo é via QRTZ_TRIGGERS",
+   "status": "rejected"
+  },
+  {
+   "to_table": "QRTZ_CRON_TRIGGERS",
+   "from_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "to_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: idem, vínculo é via QRTZ_TRIGGERS",
+   "status": "rejected"
+  },
+  {
+   "to_table": "QRTZ_SIMPLE_TRIGGERS",
+   "from_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "to_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: idem, vínculo é via QRTZ_TRIGGERS",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

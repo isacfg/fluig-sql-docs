@@ -1,0 +1,205 @@
+{
+ "name": "FDN_IDENTITYPARTNER",
+ "domain": "foundation-identity-access",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Parceiro de identidade/licenciamento do tenant: guarda credenciais de cliente, licença e quantidade de usuários licenciados.",
+ "lifecycle": "Criado no registro/ativação do tenant com o serviço de identidade; poucas linhas.",
+ "key_notes": "Contém segredo (CLIENT_SECRET) e chave pública. Estado via enum IdentityPartnerState (ordinal).",
+ "notes_for_agents": "Contém CLIENT_SECRET e PUBLIC_KEY: dados sensíveis, não exponha.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [
+  [
+   "TENANT_ID"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.identitypartner.entity.FDNIdentityPartner"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNIdentityPartner"
+  },
+  {
+   "name": "CLIENT_ID",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Identificador de cliente (OAuth/identidade) do parceiro.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "clientId",
+   "java_type": "String",
+   "java_entity": "FDNIdentityPartner"
+  },
+  {
+   "name": "CLIENT_SECRET",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Segredo do cliente do parceiro de identidade (dado sensível).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "clientSecret",
+   "java_type": "String",
+   "java_entity": "FDNIdentityPartner"
+  },
+  {
+   "name": "LAST_UPDATE",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Timestamp da última atualização, em epoch (provavelmente milissegundos).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "lastUpdate",
+   "java_type": "Long",
+   "java_entity": "FDNIdentityPartner"
+  },
+  {
+   "name": "LICENSE_ID",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Identificador da licença associada ao tenant.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "licenseId",
+   "java_type": "String",
+   "java_entity": "FDNIdentityPartner"
+  },
+  {
+   "name": "LICENSED_USERS",
+   "type": "int(11)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Quantidade de usuários licenciados.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "licensedUsers",
+   "java_type": "Integer",
+   "java_entity": "FDNIdentityPartner"
+  },
+  {
+   "name": "PUBLIC_KEY",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Chave pública do parceiro de identidade.",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "publicKey",
+   "java_type": "String",
+   "java_entity": "FDNIdentityPartner"
+  },
+  {
+   "name": "QA",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica ambiente de QA/testes.",
+   "semantic_type": "flag",
+   "values": "1=QA; 0=produção",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "qa",
+   "java_type": "Boolean",
+   "java_entity": "FDNIdentityPartner"
+  },
+  {
+   "name": "STATE",
+   "type": "int(11)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Estado do parceiro, ordinal do enum IdentityPartnerState.",
+   "semantic_type": "enum",
+   "values": "0=TRIAL; 1=ACTIVE; 2=DEMO; 3=DOWN; 4=VIOLATED (ordem do enum; mapeamento ordinal presumido)",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "state",
+   "java_type": "IdentityPartnerState",
+   "java_entity": "FDNIdentityPartner"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant do parceiro; FK física.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNIdentityPartner"
+  },
+  {
+   "name": "VALIDATION",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Dado de validação da licença/parceiro (texto livre).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "validation",
+   "java_type": "String",
+   "java_entity": "FDNIdentityPartner"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Tenant ao qual o registro pertence.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

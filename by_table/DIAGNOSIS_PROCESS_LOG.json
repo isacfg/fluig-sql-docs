@@ -1,0 +1,212 @@
+{
+ "name": "DIAGNOSIS_PROCESS_LOG",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Log de auditoria das ações de diagnóstico em processos e instâncias, como troca de versão de script e reenvio.",
+ "lifecycle": "Uma linha por ação de diagnóstico; cresce conforme uso.",
+ "key_notes": "Usa TENANT_ID. PROCESS_ID e PROCESS_VERSION podem ser nulos em ações de instância.",
+ "notes_for_agents": "Índice por (TENANT_ID, PROCESS_ID, PROCESS_VERSION, INSTANCE_ID). ACTION_VALUE pode ter scripts.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "DIAGNOSISPROCESSLOG01",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "PROCESS_VERSION",
+    "INSTANCE_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.DiagnosisProcessLog"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador único (autogerado).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "DiagnosisProcessLog"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant dono da linha.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "DiagnosisProcessLog"
+  },
+  {
+   "name": "PROCESS_ID",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código da definição de processo afetada.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "DiagnosisProcessLog"
+  },
+  {
+   "name": "PROCESS_VERSION",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versão da definição de processo afetada.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "processVersion",
+   "java_type": "Integer",
+   "java_entity": "DiagnosisProcessLog"
+  },
+  {
+   "name": "INSTANCE_ID",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Número da instância de processo, quando a ação é por instância.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_WORKFLOW.NUM_PROCES",
+   "confidence": "high",
+   "java_field": "instanceId",
+   "java_type": "Integer",
+   "java_entity": "DiagnosisProcessLog"
+  },
+  {
+   "name": "USER_ID",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do usuário que executou a ação.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "medium",
+   "java_field": "userId",
+   "java_type": "String",
+   "java_entity": "DiagnosisProcessLog"
+  },
+  {
+   "name": "ACTION",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código da ação de diagnóstico (DiagnosisProcessLogActionType).",
+   "semantic_type": "enum",
+   "values": "101=INSTANCE_CHANGE_SCRIPT_VERSION; 102=INSTANCE_RESEND; 103=INSTANCE_VERBOSE_SCRIPT; 104=INSTANCE_DOWNLOAD; 201=PROCESS_NEW_SCRIPT_VERSION; 202=PROCESS_CHANGE_SCRIPT_VERSION; 203=PROCESS_ANALYSIS_SCRIPT",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "action",
+   "java_type": "int",
+   "java_entity": "DiagnosisProcessLog"
+  },
+  {
+   "name": "ACTION_DATE",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data e hora da ação.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "actionDate",
+   "java_type": "Date",
+   "java_entity": "DiagnosisProcessLog"
+  },
+  {
+   "name": "ACTION_VALUE",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Detalhe/valor da ação, texto longo.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "actionValue",
+   "java_type": "String",
+   "java_entity": "DiagnosisProcessLog"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DEF_PROCES",
+   "from_cols": [
+    "TENANT_ID",
+    "PROCESS_ID"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Processo diagnosticado.",
+   "status": "probable"
+  },
+  {
+   "to_table": "PROCES_WORKFLOW",
+   "from_cols": [
+    "TENANT_ID",
+    "INSTANCE_ID"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Instância diagnosticada.",
+   "status": "probable"
+  },
+  {
+   "to_table": "FDN_USER",
+   "from_cols": [
+    "USER_ID"
+   ],
+   "to_cols": [
+    "USER_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Inferência heurística por nome; USER_ID aqui guarda o código do usuário, confirmar coluna alvo.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

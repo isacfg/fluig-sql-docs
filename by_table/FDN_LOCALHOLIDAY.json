@@ -1,0 +1,137 @@
+{
+ "name": "FDN_LOCALHOLIDAY",
+ "domain": "calendario-feriados",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Associação entre local (FDN_LOCAL) e feriado global (CALEND_GLOBAL): feriados que valem para cada local.",
+ "lifecycle": "Criada ao vincular feriados a locais.",
+ "key_notes": "Chave de feriado composta (HOLIDAY_ID, COMPANY_ID) = CALEND_GLOBAL (ID, COD_EMPRESA).",
+ "notes_for_agents": "Join com CALEND_GLOBAL deve usar as duas colunas.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [
+  [
+   "LOCAL_ID",
+   "HOLIDAY_ID"
+  ]
+ ],
+ "indexes": [
+  {
+   "name": "FKwptl75siam95n7wpk7a78w1g",
+   "unique": false,
+   "columns": [
+    "HOLIDAY_ID",
+    "COMPANY_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.fluig.local.entity.FDNLocalHoliday"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNLocalHoliday"
+  },
+  {
+   "name": "HOLIDAY_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Feriado vinculado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "CALEND_GLOBAL.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "COMPANY_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Empresa do feriado; parte da chave composta do feriado.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "CALEND_GLOBAL.COD_EMPRESA",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "LOCAL_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Local ao qual o feriado se aplica.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_LOCAL.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_LOCAL",
+   "from_cols": [
+    "LOCAL_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Local.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "CALEND_GLOBAL",
+   "from_cols": [
+    "HOLIDAY_ID",
+    "COMPANY_ID"
+   ],
+   "to_cols": [
+    "ID",
+    "COD_EMPRESA"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Feriado global (join composto).",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_LOCAL",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "LOCAL_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk"
+  }
+ ]
+}

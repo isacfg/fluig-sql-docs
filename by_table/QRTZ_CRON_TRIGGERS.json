@@ -1,0 +1,113 @@
+{
+ "name": "QRTZ_CRON_TRIGGERS",
+ "domain": "scheduler-quartz",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Detalhe de triggers do Quartz baseados em expressão cron, 1:1 com QRTZ_TRIGGERS.",
+ "lifecycle": "Criada junto com o trigger cron ao agendar job.",
+ "key_notes": "Sem tenant: scheduler é global ao cluster (tenant fica no nome/grupo/JobDataMap).",
+ "notes_for_agents": "JOIN com QRTZ_TRIGGERS por (TRIGGER_GROUP, TRIGGER_NAME).",
+ "primary_key": [
+  "TRIGGER_GROUP",
+  "TRIGGER_NAME"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.scheduler.entity.quartz.QrtzCronTriggers"
+ ],
+ "columns": [
+  {
+   "name": "TRIGGER_GROUP",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Nome do grupo do trigger Quartz; compõe a PK (TRIGGER_GROUP, TRIGGER_NAME) e liga ao QRTZ_TRIGGERS.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "QRTZ_TRIGGERS.TRIGGER_GROUP",
+   "confidence": "high",
+   "java_field": "triggerGroup",
+   "java_type": "String",
+   "java_entity": "QrtzCronTriggers"
+  },
+  {
+   "name": "TRIGGER_NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Nome do trigger Quartz dentro do grupo; compõe a PK e liga ao QRTZ_TRIGGERS.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "QRTZ_TRIGGERS.TRIGGER_NAME",
+   "confidence": "high",
+   "java_field": "triggerName",
+   "java_type": "String",
+   "java_entity": "QrtzCronTriggers"
+  },
+  {
+   "name": "CRON_EXPRESSION",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Expressão cron do Quartz (formato com segundos) que define a recorrência do trigger.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "cronExpression",
+   "java_type": "String",
+   "java_entity": "QrtzCronTriggers"
+  },
+  {
+   "name": "TIME_ZONE_ID",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "ID do fuso horário (ex.: America/Sao_Paulo) usado para avaliar a expressão cron; pode ser nulo.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "timeZoneId",
+   "java_type": "String",
+   "java_entity": "QrtzCronTriggers"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "QRTZ_TRIGGERS",
+   "from_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "to_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "cardinality": "1:1",
+   "kind": "logical-confirmed",
+   "description": "Detalhe cron do trigger; mesma PK de QRTZ_TRIGGERS.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "QRTZ_PAUSED_TRIGGER_GRPS",
+   "from_cols": [
+    "TRIGGER_GROUP"
+   ],
+   "to_cols": [
+    "TRIGGER_GROUP"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: coincidência de nome; não é FK",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

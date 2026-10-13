@@ -1,0 +1,138 @@
+{
+ "name": "DOCTO_SOCIAL",
+ "domain": "ecm-documents",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Mapeia pastas sociais (espaços/comunidades) para pastas de documentos, por alias e tipo de pasta.",
+ "lifecycle": "Criada quando um espaço social cria sua pasta ECM.",
+ "key_notes": "Índice DOCTOSOCIALI001 em NR_DOCUMENTO. Entidade SocialFolder.",
+ "notes_for_agents": "Lookup por (COD_EMPRESA, COD_APELIDO[, TP_PASTA]).",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_APELIDO",
+  "TP_PASTA"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "DOCTOSOCIALI001",
+   "unique": false,
+   "columns": [
+    "NR_DOCUMENTO"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.SocialFolder"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); parte da PK, sempre filtrar por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "SocialFolder"
+  },
+  {
+   "name": "TP_PASTA",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Tipo da pasta social (ex. pasta de documentos do espaço).",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "folderType",
+   "java_type": "String",
+   "java_entity": "SocialFolder"
+  },
+  {
+   "name": "COD_APELIDO",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Alias do espaço social.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "spaceAlias",
+   "java_type": "String",
+   "java_entity": "SocialFolder"
+  },
+  {
+   "name": "BOO_SECURITY_ENABLE",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a segurança é aplicada à pasta (null equivale a false).",
+   "semantic_type": "flag",
+   "values": "1=aplica; 0=não",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "applySecurity",
+   "java_type": "Boolean",
+   "java_entity": "SocialFolder"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Documento (pasta) ECM associado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "Integer",
+   "java_entity": "SocialFolder"
+  },
+  {
+   "name": "FOLDER_ENABLE",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a pasta social está habilitada.",
+   "semantic_type": "flag",
+   "values": "1=habilitada; 0=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "folderEnabled",
+   "java_type": "Boolean",
+   "java_entity": "SocialFolder"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Pasta ECM do espaço.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

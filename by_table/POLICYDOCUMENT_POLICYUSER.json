@@ -1,0 +1,82 @@
+{
+ "name": "POLICYDOCUMENT_POLICYUSER",
+ "domain": "use-policy",
+ "module": "04001-fluig-database-use-policy",
+ "purpose": "Tabela de junção JPA (@OneToMany usersAccepted) entre documento de política e aceites de usuário.",
+ "lifecycle": "Linha criada junto com cada POLICYUSER registrado.",
+ "key_notes": "USERSACCEPTED_ID é único: cada aceite pertence a um só documento. Redundante com POLICYUSER.POLICYDOCUMENTID.",
+ "notes_for_agents": "Prefira POLICYUSER.POLICYDOCUMENTID para joins diretos.",
+ "primary_key": [
+  "POLICYDOCUMENT_ID",
+  "USERSACCEPTED_ID"
+ ],
+ "unique_constraints": [
+  [
+   "USERSACCEPTED_ID"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [],
+ "columns": [
+  {
+   "name": "POLICYDOCUMENT_ID",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Documento de política.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "POLICYDOCUMENT.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "USERSACCEPTED_ID",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Aceite de usuário.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "POLICYUSER.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "POLICYUSER",
+   "from_cols": [
+    "USERSACCEPTED_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Aceite do usuário.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "POLICYDOCUMENT",
+   "from_cols": [
+    "POLICYDOCUMENT_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Documento aceito.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

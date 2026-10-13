@@ -1,0 +1,271 @@
+{
+ "name": "PROCESS_OBSERVATION",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Observacoes e historico de anexos de uma instancia de processo, por atividade/thread/movimentacao (informacao, erro, inclusao/alteracao/exclusao de anexo).",
+ "lifecycle": "Inserida durante a execucao de instancias (movimentacoes, anexos); volume alto.",
+ "key_notes": "PK OBSERVATION_ID. TENANT_ID mapeia companyId. Indice PROCESOBSERVATION01 (NUM_PROCESS, NUM_SEQ).",
+ "notes_for_agents": "NUM_SEQ e a sequencia da atividade, nao FK para CONTROL_LICENC. OBS_TYPE segue enum ProcessObservationType.",
+ "primary_key": [
+  "OBSERVATION_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "PROCESOBSERVATION01",
+   "unique": false,
+   "columns": [
+    "NUM_PROCESS",
+    "NUM_SEQ"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessObservation"
+ ],
+ "columns": [
+  {
+   "name": "OBSERVATION_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador sequencial da observacao.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "ProcessObservation"
+  },
+  {
+   "name": "COLLEAGUE_ID",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matricula do usuario autor da observacao.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE (via matricula)",
+   "confidence": "high",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "ProcessObservation"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dona da linha; faz parte da PK e deve ser filtrada em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ProcessObservation"
+  },
+  {
+   "name": "MOV_SEQ",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sequencia da movimentacao do processo associada.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "MOVTO_PROCES.NUM_SEQ_MOVTO",
+   "confidence": "medium",
+   "java_field": "movementSequence",
+   "java_type": "Integer",
+   "java_entity": "ProcessObservation"
+  },
+  {
+   "name": "OBSERVATION",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Texto (LOB) da observacao.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "observation",
+   "java_type": "String",
+   "java_entity": "ProcessObservation"
+  },
+  {
+   "name": "DT_OBSERVATION",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de registro da observacao.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "observationDate",
+   "java_type": "Date",
+   "java_entity": "ProcessObservation"
+  },
+  {
+   "name": "OBS_TYPE",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo da observacao (enum ProcessObservationType).",
+   "semantic_type": "enum",
+   "values": "0=INFO; 1=ERROR; 2=ATTACH_INSERT; 3=ATTACH_UPDATE; 4=ATTACH_DELETE",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "observationType",
+   "java_type": "Integer",
+   "java_entity": "ProcessObservation"
+  },
+  {
+   "name": "NUM_PROCESS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Numero da instancia de processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_WORKFLOW.NUM_PROCES",
+   "confidence": "high",
+   "java_field": "processInstanceId",
+   "java_type": "int",
+   "java_entity": "ProcessObservation"
+  },
+  {
+   "name": "NUM_SEQ",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sequencia da atividade (estado) do processo onde a observacao ocorreu.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "high",
+   "java_field": "stateSequence",
+   "java_type": "int",
+   "java_entity": "ProcessObservation"
+  },
+  {
+   "name": "NUM_THREAD",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sequencia da thread do processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "THREAD_PROCES.NUM_SEQ_THREAD",
+   "confidence": "high",
+   "java_field": "threadSequence",
+   "java_type": "int",
+   "java_entity": "ProcessObservation"
+  },
+  {
+   "name": "FILE_NAME",
+   "type": "varchar(4000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do arquivo anexo quando a observacao e de anexo.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "fileName",
+   "java_type": "String",
+   "java_entity": "ProcessObservation"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versao do documento anexo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "medium",
+   "java_field": "version",
+   "java_type": "Integer",
+   "java_entity": "ProcessObservation"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Numero do documento do GED anexado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "medium",
+   "java_field": "documentId",
+   "java_type": "Integer",
+   "java_entity": "ProcessObservation"
+  },
+  {
+   "name": "REPLACEMENT_ID",
+   "type": "varchar(150)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matricula do substituto que agiu em nome do usuario, quando houve substituicao.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE (via matricula)",
+   "confidence": "medium",
+   "java_field": "replacementId",
+   "java_type": "String",
+   "java_entity": "ProcessObservation"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "PROCES_WORKFLOW",
+   "from_cols": [
+    "TENANT_ID",
+    "NUM_PROCESS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Instancia de processo observada.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "CONTROL_LICENC",
+   "from_cols": [
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Falso positivo por nome NUM_SEQ; aqui e sequencia de atividade.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

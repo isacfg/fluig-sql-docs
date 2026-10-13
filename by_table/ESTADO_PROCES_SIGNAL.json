@@ -1,0 +1,190 @@
+{
+ "name": "ESTADO_PROCES_SIGNAL",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Vínculo entre um estado de evento condicional/sinal e um sinal BPMN (ProcessStateConditionSignal).",
+ "lifecycle": "Criada ao configurar eventos de sinal no processo.",
+ "key_notes": "",
+ "notes_for_agents": "",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NUM_SEQ_CONDITION",
+  "COD_DEF_PROCES",
+  "NUM_SEQ",
+  "NUM_VERS"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessStateConditionSignal"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK e filtro obrigatório de multi-tenancy.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ProcessStateConditionSignal"
+  },
+  {
+   "name": "NUM_SEQ_CONDITION",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Sequência da condição dentro do estado.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "conditionSequence",
+   "java_type": "int",
+   "java_entity": "ProcessStateConditionSignal"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Código (processId) da definição de processo BPM a que a linha pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ProcessStateConditionSignal"
+  },
+  {
+   "name": "NUM_SEQ",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "NUM_SEQ do estado (stateSequence) dono do sinal.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "high",
+   "java_field": "stateSequence",
+   "java_type": "int",
+   "java_entity": "ProcessStateConditionSignal"
+  },
+  {
+   "name": "NUM_VERS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 5,
+   "purpose": "Número da versão da definição de processo (versionamento do processo).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "ProcessStateConditionSignal"
+  },
+  {
+   "name": "COD_SINAL",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id do sinal BPMN escutado/disparado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_SIGNAL.COD_SINAL",
+   "confidence": "medium",
+   "java_field": "signalId",
+   "java_type": "int",
+   "java_entity": "ProcessStateConditionSignal"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ESTADO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Estado/atividade do processo ao qual esta linha pertence.",
+   "status": "probable"
+  },
+  {
+   "to_table": "PROCES_SIGNAL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_SINAL"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_SINAL"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Sinal BPMN referenciado.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "LIN_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: swimlane.",
+   "status": "rejected"
+  },
+  {
+   "to_table": "SEGUR_ANEXO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: coincidência de colunas-chave.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

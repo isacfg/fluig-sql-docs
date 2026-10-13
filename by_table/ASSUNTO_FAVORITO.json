@@ -1,0 +1,99 @@
+{
+ "name": "ASSUNTO_FAVORITO",
+ "domain": "ecm-documents",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Assuntos marcados como favoritos por usuário.",
+ "lifecycle": "Uma linha por (usuário, assunto) favoritado.",
+ "key_notes": "PK composta de 3 colunas.",
+ "notes_for_agents": "Entidade FavoriteTopic.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "CD_ASSUNTO",
+  "CD_MATRICULA"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.FavoriteTopic"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); parte da PK, sempre filtrar por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "FavoriteTopic"
+  },
+  {
+   "name": "CD_ASSUNTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Assunto favoritado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ASSUNTO.CD_ASSUNTO",
+   "confidence": "high",
+   "java_field": "topicId",
+   "java_type": "int",
+   "java_entity": "FavoriteTopic"
+  },
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Matrícula do usuário que favoritou.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "medium",
+   "java_field": "userId",
+   "java_type": "String",
+   "java_entity": "FavoriteTopic"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ASSUNTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "CD_ASSUNTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "CD_ASSUNTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Assunto favoritado (sem FK física).",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "ASSUNTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "CD_ASSUNTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "CD_ASSUNTO"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable"
+  }
+ ]
+}

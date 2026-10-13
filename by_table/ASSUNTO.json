@@ -1,0 +1,171 @@
+{
+ "name": "ASSUNTO",
+ "domain": "ecm-documents",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Assuntos (tópicos) de classificação de documentos; define se preenchimento é obrigatório e se há e-mail ao eliminar/atualizar.",
+ "lifecycle": "Cadastro administrativo, baixo volume.",
+ "key_notes": "PK (COD_EMPRESA, CD_ASSUNTO).",
+ "notes_for_agents": "Entidade Topic.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "CD_ASSUNTO"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.Topic"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); parte da PK, sempre filtrar por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "Topic"
+  },
+  {
+   "name": "CD_ASSUNTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código numérico do assunto.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "topicId",
+   "java_type": "int",
+   "java_entity": "Topic"
+  },
+  {
+   "name": "NM_ASSUNTO",
+   "type": "varchar(250)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome/descrição do assunto.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "Topic"
+  },
+  {
+   "name": "LOG_ASSUNTO_OBRIG",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se informar este assunto é obrigatório.",
+   "semantic_type": "flag",
+   "values": "1=obrigatório; 0=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "mandatory",
+   "java_type": "Boolean",
+   "java_entity": "Topic"
+  },
+  {
+   "name": "LOG_EMAIL_ELIMINA",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se envia e-mail quando documento do assunto é eliminado.",
+   "semantic_type": "flag",
+   "values": "1=envia; 0=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "removeEmail",
+   "java_type": "Boolean",
+   "java_entity": "Topic"
+  },
+  {
+   "name": "LOG_EMAIL_ATUALIZA",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se envia e-mail quando documento do assunto é atualizado.",
+   "semantic_type": "flag",
+   "values": "1=envia; 0=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "updateEmail",
+   "java_type": "Boolean",
+   "java_entity": "Topic"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ASSUNTO_FAVORITO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "CD_ASSUNTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "CD_ASSUNTO"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable",
+   "description": "Usuários que favoritaram o assunto.",
+   "status": "probable"
+  },
+  {
+   "to_table": "CONFIGUR_OBRIG_ASSUNTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "CD_ASSUNTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "CD_ASSUNTO"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable",
+   "description": "Regras de obrigatoriedade por destinatário.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "ASSUNTO_FAVORITO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "CD_ASSUNTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "CD_ASSUNTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "CONFIGUR_OBRIG_ASSUNTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "CD_ASSUNTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "CD_ASSUNTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

@@ -1,0 +1,212 @@
+{
+ "name": "FDN_RECENTLY_VIEWED",
+ "domain": "acesso-recente",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Itens vistos recentemente por usuário (documento, instância de processo ou página), para o atalho de recentes.",
+ "lifecycle": "Upsert a cada visualização; truncada por rotina de limpeza. Volume médio.",
+ "key_notes": "OBJECT_TYPE define qual coluna é preenchida (NUM_DOCUMENT, NUM_PROCESS_INSTANCE ou PAGE_CODE). LOGIN é textual.",
+ "notes_for_agents": "Filtrar por TENANT_ID e LOGIN; ordenar por DAT_ACCESS desc.",
+ "primary_key": [
+  "RECENTLY_VIEWED_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "IDX_RECENTLY_VIEWED001",
+   "unique": false,
+   "columns": [
+    "LOGIN",
+    "TENANT_ID"
+   ]
+  },
+  {
+   "name": "IDX_RECENTLY_VIEWED002",
+   "unique": false,
+   "columns": [
+    "DAT_ACCESS"
+   ]
+  },
+  {
+   "name": "IDX_RECENTLY_VIEWED003",
+   "unique": false,
+   "columns": [
+    "LOGIN",
+    "TENANT_ID",
+    "OBJECT_TYPE",
+    "NUM_DOCUMENT",
+    "NUM_PROCESS_INSTANCE",
+    "PAGE_CODE"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.fluig.foundation.recentlyviewed.entity.FDNRecentlyViewed"
+ ],
+ "columns": [
+  {
+   "name": "RECENTLY_VIEWED_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "long",
+   "java_entity": "FDNRecentlyViewed"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant do usuário.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "long",
+   "java_entity": "FDNRecentlyViewed"
+  },
+  {
+   "name": "LOGIN",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Login do usuário que visualizou.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "medium",
+   "java_field": "login",
+   "java_type": "String",
+   "java_entity": "FDNRecentlyViewed"
+  },
+  {
+   "name": "OBJECT_TYPE",
+   "type": "varchar(16)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do objeto visto (enum TypeAccessEnum, gravado como string).",
+   "semantic_type": "enum",
+   "values": "PAGE; PROCESS_INSTANCE; DOCUMENT",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "type",
+   "java_type": "TypeAccessEnum",
+   "java_entity": "FDNRecentlyViewed"
+  },
+  {
+   "name": "NUM_DOCUMENT",
+   "type": "int",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Número do documento visto quando OBJECT_TYPE=DOCUMENT.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENT.NR_DOCUMENTO",
+   "confidence": "medium",
+   "java_field": "documentId",
+   "java_type": "Integer",
+   "java_entity": "FDNRecentlyViewed"
+  },
+  {
+   "name": "NUM_PROCESS_INSTANCE",
+   "type": "int",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Número da instância de processo quando OBJECT_TYPE=PROCESS_INSTANCE.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_WORKFLOW.NUM_PROCES",
+   "confidence": "medium",
+   "java_field": "processInstanceId",
+   "java_type": "Integer",
+   "java_entity": "FDNRecentlyViewed"
+  },
+  {
+   "name": "PAGE_CODE",
+   "type": "varchar(128)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Código da página quando OBJECT_TYPE=PAGE.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "page",
+   "java_type": "String",
+   "java_entity": "FDNRecentlyViewed"
+  },
+  {
+   "name": "DAT_ACCESS",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora do último acesso ao item.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "datAccess",
+   "java_type": "Date",
+   "java_entity": "FDNRecentlyViewed"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "varchar(254)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Descrição/título do item exibido.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "FDNRecentlyViewed"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "NUM_DOCUMENT"
+   ],
+   "to_cols": [
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Quando OBJECT_TYPE=DOCUMENT; nome da tabela alvo não confirmado.",
+   "status": "probable"
+  },
+  {
+   "to_table": "PROCES_WORKFLOW",
+   "from_cols": [
+    "NUM_PROCESS_INSTANCE"
+   ],
+   "to_cols": [
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Quando OBJECT_TYPE=PROCESS_INSTANCE.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

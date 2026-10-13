@@ -1,0 +1,160 @@
+{
+ "name": "CONFIGUR_OBRIG_ASSUNTO",
+ "domain": "ecm-documents",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Destinatários (usuário/grupo/todos) para os quais o assunto é obrigatório, por sequência.",
+ "lifecycle": "Linhas criadas ao configurar a obrigatoriedade do assunto.",
+ "key_notes": "PK (COD_EMPRESA, CD_ASSUNTO, NUM_SEQ). NUM_SEQ é sequência local por assunto, NÃO referencia PENDCIA_NOTIF_EMAIL.",
+ "notes_for_agents": "attributeType=3 (todos) via findEveryoneSubjects. Entidade MandatoryTopicConfig. Tipo 1 usuário, 2 grupo.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "CD_ASSUNTO",
+  "NUM_SEQ"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.MandatoryTopicConfig"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); parte da PK, sempre filtrar por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "MandatoryTopicConfig"
+  },
+  {
+   "name": "NUM_SEQ",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Sequência da linha dentro do assunto.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "sequence",
+   "java_type": "int",
+   "java_entity": "MandatoryTopicConfig"
+  },
+  {
+   "name": "CD_ASSUNTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Assunto configurado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ASSUNTO.CD_ASSUNTO",
+   "confidence": "high",
+   "java_field": "topicId",
+   "java_type": "int",
+   "java_entity": "MandatoryTopicConfig"
+  },
+  {
+   "name": "IDI_TIP_ATRIBUIC",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do destinatário da atribuição: usuário, grupo ou todos, definindo como interpretar DES_VAL_ATRIBUIC.",
+   "semantic_type": "enum",
+   "values": "1=usuário; 2=grupo; 3=todos (DocumentSecurityConfigTypeEnum)",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "attributeType",
+   "java_type": "Integer",
+   "java_entity": "MandatoryTopicConfig"
+  },
+  {
+   "name": "DES_VAL_ATRIBUIC",
+   "type": "varchar(2000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor da atribuição: matrícula do usuário ou código do grupo conforme IDI_TIP_ATRIBUIC; para tipo 3 (todos) é valor genérico.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "attributeValue",
+   "java_type": "String",
+   "java_entity": "MandatoryTopicConfig"
+  },
+  {
+   "name": "LOG_ASSUNTO_OBRIG",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o assunto é obrigatório para o destinatário.",
+   "semantic_type": "flag",
+   "values": "1=obrigatório; 0=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "mandatoryTopic",
+   "java_type": "Boolean",
+   "java_entity": "MandatoryTopicConfig"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ASSUNTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "CD_ASSUNTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "CD_ASSUNTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Assunto configurado (queries filtram por topicId).",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "PENDCIA_NOTIF_EMAIL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: coincidência de nome; NUM_SEQ é sequência local.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": [
+  {
+   "from_table": "ASSUNTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "CD_ASSUNTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "CD_ASSUNTO"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable"
+  }
+ ]
+}

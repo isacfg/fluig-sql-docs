@@ -1,0 +1,132 @@
+{
+ "name": "FDN_PDATA_JUSTIFICATION",
+ "domain": "privacy-lgpd",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Justificativa de tratamento de um dado pessoal cadastrado, associada a uma classificação.",
+ "lifecycle": "Criada ao justificar um registro de FDN_PERSONALDATA.",
+ "key_notes": "Sem tenant direto; herdado de FDN_PERSONALDATA.",
+ "notes_for_agents": "Join com FDN_PERSONALDATA e FDN_PDATA_CLASSIFICATION.",
+ "primary_key": [
+  "PDATA_JUSTIFICATION_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.security.entity.FDNPersonalDataJustification"
+ ],
+ "columns": [
+  {
+   "name": "PDATA_JUSTIFICATION_ID",
+   "type": "BIGINT",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK da justificativa.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNPersonalDataJustification"
+  },
+  {
+   "name": "PDATA_JUSTIFICATION",
+   "type": "VARCHAR(500)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Texto livre da justificativa (até 500 caracteres).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "justification",
+   "java_type": "String",
+   "java_entity": "FDNPersonalDataJustification"
+  },
+  {
+   "name": "PERSONALDATA_ID",
+   "type": "BIGINT",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Dado pessoal justificado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_PERSONALDATA.PERSONALDATA_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "PDATA_CLASSIFICATION_ID",
+   "type": "BIGINT",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Classificação aplicada.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_PDATA_CLASSIFICATION.PDATA_CLASSIFICATION_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_PERSONALDATA",
+   "from_cols": [
+    "PERSONALDATA_ID"
+   ],
+   "to_cols": [
+    "PERSONALDATA_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Dado pessoal (FK FK_FDNPDATAJUSTIFICATION001; JPA personalData).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_PDATA_CLASSIFICATION",
+   "from_cols": [
+    "PDATA_CLASSIFICATION_ID"
+   ],
+   "to_cols": [
+    "PDATA_CLASSIFICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Classificação (FK FK_FDNPDATAJUSTIFICATION002; JPA classification).",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_PDATA_CLASSIFICATION",
+   "from_cols": [
+    "PDATA_CLASSIFICATION_ID"
+   ],
+   "to_cols": [
+    "PDATA_CLASSIFICATION_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_PERSONALDATA",
+   "from_cols": [
+    "PERSONALDATA_ID"
+   ],
+   "to_cols": [
+    "PERSONALDATA_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk"
+  }
+ ]
+}

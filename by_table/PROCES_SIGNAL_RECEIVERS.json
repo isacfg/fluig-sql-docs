@@ -1,0 +1,305 @@
+{
+ "name": "PROCES_SIGNAL_RECEIVERS",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Receptores de sinal: threads de instancias de processo aguardando um sinal em uma atividade de captura.",
+ "lifecycle": "Inserida quando a atividade passa a aguardar sinal; LOG_ATIV controla se ainda ativa.",
+ "key_notes": "PK de 7 colunas (tenant, processo, versao, atividade, sinal, instancia, thread).",
+ "notes_for_agents": "Filtrar LOG_ATIV=1 para receptores ainda aguardando. Join com PROCES_SIGNAL por (COD_EMPRESA, COD_SINAL).",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_DEF_PROCES",
+  "NUM_VERS",
+  "NUM_SEQ",
+  "COD_SINAL",
+  "NUM_PROCES",
+  "NUM_SEQ_THREAD"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.SignalReceiver"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant (empresa) dona da linha; faz parte da PK e deve ser filtrada em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "SignalReceiver"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Codigo da definicao do processo receptor.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "SignalReceiver"
+  },
+  {
+   "name": "NUM_PROCES",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 6,
+   "purpose": "Numero da instancia de processo que aguarda o sinal.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_WORKFLOW.NUM_PROCES",
+   "confidence": "high",
+   "java_field": "processInstanceId",
+   "java_type": "int",
+   "java_entity": "SignalReceiver"
+  },
+  {
+   "name": "COD_SINAL",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 5,
+   "purpose": "Codigo do sinal aguardado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_SIGNAL.COD_SINAL",
+   "confidence": "high",
+   "java_field": "signalId",
+   "java_type": "int",
+   "java_entity": "SignalReceiver"
+  },
+  {
+   "name": "NUM_SEQ",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Sequencia da atividade receptora.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "high",
+   "java_field": "stateSequence",
+   "java_type": "int",
+   "java_entity": "SignalReceiver"
+  },
+  {
+   "name": "NUM_SEQ_THREAD",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 7,
+   "purpose": "Sequencia da thread da instancia que aguarda.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "THREAD_PROCES.NUM_SEQ_THREAD",
+   "confidence": "high",
+   "java_field": "threadSequence",
+   "java_type": "int",
+   "java_entity": "SignalReceiver"
+  },
+  {
+   "name": "NUM_VERS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Versao da definicao do processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "SignalReceiver"
+  },
+  {
+   "name": "LOG_ATIV",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o receptor segue ativo aguardando o sinal.",
+   "semantic_type": "flag",
+   "values": "1=ativo; 0=encerrado",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "active",
+   "java_type": "Boolean",
+   "java_entity": "SignalReceiver"
+  },
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matricula do usuario associado ao receptor (responsavel).",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE (via matricula)",
+   "confidence": "medium",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "SignalReceiver"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "PROCES_SIGNAL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_SINAL"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_SINAL"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Sinal aguardado.",
+   "status": "probable"
+  },
+  {
+   "to_table": "ESTADO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Atividade receptora.",
+   "status": "probable"
+  },
+  {
+   "to_table": "THREAD_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_THREAD"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_THREAD"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Thread da instancia aguardando.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "ADHOC_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Inferida por nome; sem relacao semantica.",
+   "status": "rejected"
+  },
+  {
+   "to_table": "CONFIGUR_GRAF_USUAR_CAP",
+   "from_cols": [
+    "CD_MATRICULA",
+    "COD_EMPRESA",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "CD_MATRICULA",
+    "COD_EMPRESA",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Inferida por nome; NUM_SEQ nao e sequencia de grafico.",
+   "status": "rejected"
+  },
+  {
+   "to_table": "FAVORITOS_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "CD_MATRICULA",
+    "COD_DEF_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "CD_MATRICULA",
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Inferida por nome; sem relacao semantica.",
+   "status": "rejected"
+  },
+  {
+   "to_table": "LIN_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Inferida; NUM_SEQ e atividade, nao linha.",
+   "status": "rejected"
+  },
+  {
+   "to_table": "SEGUR_ANEXO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Inferida por nome; sem relacao semantica.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

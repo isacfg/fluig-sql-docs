@@ -1,0 +1,142 @@
+{
+ "name": "LOCK_RESOURCE",
+ "domain": "document-management",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Trava (lock) de recurso por usuário/sessão para edição exclusiva (LockResource).",
+ "lifecycle": "Criada ao bloquear um recurso; removida ao liberar.",
+ "key_notes": "Linhas órfãs podem ficar se a sessão cair.",
+ "notes_for_agents": "Contém ids de sessão (sensível).",
+ "primary_key": [
+  "COD_EMPRESA",
+  "TOKEN_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.LockResource"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK e filtro obrigatório de multi-tenancy.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "LockResource"
+  },
+  {
+   "name": "TOKEN_ID",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Token único da trava.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "tokenId",
+   "java_type": "String",
+   "java_entity": "LockResource"
+  },
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrícula do usuário que detém a trava.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USER.COLLEAGUE_ID",
+   "confidence": "high",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "LockResource"
+  },
+  {
+   "name": "ID_RESOURCE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador do recurso travado (ex.: documento).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "idResource",
+   "java_type": "String",
+   "java_entity": "LockResource"
+  },
+  {
+   "name": "DATA_LOCK",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data da trava.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "lockDate",
+   "java_type": "Date",
+   "java_entity": "LockResource"
+  },
+  {
+   "name": "HRA_LOCK",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Hora da trava (texto).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "lockTime",
+   "java_type": "String",
+   "java_entity": "LockResource"
+  },
+  {
+   "name": "DES_ID_SESSAO",
+   "type": "varchar(2000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição/id da sessão que travou.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "sessionDescription",
+   "java_type": "String",
+   "java_entity": "LockResource"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [
+  {
+   "to_table": "RESET_PASSWORD_TOKEN",
+   "from_cols": [
+    "TOKEN_ID"
+   ],
+   "to_cols": [
+    "TOKEN_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: coincidência de nome TOKEN_ID.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

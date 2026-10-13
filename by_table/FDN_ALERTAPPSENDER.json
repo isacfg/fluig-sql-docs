@@ -1,0 +1,196 @@
+{
+ "name": "FDN_ALERTAPPSENDER",
+ "domain": "foundation-alert",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Aplicacao/canal emissor de alertas registrado por tenant (ex.: central Fluig, e-mail, mobile), com JNDI do destino de entrega.",
+ "lifecycle": "Carga inicial/registro por tenant; IS_ACTIVE e IS_BLOCKED alterados por administracao. Volume baixo.",
+ "key_notes": "Multi-tenant via TENANT_ID. Referenciada por FDN_ALERTCONFIG.SENDER_APP_ID. KEY/CONSTRAINT do input sao artefatos do DDL.",
+ "notes_for_agents": "Filtre por TENANT_ID e IS_ACTIVE=1 (ver FDNAlertAppSender.findAllActiveByTenant).",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "INDEX_ALERT_APP_SENDER_KEY",
+   "unique": false,
+   "columns": [
+    "APP_KEY"
+   ]
+  },
+  {
+   "name": "FK_NTCOL8EXUEG36AT3FIGO82S4G",
+   "unique": false,
+   "columns": [
+    "TENANT_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.alert.entity.FDNAlertAppSender"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador sequencial do emissor (PK).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNAlertAppSender"
+  },
+  {
+   "name": "IS_ACTIVE",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Flag: canal ativo.",
+   "semantic_type": "flag",
+   "values": "1=ativo; 0=inativo",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "active",
+   "java_type": "Boolean",
+   "java_entity": "FDNAlertAppSender"
+  },
+  {
+   "name": "APP_CODE",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Codigo curto da aplicacao emissora.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "applicationCode",
+   "java_type": "String",
+   "java_entity": "FDNAlertAppSender"
+  },
+  {
+   "name": "APP_KEY",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave unica da aplicacao emissora usada nas consultas (applicationKey).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "applicationKey",
+   "java_type": "String",
+   "java_entity": "FDNAlertAppSender"
+  },
+  {
+   "name": "IS_BLOCKED",
+   "type": "bit(1)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Flag: canal bloqueado, nao pode ser ativado pelo usuario.",
+   "semantic_type": "flag",
+   "values": "1=bloqueado; 0=livre",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "blocked",
+   "java_type": "Boolean",
+   "java_entity": "FDNAlertAppSender"
+  },
+  {
+   "name": "DESCRIPTION_KEY",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave i18n da descricao do canal.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "descriptionKey",
+   "java_type": "String",
+   "java_entity": "FDNAlertAppSender"
+  },
+  {
+   "name": "JNDI_NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome JNDI do recurso (fila/servico) que entrega os alertas ao canal.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "jndiName",
+   "java_type": "String",
+   "java_entity": "FDNAlertAppSender"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dono do registro.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNAlertAppSender"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Tenant dono do canal.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_ALERTCONFIG",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "SENDER_APP_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Preferencias de recebimento por canal.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_ALERTCONFIG",
+   "from_cols": [
+    "SENDER_APP_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

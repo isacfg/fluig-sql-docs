@@ -1,0 +1,137 @@
+{
+ "name": "FORM_DATASET",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Associa um formulário (documento/versão) a datasets usados por ele (FormDataset).",
+ "lifecycle": "Criada ao vincular datasets no formulário.",
+ "key_notes": "UK_FORMDATASET001 (COD_EMPRESA, NR_DOCUMENTO, NR_VERSAO, COD_DATASET).",
+ "notes_for_agents": "Na lista de colunas aparece também uma linha CONSTRAINT (UK_FORMDATASET001), que é a unique key, não coluna real.",
+ "primary_key": [
+  "FORM_DATASET_ID"
+ ],
+ "unique_constraints": [
+  [
+   "COD_EMPRESA",
+   "NR_DOCUMENTO",
+   "NR_VERSAO",
+   "COD_DATASET"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dataset.model.FormDataset"
+ ],
+ "columns": [
+  {
+   "name": "FORM_DATASET_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave substituta do vínculo.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FormDataset"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK e filtro obrigatório de multi-tenancy.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "FormDataset"
+  },
+  {
+   "name": "COD_DATASET",
+   "type": "varchar(100)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do dataset vinculado ao formulário.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SERV_DATASET.COD_DATASET",
+   "confidence": "high",
+   "java_field": "datasetId",
+   "java_type": "String",
+   "java_entity": "FormDataset"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Número do documento do formulário.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "Integer",
+   "java_entity": "FormDataset"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versão do documento do formulário.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "FormDataset"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "SERV_DATASET",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DATASET"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DATASET"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "FK física para o dataset.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Formulário dono do vínculo.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

@@ -1,0 +1,512 @@
+{
+ "name": "ECM_ZOOM_FIELD_FORM_ITEM",
+ "domain": "ecm-metadata-forms",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Subclasse de ECM_ABSTRACT_FORM_ITEM para itens Zoom (selecao de registro de um dataset) em formularios de metadados do ECM.",
+ "lifecycle": "Gravada ao salvar o formulario no designer; copiada na versao; removida com o formulario. Volume baixo.",
+ "key_notes": "PK composta (METADATAFORM_ID,HTML_ID). TABLE_PER_CLASS: repete colunas da superclasse. Pai de ECM_ZOOM_DISPLAY_FIELD, ECM_ZOOM_FILTER_FIELD e ECM_ZOOM_OUTPUT_FIELD.",
+ "notes_for_agents": "DATASET_ID e referencia logica por nome ao dataset (nao validada: confidence medium).",
+ "primary_key": [
+  "METADATAFORM_ID",
+  "HTML_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.metadataform.model.ZoomFieldMetadataFormItem"
+ ],
+ "columns": [
+  {
+   "name": "HTML_ID",
+   "type": "varchar(10)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Identificador HTML do item dentro do formulario de metadados; junto com METADATAFORM_ID forma a PK composta (varchar 10).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "ITEM_POS_HEIGHT",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Altura do item no layout (grade) do formulario de metadados.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "HTML_ID_PARENT",
+   "type": "varchar(10)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "HTML_ID do item pai (secao/aba) que contem este item no layout; NULL se estiver na raiz.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "ECM_ABSTRACT_FORM_ITEM.HTML_ID",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "NAME",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome tecnico do campo/item, usado como nome do campo no formulario.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "ORDER_ITEM",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Posicao de ordenacao do item no formulario.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "ITEM_POS_X",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Posicao horizontal (coluna) do item no layout do formulario.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "ITEM_POS_Y",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Posicao vertical (linha) do item no layout do formulario.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "FORM_ITEM_TYPE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do item: nome do enum MetadataFormItemTypeEnum (ex.: UploadFileMetadataFormItem), igual ao nome da classe da entidade.",
+   "semantic_type": "enum",
+   "values": "TextFieldMetadataFormItem; TextAreaMetadataFormItem; ExternalLinkMetadataFormItem; ListMetadataFormItem; UploadFileMetadataFormItem; NumberFieldMetadataFormItem; EvaluationMetadataFormItem; DateFieldMetadataFormItem; ZoomFieldMetadataFormItem; TitleMetadataFormItem; DividerMetadataFormItem; SectionMetadataFormItem; TabMetadataFormItem; ImageMetadataFormItem; DynamicTableMetadataFormItem; FixedTableMetadataFormItem; LabelMetadataFormItem; ZoomUserMetadataFormItem; ButtonMetadataFormItem (armazenado como string)",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "VALUE_ITEM",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Flag: o item guarda valor preenchido pelo usuario (campo de dados) em vez de ser elemento decorativo/estrutural.",
+   "semantic_type": "flag",
+   "values": "1=item de valor; 0=estrutural",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "ITEM_WIDTH",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Largura do item no layout (grade) do formulario.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "METADATAFORM_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Formulario de metadados dono do item; parte da PK composta.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ECM_METADATA_FORM.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "USE_ANALYTICS",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Flag: campo participa de analise/indexacao analitica dos dados do formulario.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "CARD_DATASET_ID",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador numerico do dataset de fichas (cartao) usado como fonte; alternativa a DATASET_ID.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "DATASET_ID",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome (codigo) do dataset que alimenta o zoom.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "DATASET.NOME",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "DESCRIPTOR",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Flag: campo usado como descritor (identificacao resumida) do registro do formulario.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "DISPLAY_KEY",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Campo do dataset usado como chave/texto principal de exibicao do valor selecionado.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "HELP_TEXT",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Texto de ajuda exibido ao preencher o campo (LOB).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "FIELD_LABEL",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Rotulo exibido do campo no formulario.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "MAX_SELECTION",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Numero maximo de itens selecionaveis quando ha multiplos valores.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "MULTIPLE_VALUES",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Flag: permite selecionar multiplos valores.",
+   "semantic_type": "flag",
+   "values": "1=multiplos; 0=unico",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "PLACEHOLDER",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Texto de placeholder exibido no campo vazio.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "REQUIRED",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Flag: preenchimento obrigatorio do campo.",
+   "semantic_type": "flag",
+   "values": "1=obrigatorio; 0=opcional",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "RESULT_LIMIT",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Limite de resultados retornados na busca/pesquisa do zoom.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "IS_UNIQUE",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Flag: valor do campo deve ser unico entre os registros do formulario.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "VALID_FOR_RELEASE",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Flag: item validado/consistente para a publicacao (release) do formulario.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ECM_METADATA_FORM",
+   "from_cols": [
+    "METADATAFORM_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Formulario dono do item.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "ECM_ABSTRACT_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "1:1",
+   "kind": "jpa-join",
+   "description": "Heranca TABLE_PER_CLASS; sem FK fisica.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "ECM_ZOOM_DISPLAY_FIELD",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID_ZOOM_ITEM"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Campos de exibicao do zoom.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "ECM_ZOOM_FILTER_FIELD",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID_ZOOM_ITEM"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Filtros fixos do zoom.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "ECM_ZOOM_OUTPUT_FIELD",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID_ZOOM_ITEM"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join",
+   "description": "Campos de saida (preenchimento de outros itens).",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "ECM_ZOOM_DISPLAY_FIELD",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID_ZOOM_ITEM"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "ECM_ZOOM_FILTER_FIELD",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID_ZOOM_ITEM"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "ECM_ZOOM_OUTPUT_FIELD",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID_ZOOM_ITEM"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  }
+ ]
+}

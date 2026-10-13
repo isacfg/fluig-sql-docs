@@ -1,0 +1,213 @@
+{
+ "name": "FDN_GROUP",
+ "domain": "foundation-identity-access",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Grupo de usuários do Fluig (de usuários, cloud ou comunidade), por tenant. Usado em permissões, papéis e agrupamento de usuários.",
+ "lifecycle": "Criado pela administração de grupos ou internamente (INTERNAL=1); volume baixo a médio.",
+ "key_notes": "Identificado logicamente por (TENANT_ID, GROUP_CODE); FDN_GROUPUSERROLE referencia o grupo por esse par e não por GROUP_ID. TENANT_ID=-1 é usado para grupos globais (findByCodeWithoutTenant). Consultas de UI filtram INTERNAL=0.",
+ "notes_for_agents": "Sempre filtrar por TENANT_ID. Para listar grupos visíveis use INTERNAL=0. Membros em FDN_GROUPUSERROLE (por GROUP_CODE+TENANT_ID). Propriedades extras em FDN_GROUPDATA.",
+ "primary_key": [
+  "GROUP_ID"
+ ],
+ "unique_constraints": [
+  [
+   "TENANT_ID",
+   "GROUP_CODE"
+  ]
+ ],
+ "indexes": [
+  {
+   "name": "FDNGROUPI001",
+   "unique": false,
+   "columns": [
+    "DESCRIPTION",
+    "TENANT_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.security.entity.FDNGroup"
+ ],
+ "columns": [
+  {
+   "name": "GROUP_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária surrogate do grupo.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNGroup"
+  },
+  {
+   "name": "GROUP_CODE",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Código do grupo, único por tenant; usado como referência lógica em permissões e membros.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "code",
+   "java_type": "String",
+   "java_entity": "FDNGroup"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Nome/descrição exibido do grupo; usado em ordenação e filtro LIKE.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "FDNGroup"
+  },
+  {
+   "name": "GROUP_TYPE",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do grupo, string do enum FDNGroupType.",
+   "semantic_type": "enum",
+   "values": "user=grupo de usuários; cloud=grupo cloud; community=grupo de comunidade",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "groupType",
+   "java_type": "String",
+   "java_entity": "FDNGroup"
+  },
+  {
+   "name": "INTERNAL",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica grupo interno do sistema, oculto das listagens normais (consultas filtram INTERNAL=false).",
+   "semantic_type": "flag",
+   "values": "1=interno do sistema; 0=criado pelo usuário",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "isInternal",
+   "java_type": "Boolean",
+   "java_entity": "FDNGroup"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dono do registro; FK para FDN_TENANT.TENANT_ID. Valor -1 indica registro global/sem tenant em consultas do código.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNGroup"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Tenant ao qual o registro pertence.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FILTER_GROUP",
+   "from_cols": [
+    "GROUP_ID"
+   ],
+   "to_cols": [
+    "GROUP_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_GROUPDATA",
+   "from_cols": [
+    "GROUP_ID"
+   ],
+   "to_cols": [
+    "GROUP_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_GROUPUSERROLE",
+   "from_cols": [
+    "TENANT_ID",
+    "CHILD_GROUPCODE"
+   ],
+   "to_cols": [
+    "TENANT_ID",
+    "GROUP_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_GROUPUSERROLE",
+   "from_cols": [
+    "TENANT_ID",
+    "GROUP_CODE"
+   ],
+   "to_cols": [
+    "TENANT_ID",
+    "GROUP_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_PERMISSION",
+   "from_cols": [
+    "TENANT_ID",
+    "GROUP_CODE"
+   ],
+   "to_cols": [
+    "TENANT_ID",
+    "GROUP_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
+  },
+  {
+   "from_table": "SOCIALINVITEGROUP",
+   "from_cols": [
+    "GROUPID"
+   ],
+   "to_cols": [
+    "GROUP_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

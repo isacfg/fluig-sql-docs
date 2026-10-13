@@ -1,0 +1,150 @@
+{
+ "name": "LINK_DOCTO_VIRTUAL",
+ "domain": "ecm-documents",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Links virtuais (atalhos): um documento aparece em uma pasta adicional sem ser copiado.",
+ "lifecycle": "Criada ao criar atalho para um documento; LOG_DELETE marca o link na lixeira.",
+ "key_notes": "PK (COD_EMPRESA, NR_DOCTO_PAI_CORREN, NR_DOCUMENTO).",
+ "notes_for_agents": "Para listar links de uma pasta: join DOCUMENTO d ON d.NR_DOCUMENTO=l.NR_DOCUMENTO com l.NR_DOCTO_PAI_CORREN=:pasta, l.LOG_DELETE=0, d.VERSAO_ATIVA=1.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NR_DOCTO_PAI_CORREN",
+  "NR_DOCUMENTO"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "IDX_LINK_DOCTO_VIRTUAL_ML",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "NR_DOCTO_PAI_CORREN",
+    "LOG_DELETE"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.LinkDocument"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa (tenant) dona do registro; faz parte da PK e deve ser filtrado em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "LinkDocument"
+  },
+  {
+   "name": "NR_DOCTO_PAI_CORREN",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Pasta pai atual em que o link aparece.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "currentParentDocumentId",
+   "java_type": "int",
+   "java_entity": "LinkDocument"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Documento original apontado pelo link.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "int",
+   "java_entity": "LinkDocument"
+  },
+  {
+   "name": "LOG_DELETE",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Exclusão lógica do link.",
+   "semantic_type": "flag",
+   "values": "1=link na lixeira",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "deleted",
+   "java_type": "Boolean",
+   "java_entity": "LinkDocument"
+  },
+  {
+   "name": "NR_DOCTO_PAI_ORIG",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Pasta pai original do documento no momento da criação do link.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "medium",
+   "java_field": "sourceParentDocumentId",
+   "java_type": "int",
+   "java_entity": "LinkDocument"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "NR_DOCUMENTO"
+   ],
+   "to_cols": [
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "Documento ligado (Document.findLinkDocuments).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCTO_PAI_CORREN"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-confirmed",
+   "description": "Pasta onde o link aparece.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "DOCUMENTO",
+   "from_cols": [
+    "NR_DOCUMENTO"
+   ],
+   "to_cols": [
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "1:N",
+   "kind": "hql-join"
+  }
+ ]
+}

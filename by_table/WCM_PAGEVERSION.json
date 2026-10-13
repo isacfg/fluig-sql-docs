@@ -1,0 +1,359 @@
+{
+ "name": "WCM_PAGEVERSION",
+ "domain": "wcm-portal-pages",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Versão de uma página do portal WCM (título, ícone, layout, autorização, publicação). Cada edição/publicação gera nova versão ligada a WCM_PAGE.",
+ "lifecycle": "Linha criada a cada nova versão de página; PUBLISHED marca a versão ativa. Cresce com o histórico de edições.",
+ "key_notes": "Sem coluna de tenant: o tenant vem via WCM_PAGE. Versionamento por VERSION (sequencial por página). A versão corrente é a com PUBLISHED=1.",
+ "notes_for_agents": "Para a versão vigente de uma página: WHERE PAGE_ID=? AND PUBLISHED=1. Índice WCMPAGEVERSION001 (ID,PAGE_ID,PUBLISHED). Filtrar tenant via WCM_PAGE.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "WCMPAGEVERSION001",
+   "unique": false,
+   "columns": [
+    "ID",
+    "PAGE_ID",
+    "PUBLISHED"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.wcm.core.entity.WCMPageVersion"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK surrogate da versão da página (gerada, GenerationType.AUTO).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "WCMPageVersion"
+  },
+  {
+   "name": "AUTH",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nível de autorização de acesso à página (enum PageAuth gravado como ordinal).",
+   "semantic_type": "enum",
+   "values": "0=PUBLIC; 1=AUTHENTICATED; 2=PRIVATE (ordem do enum PageAuth, EnumType.ORDINAL)",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "authorization",
+   "java_type": "PageAuth",
+   "java_entity": "WCMPageVersion"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Descrição curta da página nesta versão.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "WCMPageVersion"
+  },
+  {
+   "name": "ENABLED_CHILDREN",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a página aceita páginas filhas (hierarquia).",
+   "semantic_type": "flag",
+   "values": "1=habilitado; 0=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "enabledChildren",
+   "java_type": "Boolean",
+   "java_entity": "WCMPageVersion"
+  },
+  {
+   "name": "ENABLED_MOBILEAPP",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a página é exibida no aplicativo mobile.",
+   "semantic_type": "flag",
+   "values": "1=habilitado; 0=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "enabledMobileApp",
+   "java_type": "Boolean",
+   "java_entity": "WCMPageVersion"
+  },
+  {
+   "name": "ENABLED_PATHPARAM",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a página aceita parâmetros no path da URL.",
+   "semantic_type": "flag",
+   "values": "1=habilitado; 0=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "enabledPathParam",
+   "java_type": "Boolean",
+   "java_entity": "WCMPageVersion"
+  },
+  {
+   "name": "ICON",
+   "type": "varchar(80)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome/caminho do ícone da página (até 80 caracteres).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "icon",
+   "java_type": "String",
+   "java_entity": "WCMPageVersion"
+  },
+  {
+   "name": "ICONFONT",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Classe de ícone de fonte (icon font) da página.",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "iconFont",
+   "java_type": "String",
+   "java_entity": "WCMPageVersion"
+  },
+  {
+   "name": "DATE_MODIFIED",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora da última modificação desta versão.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "modifiedDate",
+   "java_type": "Date",
+   "java_entity": "WCMPageVersion"
+  },
+  {
+   "name": "PUBLISHED",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se esta é a versão publicada (ativa) da página.",
+   "semantic_type": "flag",
+   "values": "1=publicada; 0=rascunho/antiga",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "published",
+   "java_type": "Boolean",
+   "java_entity": "WCMPageVersion"
+  },
+  {
+   "name": "TITLE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Título da página exibido no portal.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "title",
+   "java_type": "String",
+   "java_entity": "WCMPageVersion"
+  },
+  {
+   "name": "VERSION",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Número sequencial da versão dentro da página (imutável, updatable=false).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "Long",
+   "java_entity": "WCMPageVersion"
+  },
+  {
+   "name": "VERSION_DESCRIPTION",
+   "type": "varchar(4000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Texto livre descrevendo as mudanças desta versão (até 4000).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "versionDescription",
+   "java_type": "String",
+   "java_entity": "WCMPageVersion"
+  },
+  {
+   "name": "LAST_EDIT_USER",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Usuário que fez a última edição (FK para FDN_USERTENANT).",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_TENANT_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "LAYOUT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Layout da página: aplicação WCM do tipo layout.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "WCM_APPLICATION.APPLICATION_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "PAGE_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Página pai a que a versão pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "WCM_PAGE.PAGE_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "LAST_EDIT_USER"
+   ],
+   "to_cols": [
+    "USER_TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Último usuário que editou a versão.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "WCM_APPLICATION",
+   "from_cols": [
+    "LAYOUT_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Layout (aplicação WCM) usado pela página.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "WCM_PAGE",
+   "from_cols": [
+    "PAGE_ID"
+   ],
+   "to_cols": [
+    "PAGE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Página a que a versão pertence (também mapeada como jpa-join WCMPageVersion.page).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "WCM_PAGEWIDGET",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "PAGEVERSION_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join",
+   "description": "Widgets posicionados nesta versão (OneToMany mappedBy pageVersion).",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "WCM_COMPONENTPAGE",
+   "from_cols": [
+    "PAGEVERSION_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_PAGEDATA",
+   "from_cols": [
+    "PAGEVERSION_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_PAGEWIDGET",
+   "from_cols": [
+    "PAGEVERSION_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

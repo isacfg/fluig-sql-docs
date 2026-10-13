@@ -1,0 +1,115 @@
+{
+ "name": "FDN_PARAMGERAL",
+ "domain": "configuracao-parametros",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Parâmetros gerais de configuração em pares chave/valor, por tenant (ou globais quando TENANT_ID é nulo).",
+ "lifecycle": "Gravada/atualizada por administração e pelo sistema; baixo volume.",
+ "key_notes": "TENANT_ID anulável. Unique (provável) TENANT_ID + DATA_KEY. A relação inferida com FLUIG_RUNTIMEDATA_PROCESS_MNGR é falsa.",
+ "notes_for_agents": "DATA_VALUE pode conter segredos/configuração sensível dependendo da chave.",
+ "primary_key": [
+  "PARAMGERAL_ID"
+ ],
+ "unique_constraints": [
+  [
+   "TENANT_ID",
+   "DATA_KEY"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.security.entity.FDNParamGeral"
+ ],
+ "columns": [
+  {
+   "name": "PARAMGERAL_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNParamGeral"
+  },
+  {
+   "name": "DATA_KEY",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave do parâmetro de configuração.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "dataKey",
+   "java_type": "String",
+   "java_entity": "FDNParamGeral"
+  },
+  {
+   "name": "DATA_VALUE",
+   "type": "varchar(4000)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Valor do parâmetro (até 4000 caracteres).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "dataValue",
+   "java_type": "String",
+   "java_entity": "FDNParamGeral"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Tenant do parâmetro; nulo indica global.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNParamGeral"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Tenant (também FK física).",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "FLUIG_RUNTIMEDATA_PROCESS_MNGR",
+   "from_cols": [
+    "DATA_KEY"
+   ],
+   "to_cols": [
+    "DATA_KEY"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: coincidência de nome de coluna, sem relação semântica.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

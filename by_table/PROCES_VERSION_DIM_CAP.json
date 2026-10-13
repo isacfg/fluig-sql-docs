@@ -1,0 +1,235 @@
+{
+ "name": "PROCES_VERSION_DIM_CAP",
+ "domain": "bpm-analytics-dw",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Dimensão de versões de processos com a janela de vigência (início/fim em dia/mês/ano).",
+ "lifecycle": "Populada pela extração do CAP; uma linha por versão de processo e empresa.",
+ "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.",
+ "notes_for_agents": "Sempre filtrar por COMPANYID. Para agregar por período use YEARID/MONTHID/DAYID ou junte com TIME_DIM_CAP. Linhas de fato são snapshots (use o snapshot mais recente/um dia específico para não somar duplicado).",
+ "primary_key": [
+  "COMPANYID",
+  "PROCESSID",
+  "PROCESSVERSION"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.cap.model.ProcesVersionDim"
+ ],
+ "columns": [
+  {
+   "name": "COMPANYID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa (tenant) do Fluig; faz parte da PK de todas as tabelas *_CAP.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ProcesVersionDim"
+  },
+  {
+   "name": "PROCESSID",
+   "type": "varchar(100)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código do processo BPM (definição de workflow) ao qual o registro se refere; parte da PK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "processID",
+   "java_type": "String",
+   "java_entity": "ProcesVersionDim"
+  },
+  {
+   "name": "PROCESSVERSION",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número da versão da definição do processo BPM; parte da PK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "processVersion",
+   "java_type": "int",
+   "java_entity": "ProcesVersionDim"
+  },
+  {
+   "name": "VALIDITYENDDAY",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Dia (1-31) do fim da vigência da versão do processo; NULL se ainda vigente (provável).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "validityEndDay",
+   "java_type": "int",
+   "java_entity": "ProcesVersionDim"
+  },
+  {
+   "name": "VALIDITYENDMONTH",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Mês (1-12) do fim da vigência da versão do processo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "validityEndMonth",
+   "java_type": "int",
+   "java_entity": "ProcesVersionDim"
+  },
+  {
+   "name": "VALIDITYENDYEAR",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Ano do fim da vigência da versão do processo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "validityEndYear",
+   "java_type": "int",
+   "java_entity": "ProcesVersionDim"
+  },
+  {
+   "name": "VALIDITYSTARTDAY",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Dia (1-31) do início da vigência da versão do processo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "validityStartDay",
+   "java_type": "int",
+   "java_entity": "ProcesVersionDim"
+  },
+  {
+   "name": "VALIDITYSTARTMONTH",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Mês (1-12) do início da vigência da versão do processo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "validityStartMonth",
+   "java_type": "int",
+   "java_entity": "ProcesVersionDim"
+  },
+  {
+   "name": "VALIDITYSTARTYEAR",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Ano do início da vigência da versão do processo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "validityStartYear",
+   "java_type": "int",
+   "java_entity": "ProcesVersionDim"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "ACTIVITY_DIM_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FACT_FLOW_VOLUME_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FACT_PROCES_COST_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FACT_PROCES_VOLUME_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FLOW_DIM_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

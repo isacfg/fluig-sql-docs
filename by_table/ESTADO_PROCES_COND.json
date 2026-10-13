@@ -1,0 +1,269 @@
+{
+ "name": "ESTADO_PROCES_COND",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Condições de decisão (saídas) associadas a um estado automático/gateway: expressão ou mapa de regras que determina o estado de destino (entidade ConditionProcessState).",
+ "lifecycle": "Criada ao modelar gateways/decisões; ordenada por NUM_SEQ_ORD_FORMUL.",
+ "key_notes": "Ordem de avaliação = NUM_SEQ_ORD_FORMUL; CONDITION_TYPE define se DES_FORMUL_ESTADO é expressão.",
+ "notes_for_agents": "Juntar a ESTADO_PROCES pelas 4 colunas-chave; ordenar por NUM_SEQ_ORD_FORMUL.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_DEF_PROCES",
+  "NUM_VERS",
+  "NUM_SEQ",
+  "NUM_SEQ_ORD_FORMUL"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ConditionProcessState"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK e filtro obrigatório de multi-tenancy.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ConditionProcessState"
+  },
+  {
+   "name": "NUM_SEQ_ORD_FORMUL",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 5,
+   "purpose": "Ordem de avaliação da condição dentro do estado (1,2,...).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "expressionOrder",
+   "java_type": "int",
+   "java_entity": "ConditionProcessState"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código (processId) da definição de processo BPM a que a linha pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ConditionProcessState"
+  },
+  {
+   "name": "NUM_SEQ",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "NUM_SEQ do estado (gateway/automático) dono da condição.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "high",
+   "java_field": "sequence",
+   "java_type": "int",
+   "java_entity": "ConditionProcessState"
+  },
+  {
+   "name": "NUM_VERS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número da versão da definição de processo (versionamento do processo).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "ConditionProcessState"
+  },
+  {
+   "name": "DES_FORMUL_ESTADO",
+   "type": "varchar(350)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Expressão da condição (script/fórmula) que, se verdadeira, leva ao estado de destino.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "condition",
+   "java_type": "String",
+   "java_entity": "ConditionProcessState"
+  },
+  {
+   "name": "NUM_SEQ_ESTADO_DEST",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "NUM_SEQ do estado de destino quando a condição é satisfeita.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "high",
+   "java_field": "destinationSequenceId",
+   "java_type": "int",
+   "java_entity": "ConditionProcessState"
+  },
+  {
+   "name": "DSL_CONFIGUR_MECAN_ATRIBUIC",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Configuração serializada do mecanismo de atribuição para o estado de destino.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "engineAllocationConfiguration",
+   "java_type": "String",
+   "java_entity": "ConditionProcessState"
+  },
+  {
+   "name": "COD_MECAN_ATRIBUIC",
+   "type": "varchar(25)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do mecanismo de atribuição aplicado ao destino da condição.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "MECAN_ATRIBUIC.COD_MECAN_ATRIBUIC",
+   "confidence": "medium",
+   "java_field": "engineAllocationId",
+   "java_type": "String",
+   "java_entity": "ConditionProcessState"
+  },
+  {
+   "name": "CONDITION_TYPE",
+   "type": "integer",
+   "nullable": false,
+   "default": "0",
+   "pk_position": null,
+   "purpose": "Tipo da condição: por expressão ou por mapa de regras.",
+   "semantic_type": "enum",
+   "values": "0=expressão (CONDITION_BY_EXPRESSION);1=mapa de regras (CONDITION_BY_RULES_MAP)",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "conditionType",
+   "java_type": "int",
+   "java_entity": "ConditionProcessState"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ESTADO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Estado (gateway/decisão) dono da condição.",
+   "status": "probable"
+  },
+  {
+   "to_table": "ESTADO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ_ESTADO_DEST"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Estado de destino da condição (NUM_SEQ_ESTADO_DEST -> NUM_SEQ).",
+   "status": "probable"
+  },
+  {
+   "to_table": "MECAN_ATRIBUIC",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_MECAN_ATRIBUIC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_MECAN_ATRIBUIC"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Mecanismo de atribuição.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "LIN_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: LIN_PROCES é swimlane.",
+   "status": "rejected"
+  },
+  {
+   "to_table": "SEGUR_ANEXO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: coincidência de colunas-chave.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

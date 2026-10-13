@@ -1,0 +1,153 @@
+{
+ "name": "PROCESS_DEFINITION_TRANSLATE",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Traducao por idioma de descricao, instrucao e categoria da definicao de processo.",
+ "lifecycle": "Criada ao salvar traducoes do processo.",
+ "key_notes": "PK ID; indice PROCESSDEFINITIONTRANSLATE01. Nao versionada.",
+ "notes_for_agents": "Ver tambem PROCESS_VERSION_TRANSLATE para textos por versao.",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "PROCESSDEFINITIONTRANSLATE01",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "LANGUAGE"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessDefinitionTranslate"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador sequencial da traducao.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "long",
+   "java_entity": "ProcessDefinitionTranslate"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dona da linha; faz parte da PK e deve ser filtrada em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "long",
+   "java_entity": "ProcessDefinitionTranslate"
+  },
+  {
+   "name": "PROCESS_ID",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Codigo da definicao de processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ProcessDefinitionTranslate"
+  },
+  {
+   "name": "LANGUAGE",
+   "type": "varchar(5)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Codigo do idioma (ex.: pt_BR).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "language",
+   "java_type": "String",
+   "java_entity": "ProcessDefinitionTranslate"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "varchar(250)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Descricao do processo traduzida.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "ProcessDefinitionTranslate"
+  },
+  {
+   "name": "INSTRUCTION",
+   "type": "varchar(2000)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Instrucao do processo traduzida.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "instruction",
+   "java_type": "String",
+   "java_entity": "ProcessDefinitionTranslate"
+  },
+  {
+   "name": "CATEGORY",
+   "type": "varchar(250)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Nome da categoria do processo traduzido (campo categoryId).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "categoryId",
+   "java_type": "String",
+   "java_entity": "ProcessDefinitionTranslate"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DEF_PROCES",
+   "from_cols": [
+    "TENANT_ID",
+    "PROCESS_ID"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Definicao de processo traduzida.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

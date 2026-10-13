@@ -1,0 +1,154 @@
+{
+ "name": "WCM_APPLICATION_APP_DEPENDENCY",
+ "domain": "wcm-portal",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Vínculo entre aplicação WCM e uma dependência (WCM_APPLICATION_DEPENDENCY), com flag de ativo.",
+ "lifecycle": "Povoada na instalação/publicação da aplicação.",
+ "key_notes": "Filha de WCM_APPLICATION; sem tenant.",
+ "notes_for_agents": "",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "FK_66DHMGXWFAXRIZ2REEZFKY2K1Z",
+   "unique": false,
+   "columns": [
+    "APPLICATION_ID"
+   ]
+  },
+  {
+   "name": "FK_UND8R0OAKA9YFPGZSFFBH2YPLR",
+   "unique": false,
+   "columns": [
+    "DEPENDENCY_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.wcm.core.entity.WCMApplicationAppDependency"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave primária.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "WCMApplicationAppDependency"
+  },
+  {
+   "name": "APPLICATION_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Aplicação que declara a dependência (jpa: component).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "WCM_APPLICATION.APPLICATION_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "DEPENDENCY_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Dependência declarada.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "WCM_APPLICATION_DEPENDENCY.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "CREATED_AT",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de criação.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "createdAt",
+   "java_type": "Date",
+   "java_entity": "WCMApplicationAppDependency"
+  },
+  {
+   "name": "UPDATED_AT",
+   "type": "datetime",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Data/hora da última atualização.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "updatedAt",
+   "java_type": "Date",
+   "java_entity": "WCMApplicationAppDependency"
+  },
+  {
+   "name": "ACTIVE",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": "b'1'",
+   "pk_position": null,
+   "purpose": "Vínculo ativo.",
+   "semantic_type": "flag",
+   "values": "1=ativo (default); 0=inativo",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "active",
+   "java_type": "Boolean",
+   "java_entity": "WCMApplicationAppDependency"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "WCM_APPLICATION",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Aplicação dona.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "WCM_APPLICATION_DEPENDENCY",
+   "from_cols": [
+    "DEPENDENCY_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Dependência.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

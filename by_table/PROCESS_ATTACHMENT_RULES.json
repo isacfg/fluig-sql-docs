@@ -1,0 +1,197 @@
+{
+ "name": "PROCESS_ATTACHMENT_RULES",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Regras de validacao de anexos por atividade de processo (operador, quantidade, nome do anexo e mensagem de erro).",
+ "lifecycle": "Criada ao salvar processo na modelagem; por versao.",
+ "key_notes": "PK ID; indice PROCESSATTACHMENTRULES01.",
+ "notes_for_agents": "Consultar por TENANT_ID+PROCESS_ID+PROCESS_VERSION+STATE_SEQUENCE.",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "PROCESSATTACHMENTRULES02",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "PROCESS_VERSION"
+   ]
+  },
+  {
+   "name": "PROCESSATTACHMENTRULES01",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "PROCESS_VERSION",
+    "STATE_SEQUENCE"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessAttachmentRules"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador sequencial da regra.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "long",
+   "java_entity": "ProcessAttachmentRules"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dona da linha; faz parte da PK e deve ser filtrada em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "long",
+   "java_entity": "ProcessAttachmentRules"
+  },
+  {
+   "name": "PROCESS_ID",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Codigo da definicao de processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ProcessAttachmentRules"
+  },
+  {
+   "name": "PROCESS_VERSION",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versao da definicao de processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "processVersion",
+   "java_type": "int",
+   "java_entity": "ProcessAttachmentRules"
+  },
+  {
+   "name": "STATE_SEQUENCE",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sequencia da atividade onde a regra vale.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "high",
+   "java_field": "stateSequence",
+   "java_type": "int",
+   "java_entity": "ProcessAttachmentRules"
+  },
+  {
+   "name": "OPERATOR",
+   "type": "integer",
+   "nullable": false,
+   "default": "0",
+   "pk_position": null,
+   "purpose": "Operador de comparacao da regra sobre a quantidade de anexos; codificacao nao confirmada.",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "operator",
+   "java_type": "int",
+   "java_entity": "ProcessAttachmentRules"
+  },
+  {
+   "name": "AMOUNT",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Quantidade de anexos comparada pelo operador (texto).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "amount",
+   "java_type": "String",
+   "java_entity": "ProcessAttachmentRules"
+  },
+  {
+   "name": "NAME",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Nome do anexo ao qual a regra se aplica.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "name",
+   "java_type": "String",
+   "java_entity": "ProcessAttachmentRules"
+  },
+  {
+   "name": "MESSAGE",
+   "type": "varchar(4000)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Mensagem exibida quando a regra e violada.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "message",
+   "java_type": "String",
+   "java_entity": "ProcessAttachmentRules"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ESTADO_PROCES",
+   "from_cols": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "PROCESS_VERSION",
+    "STATE_SEQUENCE"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Atividade do processo onde a regra e aplicada.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

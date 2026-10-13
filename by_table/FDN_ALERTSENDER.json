@@ -1,0 +1,165 @@
+{
+ "name": "FDN_ALERTSENDER",
+ "domain": "foundation-alert",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Registra quem enviou/originou um alerta (usuario remetente) e por qual via.",
+ "lifecycle": "Criada com o alerta; removida com ele (removeAlertSendersByAlertIdsList). Volume alto.",
+ "key_notes": "USER_ID referencia FDN_USERTENANT.USER_TENANT_ID (FK fisica), nao FDN_USER. KEY/CONSTRAINT do input sao artefatos do DDL.",
+ "notes_for_agents": "Junte com FDN_USERTENANT e depois FDN_USER se precisar do login/nome.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "FDNALERTSENDERI001",
+   "unique": false,
+   "columns": [
+    "ALERT_ID"
+   ]
+  },
+  {
+   "name": "FK_CI7SNWTOUYWJLT2NONO14DU0E",
+   "unique": false,
+   "columns": [
+    "USER_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.alert.entity.FDNAlertSender"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador sequencial (PK).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNAlertSender"
+  },
+  {
+   "name": "ALERT_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Alerta enviado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_ALERT.ID",
+   "confidence": "high",
+   "java_field": "alertId",
+   "java_type": "Long",
+   "java_entity": "FDNAlertSender"
+  },
+  {
+   "name": "CREATION_DATE",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora do envio/registro do remetente.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "creationDate",
+   "java_type": "Date",
+   "java_entity": "FDNAlertSender"
+  },
+  {
+   "name": "USER_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Usuario remetente (USER_TENANT_ID).",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_TENANT_ID",
+   "confidence": "high",
+   "java_field": "userId",
+   "java_type": "Long",
+   "java_entity": "FDNAlertSender"
+  },
+  {
+   "name": "VIA",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Canal/meio pelo qual o alerta foi enviado.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "via",
+   "java_type": "String",
+   "java_entity": "FDNAlertSender"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "USER_ID"
+   ],
+   "to_cols": [
+    "USER_TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Usuario remetente.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_ALERT",
+   "from_cols": [
+    "ALERT_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Alerta enviado.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "FDN_USER",
+   "from_cols": [
+    "USER_ID"
+   ],
+   "to_cols": [
+    "USER_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Inferencia por nome rejeitada: USER_ID aponta para FDN_USERTENANT.USER_TENANT_ID.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": [
+  {
+   "from_table": "FDN_ALERT",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "ALERT_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join"
+  }
+ ]
+}

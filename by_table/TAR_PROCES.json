@@ -1,0 +1,814 @@
+{
+ "name": "TAR_PROCES",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Atribuição de tarefa de processo a um usuário: uma linha por usuário responsável por uma etapa (movimentação) de uma instância, com status, prazos, avisos de atraso e conclusão. Base da central de tarefas do workflow.",
+ "lifecycle": "Criada quando a etapa é atribuída a um usuário (ou transferida); atualizada ao concluir, transferir ou cancelar. Volume alto (cresce com as instâncias).",
+ "key_notes": "PK composta de 5 colunas; NUM_SEQ_TRANSF distingue transferências. Colunas DEADLINEDATE/DEADLINEHOUR/INITIALTERMDATE/INITIALTERMHOUR/TASKCOMPLETIONDATE/TASKCOMPLETIONHOUR são legadas (@Deprecated); usar DEADLINE/START_DATE/END_DATE. Tarefas abertas: IDI_STATUS<=1 e LOG_ATIV=1.",
+ "notes_for_agents": "Filtrar por COD_EMPRESA. Tarefas pendentes do usuário: LOG_ATIV=1 AND IDI_STATUS IN (0,1) (índice PROCESSTASK04). Colunas DATE de aviso e hora são separadas. DSL_OBS_TAR é longtext. DS_NOME_ARQUIVO_ASS/DS_ARQUIVO_HASH ligados a assinatura.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NUM_PROCES",
+  "NUM_SEQ_MOVTO",
+  "NUM_SEQ_TRANSF",
+  "CD_MATRICULA"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "PROCESTASK01",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "LOG_ATIV",
+    "IDI_STATUS",
+    "DEADLINE"
+   ]
+  },
+  {
+   "name": "PROCESSTASK02",
+   "unique": false,
+   "columns": [
+    "CD_MATRICULA"
+   ]
+  },
+  {
+   "name": "PROCESSTASK03",
+   "unique": false,
+   "columns": [
+    "NUM_PROCES"
+   ]
+  },
+  {
+   "name": "PROCESSTASK04",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "IDI_STATUS",
+    "CD_MATRICULA",
+    "LOG_ATIV"
+   ]
+  },
+  {
+   "name": "PROCESSTASK05",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "ASSIGN_START_DATE"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessTask"
+ ],
+ "columns": [
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 5,
+   "purpose": "Matrícula do usuário atribuído à tarefa (responsável).",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE (colleagueId; matrícula/login)",
+   "confidence": "medium",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK. Filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "NUM_SEQ_MOVTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Sequência da movimentação (etapa) da instância à qual a tarefa pertence.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "HISTOR_PROCES.NUM_SEQ_MOVTO",
+   "confidence": "high",
+   "java_field": "movementSequence",
+   "java_type": "int",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "NUM_PROCES",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Número da instância (solicitação) de processo de workflow.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_WORKFLOW.NUM_PROCES",
+   "confidence": "high",
+   "java_field": "processInstanceId",
+   "java_type": "int",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "NUM_SEQ_TRANSF",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Sequência de transferência da atribuição (0 = atribuição original, >0 = transferida).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "transferredSequence",
+   "java_type": "int",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "LOG_ATIV",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a atribuição está ativa (tarefa corrente do usuário).",
+   "semantic_type": "flag",
+   "values": "1=ativa; 0=inativa/histórico",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "active",
+   "java_type": "Boolean",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "ASSIGN_START_DATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora em que a tarefa foi atribuída ao usuário.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "assignDate",
+   "java_type": "Date",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "ASSIGN_END_DATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora em que a atribuição terminou (conclusão, transferência ou cancelamento).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "assignEndDate",
+   "java_type": "Date",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "DAT_MSG_ATRASO_RESPONS",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data do envio da mensagem de atraso ao responsável.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "authorityDelayMessageDate",
+   "java_type": "Date",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "NUM_HORA_MSG_ATRASO_RESPONS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Hora do envio da mensagem de atraso ao responsável.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "authorityDelayMessageHour",
+   "java_type": "Integer",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "COD_MATR_ESCOLHID",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrículas escolhidas para a próxima atribuição (lista serializada).",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "medium",
+   "java_field": "choosedColleagueId",
+   "java_type": "String",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "NUM_SEQ_ESCOLHID",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sequência da etapa escolhida para o próximo destino.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "choosedSequence",
+   "java_type": "Integer",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "CLOSURE_STATUS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Situação do prazo da tarefa (enum WorkflowProcessClosureStatus).",
+   "semantic_type": "status",
+   "values": "0=OPEN; 1=ON_TIME; 2=WARNING; 3=EXPIRED",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "closureStatus",
+   "java_type": "Integer",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "CD_MATRICULA_CONCLUS",
+   "type": "varchar(150)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrícula de quem efetivamente concluiu a tarefa (pode ser substituto ou gestor).",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE (colleagueId; matrícula/login)",
+   "confidence": "medium",
+   "java_field": "completeColleagueId",
+   "java_type": "String",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "IDI_TIP_CONCLUS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo de conclusão: por quem a tarefa foi concluída (enum ProcessTaskCompleteType).",
+   "semantic_type": "enum",
+   "values": "0=MANAGER; 1=REPLACEMENT; 2=REPLACEMENT_MANAGER",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "completeType",
+   "java_type": "Integer",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "DEADLINE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora limite (prazo) da tarefa.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "deadline",
+   "java_type": "Date",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "DEADLINEDATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Legado: data do prazo (campo deprecated, separado de hora).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "DEADLINEHOUR",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Legado: hora do prazo (deprecated).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "END_DATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de término da tarefa.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "endDate",
+   "java_type": "Date",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "INITIALTERMDATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Legado: data inicial do prazo (deprecated).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "INITIALTERMHOUR",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Legado: hora inicial do prazo (deprecated).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "DAT_MSG_ATRASO_GESTOR",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data do envio da mensagem de atraso ao gestor.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "managerDelayMessageDate",
+   "java_type": "Date",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "NUM_HORA_MSG_ATRASO_GESTOR",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Hora do envio da mensagem de atraso ao gestor.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "managerDelayMessageHour",
+   "java_type": "Integer",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "DAT_MSG_EXPIRAC_RESPONS",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data do aviso de expiração enviado ao responsável.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "noticeExpirationAuthorityDate",
+   "java_type": "Date",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "NUM_HORA_MSG_EXPIRAC_RESPONS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Hora do aviso de expiração enviado ao responsável.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "noticeExpirationAuthorityHour",
+   "java_type": "Integer",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "DAT_MSG_EXPIRAC_GESTOR",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data do aviso de expiração enviado ao gestor.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "noticeExpirationManagerDate",
+   "java_type": "Date",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "NUM_HORA_MSG_EXPIRAC_GESTOR",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Hora do aviso de expiração enviado ao gestor.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "noticeExpirationManagerHour",
+   "java_type": "Integer",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "DAT_MSG_EXPIRAC_REQUISIT",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data do aviso de expiração enviado ao requisitante.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "noticeExpirationRequisitionerDate",
+   "java_type": "Date",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "NUM_HORA_MSG_EXPIRAC_REQUISIT",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Hora do aviso de expiração enviado ao requisitante.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "noticeExpirationRequisitionerHour",
+   "java_type": "Integer",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "DAT_MSG_ATRASO_REQUISIT",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data do envio da mensagem de atraso ao requisitante.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "requisitionerDelayMessageDate",
+   "java_type": "Date",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "NUM_HORA_MSG_ATRASO_REQUISIT",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Hora do envio da mensagem de atraso ao requisitante.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "requisitionerDelayMessageHour",
+   "java_type": "Integer",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "START_DATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de início do prazo/execução da tarefa.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "startDate",
+   "java_type": "Date",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "IDI_STATUS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Status da tarefa (enum ProcessTaskStatusType).",
+   "semantic_type": "status",
+   "values": "0=NOT_COMPLETED; 1=PENDING_CONSENSUS; 2=COMPLETED; 3=TRANSFERRED; 4=CANCELED",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "status",
+   "java_type": "Integer",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "TASKCOMPLETIONDATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Legado: data de conclusão (deprecated); preferir END_DATE.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TASKCOMPLETIONHOUR",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Legado: hora de conclusão (deprecated).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "DSL_OBS_TAR",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Observação textual registrada na tarefa (longtext).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "taskObservation",
+   "java_type": "String",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "LOG_ASSINADO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a tarefa foi assinada digitalmente.",
+   "semantic_type": "flag",
+   "values": "1=assinada; 0=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "taskSigned",
+   "java_type": "Boolean",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "DS_ARQUIVO_HASH",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Hash do arquivo de assinatura da tarefa.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "taskSignedHash",
+   "java_type": "String",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "DS_NOME_ARQUIVO_ASS",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do arquivo de assinatura da tarefa.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "taskSignedName",
+   "java_type": "String",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "WARNING_DATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora a partir da qual a tarefa entra em alerta de prazo.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "warningDate",
+   "java_type": "Date",
+   "java_entity": "ProcessTask"
+  },
+  {
+   "name": "TOTAL_RUNTIME",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tempo total de execução da tarefa, em milissegundos.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "totalRuntime",
+   "java_type": "Long",
+   "java_entity": "ProcessTask"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "PROCES_WORKFLOW",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "Instância de processo à qual a tarefa pertence (join em queries HQL).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "HISTOR_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Movimentação (etapa) atribuída; sem FK física.",
+   "status": "probable"
+  },
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "USER_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Usuário responsável. [alvo corrigido: USER_CODE/LOGIN pertencem a FDN_USERTENANT]",
+   "status": "probable"
+  },
+  {
+   "to_table": "PROCES_WORKFLOW",
+   "from_cols": [
+    "COD_EMPRESA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "WorkflowProcess.findPending",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "PROCES_WORKFLOW",
+   "from_cols": [
+    "NUM_PROCES"
+   ],
+   "to_cols": [
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "WorkflowProcess.findPending",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "APONT_TAR_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO",
+    "NUM_SEQ_TRANSF",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO",
+    "NUM_SEQ_TRANSF",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "HISTOR_TRANSF_PENDCIA",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO",
+    "NUM_SEQ_TRANSF",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO",
+    "NUM_SEQ_TRANSF",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "TAR_CONHECIMENTO_USUARIO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO",
+    "NUM_SEQ_TRANSF",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO",
+    "NUM_SEQ_TRANSF",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "1:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

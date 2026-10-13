@@ -1,0 +1,135 @@
+{
+ "name": "LINK_PROCES_ASSOC",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Associação de um link do processo a um componente gráfico (nota, documento, banco de dados) do diagrama (ProcessLinkAssoc).",
+ "lifecycle": "Criada ao ligar artefatos BPMN a fluxos.",
+ "key_notes": "Nome da coluna Java divergente: NUM_SEQ_COMPON_GRAF é mapeado como initialStateSequence.",
+ "notes_for_agents": "",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_DEF_PROCES",
+  "NUM_VERS",
+  "NUM_SEQ_LINK"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessLinkAssoc"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK e filtro obrigatório de multi-tenancy.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ProcessLinkAssoc"
+  },
+  {
+   "name": "NUM_SEQ_LINK",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Sequência do link associado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "LINK_PROCES.NUM_SEQ_LINK",
+   "confidence": "high",
+   "java_field": "linkSequence",
+   "java_type": "int",
+   "java_entity": "ProcessLinkAssoc"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código (processId) da definição de processo BPM a que a linha pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ProcessLinkAssoc"
+  },
+  {
+   "name": "NUM_VERS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número da versão da definição de processo (versionamento do processo).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "ProcessLinkAssoc"
+  },
+  {
+   "name": "NUM_SEQ_ESTADO_FINAL",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "NUM_SEQ do elemento de destino da associação.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "medium",
+   "java_field": "finalStateSequence",
+   "java_type": "Integer",
+   "java_entity": "ProcessLinkAssoc"
+  },
+  {
+   "name": "NUM_SEQ_COMPON_GRAF",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "NUM_SEQ do componente gráfico (nota/documento/banco) de origem da associação.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "COMPON_GRAF_PROCES.NUM_SEQ_COMPON_GRAF",
+   "confidence": "medium",
+   "java_field": "initialStateSequence",
+   "java_type": "Integer",
+   "java_entity": "ProcessLinkAssoc"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "COMPON_GRAF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ_COMPON_GRAF"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ_COMPON_GRAF"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Componente gráfico da associação.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

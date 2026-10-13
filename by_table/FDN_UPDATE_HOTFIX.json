@@ -1,0 +1,82 @@
+{
+ "name": "FDN_UPDATE_HOTFIX",
+ "domain": "foundation-platform",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Registro de updates/hotfixes aplicados à instalação do Fluig, com código, data de criação e usuário que aplicou.",
+ "lifecycle": "Uma linha por update/hotfix aplicado; volume muito baixo.",
+ "key_notes": "Sem tenant; é global da instalação.",
+ "notes_for_agents": "Tabela global; consulta via UpdateHotfixEntity.findUpdateHotfix.",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.updatehotfix.entity.UpdateHotfixEntity"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "PK surrogate do registro de hotfix.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "COD_UPDATE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código/identificador do update ou hotfix aplicado.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "codUpdate",
+   "java_type": "String",
+   "java_entity": "UpdateHotfixEntity"
+  },
+  {
+   "name": "UPDATE_CREATION_DATE",
+   "type": "date",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Data de criação do update/hotfix (somente data).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "updateCreationDate",
+   "java_type": "Date",
+   "java_entity": "UpdateHotfixEntity"
+  },
+  {
+   "name": "USER_UPDATE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Usuário que aplicou/registrou o update (texto livre, não FK).",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "userUpdate",
+   "java_type": "String",
+   "java_entity": "UpdateHotfixEntity"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

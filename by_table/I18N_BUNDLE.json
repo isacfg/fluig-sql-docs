@@ -1,0 +1,117 @@
+{
+ "name": "I18N_BUNDLE",
+ "domain": "i18n",
+ "module": "06001-fluig-database-addon-i18n-dbupdate",
+ "purpose": "Bundle de internacionalização: agrupador de locales e literais traduzidos identificado por código.",
+ "lifecycle": "Criado ao registrar um bundle; baixo volume.",
+ "key_notes": "IDs são UUID em varchar(36). Unique key (artefato UNIQUE) provavelmente em BUNDLE_CODE.",
+ "notes_for_agents": "Hierarquia: BUNDLE -> LOCALE -> LITERAL_TRANSLATED.",
+ "primary_key": [
+  "BUNDLE_ID"
+ ],
+ "unique_constraints": [
+  [
+   "BUNDLE_CODE"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.core.i18n.domain.Bundle"
+ ],
+ "columns": [
+  {
+   "name": "BUNDLE_ID",
+   "type": "varchar(36)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK UUID do bundle.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "String",
+   "java_entity": "Bundle"
+  },
+  {
+   "name": "BUNDLE_CODE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do bundle de i18n.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "bundleCode",
+   "java_type": "String",
+   "java_entity": "Bundle"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "I18N_LOCALE",
+   "from_cols": [
+    "BUNDLE_ID"
+   ],
+   "to_cols": [
+    "BUNDLE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Locales do bundle.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "I18N_RELATED_BUNDLE",
+   "from_cols": [
+    "BUNDLE_ID"
+   ],
+   "to_cols": [
+    "BUNDLE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Bundles relacionados.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "I18N_LOCALE",
+   "from_cols": [
+    "BUNDLE_ID"
+   ],
+   "to_cols": [
+    "BUNDLE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "I18N_RELATED_BUNDLE",
+   "from_cols": [
+    "BUNDLE_ID"
+   ],
+   "to_cols": [
+    "BUNDLE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "I18N_RELATED_BUNDLE",
+   "from_cols": [
+    "RELATED_BUNDLE_CODE"
+   ],
+   "to_cols": [
+    "BUNDLE_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

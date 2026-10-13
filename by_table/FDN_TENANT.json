@@ -1,0 +1,720 @@
+{
+ "name": "FDN_TENANT",
+ "domain": "foundation-tenancy",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Tenant (empresa/organização) do Fluig; raiz da multi-tenancy, referenciada por quase todas as tabelas.",
+ "lifecycle": "Criado na instalação ou provisionamento; poucas linhas.",
+ "key_notes": "TENANT_CODE é a chave de negócio. Unique key provável em TENANT_CODE. Quase toda tabela do Fluig filtra por TENANT_ID.",
+ "notes_for_agents": "Tabela raiz de tenancy. Contém FEDERAL_ID (CNPJ), dado de identificação da organização.",
+ "primary_key": [
+  "TENANT_ID"
+ ],
+ "unique_constraints": [
+  [
+   "TENANT_CODE"
+  ]
+ ],
+ "indexes": [
+  {
+   "name": "FDNTENANTI001",
+   "unique": false,
+   "columns": [
+    "DESCRIPTION"
+   ]
+  },
+  {
+   "name": "FDNTENANTI002",
+   "unique": false,
+   "columns": [
+    "FEDERAL_ID"
+   ]
+  },
+  {
+   "name": "FDNTENANTI003",
+   "unique": false,
+   "columns": [
+    "IDP_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.security.entity.FDNTenant"
+ ],
+ "columns": [
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária do tenant, usada como TENANT_ID em todo o sistema.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNTenant"
+  },
+  {
+   "name": "TENANT_UUID",
+   "type": "varchar(36)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "UUID do tenant.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "UUID",
+   "java_type": "String",
+   "java_entity": "FDNTenant"
+  },
+  {
+   "name": "TENANT_CODE",
+   "type": "varchar(32)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código curto do tenant (chave de negócio).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "code",
+   "java_type": "String",
+   "java_entity": "FDNTenant"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome/descrição da organização.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "FDNTenant"
+  },
+  {
+   "name": "FEDERAL_ID",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador federal (ex.: CNPJ) da organização.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "federalId",
+   "java_type": "String",
+   "java_entity": "FDNTenant"
+  },
+  {
+   "name": "IDP_ID",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Identificador do provedor de identidade (IdP) externo associado.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "idpId",
+   "java_type": "String",
+   "java_entity": "FDNTenant"
+  },
+  {
+   "name": "IDP_LOGOFF",
+   "type": "bit(1)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Indica se o logoff deve ser propagado ao IdP.",
+   "semantic_type": "flag",
+   "values": "1=propaga logoff ao IdP; 0=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "idpLogOff",
+   "java_type": "Boolean",
+   "java_entity": "FDNTenant"
+  },
+  {
+   "name": "ORGANIZATION_URL",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "URL da organização/instância do tenant.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "organizationUrl",
+   "java_type": "String",
+   "java_entity": "FDNTenant"
+  },
+  {
+   "name": "REMOVE_VOLUME",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica remoção do volume de arquivos ao remover o tenant.",
+   "semantic_type": "flag",
+   "values": "1=remover volume; 0=manter",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "removeVolume",
+   "java_type": "Boolean",
+   "java_entity": "FDNTenant"
+  },
+  {
+   "name": "TENANT_ACTIVE",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica tenant ativo.",
+   "semantic_type": "flag",
+   "values": "1=ativo; 0=inativo",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "tenantActive",
+   "java_type": "Boolean",
+   "java_entity": "FDNTenant"
+  },
+  {
+   "name": "THUMBNAIL_ENABLED",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Habilita geração de thumbnails para o tenant.",
+   "semantic_type": "flag",
+   "values": "1=habilitado; 0=desabilitado",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "thumbnailEnabled",
+   "java_type": "Boolean",
+   "java_entity": "FDNTenant"
+  },
+  {
+   "name": "USE_WIZARD",
+   "type": "bit(1)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Indica uso do wizard inicial de configuração.",
+   "semantic_type": "flag",
+   "values": "1=usa wizard; 0=não",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "useWizard",
+   "java_type": "Boolean",
+   "java_entity": "FDNTenant"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANTDATA",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join",
+   "description": "Propriedades do tenant.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_TENANTPRODUCT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join",
+   "description": "Produtos habilitados.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join",
+   "description": "Usuários do tenant.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_DIGITALSIGNATURE",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FLUIG_AUDIT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FLUIG_AUDIT_CONFIG",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "1:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FDN_PARAMGERAL",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_DATASETHISTORY",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FILTERS",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "ECM_DOCTO_LANGUAGE",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FDN_ALERTAPPSENDER",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_ALERTCONFIG",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_ALERTEVENTTYPE",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_ALERTMODULE",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_SERVICE_OPERATION",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FDN_GROUP",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_GROUPUSERROLE",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_IDENTITYPARTNER",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_ROLE",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_USERLOGGING",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FDN_USERROLE",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_USERTENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_VOLUME",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_TENANTDATA",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_TENANTPRODUCT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "MAILEVENTTEMPLATE",
+   "from_cols": [
+    "TENANTID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FDN_PUSH",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "LS_METRIC",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_AUTHORIZECLIENTDATA",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FDN_OAUTHPROVIDER",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FDN_PDATATRACE_CONFIG",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "1:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FDN_PERSONALDATA",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "RATING",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FDN_REQUEST_NONCE",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_USERTOKEN",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FDN_ACCESSLOG",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "USEPOLICY",
+   "from_cols": [
+    "TENANTID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "1:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FDN_SITE",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "WCM_APPLICATION_DEPENDENCY",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_COMPONENTPAGE",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_PAGE",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_TENANTAPPLICATION",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_STOREITEM_METRIC",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_THEME_HISTORY",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

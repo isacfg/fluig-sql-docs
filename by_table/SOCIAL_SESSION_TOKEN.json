@@ -1,0 +1,144 @@
+{
+ "name": "SOCIAL_SESSION_TOKEN",
+ "domain": "social",
+ "module": "03001-fluig-database-social",
+ "purpose": "Token de sessão por perfil social e aplicação (ex.: apps externas/mobile), com data de expiração.",
+ "lifecycle": "Criado/renovado quando um perfil social obtém token para uma aplicação; um registro por (SOCIAL_ID, TENANT_ID, APPLICATION_ID).",
+ "key_notes": "Único por SOCIAL_ID+TENANT_ID+APPLICATION_ID.",
+ "notes_for_agents": "DADO SENSÍVEL: SESSION_TOKEN. Filtre por TENANT_ID.",
+ "primary_key": [
+  "SESSION_TOKEN_ID"
+ ],
+ "unique_constraints": [
+  [
+   "SOCIAL_ID",
+   "TENANT_ID",
+   "APPLICATION_ID"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [],
+ "columns": [
+  {
+   "name": "SESSION_TOKEN_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária do token de sessão.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "APPLICATION_ID",
+   "type": "varchar(70)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador (texto, até 70) da aplicação cliente dona do token; não é o ID numérico de WCM_APPLICATION.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "EXPIRESIN",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de expiração do token.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "SESSION_TOKEN",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor do token de sessão (sensível).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant (empresa) do token.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "SOCIAL_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Perfil social dono do token.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIAL.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "SOCIAL",
+   "from_cols": [
+    "SOCIAL_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Perfil social dono do token.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "WCM_APPLICATION",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "REJEITADA: APPLICATION_ID aqui é varchar(70) de aplicação cliente, tipo incompatível com WCM_APPLICATION.APPLICATION_ID bigint (match só por nome).",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

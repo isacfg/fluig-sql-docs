@@ -1,0 +1,82 @@
+{
+ "name": "WCM_RESOURCECOMPONENT",
+ "domain": "wcm-resources",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Catálogo de componentes de recursos estáticos (bibliotecas JS/CSS) identificados por código, que temas/widgets podem referenciar.",
+ "lifecycle": "Carga de catálogo, poucas linhas, raramente alterada.",
+ "key_notes": "Código único global (sem tenant).",
+ "notes_for_agents": "Buscar por RESOURCE_COMPONENT_CODE; arquivos em WCM_RESOURCECOMPONENTFILE.",
+ "primary_key": [
+  "RESOURCE_COMPONENT_ID"
+ ],
+ "unique_constraints": [
+  [
+   "RESOURCE_COMPONENT_CODE"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.wcm.core.entity.WCMResourceComponent"
+ ],
+ "columns": [
+  {
+   "name": "RESOURCE_COMPONENT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK surrogate do componente de recurso.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "WCMResourceComponent"
+  },
+  {
+   "name": "RESOURCE_COMPONENT_CODE",
+   "type": "varchar(25)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código único do componente (até 25 caracteres), usado para buscar via findByCode.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "code",
+   "java_type": "String",
+   "java_entity": "WCMResourceComponent"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "WCM_RESOURCECOMPONENTFILE",
+   "from_cols": [
+    "RESOURCE_COMPONENT_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_COMPONENT_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Arquivos que compõem o componente.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "WCM_RESOURCECOMPONENTFILE",
+   "from_cols": [
+    "RESOURCE_COMPONENT_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_COMPONENT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

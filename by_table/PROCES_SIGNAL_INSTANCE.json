@@ -1,0 +1,250 @@
+{
+ "name": "PROCES_SIGNAL_INSTANCE",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Ocorrencias de sinal emitidas por instancias de processo, com dados do sinal e atividade de origem.",
+ "lifecycle": "Inserida quando uma atividade emite um sinal.",
+ "key_notes": "PK (COD_EMPRESA, COD_SINAL, COD_SINAL_INSTANCE).",
+ "notes_for_agents": "Origem do sinal: COD_DEF_PROCES+NUM_VERS+NUM_SEQ (atividade) e NUM_PROCES (instancia).",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_SINAL",
+  "COD_SINAL_INSTANCE"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.SignalInstance"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant (empresa) dona da linha; faz parte da PK e deve ser filtrada em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "SignalInstance"
+  },
+  {
+   "name": "COD_SINAL",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Codigo do sinal emitido.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_SIGNAL.COD_SINAL",
+   "confidence": "high",
+   "java_field": "signalId",
+   "java_type": "int",
+   "java_entity": "SignalInstance"
+  },
+  {
+   "name": "COD_SINAL_INSTANCE",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Sequencial da ocorrencia do sinal.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "signalInstanceId",
+   "java_type": "Integer",
+   "java_entity": "SignalInstance"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Codigo da definicao do processo que emitiu o sinal.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "SignalInstance"
+  },
+  {
+   "name": "NUM_PROCES",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Numero da instancia de processo emissora.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_WORKFLOW.NUM_PROCES",
+   "confidence": "high",
+   "java_field": "processInstanceId",
+   "java_type": "Integer",
+   "java_entity": "SignalInstance"
+  },
+  {
+   "name": "DES_SINAL_DATA",
+   "type": "varchar(200)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Dados/payload do sinal (ate 200 caracteres).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "signalData",
+   "java_type": "String",
+   "java_entity": "SignalInstance"
+  },
+  {
+   "name": "NUM_SEQ",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sequencia da atividade que emitiu o sinal.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "high",
+   "java_field": "stateSequence",
+   "java_type": "Integer",
+   "java_entity": "SignalInstance"
+  },
+  {
+   "name": "NUM_VERS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versao da definicao de processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "Integer",
+   "java_entity": "SignalInstance"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "PROCES_SIGNAL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_SINAL"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_SINAL"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Sinal emitido.",
+   "status": "probable"
+  },
+  {
+   "to_table": "ESTADO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Atividade emissora do sinal.",
+   "status": "probable"
+  },
+  {
+   "to_table": "PROCES_WORKFLOW",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Instancia emissora do sinal.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "ADHOC_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Inferida apenas por nome; NUM_SEQ aqui e atividade, nao tarefa ad hoc.",
+   "status": "rejected"
+  },
+  {
+   "to_table": "LIN_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Inferida; LIN_PROCES e linha/transicao, nao a origem do sinal.",
+   "status": "rejected"
+  },
+  {
+   "to_table": "SEGUR_ANEXO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Inferida por nome; sem relacao semantica.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

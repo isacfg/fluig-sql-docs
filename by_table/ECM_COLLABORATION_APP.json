@@ -1,0 +1,174 @@
+{
+ "name": "ECM_COLLABORATION_APP",
+ "domain": "ecm-collaboration",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Cadastro dos aplicativos externos de colaboração (provedores de edição online) habilitados por tenant.",
+ "lifecycle": "Poucas linhas por tenant, configuradas por administração/instalação; raramente alteradas.",
+ "key_notes": "UNIQUE (TENANT_ID, APP_CODE, APP_JNDI_NAME). TENANT_ID e APP_JNDI_NAME não são atualizáveis. CLIENT_SECRET é credencial.",
+ "notes_for_agents": "SENSÍVEL: CLIENT_SECRET e CLIENT_ID são credenciais; não expor. Filtrar por TENANT_ID.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [
+  [
+   "TENANT_ID",
+   "APP_CODE",
+   "APP_JNDI_NAME"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.ecm.collaboration.entity.CollaborationApp"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador gerado da app de colaboração.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "CollaborationApp"
+  },
+  {
+   "name": "CLIENT_ID",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Client ID OAuth da integração com o provedor externo.",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "clientId",
+   "java_type": "String",
+   "java_entity": "CollaborationApp"
+  },
+  {
+   "name": "CLIENT_SECRET",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Client secret OAuth da integração (credencial sensível).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "clientSecret",
+   "java_type": "String",
+   "java_entity": "CollaborationApp"
+  },
+  {
+   "name": "APP_CODE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código identificador da app de colaboração (usado em findByAppCode).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "code",
+   "java_type": "String",
+   "java_entity": "CollaborationApp"
+  },
+  {
+   "name": "ENABLED",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indicador de app habilitada, armazenado como string.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "enabled",
+   "java_type": "String",
+   "java_entity": "CollaborationApp"
+  },
+  {
+   "name": "APP_JNDI_NAME",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome JNDI do componente/EJB que implementa a integração com a app.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "jndiName",
+   "java_type": "String",
+   "java_entity": "CollaborationApp"
+  },
+  {
+   "name": "APP_NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome de exibição da app de colaboração.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "name",
+   "java_type": "String",
+   "java_entity": "CollaborationApp"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant dono do registro (imutável).",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "CollaborationApp"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ECM_COLLABORATION",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "COLLABORATION_APP_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Colaborações que usam esta app.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "ECM_COLLABORATION",
+   "from_cols": [
+    "COLLABORATION_APP_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

@@ -1,0 +1,78 @@
+{
+ "name": "FDN_PDATA_CLASSIFICATION",
+ "domain": "privacy-lgpd",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Catálogo de classificações de dados pessoais (base legal/categoria) usado nas justificativas LGPD.",
+ "lifecycle": "Dados de referência; poucas linhas.",
+ "key_notes": "Sem tenant.",
+ "notes_for_agents": "Tabela de domínio.",
+ "primary_key": [
+  "PDATA_CLASSIFICATION_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.security.entity.FDNPersonalDataClassification"
+ ],
+ "columns": [
+  {
+   "name": "PDATA_CLASSIFICATION_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK da classificação.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNPersonalDataClassification"
+  },
+  {
+   "name": "PDATA_CLASSIFICATION",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Texto/chave da classificação de dado pessoal.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "classification",
+   "java_type": "String",
+   "java_entity": "FDNPersonalDataClassification"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_PDATA_JUSTIFICATION",
+   "from_cols": [
+    "PDATA_CLASSIFICATION_ID"
+   ],
+   "to_cols": [
+    "PDATA_CLASSIFICATION_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Justificativas que usam a classificação.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_PDATA_JUSTIFICATION",
+   "from_cols": [
+    "PDATA_CLASSIFICATION_ID"
+   ],
+   "to_cols": [
+    "PDATA_CLASSIFICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

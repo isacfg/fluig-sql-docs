@@ -1,0 +1,84 @@
+{
+ "name": "FDN_LOCK",
+ "domain": "concorrencia-lock",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Locks distribuídos de recursos: indica que um item de uma funcionalidade está bloqueado por uma instância/sessão (UUID).",
+ "lifecycle": "Linha criada ao adquirir o lock e removida ao liberar; transitória, poucas linhas.",
+ "key_notes": "PK composta (TENANT_ID, FEATURE_TYPE, ITEM_ID). Locks órfãos podem ficar se o servidor cair. Java tem FDNLock com id composto (por isso campos repetidos).",
+ "notes_for_agents": "Consultar pela PK completa.",
+ "primary_key": [
+  "TENANT_ID",
+  "FEATURE_TYPE",
+  "ITEM_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.lock.entity.FDNLock"
+ ],
+ "columns": [
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant do lock; parte da PK composta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "long",
+   "java_entity": "FDNLock"
+  },
+  {
+   "name": "FEATURE_TYPE",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Tipo da funcionalidade bloqueada (inteiro); parte da PK. Valores definidos por quem solicita o lock.",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "featureType",
+   "java_type": "int",
+   "java_entity": "FDNLock"
+  },
+  {
+   "name": "ITEM_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Identificador do item bloqueado dentro da funcionalidade; parte da PK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "itemId",
+   "java_type": "int",
+   "java_entity": "FDNLock"
+  },
+  {
+   "name": "UUID",
+   "type": "varchar(36)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "UUID do dono do lock (sessão/instância que o adquiriu).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "uuid",
+   "java_type": "String",
+   "java_entity": "FDNLock"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

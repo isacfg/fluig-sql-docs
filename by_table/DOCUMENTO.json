@@ -1,0 +1,2113 @@
+{
+ "name": "DOCUMENTO",
+ "domain": "ecm-documents",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Tabela central do ECM: cada linha é uma VERSÃO de um item da árvore de documentos do GED (pasta, arquivo, fichário de formulário, ficha, anexo de processo, link externo etc.), distinguido por TP_DOCUMENTO.",
+ "lifecycle": "Uma linha por versão (NR_DOCUMENTO + NR_VERSAO); nova versão cria nova linha e a anterior perde VERSAO_ATIVA. Exclusão é lógica (LOG_DELETE=1, lixeira). Volume alto, geralmente a maior tabela do ECM.",
+ "key_notes": "PK composta (COD_EMPRESA, NR_DOCUMENTO, NR_VERSAO). Sempre filtrar COD_EMPRESA, LOG_DELETE=0 e VERSAO_ATIVA=1 para obter o estado corrente. Hierarquia por NR_DOCUMENTO_PAI (0 = raiz). Pastas particulares usam LOG_DOCTO_PARTIC/COD_MATR_PARTIC.",
+ "notes_for_agents": "Filtrar sempre COD_EMPRESA; para estado atual usar VERSAO_ATIVA=1 AND LOG_DELETE=0. TP_DOCUMENTO é texto (comparar com aspas: '1','2'...). Colunas longtext: DS_COMENTARIO_ADICIONAL, DS_PALAVRA_CHAVE, NM_ARQUIVOS_RELACIONADOS. Contém matrículas de usuários (dado pessoal indireto). Arquivo físico em NM_ARQUIVO_FISICO + COD_VOL_FISIC. Hierarquia via NR_DOCUMENTO_PAI.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NR_DOCUMENTO",
+  "NR_VERSAO"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "IDX_DOCTO_PAI",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO_PAI",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ]
+  },
+  {
+   "name": "IDX_DOCTO_PART",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO_PAI",
+    "LOG_DOCTO_PARTIC",
+    "CD_MATRICULA"
+   ]
+  },
+  {
+   "name": "IDX_DOCTO_AUX",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "LOG_DELETE",
+    "VERSAO_ATIVA",
+    "CD_DOCUMENTO_EXT",
+    "LOG_INDEXAD"
+   ]
+  },
+  {
+   "name": "IDX_MIME_TYPE",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO_PAI",
+    "CD_TIPO_DOC",
+    "COD_MIME_TYPE",
+    "LOG_DELETE",
+    "NR_VERSAO"
+   ]
+  },
+  {
+   "name": "IDX_METALIST",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "COD_LISTA",
+    "COD_REG_LISTA"
+   ]
+  },
+  {
+   "name": "IDX_METALIST2",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "COD_LISTA",
+    "VERSAO_ATIVA"
+   ]
+  },
+  {
+   "name": "IDX_DOCUMENT_TYPE2",
+   "unique": false,
+   "columns": [
+    "TP_DOCUMENTO",
+    "COD_EMPRESA"
+   ]
+  },
+  {
+   "name": "IDX_DOCTO_AUX2",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "DT_EXPIRACAO",
+    "LOG_DOCTO_EXPIRA",
+    "TP_DOCUMENTO",
+    "VERSAO_ATIVA",
+    "NR_DIAS_NOT_EXP"
+   ]
+  },
+  {
+   "name": "IDX_DOCUMENT_AUX1",
+   "unique": false,
+   "columns": [
+    "CD_PUBLICADOR",
+    "VERSAO_ATIVA",
+    "COD_EMPRESA",
+    "LOG_APROVADO"
+   ]
+  },
+  {
+   "name": "IDX_DOCUMENT_AUX2",
+   "unique": false,
+   "columns": [
+    "COD_MATR_PARTIC"
+   ]
+  },
+  {
+   "name": "IDX_DOCUMENT_AUX3",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA"
+   ]
+  },
+  {
+   "name": "IDX_DOCUMENT_AUX4",
+   "unique": false,
+   "columns": [
+    "LOG_DOCTO_PARTIC"
+   ]
+  },
+  {
+   "name": "IDX_DOCUMENT_AUX5",
+   "unique": false,
+   "columns": [
+    "VERSAO_ATIVA",
+    "LOG_DELETE",
+    "LOG_INDEXAD",
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ]
+  },
+  {
+   "name": "FK_DOCUMENTASSUNTO",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "CD_ASSUNTO"
+   ]
+  },
+  {
+   "name": "IDX_DOCUMENT_AUX6",
+   "unique": false,
+   "columns": [
+    "DT_CRIACAO",
+    "TP_DOCUMENTO"
+   ]
+  },
+  {
+   "name": "IDX_DOCUMENT_AUX7",
+   "unique": false,
+   "columns": [
+    "VERSAO_ATIVA",
+    "NR_DOCUMENTO"
+   ]
+  },
+  {
+   "name": "IDX_DOCUMENT_AUX8",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "DT_ATUALIZACAO"
+   ]
+  },
+  {
+   "name": "IDX_DOCUMENT_AUX9",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "LOG_APROVADO"
+   ]
+  },
+  {
+   "name": "IDX_DOCUMENT_AUX10",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "LOG_DELETE",
+    "TP_DOCUMENTO",
+    "NR_DOCUMENTO_PAI"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.Document"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa (tenant) dona do registro; faz parte da PK e deve ser filtrado em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "Document"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Identificador lógico do documento/pasta; é o mesmo em todas as versões.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "Integer",
+   "java_entity": "Document"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número sequencial da versão do documento.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "Document"
+  },
+  {
+   "name": "COD_UUID",
+   "type": "varchar(36)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "UUID (36 caracteres) do documento, identificador estável usado por APIs/integrações.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "UUID",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "NR_ACESSOS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Contador de acessos/visualizações do documento; usado no ranking de documentos mais populares.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "accessCount",
+   "java_type": "Integer",
+   "java_entity": "Document"
+  },
+  {
+   "name": "VERSAO_ATIVA",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se esta é a versão ativa (vigente) do documento.",
+   "semantic_type": "flag",
+   "values": "1=versão ativa; 0=versão antiga",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "activeVersion",
+   "java_type": "Boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "DS_COMENTARIO_ADICIONAL",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Comentários adicionais livres informados na publicação (texto longo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "additionalComments",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "PERMITIR_MULTI_FICHAS",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Em fichário de formulário, permite que o mesmo usuário crie múltiplas fichas.",
+   "semantic_type": "flag",
+   "values": "1=permite várias fichas por usuário",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "allowMuiltiCardsPerUser",
+   "java_type": "Boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "APROV_E_OU",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Modo de aprovação com vários aprovadores: E (todos) ou OU (qualquer um).",
+   "semantic_type": "flag",
+   "values": "1/0 = todos vs. qualquer aprovador (sentido exato não confirmado)",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "approvalAndOr",
+   "java_type": "Boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "LOG_APROVADO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a versão foi aprovada no fluxo de aprovação de documentos.",
+   "semantic_type": "flag",
+   "values": "1=aprovado; 0=pendente de aprovação",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "approved",
+   "java_type": "Boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "DT_APROVACAO",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data em que a versão foi aprovada.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "approvedDate",
+   "java_type": "Date",
+   "java_entity": "Document"
+  },
+  {
+   "name": "CD_ATUALIZACAO",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código/identificador de atualização associado ao documento (sequência de atualização).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "atualizationId",
+   "java_type": "Integer",
+   "java_entity": "Document"
+  },
+  {
+   "name": "DES_PRINC_FICHA",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição principal da ficha: texto que representa o registro de formulário (campo descritor do fichário).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "cardDescription",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "LOG_PASTA_CHECKOUT",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Marca a pasta particular usada para armazenar documentos em check-out do usuário.",
+   "semantic_type": "flag",
+   "values": "1=pasta de check-out",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "checkoutFolder",
+   "java_type": "Boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrícula do usuário criador/proprietário do documento.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE (colleagueId)",
+   "confidence": "high",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "IDI_TIP_ARMAZ_LP",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo de armazenamento/conversão para longo prazo (PDF/A) do documento.",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "convertDocumentType",
+   "java_type": "Integer",
+   "java_entity": "Document"
+  },
+  {
+   "name": "NUM_CRC",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "CRC do arquivo físico, usado para detectar conteúdo duplicado/alterado.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "crc",
+   "java_type": "Long",
+   "java_entity": "Document"
+  },
+  {
+   "name": "DT_CRIACAO",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data de criação do documento (sem hora).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "createDate",
+   "java_type": "Date",
+   "java_entity": "Document"
+  },
+  {
+   "name": "NM_DATASET",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do dataset associado, quando o fichário/formulário expõe dados como dataset.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "datasetName",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "LOG_DELETE",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Exclusão lógica: 1 = documento na lixeira/excluído.",
+   "semantic_type": "flag",
+   "values": "1=excluído (lixeira); 0=ativo",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "deleted",
+   "java_type": "Boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "DS_PRINCIPAL_DOCUMENTO",
+   "type": "varchar(4000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição/nome exibido do documento ou pasta (até 4000 caracteres).",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "documentDescription",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "NUM_DOCTO_PROPRIED",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "NR_DOCUMENTO do documento de propriedades (fichário/pasta) do qual este herda metadados.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "medium",
+   "java_field": "documentPropertyNumber",
+   "java_type": "Integer",
+   "java_entity": "Document"
+  },
+  {
+   "name": "NUM_VERS_PROPRIED",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versão do documento de propriedades referenciado em NUM_DOCTO_PROPRIED.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "medium",
+   "java_field": "documentPropertyVersion",
+   "java_type": "Integer",
+   "java_entity": "Document"
+  },
+  {
+   "name": "TP_DOCUMENTO",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do item do GED.",
+   "semantic_type": "enum",
+   "values": "0=pasta raiz; 1=pasta; 2=documento (arquivo); 3=link externo; 4=fichário (formulário); 5=ficha (registro de formulário); 6=publicado em pool; 7=anexo de workflow; 8=documento editável; 9=aplicação externa; 10=relatório/arquivo; 15=pasta social; 16=formulário de metadados",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "documentType",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "CD_TIPO_DOC",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do tipo de documento (classificação do usuário) aplicado ao item.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "TIPO_DOCUMENTO.CD_TIPO_DOC",
+   "confidence": "high",
+   "java_field": "documentTypeId",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "LOG_PERMITE_DOWNLOAD",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o download do arquivo é permitido.",
+   "semantic_type": "flag",
+   "values": "1=permite download",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "downloadEnabled",
+   "java_type": "Boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "LOG_RASCUNHO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica versão em rascunho (não publicada).",
+   "semantic_type": "flag",
+   "values": "1=rascunho",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "draft",
+   "java_type": "Boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "DT_EXPIRACAO",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data de expiração do documento (validade).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "expirationDate",
+   "java_type": "Date",
+   "java_entity": "Document"
+  },
+  {
+   "name": "LOG_DOCTO_EXPIRA",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o documento possui prazo de expiração.",
+   "semantic_type": "flag",
+   "values": "1=expira",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "expires",
+   "java_type": "Boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "CD_DOCUMENTO_EXT",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código/identificador externo do documento (integração com sistema externo).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "externalDocumentId",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "NR_ICONE",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Número do ícone associado ao documento/pasta.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ICONE.NR_ICONE",
+   "confidence": "medium",
+   "java_field": "iconId",
+   "java_type": "Integer",
+   "java_entity": "Document"
+  },
+  {
+   "name": "LOG_NAO_ALTERA",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Documento imutável: não pode ser alterado.",
+   "semantic_type": "flag",
+   "values": "1=imutável",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "imutable",
+   "java_type": "Boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "LOG_INDEXAD",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o documento já foi indexado no motor de busca.",
+   "semantic_type": "flag",
+   "values": "1=indexado; 0=pendente de indexação",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "indexed",
+   "java_type": "Boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "LOG_HERDA_APROV",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Herda os aprovadores da pasta pai.",
+   "semantic_type": "flag",
+   "values": "1=herda aprovadores",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "inheritApprovers",
+   "java_type": "Boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "LOG_HERDA_SEGUR",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Herda a segurança (permissões) da pasta pai.",
+   "semantic_type": "flag",
+   "values": "1=herda segurança do pai",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "inheritSecurity",
+   "java_type": "boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "LOG_USA_VISUALIZ",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Usa o visualizador interno do Fluig para exibir o arquivo.",
+   "semantic_type": "flag",
+   "values": "1=visualizador interno",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "internalVisualizer",
+   "java_type": "Boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "NR_MARCA_DAGUA",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Marca d'água aplicada na visualização/download do documento.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "MARCA_DAGUA.NR_MARCA_DAGUA",
+   "confidence": "high",
+   "java_field": "watermarkId",
+   "java_type": "Integer",
+   "java_entity": "Document"
+  },
+  {
+   "name": "DS_PALAVRA_CHAVE",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Palavras-chave do documento para busca (texto longo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "keyWord",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "CD_IDIOMA",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do idioma do documento (ex.: pt_BR).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "languageId",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "DT_ATUALIZACAO",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data da última modificação.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "lastModifiedDate",
+   "java_type": "Date",
+   "java_entity": "Document"
+  },
+  {
+   "name": "HRA_ATUALIZ",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Hora da última modificação, em texto (HH:mm:ss).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "lastModifiedTime",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "COD_LISTA",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código da meta-lista (lista de metadados/formulário) vinculada ao documento.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "META_LISTA.COD_LISTA",
+   "confidence": "medium",
+   "java_field": "metaListId",
+   "java_type": "Integer",
+   "java_entity": "Document"
+  },
+  {
+   "name": "COD_REG_LISTA",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do registro dentro da meta-lista (card/registro de formulário).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "metaListRecordId",
+   "java_type": "Integer",
+   "java_entity": "Document"
+  },
+  {
+   "name": "COD_MIME_TYPE",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "MIME type do arquivo (ex.: application/pdf).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "mimetype",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "NR_DIAS_NOT_EXP",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Dias de antecedência para notificar a expiração; NULL usa o parâmetro global.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "notificationDays",
+   "java_type": "Integer",
+   "java_entity": "Document"
+  },
+  {
+   "name": "LOG_DATASET_ATIVO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Dataset considera apenas registros ativos do fichário.",
+   "semantic_type": "flag",
+   "values": "1=somente ativos",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "onlyActiveRows",
+   "java_type": "Boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "NR_DOCUMENTO_PAI",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "NR_DOCUMENTO da pasta pai na árvore (0 = raiz).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "parentDocumentId",
+   "java_type": "Integer",
+   "java_entity": "Document"
+  },
+  {
+   "name": "IDI_STATUS_CONV_PDF",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Status da conversão do arquivo para PDF para visualização.",
+   "semantic_type": "enum",
+   "values": "0=não convertido; 1=convertido; 2=conversão não suportada; 3=arquivo não encontrado; 4=OpenOffice indisponível; 5=erro de conversão",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "pdfConversionStatus",
+   "java_type": "Integer",
+   "java_entity": "Document"
+  },
+  {
+   "name": "COD_TIP_VISUALIZ",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Motor de renderização/visualização de PDF utilizado (pdfRenderEngine).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "pdfRenderEngine",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "IDI_TIP_PERMIS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo de permissão de segurança aplicada ao documento (default 0).",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "permissionType",
+   "java_type": "Integer",
+   "java_entity": "Document"
+  },
+  {
+   "name": "NM_ARQUIVO_FISICO",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do arquivo físico gravado no volume de armazenamento.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "phisicalFile",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "NUM_PRIORID",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Prioridade do documento/ordem de exibição.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "priority",
+   "java_type": "Integer",
+   "java_entity": "Document"
+  },
+  {
+   "name": "COD_MATR_PARTIC",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrícula do dono da pasta/documento particular (privado).",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE (privateColleagueId)",
+   "confidence": "high",
+   "java_field": "privateColleagueId",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "LOG_DOCTO_PARTIC",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica documento/pasta particular do usuário.",
+   "semantic_type": "flag",
+   "values": "1=particular",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "privateDocument",
+   "java_type": "Boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "LOG_PROCES_BATCH",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica que o documento está em processamento em lote.",
+   "semantic_type": "flag",
+   "values": "1=em processamento batch",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "processingBatch",
+   "java_type": "Boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "CD_PUBLICADOR",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrícula do usuário que publicou esta versão.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE (publisherId)",
+   "confidence": "high",
+   "java_field": "publisherId",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "QUOTA",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Cota de espaço da pasta (MB); 0/NULL sem cota.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "quota",
+   "java_type": "Integer",
+   "java_entity": "Document"
+  },
+  {
+   "name": "NM_ARQUIVOS_RELACIONADOS",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Lista de arquivos relacionados/anexos do documento (texto longo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "relatedFiles",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "IDI_TIP_RESTRIC",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo de restrição de segurança aplicada ao documento (default 0).",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "restrictionType",
+   "java_type": "Integer",
+   "java_entity": "Document"
+  },
+  {
+   "name": "FDN_SITECODE",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do site/portal associado ao documento.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "siteCode",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "NUM_TAM_ARQ_FISIC",
+   "type": "float",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tamanho do arquivo físico (em MB, float, conforme uso em cotas).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "size",
+   "java_type": "Float",
+   "java_entity": "Document"
+  },
+  {
+   "name": "DOCTO_SOCIAL",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indicador/identificador de documento social (rede social/feed).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "socialDocument",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "IDI_STATUS_ARMAZ_LP",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Status do armazenamento de longo prazo do documento.",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "statusArmazLongoPrazo",
+   "java_type": "Integer",
+   "java_entity": "Document"
+  },
+  {
+   "name": "CD_ASSUNTO",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do assunto (tópico) do documento.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ASSUNTO.CD_ASSUNTO",
+   "confidence": "medium",
+   "java_field": "topicId",
+   "java_type": "Integer",
+   "java_entity": "Document"
+  },
+  {
+   "name": "LOG_TRADUZIR",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica que o documento é traduzível.",
+   "semantic_type": "flag",
+   "values": "1=traduzir",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "translated",
+   "java_type": "boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "LOG_ATUALIZ_PROPRIED_ISO",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Atualizar propriedades ISO do documento.",
+   "semantic_type": "flag",
+   "values": "1=atualizar",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "updateIsoProperties",
+   "java_type": "boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "USED_QUOTA",
+   "type": "float",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Espaço de cota já utilizado na pasta (MB).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "usedQuota",
+   "java_type": "Float",
+   "java_entity": "Document"
+  },
+  {
+   "name": "LOG_NOTIFICA_USUAR",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Notifica usuários sobre alterações/publicação do documento.",
+   "semantic_type": "flag",
+   "values": "1=notificar",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "userNotify",
+   "java_type": "Boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "DT_INI_VALIDADE",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data de início da validade do documento.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "validationStartDate",
+   "java_type": "Date",
+   "java_entity": "Document"
+  },
+  {
+   "name": "DS_VERSAO",
+   "type": "varchar(4000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição/comentário da versão (até 4000 caracteres).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "versionDescription",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "CD_VISAO",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código da visão associada ao documento.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "visualization",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "COD_VOL_FISIC",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do volume físico de armazenamento onde o arquivo está.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VOLUME.COD_VOL_FISIC",
+   "confidence": "medium",
+   "java_field": "volumeId",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "LOG_PUBLIC",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Documento público (acessível sem autenticação).",
+   "semantic_type": "flag",
+   "values": "1=público",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "publicDocument",
+   "java_type": "Boolean",
+   "java_entity": "Document"
+  },
+  {
+   "name": "METADATAFORM_VERSION_STATUS",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Status da versão de formulário de metadados.",
+   "semantic_type": "status",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "metadataFormVersionStatus",
+   "java_type": "String",
+   "java_entity": "Document"
+  },
+  {
+   "name": "HASH_ANNOTATIONS",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "null",
+   "pk_position": null,
+   "purpose": "Hash das anotações do documento; compara se anotações mudaram entre versões.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "hashAnnotations",
+   "java_type": "String",
+   "java_entity": "Document"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "LINK_DOCTO_VIRTUAL",
+   "from_cols": [
+    "NR_DOCUMENTO"
+   ],
+   "to_cols": [
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "1:N",
+   "kind": "hql-join",
+   "description": "Links virtuais que apontam para este documento (Document.findLinkDocuments).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO_PAI"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-confirmed",
+   "description": "Auto-relação: pasta pai.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "TIPO_DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "CD_TIPO_DOC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "CD_TIPO_DOC"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Tipo de documento.",
+   "status": "probable"
+  },
+  {
+   "to_table": "MARCA_DAGUA",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_MARCA_DAGUA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_MARCA_DAGUA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-confirmed",
+   "description": "Marca d'água aplicada (query COUNT_DOCUMENTS_BY_WATERMARK).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "ICONE",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_ICONE"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_ICONE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Ícone do item.",
+   "status": "probable"
+  },
+  {
+   "to_table": "META_LISTA",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Meta-lista de formulário.",
+   "status": "probable"
+  },
+  {
+   "to_table": "DOCTO_DESTAQ_COLAB",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable",
+   "description": "Heurística; DOCTO_DESTAQ_COLAB é filho (por usuário) de DOCUMENTO por (EMPRESA,DOC,VERSAO); matrícula não é chave da relação.",
+   "status": "probable"
+  },
+  {
+   "to_table": "DOCTO_RANKING",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable",
+   "description": "Heurística; ranking por usuário refere o documento por (EMPRESA,DOC,VERSAO).",
+   "status": "probable"
+  },
+  {
+   "to_table": "PREFER_PASTA",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable",
+   "description": "Heurística; preferências de pasta por usuário referenciam o documento.",
+   "status": "probable"
+  },
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "USER_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Criador do documento (também CD_PUBLICADOR, COD_MATR_PARTIC). [alvo corrigido: USER_CODE/LOGIN pertencem a FDN_USERTENANT]",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "ASSUNTO_FAVORITO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "CD_ASSUNTO",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "CD_ASSUNTO",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: coincidência de nomes de PK; assunto favorito é por usuário, não é FK do documento.",
+   "status": "rejected"
+  },
+  {
+   "to_table": "CONHECIMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "CD_MATRICULA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "CD_MATRICULA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable",
+   "description": "Sentido inverso: CONHECIMENTO referencia DOCUMENTO; relação inferida por nomes, não confirmada; CD_MATRICULA do documento é o criador, não o usuário da relação.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": [
+  {
+   "from_table": "FDN_RECENTLY_VIEWED",
+   "from_cols": [
+    "NUM_DOCUMENT"
+   ],
+   "to_cols": [
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "TAR_DOCTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "ANEXO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "EVENT_FICHA",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FORM_DATASET",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "HISTOR_ACES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "ECM_COLLABORATION",
+   "from_cols": [
+    "TENANT_ID",
+    "DOCUMENT_ID",
+    "DOCUMENT_VERSION"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "LOG_COP_CONTROLAD",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "MOVTO_APROVAC",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "NIVEL_APROVACAO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "CONFIGUR_SEGUR_DOCTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "CONHECIMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DEFAULT_PROPRIED_DOCTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DOCTO_ALOCAD",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_DOCTO_ORIG",
+    "NUM_VERS_ORIG"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DOCTO_ALOCAD",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_DOCTO_DEST"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DOCTO_ANOTACAO_COLAB",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DOCTO_APLICAT",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DOCTO_CAMPO_CUSTOM",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DOCTO_COMENT",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DOCTO_CONTDO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DOCTO_DESTAQ_COLAB",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DOCTO_NOTIF",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DOCTO_OBS_COLAB",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DOCTO_RANKING",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DOCTO_RELACDO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DOCTO_RELACDO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_DOCTO_RELACDO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DOCTO_SOCIAL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DOCTO_TAG",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO_PAI"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-confirmed"
+  },
+  {
+   "from_table": "LINK_DOCTO_VIRTUAL",
+   "from_cols": [
+    "NR_DOCUMENTO"
+   ],
+   "to_cols": [
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
+  },
+  {
+   "from_table": "LINK_DOCTO_VIRTUAL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCTO_PAI_CORREN"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-confirmed"
+  },
+  {
+   "from_table": "MARCA_DAGUA",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_MARCA_DAGUA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_MARCA_DAGUA"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-confirmed"
+  },
+  {
+   "from_table": "TIPO_DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "CD_TIPO_DOC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "CD_TIPO_DOC"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FICHA",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_FICHA",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FICHARIO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_FICHARIO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FAVORITOS",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PREFER_PASTA",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "ECM_IMAGE_FORM_ITEM",
+   "from_cols": [
+    "DOCUMENT_ID",
+    "DOCUMENT_VERSION"
+   ],
+   "to_cols": [
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "ECM_METADATA_FORM",
+   "from_cols": [
+    "TENANT_ID",
+    "DOCUMENT_ID",
+    "DCMNT_VRSN_NMBER"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "APROVACAO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "SOCIALFORMCONTROL",
+   "from_cols": [
+    "DOCUMENTID"
+   ],
+   "to_cols": [
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "SOCIALFORMEVENT",
+   "from_cols": [
+    "DOCUMENTID"
+   ],
+   "to_cols": [
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

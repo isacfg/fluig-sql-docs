@@ -1,0 +1,192 @@
+{
+ "name": "META_LISTA",
+ "domain": "ecm-lists-filters",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Cabeçalho de meta-lista: lista dinâmica de dados definida pelo usuário (tabelas customizadas de metadados do ECM).",
+ "lifecycle": "Exclusão lógica por LOG_DELETE.",
+ "key_notes": "Multi-tenant por COD_EMPRESA (parte da PK).",
+ "notes_for_agents": "Sempre filtrar COD_EMPRESA e, nas filhas, COD_LISTA; ignore LOG_DELETE=1 em META_LISTA/CAMPO.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_LISTA"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.lists.model.MetaList"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "MetaList"
+  },
+  {
+   "name": "COD_LISTA",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código da meta-lista (lista dinâmica/dataset de metadados) dentro da empresa.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "listId",
+   "java_type": "int",
+   "java_entity": "MetaList"
+  },
+  {
+   "name": "LOG_DELETE",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Exclusão lógica da lista.",
+   "semantic_type": "flag",
+   "values": "1=excluída; 0/null=ativa",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "deleted",
+   "java_type": "Boolean",
+   "java_entity": "MetaList"
+  },
+  {
+   "name": "DSL_LISTA",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição da lista.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "metaListDescription",
+   "java_type": "String",
+   "java_entity": "MetaList"
+  },
+  {
+   "name": "NOM_LISTA",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome da lista.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "metaListName",
+   "java_type": "String",
+   "java_entity": "MetaList"
+  },
+  {
+   "name": "TP_LISTA",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo da lista; queries findAll filtram TP_LISTA=0 ou nulo como listas comuns.",
+   "semantic_type": "enum",
+   "values": "0/null=lista comum; outros valores não confirmados",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "type",
+   "java_type": "Integer",
+   "java_entity": "MetaList"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "META_LISTA_CAMPO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "META_LISTA_CAMPO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA_ESTRAN"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "META_LISTA_PERSPECT",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "META_LIST_EVENT",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "SERV_DATASET",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

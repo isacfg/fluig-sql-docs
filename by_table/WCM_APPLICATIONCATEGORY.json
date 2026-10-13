@@ -1,0 +1,107 @@
+{
+ "name": "WCM_APPLICATIONCATEGORY",
+ "domain": "wcm-portal",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Categoria atribuída a uma aplicação WCM (agrupamento no catálogo de widgets).",
+ "lifecycle": "Povoada na instalação/publicação da aplicação.",
+ "key_notes": "Filha de WCM_APPLICATION; sem tenant.",
+ "notes_for_agents": "Único por APPLICATION_ID+APPLICATION_CATEGORY.",
+ "primary_key": [
+  "APPLICATION_CATEGORY_ID"
+ ],
+ "unique_constraints": [
+  [
+   "APPLICATION_ID",
+   "APPLICATION_CATEGORY"
+  ]
+ ],
+ "indexes": [
+  {
+   "name": "WCMAPPCATEGI001",
+   "unique": false,
+   "columns": [
+    "APPLICATION_CATEGORY",
+    "APPLICATION_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.wcm.core.entity.WCMApplicationCategory"
+ ],
+ "columns": [
+  {
+   "name": "APPLICATION_CATEGORY_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "WCMApplicationCategory"
+  },
+  {
+   "name": "APPLICATION_CATEGORY",
+   "type": "varchar(60)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome/código da categoria.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "category",
+   "java_type": "String",
+   "java_entity": "WCMApplicationCategory"
+  },
+  {
+   "name": "APPLICATION_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Aplicação categorizada.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "WCM_APPLICATION.APPLICATION_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "WCM_APPLICATION",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Aplicação WCM dona do registro.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "WCM_APPLICATION",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk"
+  }
+ ]
+}

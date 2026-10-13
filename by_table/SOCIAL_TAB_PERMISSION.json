@@ -1,0 +1,132 @@
+{
+ "name": "SOCIAL_TAB_PERMISSION",
+ "domain": "social",
+ "module": "03001-fluig-database-social",
+ "purpose": "Permissão de abas do perfil/comunidade social (hoje só NOCODE_FORMS_APP), com tipo de acesso e flag de ativação.",
+ "lifecycle": "Criada/atualizada ao configurar permissões de aba de um perfil social.",
+ "key_notes": "Único por TENANT_ID+SOCIAL_ID+TAB_ID.",
+ "notes_for_agents": "Filtre por TENANT_ID e SOCIAL_ID.",
+ "primary_key": [
+  "SOCIAL_TAB_PERMISSION_ID"
+ ],
+ "unique_constraints": [
+  [
+   "TENANT_ID",
+   "SOCIAL_ID",
+   "TAB_ID"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.social.relation.entity.SocialTabPermission"
+ ],
+ "columns": [
+  {
+   "name": "SOCIAL_TAB_PERMISSION_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "SocialTabPermission"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant (empresa) da permissão.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "SocialTabPermission"
+  },
+  {
+   "name": "SOCIAL_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Perfil social ao qual a permissão de aba se aplica.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIAL.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TAB_ID",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Aba controlada (enum SocialTabType, gravado como texto).",
+   "semantic_type": "enum",
+   "values": "NOCODE_FORMS_APP=aba de formulários no-code",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "tabId",
+   "java_type": "SocialTabType",
+   "java_entity": "SocialTabPermission"
+  },
+  {
+   "name": "TAB_PERMISSION_TYPE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nível de acesso à aba (enum SocialTabPermissionType, texto).",
+   "semantic_type": "enum",
+   "values": "FREE=livre; PARTIAL=parcial; RESTRICT=restrito",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "tabPermissionType",
+   "java_type": "SocialTabPermissionType",
+   "java_entity": "SocialTabPermission"
+  },
+  {
+   "name": "TAB_ACTIVE",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a aba está ativa para o perfil.",
+   "semantic_type": "flag",
+   "values": "1=ativa; 0=inativa",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "active",
+   "java_type": "boolean",
+   "java_entity": "SocialTabPermission"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "SOCIAL",
+   "from_cols": [
+    "SOCIAL_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Perfil social dono da permissão (jpa-join SocialTabPermission.social).",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

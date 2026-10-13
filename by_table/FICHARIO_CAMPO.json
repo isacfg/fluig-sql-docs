@@ -1,0 +1,171 @@
+{
+ "name": "FICHARIO_CAMPO",
+ "domain": "ecm-forms",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Definição dos campos de cada tabela de um fichário (formulário): nome e tipo do campo.",
+ "lifecycle": "Criada na publicação do formulário; uma linha por campo por versão.",
+ "key_notes": "PK (COD_EMPRESA, COD_CAMPO, NR_FICHARIO, COD_TABELA, NR_VERSAO).",
+ "notes_for_agents": "Descritor dos valores guardados em FICHA.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_CAMPO",
+  "NR_FICHARIO",
+  "COD_TABELA",
+  "NR_VERSAO"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.forms.model.FormField"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa (tenant) dona do registro; faz parte da PK e deve ser filtrado em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "Long",
+   "java_entity": "FormField"
+  },
+  {
+   "name": "COD_CAMPO",
+   "type": "varchar(70)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Identificador/nome do campo do formulário.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "fieldId",
+   "java_type": "String",
+   "java_entity": "FormField"
+  },
+  {
+   "name": "NR_FICHARIO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número do fichário (formulário).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FICHARIO.NR_FICHARIO",
+   "confidence": "high",
+   "java_field": "formId",
+   "java_type": "Integer",
+   "java_entity": "FormField"
+  },
+  {
+   "name": "COD_TABELA",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Tabela do formulário à qual o campo pertence.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "FICHARIO.COD_TABELA",
+   "confidence": "high",
+   "java_field": "tableId",
+   "java_type": "String",
+   "java_entity": "FormField"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 5,
+   "purpose": "Versão do fichário.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FICHARIO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "Integer",
+   "java_entity": "FormField"
+  },
+  {
+   "name": "TIPO_CAMPO",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo de dado/componente do campo (texto, número etc.); valores não confirmados.",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "fieldType",
+   "java_type": "String",
+   "java_entity": "FormField"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FICHARIO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_FICHARIO",
+    "NR_VERSAO",
+    "COD_TABELA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_FICHARIO",
+    "NR_VERSAO",
+    "COD_TABELA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-confirmed",
+   "description": "Tabela do fichário a que o campo pertence (chave coincide integralmente).",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FICHA",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_CAMPO",
+    "NR_FICHARIO",
+    "COD_TABELA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_CAMPO",
+    "NR_FICHARIO",
+    "COD_TABELA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FICHARIO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_FICHARIO",
+    "NR_VERSAO",
+    "COD_TABELA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_FICHARIO",
+    "NR_VERSAO",
+    "COD_TABELA"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable"
+  }
+ ]
+}

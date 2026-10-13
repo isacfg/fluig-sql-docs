@@ -1,0 +1,122 @@
+{
+ "name": "FDN_DOWNLOADNOTIFY",
+ "domain": "volumes-sites",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Usuários a notificar quando um item da fila de download de site (FDN_SITEDOWNLOADQUEUE) concluir. Liga item da fila a usuário.",
+ "lifecycle": "Criada ao solicitar download; removida após a notificação ou fim da fila.",
+ "key_notes": "Sem tenant direto.",
+ "notes_for_agents": "Consulta típica: findByQueueAndUser.",
+ "primary_key": [
+  "DOWNLOADNOTIFY_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "DOWNLOADNOTIFY001",
+   "unique": false,
+   "columns": [
+    "QUEUE_ID",
+    "USERTENANT_ID"
+   ]
+  },
+  {
+   "name": "FK_2DGRLLL8TRAMNVXK1D4KCF50N",
+   "unique": false,
+   "columns": [
+    "USERTENANT_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.fluig.foundation.volume.entity.FDNDownloadNotify"
+ ],
+ "columns": [
+  {
+   "name": "DOWNLOADNOTIFY_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNDownloadNotify"
+  },
+  {
+   "name": "QUEUE_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Item da fila de download a ser notificado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_SITEDOWNLOADQUEUE.QUEUE_ID",
+   "confidence": "high",
+   "java_field": "queueId",
+   "java_type": "Long",
+   "java_entity": "FDNDownloadNotify"
+  },
+  {
+   "name": "USERTENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Usuário a notificar (FDN_USERTENANT).",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_TENANT_ID",
+   "confidence": "high",
+   "java_field": "userTenantId",
+   "java_type": "Long",
+   "java_entity": "FDNDownloadNotify"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_SITEDOWNLOADQUEUE",
+   "from_cols": [
+    "QUEUE_ID"
+   ],
+   "to_cols": [
+    "QUEUE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Item da fila.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "USERTENANT_ID"
+   ],
+   "to_cols": [
+    "USER_TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Usuário a notificar.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_SITEDOWNLOADQUEUE",
+   "from_cols": [
+    "QUEUE_ID"
+   ],
+   "to_cols": [
+    "QUEUE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk"
+  }
+ ]
+}

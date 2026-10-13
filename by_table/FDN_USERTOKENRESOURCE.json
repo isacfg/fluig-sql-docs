@@ -1,0 +1,101 @@
+{
+ "name": "FDN_USERTOKENRESOURCE",
+ "domain": "seguranca",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Recursos (hoje apenas URLs) liberados por um token de usuário.",
+ "lifecycle": "Criada junto com o token.",
+ "key_notes": "Único por (USERTOKEN_ID, RESOURCE_CODE).",
+ "notes_for_agents": "JOIN com FDN_USERTOKEN.",
+ "primary_key": [
+  "USERTOKENRESOURCE_ID"
+ ],
+ "unique_constraints": [
+  [
+   "USERTOKEN_ID",
+   "RESOURCE_CODE"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.security.entity.FDNUserTokenResource"
+ ],
+ "columns": [
+  {
+   "name": "USERTOKENRESOURCE_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador do recurso liberado pelo token (PK).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNUserTokenResource"
+  },
+  {
+   "name": "RESOURCE_CODE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do recurso liberado (para tipo URL, a própria URL).",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "resource",
+   "java_type": "String",
+   "java_entity": "FDNUserTokenResource"
+  },
+  {
+   "name": "RESOURCE_TYPE",
+   "type": "int(11)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do recurso (enum FDNTokenResourceType, código inteiro).",
+   "semantic_type": "enum",
+   "values": "0=URL",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "type",
+   "java_type": "FDNTokenResourceType",
+   "java_entity": "FDNUserTokenResource"
+  },
+  {
+   "name": "USERTOKEN_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Token de usuário ao qual o recurso pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_USERTOKEN.USERTOKEN_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_USERTOKEN",
+   "from_cols": [
+    "USERTOKEN_ID"
+   ],
+   "to_cols": [
+    "USERTOKEN_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Token dono do recurso (FDNUserTokenResource.userToken).",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

@@ -1,0 +1,327 @@
+{
+ "name": "ESTADO_PROCES_TRIGGER",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Gatilhos (timers/eventos) de um estado: agendamento, frequência e valor de disparo para eventos iniciais/intermediários de timer (ProcessStateTrigger).",
+ "lifecycle": "Criada ao modelar eventos de timer/mensagem; JOB_NAME liga ao agendador.",
+ "key_notes": "Consultada por findInitialTimerTrigger para eventos de início por timer.",
+ "notes_for_agents": "Para timers de início, juntar a ESTADO_PROCES com LOG_ESTADO_INICIAL=1.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_DEF_PROCES",
+  "NUM_VERS",
+  "NUM_SEQ",
+  "NUM_SEQ_TRIGGER"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessStateTrigger"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK e filtro obrigatório de multi-tenancy.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ProcessStateTrigger"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código (processId) da definição de processo BPM a que a linha pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ProcessStateTrigger"
+  },
+  {
+   "name": "NUM_SEQ",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "NUM_SEQ do estado (stateSequence) dono do gatilho.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "high",
+   "java_field": "stateSequence",
+   "java_type": "int",
+   "java_entity": "ProcessStateTrigger"
+  },
+  {
+   "name": "NUM_SEQ_TRIGGER",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 5,
+   "purpose": "Sequência do gatilho dentro do estado.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "triggerSequence",
+   "java_type": "int",
+   "java_entity": "ProcessStateTrigger"
+  },
+  {
+   "name": "NUM_VERS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número da versão da definição de processo (versionamento do processo).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "ProcessStateTrigger"
+  },
+  {
+   "name": "DSL_DIA_SEMANA",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Dias da semana (lista textual) em que o timer dispara.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "diaSemana",
+   "java_type": "String",
+   "java_entity": "ProcessStateTrigger"
+  },
+  {
+   "name": "DSL_FREQUENCIA",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Frequência/expressão de repetição do timer.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "frequencia",
+   "java_type": "String",
+   "java_entity": "ProcessStateTrigger"
+  },
+  {
+   "name": "JOB_NAME",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do job agendado (scheduler) criado para o gatilho.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "jobName",
+   "java_type": "String",
+   "java_entity": "ProcessStateTrigger"
+  },
+  {
+   "name": "COD_TRIGGER",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo de execução (runType) da frequência do timer.",
+   "semantic_type": "enum",
+   "values": "0=minuto;1=hora;2=dia;3=dia útil;4=mês;5=semana do mês;6=dia da semana;99=segundo",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "runType",
+   "java_type": "int",
+   "java_entity": "ProcessStateTrigger"
+  },
+  {
+   "name": "DSL_TIME_TRIGGER",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Horário/instante de disparo do timer (texto).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "timeTrigger",
+   "java_type": "String",
+   "java_entity": "ProcessStateTrigger"
+  },
+  {
+   "name": "IDI_CALC_ESFOR",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do gatilho (campo Java type, enum ProcessStateTriggerType); nome de coluna reaproveitado de IDI_CALC_ESFOR.",
+   "semantic_type": "enum",
+   "values": "0=sinal;1=mensagem;2=timer;3=condicional;4=múltiplo;5=paralelo",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "type",
+   "java_type": "Integer",
+   "java_entity": "ProcessStateTrigger"
+  },
+  {
+   "name": "DSL_VALUE",
+   "type": "varchar(4000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor/parâmetro do gatilho (até 4000 caracteres), ex.: expressão ou intervalo.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "value",
+   "java_type": "String",
+   "java_entity": "ProcessStateTrigger"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ESTADO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "Estado dono do gatilho (join em findInitialTimerTrigger).",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "LIN_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: LIN_PROCES é raia (swimlane) do diagrama; coincidência de forma da PK.",
+   "status": "rejected"
+  },
+  {
+   "to_table": "SEGUR_ANEXO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: segurança de anexo apenas compartilha as colunas-chave por nome; sem vínculo no código desta entidade.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": [
+  {
+   "from_table": "ESTADO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "1:N",
+   "kind": "hql-join"
+  },
+  {
+   "from_table": "ESTADO_PROCES",
+   "from_cols": [
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
+  },
+  {
+   "from_table": "ESTADO_PROCES",
+   "from_cols": [
+    "COD_DEF_PROCES"
+   ],
+   "to_cols": [
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
+  },
+  {
+   "from_table": "ESTADO_PROCES",
+   "from_cols": [
+    "COD_EMPRESA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
+  },
+  {
+   "from_table": "ESTADO_PROCES",
+   "from_cols": [
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
+  }
+ ]
+}

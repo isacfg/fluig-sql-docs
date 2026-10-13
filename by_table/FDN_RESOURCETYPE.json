@@ -1,0 +1,140 @@
+{
+ "name": "FDN_RESOURCETYPE",
+ "domain": "foundation-identity-access",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Tipos de recurso protegível (categorias de FDN_RESOURCE).",
+ "lifecycle": "Populada na instalação; poucas linhas.",
+ "key_notes": "Define, via FDN_RESOURCETYPEPERMISSION, quais permissões existem para cada tipo.",
+ "notes_for_agents": "Tabela de domínio, sem tenant.",
+ "primary_key": [
+  "RESOURCE_TYPE_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "FDNRESOURCETYPEI001",
+   "unique": false,
+   "columns": [
+    "RESOURCE_TYPE_CODE"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.permission.entity.FDNResourceType"
+ ],
+ "columns": [
+  {
+   "name": "RESOURCE_TYPE_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária surrogate.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNResourceType"
+  },
+  {
+   "name": "RESOURCE_TYPE_CODE",
+   "type": "varchar(40)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do tipo de recurso (indexado).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "code",
+   "java_type": "String",
+   "java_entity": "FDNResourceType"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "varchar(120)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição do tipo de recurso.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "FDNResourceType"
+  },
+  {
+   "name": "INTERNAL",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica tipo interno do sistema.",
+   "semantic_type": "flag",
+   "values": "1=interno; 0=não interno",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "isInternal",
+   "java_type": "Boolean",
+   "java_entity": "FDNResourceType"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_RESOURCE",
+   "from_cols": [
+    "RESOURCE_TYPE_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_TYPE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join",
+   "description": "Recursos deste tipo.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_RESOURCETYPEPERMISSION",
+   "from_cols": [
+    "RESOURCE_TYPE_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_TYPE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join",
+   "description": "Permissões válidas para o tipo.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_RESOURCE",
+   "from_cols": [
+    "RESOURCE_TYPE_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_TYPE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_RESOURCETYPEPERMISSION",
+   "from_cols": [
+    "RESOURCE_TYPE_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_TYPE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

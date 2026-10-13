@@ -1,0 +1,129 @@
+{
+ "name": "HISTOR_CONVER_ESTADO",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Mapeamento de estados na conversão: estado de origem x estado de destino por conversão (ConversionHistoryState).",
+ "lifecycle": "Uma linha por estado mapeado em cada conversão.",
+ "key_notes": "",
+ "notes_for_agents": "",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NUM_SEQ_CONVER",
+  "NUM_SEQ_ESTADO"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ConversionHistoryState"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK e filtro obrigatório de multi-tenancy.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ConversionHistoryState"
+  },
+  {
+   "name": "NUM_SEQ_CONVER",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Sequência da conversão pai.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "HISTOR_CONVER.NUM_SEQ_CONVER",
+   "confidence": "high",
+   "java_field": "conversionSequence",
+   "java_type": "int",
+   "java_entity": "ConversionHistoryState"
+  },
+  {
+   "name": "NUM_SEQ_ESTADO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "NUM_SEQ do estado na versão de origem.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "medium",
+   "java_field": "stateSequence",
+   "java_type": "int",
+   "java_entity": "ConversionHistoryState"
+  },
+  {
+   "name": "NUM_SEQ_ESTADO_CONVER",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "NUM_SEQ do estado correspondente na versão de destino.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "medium",
+   "java_field": "conversionState",
+   "java_type": "int",
+   "java_entity": "ConversionHistoryState"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "HISTOR_CONVER",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ_CONVER"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ_CONVER"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Conversão pai.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "HISTOR_CONVER",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ_CONVER"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ_CONVER"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "HISTOR_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ_CONVER",
+    "NUM_SEQ_ESTADO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ_CONVER",
+    "NUM_SEQ_ESTADO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

@@ -1,0 +1,1183 @@
+{
+ "name": "ESTADO_PROCES",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Estado/atividade (nó do fluxo BPM) de uma versão de definição de processo: tarefas, gateways, eventos, subprocessos e fim, com prazos, notificações, atribuição e posição no diagrama (entidade ProcessState).",
+ "lifecycle": "Criada ao salvar/publicar uma versão do processo no modelador; imutável após release da versão. Volume proporcional a versões x atividades.",
+ "key_notes": "Chave composta (empresa, processo, versão, sequência). Cada versão do processo duplica seus estados. NUM_SEQ é compartilhado no espaço de ids do diagrama.",
+ "notes_for_agents": "Sempre filtrar por COD_EMPRESA + COD_DEF_PROCES + NUM_VERS (as versões coexistem). LOG_ESTADO_INICIAL=1 localiza o start. DSL_INSTRUC e DSL_CONFIGUR_MECAN_ATRIBUIC são longtext. IDI_TIP_BPMN dá o tipo BPMN fino; IDI_TIP_ESTADO o tipo funcional.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_DEF_PROCES",
+  "NUM_VERS",
+  "NUM_SEQ"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessState"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK e filtro obrigatório de multi-tenancy.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código (processId) da definição de processo BPM a que a linha pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "NUM_SEQ",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Sequência (id numérico dentro da versão do processo) do estado/atividade do diagrama.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "high",
+   "java_field": "sequence",
+   "java_type": "int",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "NUM_VERS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número da versão da definição de processo (versionamento do processo).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "NUM_PERC_CSENSO",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Percentual de consenso exigido para aprovar atividade conjunta (LOG_CONJTA) entre os responsáveis.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "agreementPercentage",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "NUM_HRS_TOLERA_RESPONS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Horas de tolerância após o prazo antes de notificar atraso ao responsável da tarefa.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "allowanceAuthorityTime",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "NUM_HRS_TOLERA_GESTOR",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Horas de tolerância após o prazo antes de notificar atraso ao gestor.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "allowanceManagerTime",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "NUM_HRS_TOLERA_REQUISIT",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Horas de tolerância após o prazo antes de notificar atraso ao requisitante do processo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "allowanceRequisitionerTime",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "LOG_DECIS_AUTOM",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica atividade/decisão automática (gateway exclusivo executado pelo motor sem usuário).",
+   "semantic_type": "flag",
+   "values": "1=automática; 0=manual",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "automatic",
+   "java_type": "Boolean",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "IDI_TIP_BPMN",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo BPMN do elemento (enum ProcessStateBpmnType): evento, tarefa, subprocesso, gateway ou loop.",
+   "semantic_type": "enum",
+   "values": "10=start normal;11=start message;12=start timer;13=start conditional;14=start signal;15=start parallel multiple;16=start multiple;30=intermediate normal;31=int. message;32=int. timer;33=int. escalation;34=int. compensate;35=int. conditional;36=int. link;37=int. signal;38=int. parallel multiple;39=int. multiple;40=int. message receive;41=int. signal receive;42=int. link receive;43=int. error;60=end normal;61=end message;62=end escalation;63=end error;64=end signal;65=end cancel;66=end multiple;67=end compensate;68=end terminate;80=task normal;81=task user;82=task service;83=task receive;84=task mail;85=task manual;86=task business rule;87=task script;100=subprocess normal;101=subprocess adhoc;120=gateway exclusive;121=gateway inclusive;122=gateway event;123=gateway exclusive event;124=gateway parallel event;125=gateway complex;126=gateway parallel;127=gateway join;140=loop none;141=loop default;142=loop multi thread",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "bpmnType",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "LOG_CANCELA_SUBPROC",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o cancelamento da atividade cancela também o subprocesso em execução.",
+   "semantic_type": "flag",
+   "values": "1=cancela subprocesso",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "cancelSubProcess",
+   "java_type": "Boolean",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "LOG_SOLICIT_CONTRA_SENHA",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Exige contra-senha (nova confirmação de senha) do usuário ao concluir a atividade.",
+   "semantic_type": "flag",
+   "values": "1=exige",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "counterSign",
+   "java_type": "Boolean",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "DEADLINE_FORM_FIELDNAME",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do campo do formulário que fornece a data do prazo da atividade (prazo dinâmico).",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "deadlineFieldName",
+   "java_type": "String",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "NUM_HRS_PRAZ",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Prazo da atividade em horas para o responsável concluir.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "deadlineTime",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "LOG_SOLICIT_ASS_DIGITAL",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Exige assinatura digital do usuário ao concluir a atividade.",
+   "semantic_type": "flag",
+   "values": "1=exige",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "digitalSignature",
+   "java_type": "Boolean",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "DSL_CONFIGUR_MECAN_ATRIBUIC",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Configuração (serializada, texto longo) do mecanismo de atribuição: parâmetros de grupo/papel/campo/etc.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "engineAllocationConfiguration",
+   "java_type": "String",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "COD_MECAN_ATRIBUIC",
+   "type": "varchar(25)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do mecanismo de atribuição de responsável da atividade (ex.: usuário, grupo, papel, campo).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "MECAN_ATRIBUIC.COD_MECAN_ATRIBUIC",
+   "confidence": "medium",
+   "java_field": "engineAllocationId",
+   "java_type": "String",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "TIPO_EXEC",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo de execução da atividade de serviço/automática.",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "executionType",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "NUM_ESFOR_PREVIS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Esforço previsto para a atividade (quantidade; unidade definida em IDI_CALC_ESFOR).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "forecastedEffort",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "IDI_CALC_ESFOR",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo/unidade de cálculo do esforço previsto (NUM_ESFOR_PREVIS).",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "forecastedEffortType",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "NUM_PASTA_FORM",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id (NR_DOCUMENTO) da pasta do GED onde o formulário da atividade/processo é armazenado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "low",
+   "java_field": "formFolder",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "NUM_HRS_FREQ_RESPONS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Frequência em horas de repetição das notificações de atraso/acompanhamento ao responsável.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "frequenceAuthorityTime",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "NUM_HRS_FREQ_GESTOR",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Frequência em horas das notificações ao gestor.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "frequenceManagerTime",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "NUM_HRS_FREQ_REQUISIT",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Frequência em horas das notificações ao requisitante.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "frequenceRequisitionerTime",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "LOG_INIBE_TRANSF",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a transferência da tarefa para outro usuário está inibida nesta atividade.",
+   "semantic_type": "flag",
+   "values": "1=proíbe transferir",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "inhibitTransfer",
+   "java_type": "Boolean",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "LOG_ESTADO_INICIAL",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Marca o estado inicial (start) da versão do processo.",
+   "semantic_type": "flag",
+   "values": "1=inicial",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "initialState",
+   "java_type": "Boolean",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "DSL_INSTRUC",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Texto de instruções exibido ao usuário na atividade (longtext, pode conter HTML).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "instruction",
+   "java_type": "String",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "LOG_CONJTA",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica atividade conjunta: vários responsáveis precisam concluir (ver NUM_PERC_CSENSO).",
+   "semantic_type": "flag",
+   "values": "1=conjunta",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "joint",
+   "java_type": "Boolean",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "NUM_HRS_EXPIRAC_RESPONS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Horas antes do vencimento para avisar o responsável (aviso de expiração).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "noticeExpirationAuthorityTime",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "NUM_HRS_EXPIRAC_GESTOR",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Horas antes do vencimento para avisar o gestor.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "noticeExpirationManagerTime",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "NUM_HRS_EXPIRAC_REQUISIT",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Horas antes do vencimento para avisar o requisitante.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "noticeExpirationRequisitionerTime",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "LOG_NOTIF_RESPONS_ATRASO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Notificar o responsável quando a tarefa atrasar.",
+   "semantic_type": "flag",
+   "values": "1=notifica",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "notifyAuthorityDelay",
+   "java_type": "Boolean",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "LOG_NOTIF_RESPONS_ACOMPTO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Notificar o responsável para acompanhamento (aviso antes do prazo).",
+   "semantic_type": "flag",
+   "values": "1=notifica",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "notifyAuthorityFollowUp",
+   "java_type": "Boolean",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "LOG_NOTIF_GESTOR_ATRASO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Notificar o gestor quando a tarefa atrasar.",
+   "semantic_type": "flag",
+   "values": "1=notifica",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "notifyManagerDelay",
+   "java_type": "Boolean",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "LOG_NOTIF_GESTOR_ACOMP",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Notificar o gestor para acompanhamento.",
+   "semantic_type": "flag",
+   "values": "1=notifica",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "notifyManagerFollowUp",
+   "java_type": "Boolean",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "LOG_NOTIF_REQUISIT_ATRASO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Notificar o requisitante quando a tarefa atrasar.",
+   "semantic_type": "flag",
+   "values": "1=notifica",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "notifyRequisitionerDelay",
+   "java_type": "Boolean",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "LOG_NOTIF_REQUISIT_ACOMPTO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Notificar o requisitante para acompanhamento.",
+   "semantic_type": "flag",
+   "values": "1=notifica",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "notifyRequisitionerFollowUp",
+   "java_type": "Boolean",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "NUM_SEQ_PAI",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "NUM_SEQ do elemento pai no diagrama (raia/subprocesso/grupo que contém este estado).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "LIN_PROCES.NUM_SEQ",
+   "confidence": "medium",
+   "java_field": "parentSequence",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "COD_PERIOD_EXPED",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do período de expediente usado para calcular prazos em horas úteis.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PERIOD_EXPED.COD_PERIOD_EXPED",
+   "confidence": "medium",
+   "java_field": "periodId",
+   "java_type": "String",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "NUM_POS_X",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Posição horizontal (X, em pixels) do elemento no diagrama do processo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "positionX",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "NUM_POS_Y",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Posição vertical (Y, em pixels) do elemento no diagrama do processo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "positionY",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "IDI_ASSUME_COLAB",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Modo de seleção/assunção do colaborador responsável (default x personalizado, ver AssignmentType).",
+   "semantic_type": "enum",
+   "values": "0=atribuição padrão (DEFAULT_ASSIGNMENT);1=atribuição personalizada (CUSTOM_ASSIGNMENT)",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "selectColleague",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "LOG_ENVIA_ATIV_SUB",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Envia o fluxo para a próxima atividade dentro do subprocesso.",
+   "semantic_type": "flag",
+   "values": "1=sim",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "sendToNextTaskInSubProcess",
+   "java_type": "Boolean",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "COD_SINAL",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id do sinal BPMN associado ao evento de sinal.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_SIGNAL.COD_SINAL",
+   "confidence": "medium",
+   "java_field": "signalId",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "DES_ESTADO",
+   "type": "varchar(200)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição da atividade/estado.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "stateDescription",
+   "java_type": "String",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "NOM_ESTADO",
+   "type": "varchar(200)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome da atividade/estado exibido no diagrama e na tarefa.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "stateName",
+   "java_type": "String",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "IDI_TIP_ESTADO",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo funcional do estado (enum ProcessStateType).",
+   "semantic_type": "enum",
+   "values": "0=simples;1=automático;2=subprocesso;3=fork;4=join;6=fim",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "stateType",
+   "java_type": "Integer",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "LOG_SUB_PROCES",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica que o estado é um subprocesso (chama outro processo).",
+   "semantic_type": "flag",
+   "values": "1=subprocesso",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "subProcess",
+   "java_type": "Boolean",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "COD_DEF_SUB_PROCES",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código da definição do processo chamado como subprocesso.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "medium",
+   "java_field": "subProcessId",
+   "java_type": "String",
+   "java_entity": "ProcessState"
+  },
+  {
+   "name": "LOG_TRANSF_ANEXO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Transfere os anexos para o subprocesso.",
+   "semantic_type": "flag",
+   "values": "1=transfere",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "transferAttachments",
+   "java_type": "Boolean",
+   "java_entity": "ProcessState"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ESTADO_PROCES_TRIGGER",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "1:N",
+   "kind": "hql-join",
+   "description": "Gatilhos (timer/sinal/etc.) do estado, usados em ProcessStateTrigger.findInitialTimerTrigger.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "MECAN_ATRIBUIC",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_MECAN_ATRIBUIC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_MECAN_ATRIBUIC"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Mecanismo de atribuição de responsável.",
+   "status": "probable"
+  },
+  {
+   "to_table": "PROCES_SIGNAL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_SINAL"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_SINAL"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Sinal BPMN do evento.",
+   "status": "probable"
+  },
+  {
+   "to_table": "VERS_DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-confirmed",
+   "description": "Versão da definição de processo à qual o estado pertence.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "ESTADO_PROCES_TRIGGER",
+   "from_cols": [
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "ProcessStateTrigger.findInitialTimerTrigger",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "ESTADO_PROCES_TRIGGER",
+   "from_cols": [
+    "COD_DEF_PROCES"
+   ],
+   "to_cols": [
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "ProcessStateTrigger.findInitialTimerTrigger",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "ESTADO_PROCES_TRIGGER",
+   "from_cols": [
+    "COD_EMPRESA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "ProcessStateTrigger.findInitialTimerTrigger",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "ESTADO_PROCES_TRIGGER",
+   "from_cols": [
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join",
+   "description": "ProcessStateTrigger.findInitialTimerTrigger",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "PENDCIA_NOTIF_EMAIL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: coincidência de nomes; NUM_SEQ aqui é o do estado, não de notificação.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": [
+  {
+   "from_table": "PROPRIED_EXT",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "ESTADO_PROCES_COND",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "ESTADO_PROCES_COND",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ_ESTADO_DEST"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "ESTADO_PROCES_SCRIPT",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "ESTADO_PROCES_SERVICE",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "ESTADO_PROCES_SIGNAL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "ESTADO_PROCES_TRIGGER",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "hql-join"
+  },
+  {
+   "from_table": "LINK_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ_ESTADO_INICIAL"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "LINK_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ_ESTADO_FINAL"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PROCESS_APP_CONFIG",
+   "from_cols": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "PROCESS_VERSION",
+    "STATE_SEQUENCE"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PROCESS_ATTACHMENT_RULES",
+   "from_cols": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "PROCESS_VERSION",
+    "STATE_SEQUENCE"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PROCESS_COND_AUTOMATIC_RULES",
+   "from_cols": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "PROCESS_VERSION",
+    "STATE_SEQUENCE"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PROCESS_ELEMENT_TRANSLATE",
+   "from_cols": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "VERSION",
+    "SEQUENCE"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PROCESS_FORM_MAP",
+   "from_cols": [
+    "TENANT_ID",
+    "PROCESS_CODE",
+    "VERSION",
+    "STATE_SEQUENCE"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PROCES_SIGNAL_INSTANCE",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PROCES_SIGNAL_RECEIVERS",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

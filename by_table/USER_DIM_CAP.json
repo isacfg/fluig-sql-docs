@@ -1,0 +1,163 @@
+{
+ "name": "USER_DIM_CAP",
+ "domain": "bpm-analytics-dw",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Dimensão de usuários do CAP com chave substituta USERSEQUENCE, código do usuário e custo por hora.",
+ "lifecycle": "Populada pela extração do CAP; HOURCOST alimenta cálculos de custo.",
+ "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.",
+ "notes_for_agents": "Sempre filtrar por COMPANYID. Para agregar por período use YEARID/MONTHID/DAYID ou junte com TIME_DIM_CAP. Linhas de fato são snapshots (use o snapshot mais recente/um dia específico para não somar duplicado). USERCODE identifica usuário (dado pessoal indireto). HOURCOST é dado sensível (custo por hora do colaborador).",
+ "primary_key": [
+  "COMPANYID",
+  "USERSEQUENCE"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.cap.model.UserDim"
+ ],
+ "columns": [
+  {
+   "name": "COMPANYID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa (tenant) do Fluig; faz parte da PK de todas as tabelas *_CAP.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "UserDim"
+  },
+  {
+   "name": "USERSEQUENCE",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Sequência numérica do usuário na dimensão USER_DIM_CAP (chave substituta por empresa, não é a matrícula).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "userSequence",
+   "java_type": "int",
+   "java_entity": "UserDim"
+  },
+  {
+   "name": "HOURCOST",
+   "type": "double",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Custo por hora do usuário (double), base do cálculo de custo realizado/baseline nos fatos de custo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "hourCost",
+   "java_type": "double",
+   "java_entity": "UserDim"
+  },
+  {
+   "name": "USERCODE",
+   "type": "varchar(100)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código/login do usuário (FDN_USERTENANT.USER_CODE) associado ao USERSEQUENCE.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "medium",
+   "java_field": "userCode",
+   "java_type": "String",
+   "java_entity": "UserDim"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "USERCODE"
+   ],
+   "to_cols": [
+    "USER_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Código do usuário; sem FK, join lógico por código (com empresa) -- apenas se a tabela tiver USERCODE. [alvo corrigido: USER_CODE/LOGIN pertencem a FDN_USERTENANT]",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FACT_ACTIVITY_COST_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "USERSEQUENCE"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "USERSEQUENCE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FACT_ACTIVITY_VOLUME_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "USERSEQUENCE"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "USERSEQUENCE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FACT_FLOW_VOLUME_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "USERSEQUENCE"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "USERSEQUENCE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FACT_PROCES_COST_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "USERSEQUENCE"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "USERSEQUENCE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FACT_PROCES_VOLUME_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "USERSEQUENCE"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "USERSEQUENCE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

@@ -1,0 +1,140 @@
+{
+ "name": "TAR_CONHECIMENTO_USUARIO",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Registra que um usuário tomou conhecimento (ciência) de uma tarefa de processo transferida/atribuída, por movimentação e sequência de transferência.",
+ "lifecycle": "Linha inserida quando o usuário registra ciência da tarefa; mantida enquanto a instância existir.",
+ "key_notes": "PK espelha a de TAR_PROCES (sem tabela de dados adicional). Entidade UserKnowledgeTask.",
+ "notes_for_agents": "Join por todas as 5 colunas da PK com TAR_PROCES.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NUM_PROCES",
+  "CD_MATRICULA",
+  "NUM_SEQ_MOVTO",
+  "NUM_SEQ_TRANSF"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.UserKnowledgeTask"
+ ],
+ "columns": [
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Matrícula do usuário que tomou conhecimento da tarefa.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE (colleagueId; matrícula/login)",
+   "confidence": "medium",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "UserKnowledgeTask"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK. Filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "UserKnowledgeTask"
+  },
+  {
+   "name": "NUM_SEQ_MOVTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Sequência da movimentação (etapa) da instância.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "HISTOR_PROCES.NUM_SEQ_MOVTO",
+   "confidence": "high",
+   "java_field": "movementSequence",
+   "java_type": "int",
+   "java_entity": "UserKnowledgeTask"
+  },
+  {
+   "name": "NUM_PROCES",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Número da instância (solicitação) de processo de workflow.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_WORKFLOW.NUM_PROCES",
+   "confidence": "high",
+   "java_field": "processInstanceId",
+   "java_type": "int",
+   "java_entity": "UserKnowledgeTask"
+  },
+  {
+   "name": "NUM_SEQ_TRANSF",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 5,
+   "purpose": "Sequência de transferência da tarefa (0 = original).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "TAR_PROCES.NUM_SEQ_TRANSF",
+   "confidence": "medium",
+   "java_field": "transferredSequence",
+   "java_type": "int",
+   "java_entity": "UserKnowledgeTask"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "TAR_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO",
+    "NUM_SEQ_TRANSF",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO",
+    "NUM_SEQ_TRANSF",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "1:1",
+   "kind": "logical-probable",
+   "description": "Mesma PK da tarefa de processo do usuário.",
+   "status": "probable"
+  },
+  {
+   "to_table": "HISTOR_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Movimentação do processo.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

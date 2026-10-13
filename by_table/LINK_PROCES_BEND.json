@@ -1,0 +1,171 @@
+{
+ "name": "LINK_PROCES_BEND",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Pontos de curva (dobras) do desenho de um link no diagrama (ProcessLinkBend).",
+ "lifecycle": "Criada ao desenhar o fluxo.",
+ "key_notes": "Somente geometria.",
+ "notes_for_agents": "",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_DEF_PROCES",
+  "NUM_VERS",
+  "NUM_SEQ_LINK",
+  "NUM_SEQ_CURV"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessLinkBend"
+ ],
+ "columns": [
+  {
+   "name": "NUM_SEQ_CURV",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 5,
+   "purpose": "Sequência do ponto de curva dentro do link.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "bendSequence",
+   "java_type": "int",
+   "java_entity": "ProcessLinkBend"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK e filtro obrigatório de multi-tenancy.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ProcessLinkBend"
+  },
+  {
+   "name": "NUM_SEQ_LINK",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Sequência do link ao qual a curva pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "LINK_PROCES.NUM_SEQ_LINK",
+   "confidence": "high",
+   "java_field": "linkSequence",
+   "java_type": "int",
+   "java_entity": "ProcessLinkBend"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código (processId) da definição de processo BPM a que a linha pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ProcessLinkBend"
+  },
+  {
+   "name": "NUM_VERS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número da versão da definição de processo (versionamento do processo).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "ProcessLinkBend"
+  },
+  {
+   "name": "NUM_POS_X",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Posição horizontal (X, em pixels) do elemento no diagrama do processo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "positionX",
+   "java_type": "Integer",
+   "java_entity": "ProcessLinkBend"
+  },
+  {
+   "name": "NUM_POS_Y",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Posição vertical (Y, em pixels) do elemento no diagrama do processo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "positionY",
+   "java_type": "Integer",
+   "java_entity": "ProcessLinkBend"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "LINK_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ_LINK"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ_LINK"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Link dono da curva.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "LINK_PROCES_ASSOC",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ_LINK"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ_LINK"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: coincidência de PK; ASSOC é associação a artefatos.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

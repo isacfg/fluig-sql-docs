@@ -1,0 +1,155 @@
+{
+ "name": "FICHARIO",
+ "domain": "ecm-forms",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Definição das tabelas de um fichário (formulário): cada fichário tem uma tabela principal e, opcionalmente, tabelas filhas (pai-e-filho).",
+ "lifecycle": "Criada ao publicar/atualizar um formulário; uma linha por tabela por versão.",
+ "key_notes": "PK (COD_EMPRESA, NR_FICHARIO, NR_VERSAO, COD_TABELA). NR_FICHARIO = NR_DOCUMENTO do fichário (TP_DOCUMENTO=4).",
+ "notes_for_agents": "Juntar com FICHARIO_CAMPO por (COD_EMPRESA, NR_FICHARIO, NR_VERSAO, COD_TABELA).",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NR_FICHARIO",
+  "NR_VERSAO",
+  "COD_TABELA"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.forms.model.TableForm"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa (tenant) dona do registro; faz parte da PK e deve ser filtrado em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "Long",
+   "java_entity": "TableForm"
+  },
+  {
+   "name": "NR_FICHARIO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Número do fichário (formulário), igual a NR_DOCUMENTO do documento fichário.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "formId",
+   "java_type": "Integer",
+   "java_entity": "TableForm"
+  },
+  {
+   "name": "COD_TABELA",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Identificador da tabela do formulário (principal ou filha).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "tableId",
+   "java_type": "String",
+   "java_entity": "TableForm"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Versão do fichário.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "Integer",
+   "java_entity": "TableForm"
+  },
+  {
+   "name": "COD_TABELA_PAI",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "COD_TABELA da tabela pai quando esta é filha (pai-e-filho); NULL para a principal.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "FICHARIO.COD_TABELA",
+   "confidence": "high",
+   "java_field": "parentTableId",
+   "java_type": "String",
+   "java_entity": "TableForm"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_FICHARIO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Documento fichário (tipo 4).",
+   "status": "probable"
+  },
+  {
+   "to_table": "FICHARIO_CAMPO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_FICHARIO",
+    "NR_VERSAO",
+    "COD_TABELA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_FICHARIO",
+    "NR_VERSAO",
+    "COD_TABELA"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable",
+   "description": "Campos da tabela do fichário.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FICHARIO_CAMPO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_FICHARIO",
+    "NR_VERSAO",
+    "COD_TABELA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_FICHARIO",
+    "NR_VERSAO",
+    "COD_TABELA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-confirmed"
+  }
+ ]
+}

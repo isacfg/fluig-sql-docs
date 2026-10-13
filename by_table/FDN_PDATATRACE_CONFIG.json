@@ -1,0 +1,100 @@
+{
+ "name": "FDN_PDATATRACE_CONFIG",
+ "domain": "privacy-lgpd",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Configuração do rastreamento de dados pessoais por tenant: ativo e retenção em dias.",
+ "lifecycle": "Uma linha por tenant (unique).",
+ "key_notes": "Unique fdn_datatrace_config_idx1 em TENANT_ID.",
+ "notes_for_agents": "1 linha por tenant.",
+ "primary_key": [
+  "PDATATRACE_CONFIG_ID"
+ ],
+ "unique_constraints": [
+  [
+   "TENANT_ID"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.datatrace.entity.PersonalDatatraceConfig"
+ ],
+ "columns": [
+  {
+   "name": "PDATATRACE_CONFIG_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK surrogate.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "PersonalDatatraceConfig"
+  },
+  {
+   "name": "ENABLED",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o rastreamento está ativo no tenant.",
+   "semantic_type": "flag",
+   "values": "1=ativo; 0=inativo",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "enabled",
+   "java_type": "Boolean",
+   "java_entity": "PersonalDatatraceConfig"
+  },
+  {
+   "name": "EXPIRATION_DAYS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Dias de retenção dos registros de FDN_PDATATRACE; NULL provavelmente sem expiração.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "expirationDays",
+   "java_type": "Integer",
+   "java_entity": "PersonalDatatraceConfig"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant configurado (único).",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "PersonalDatatraceConfig"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "1:1",
+   "kind": "logical-probable",
+   "description": "Tenant da configuração.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

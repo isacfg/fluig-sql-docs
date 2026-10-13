@@ -1,0 +1,116 @@
+{
+ "name": "FDN_ALERTMETADATA",
+ "domain": "foundation-alert",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Pares chave/valor extras anexados a um alerta (parametros usados para montar a mensagem/link).",
+ "lifecycle": "Criados com o alerta; removidos com ele (removeAlertMetadatasByAlertIdsList).",
+ "key_notes": "METADATA_VALUE e LOB (longtext). KEY/CONSTRAINT do input sao artefatos do DDL.",
+ "notes_for_agents": "Coluna LOB: evite SELECT * em consultas volumosas. Valor pode conter dados de negocio.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "FK_RC31UACCJXJO6L1TMLH7PEK6",
+   "unique": false,
+   "columns": [
+    "ALERT_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.alert.entity.FDNAlertMetadata"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador sequencial (PK).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNAlertMetadata"
+  },
+  {
+   "name": "ALERT_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Alerta dono do metadado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_ALERT.ID",
+   "confidence": "high",
+   "java_field": "alertId",
+   "java_type": "Long",
+   "java_entity": "FDNAlertMetadata"
+  },
+  {
+   "name": "METADATA_KEY",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome da chave do metadado.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "key",
+   "java_type": "String",
+   "java_entity": "FDNAlertMetadata"
+  },
+  {
+   "name": "METADATA_VALUE",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor do metadado (texto longo, LOB).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "value",
+   "java_type": "String",
+   "java_entity": "FDNAlertMetadata"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_ALERT",
+   "from_cols": [
+    "ALERT_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Alerta dono.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_ALERT",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "ALERT_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join"
+  }
+ ]
+}

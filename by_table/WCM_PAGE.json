@@ -1,0 +1,354 @@
+{
+ "name": "WCM_PAGE",
+ "domain": "wcm-portal",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Página do portal WCM (hierárquica), com tema, URL amigável e flags de exibição.",
+ "lifecycle": "Criada ao publicar/criar páginas; versões em WCM_PAGEVERSION.",
+ "key_notes": "Único por PAGE_CODE+TENANT_ID.",
+ "notes_for_agents": "Filtre por TENANT_ID.",
+ "primary_key": [
+  "PAGE_ID"
+ ],
+ "unique_constraints": [
+  [
+   "PAGE_CODE",
+   "TENANT_ID"
+  ]
+ ],
+ "indexes": [
+  {
+   "name": "WCMPAGEI001",
+   "unique": false,
+   "columns": [
+    "PAGE_CODE"
+   ]
+  },
+  {
+   "name": "WCMPAGEI002",
+   "unique": false,
+   "columns": [
+    "PARENT_PAGE_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.wcm.core.entity.WCMPage"
+ ],
+ "columns": [
+  {
+   "name": "PAGE_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "WCMPage"
+  },
+  {
+   "name": "DEFAULT_LOCALE",
+   "type": "varchar(12)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Locale padrão.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "defaultLocale",
+   "java_type": "String",
+   "java_entity": "WCMPage"
+  },
+  {
+   "name": "DISABLE_CHILD_LEVEL",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Desabilita subníveis.",
+   "semantic_type": "flag",
+   "values": "1=sim",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "disableChildLevel",
+   "java_type": "Boolean",
+   "java_entity": "WCMPage"
+  },
+  {
+   "name": "DISPLAY_ORDER",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Ordem de exibição.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "displayOrder",
+   "java_type": "Integer",
+   "java_entity": "WCMPage"
+  },
+  {
+   "name": "EDITABLE",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Editável.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "editable",
+   "java_type": "Boolean",
+   "java_entity": "WCMPage"
+  },
+  {
+   "name": "ENABLED",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Habilitada.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "enabled",
+   "java_type": "Boolean",
+   "java_entity": "WCMPage"
+  },
+  {
+   "name": "FRIENDLY_URL",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "URL amigável.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "friendlyURL",
+   "java_type": "String",
+   "java_entity": "WCMPage"
+  },
+  {
+   "name": "HIDDEN",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Oculta do menu.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "hidden",
+   "java_type": "Boolean",
+   "java_entity": "WCMPage"
+  },
+  {
+   "name": "PAGE_LEVEL",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nível hierárquico.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "level",
+   "java_type": "Integer",
+   "java_entity": "WCMPage"
+  },
+  {
+   "name": "MENU_GROUP",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Funciona como grupo de menu.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "menuGroup",
+   "java_type": "Boolean",
+   "java_entity": "WCMPage"
+  },
+  {
+   "name": "PAGE_CODE",
+   "type": "varchar(40)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código da página.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "pageCode",
+   "java_type": "String",
+   "java_entity": "WCMPage"
+  },
+  {
+   "name": "PARENT_PAGE_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Página pai.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "WCM_PAGE.PAGE_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "RESOURCE_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Recurso de segurança.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_RESOURCE.RESOURCE_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "THEME_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tema (WCM_APPLICATION tipo theme).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "WCM_APPLICATION.APPLICATION_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "WCM_PAGE",
+   "from_cols": [
+    "PARENT_PAGE_ID"
+   ],
+   "to_cols": [
+    "PAGE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Pai.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_RESOURCE",
+   "from_cols": [
+    "RESOURCE_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Recurso.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Tenant.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "WCM_APPLICATION",
+   "from_cols": [
+    "THEME_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Tema.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "WCM_APPLICATION",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "THEME_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_PAGE",
+   "from_cols": [
+    "PARENT_PAGE_ID"
+   ],
+   "to_cols": [
+    "PAGE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "WCM_PAGEVERSION",
+   "from_cols": [
+    "PAGE_ID"
+   ],
+   "to_cols": [
+    "PAGE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

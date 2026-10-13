@@ -1,0 +1,169 @@
+{
+ "name": "WCM_STOREITEM_METRIC",
+ "domain": "wcm-store",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Métricas de uso (downloads e visualizações) de itens da loja de componentes WCM, por tenant.",
+ "lifecycle": "Linha criada no primeiro acesso/download do item por tenant; contadores incrementados.",
+ "key_notes": "Unique (TENANT_ID, COMPONENT_CODE). DOWNLOADS/VIEWS são bigint no banco, mas Integer na entidade.",
+ "notes_for_agents": "Filtrar sempre por TENANT_ID. Índice por COMPONENT_CODE.",
+ "primary_key": [
+  "STOREITEM_METRIC_ID"
+ ],
+ "unique_constraints": [
+  [
+   "TENANT_ID",
+   "COMPONENT_CODE"
+  ]
+ ],
+ "indexes": [
+  {
+   "name": "WCMSTOREITEMMETRICI001",
+   "unique": false,
+   "columns": [
+    "COMPONENT_CODE"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.wcm.core.entity.WCMStoreItemMetric"
+ ],
+ "columns": [
+  {
+   "name": "STOREITEM_METRIC_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK surrogate da métrica.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "WCMStoreItemMetric"
+  },
+  {
+   "name": "COMPONENT_CODE",
+   "type": "varchar(40)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do componente/item na loja (até 40).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "componentCode",
+   "java_type": "String",
+   "java_entity": "WCMStoreItemMetric"
+  },
+  {
+   "name": "NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do item da loja.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "name",
+   "java_type": "String",
+   "java_entity": "WCMStoreItemMetric"
+  },
+  {
+   "name": "DEVELOPER_CODE",
+   "type": "varchar(80)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do desenvolvedor do item.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "developerCode",
+   "java_type": "String",
+   "java_entity": "WCMStoreItemMetric"
+  },
+  {
+   "name": "DEVELOPER_NAME",
+   "type": "varchar(80)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do desenvolvedor do item.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "developerName",
+   "java_type": "String",
+   "java_entity": "WCMStoreItemMetric"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dono da métrica.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "DOWNLOADS",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Contagem de downloads do item pelo tenant.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "downloads",
+   "java_type": "Integer",
+   "java_entity": "WCMStoreItemMetric"
+  },
+  {
+   "name": "VIEWS",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Contagem de visualizações do item pelo tenant.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "views",
+   "java_type": "Integer",
+   "java_entity": "WCMStoreItemMetric"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Tenant da métrica.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

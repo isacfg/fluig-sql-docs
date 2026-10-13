@@ -1,0 +1,50 @@
+{
+ "name": "FLUIG_RUNTIMEDATA_PROCESS_MNGR",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Armazenamento chave/valor de dados de runtime do gerenciador de processos (BPM); sem entidade JPA no código.",
+ "lifecycle": "Escrita pelo próprio módulo BPM; poucas linhas.",
+ "key_notes": "Sem entidade mapeada; significado inferido do nome.",
+ "notes_for_agents": "Tabela sem tenant; não consultar sem conhecer a chave.",
+ "primary_key": [
+  "DATA_KEY"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [],
+ "columns": [
+  {
+   "name": "DATA_KEY",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave do dado de runtime do gerenciador de processos.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "DATA_VALUE",
+   "type": "varchar(4000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor (até 4000 caracteres) associado à chave.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

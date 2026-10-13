@@ -1,0 +1,354 @@
+{
+ "name": "FDN_ALERT",
+ "domain": "foundation-alert",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Alerta/notificacao da central de alertas do Fluig destinado a um usuario (receiver), ligado a um tipo de evento, a um objeto e a um local.",
+ "lifecycle": "Inserida quando um modulo dispara um alerta; IS_READ atualizado ao ler; removida por limpeza/expurgo junto com ALERTACTION, ALERTMETADATA e ALERTSENDER. Volume alto.",
+ "key_notes": "Sem coluna de tenant propria; o tenant vem do destinatario (RECEIVER_ID -> FDN_USERTENANT). As colunas KEY e CONSTRAINT do input sao artefatos do DDL (indice FK e FK), nao colunas reais.",
+ "notes_for_agents": "Consultas tipicas: nao lidos por RECEIVER_ID e IS_READ=0. EVENT_TYPE_ID, OBJECT_ID e PLACE_ID sao nullable.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "FDNALERTI002",
+   "unique": false,
+   "columns": [
+    "RECEIVER_ID",
+    "IS_READ"
+   ]
+  },
+  {
+   "name": "FDNALERTI003",
+   "unique": false,
+   "columns": [
+    "RECEIVER_ID",
+    "CREATION_DATE"
+   ]
+  },
+  {
+   "name": "FDNALERTI004",
+   "unique": false,
+   "columns": [
+    "CREATION_DATE"
+   ]
+  },
+  {
+   "name": "FDNALERTI005",
+   "unique": false,
+   "columns": [
+    "EVENT_TYPE_ID",
+    "RECEIVER_ID",
+    "IS_READ"
+   ]
+  },
+  {
+   "name": "FDNALERTI006",
+   "unique": false,
+   "columns": [
+    "EVENT_TYPE_ID",
+    "CREATION_DATE",
+    "IS_READ",
+    "RECEIVER_ID"
+   ]
+  },
+  {
+   "name": "FK_5J91TOHMRQOAQH4R4H1CQ7U0J",
+   "unique": false,
+   "columns": [
+    "EVENT_TYPE_ID"
+   ]
+  },
+  {
+   "name": "FK_5XQOYWDMPIXHTFDL9JA0XGR2T",
+   "unique": false,
+   "columns": [
+    "OBJECT_ID"
+   ]
+  },
+  {
+   "name": "FK_EFLCRY1BMVBM7EM8K8XGFYXVJ",
+   "unique": false,
+   "columns": [
+    "PLACE_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.alert.entity.FDNAlert"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador sequencial do alerta (PK).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNAlert"
+  },
+  {
+   "name": "PRIORITY",
+   "type": "varchar(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Prioridade do alerta (nome do enum FDNAlertPriority gravado como string).",
+   "semantic_type": "enum",
+   "values": "NONE; LOW; NORMAL; MEDIUM; HIGH",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "alertPriority",
+   "java_type": "String",
+   "java_entity": "FDNAlert"
+  },
+  {
+   "name": "CREATION_DATE",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de criacao do alerta.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "creationDate",
+   "java_type": "Date",
+   "java_entity": "FDNAlert"
+  },
+  {
+   "name": "EVENT_TYPE_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Tipo de evento do alerta.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_ALERTEVENTTYPE.ID",
+   "confidence": "high",
+   "java_field": "eventTypeId",
+   "java_type": "Long",
+   "java_entity": "FDNAlert"
+  },
+  {
+   "name": "OBJECT_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Objeto de negocio ao qual o alerta se refere.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_ALERTOBJECT.ID",
+   "confidence": "high",
+   "java_field": "objectId",
+   "java_type": "Long",
+   "java_entity": "FDNAlert"
+  },
+  {
+   "name": "PLACE_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Local/contexto (tambem um FDN_ALERTOBJECT) onde o evento ocorreu.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_ALERTOBJECT.ID",
+   "confidence": "high",
+   "java_field": "placeId",
+   "java_type": "Long",
+   "java_entity": "FDNAlert"
+  },
+  {
+   "name": "IS_READ",
+   "type": "bit(1)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Flag: alerta ja lido pelo destinatario.",
+   "semantic_type": "flag",
+   "values": "1=lido; 0=nao lido",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "read",
+   "java_type": "Boolean",
+   "java_entity": "FDNAlert"
+  },
+  {
+   "name": "RECEIVER_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Usuario destinatario (USER_TENANT_ID de FDN_USERTENANT).",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_TENANT_ID",
+   "confidence": "high",
+   "java_field": "receiverId",
+   "java_type": "Long",
+   "java_entity": "FDNAlert"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "RECEIVER_ID"
+   ],
+   "to_cols": [
+    "USER_TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Destinatario do alerta.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_ALERTEVENTTYPE",
+   "from_cols": [
+    "EVENT_TYPE_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Tipo de evento.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_ALERTOBJECT",
+   "from_cols": [
+    "OBJECT_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Objeto alvo do alerta.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_ALERTOBJECT",
+   "from_cols": [
+    "PLACE_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Local do evento.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_ALERTACTION",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "ALERT_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join",
+   "description": "Acoes do alerta.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_ALERTMETADATA",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "ALERT_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join",
+   "description": "Metadados chave/valor.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_ALERTSENDER",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "ALERT_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join",
+   "description": "Remetentes do alerta.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_ALERTACTION",
+   "from_cols": [
+    "ALERT_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_ALERTMETADATA",
+   "from_cols": [
+    "ALERT_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_ALERTOBJECT",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "OBJECT_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_ALERTOBJECT",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "PLACE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_ALERTSENDER",
+   "from_cols": [
+    "ALERT_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  }
+ ]
+}

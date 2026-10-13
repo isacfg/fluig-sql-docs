@@ -1,0 +1,127 @@
+{
+ "name": "LS_METRIC",
+ "domain": "monitoring-metrics",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Cabeçalho de métricas de uso do License Server por tenant, identificando rotina e sub-rotina medidas.",
+ "lifecycle": "Criada na primeira medição de cada (tenant, rotina, subrotina); detalhes em LS_METRIC_DETAIL.",
+ "key_notes": "Unique key (artefato UNIQUE), provavelmente TENANT_ID+ROUTINE+SUB_ROUTINE.",
+ "notes_for_agents": "Join com LS_METRIC_DETAIL por METRIC_ID.",
+ "primary_key": [
+  "METRIC_ID"
+ ],
+ "unique_constraints": [
+  [
+   "TENANT_ID",
+   "ROUTINE",
+   "SUB_ROUTINE"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.lsmetric.entity.LSMetric"
+ ],
+ "columns": [
+  {
+   "name": "METRIC_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK surrogate da métrica.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "LSMetric"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant medido.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "LSMetric"
+  },
+  {
+   "name": "ROUTINE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Rotina/funcionalidade medida.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "routine",
+   "java_type": "String",
+   "java_entity": "LSMetric"
+  },
+  {
+   "name": "SUB_ROUTINE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sub-rotina medida dentro da rotina.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "subRoutine",
+   "java_type": "String",
+   "java_entity": "LSMetric"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Tenant medido.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "LS_METRIC_DETAIL",
+   "from_cols": [
+    "METRIC_ID"
+   ],
+   "to_cols": [
+    "METRIC_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join",
+   "description": "Medições individuais.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "LS_METRIC_DETAIL",
+   "from_cols": [
+    "METRIC_ID"
+   ],
+   "to_cols": [
+    "METRIC_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

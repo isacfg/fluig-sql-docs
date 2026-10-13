@@ -1,0 +1,84 @@
+{
+ "name": "META_LISTA_REL",
+ "domain": "ecm-lists-filters",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Relacionamentos mestre-detalhe entre meta-listas.",
+ "lifecycle": "",
+ "key_notes": "Multi-tenant por COD_EMPRESA (parte da PK).",
+ "notes_for_agents": "Sempre filtrar COD_EMPRESA e, nas filhas, COD_LISTA; ignore LOG_DELETE=1 em META_LISTA/CAMPO.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_LISTA_PAI",
+  "COD_LISTA_FILHO"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.lists.model.MetaListRelation"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "MetaListRelation"
+  },
+  {
+   "name": "COD_LISTA_FILHO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Meta-lista detalhe (filha) do relacionamento mestre-detalhe.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "META_LISTA.COD_LISTA",
+   "confidence": "high",
+   "java_field": "detailList",
+   "java_type": "int",
+   "java_entity": "MetaListRelation"
+  },
+  {
+   "name": "COD_LISTA_PAI",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Meta-lista mestre (pai).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "META_LISTA.COD_LISTA",
+   "confidence": "high",
+   "java_field": "masterList",
+   "java_type": "int",
+   "java_entity": "MetaListRelation"
+  },
+  {
+   "name": "COD_TABELA",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador da tabela/dataset do relacionamento.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "tableId",
+   "java_type": "String",
+   "java_entity": "MetaListRelation"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

@@ -1,0 +1,136 @@
+{
+ "name": "PROPRIED_AVANCAD_PROCES",
+ "domain": "bpm-definicao-processo",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Propriedades avançadas (chave/valor) de uma versão de definição de processo, configuradas no modelador.",
+ "lifecycle": "Gravadas ao salvar/publicar uma versão do processo; regravadas por versão. Volume baixo.",
+ "key_notes": "Versionada: sempre inclui NUM_VERS. Entidade AdvancedProcessProperties.",
+ "notes_for_agents": "Consultar por (COD_EMPRESA, COD_DEF_PROCES, NUM_VERS). Named queries: findAll, findByProcess.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_DEF_PROCES",
+  "NUM_VERS",
+  "COD_PROPRIED"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.AdvancedProcessProperties"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK. Filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "AdvancedProcessProperties"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código da definição de processo (processId).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "AdvancedProcessProperties"
+  },
+  {
+   "name": "COD_PROPRIED",
+   "type": "varchar(200)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Identificador/nome da propriedade avançada.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "propertyId",
+   "java_type": "String",
+   "java_entity": "AdvancedProcessProperties"
+  },
+  {
+   "name": "NUM_VERS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número da versão da definição de processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "AdvancedProcessProperties"
+  },
+  {
+   "name": "DSL_VAL_PROPRIED",
+   "type": "varchar(2000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor da propriedade (texto até 2000 caracteres).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "propertieValue",
+   "java_type": "String",
+   "java_entity": "AdvancedProcessProperties"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "VERS_DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão de processo dona da propriedade (sem FK física).",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "PROPRIED_EXT",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "COD_PROPRIED"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "COD_PROPRIED"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

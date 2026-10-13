@@ -1,0 +1,156 @@
+{
+ "name": "TAR_DOCTO",
+ "domain": "bpm-tarefas",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Subtipo de tarefa (herança JOINED de Task) ligado a um documento específico do GED; base para tarefas de edição e revisão de documento.",
+ "lifecycle": "Uma linha por tarefa do subtipo, criada junto com a linha de TAR_CTRAL.",
+ "key_notes": "Herança JOINED: PK = FK para TAR_CTRAL. Tem subtipos TAR_DOCTO_EDIC e TAR_DOCTO_REVIS.",
+ "notes_for_agents": "Join com TAR_CTRAL para obter dono, prazo e status.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_TAREFA"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.task.DocumentTask"
+ ],
+ "columns": [
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Número do documento do GED associado à tarefa.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "int",
+   "java_entity": "DocumentTask"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versão do documento associada à tarefa.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "DocumentTask"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK. Filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "DocumentTask"
+  },
+  {
+   "name": "COD_TAREFA",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código da tarefa (taskId); parte da PK e elo da herança JOINED com TAR_CTRAL.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "TAR_CTRAL.COD_TAREFA",
+   "confidence": "high",
+   "java_field": "taskId",
+   "java_type": "int",
+   "java_entity": "DocumentTask"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "TAR_CTRAL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "cardinality": "1:1",
+   "kind": "physical-fk",
+   "description": "Tarefa base (herança JOINED).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Documento (versão) alvo da tarefa; sem FK física.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "TAR_CTRAL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "cardinality": "1:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "TAR_DOCTO_EDIC",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "cardinality": "1:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "TAR_DOCTO_REVIS",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "cardinality": "1:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

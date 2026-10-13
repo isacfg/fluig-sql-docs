@@ -1,0 +1,129 @@
+{
+ "name": "WCM_TENANTAPPLICATION",
+ "domain": "wcm-portal-apps",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Habilitação de uma aplicação WCM (widget/tema/layout) para um tenant, com código externo opcional.",
+ "lifecycle": "Criada ao instalar/habilitar uma aplicação no tenant; ENABLED_APP alterna a habilitação.",
+ "key_notes": "Unique (TENANT_ID, APPLICATION_ID). Filtrar por TENANT_ID.",
+ "notes_for_agents": "Named queries: findByTenant, findByApplication, findByTenantApplication, findByTenantExtendedAppCode, findByApplicationCode.",
+ "primary_key": [
+  "TENANT_APPLICATION_ID"
+ ],
+ "unique_constraints": [
+  [
+   "TENANT_ID",
+   "APPLICATION_ID"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.wcm.core.entity.WCMTenantApplication"
+ ],
+ "columns": [
+  {
+   "name": "TENANT_APPLICATION_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK surrogate.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "WCMTenantApplication"
+  },
+  {
+   "name": "APP_CODE_EXT",
+   "type": "varchar(40)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código estendido/customizado da aplicação no tenant (findByTenantExtendedAppCode).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "appCodeExt",
+   "java_type": "String",
+   "java_entity": "WCMTenantApplication"
+  },
+  {
+   "name": "ENABLED_APP",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a aplicação está habilitada no tenant.",
+   "semantic_type": "flag",
+   "values": "1=habilitada; 0=desabilitada",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "enabled",
+   "java_type": "Boolean",
+   "java_entity": "WCMTenantApplication"
+  },
+  {
+   "name": "APPLICATION_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Aplicação WCM habilitada.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "WCM_APPLICATION.APPLICATION_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant dono da habilitação.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "WCM_APPLICATION",
+   "from_cols": [
+    "APPLICATION_ID"
+   ],
+   "to_cols": [
+    "APPLICATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Aplicação habilitada.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Tenant.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

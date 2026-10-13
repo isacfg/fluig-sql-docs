@@ -1,0 +1,118 @@
+{
+ "name": "TERMO",
+ "domain": "ecm-search",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Dicionário de termos de busca por idioma, com marcação de termos irrelevantes (stop words).",
+ "lifecycle": "Mantida pela indexação/administração; volume baixo a médio.",
+ "key_notes": "PK (COD_EMPRESA, IND_IDIOMA, COD_TERMO).",
+ "notes_for_agents": "Nota: IND_IDIOMA é varchar(2) aqui e varchar(12) em SINONIMO.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "IND_IDIOMA",
+  "COD_TERMO"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.foundation.model.Term"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa (tenant) dona do registro; faz parte da PK e deve ser filtrado em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "Term"
+  },
+  {
+   "name": "IND_IDIOMA",
+   "type": "varchar(2)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código do idioma de 2 letras do termo.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "languageId",
+   "java_type": "String",
+   "java_entity": "Term"
+  },
+  {
+   "name": "COD_TERMO",
+   "type": "varchar(100)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Texto do termo.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "termId",
+   "java_type": "String",
+   "java_entity": "Term"
+  },
+  {
+   "name": "LOG_IRRELEV",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Termo irrelevante (ignorado na busca).",
+   "semantic_type": "flag",
+   "values": "1=irrelevante",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "logIrrelev",
+   "java_type": "Boolean",
+   "java_entity": "Term"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "SINONIMO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "IND_IDIOMA",
+    "COD_TERMO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "IND_IDIOMA",
+    "COD_TERMO"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-confirmed",
+   "description": "Sinônimos do termo.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "SINONIMO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "IND_IDIOMA",
+    "COD_TERMO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "IND_IDIOMA",
+    "COD_TERMO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-confirmed"
+  }
+ ]
+}

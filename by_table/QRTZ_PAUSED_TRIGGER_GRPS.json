@@ -1,0 +1,37 @@
+{
+ "name": "QRTZ_PAUSED_TRIGGER_GRPS",
+ "domain": "scheduler-quartz",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Grupos de triggers pausados.",
+ "lifecycle": "Normalmente vazia.",
+ "key_notes": "Não é pai de triggers; só lista grupos.",
+ "notes_for_agents": "Infraestrutura Quartz.",
+ "primary_key": [
+  "TRIGGER_GROUP"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.scheduler.entity.quartz.QrtzPausedTriggerGrps"
+ ],
+ "columns": [
+  {
+   "name": "TRIGGER_GROUP",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Grupo de triggers atualmente pausado; PK.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "QRTZ_TRIGGERS.TRIGGER_GROUP",
+   "confidence": "high",
+   "java_field": "triggerGroup",
+   "java_type": "String",
+   "java_entity": "QrtzPausedTriggerGrps"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

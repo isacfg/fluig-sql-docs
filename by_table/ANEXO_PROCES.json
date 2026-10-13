@@ -1,0 +1,535 @@
+{
+ "name": "ANEXO_PROCES",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Anexos (documentos do GED) vinculados a instâncias de processo de workflow, com histórico de onde/por quem foram incluídos.",
+ "lifecycle": "Uma linha por anexo adicionado a uma solicitação; cresce com o uso de anexos em processos.",
+ "key_notes": "PK (COD_EMPRESA, NUM_PROCES, NUM_SEQ_ANEXO). As 15 colunas VALOR_CAMPO_xx são LOB genéricos, normalmente vazios.",
+ "notes_for_agents": "Colunas VALOR_CAMPO_xx são longtext: evitar SELECT *. Binário do anexo está no GED (DOCUMENTO/arquivo), não aqui.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NUM_PROCES",
+  "NUM_SEQ_ANEXO"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "ANEXOPROCES001",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ]
+  },
+  {
+   "name": "ANEXOPROCES002",
+   "unique": false,
+   "columns": [
+    "NR_DOCUMENTO"
+   ]
+  },
+  {
+   "name": "ANEXOPROCES003",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessAttachment"
+ ],
+ "columns": [
+  {
+   "name": "NUM_SEQ_ANEXO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Sequência do anexo dentro da instância de processo; compõe a PK.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "attachmentSequence",
+   "java_type": "int",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant (empresa) dono da linha; sempre filtrar por este valor.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "NUM_PROCES",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Número da instância de processo ao qual o anexo pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_WORKFLOW.NUM_PROCES",
+   "confidence": "high",
+   "java_field": "processInstanceId",
+   "java_type": "int",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "DT_ANEXO",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data e hora em que o anexo foi incluído.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "attachedDate",
+   "java_type": "Date",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(150)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrícula do usuário que anexou o documento.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "high",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Número do documento do GED (ECM) anexado à instância.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "medium",
+   "java_field": "documentId",
+   "java_type": "Integer",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "VALOR_CAMPO_01",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Slot 1 de valor de campo de formulário associado ao anexo (texto longo, uso genérico; semântica depende do processo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "fieldValue1",
+   "java_type": "String",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "VALOR_CAMPO_10",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Slot 10 de valor de campo de formulário associado ao anexo (texto longo, uso genérico; semântica depende do processo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "fieldValue10",
+   "java_type": "String",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "VALOR_CAMPO_11",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Slot 11 de valor de campo de formulário associado ao anexo (texto longo, uso genérico; semântica depende do processo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "fieldValue11",
+   "java_type": "String",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "VALOR_CAMPO_12",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Slot 12 de valor de campo de formulário associado ao anexo (texto longo, uso genérico; semântica depende do processo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "fieldValue12",
+   "java_type": "String",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "VALOR_CAMPO_13",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Slot 13 de valor de campo de formulário associado ao anexo (texto longo, uso genérico; semântica depende do processo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "fieldValue13",
+   "java_type": "String",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "VALOR_CAMPO_14",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Slot 14 de valor de campo de formulário associado ao anexo (texto longo, uso genérico; semântica depende do processo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "fieldValue14",
+   "java_type": "String",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "VALOR_CAMPO_15",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Slot 15 de valor de campo de formulário associado ao anexo (texto longo, uso genérico; semântica depende do processo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "fieldValue15",
+   "java_type": "String",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "VALOR_CAMPO_02",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Slot 2 de valor de campo de formulário associado ao anexo (texto longo, uso genérico; semântica depende do processo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "fieldValue2",
+   "java_type": "String",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "VALOR_CAMPO_03",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Slot 3 de valor de campo de formulário associado ao anexo (texto longo, uso genérico; semântica depende do processo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "fieldValue3",
+   "java_type": "String",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "VALOR_CAMPO_04",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Slot 4 de valor de campo de formulário associado ao anexo (texto longo, uso genérico; semântica depende do processo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "fieldValue4",
+   "java_type": "String",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "VALOR_CAMPO_05",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Slot 5 de valor de campo de formulário associado ao anexo (texto longo, uso genérico; semântica depende do processo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "fieldValue5",
+   "java_type": "String",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "VALOR_CAMPO_06",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Slot 6 de valor de campo de formulário associado ao anexo (texto longo, uso genérico; semântica depende do processo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "fieldValue6",
+   "java_type": "String",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "VALOR_CAMPO_07",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Slot 7 de valor de campo de formulário associado ao anexo (texto longo, uso genérico; semântica depende do processo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "fieldValue7",
+   "java_type": "String",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "VALOR_CAMPO_08",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Slot 8 de valor de campo de formulário associado ao anexo (texto longo, uso genérico; semântica depende do processo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "fieldValue8",
+   "java_type": "String",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "VALOR_CAMPO_09",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Slot 9 de valor de campo de formulário associado ao anexo (texto longo, uso genérico; semântica depende do processo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "fieldValue9",
+   "java_type": "String",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "NUM_SEQ_MOVTO_ORIG",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sequência do movimento do processo em que o anexo foi originalmente incluído.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "originalMovementSequence",
+   "java_type": "Integer",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "NUM_SEQ_THREAD_ORIG",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sequência da thread do processo em que o anexo foi originalmente incluído.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "originalThreadSequence",
+   "java_type": "Integer",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versão do documento GED anexado.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "medium",
+   "java_field": "version",
+   "java_type": "Integer",
+   "java_entity": "ProcessAttachment"
+  },
+  {
+   "name": "REPLACEMENT_ID",
+   "type": "varchar(150)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrícula do substituto em nome de quem o anexo foi incluído, quando há substituição.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "low",
+   "java_field": "replacementId",
+   "java_type": "String",
+   "java_entity": "ProcessAttachment"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "PROCES_WORKFLOW",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Instância dona do anexo.",
+   "status": "probable"
+  },
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Documento GED anexado (relação lógica não listada pela heurística).",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "CONHECIMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Inferência por coincidência de nomes de coluna; tabela é do domínio de usuário/documento, sem relação com anexo de processo.",
+   "status": "rejected"
+  },
+  {
+   "to_table": "DOCTO_DESTAQ_COLAB",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Inferência por coincidência de nomes de coluna; tabela é do domínio de usuário/documento, sem relação com anexo de processo.",
+   "status": "rejected"
+  },
+  {
+   "to_table": "DOCTO_RANKING",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Inferência por coincidência de nomes de coluna; tabela é do domínio de usuário/documento, sem relação com anexo de processo.",
+   "status": "rejected"
+  },
+  {
+   "to_table": "PREFER_PASTA",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Inferência por coincidência de nomes de coluna; tabela é do domínio de usuário/documento, sem relação com anexo de processo.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

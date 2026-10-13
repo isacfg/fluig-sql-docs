@@ -1,0 +1,277 @@
+{
+ "name": "DOCTO_ANOTACAO_COLAB",
+ "domain": "ecm-documents",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Anotações de colaboradores sobre páginas de um documento (posição X/Y, threads via anotação pai).",
+ "lifecycle": "Criada ao anotar o documento.",
+ "key_notes": "PK 5 colunas inclui NR_ANOTACAO. DTT_CRIAC é bigint (epoch ms provável).",
+ "notes_for_agents": "Sem named queries; filtrar por documento+versão.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NR_DOCUMENTO",
+  "NR_VERSAO",
+  "CD_MATRICULA",
+  "NR_ANOTACAO"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.DocumentAnnotation"
+ ],
+ "columns": [
+  {
+   "name": "NR_ANOTACAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 5,
+   "purpose": "Número sequencial da anotação.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "annotationId",
+   "java_type": "int",
+   "java_entity": "DocumentAnnotation"
+  },
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Matrícula do autor da anotação.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "medium",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "DocumentAnnotation"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); parte da PK, sempre filtrar por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "DocumentAnnotation"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Número (ID lógico) do documento ECM, sem FK física para DOCUMENTO.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "int",
+   "java_entity": "DocumentAnnotation"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número da versão do documento; par com NR_DOCUMENTO identifica a versão.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "DocumentAnnotation"
+  },
+  {
+   "name": "DSL_ANOTACAO",
+   "type": "varchar(2000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Texto da anotação.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "annotation",
+   "java_type": "String",
+   "java_entity": "DocumentAnnotation"
+  },
+  {
+   "name": "DTT_CRIAC",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de criação como bigint (epoch ms provável).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "createDate",
+   "java_type": "long",
+   "java_entity": "DocumentAnnotation"
+  },
+  {
+   "name": "NR_PAGINA",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Página do documento onde a anotação foi feita.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "page",
+   "java_type": "int",
+   "java_entity": "DocumentAnnotation"
+  },
+  {
+   "name": "NR_ANOTACAO_PAI",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "NR_ANOTACAO da anotação pai (resposta); 0/nulo se raiz.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCTO_ANOTACAO_COLAB.NR_ANOTACAO",
+   "confidence": "medium",
+   "java_field": "parentAnnotationId",
+   "java_type": "int",
+   "java_entity": "DocumentAnnotation"
+  },
+  {
+   "name": "NR_POSICAOX",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Coordenada X da anotação na página.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "posicaoX",
+   "java_type": "int",
+   "java_entity": "DocumentAnnotation"
+  },
+  {
+   "name": "NR_POSICAOY",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Coordenada Y da anotação na página.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "posicaoY",
+   "java_type": "int",
+   "java_entity": "DocumentAnnotation"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão anotada.",
+   "status": "probable"
+  },
+  {
+   "to_table": "DOCTO_ANOTACAO_COLAB",
+   "from_cols": [
+    "NR_ANOTACAO_PAI"
+   ],
+   "to_cols": [
+    "NR_ANOTACAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Auto-relação: anotação pai.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "DOCTO_COMENT",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA",
+    "DTT_CRIAC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA",
+    "DTT_CRIAC"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: coincidência de colunas de PK.",
+   "status": "rejected"
+  },
+  {
+   "to_table": "DOCTO_OBS_COLAB",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA",
+    "DTT_CRIAC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO",
+    "CD_MATRICULA",
+    "DTT_CRIAC"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: coincidência de colunas de PK.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": [
+  {
+   "from_table": "DOCTO_ANOTACAO_COLAB",
+   "from_cols": [
+    "NR_ANOTACAO_PAI"
+   ],
+   "to_cols": [
+    "NR_ANOTACAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

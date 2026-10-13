@@ -1,0 +1,197 @@
+{
+ "name": "SEGUR_ANEXO_PROCES",
+ "domain": "bpm-definicao-processo",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Regras de segurança de anexos por versão de processo: define quem (mecanismo de atribuição) tem qual nível de acesso aos anexos da solicitação.",
+ "lifecycle": "Gravadas ao salvar a definição do processo; substituídas por versão.",
+ "key_notes": "Versionada por NUM_VERS. NUM_SEQ é sequência da regra dentro do processo/versão, não a de PENDCIA_NOTIF_EMAIL.",
+ "notes_for_agents": "Consultar por (COD_EMPRESA, COD_DEF_PROCES, NUM_VERS). Named query: findByProcess.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_DEF_PROCES",
+  "NUM_VERS",
+  "NUM_SEQ"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessAttachmentSecurity"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK. Filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ProcessAttachmentSecurity"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código da definição de processo à qual a regra se aplica.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ProcessAttachmentSecurity"
+  },
+  {
+   "name": "NUM_SEQ",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Sequência da regra de segurança dentro do processo/versão.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "sequence",
+   "java_type": "int",
+   "java_entity": "ProcessAttachmentSecurity"
+  },
+  {
+   "name": "NUM_VERS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Versão da definição de processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "ProcessAttachmentSecurity"
+  },
+  {
+   "name": "IND_NIV_ACES",
+   "type": "varchar(8)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nível de acesso concedido aos anexos (código textual definido no modelador).",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "accessLevel",
+   "java_type": "String",
+   "java_entity": "ProcessAttachmentSecurity"
+  },
+  {
+   "name": "DSL_CONFIGUR_MECAN_ATRIBUIC",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Configuração (serializada) do mecanismo de atribuição que resolve os usuários da regra.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "engineAllocationConfiguration",
+   "java_type": "String",
+   "java_entity": "ProcessAttachmentSecurity"
+  },
+  {
+   "name": "COD_MECAN_ATRIBUIC",
+   "type": "varchar(25)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do mecanismo de atribuição (engineAllocationId), ex.: por usuário, grupo ou papel.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "MECAN_ATRIBUIC.COD_MECAN_ATRIBUIC",
+   "confidence": "medium",
+   "java_field": "engineAllocationId",
+   "java_type": "String",
+   "java_entity": "ProcessAttachmentSecurity"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "VERS_DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão de processo dona da regra.",
+   "status": "probable"
+  },
+  {
+   "to_table": "MECAN_ATRIBUIC",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_MECAN_ATRIBUIC"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_MECAN_ATRIBUIC"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Mecanismo de atribuição referenciado por código; o mecanismo pode ser customizado e não necessariamente existir como linha.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "PENDCIA_NOTIF_EMAIL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Coincidência de nome apenas (NUM_SEQ); sem relação semântica.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": [
+  {
+   "from_table": "PROPRIED_EXT",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

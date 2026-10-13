@@ -1,0 +1,118 @@
+{
+ "name": "PARAM_APLICAT_USUAR",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Valor de parametro de aplicativo especifico de um usuario, sobrepondo o valor padrao de PARAM_APLICAT.",
+ "lifecycle": "Criada quando um usuario personaliza um parametro com LOG_VARIAC_USUAR=1.",
+ "key_notes": "PK (COD_EMPRESA, CD_MATRICULA, NOM_PARAM, COD_APLICAT).",
+ "notes_for_agents": "Pode conter valores sensiveis (senhas de aplicativo). Fazer join com PARAM_APLICAT por (COD_EMPRESA, COD_APLICAT, NOM_PARAM).",
+ "primary_key": [
+  "COD_EMPRESA",
+  "CD_MATRICULA",
+  "NOM_PARAM",
+  "COD_APLICAT"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.UserApplicationParameter"
+ ],
+ "columns": [
+  {
+   "name": "COD_APLICAT",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Codigo do aplicativo ao qual o parametro pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "APLICATIVO.COD_APLICAT",
+   "confidence": "medium",
+   "java_field": "applicationId",
+   "java_type": "String",
+   "java_entity": "UserApplicationParameter"
+  },
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Matricula do usuario dono do valor personalizado.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE (via matricula)",
+   "confidence": "high",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "UserApplicationParameter"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant (empresa) dona da linha; faz parte da PK e deve ser filtrada em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "UserApplicationParameter"
+  },
+  {
+   "name": "NOM_PARAM",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Nome do parametro personalizado.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "PARAM_APLICAT.NOM_PARAM",
+   "confidence": "high",
+   "java_field": "parameterName",
+   "java_type": "String",
+   "java_entity": "UserApplicationParameter"
+  },
+  {
+   "name": "VAL_PARAM",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor do parametro para o usuario.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "parameterValue",
+   "java_type": "String",
+   "java_entity": "UserApplicationParameter"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "PARAM_APLICAT",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_APLICAT",
+    "NOM_PARAM"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_APLICAT",
+    "NOM_PARAM"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Definicao do parametro cujo valor e sobreposto por usuario.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

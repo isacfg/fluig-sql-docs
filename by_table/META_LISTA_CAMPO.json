@@ -1,0 +1,221 @@
+{
+ "name": "META_LISTA_CAMPO",
+ "domain": "ecm-lists-filters",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Campos (colunas) de uma meta-lista, com título, tipo, obrigatoriedade e lista estrangeira.",
+ "lifecycle": "Exclusão lógica por LOG_DELETE.",
+ "key_notes": "Multi-tenant por COD_EMPRESA (parte da PK).",
+ "notes_for_agents": "Sempre filtrar COD_EMPRESA e, nas filhas, COD_LISTA; ignore LOG_DELETE=1 em META_LISTA/CAMPO.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_LISTA",
+  "NUM_SEQ_CAMPO"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.lists.model.MetaListField"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "NUM_SEQ_CAMPO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Sequencial do campo dentro da meta-lista.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "COD_LISTA",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Meta-lista dona do campo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "META_LISTA.COD_LISTA",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "LOG_DELETE",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Exclusão lógica do campo.",
+   "semantic_type": "flag",
+   "values": "1=excluído; 0=ativo",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "deleted",
+   "java_type": "Boolean",
+   "java_entity": "MetaListField"
+  },
+  {
+   "name": "NOM_CAMPO",
+   "type": "varchar(70)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome técnico do campo.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "fieldName",
+   "java_type": "String",
+   "java_entity": "MetaListField"
+  },
+  {
+   "name": "COD_LISTA_ESTRAN",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Meta-lista estrangeira referenciada quando o campo é chave estrangeira para outra lista.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "META_LISTA.COD_LISTA",
+   "confidence": "medium",
+   "java_field": "foreignListID",
+   "java_type": "Integer",
+   "java_entity": "MetaListField"
+  },
+  {
+   "name": "LOG_ROTULO",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o campo é o rótulo (label) exibido do registro.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "label",
+   "java_type": "Boolean",
+   "java_entity": "MetaListField"
+  },
+  {
+   "name": "LOG_REQUER",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o campo é obrigatório.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "mandatory",
+   "java_type": "Boolean",
+   "java_entity": "MetaListField"
+  },
+  {
+   "name": "NOM_TITULO",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Título exibido do campo.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "title",
+   "java_type": "String",
+   "java_entity": "MetaListField"
+  },
+  {
+   "name": "TP_CAMPO",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo de dado do campo (código inteiro; mapeamento não confirmado).",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "type",
+   "java_type": "int",
+   "java_entity": "MetaListField"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "META_LISTA",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Chaves compostas coincidem com a PK do alvo; sem FK física.",
+   "status": "probable"
+  },
+  {
+   "to_table": "META_LISTA",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA_ESTRAN"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Lista estrangeira referenciada pelo campo.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "META_LISTA_PERSPECT_CAMPO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA",
+    "NUM_SEQ_CAMPO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA",
+    "NUM_SEQ_CAMPO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

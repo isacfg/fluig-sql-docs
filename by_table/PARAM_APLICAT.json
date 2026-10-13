@@ -1,0 +1,161 @@
+{
+ "name": "PARAM_APLICAT",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Parametros de configuracao de aplicativos (cadastro APLICATIVO) por tenant: nome, tipo, valor padrao e se pode variar por usuario.",
+ "lifecycle": "Criada ao cadastrar/configurar aplicativo; baixo volume.",
+ "key_notes": "PK (COD_EMPRESA, COD_APLICAT, NOM_PARAM). Valores por usuario ficam em PARAM_APLICAT_USUAR.",
+ "notes_for_agents": "VAL_PARAM pode ser senha quando LOG_FORMAT_SENHA=1 (sensivel). Filtrar por COD_EMPRESA.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_APLICAT",
+  "NOM_PARAM"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.ApplicationParameter"
+ ],
+ "columns": [
+  {
+   "name": "COD_APLICAT",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Codigo do aplicativo dono do parametro.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "APLICATIVO.COD_APLICAT",
+   "confidence": "medium",
+   "java_field": "applicationId",
+   "java_type": "String",
+   "java_entity": "ApplicationParameter"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant (empresa) dona da linha; faz parte da PK e deve ser filtrada em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ApplicationParameter"
+  },
+  {
+   "name": "NOM_PARAM",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Nome do parametro do aplicativo.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "name",
+   "java_type": "String",
+   "java_entity": "ApplicationParameter"
+  },
+  {
+   "name": "LOG_FORMAT_SENHA",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica que o valor deve ser tratado/exibido como senha.",
+   "semantic_type": "flag",
+   "values": "1=formato senha; 0=texto",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "isPasswordFormat",
+   "java_type": "Boolean",
+   "java_entity": "ApplicationParameter"
+  },
+  {
+   "name": "LOG_VARIAC_USUAR",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica que o valor pode variar por usuario (override em PARAM_APLICAT_USUAR).",
+   "semantic_type": "flag",
+   "values": "1=valor por usuario; 0=global",
+   "refs": "PARAM_APLICAT_USUAR",
+   "confidence": "high",
+   "java_field": "isValueByUser",
+   "java_type": "Boolean",
+   "java_entity": "ApplicationParameter"
+  },
+  {
+   "name": "IDI_TIP_PARAM",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo de dado do parametro (campo parameterType); valores nao confirmados.",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "parameterType",
+   "java_type": "int",
+   "java_entity": "ApplicationParameter"
+  },
+  {
+   "name": "VAL_PARAM",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor do parametro (padrao/global), em texto.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "value",
+   "java_type": "String",
+   "java_entity": "ApplicationParameter"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "APLICATIVO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_APLICAT"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_APLICAT"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Aplicativo dono do parametro.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "PARAM_APLICAT_USUAR",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_APLICAT",
+    "NOM_PARAM"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_APLICAT",
+    "NOM_PARAM"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

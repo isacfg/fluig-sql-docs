@@ -1,0 +1,68 @@
+{
+ "name": "SEQ_ECM",
+ "domain": "infraestrutura-sequencias",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Tabela de sequências (próximo ID) por empresa e por tabela lógica, usada pelo ECM/workflow para gerar chaves numéricas sem auto-increment.",
+ "lifecycle": "Uma linha por (empresa, tabela); COD_PROX_ID é incrementado a cada geração de ID. Volume muito baixo, altíssima atualização.",
+ "key_notes": "Contador manual: leitura+update concorrentes exigem lock; não alterar manualmente.",
+ "notes_for_agents": "Não fazer join; é apenas gerador de sequência. Não editar fora do aplicativo.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "CD_TABELA"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.foundation.model.ECMSequence"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK. Filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ECMSequence"
+  },
+  {
+   "name": "CD_TABELA",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Nome/identificador lógico da tabela cujo ID é sequenciado.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "tableId",
+   "java_type": "String",
+   "java_entity": "ECMSequence"
+  },
+  {
+   "name": "COD_PROX_ID",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Próximo valor de ID a ser entregue para a tabela CD_TABELA.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "nextId",
+   "java_type": "Integer",
+   "java_entity": "ECMSequence"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

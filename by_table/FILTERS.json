@@ -1,0 +1,202 @@
+{
+ "name": "FILTERS",
+ "domain": "ecm-lists-filters",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Filtros salvos pelos usuários nas listas de documentos ou de processos (tarefas), com tipo DOCUMENT ou PROCESS.",
+ "lifecycle": "Criado pelo usuário; POSITION reordenada por queries.",
+ "key_notes": "Multi-tenant por TENANT_ID.",
+ "notes_for_agents": "Contém referência a usuário (matrícula/id); dado pessoal indireto.  Filtrar por FILTERS.TENANT_ID e USER_ID; TYPE 0=DOCUMENT, 1=PROCESS.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.filter.model.Filter"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador do filtro salvo.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "Filter"
+  },
+  {
+   "name": "IS_PUBLIC",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o filtro é público (visível a outros usuários).",
+   "semantic_type": "flag",
+   "values": "1=público; 0/null=privado (inferido)",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "isPublic",
+   "java_type": "Boolean",
+   "java_entity": "Filter"
+  },
+  {
+   "name": "NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do filtro.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "name",
+   "java_type": "String",
+   "java_entity": "Filter"
+  },
+  {
+   "name": "POSITION",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Posição do filtro na lista do usuário/tenant/tipo (Filter.nextPosition, updatePositions).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "position",
+   "java_type": "Integer",
+   "java_entity": "Filter"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant do filtro.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "Filter"
+  },
+  {
+   "name": "TYPE",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do filtro (enum FilterType, ordinal).",
+   "semantic_type": "enum",
+   "values": "0=DOCUMENT; 1=PROCESS",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "type",
+   "java_type": "FilterType",
+   "java_entity": "Filter"
+  },
+  {
+   "name": "USER_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Usuário dono do filtro (id numérico).",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USER.USER_ID",
+   "confidence": "medium",
+   "java_field": "userId",
+   "java_type": "Long",
+   "java_entity": "Filter"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_USER",
+   "from_cols": [
+    "USER_ID"
+   ],
+   "to_cols": [
+    "USER_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Dono do filtro.",
+   "status": "probable"
+  },
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Tenant do filtro.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "FDN_USER",
+   "from_cols": [
+    "USER_ID"
+   ],
+   "to_cols": [
+    "USER_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; USER_ID de FILTERS é id numérico do usuário; ver relação lógica a FDN_USER.USER_ID (provável, não confirmada por FK)",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": [
+  {
+   "from_table": "FILTER_FIELDS",
+   "from_cols": [
+    "FILTER_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FILTER_GROUP",
+   "from_cols": [
+    "FILTER_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FILTER_ORDER",
+   "from_cols": [
+    "FILTER_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

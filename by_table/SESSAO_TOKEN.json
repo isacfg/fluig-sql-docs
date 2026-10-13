@@ -1,0 +1,81 @@
+{
+ "name": "SESSAO_TOKEN",
+ "domain": "security-oauth-tokens",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Tokens de sessão (UUID) associados a um login, com marca do último uso. Usada pela entidade Token do foundation/webdesk.",
+ "lifecycle": "Linhas criadas ao emitir token de sessão; VAL_ULT_USO atualizado a cada uso.",
+ "key_notes": "Sem tenant nem FK; ligação ao usuário é só pelo texto LOGIN.",
+ "notes_for_agents": "Dado sensível: COD_TOKEN é credencial de sessão. LOGIN refere FDN_USERTENANT.LOGIN por valor.",
+ "primary_key": [
+  "COD_TOKEN"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.foundation.model.Token"
+ ],
+ "columns": [
+  {
+   "name": "COD_TOKEN",
+   "type": "varchar(40)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "UUID (varchar 40) do token de sessão; PK. Campo Java uuid.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "uuid",
+   "java_type": "String",
+   "java_entity": "Token"
+  },
+  {
+   "name": "VAL_ULT_USO",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Instante do último uso do token, provável epoch em milissegundos (Long lastTimeUsed).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "lastTimeUsed",
+   "java_type": "Long",
+   "java_entity": "Token"
+  },
+  {
+   "name": "LOGIN",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Login do usuário dono do token (texto).",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.LOGIN",
+   "confidence": "medium",
+   "java_field": "login",
+   "java_type": "String",
+   "java_entity": "Token"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "LOGIN"
+   ],
+   "to_cols": [
+    "LOGIN"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Login do dono do token; sem FK [alvo corrigido: USER_CODE/LOGIN pertencem a FDN_USERTENANT]",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

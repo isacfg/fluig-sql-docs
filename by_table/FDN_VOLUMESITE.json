@@ -1,0 +1,134 @@
+{
+ "name": "FDN_VOLUMESITE",
+ "domain": "foundation-platform",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Associa um volume de armazenamento a um site, informando o caminho físico (STORAGE) usado por esse site naquele volume.",
+ "lifecycle": "Criada ao vincular site a volume; volume baixo.",
+ "key_notes": "Unique key (artefato UNIQUE), provavelmente VOLUME_ID+SITE_ID. Sem coluna de tenant: use FDN_SITE/FDN_VOLUME.",
+ "notes_for_agents": "Join típico: FDN_VOLUMESITE -> FDN_VOLUME para obter TENANT_ID e VOLUME_CODE.",
+ "primary_key": [
+  "VOLUMESITE_ID"
+ ],
+ "unique_constraints": [
+  [
+   "VOLUME_ID",
+   "SITE_ID"
+  ]
+ ],
+ "indexes": [
+  {
+   "name": "FK_9JODRY492AMD4AHS0O7C4T3KW",
+   "unique": false,
+   "columns": [
+    "SITE_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.fluig.foundation.volume.entity.FDNVolumeSite"
+ ],
+ "columns": [
+  {
+   "name": "VOLUMESITE_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK surrogate do vínculo volume-site.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNVolumeSite"
+  },
+  {
+   "name": "SITE_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Site vinculado ao volume.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_SITE.SITE_ID",
+   "confidence": "high",
+   "java_field": "siteId",
+   "java_type": "Long",
+   "java_entity": "FDNVolumeSite"
+  },
+  {
+   "name": "STORAGE",
+   "type": "varchar(400)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Caminho de armazenamento (path) do site dentro do volume.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "storage",
+   "java_type": "String",
+   "java_entity": "FDNVolumeSite"
+  },
+  {
+   "name": "VOLUME_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Volume vinculado ao site.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_VOLUME.VOLUME_ID",
+   "confidence": "high",
+   "java_field": "volumeId",
+   "java_type": "Long",
+   "java_entity": "FDNVolumeSite"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_VOLUME",
+   "from_cols": [
+    "VOLUME_ID"
+   ],
+   "to_cols": [
+    "VOLUME_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Volume vinculado (FDNVolumeSite.volume).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_SITE",
+   "from_cols": [
+    "SITE_ID"
+   ],
+   "to_cols": [
+    "SITE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Site vinculado.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_VOLUME",
+   "from_cols": [
+    "VOLUME_ID"
+   ],
+   "to_cols": [
+    "VOLUME_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join"
+  }
+ ]
+}

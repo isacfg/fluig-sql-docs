@@ -1,0 +1,148 @@
+{
+ "name": "EVENT_FICHA",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Script de evento (JavaScript) de um formulário/ficha, por documento e versão (CardEvent).",
+ "lifecycle": "Criada ao salvar eventos do formulário no editor de formulários.",
+ "key_notes": "Versionada por NR_VERSAO; LOG_APLIC_TODAS_VERS indica aplicação a versões anteriores.",
+ "notes_for_agents": "Contém código executável; tratar como dado, não executar.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NR_DOCUMENTO",
+  "NR_VERSAO",
+  "COD_EVENT"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.forms.model.CardEvent"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK e filtro obrigatório de multi-tenancy.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "CardEvent"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Número do documento (formulário) no GED ao qual o evento pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "int",
+   "java_entity": "CardEvent"
+  },
+  {
+   "name": "COD_EVENT",
+   "type": "varchar(25)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Nome/código do evento do formulário (ex.: displayFields, validateForm).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "EVENT_GERAL.COD_EVENT",
+   "confidence": "medium",
+   "java_field": "eventId",
+   "java_type": "String",
+   "java_entity": "CardEvent"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Versão do documento do formulário.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "CardEvent"
+  },
+  {
+   "name": "DSL_EVENT",
+   "type": "longtext",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código-fonte (longtext) do script do evento.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "eventDescription",
+   "java_type": "String",
+   "java_entity": "CardEvent"
+  },
+  {
+   "name": "LOG_APLIC_TODAS_VERS",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o evento vale também para versões anteriores do formulário.",
+   "semantic_type": "flag",
+   "values": "1=aplica a todas as versões",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "eventVersAnt",
+   "java_type": "Boolean",
+   "java_entity": "CardEvent"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Documento (formulário) dono do evento.",
+   "status": "probable"
+  },
+  {
+   "to_table": "EVENT_GERAL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_EVENT"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_EVENT"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Evento global de mesmo nome; relação por nome, sem FK.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

@@ -1,0 +1,109 @@
+{
+ "name": "FILTER_ORDER",
+ "domain": "ecm-lists-filters",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Critérios de ordenação de um filtro salvo, apontando para um FILTER_FIELDS.",
+ "lifecycle": "Removidos junto com o filtro (removeOrderFromFilter).",
+ "key_notes": "",
+ "notes_for_agents": "",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.filter.model.FilterOrder"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador do critério de ordenação.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FilterOrder"
+  },
+  {
+   "name": "TYPE",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Direção/tipo da ordenação (string livre; ex. ASC/DESC provável).",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "type",
+   "java_type": "String",
+   "java_entity": "FilterOrder"
+  },
+  {
+   "name": "FILTER_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Filtro ao qual a ordenação pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FILTERS.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "FIELD_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Campo do filtro usado como chave de ordenação.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FILTER_FIELDS.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FILTERS",
+   "from_cols": [
+    "FILTER_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "FK ['FILTER_ID'] referencia FILTERS.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FILTER_FIELDS",
+   "from_cols": [
+    "FIELD_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "FK ['FIELD_ID'] referencia FILTER_FIELDS.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

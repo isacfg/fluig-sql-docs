@@ -1,0 +1,252 @@
+{
+ "name": "FDN_PUSH",
+ "domain": "mobile-push",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Registros de dispositivos móveis para notificações push: tokens de acesso, de canal e de dispositivo por usuário OAuth/aplicativo.",
+ "lifecycle": "Criada no registro do dispositivo e atualizada em renovações de token; volume proporcional a dispositivos.",
+ "key_notes": "Contém tokens e IMEI (sensíveis). PUSH_SERVICE e PUSH_APP são enums gravados como string.",
+ "notes_for_agents": "Nunca expor tokens e IMEI.",
+ "primary_key": [
+  "PUSH_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "FK_KC33OQJHQNOHVJKXQYFKXKGS7",
+   "unique": false,
+   "columns": [
+    "FDN_OAUTH_APPLICATION_USER_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.fluig.foundation.mobile.entity.FDNPush"
+ ],
+ "columns": [
+  {
+   "name": "PUSH_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNPush"
+  },
+  {
+   "name": "ACCESS_TOKEN",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Token de acesso OAuth associado ao dispositivo (sensível).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "accessToken",
+   "java_type": "String",
+   "java_entity": "FDNPush"
+  },
+  {
+   "name": "IMEI",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "IMEI/identificador do dispositivo (dado pessoal).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "imei",
+   "java_type": "String",
+   "java_entity": "FDNPush"
+  },
+  {
+   "name": "CHANNEL_TOKEN",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Token do canal de push no provedor (sensível).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "channelToken",
+   "java_type": "String",
+   "java_entity": "FDNPush"
+  },
+  {
+   "name": "MOBILE_LANGUAGE",
+   "type": "varchar(5)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Idioma do dispositivo (ex.: pt_BR, até 5 caracteres).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "mobileLanguage",
+   "java_type": "String",
+   "java_entity": "FDNPush"
+  },
+  {
+   "name": "MOBILE_TOKEN",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Token do dispositivo móvel para envio de push (sensível).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "mobileToken",
+   "java_type": "String",
+   "java_entity": "FDNPush"
+  },
+  {
+   "name": "PUSH_STATUS",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Status do registro de push, em texto livre (valores não confirmados).",
+   "semantic_type": "status",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "status",
+   "java_type": "String",
+   "java_entity": "FDNPush"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant do registro.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNPush"
+  },
+  {
+   "name": "TOKEN_CREATION_DATE",
+   "type": "date",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Data de criação do token.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "tokenCreationDate",
+   "java_type": "Date",
+   "java_entity": "FDNPush"
+  },
+  {
+   "name": "TOKEN_LAST_UPDATE_DATE",
+   "type": "date",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Data da última atualização do token.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "tokenLastUpdateDate",
+   "java_type": "Date",
+   "java_entity": "FDNPush"
+  },
+  {
+   "name": "FDN_OAUTH_APPLICATION_USER_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Vínculo usuário-aplicativo OAuth dono do dispositivo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_OAUTHAPPUSER.OAUTH_APP_USER_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "PUSH_SERVICE",
+   "type": "varchar(13)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Serviço de push usado.",
+   "semantic_type": "enum",
+   "values": "URBAN_AIRSHIP; FIREBASE",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "pushService",
+   "java_type": "PushServiceEnum",
+   "java_entity": "FDNPush"
+  },
+  {
+   "name": "PUSH_APP",
+   "type": "varchar(15)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Aplicativo móvel de destino.",
+   "semantic_type": "enum",
+   "values": "MY_FLUIG; MY_APPROVAL",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "pushApp",
+   "java_type": "PushAppEnum",
+   "java_entity": "FDNPush"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_OAUTHAPPUSER",
+   "from_cols": [
+    "FDN_OAUTH_APPLICATION_USER_ID"
+   ],
+   "to_cols": [
+    "OAUTH_APP_USER_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Usuário/aplicativo OAuth dono.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Tenant, sem FK.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

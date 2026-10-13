@@ -1,0 +1,67 @@
+{
+ "name": "TAG",
+ "domain": "ecm-search",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Cadastro de tags (etiquetas) usadas para classificar conteúdo.",
+ "lifecycle": "Uma linha por tag distinta; criada ao primeiro uso.",
+ "key_notes": "PK (COD_EMPRESA, COD_TAG). Associações com documentos/conteúdos ficam em outras tabelas.",
+ "notes_for_agents": "Tabela mínima; ligações a conteúdo em tabelas de associação.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_TAG"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.Tag"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa (tenant) dona do registro; faz parte da PK e deve ser filtrado em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "Tag"
+  },
+  {
+   "name": "COD_TAG",
+   "type": "varchar(100)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Texto da tag (identificador).",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "tagId",
+   "java_type": "String",
+   "java_entity": "Tag"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "DOCTO_TAG",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAG"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAG"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

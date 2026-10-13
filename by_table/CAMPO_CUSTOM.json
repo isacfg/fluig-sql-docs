@@ -1,0 +1,113 @@
+{
+ "name": "CAMPO_CUSTOM",
+ "domain": "ecm-documents",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Definição de campos customizados (metadados extras) que podem ser associados a documentos.",
+ "lifecycle": "Cadastro administrativo, baixo volume.",
+ "key_notes": "PK (COD_EMPRESA, COD_CAMPO_CUSTOM). Valores por documento em DOCTO_CAMPO_CUSTOM.",
+ "notes_for_agents": "Entidade CustomFields; query findAlwaysShow.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_CAMPO_CUSTOM"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.CustomFields"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); parte da PK, sempre filtrar por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "CustomFields"
+  },
+  {
+   "name": "COD_CAMPO_CUSTOM",
+   "type": "varchar(100)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código/identificador do campo customizado.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "customFieldId",
+   "java_type": "String",
+   "java_entity": "CustomFields"
+  },
+  {
+   "name": "LOG_MOSTRA_TODOS_DOCTO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o campo é exibido em todos os documentos (alwaysShow).",
+   "semantic_type": "flag",
+   "values": "1=sempre exibe; 0=somente onde associado",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "alwaysShow",
+   "java_type": "Boolean",
+   "java_entity": "CustomFields"
+  },
+  {
+   "name": "DES_CAMPO_CUSTOM",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição/rótulo do campo customizado.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "customFieldDescription",
+   "java_type": "String",
+   "java_entity": "CustomFields"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DOCTO_CAMPO_CUSTOM",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_CAMPO_CUSTOM"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_CAMPO_CUSTOM"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable",
+   "description": "Valores do campo por documento.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "DOCTO_CAMPO_CUSTOM",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_CAMPO_CUSTOM"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_CAMPO_CUSTOM"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

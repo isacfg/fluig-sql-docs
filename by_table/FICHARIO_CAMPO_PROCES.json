@@ -1,0 +1,131 @@
+{
+ "name": "FICHARIO_CAMPO_PROCES",
+ "domain": "bpm-forms",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Mapeia campos do formulário a um processo: descrição e posição (slot) de campos exibidos/indexados para a definição de processo.",
+ "lifecycle": "Gravada ao configurar o formulário associado a um processo; poucas linhas por processo.",
+ "key_notes": "PK (COD_EMPRESA, COD_CAMPO, COD_DEF_PROCES).",
+ "notes_for_agents": "Filtrar por COD_EMPRESA e COD_DEF_PROCES.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_CAMPO",
+  "COD_DEF_PROCES"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessFormField"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa (tenant) dona do registro; faz parte da PK e deve ser filtrado em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ProcessFormField"
+  },
+  {
+   "name": "COD_CAMPO",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Nome do campo do formulário mapeado.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "FICHARIO_CAMPO.COD_CAMPO",
+   "confidence": "high",
+   "java_field": "fieldId",
+   "java_type": "String",
+   "java_entity": "ProcessFormField"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Código da definição de processo à qual o campo é associado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ProcessFormField"
+  },
+  {
+   "name": "DS_CAMPO",
+   "type": "varchar(200)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição/rótulo do campo no processo.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "fieldDescription",
+   "java_type": "String",
+   "java_entity": "ProcessFormField"
+  },
+  {
+   "name": "NUM_SEQ",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Posição (slot) numérica do campo na lista do processo.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "slotId",
+   "java_type": "Integer",
+   "java_entity": "ProcessFormField"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-confirmed",
+   "description": "Definição do processo.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "PENDCIA_NOTIF_EMAIL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: coincidência de nome; NUM_SEQ aqui é slot do campo.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

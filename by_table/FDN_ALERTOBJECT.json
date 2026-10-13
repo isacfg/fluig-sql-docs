@@ -1,0 +1,201 @@
+{
+ "name": "FDN_ALERTOBJECT",
+ "domain": "foundation-alert",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Objeto de negocio (documento, tarefa, etc.) referenciado por um alerta, tanto como alvo (OBJECT_ID) quanto como local (PLACE_ID).",
+ "lifecycle": "Criado ao disparar alerta; removido com os alertas (removeAlertObjectsByIdsList). Volume alto.",
+ "key_notes": "Nao ha coluna de tenant. OBJECT_ID aqui e o id do objeto na aplicacao de origem (nao PK desta tabela); PK e ID. Indice INDEX_ALERT_OBJECT_KEYS (OBJECT_ID,OBJECT_CLASS). Sem FK declarada; FDN_ALERT referencia por ID.",
+ "notes_for_agents": "Busca por objeto de origem: OBJECT_ID + OBJECT_CLASS (indice). Nao confundir OBJECT_ID com FDN_ALERT.OBJECT_ID.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "INDEX_ALERT_OBJECT_KEYS",
+   "unique": false,
+   "columns": [
+    "OBJECT_ID",
+    "OBJECT_CLASS"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.alert.entity.FDNAlertObject"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador sequencial (PK), referenciado por FDN_ALERT.OBJECT_ID e PLACE_ID.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNAlertObject"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Descricao/titulo do objeto exibido no alerta.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "FDNAlertObject"
+  },
+  {
+   "name": "LINK",
+   "type": "varchar(4000)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "URL de navegacao ate o objeto (ate 4000 chars).",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "link",
+   "java_type": "String",
+   "java_entity": "FDNAlertObject"
+  },
+  {
+   "name": "NOTE",
+   "type": "varchar(700)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Observacao adicional sobre o objeto (ate 700 chars).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "note",
+   "java_type": "String",
+   "java_entity": "FDNAlertObject"
+  },
+  {
+   "name": "OBJECT_CLASS",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Classe/tipo do objeto na aplicacao de origem; combinado com OBJECT_ID identifica o objeto.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "objectClass",
+   "java_type": "String",
+   "java_entity": "FDNAlertObject"
+  },
+  {
+   "name": "OBJECT_DETAIL_KEY",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Chave i18n de detalhe adicional do objeto.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "objectDetailKey",
+   "java_type": "String",
+   "java_entity": "FDNAlertObject"
+  },
+  {
+   "name": "OBJECT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador do objeto na aplicacao de origem (ex.: id do documento); nao e FK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "objectId",
+   "java_type": "Long",
+   "java_entity": "FDNAlertObject"
+  },
+  {
+   "name": "TYPE_DESCRIPTION_KEY",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Chave i18n do rotulo do tipo do objeto.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "typeDescriptionKey",
+   "java_type": "String",
+   "java_entity": "FDNAlertObject"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_ALERT",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "OBJECT_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join",
+   "description": "Alertas que apontam para este objeto.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_ALERT",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "PLACE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join",
+   "description": "Alertas que usam este objeto como local.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_ALERT",
+   "from_cols": [
+    "OBJECT_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "FDN_ALERT",
+   "from_cols": [
+    "PLACE_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  }
+ ]
+}

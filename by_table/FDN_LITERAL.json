@@ -1,0 +1,151 @@
+{
+ "name": "FDN_LITERAL",
+ "domain": "i18n",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Literais (textos da interface) por produto e locale, com valor original e valor customizado pelo cliente.",
+ "lifecycle": "Carga inicial por produto; CUSTOM_VALUE alterado por administradores.",
+ "key_notes": "Sem tenant. CUSTOM_VALUE nulo significa sem customização. Índice (LOCALE, PRODUCT_CODE).",
+ "notes_for_agents": "Buscar por (PRODUCT_CODE, LOCALE, LITERAL_KEY); usar COALESCE(CUSTOM_VALUE, ORIGINAL_VALUE).",
+ "primary_key": [
+  "LITERAL_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "FDNLITERAL001",
+   "unique": false,
+   "columns": [
+    "LOCALE",
+    "PRODUCT_CODE"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.i18n.entity.FDNLiteral"
+ ],
+ "columns": [
+  {
+   "name": "LITERAL_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNLiteral"
+  },
+  {
+   "name": "CUSTOM_VALUE",
+   "type": "varchar(700)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Texto customizado que substitui o original; nulo sem customização.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "customValue",
+   "java_type": "String",
+   "java_entity": "FDNLiteral"
+  },
+  {
+   "name": "LITERAL_KEY",
+   "type": "varchar(700)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave do literal.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "key",
+   "java_type": "String",
+   "java_entity": "FDNLiteral"
+  },
+  {
+   "name": "LAST_UPDATE_BY",
+   "type": "varchar(150)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Login do usuário que fez a última alteração.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "medium",
+   "java_field": "lastUpdateBy",
+   "java_type": "String",
+   "java_entity": "FDNLiteral"
+  },
+  {
+   "name": "LAST_UPDATE_DATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Data/hora da última alteração.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "lastUpdateDate",
+   "java_type": "Date",
+   "java_entity": "FDNLiteral"
+  },
+  {
+   "name": "LOCALE",
+   "type": "varchar(8)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Locale do literal.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "locale",
+   "java_type": "String",
+   "java_entity": "FDNLiteral"
+  },
+  {
+   "name": "ORIGINAL_VALUE",
+   "type": "varchar(700)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Texto padrão original do literal.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "originalValue",
+   "java_type": "String",
+   "java_entity": "FDNLiteral"
+  },
+  {
+   "name": "PRODUCT_CODE",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do produto/módulo dono do literal.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "productCode",
+   "java_type": "String",
+   "java_entity": "FDNLiteral"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

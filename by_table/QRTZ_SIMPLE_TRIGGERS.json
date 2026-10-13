@@ -1,0 +1,128 @@
+{
+ "name": "QRTZ_SIMPLE_TRIGGERS",
+ "domain": "scheduler-quartz",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Detalhe de triggers Quartz de repetição simples (contagem e intervalo), 1:1 com QRTZ_TRIGGERS.",
+ "lifecycle": "Criada junto com o trigger simples.",
+ "key_notes": "",
+ "notes_for_agents": "JOIN com QRTZ_TRIGGERS por (TRIGGER_GROUP, TRIGGER_NAME).",
+ "primary_key": [
+  "TRIGGER_GROUP",
+  "TRIGGER_NAME"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.scheduler.entity.quartz.QrtzSimpleTriggers"
+ ],
+ "columns": [
+  {
+   "name": "TRIGGER_GROUP",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Nome do grupo do trigger Quartz; compõe a PK (TRIGGER_GROUP, TRIGGER_NAME) e liga ao QRTZ_TRIGGERS.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "QRTZ_TRIGGERS.TRIGGER_GROUP",
+   "confidence": "high",
+   "java_field": "triggerGroup",
+   "java_type": "String",
+   "java_entity": "QrtzSimpleTriggers"
+  },
+  {
+   "name": "TRIGGER_NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Nome do trigger Quartz dentro do grupo; compõe a PK e liga ao QRTZ_TRIGGERS.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "QRTZ_TRIGGERS.TRIGGER_NAME",
+   "confidence": "high",
+   "java_field": "triggerName",
+   "java_type": "String",
+   "java_entity": "QrtzSimpleTriggers"
+  },
+  {
+   "name": "REPEAT_COUNT",
+   "type": "decimal(19,2)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Número de repetições após o primeiro disparo (-1 = indefinido).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "repeatCount",
+   "java_type": "BigInteger",
+   "java_entity": "QrtzSimpleTriggers"
+  },
+  {
+   "name": "REPEAT_INTERVAL",
+   "type": "decimal(19,2)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Intervalo entre repetições, em milissegundos.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "repeatInterval",
+   "java_type": "BigInteger",
+   "java_entity": "QrtzSimpleTriggers"
+  },
+  {
+   "name": "TIMES_TRIGGERED",
+   "type": "decimal(19,2)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Quantidade de vezes que o trigger já disparou.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "timesTriggered",
+   "java_type": "BigInteger",
+   "java_entity": "QrtzSimpleTriggers"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "QRTZ_TRIGGERS",
+   "from_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "to_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "cardinality": "1:1",
+   "kind": "logical-confirmed",
+   "description": "Detalhe simples (repetição) do trigger; mesma PK de QRTZ_TRIGGERS.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "QRTZ_PAUSED_TRIGGER_GRPS",
+   "from_cols": [
+    "TRIGGER_GROUP"
+   ],
+   "to_cols": [
+    "TRIGGER_GROUP"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: coincidência de nome; não é FK",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

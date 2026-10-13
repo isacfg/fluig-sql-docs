@@ -1,0 +1,97 @@
+{
+ "name": "FDN_BUNDLEVALUE",
+ "domain": "i18n",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Valores traduzidos de resource bundles (i18n) por bundle, chave e locale. Cada linha é uma tradução de uma chave.",
+ "lifecycle": "Carregada/atualizada na instalação ou atualização de módulos; volume potencialmente alto (milhares de chaves por locale).",
+ "key_notes": "Sem tenant. Distinta de FDN_LITERAL, que guarda customizações de literais por produto/locale.",
+ "notes_for_agents": "Buscar por (BUNDLE_CODE, LOCALE, RESOURCE_KEY).",
+ "primary_key": [
+  "BUNDLE_VALUE_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.i18n.entity.FDNBundleValue"
+ ],
+ "columns": [
+  {
+   "name": "BUNDLE_VALUE_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária da tradução.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNBundleValue"
+  },
+  {
+   "name": "BUNDLE_CODE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do resource bundle ao qual a chave pertence.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "bundleCode",
+   "java_type": "String",
+   "java_entity": "FDNBundleValue"
+  },
+  {
+   "name": "RESOURCE_KEY",
+   "type": "varchar(4000)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave do recurso de texto dentro do bundle (até 4000 caracteres).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "key",
+   "java_type": "String",
+   "java_entity": "FDNBundleValue"
+  },
+  {
+   "name": "LOCALE",
+   "type": "varchar(10)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Locale da tradução (ex.: pt_BR, en_US, es).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "locale",
+   "java_type": "String",
+   "java_entity": "FDNBundleValue"
+  },
+  {
+   "name": "RESOURCE_VALUE",
+   "type": "varchar(4000)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Texto traduzido para a chave e o locale.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "value",
+   "java_type": "String",
+   "java_entity": "FDNBundleValue"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

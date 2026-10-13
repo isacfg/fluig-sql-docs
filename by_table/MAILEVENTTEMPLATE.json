@@ -1,0 +1,133 @@
+{
+ "name": "MAILEVENTTEMPLATE",
+ "domain": "mail",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Mapeia eventos de e-mail do Fluig a templates por tenant, dialeto (idioma) e nome de template, com assunto.",
+ "lifecycle": "Configuração; volume baixo.",
+ "key_notes": "Unique UK_MAILEVTTPL001 em (tenantId, eventKey, dialect, templateName). Colunas sem coluna Java mapeada no extrator (nomes TENANTID, EVENTKEY sem underscore).",
+ "notes_for_agents": "Filtrar por TENANTID + EVENTKEY + DIALECT.",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [
+  [
+   "tenantId",
+   "eventKey",
+   "dialect",
+   "templateName"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.mail.entity.MailEventTemplate"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "PK surrogate.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "DIALECT",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Dialeto/idioma do template (ex.: pt_BR).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "EVENTKEY",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave do evento de e-mail que dispara o template.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "SUBJECT",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Assunto do e-mail para este evento.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TEMPLATENAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do arquivo/template de e-mail utilizado.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TENANTID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant dono da configuração.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANTID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Tenant da configuração; sem FK física.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

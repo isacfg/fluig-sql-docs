@@ -1,0 +1,85 @@
+{
+ "name": "QRTZ_JOB_LISTENERS",
+ "domain": "scheduler-quartz",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Listeners de job registrados por job.",
+ "lifecycle": "Normalmente vazia.",
+ "key_notes": "",
+ "notes_for_agents": "FK física para QRTZ_JOB_DETAILS.",
+ "primary_key": [
+  "JOB_GROUP",
+  "JOB_LISTENER",
+  "JOB_NAME"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.scheduler.entity.quartz.QrtzJobListeners"
+ ],
+ "columns": [
+  {
+   "name": "JOB_GROUP",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Grupo do job Quartz; parte da chave do job em QRTZ_JOB_DETAILS.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "QRTZ_JOB_DETAILS.JOB_GROUP",
+   "confidence": "high",
+   "java_field": "jobGroup",
+   "java_type": "String",
+   "java_entity": "QrtzJobListeners"
+  },
+  {
+   "name": "JOB_LISTENER",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Nome do JobListener registrado para o job; parte da PK.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "jobListener",
+   "java_type": "String",
+   "java_entity": "QrtzJobListeners"
+  },
+  {
+   "name": "JOB_NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Nome do job Quartz dentro do grupo; parte da chave do job em QRTZ_JOB_DETAILS.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "QRTZ_JOB_DETAILS.JOB_NAME",
+   "confidence": "high",
+   "java_field": "jobName",
+   "java_type": "String",
+   "java_entity": "QrtzJobListeners"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "QRTZ_JOB_DETAILS",
+   "from_cols": [
+    "JOB_GROUP",
+    "JOB_NAME"
+   ],
+   "to_cols": [
+    "JOB_GROUP",
+    "JOB_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Listener registrado para o job.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

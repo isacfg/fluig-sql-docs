@@ -1,0 +1,148 @@
+{
+ "name": "META_LISTA_PERSPECT_FILTRO",
+ "domain": "ecm-lists-filters",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Filtros (campo, condição, valor) aplicados a uma perspectiva de meta-lista.",
+ "lifecycle": "",
+ "key_notes": "Multi-tenant por COD_EMPRESA (parte da PK).",
+ "notes_for_agents": "Sempre filtrar COD_EMPRESA e, nas filhas, COD_LISTA; ignore LOG_DELETE=1 em META_LISTA/CAMPO.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_LISTA",
+  "COD_PERSPECT",
+  "COD_FILTRO"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.lists.model.MetaListPerspectiveFilter"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "MetaListPerspectiveFilter"
+  },
+  {
+   "name": "COD_FILTRO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Sequencial do filtro dentro da perspectiva.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "filterId",
+   "java_type": "int",
+   "java_entity": "MetaListPerspectiveFilter"
+  },
+  {
+   "name": "COD_LISTA",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Meta-lista.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "META_LISTA.COD_LISTA",
+   "confidence": "high",
+   "java_field": "listId",
+   "java_type": "int",
+   "java_entity": "MetaListPerspectiveFilter"
+  },
+  {
+   "name": "COD_PERSPECT",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Perspectiva.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "META_LISTA_PERSPECT.COD_PERSPECT",
+   "confidence": "high",
+   "java_field": "perspectiveId",
+   "java_type": "int",
+   "java_entity": "MetaListPerspectiveFilter"
+  },
+  {
+   "name": "COD_CONDICAO",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Operador da condição do filtro (string; ex. igual, maior).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "conditional",
+   "java_type": "String",
+   "java_entity": "MetaListPerspectiveFilter"
+  },
+  {
+   "name": "NOM_CAMPO",
+   "type": "varchar(70)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Campo filtrado.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "fieldName",
+   "java_type": "String",
+   "java_entity": "MetaListPerspectiveFilter"
+  },
+  {
+   "name": "COD_VALOR",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor de comparação do filtro.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "value",
+   "java_type": "String",
+   "java_entity": "MetaListPerspectiveFilter"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "META_LISTA_PERSPECT",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA",
+    "COD_PERSPECT"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA",
+    "COD_PERSPECT"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Chaves compostas coincidem com a PK do alvo; sem FK física.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

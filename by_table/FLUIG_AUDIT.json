@@ -1,0 +1,210 @@
+{
+ "name": "FLUIG_AUDIT",
+ "domain": "audit",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Trilha de auditoria de ações de usuários sobre recursos do Fluig (criar, editar, remover etc.).",
+ "lifecycle": "Uma linha por evento auditado; cresce continuamente e é expurgada conforme EXPIRATION_DAYS de FLUIG_AUDIT_CONFIG; volume alto.",
+ "key_notes": "Sempre filtrar por TENANT_ID (índice fluig_audit_idx1: TENANT_ID, USER_TENANT_ID, RESOURCE_NAME, RESOURCE_KEY). RESOURCE_KEY é texto, não FK.",
+ "notes_for_agents": "Contém IP do usuário (dado pessoal) e possivelmente dados em DETAIL_PARAMS (LOB). Filtre por TENANT_ID e AUDIT_TIMESTAMP.",
+ "primary_key": [
+  "AUDIT_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "fluig_audit_idx1",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "USER_TENANT_ID",
+    "RESOURCE_NAME",
+    "RESOURCE_KEY"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.fluig.audit.entity.FluigAudit"
+ ],
+ "columns": [
+  {
+   "name": "AUDIT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK surrogate do evento de auditoria.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FluigAudit"
+  },
+  {
+   "name": "DETAIL",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Descrição curta/chave do detalhe do evento.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "detail",
+   "java_type": "String",
+   "java_entity": "FluigAudit"
+  },
+  {
+   "name": "DETAIL_PARAMS",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Parâmetros do detalhe (LOB longtext), provavelmente JSON/texto serializado.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "detailParams",
+   "java_type": "String",
+   "java_entity": "FluigAudit"
+  },
+  {
+   "name": "USER_IP",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Endereço IP do usuário que executou a ação (dado pessoal).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "ip",
+   "java_type": "String",
+   "java_entity": "FluigAudit"
+  },
+  {
+   "name": "RESOURCE_NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do tipo de recurso auditado (ex.: tabela/entidade).",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "resource",
+   "java_type": "String",
+   "java_entity": "FluigAudit"
+  },
+  {
+   "name": "RESOURCE_KEY",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave/identificador do registro do recurso auditado, como texto.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "resourceKey",
+   "java_type": "String",
+   "java_entity": "FluigAudit"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant em que o evento ocorreu.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FluigAudit"
+  },
+  {
+   "name": "AUDIT_TIMESTAMP",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data e hora do evento.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "timestamp",
+   "java_type": "Date",
+   "java_entity": "FluigAudit"
+  },
+  {
+   "name": "TYPE",
+   "type": "int(11)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do evento auditado (enum FluigAuditEventType).",
+   "semantic_type": "enum",
+   "values": "0=CREATE; 1=EDIT; 2=REMOVE; 3=RESTORE; 4=DOWNLOAD; 5=INACTIVE; 6=EXECUTE",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "type",
+   "java_type": "FluigAuditEventType",
+   "java_entity": "FluigAudit"
+  },
+  {
+   "name": "USER_TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Usuário (vínculo usuário-tenant) que executou a ação.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_TENANT_ID",
+   "confidence": "high",
+   "java_field": "userTenantId",
+   "java_type": "Long",
+   "java_entity": "FluigAudit"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "USER_TENANT_ID"
+   ],
+   "to_cols": [
+    "USER_TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Usuário executor; sem FK física, nome/semântica coincidem.",
+   "status": "probable"
+  },
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Tenant do evento.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

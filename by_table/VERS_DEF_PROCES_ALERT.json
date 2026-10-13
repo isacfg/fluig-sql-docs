@@ -1,0 +1,187 @@
+{
+ "name": "VERS_DEF_PROCES_ALERT",
+ "domain": "bpm-process-definition",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Alertas de análise (boas práticas/riscos) gerados para versões de definição de processo.",
+ "lifecycle": "Gerada ao validar/publicar versão; reprocessável.",
+ "key_notes": "Usa TENANT_ID, PROCESS_ID e PROCESS_VERSION (nomes em inglês). ALERT_TYPE embute o local (dezena).",
+ "notes_for_agents": "Join com VERS_DEF_PROCES por tenant, processo e versão.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "VERS_DEF_PROCES_ALERT_01",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "PROCESS_VERSION",
+    "SCRIPT_VERSION"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessDefinitionVersionAlert"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador sequencial.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "ProcessDefinitionVersionAlert"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant (empresa).",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "ProcessDefinitionVersionAlert"
+  },
+  {
+   "name": "PROCESS_ID",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código da definição de processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ProcessDefinitionVersionAlert"
+  },
+  {
+   "name": "PROCESS_VERSION",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versão do processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "processVersion",
+   "java_type": "int",
+   "java_entity": "ProcessDefinitionVersionAlert"
+  },
+  {
+   "name": "SCRIPT_VERSION",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versão do script analisado.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "scriptVersion",
+   "java_type": "int",
+   "java_entity": "ProcessDefinitionVersionAlert"
+  },
+  {
+   "name": "ALERT_TYPE",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do alerta.",
+   "semantic_type": "enum",
+   "values": "1001=gerente sem mecanismo; 2001=tarefas automáticas; 2002=processo padrão com versão local; 3001=throw sem catch; 3002=uso de conexões do banco; 3003=service manager em script comum; 4001=condição de alta frequência; 4002=serviço de alta frequência; 5001=tradução para estado desconhecido; 5002=tradução difere do processo; 5003=tradução difere do estado",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "alertType",
+   "java_type": "int",
+   "java_entity": "ProcessDefinitionVersionAlert"
+  },
+  {
+   "name": "ALERT_LOCAL",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Local do alerta.",
+   "semantic_type": "enum",
+   "values": "10=definição; 20=versão da definição; 30=script; 40=estado; 50=tradução",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "alertLocal",
+   "java_type": "int",
+   "java_entity": "ProcessDefinitionVersionAlert"
+  },
+  {
+   "name": "DETAILS",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Detalhes do alerta (texto longo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "details",
+   "java_type": "String",
+   "java_entity": "ProcessDefinitionVersionAlert"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "VERS_DEF_PROCES",
+   "from_cols": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "PROCESS_VERSION"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-confirmed",
+   "description": "Versão analisada.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "VERS_DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "PROCESS_VERSION"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-confirmed"
+  }
+ ]
+}

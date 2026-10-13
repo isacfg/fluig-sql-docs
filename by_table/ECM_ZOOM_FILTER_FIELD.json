@@ -1,0 +1,133 @@
+{
+ "name": "ECM_ZOOM_FILTER_FIELD",
+ "domain": "ecm-metadata-forms",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Filtros fixos (campo=valor) aplicados ao dataset consultado por um item Zoom de formulario de metadados.",
+ "lifecycle": "Criada ao configurar filtros do zoom no designer; recriada ao salvar. Volume baixo.",
+ "key_notes": "Unique (METADATAFORM_ID,HTML_ID_ZOOM_ITEM,FILTER_FIELD). FK composta FK_ID_ZM_FLD_FLTR para ECM_ZOOM_FIELD_FORM_ITEM.",
+ "notes_for_agents": "Join pelo par (METADATAFORM_ID, HTML_ID_ZOOM_ITEM).",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [
+  [
+   "METADATAFORM_ID",
+   "HTML_ID_ZOOM_ITEM",
+   "FILTER_FIELD"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.metadataform.model.ZoomFilterField"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador sequencial da linha (PK).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "FILTER_FIELD",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do campo do dataset sobre o qual o filtro e aplicado.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "FILTER_VALUE",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor constante usado no filtro do campo.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "HTML_ID_ZOOM_ITEM",
+   "type": "varchar(10)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "HTML_ID do item zoom pai; parte da FK composta.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ECM_ZOOM_FIELD_FORM_ITEM.HTML_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "METADATAFORM_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Formulario do item zoom pai; parte da FK composta.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ECM_ZOOM_FIELD_FORM_ITEM.METADATAFORM_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ECM_ZOOM_FIELD_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID_ZOOM_ITEM"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Item zoom ao qual o filtro pertence.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "ECM_ZOOM_FIELD_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID_ZOOM_ITEM"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk"
+  }
+ ]
+}

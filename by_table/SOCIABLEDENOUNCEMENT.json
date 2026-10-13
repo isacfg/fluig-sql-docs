@@ -1,0 +1,180 @@
+{
+ "name": "SOCIABLEDENOUNCEMENT",
+ "domain": "social",
+ "module": "03001-fluig-database-social",
+ "purpose": "Denúncia (de usuário ou por lista negra de palavras) feita contra um conteúdo sociável.",
+ "lifecycle": "Linha criada ao denunciar; STATUS evolui na moderação, com histórico em SOCIABLEDENOUNCEMENTHISTORY.",
+ "key_notes": "Sem TENANTID próprio; tenant via SOCIABLE.TENANTID.",
+ "notes_for_agents": "Transições válidas: PENDING->ARCHIVED/REVOKED e ARCHIVED->PENDING. USER_ID é SOCIAL.ID, nulo em denúncia automática.",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.social.sociable.entity.SociableDenouncement"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id da denúncia; PK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "CREATIONDATE",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora da denúncia.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "creationDate",
+   "java_type": "Date",
+   "java_entity": "SociableDenouncement"
+  },
+  {
+   "name": "STATUS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Estado da denúncia, ordinal de SociableDenouncementStatus.",
+   "semantic_type": "status",
+   "values": "0=PENDING; 1=ARCHIVED; 2=REVOKED",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TEXT",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Motivo/texto da denúncia (até 255).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TYPE",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Origem da denúncia, ordinal de SociableDenouncementType.",
+   "semantic_type": "enum",
+   "values": "0=USER; 1=BLACKLIST",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "SOCIABLE_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Conteúdo denunciado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIABLE.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "USER_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Perfil social do denunciante (nulo p/ detecção automática).",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "SOCIAL.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "SOCIABLE",
+   "from_cols": [
+    "SOCIABLE_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Conteúdo denunciado",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "SOCIAL",
+   "from_cols": [
+    "USER_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Denunciante (SocialUser)",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "FDN_USER",
+   "from_cols": [
+    "USER_ID"
+   ],
+   "to_cols": [
+    "USER_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome de coluna rejeitada: USER_ID nesta tabela é SOCIAL.ID (perfil social), não FDN_USER.USER_ID.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": [
+  {
+   "from_table": "SOCIABLEDENOUNCEMENTHISTORY",
+   "from_cols": [
+    "DENOUNCE_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

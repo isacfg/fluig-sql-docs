@@ -1,0 +1,104 @@
+{
+ "name": "FDN_SITESCHEDULER",
+ "domain": "foundation-platform",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Janelas de agendamento (início/fim) associadas a um site do Fluig; usada por consulta FDNSiteScheduler.findBySite.",
+ "lifecycle": "Linhas criadas ao agendar um período para um site; volume baixo.",
+ "key_notes": "Sem coluna de tenant: o tenant vem via FDN_SITE.",
+ "notes_for_agents": "Filtrar por SITE_ID; para tenant fazer join com FDN_SITE.",
+ "primary_key": [
+  "SITESCHEDULER_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "FK_9314CU0VGYY7PXECBECEIJPM8",
+   "unique": false,
+   "columns": [
+    "SITE_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.fluig.foundation.volume.entity.FDNSiteScheduler"
+ ],
+ "columns": [
+  {
+   "name": "SITESCHEDULER_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK surrogate do agendamento do site.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNSiteScheduler"
+  },
+  {
+   "name": "END_TIME",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Fim do agendamento, epoch em milissegundos (Long).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "endTime",
+   "java_type": "Long",
+   "java_entity": "FDNSiteScheduler"
+  },
+  {
+   "name": "SITE_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Site ao qual o agendamento pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_SITE.SITE_ID",
+   "confidence": "high",
+   "java_field": "siteId",
+   "java_type": "Long",
+   "java_entity": "FDNSiteScheduler"
+  },
+  {
+   "name": "START_TIME",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Início do agendamento, epoch em milissegundos (Long).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "startTime",
+   "java_type": "Long",
+   "java_entity": "FDNSiteScheduler"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_SITE",
+   "from_cols": [
+    "SITE_ID"
+   ],
+   "to_cols": [
+    "SITE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Site dono do agendamento (FK FK_9314CU0VGYY7PXECBECEIJPM8; JPA FDNSiteScheduler.site).",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

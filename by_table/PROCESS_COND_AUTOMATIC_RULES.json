@@ -1,0 +1,219 @@
+{
+ "name": "PROCESS_COND_AUTOMATIC_RULES",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Condicoes das regras de transicao automatica de atividade (campo, operador, valor), agrupadas por expressao e ordem.",
+ "lifecycle": "Criada ao salvar processo na modelagem; por versao.",
+ "key_notes": "PK ID; indice ESTADOPROCESSCONDRULE. Coluna PROCESS_VERSION mapeia 'version'; STATE_SEQUENCE mapeia 'sequence'.",
+ "notes_for_agents": "VALUE_TYPE define se RULE_VALUE e fixo ou campo do formulario.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "ESTADOPROCESSCONDRULE",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "PROCESS_VERSION",
+    "STATE_SEQUENCE",
+    "EXPRESSION_ORDER"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ConditionProcessAutomaticRules"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador sequencial da condicao.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "long",
+   "java_entity": "ConditionProcessAutomaticRules"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dona da linha; faz parte da PK e deve ser filtrada em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "long",
+   "java_entity": "ConditionProcessAutomaticRules"
+  },
+  {
+   "name": "PROCESS_ID",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Codigo da definicao de processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ConditionProcessAutomaticRules"
+  },
+  {
+   "name": "PROCESS_VERSION",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versao da definicao de processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "ConditionProcessAutomaticRules"
+  },
+  {
+   "name": "STATE_SEQUENCE",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sequencia da atividade com a regra automatica.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "high",
+   "java_field": "sequence",
+   "java_type": "int",
+   "java_entity": "ConditionProcessAutomaticRules"
+  },
+  {
+   "name": "EXPRESSION_ORDER",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Ordem da expressao (grupo) dentro da atividade.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "expressionOrder",
+   "java_type": "int",
+   "java_entity": "ConditionProcessAutomaticRules"
+  },
+  {
+   "name": "RULE_ORDER",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Ordem da condicao dentro da expressao.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "ruleOrder",
+   "java_type": "int",
+   "java_entity": "ConditionProcessAutomaticRules"
+  },
+  {
+   "name": "OPERATOR",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Operador de comparacao; codificacao nao confirmada.",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "operator",
+   "java_type": "int",
+   "java_entity": "ConditionProcessAutomaticRules"
+  },
+  {
+   "name": "FIELD",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Campo avaliado pela condicao.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "field",
+   "java_type": "String",
+   "java_entity": "ConditionProcessAutomaticRules"
+  },
+  {
+   "name": "RULE_VALUE",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor comparado (fixo ou nome de campo conforme VALUE_TYPE).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "value",
+   "java_type": "String",
+   "java_entity": "ConditionProcessAutomaticRules"
+  },
+  {
+   "name": "VALUE_TYPE",
+   "type": "integer",
+   "nullable": true,
+   "default": "0",
+   "pk_position": null,
+   "purpose": "Tipo do valor comparado.",
+   "semantic_type": "enum",
+   "values": "0=BY_FORM_VALUE_TYPE (valor vem de campo do formulario); 1=FIX_VALUE_TYPE (valor fixo)",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "valueType",
+   "java_type": "int",
+   "java_entity": "ConditionProcessAutomaticRules"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ESTADO_PROCES",
+   "from_cols": [
+    "TENANT_ID",
+    "PROCESS_ID",
+    "PROCESS_VERSION",
+    "STATE_SEQUENCE"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Atividade com regra automatica.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

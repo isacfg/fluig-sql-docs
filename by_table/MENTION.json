@@ -1,0 +1,191 @@
+{
+ "name": "MENTION",
+ "domain": "social",
+ "module": "03001-fluig-database-social",
+ "purpose": "Menção (@usuário) feita em um objeto social (post/comentário); liga o autor ao perfil social mencionado.",
+ "lifecycle": "Linha criada ao salvar conteúdo com @menção. Volume proporcional a posts/comentários.",
+ "key_notes": "Multi-tenant por TENANTID. Objeto mencionante é polimórfico (MENTIONINGCLASS + MENTIONINGID), sem FK.",
+ "notes_for_agents": "Para achar o conteúdo: MENTIONINGCLASS (classe) + MENTIONINGID (id na SOCIABLE, quando a classe é um Sociable).",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "MentionI001",
+   "unique": false,
+   "columns": [
+    "mentioningId",
+    "mentioningClass"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.social.mention.entity.Mention"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id da menção; PK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "CREATIONDATE",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de criação da linha (timestamp).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "LASTUPDATEDATE",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora da última alteração da linha (timestamp).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TENANTID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id do tenant (empresa) dono da linha; filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "MENTIONINGCLASS",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome da classe do objeto que contém a menção (polimórfico, ex.: classe de post/comentário).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "MENTIONINGID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id do objeto mencionante (interpretar junto com MENTIONINGCLASS; tipicamente SOCIABLE.ID).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIABLE.ID",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "AUTHOR_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Perfil social (SocialUser) autor da menção.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIAL.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "SOCIAL_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Perfil social mencionado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIAL.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "SOCIAL",
+   "from_cols": [
+    "AUTHOR_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Autor da menção (perfil SocialUser)",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "SOCIAL",
+   "from_cols": [
+    "SOCIAL_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Perfil social que foi mencionado",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "SOCIABLE",
+   "from_cols": [
+    "MENTIONINGID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Objeto mencionante (polimórfico via MENTIONINGCLASS); sem FK",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

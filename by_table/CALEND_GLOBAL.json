@@ -1,0 +1,134 @@
+{
+ "name": "CALEND_GLOBAL",
+ "domain": "calendario-feriados",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Feriados globais da empresa (entidade FDNHoliday). Cada linha é um feriado de um calendário identificado por COD_FER_CALEND, fixo (dia/mês) ou de um ano específico.",
+ "lifecycle": "Cadastrado manualmente por administradores; volume baixo (dezenas a centenas por empresa).",
+ "key_notes": "Multi-tenant por COD_EMPRESA (e não TENANT_ID). Se NUM_ANO_FER é nulo, provavelmente o feriado se repete todo ano (não confirmado no código). FDN_LOCALHOLIDAY referencia esta tabela por (ID, COD_EMPRESA).",
+ "notes_for_agents": "Filtrar por COD_EMPRESA. Associação a locais via FDN_LOCALHOLIDAY (HOLIDAY_ID, COMPANY_ID) -> (ID, COD_EMPRESA).",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [
+  [
+   "ID",
+   "COD_EMPRESA"
+  ],
+  [
+   "COD_FER_CALEND"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.holiday.entity.FDNHoliday"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária (surrogate) do feriado.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNHoliday"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código da empresa/tenant dona do feriado; compõe a referência de FDN_LOCALHOLIDAY.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "FDNHoliday"
+  },
+  {
+   "name": "COD_FER_CALEND",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador textual (código/descrição) do feriado no calendário; usado em validateDescription para evitar duplicidade.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "holidayCalendarId",
+   "java_type": "String",
+   "java_entity": "FDNHoliday"
+  },
+  {
+   "name": "NUM_DIA_FER",
+   "type": "int(11)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Dia do mês do feriado (1-31).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "holidayDay",
+   "java_type": "Integer",
+   "java_entity": "FDNHoliday"
+  },
+  {
+   "name": "NUM_MES_FER",
+   "type": "int(11)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Mês do feriado (1-12).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "holidayMonth",
+   "java_type": "Integer",
+   "java_entity": "FDNHoliday"
+  },
+  {
+   "name": "NUM_ANO_FER",
+   "type": "int(11)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Ano do feriado; nulo provavelmente indica feriado recorrente anual.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "holidayYear",
+   "java_type": "Integer",
+   "java_entity": "FDNHoliday"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_LOCALHOLIDAY",
+   "from_cols": [
+    "HOLIDAY_ID",
+    "COMPANY_ID"
+   ],
+   "to_cols": [
+    "ID",
+    "COD_EMPRESA"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  }
+ ]
+}

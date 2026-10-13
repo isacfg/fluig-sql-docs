@@ -1,0 +1,67 @@
+{
+ "name": "FDN_API_BLOCKER",
+ "domain": "seguranca-api",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Padrões de URL/API bloqueados pelo filtro bloqueador de APIs do Fluig, com exceções. Cada linha é um padrão de bloqueio.",
+ "lifecycle": "Configuração; poucas linhas, alterada raramente por administração.",
+ "key_notes": "Sem coluna de tenant: configuração global do servidor.",
+ "notes_for_agents": "Tabela pequena e global; ler inteira (FDNAPIBlockerPattern.findAll).",
+ "primary_key": [
+  "API_BLOCKER_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.blocker.entity.FDNAPIBlockerPattern"
+ ],
+ "columns": [
+  {
+   "name": "API_BLOCKER_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária do padrão de bloqueio.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNAPIBlockerPattern"
+  },
+  {
+   "name": "PATTERN",
+   "type": "varchar(500)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Padrão (expressão/caminho) de requisições a bloquear; campo Java blockPattern.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "blockPattern",
+   "java_type": "String",
+   "java_entity": "FDNAPIBlockerPattern"
+  },
+  {
+   "name": "EXCEPTIONS",
+   "type": "varchar(600)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Lista de exceções ao padrão (caminhos permitidos), em texto livre.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "exceptions",
+   "java_type": "String",
+   "java_entity": "FDNAPIBlockerPattern"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

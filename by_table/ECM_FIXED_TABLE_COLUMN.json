@@ -1,0 +1,426 @@
+{
+ "name": "ECM_FIXED_TABLE_COLUMN",
+ "domain": "ecm-metadata-forms",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Colunas de um item tabela fixa do formulário de metadados.",
+ "lifecycle": "",
+ "key_notes": "",
+ "notes_for_agents": "",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.metadataform.model.FixedTableColumn"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da coluna.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "HTML_ID",
+   "type": "varchar(10)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "HTML_ID da coluna.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "COLUMN_ORDER",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Ordem da coluna na tabela fixa.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TITLE",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Título da coluna.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "HTML_ID_FIXEDTABLE_ITEM",
+   "type": "varchar(10)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "HTML_ID do item tabela fixa dono da coluna.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ECM_FIXED_TABLE_FORM_ITEM.HTML_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "METADATAFORM_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Formulário de metadados da tabela fixa.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ECM_METADATA_FORM.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ECM_FIXED_TABLE_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID_FIXEDTABLE_ITEM"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "FK ['METADATAFORM_ID', 'HTML_ID_FIXEDTABLE_ITEM'] referencia ECM_FIXED_TABLE_FORM_ITEM.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "ECM_BUTTON_FORM_ITEM",
+   "from_cols": [
+    "HTML_ID",
+    "METADATAFORM_ID"
+   ],
+   "to_cols": [
+    "HTML_ID",
+    "METADATAFORM_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; tabelas irmãs do mesmo supertipo, não relação entre si",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_DATE_FIELD_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; tabelas irmãs do mesmo supertipo, não relação entre si",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_DIVIDER_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; tabelas irmãs do mesmo supertipo, não relação entre si",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_DYNAMIC_TABLE_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; tabelas irmãs do mesmo supertipo, não relação entre si",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_EVALUATION_FIELD_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; tabelas irmãs do mesmo supertipo, não relação entre si",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_EXTERNAL_LINK_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; tabelas irmãs do mesmo supertipo, não relação entre si",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_IMAGE_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; tabelas irmãs do mesmo supertipo, não relação entre si",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_LABEL_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; tabelas irmãs do mesmo supertipo, não relação entre si",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_LIST_FIELD_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; tabelas irmãs do mesmo supertipo, não relação entre si",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_NUMBER_FIELD_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; tabelas irmãs do mesmo supertipo, não relação entre si",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_SECTION_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; tabelas irmãs do mesmo supertipo, não relação entre si",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_TAB_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; tabelas irmãs do mesmo supertipo, não relação entre si",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_TEXT_AREA_FIELD_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; tabelas irmãs do mesmo supertipo, não relação entre si",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_TEXT_FIELD_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; tabelas irmãs do mesmo supertipo, não relação entre si",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_TITLE_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; tabelas irmãs do mesmo supertipo, não relação entre si",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_UPLOAD_FILE_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; tabelas irmãs do mesmo supertipo, não relação entre si",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_ZOOM_FIELD_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; tabelas irmãs do mesmo supertipo, não relação entre si",
+   "status": "rejected"
+  },
+  {
+   "to_table": "ECM_ZOOM_USER_FORM_ITEM",
+   "from_cols": [
+    "HTML_ID",
+    "METADATAFORM_ID"
+   ],
+   "to_cols": [
+    "HTML_ID",
+    "METADATAFORM_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; tabelas irmãs do mesmo supertipo, não relação entre si",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": [
+  {
+   "from_table": "ECM_FIXED_TABLE_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID_FIXEDTABLE_ITEM"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "ECM_FIXED_TABLE_ROW",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "COLUMN_HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

@@ -1,0 +1,122 @@
+{
+ "name": "I18N_RELATED_BUNDLE",
+ "domain": "i18n",
+ "module": "06001-fluig-database-addon-i18n-dbupdate",
+ "purpose": "Lista os bundles relacionados (por código) a um bundle, para herança/fallback de literais.",
+ "lifecycle": "Configuração; baixo volume.",
+ "key_notes": "RELATED_BUNDLE_CODE é código textual, não FK para I18N_BUNDLE.BUNDLE_ID.",
+ "notes_for_agents": "Resolver relacionado via join por BUNDLE_CODE.",
+ "primary_key": [
+  "RELATED_BUNDLE_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "IDX_RELATEDBUNDLE0002",
+   "unique": false,
+   "columns": [
+    "BUNDLE_ID"
+   ]
+  },
+  {
+   "name": "IDX_RELATEDBUNDLE0003",
+   "unique": false,
+   "columns": [
+    "BUNDLE_ID",
+    "RELATED_BUNDLE_CODE"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.fluig.core.i18n.domain.RelatedBundle"
+ ],
+ "columns": [
+  {
+   "name": "RELATED_BUNDLE_ID",
+   "type": "varchar(36)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK UUID do relacionamento.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "String",
+   "java_entity": "RelatedBundle"
+  },
+  {
+   "name": "BUNDLE_ID",
+   "type": "varchar(36)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Bundle que declara a relação.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "I18N_BUNDLE.BUNDLE_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "RELATED_BUNDLE_CODE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do bundle relacionado (compara com I18N_BUNDLE.BUNDLE_CODE).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "I18N_BUNDLE.BUNDLE_CODE",
+   "confidence": "medium",
+   "java_field": "relatedBundleCode",
+   "java_type": "String",
+   "java_entity": "RelatedBundle"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "I18N_BUNDLE",
+   "from_cols": [
+    "BUNDLE_ID"
+   ],
+   "to_cols": [
+    "BUNDLE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Bundle dono (RelatedBundle.bundle).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "I18N_BUNDLE",
+   "from_cols": [
+    "RELATED_BUNDLE_CODE"
+   ],
+   "to_cols": [
+    "BUNDLE_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Bundle referenciado pelo código.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "I18N_BUNDLE",
+   "from_cols": [
+    "BUNDLE_ID"
+   ],
+   "to_cols": [
+    "BUNDLE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk"
+  }
+ ]
+}

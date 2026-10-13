@@ -1,0 +1,82 @@
+{
+ "name": "USEPOLICY_POLICYDOCUMENT",
+ "domain": "use-policy",
+ "module": "04001-fluig-database-use-policy",
+ "purpose": "Tabela de junção JPA entre USEPOLICY e seus POLICYDOCUMENT (@OneToMany documents).",
+ "lifecycle": "Linhas criadas ao salvar a política com seus documentos.",
+ "key_notes": "DOCUMENTS_ID único (um documento pertence a uma só política).",
+ "notes_for_agents": "",
+ "primary_key": [
+  "USEPOLICY_ID",
+  "DOCUMENTS_ID"
+ ],
+ "unique_constraints": [
+  [
+   "DOCUMENTS_ID"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [],
+ "columns": [
+  {
+   "name": "USEPOLICY_ID",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Política de uso.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "USEPOLICY.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "DOCUMENTS_ID",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Documento de política.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "POLICYDOCUMENT.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "POLICYDOCUMENT",
+   "from_cols": [
+    "DOCUMENTS_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Documento da política.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "USEPOLICY",
+   "from_cols": [
+    "USEPOLICY_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Política dona.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

@@ -1,0 +1,153 @@
+{
+ "name": "COLAB_SUBSTTO_PROCESSO",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Lista de processos (definições) aos quais uma substituição de usuário se aplica.",
+ "lifecycle": "Linhas criadas junto com a substituição quando limitada a processos específicos.",
+ "key_notes": "Colunas CD_MATRICULA, COD_EMPRESA e COD_SUBSTTO duplicam dados de COLAB_SUBSTTO e são anuláveis.",
+ "notes_for_agents": "Colunas anuláveis; preferir COLLEAGUE_REPLACEMENT_ID para join.",
+ "primary_key": [
+  "COLLEAGUE_PROCESS_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.foundation.model.ColleagueReplacementProcess"
+ ],
+ "columns": [
+  {
+   "name": "COLLEAGUE_PROCESS_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador único (surrogate) da linha.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "long",
+   "java_entity": "ColleagueReplacementProcess"
+  },
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrícula do usuário substituído (cópia de COLAB_SUBSTTO.CD_MATRICULA).",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "medium",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "ColleagueReplacementProcess"
+  },
+  {
+   "name": "COLLEAGUE_REPLACEMENT_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Substituição à qual o processo pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "COLAB_SUBSTTO.COLLEAGUE_REPLACEMENT_ID",
+   "confidence": "high",
+   "java_field": "colleagueReplacementId",
+   "java_type": "long",
+   "java_entity": "ColleagueReplacementProcess"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dono da linha; sempre filtrar por este valor.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ColleagueReplacementProcess"
+  },
+  {
+   "name": "COD_PROCESS",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código da definição de processo delegada.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processID",
+   "java_type": "String",
+   "java_entity": "ColleagueReplacementProcess"
+  },
+  {
+   "name": "COD_SUBSTTO",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrícula do substituto (cópia de COLAB_SUBSTTO.COD_SUBSTTO).",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "medium",
+   "java_field": "replacementId",
+   "java_type": "String",
+   "java_entity": "ColleagueReplacementProcess"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "COLAB_SUBSTTO",
+   "from_cols": [
+    "COLLEAGUE_REPLACEMENT_ID"
+   ],
+   "to_cols": [
+    "COLLEAGUE_REPLACEMENT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Substituição pai.",
+   "status": "probable"
+  },
+  {
+   "to_table": "DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_PROCESS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Definição de processo delegada.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "COLAB_SUBSTTO",
+   "from_cols": [
+    "COLLEAGUE_REPLACEMENT_ID"
+   ],
+   "to_cols": [
+    "COLLEAGUE_REPLACEMENT_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable"
+  }
+ ]
+}

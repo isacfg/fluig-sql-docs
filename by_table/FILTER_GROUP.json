@@ -1,0 +1,165 @@
+{
+ "name": "FILTER_GROUP",
+ "domain": "ecm-lists-filters",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Compartilhamento de um filtro com grupo, papel ou usuário, com permissão.",
+ "lifecycle": "Uma linha por destinatário; apenas um de GROUP_ID/ROLE_ID/USER_TENANT_ID deve estar preenchido (inferido).",
+ "key_notes": "",
+ "notes_for_agents": "Contém referência a usuário (matrícula/id); dado pessoal indireto.",
+ "primary_key": [
+  "ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.filter.model.FilterGroup"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da concessão de acesso ao filtro.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FilterGroup"
+  },
+  {
+   "name": "FILTER_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Filtro compartilhado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FILTERS.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "GROUP_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Grupo que recebe acesso (alternativa a usuário/papel).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_GROUP.GROUP_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "ROLE_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Papel que recebe acesso.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_ROLE.ROLE_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "USER_TENANT_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Usuário (vínculo usuário-tenant) que recebe acesso.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_TENANT_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "PERMISSION",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nível de permissão concedido ao filtro (inteiro; significado não encontrado).",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "permission",
+   "java_type": "Integer",
+   "java_entity": "FilterGroup"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FILTERS",
+   "from_cols": [
+    "FILTER_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "FK ['FILTER_ID'] referencia FILTERS.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_GROUP",
+   "from_cols": [
+    "GROUP_ID"
+   ],
+   "to_cols": [
+    "GROUP_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "FK ['GROUP_ID'] referencia FDN_GROUP.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_ROLE",
+   "from_cols": [
+    "ROLE_ID"
+   ],
+   "to_cols": [
+    "ROLE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "FK ['ROLE_ID'] referencia FDN_ROLE.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "USER_TENANT_ID"
+   ],
+   "to_cols": [
+    "USER_TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "FK ['USER_TENANT_ID'] referencia FDN_USERTENANT.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

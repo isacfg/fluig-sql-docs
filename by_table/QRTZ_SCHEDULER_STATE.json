@@ -1,0 +1,105 @@
+{
+ "name": "QRTZ_SCHEDULER_STATE",
+ "domain": "scheduler-quartz",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Estado/heartbeat de cada instância (nó) do scheduler no cluster.",
+ "lifecycle": "Uma linha por nó; atualizada a cada check-in.",
+ "key_notes": "",
+ "notes_for_agents": "Detectar nós mortos via LAST_CHECKIN_TIME + CHECKIN_INTERVAL.",
+ "primary_key": [
+  "INSTANCE_NAME"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.scheduler.entity.quartz.QrtzSchedulerState"
+ ],
+ "columns": [
+  {
+   "name": "INSTANCE_NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Nome único da instância (nó) do scheduler no cluster; PK.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "instanceName",
+   "java_type": "String",
+   "java_entity": "QrtzSchedulerState"
+  },
+  {
+   "name": "CHECKIN_INTERVAL",
+   "type": "decimal(19,2)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Intervalo de check-in da instância, em milissegundos.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "checkinInterval",
+   "java_type": "BigInteger",
+   "java_entity": "QrtzSchedulerState"
+  },
+  {
+   "name": "LAST_CHECKIN_TIME",
+   "type": "decimal(19,2)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Último check-in da instância (heartbeat), ms desde epoch; usado para detectar nós mortos.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "lastCheckinTime",
+   "java_type": "BigInteger",
+   "java_entity": "QrtzSchedulerState"
+  },
+  {
+   "name": "RECOVERER",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Instância que está recuperando jobs desta instância falha; nulo se nenhuma.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "recoverer",
+   "java_type": "String",
+   "java_entity": "QrtzSchedulerState"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_SERVER_INFO",
+   "from_cols": [
+    "INSTANCE_NAME"
+   ],
+   "to_cols": [
+    "INSTANCE_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "QRTZ_FIRED_TRIGGERS",
+   "from_cols": [
+    "INSTANCE_NAME"
+   ],
+   "to_cols": [
+    "INSTANCE_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

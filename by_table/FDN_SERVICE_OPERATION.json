@@ -1,0 +1,176 @@
+{
+ "name": "FDN_SERVICE_OPERATION",
+ "domain": "foundation-dataservice",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Operação de serviço de dados (Data Service) configurável por tenant: descritor e implementação de uma operação de um serviço.",
+ "lifecycle": "Criada/alterada ao cadastrar serviços de dados customizados; volume baixo.",
+ "key_notes": "Colunas DESCRIPTOR e IMPLEMENTATION são LOB (longtext) e podem conter código/definição. Sem FKs.",
+ "notes_for_agents": "Evite selecionar DESCRIPTOR/IMPLEMENTATION em varreduras (LOB).",
+ "primary_key": [
+  "OPERATION_ID"
+ ],
+ "unique_constraints": [
+  [
+   "TENANT_ID",
+   "NAME"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.dataservice.entity.FDNServiceOperation"
+ ],
+ "columns": [
+  {
+   "name": "OPERATION_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária surrogate.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNServiceOperation"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant (empresa) dono do registro; FK para FDN_TENANT.TENANT_ID. Valor -1 indica registro global/sem tenant em consultas do código.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNServiceOperation"
+  },
+  {
+   "name": "SERVICE",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador do serviço de dados ao qual a operação pertence.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "service",
+   "java_type": "String",
+   "java_entity": "FDNServiceOperation"
+  },
+  {
+   "name": "NAME",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome da operação (até 150 chars).",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "name",
+   "java_type": "String",
+   "java_entity": "FDNServiceOperation"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição da operação.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "FDNServiceOperation"
+  },
+  {
+   "name": "OPERATION",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Identificador/nome técnico da operação dentro do serviço.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "operation",
+   "java_type": "String",
+   "java_entity": "FDNServiceOperation"
+  },
+  {
+   "name": "DESCRIPTOR",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descritor (definição de entradas/saídas) da operação, texto longo.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "descriptor",
+   "java_type": "String",
+   "java_entity": "FDNServiceOperation"
+  },
+  {
+   "name": "IMPL_TYPE",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo de implementação da operação (string, até 50 chars).",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "implType",
+   "java_type": "String",
+   "java_entity": "FDNServiceOperation"
+  },
+  {
+   "name": "IMPLEMENTATION",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Corpo da implementação da operação, texto longo (LOB).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "implementation",
+   "java_type": "String",
+   "java_entity": "FDNServiceOperation"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Tenant dono; sem FK declarada.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

@@ -1,0 +1,307 @@
+{
+ "name": "ECM_COLLABORATION",
+ "domain": "ecm-collaboration",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Sessão de colaboração externa (edição online em app de terceiros, ex. Office365/Google) vinculada a uma versão de documento do ECM. Criada ao iniciar a colaboração.",
+ "lifecycle": "Uma linha por colaboração iniciada; IS_ACTIVE=false ao encerrar (END_DATE preenchido). Cascade REMOVE remove os convidados.",
+ "key_notes": "Multi-tenant por TENANT_ID (não COD_EMPRESA). SOURCE_DOC_* é o documento original; DOCUMENT_* é o documento/versão colaborado (cópia/versão de trabalho).",
+ "notes_for_agents": "Filtrar por TENANT_ID. Ativa: IS_ACTIVE=1 por (DOCUMENT_ID, DOCUMENT_VERSION). Linha tem URLs/IDs externos; sem dado pessoal direto além de UPLOADER_LOGIN.",
+ "primary_key": [
+  "COLLABORATION_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "FK_LE5GR236MYW6MFGKA3DVPYGDK",
+   "unique": false,
+   "columns": [
+    "COLLABORATION_APP_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.fluig.ecm.collaboration.entity.Collaboration"
+ ],
+ "columns": [
+  {
+   "name": "COLLABORATION_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador gerado (GenerationType.AUTO) da colaboração.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "Collaboration"
+  },
+  {
+   "name": "IS_ACTIVE",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a colaboração está em andamento.",
+   "semantic_type": "flag",
+   "values": "1=ativa; 0=encerrada",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "active",
+   "java_type": "Boolean",
+   "java_entity": "Collaboration"
+  },
+  {
+   "name": "DOCUMENT_ID",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Documento ECM em colaboração.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "Integer",
+   "java_entity": "Collaboration"
+  },
+  {
+   "name": "DOCUMENT_VERSION",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versão do documento em colaboração.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "documentVersion",
+   "java_type": "Integer",
+   "java_entity": "Collaboration"
+  },
+  {
+   "name": "END_DATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de término da colaboração.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "endDate",
+   "java_type": "Date",
+   "java_entity": "Collaboration"
+  },
+  {
+   "name": "EXTENSION",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Extensão do arquivo colaborado (ex. docx, xlsx).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "extension",
+   "java_type": "String",
+   "java_entity": "Collaboration"
+  },
+  {
+   "name": "EXTERNAL_FILE_ID",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "ID do arquivo no serviço externo de colaboração; usado em lookup (findByExternalFileId).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "externalFileId",
+   "java_type": "String",
+   "java_entity": "Collaboration"
+  },
+  {
+   "name": "EXTERNAL_URL",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "URL do arquivo no serviço externo para abrir a edição.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "externalUrl",
+   "java_type": "String",
+   "java_entity": "Collaboration"
+  },
+  {
+   "name": "SOURCE_DOC_ID",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Documento ECM de origem a partir do qual a colaboração foi iniciada (imutável).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "sourceDocumentId",
+   "java_type": "int",
+   "java_entity": "Collaboration"
+  },
+  {
+   "name": "SOURCE_DOC_VERSION",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versão do documento de origem (imutável).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "sourceDocumentVersion",
+   "java_type": "int",
+   "java_entity": "Collaboration"
+  },
+  {
+   "name": "START_DATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de início da colaboração.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "startDate",
+   "java_type": "Date",
+   "java_entity": "Collaboration"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant/empresa dona da colaboração (imutável após insert).",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "Collaboration"
+  },
+  {
+   "name": "UPLOADER_LOGIN",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Login do usuário que iniciou/enviou o arquivo à colaboração.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.LOGIN",
+   "confidence": "medium",
+   "java_field": "uploaderLogin",
+   "java_type": "String",
+   "java_entity": "Collaboration"
+  },
+  {
+   "name": "COLLABORATION_APP_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "FK para o app de colaboração utilizado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ECM_COLLABORATION_APP.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ECM_COLLABORATION_APP",
+   "from_cols": [
+    "COLLABORATION_APP_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "App de colaboração usado.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "TENANT_ID",
+    "DOCUMENT_ID",
+    "DOCUMENT_VERSION"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão do documento colaborada (sem FK).",
+   "status": "probable"
+  },
+  {
+   "to_table": "ECM_COLLABORATION_GUEST",
+   "from_cols": [
+    "COLLABORATION_ID"
+   ],
+   "to_cols": [
+    "COLLABORATION_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join",
+   "description": "Convidados da colaboração (OneToMany guests).",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "ECM_COLLABORATION_APP",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "COLLABORATION_APP_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "ECM_COLLABORATION_GUEST",
+   "from_cols": [
+    "COLLABORATION_ID"
+   ],
+   "to_cols": [
+    "COLLABORATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

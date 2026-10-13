@@ -1,0 +1,181 @@
+{
+ "name": "FDN_ACCESSLOG",
+ "domain": "seguranca-auditoria",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Log de acessos (login/logout) à plataforma Fluig por usuário, com IP do cliente, IP do servidor e agente. Recebe uma linha por evento de acesso.",
+ "lifecycle": "Insert-only a cada autenticação; cresce continuamente (alto volume), sujeito a expurgo por rotina de manutenção.",
+ "key_notes": "Sem FK: LOGIN guarda o login textual, não o ID do usuário. LOG_TYPE=0 é contado como acesso (login) nas consultas de usuários ativos no período. Índice IDX_FDNCCESSLOG001 (TENANT_ID, LOG_TYPE, ACCESS_DATE).",
+ "notes_for_agents": "Contém IPs e login (dados pessoais). Filtrar sempre por TENANT_ID e intervalo de ACCESS_DATE para usar o índice.",
+ "primary_key": [
+  "ACCESSLOG_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "IDX_FDNCCESSLOG001",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "LOG_TYPE",
+    "ACCESS_DATE"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.security.entity.FDNAccessLog"
+ ],
+ "columns": [
+  {
+   "name": "ACCESSLOG_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária do registro de acesso.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNAccessLog"
+  },
+  {
+   "name": "ACCESS_DATE",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data e hora do evento de acesso.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "accessDate",
+   "java_type": "Date",
+   "java_entity": "FDNAccessLog"
+  },
+  {
+   "name": "CLIENT_ADDRESS",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Endereço IP do cliente que acessou (dado pessoal).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "clientAddress",
+   "java_type": "String",
+   "java_entity": "FDNAccessLog"
+  },
+  {
+   "name": "LOG_TYPE",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do evento de acesso; 0 é usado como \"acesso/login\" nas contagens de usuários do período.",
+   "semantic_type": "enum",
+   "values": "0=acesso (login) contado nos relatórios; demais valores não confirmados",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "logType",
+   "java_type": "Integer",
+   "java_entity": "FDNAccessLog"
+  },
+  {
+   "name": "LOGIN",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Login (código textual) do usuário que acessou.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "medium",
+   "java_field": "login",
+   "java_type": "String",
+   "java_entity": "FDNAccessLog"
+  },
+  {
+   "name": "SERVER_ADDRESS",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Endereço IP do servidor Fluig que atendeu o acesso.",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "serverAddress",
+   "java_type": "String",
+   "java_entity": "FDNAccessLog"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant (empresa) do acesso.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNAccessLog"
+  },
+  {
+   "name": "CATEGORY",
+   "type": "varchar(20)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Categoria/agente do cliente (navegador ou app); mapeado ao campo Java \"agent\".",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "agent",
+   "java_type": "String",
+   "java_entity": "FDNAccessLog"
+  },
+  {
+   "name": "OS",
+   "type": "varchar(20)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sistema operacional do cliente (máx. 20 caracteres).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "os",
+   "java_type": "String",
+   "java_entity": "FDNAccessLog"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Tenant do acesso, sem FK física.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

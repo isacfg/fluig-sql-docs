@@ -1,0 +1,304 @@
+{
+ "name": "ECM_FIXED_TABLE_FORM_ITEM",
+ "domain": "ecm-metadata-forms",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Itens do tipo tabela fixa (grid de colunas e linhas pré-definidas) dos formulários de metadados (ECM Metadata Form) do Fluig. Uma linha por item posicionado em um formulário.",
+ "lifecycle": "Criada/atualizada ao salvar o formulário no editor de formulários de metadados; removida em cascata com o formulário/versão. Volume proporcional à quantidade de formulários e campos.",
+ "key_notes": "Subclasse JPA (TABLE_PER_CLASS) de AbstractMetadataFormItem (classe FixedTableMetadataFormItem): não há tabela concreta ECM_ABSTRACT_FORM_ITEM garantida; as colunas comuns (HTML_ID, ITEM_*, NAME, ORDER_ITEM, FORM_ITEM_TYPE...) se repetem em cada tabela de item. PK composta (METADATAFORM_ID, HTML_ID). Sem COD_EMPRESA: tenant só via ECM_METADATA_FORM.TENANT_ID.",
+ "notes_for_agents": "Para listar todos os itens de um formulário é preciso UNION das tabelas ECM_*_FORM_ITEM filtradas por METADATAFORM_ID. Filtre tenant via JOIN ECM_METADATA_FORM (TENANT_ID). Preferir a versão VERSION_STATUS='CURRENT'. Definições de coluna em ECM_FIXED_TABLE_COLUMN e valores em ECM_FIXED_TABLE_ROW.",
+ "primary_key": [
+  "METADATAFORM_ID",
+  "HTML_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.metadataform.model.FixedTableMetadataFormItem"
+ ],
+ "columns": [
+  {
+   "name": "HTML_ID",
+   "type": "varchar(10)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Identificador HTML do item dentro do formulário (até 10 chars); com METADATAFORM_ID forma a PK do item.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "ITEM_POS_HEIGHT",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Altura do item no layout do formulário (grade), inteiro; 0 quando não definido.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "HTML_ID_PARENT",
+   "type": "varchar(10)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "HTML_ID do item pai (seção, aba, etc.) que contém este item; NULL se estiver na raiz do formulário.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ECM_*_FORM_ITEM.HTML_ID (mesmo METADATAFORM_ID)",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "NAME",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome técnico do campo, usado como chave do valor ao gravar os dados do registro do formulário.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "ORDER_ITEM",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Ordem de exibição do item entre os filhos do formulário (ORDER BY order).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "ITEM_POS_X",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Posição horizontal do item no layout do formulário (inteiro).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "ITEM_POS_Y",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Posição vertical do item no layout do formulário (inteiro).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "FORM_ITEM_TYPE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do item: nome do enum MetadataFormItemTypeEnum gravado como string; identifica a subclasse/tabela do item.",
+   "semantic_type": "enum",
+   "values": "TextFieldMetadataFormItem; TextAreaMetadataFormItem; ExternalLinkMetadataFormItem; ListMetadataFormItem; UploadFileMetadataFormItem; NumberFieldMetadataFormItem; EvaluationMetadataFormItem; DateFieldMetadataFormItem; ZoomFieldMetadataFormItem; TitleMetadataFormItem; DividerMetadataFormItem; SectionMetadataFormItem; TabMetadataFormItem; ImageMetadataFormItem; DynamicTableMetadataFormItem; FixedTableMetadataFormItem; LabelMetadataFormItem; ZoomUserMetadataFormItem; ButtonMetadataFormItem (nome da classe JPA do item; o valor igual ao da tabela)",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "VALUE_ITEM",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o item armazena valor do usuário (campo de dado) em oposição a item apenas visual.",
+   "semantic_type": "flag",
+   "values": "1=campo que guarda valor; 0=elemento visual",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "ITEM_WIDTH",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Largura do item no layout do formulário (inteiro).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "METADATAFORM_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "ID do formulário de metadados dono do item; parte da PK.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ECM_METADATA_FORM.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "FIELD_LABEL",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Rótulo exibido do campo no formulário.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "VALID_FOR_RELEASE",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Flag de validade do item para publicação (release) do formulário; default Boolean.TRUE na entidade.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ECM_METADATA_FORM",
+   "from_cols": [
+    "METADATAFORM_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Formulário de metadados dono do item (FK FK_3yruo4t5v7r6t254saa49omac).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "ECM_ABSTRACT_FORM_ITEM",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "1:1",
+   "kind": "jpa-join",
+   "description": "Herança JPA TABLE_PER_CLASS: ECM_ABSTRACT_FORM_ITEM é a superclasse abstrata; esta tabela repete as colunas comuns. Sem FK física.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "ECM_FIXED_TABLE_ROW",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID_FIXEDTABLE_ITEM"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join",
+   "description": "Valores de células/linhas da tabela fixa (rowsValues, EAGER).",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "ECM_FIXED_TABLE_COLUMN",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID_FIXEDTABLE_ITEM"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join",
+   "description": "Definição das colunas da tabela fixa (FixedTableColumn.fixedTable, mappedBy; nomes exatos das colunas da tabela filha não verificados).",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "ECM_FIXED_TABLE_COLUMN",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID_FIXEDTABLE_ITEM"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "ECM_FIXED_TABLE_ROW",
+   "from_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID_FIXEDTABLE_ITEM"
+   ],
+   "to_cols": [
+    "METADATAFORM_ID",
+    "HTML_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

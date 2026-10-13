@@ -1,0 +1,178 @@
+{
+ "name": "FICHA",
+ "domain": "ecm-forms",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Valores dos campos das fichas (registros de formulário/fichário): uma linha por campo de cada ficha, versão e tabela do formulário.",
+ "lifecycle": "Linhas criadas ao salvar uma ficha (documento TP_DOCUMENTO=5) e atualizadas/removidas conforme a ficha muda. Volume muito alto (campos x fichas).",
+ "key_notes": "PK (COD_EMPRESA, NR_FICHA, NR_VERSAO, COD_TABELA, COD_CAMPO). NR_FICHA corresponde a NR_DOCUMENTO da ficha em DOCUMENTO. Estrutura EAV; COD_TABELA distingue tabela pai/filha (pai-e-filho).",
+ "notes_for_agents": "COD_VALOR é longtext: pode conter dados pessoais digitados em formulários. Para dados de formulário de processo prefira também as tabelas ML{N}* dinâmicas.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NR_FICHA",
+  "NR_VERSAO",
+  "COD_TABELA",
+  "COD_CAMPO"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "FormIndex",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "NR_FICHARIO",
+    "NR_FICHA"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.forms.model.CardField"
+ ],
+ "columns": [
+  {
+   "name": "NR_FICHA",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Número da ficha = NR_DOCUMENTO do documento ficha.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "cardId",
+   "java_type": "int",
+   "java_entity": "CardField"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa (tenant) dona do registro; faz parte da PK e deve ser filtrado em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "CardField"
+  },
+  {
+   "name": "COD_CAMPO",
+   "type": "varchar(70)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 5,
+   "purpose": "Identificador do campo do formulário (nome do input).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "FICHARIO_CAMPO.COD_CAMPO",
+   "confidence": "high",
+   "java_field": "fieldId",
+   "java_type": "String",
+   "java_entity": "CardField"
+  },
+  {
+   "name": "COD_TABELA",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Tabela do formulário (principal ou filha pai-e-filho) à qual o campo pertence.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "FICHARIO.COD_TABELA",
+   "confidence": "high",
+   "java_field": "tableId",
+   "java_type": "String",
+   "java_entity": "CardField"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Versão da ficha.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "CardField"
+  },
+  {
+   "name": "NR_FICHARIO",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Número do fichário (formulário) ao qual a ficha pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FICHARIO.NR_FICHARIO",
+   "confidence": "high",
+   "java_field": "formId",
+   "java_type": "int",
+   "java_entity": "CardField"
+  },
+  {
+   "name": "COD_VALOR",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor gravado no campo (texto longo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "valueId",
+   "java_type": "String",
+   "java_entity": "CardField"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_FICHA",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Ficha é um documento tipo 5.",
+   "status": "probable"
+  },
+  {
+   "to_table": "FICHARIO_CAMPO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_CAMPO",
+    "NR_FICHARIO",
+    "COD_TABELA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_CAMPO",
+    "NR_FICHARIO",
+    "COD_TABELA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Definição do campo; a versão da ficha (NR_VERSAO) não é necessariamente a versão do fichário, por isso a heurística de PK completa é parcial.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

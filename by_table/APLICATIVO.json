@@ -1,0 +1,154 @@
+{
+ "name": "APLICATIVO",
+ "domain": "bpm-integracao",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Cadastro de aplicativos externos executáveis (linha de comando) que o Fluig dispara através de um adapter.",
+ "lifecycle": "Config administrativa, volume baixo.",
+ "key_notes": "PK (COD_EMPRESA, COD_APLICAT).",
+ "notes_for_agents": "Filtrar COD_EMPRESA. LIN_COMANDO pode conter caminhos/credenciais: tratar como sensível.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_APLICAT"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.Application"
+ ],
+ "columns": [
+  {
+   "name": "COD_APLICAT",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Identificador do aplicativo (applicationId).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "applicationId",
+   "java_type": "String",
+   "java_entity": "Application"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tenant (empresa) dono da linha; sempre filtrar por este valor.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "Application"
+  },
+  {
+   "name": "COD_ADAPTER",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Adapter que executa o aplicativo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ADAPTER.COD_ADAPTER",
+   "confidence": "high",
+   "java_field": "adapterId",
+   "java_type": "String",
+   "java_entity": "Application"
+  },
+  {
+   "name": "LIN_COMANDO",
+   "type": "varchar(1000)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Linha de comando a executar, até 1000 caracteres.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "commandLine",
+   "java_type": "String",
+   "java_entity": "Application"
+  },
+  {
+   "name": "DES_APLICAT",
+   "type": "varchar(512)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição do aplicativo.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "Application"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ADAPTER",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_ADAPTER"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_ADAPTER"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Adapter usado pelo aplicativo (sem @JoinColumn; casamento por nome e semântica).",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "ADAPTER",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_ADAPTER"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_ADAPTER"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "PARAM_APLICAT",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_APLICAT"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_APLICAT"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "DOCTO_APLICAT",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_APLICAT"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_APLICAT"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

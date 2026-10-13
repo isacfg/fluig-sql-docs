@@ -1,0 +1,206 @@
+{
+ "name": "HISTOR_TRANSF_PENDCIA",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Histórico de transferências de pendências (tarefas) entre usuários (PendencyTransferHistory).",
+ "lifecycle": "Uma linha por transferência de tarefa.",
+ "key_notes": "",
+ "notes_for_agents": "Dado pessoal: matrículas de origem/destino.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NUM_PROCES",
+  "NUM_SEQ_MOVTO",
+  "CD_MATRICULA",
+  "NUM_SEQ_TRANSF",
+  "SEQ_MOVTO"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.PendencyTransferHistory"
+ ],
+ "columns": [
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Matrícula do responsável da pendência transferida.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USER.COLLEAGUE_ID",
+   "confidence": "high",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "PendencyTransferHistory"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK e filtro obrigatório de multi-tenancy.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "PendencyTransferHistory"
+  },
+  {
+   "name": "NUM_SEQ_MOVTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Sequência da movimentação do processo a que a pendência pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "HISTOR_PROCES.NUM_SEQ_MOVTO",
+   "confidence": "high",
+   "java_field": "movementSequence",
+   "java_type": "int",
+   "java_entity": "PendencyTransferHistory"
+  },
+  {
+   "name": "NUM_PROCES",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Número da instância de processo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_WORKFLOW.NUM_PROCES",
+   "confidence": "high",
+   "java_field": "processInstanceId",
+   "java_type": "int",
+   "java_entity": "PendencyTransferHistory"
+  },
+  {
+   "name": "SEQ_MOVTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 6,
+   "purpose": "Sequência do registro de transferência (parte da PK).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "sequence",
+   "java_type": "int",
+   "java_entity": "PendencyTransferHistory"
+  },
+  {
+   "name": "NUM_SEQ_TRANSF",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 5,
+   "purpose": "Sequência da tarefa transferida (pendência).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "TAR_PROCES.NUM_SEQ_TRANSF",
+   "confidence": "medium",
+   "java_field": "transferredSequence",
+   "java_type": "int",
+   "java_entity": "PendencyTransferHistory"
+  },
+  {
+   "name": "COD_USUAR_DEST",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrícula do usuário que recebeu a tarefa.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USER.COLLEAGUE_ID",
+   "confidence": "high",
+   "java_field": "newColleague",
+   "java_type": "String",
+   "java_entity": "PendencyTransferHistory"
+  },
+  {
+   "name": "COD_USUAR_ORIG",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrícula do usuário que transferiu a tarefa.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USER.COLLEAGUE_ID",
+   "confidence": "high",
+   "java_field": "originalColleague",
+   "java_type": "String",
+   "java_entity": "PendencyTransferHistory"
+  },
+  {
+   "name": "DTT_TRANSF",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data e hora da transferência.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "transferTimestamp",
+   "java_type": "Date",
+   "java_entity": "PendencyTransferHistory"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "TAR_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO",
+    "NUM_SEQ_TRANSF",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO",
+    "NUM_SEQ_TRANSF",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Tarefa do processo transferida.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "TAR_CONHECIMENTO_USUARIO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "CD_MATRICULA",
+    "NUM_SEQ_MOVTO",
+    "NUM_SEQ_TRANSF"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "CD_MATRICULA",
+    "NUM_SEQ_MOVTO",
+    "NUM_SEQ_TRANSF"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: tabela de ciência da tarefa; apenas coincidência de colunas.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

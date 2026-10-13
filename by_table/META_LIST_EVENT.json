@@ -1,0 +1,116 @@
+{
+ "name": "META_LIST_EVENT",
+ "domain": "ecm-lists-filters",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Scripts de evento (JavaScript) associados a uma meta-lista.",
+ "lifecycle": "",
+ "key_notes": "Multi-tenant por COD_EMPRESA (parte da PK).",
+ "notes_for_agents": "DSL_EVENT é LOB com script; evitar SELECT *. Sempre filtrar COD_EMPRESA e, nas filhas, COD_LISTA; ignore LOG_DELETE=1 em META_LISTA/CAMPO.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_LISTA",
+  "COD_EVENT"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.lists.model.MetaListEvent"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "MetaListEvent"
+  },
+  {
+   "name": "COD_EVENT",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Identificador do evento (ex. nome de evento de lista) com script associado.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "EVENT_GERAL.COD_EVENT",
+   "confidence": "medium",
+   "java_field": "eventId",
+   "java_type": "String",
+   "java_entity": "MetaListEvent"
+  },
+  {
+   "name": "COD_LISTA",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Meta-lista dona do evento.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "META_LISTA.COD_LISTA",
+   "confidence": "high",
+   "java_field": "listId",
+   "java_type": "int",
+   "java_entity": "MetaListEvent"
+  },
+  {
+   "name": "DSL_EVENT",
+   "type": "longtext",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código-fonte JavaScript do evento (LOB).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "scriptCode",
+   "java_type": "String",
+   "java_entity": "MetaListEvent"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "META_LISTA",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_LISTA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Chaves compostas coincidem com a PK do alvo; sem FK física.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "EVENT_GERAL",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_EVENT"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_EVENT"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome; COD_EVENT é nome de evento da meta-lista, sem evidência de referência a EVENT_GERAL",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

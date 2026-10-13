@@ -1,0 +1,82 @@
+{
+ "name": "WCM_RESOURCEKIT",
+ "domain": "wcm-resources",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Catálogo de kits de recursos estáticos (conjuntos de arquivos) identificados por código.",
+ "lifecycle": "Carga de catálogo, poucas linhas.",
+ "key_notes": "Código único global (sem tenant).",
+ "notes_for_agents": "Buscar por RESOURCE_KIT_CODE.",
+ "primary_key": [
+  "RESOURCE_KIT_ID"
+ ],
+ "unique_constraints": [
+  [
+   "RESOURCE_KIT_CODE"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.wcm.core.entity.WCMResourceKit"
+ ],
+ "columns": [
+  {
+   "name": "RESOURCE_KIT_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK surrogate do kit.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "WCMResourceKit"
+  },
+  {
+   "name": "RESOURCE_KIT_CODE",
+   "type": "varchar(16)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código único do kit (até 16 caracteres).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "code",
+   "java_type": "String",
+   "java_entity": "WCMResourceKit"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "WCM_RESOURCEKITFILE",
+   "from_cols": [
+    "RESOURCE_KIT_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_KIT_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Arquivos do kit.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "WCM_RESOURCEKITFILE",
+   "from_cols": [
+    "RESOURCE_KIT_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_KIT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

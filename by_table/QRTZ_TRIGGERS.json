@@ -1,0 +1,372 @@
+{
+ "name": "QRTZ_TRIGGERS",
+ "domain": "scheduler-quartz",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Triggers do Quartz: quando e qual job disparar, estado e próximos/últimos disparos.",
+ "lifecycle": "Criada ao agendar; NEXT_FIRE_TIME/TRIGGER_STATE atualizados a cada disparo.",
+ "key_notes": "Tempos em milissegundos desde epoch (decimal). Named query findTriggersFromJob.",
+ "notes_for_agents": "Tabela central do scheduler; detalhes em QRTZ_CRON_TRIGGERS/QRTZ_SIMPLE_TRIGGERS/QRTZ_BLOB_TRIGGERS conforme TRIGGER_TYPE.",
+ "primary_key": [
+  "TRIGGER_GROUP",
+  "TRIGGER_NAME"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.scheduler.entity.quartz.QrtzTriggers"
+ ],
+ "columns": [
+  {
+   "name": "TRIGGER_GROUP",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Nome do grupo do trigger Quartz; compõe a PK (TRIGGER_GROUP, TRIGGER_NAME) e liga ao QRTZ_TRIGGERS.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "QRTZ_TRIGGERS.TRIGGER_GROUP",
+   "confidence": "high",
+   "java_field": "triggerGroup",
+   "java_type": "String",
+   "java_entity": "QrtzTriggers"
+  },
+  {
+   "name": "TRIGGER_NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Nome do trigger Quartz dentro do grupo; compõe a PK e liga ao QRTZ_TRIGGERS.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "QRTZ_TRIGGERS.TRIGGER_NAME",
+   "confidence": "high",
+   "java_field": "triggerName",
+   "java_type": "String",
+   "java_entity": "QrtzTriggers"
+  },
+  {
+   "name": "CALENDAR_NAME",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Calendário Quartz opcional que exclui períodos do disparo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "QRTZ_CALENDARS.CALENDAR_NAME",
+   "confidence": "high",
+   "java_field": "calendarName",
+   "java_type": "String",
+   "java_entity": "QrtzTriggers"
+  },
+  {
+   "name": "DESCRIPTION",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição textual do trigger.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "QrtzTriggers"
+  },
+  {
+   "name": "END_TIME",
+   "type": "decimal(19,2)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Fim da validade do trigger, ms desde epoch; nulo = sem fim.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "endTime",
+   "java_type": "BigInteger",
+   "java_entity": "QrtzTriggers"
+  },
+  {
+   "name": "IS_VOLATILE",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Legado Quartz: trigger volátil.",
+   "semantic_type": "flag",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "isVolatile",
+   "java_type": "boolean",
+   "java_entity": "QrtzTriggers"
+  },
+  {
+   "name": "JOB_DATA",
+   "type": "longblob",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "JobDataMap do trigger serializado (binário).",
+   "semantic_type": "blob",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "jobData",
+   "java_type": "byte[]",
+   "java_entity": "QrtzTriggers"
+  },
+  {
+   "name": "JOB_GROUP",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Grupo do job que o trigger dispara.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "QRTZ_JOB_DETAILS.JOB_GROUP",
+   "confidence": "high",
+   "java_field": "jobGroup",
+   "java_type": "String",
+   "java_entity": "QrtzTriggers"
+  },
+  {
+   "name": "JOB_NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome do job que o trigger dispara.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "QRTZ_JOB_DETAILS.JOB_NAME",
+   "confidence": "high",
+   "java_field": "jobName",
+   "java_type": "String",
+   "java_entity": "QrtzTriggers"
+  },
+  {
+   "name": "MISFIRE_INSTR",
+   "type": "smallint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código da instrução de misfire do Quartz (política quando o disparo é perdido).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "misfireInstr",
+   "java_type": "Short",
+   "java_entity": "QrtzTriggers"
+  },
+  {
+   "name": "NEXT_FIRE_TIME",
+   "type": "decimal(19,2)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Próximo disparo previsto, ms desde epoch; nulo se não há mais.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "nextFireTime",
+   "java_type": "BigInteger",
+   "java_entity": "QrtzTriggers"
+  },
+  {
+   "name": "PREV_FIRE_TIME",
+   "type": "decimal(19,2)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Último disparo ocorrido, ms desde epoch.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "prevFireTime",
+   "java_type": "BigInteger",
+   "java_entity": "QrtzTriggers"
+  },
+  {
+   "name": "PRIORITY",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Prioridade do trigger (maior = primeiro em empate de horário).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "priority",
+   "java_type": "Integer",
+   "java_entity": "QrtzTriggers"
+  },
+  {
+   "name": "START_TIME",
+   "type": "decimal(19,2)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Início da validade do trigger, ms desde epoch.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "startTime",
+   "java_type": "BigInteger",
+   "java_entity": "QrtzTriggers"
+  },
+  {
+   "name": "TRIGGER_STATE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Estado do trigger no Quartz (ex.: WAITING, ACQUIRED, PAUSED, BLOCKED, COMPLETE, ERROR); não enumerado no código do Fluig.",
+   "semantic_type": "status",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "triggerState",
+   "java_type": "String",
+   "java_entity": "QrtzTriggers"
+  },
+  {
+   "name": "TRIGGER_TYPE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do trigger que define a tabela de detalhe (ex.: CRON, SIMPLE, BLOB).",
+   "semantic_type": "enum",
+   "values": "CRON=QRTZ_CRON_TRIGGERS; SIMPLE=QRTZ_SIMPLE_TRIGGERS; BLOB=QRTZ_BLOB_TRIGGERS (convenção Quartz, não confirmada no código)",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "triggerType",
+   "java_type": "String",
+   "java_entity": "QrtzTriggers"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "QRTZ_JOB_DETAILS",
+   "from_cols": [
+    "JOB_GROUP",
+    "JOB_NAME"
+   ],
+   "to_cols": [
+    "JOB_GROUP",
+    "JOB_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Job disparado pelo trigger.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "QRTZ_CALENDARS",
+   "from_cols": [
+    "CALENDAR_NAME"
+   ],
+   "to_cols": [
+    "CALENDAR_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Calendário opcional (semântica Quartz; sem FK física).",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "QRTZ_PAUSED_TRIGGER_GRPS",
+   "from_cols": [
+    "TRIGGER_GROUP"
+   ],
+   "to_cols": [
+    "TRIGGER_GROUP"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: tabela só lista grupos pausados; não é pai",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": [
+  {
+   "from_table": "QRTZ_BLOB_TRIGGERS",
+   "from_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "to_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "cardinality": "1:1",
+   "kind": "logical-confirmed"
+  },
+  {
+   "from_table": "QRTZ_CRON_TRIGGERS",
+   "from_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "to_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "cardinality": "1:1",
+   "kind": "logical-confirmed"
+  },
+  {
+   "from_table": "QRTZ_FIRED_TRIGGERS",
+   "from_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "to_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "QRTZ_SIMPLE_TRIGGERS",
+   "from_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "to_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "cardinality": "1:1",
+   "kind": "logical-confirmed"
+  },
+  {
+   "from_table": "QRTZ_TRIGGER_LISTENERS",
+   "from_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "to_cols": [
+    "TRIGGER_GROUP",
+    "TRIGGER_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

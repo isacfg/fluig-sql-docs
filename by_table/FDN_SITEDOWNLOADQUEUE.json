@@ -1,0 +1,346 @@
+{
+ "name": "FDN_SITEDOWNLOADQUEUE",
+ "domain": "volumes-sites",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Fila de downloads de arquivos de documentos entre sites. Cada linha é uma transferência de uma versão de documento para o site do usuário.",
+ "lifecycle": "Inserida ao agendar o download; atualizada com progresso, status e fim; itens concluídos/erros podem permanecer.",
+ "key_notes": "QUEUE_STATUS = enum FDNDownloadQueueStatus: 1=SCHEDULED; 2=PAUSED; 3=DOWNLOADING; 4=FORCE_DOWNLOADING; 5=ERROR; 6=COMPLETED. Sem TENANT_ID; o tenant vem de USER_SITE_ID -> FDN_SITE.",
+ "notes_for_agents": "Para ativos: QUEUE_STATUS != 6 (COMPLETED).",
+ "primary_key": [
+  "QUEUE_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "SITEDOWNLOADQUEUE001",
+   "unique": false,
+   "columns": [
+    "FILE_SITE_ID",
+    "USER_SITE_ID",
+    "DOCUMENT_ID",
+    "QUEUE_ID"
+   ]
+  },
+  {
+   "name": "FK_T9H4S6VR7T6X1X3SJGJI8X7F3",
+   "unique": false,
+   "columns": [
+    "USER_SITE_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.fluig.foundation.volume.entity.FDNSiteDownloadQueue"
+ ],
+ "columns": [
+  {
+   "name": "QUEUE_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária do item da fila.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNSiteDownloadQueue"
+  },
+  {
+   "name": "DOCUMENT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id do documento a baixar.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "medium",
+   "java_field": "documentId",
+   "java_type": "Long",
+   "java_entity": "FDNSiteDownloadQueue"
+  },
+  {
+   "name": "END_DATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Data/hora do fim do download.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "endDate",
+   "java_type": "Date",
+   "java_entity": "FDNSiteDownloadQueue"
+  },
+  {
+   "name": "ERROR_LOG",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Mensagem de erro do último fracasso (até 255 caracteres).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "errorLog",
+   "java_type": "String",
+   "java_entity": "FDNSiteDownloadQueue"
+  },
+  {
+   "name": "FILE_SITE_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Site de origem onde o arquivo está.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_SITE.SITE_ID",
+   "confidence": "high",
+   "java_field": "fileSiteId",
+   "java_type": "Long",
+   "java_entity": "FDNSiteDownloadQueue"
+  },
+  {
+   "name": "FILE_SIZE",
+   "type": "float",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Tamanho do arquivo (unidade não confirmada).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "fileSize",
+   "java_type": "Float",
+   "java_entity": "FDNSiteDownloadQueue"
+  },
+  {
+   "name": "FILE_STREAM",
+   "type": "varchar(1024)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Caminho/identificador do stream de origem do arquivo.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "fileStream",
+   "java_type": "String",
+   "java_entity": "FDNSiteDownloadQueue"
+  },
+  {
+   "name": "OUTPUT_FILE",
+   "type": "varchar(1024)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Caminho do arquivo de destino.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "outputFile",
+   "java_type": "String",
+   "java_entity": "FDNSiteDownloadQueue"
+  },
+  {
+   "name": "QUEU_PRIORITY",
+   "type": "int(11)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Prioridade na fila; menor valor primeiro (ordenado ASC).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "priority",
+   "java_type": "Integer",
+   "java_entity": "FDNSiteDownloadQueue"
+  },
+  {
+   "name": "PROGRESS",
+   "type": "float",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Progresso do download (percentual ou fração, unidade não confirmada).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "progress",
+   "java_type": "Float",
+   "java_entity": "FDNSiteDownloadQueue"
+  },
+  {
+   "name": "SCHEDELED_TIME",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Instante agendado em milissegundos epoch (nome com grafia original).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "scheduledTime",
+   "java_type": "Long",
+   "java_entity": "FDNSiteDownloadQueue"
+  },
+  {
+   "name": "STARTED_TIME",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Instante de início em milissegundos epoch.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "startedTime",
+   "java_type": "Long",
+   "java_entity": "FDNSiteDownloadQueue"
+  },
+  {
+   "name": "QUEUE_STATUS",
+   "type": "int(11)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Status do item (enum FDNDownloadQueueStatus).",
+   "semantic_type": "status",
+   "values": "1=SCHEDULED; 2=PAUSED; 3=DOWNLOADING; 4=FORCE_DOWNLOADING; 5=ERROR; 6=COMPLETED",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "status",
+   "java_type": "Integer",
+   "java_entity": "FDNSiteDownloadQueue"
+  },
+  {
+   "name": "USER_ID",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Identificador do usuário solicitante, em texto.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "low",
+   "java_field": "userId",
+   "java_type": "String",
+   "java_entity": "FDNSiteDownloadQueue"
+  },
+  {
+   "name": "USER_SITE_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Site do usuário (destino do download).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_SITE.SITE_ID",
+   "confidence": "high",
+   "java_field": "userSiteId",
+   "java_type": "Long",
+   "java_entity": "FDNSiteDownloadQueue"
+  },
+  {
+   "name": "DOCUMENT_VERSION",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versão do documento a baixar.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "Long",
+   "java_entity": "FDNSiteDownloadQueue"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_SITE",
+   "from_cols": [
+    "USER_SITE_ID"
+   ],
+   "to_cols": [
+    "SITE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Site de destino do usuário.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_SITE",
+   "from_cols": [
+    "FILE_SITE_ID"
+   ],
+   "to_cols": [
+    "SITE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Site de origem do arquivo.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_DOWNLOADNOTIFY",
+   "from_cols": [
+    "QUEUE_ID"
+   ],
+   "to_cols": [
+    "QUEUE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Notificações do item.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "FDN_USER",
+   "from_cols": [
+    "USER_ID"
+   ],
+   "to_cols": [
+    "USER_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: inferência por nome, USER_ID é texto sem FK e não confirmado como PK de FDN_USER.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": [
+  {
+   "from_table": "FDN_DOWNLOADNOTIFY",
+   "from_cols": [
+    "QUEUE_ID"
+   ],
+   "to_cols": [
+    "QUEUE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

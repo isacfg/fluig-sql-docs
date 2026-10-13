@@ -1,0 +1,245 @@
+{
+ "name": "FDN_SITE",
+ "domain": "volumes-sites",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Sites (servidores/sites de volume) usados na replicação e download de arquivos, com URL, limites de cópia e stream e tentativas máximas.",
+ "lifecycle": "Cadastro administrativo; baixo volume.",
+ "key_notes": "findLocalSite obtém o site local. Pode ser vinculado a FDN_LOCAL. SITE_CODE é usado em buscas.",
+ "notes_for_agents": "Filtrar por TENANT_ID.",
+ "primary_key": [
+  "SITE_ID"
+ ],
+ "unique_constraints": [
+  [
+   "TENANT_ID",
+   "SITE_CODE"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.volume.entity.FDNSite"
+ ],
+ "columns": [
+  {
+   "name": "SITE_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária do site.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNSite"
+  },
+  {
+   "name": "ACTIVE",
+   "type": "bit(1)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Indica site ativo (inactivate o desativa).",
+   "semantic_type": "flag",
+   "values": "1=ativo; 0=inativo",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "active",
+   "java_type": "Boolean",
+   "java_entity": "FDNSite"
+  },
+  {
+   "name": "COPY_LIMIT",
+   "type": "int(11)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Limite de cópias simultâneas.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "copyLimit",
+   "java_type": "Integer",
+   "java_entity": "FDNSite"
+  },
+  {
+   "name": "MAXIMUM_RETRIES",
+   "type": "int(11)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Número máximo de tentativas em caso de falha.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "maximumRetries",
+   "java_type": "Integer",
+   "java_entity": "FDNSite"
+  },
+  {
+   "name": "SITE_CODE",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código único do site.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "siteCode",
+   "java_type": "String",
+   "java_entity": "FDNSite"
+  },
+  {
+   "name": "SITE_URL",
+   "type": "varchar(400)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "URL do site (até 400 caracteres).",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "siteURL",
+   "java_type": "String",
+   "java_entity": "FDNSite"
+  },
+  {
+   "name": "STREAM_LIMIT",
+   "type": "int(11)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Limite de streams simultâneos.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "streamLimit",
+   "java_type": "Integer",
+   "java_entity": "FDNSite"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant dono do site.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNSite"
+  },
+  {
+   "name": "LOCAL_ID",
+   "type": "bigint(20)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Local (FDN_LOCAL) associado ao site; anulável.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_LOCAL.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Tenant do site.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_LOCAL",
+   "from_cols": [
+    "LOCAL_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join",
+   "description": "Local do site (FK_SITELOCAL).",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_LOCAL",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "LOCAL_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_SITESCHEDULER",
+   "from_cols": [
+    "SITE_ID"
+   ],
+   "to_cols": [
+    "SITE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_VOLUMESITE",
+   "from_cols": [
+    "SITE_ID"
+   ],
+   "to_cols": [
+    "SITE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_SITEDOWNLOADQUEUE",
+   "from_cols": [
+    "USER_SITE_ID"
+   ],
+   "to_cols": [
+    "SITE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "FDN_SITEDOWNLOADQUEUE",
+   "from_cols": [
+    "FILE_SITE_ID"
+   ],
+   "to_cols": [
+    "SITE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  }
+ ]
+}

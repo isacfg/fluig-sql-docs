@@ -1,0 +1,64 @@
+{
+ "name": "QRTZ_CALENDARS",
+ "domain": "scheduler-quartz",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Calendários Quartz serializados que excluem períodos de disparo de triggers.",
+ "lifecycle": "Poucas linhas; geralmente vazia.",
+ "key_notes": "",
+ "notes_for_agents": "Infraestrutura Quartz; CALENDAR é binário Java.",
+ "primary_key": [
+  "CALENDAR_NAME"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.scheduler.entity.quartz.QrtzCalendars"
+ ],
+ "columns": [
+  {
+   "name": "CALENDAR_NAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Nome do calendário Quartz (PK); referenciado por QRTZ_TRIGGERS.CALENDAR_NAME.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "calendarName",
+   "java_type": "String",
+   "java_entity": "QrtzCalendars"
+  },
+  {
+   "name": "CALENDAR",
+   "type": "longblob",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Objeto Calendar do Quartz serializado (binário Java).",
+   "semantic_type": "blob",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "calendar",
+   "java_type": "byte[]",
+   "java_entity": "QrtzCalendars"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "QRTZ_TRIGGERS",
+   "from_cols": [
+    "CALENDAR_NAME"
+   ],
+   "to_cols": [
+    "CALENDAR_NAME"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

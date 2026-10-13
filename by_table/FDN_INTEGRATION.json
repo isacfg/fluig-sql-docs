@@ -1,0 +1,97 @@
+{
+ "name": "FDN_INTEGRATION",
+ "domain": "integracao-eventos",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Componentes de integração registrados (bean/EJB por nome JNDI) que recebem eventos de integração, ordenados por prioridade.",
+ "lifecycle": "Registrados na implantação; poucas linhas.",
+ "key_notes": "Unique (provável) por JNDI_NAME. Ordenação por PRIORITY (findAllOrderByPriority).",
+ "notes_for_agents": "Tabela global, sem tenant.",
+ "primary_key": [
+  "INTEGRATION_ID"
+ ],
+ "unique_constraints": [
+  [
+   "JNDI_NAME"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.integration.entity.FDNIntegration"
+ ],
+ "columns": [
+  {
+   "name": "INTEGRATION_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Chave primária da integração.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNIntegration"
+  },
+  {
+   "name": "JNDI_NAME",
+   "type": "varchar(120)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome JNDI do componente que implementa a integração.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "jndiName",
+   "java_type": "String",
+   "java_entity": "FDNIntegration"
+  },
+  {
+   "name": "PRIORITY",
+   "type": "int(11)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Prioridade de execução; menor valor primeiro (ordenação ascendente presumida).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "priority",
+   "java_type": "Integer",
+   "java_entity": "FDNIntegration"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_INTEGRATIONEVENT",
+   "from_cols": [
+    "INTEGRATION_ID"
+   ],
+   "to_cols": [
+    "INTEGRATION_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Eventos tratados pela integração.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_INTEGRATIONEVENT",
+   "from_cols": [
+    "INTEGRATION_ID"
+   ],
+   "to_cols": [
+    "INTEGRATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

@@ -1,0 +1,94 @@
+{
+ "name": "SOCIALINVITEGROUP",
+ "domain": "social",
+ "module": "03001-fluig-database-social",
+ "purpose": "Grupos associados a um convite; o convidado entra nesses grupos ao se cadastrar.",
+ "lifecycle": "Criada com o convite.",
+ "key_notes": "Sem tenant.",
+ "notes_for_agents": "",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.social.invite.entity.SocialInviteGroup"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id; PK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "GROUPID",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do grupo Fluig (texto).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "FDN_GROUP.GROUP_CODE",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "SOCIALINVITE_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Convite ao qual o grupo pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIALINVITE.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "SOCIALINVITE",
+   "from_cols": [
+    "SOCIALINVITE_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Convite dono do grupo",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_GROUP",
+   "from_cols": [
+    "GROUPID"
+   ],
+   "to_cols": [
+    "GROUP_CODE"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Código do grupo do convite; sem FK",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

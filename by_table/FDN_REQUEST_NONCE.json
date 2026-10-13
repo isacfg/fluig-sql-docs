@@ -1,0 +1,135 @@
+{
+ "name": "FDN_REQUEST_NONCE",
+ "domain": "seguranca",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Nonces de requisições para prevenção de replay e rastreio de status/falha.",
+ "lifecycle": "Inserida a cada requisição protegida; antigas removidas por rotina (findNoncesToDelete usa CREATE_DATE).",
+ "key_notes": "Multi-tenant por TENANT_ID; PK é o nonce string.",
+ "notes_for_agents": "Alto volume transitório; índice (TENANT_ID, CREATE_DATE). USER_CODE é dado pessoal.",
+ "primary_key": [
+  "REQUEST_NONCE_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "FDNREQUESTNONCE01",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "CREATE_DATE"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.fluig.request.entity.FDNRequestNonce"
+ ],
+ "columns": [
+  {
+   "name": "REQUEST_NONCE_ID",
+   "type": "VARCHAR(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Nonce da requisição (string única, PK) usado contra replay.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "String",
+   "java_entity": "FDNRequestNonce"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant da requisição.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNRequestNonce"
+  },
+  {
+   "name": "CREATE_DATE",
+   "type": "DATE",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data de criação do nonce; usada para limpeza (findNoncesToDelete).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "createDate",
+   "java_type": "Date",
+   "java_entity": "FDNRequestNonce"
+  },
+  {
+   "name": "REQUEST_STATUS",
+   "type": "VARCHAR(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Status do processamento da requisição associada ao nonce; valores não enumerados no código.",
+   "semantic_type": "status",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "status",
+   "java_type": "String",
+   "java_entity": "FDNRequestNonce"
+  },
+  {
+   "name": "FAILURE_DESCRIPTION",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Texto da falha quando a requisição falhou.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "failureDescription",
+   "java_type": "String",
+   "java_entity": "FDNRequestNonce"
+  },
+  {
+   "name": "USER_CODE",
+   "type": "varchar(150)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Código do usuário autenticado na requisição, se houver.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "medium",
+   "java_field": "userCode",
+   "java_type": "String",
+   "java_entity": "FDNRequestNonce"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Tenant da requisição.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

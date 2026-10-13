@@ -1,0 +1,118 @@
+{
+ "name": "DOCTO_CONTDO",
+ "domain": "ecm-documents",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Conteúdo binário (arquivo físico) de uma versão de documento quando armazenado no banco.",
+ "lifecycle": "Uma linha por arquivo da versão; volume e tamanho altos.",
+ "key_notes": "BLOB longblob; em instalações com volume/FS externo pode ficar vazio. Evitar SELECT *.",
+ "notes_for_agents": "Não selecionar BLB_DOCTO_CONTDO sem necessidade. Entidade DocumentData.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NR_DOCUMENTO",
+  "NR_VERSAO",
+  "NOM_ARQ_FISIC"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.DocumentData"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); parte da PK, sempre filtrar por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "DocumentData"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Número (ID lógico) do documento ECM, sem FK física para DOCUMENTO.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "Integer",
+   "java_entity": "DocumentData"
+  },
+  {
+   "name": "NOM_ARQ_FISIC",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Nome do arquivo físico do documento.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "fileName",
+   "java_type": "String",
+   "java_entity": "DocumentData"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número da versão do documento; par com NR_DOCUMENTO identifica a versão.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "DocumentData"
+  },
+  {
+   "name": "BLB_DOCTO_CONTDO",
+   "type": "longblob",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Bytes do arquivo.",
+   "semantic_type": "blob",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "data",
+   "java_type": "byte[]",
+   "java_entity": "DocumentData"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão dona do arquivo.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

@@ -1,0 +1,448 @@
+{
+ "name": "HISTOR_PROCES",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Histórico de movimentações de uma instância de processo: cada passagem entre estados, com datas, links seguidos, thread e versão da definição (ProcessHistory).",
+ "lifecycle": "Uma linha por movimentação; cresce continuamente com o uso (tabela grande).",
+ "key_notes": "Índices: NUM_SEQ_MOVTO_ANT; (COD_EMPRESA, LOG_ATIV, NUM_SUB_PROCES); (COD_EMPRESA, DAT_MOVTO); KEY PROCESHISTORY02 (NUM_SUB_PROCES, NUM_PROCES).",
+ "notes_for_agents": "Filtrar sempre por COD_EMPRESA e NUM_PROCES. Ordenar por NUM_SEQ_MOVTO. LOG_ATIV=1 para posição atual.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NUM_PROCES",
+  "NUM_SEQ_MOVTO"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "PROCESHISTORY01",
+   "unique": false,
+   "columns": [
+    "NUM_PROCES",
+    "NUM_SUB_PROCES"
+   ]
+  },
+  {
+   "name": "PROCESHISTORY02",
+   "unique": false,
+   "columns": [
+    "NUM_SUB_PROCES",
+    "NUM_PROCES"
+   ]
+  },
+  {
+   "name": "PROCESHISTORY03",
+   "unique": false,
+   "columns": [
+    "NUM_SEQ_MOVTO_ANT"
+   ]
+  },
+  {
+   "name": "PROCESHISTORY04",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "LOG_ATIV",
+    "NUM_SUB_PROCES"
+   ]
+  },
+  {
+   "name": "PROCESHISTORY05",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "DAT_MOVTO"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ProcessHistory"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK e filtro obrigatório de multi-tenancy.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ProcessHistory"
+  },
+  {
+   "name": "NUM_SEQ_MOVTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Sequência da movimentação dentro da instância.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "movementSequence",
+   "java_type": "int",
+   "java_entity": "ProcessHistory"
+  },
+  {
+   "name": "NUM_PROCES",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Número da instância de processo (processInstanceId).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "PROCES_WORKFLOW.NUM_PROCES",
+   "confidence": "high",
+   "java_field": "processInstanceId",
+   "java_type": "int",
+   "java_entity": "ProcessHistory"
+  },
+  {
+   "name": "LOG_ATIV",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica movimentação ativa (estado corrente da instância/thread).",
+   "semantic_type": "flag",
+   "values": "1=ativa;0=encerrada",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "active",
+   "java_type": "Boolean",
+   "java_entity": "ProcessHistory"
+  },
+  {
+   "name": "LOG_FLUXO_AUTOM",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Movimentação feita por link automático.",
+   "semantic_type": "flag",
+   "values": "1=automático",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "automaticLink",
+   "java_type": "Boolean",
+   "java_entity": "ProcessHistory"
+  },
+  {
+   "name": "NUM_SEQ_CONVER",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sequência da conversão de versão que gerou a movimentação (quando houve).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "HISTOR_CONVER.NUM_SEQ_CONVER",
+   "confidence": "medium",
+   "java_field": "conversionSequence",
+   "java_type": "Integer",
+   "java_entity": "ProcessHistory"
+  },
+  {
+   "name": "LOG_FLUXO_PADRAO",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Movimentação feita pelo link padrão.",
+   "semantic_type": "flag",
+   "values": "1=padrão",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "defaultLink",
+   "java_type": "Boolean",
+   "java_entity": "ProcessHistory"
+  },
+  {
+   "name": "DAT_MOVTO",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data da movimentação.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "movementDate",
+   "java_type": "Date",
+   "java_entity": "ProcessHistory"
+  },
+  {
+   "name": "HRA_MOVTO",
+   "type": "varchar(8)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Hora da movimentação (texto até 8 caracteres, HH:mm:ss).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "movementHour",
+   "java_type": "String",
+   "java_entity": "ProcessHistory"
+  },
+  {
+   "name": "NUM_SEQ_MOVTO_ANT",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "NUM_SEQ_MOVTO da movimentação anterior (encadeamento).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "HISTOR_PROCES.NUM_SEQ_MOVTO",
+   "confidence": "high",
+   "java_field": "previousMovementSequence",
+   "java_type": "Integer",
+   "java_entity": "ProcessHistory"
+  },
+  {
+   "name": "LOG_FLUXO_RET",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Movimentação feita por link de retorno.",
+   "semantic_type": "flag",
+   "values": "1=retorno",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "returnLink",
+   "java_type": "Boolean",
+   "java_entity": "ProcessHistory"
+  },
+  {
+   "name": "NUM_SEQ_ESTADO",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "NUM_SEQ do estado em que a instância entrou nesta movimentação.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ESTADO_PROCES.NUM_SEQ",
+   "confidence": "high",
+   "java_field": "stateSequence",
+   "java_type": "Integer",
+   "java_entity": "ProcessHistory"
+  },
+  {
+   "name": "NUM_SUB_PROCES",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id do subprocesso (instância filha) associado; 0 quando não é subprocesso.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "subProcessId",
+   "java_type": "Integer",
+   "java_entity": "ProcessHistory"
+  },
+  {
+   "name": "NUM_SEQ_THREAD",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Sequência da thread (ramo paralelo) da instância.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "THREAD_PROCES.NUM_SEQ_THREAD",
+   "confidence": "high",
+   "java_field": "threadSequence",
+   "java_type": "Integer",
+   "java_entity": "ProcessHistory"
+  },
+  {
+   "name": "MOVTO_DATE_TIME",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data e hora completas da movimentação.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "movementDatetime",
+   "java_type": "Date",
+   "java_entity": "ProcessHistory"
+  },
+  {
+   "name": "SCRIPT_VERSION",
+   "type": "integer",
+   "nullable": false,
+   "default": "0",
+   "pk_position": null,
+   "purpose": "Versão dos scripts de evento do processo vigente na movimentação.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "EVENT_PROCES.SCRIPT_VERSION",
+   "confidence": "medium",
+   "java_field": "scriptVersion",
+   "java_type": "Integer",
+   "java_entity": "ProcessHistory"
+  },
+  {
+   "name": "PROCESS_DEFINITION_VERSION",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versão da definição de processo usada na movimentação.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "medium",
+   "java_field": "processDefinitionVersion",
+   "java_type": "Integer",
+   "java_entity": "ProcessHistory"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "THREAD_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_THREAD"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_THREAD"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Thread da instância.",
+   "status": "probable"
+  },
+  {
+   "to_table": "HISTOR_CONVER_ESTADO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ_CONVER",
+    "NUM_SEQ_ESTADO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ_CONVER",
+    "NUM_SEQ_ESTADO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Conversão aplicada.",
+   "status": "probable"
+  },
+  {
+   "to_table": "PROCES_WORKFLOW",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Instância de processo.",
+   "status": "probable"
+  },
+  {
+   "to_table": "HISTOR_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO_ANT"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Auto-relação: movimentação anterior.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "TAR_WORKFLOW",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "HISTOR_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO_ANT"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "TAR_CONHECIMENTO_USUARIO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "TAR_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_PROCES",
+    "NUM_SEQ_MOVTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

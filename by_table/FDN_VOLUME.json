@@ -1,0 +1,171 @@
+{
+ "name": "FDN_VOLUME",
+ "domain": "foundation-platform",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Volumes de armazenamento de arquivos (GED/documentos) por tenant, com capacidade máxima e espaço usado.",
+ "lifecycle": "Criados na configuração do tenant; USED_SPACE é atualizado via UPDATE (addUsedSpace/removeDeletedSpace) a cada upload/remoção.",
+ "key_notes": "VOLUME_TYPE=0 casa com qualquer tipo (findByType usa volumeType = :type OR volumeType = 0). Há unique key (artefato UNIQUE) provavelmente sobre tenant+código.",
+ "notes_for_agents": "Sempre filtrar por TENANT_ID. Atualizar USED_SPACE só via mecanismo da aplicação.",
+ "primary_key": [
+  "VOLUME_ID"
+ ],
+ "unique_constraints": [
+  [
+   "TENANT_ID",
+   "VOLUME_CODE"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.foundation.volume.entity.FDNVolume"
+ ],
+ "columns": [
+  {
+   "name": "VOLUME_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK surrogate do volume.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNVolume"
+  },
+  {
+   "name": "DOCUMENT_ID",
+   "type": "int(11)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "Documento do GED associado ao volume (opcional).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENT.DOCUMENT_ID",
+   "confidence": "low",
+   "java_field": "documentId",
+   "java_type": "Integer",
+   "java_entity": "FDNVolume"
+  },
+  {
+   "name": "MAX_SIZE",
+   "type": "float",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Capacidade máxima do volume (float; unidade provavelmente bytes ou MB).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "maxSize",
+   "java_type": "float",
+   "java_entity": "FDNVolume"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant dono do volume.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "FDNVolume"
+  },
+  {
+   "name": "USED_SPACE",
+   "type": "float",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Espaço já utilizado no volume (float, mesma unidade de MAX_SIZE); incrementado/decrementado por UPDATE.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "usedSpace",
+   "java_type": "float",
+   "java_entity": "FDNVolume"
+  },
+  {
+   "name": "VOLUME_CODE",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código textual do volume, único por tenant; usado para localizar o volume.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "volumeCode",
+   "java_type": "String",
+   "java_entity": "FDNVolume"
+  },
+  {
+   "name": "VOLUME_TYPE",
+   "type": "int(11)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do volume; 0 serve como curinga para qualquer tipo.",
+   "semantic_type": "enum",
+   "values": "0=curinga (qualquer tipo); demais valores não confirmados",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "volumeType",
+   "java_type": "int",
+   "java_entity": "FDNVolume"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_TENANT",
+   "from_cols": [
+    "TENANT_ID"
+   ],
+   "to_cols": [
+    "TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Tenant dono do volume.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "FDN_VOLUMESITE",
+   "from_cols": [
+    "VOLUME_ID"
+   ],
+   "to_cols": [
+    "VOLUME_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join",
+   "description": "Mapeamentos do volume para sites com caminho de storage.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_VOLUMESITE",
+   "from_cols": [
+    "VOLUME_ID"
+   ],
+   "to_cols": [
+    "VOLUME_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "jpa-join"
+  }
+ ]
+}

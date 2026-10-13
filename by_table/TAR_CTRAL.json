@@ -1,0 +1,300 @@
+{
+ "name": "TAR_CTRAL",
+ "domain": "bpm-tarefas",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Tabela raiz (herança JOINED, entidade Task) das tarefas do gerenciador de tarefas: um registro por tarefa com dono, prazo e status. Subtipos em TAR_DOCTO, TAR_ESFOR, TAR_PARTIC, TAR_WORKFLOW.",
+ "lifecycle": "Criada ao gerar uma tarefa (workflow, documento, to-do); atualizada na conclusão. Volume médio a alto.",
+ "key_notes": "Herança JOINED: o tipo é determinado pela existência de linha na tabela filha (mesma PK COD_EMPRESA+COD_TAREFA). Não confundir com TAR_PROCES (atribuições de processo).",
+ "notes_for_agents": "Índice CENTRAL_TC (COD_EMPRESA, CD_MATRICULA, IDI_STATUS, NUM_HRS_CONCLUS_TAR) atende a central de tarefas. Datas e horas são separadas (DATE + int).",
+ "primary_key": [
+  "COD_EMPRESA",
+  "COD_TAREFA"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "CENTRAL_TC",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "CD_MATRICULA",
+    "IDI_STATUS",
+    "NUM_HRS_CONCLUS_TAR"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.taskmanager.model.Task"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK. Filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "Task"
+  },
+  {
+   "name": "COD_TAREFA",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código sequencial da tarefa dentro da empresa (gerado via SEQ_ECM).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "SEQ_ECM.CD_TABELA",
+   "confidence": "high",
+   "java_field": "taskId",
+   "java_type": "int",
+   "java_entity": "Task"
+  },
+  {
+   "name": "DAT_CONCLUS_TAR",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data efetiva de conclusão da tarefa.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "actualConclusionDate",
+   "java_type": "Date",
+   "java_entity": "Task"
+  },
+  {
+   "name": "NUM_HRS_CONCLUS_TAR",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Hora de conclusão da tarefa, inteiro de hora (formato interno do Fluig).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "actualConclusionTime",
+   "java_type": "int",
+   "java_entity": "Task"
+  },
+  {
+   "name": "DAT_CRIACAO",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data de criação da tarefa.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "creationDate",
+   "java_type": "Date",
+   "java_entity": "Task"
+  },
+  {
+   "name": "NUM_HRS_CRIACAO",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Hora de criação da tarefa (inteiro).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "creationTime",
+   "java_type": "int",
+   "java_entity": "Task"
+  },
+  {
+   "name": "NUM_HRS_PRAZ",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Prazo da tarefa em horas.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "deadline",
+   "java_type": "int",
+   "java_entity": "Task"
+  },
+  {
+   "name": "DES_TAREFA",
+   "type": "varchar(2000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição/título da tarefa.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "description",
+   "java_type": "String",
+   "java_entity": "Task"
+  },
+  {
+   "name": "DAT_FIM_PRAZ",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data limite prevista para conclusão.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "expectedConclusionDate",
+   "java_type": "Date",
+   "java_entity": "Task"
+  },
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(150)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrícula do dono (responsável) da tarefa.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE (colleagueId; matrícula/login)",
+   "confidence": "medium",
+   "java_field": "owner",
+   "java_type": "String",
+   "java_entity": "Task"
+  },
+  {
+   "name": "IDI_STATUS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Status da tarefa (enum TaskStatus, ordinal).",
+   "semantic_type": "status",
+   "values": "0=New; 1=Consensus; 2=Completed; 3=Transferred; 4=Cancelled; 5=Started; 6=Paused",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "taskStatus",
+   "java_type": "TaskStatus",
+   "java_entity": "Task"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "TAR_DOCTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "cardinality": "1:1",
+   "kind": "jpa-join",
+   "description": "Subtipo tarefa de documento.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "TAR_ESFOR",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "cardinality": "1:1",
+   "kind": "physical-fk",
+   "description": "Subtipo tarefa de esforço registrado.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "TAR_PARTIC",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "cardinality": "1:1",
+   "kind": "physical-fk",
+   "description": "Subtipo tarefa to-do.",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "TAR_WORKFLOW",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "cardinality": "1:1",
+   "kind": "jpa-join",
+   "description": "Subtipo tarefa de workflow.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "TAR_DOCTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "cardinality": "1:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "TAR_ESFOR",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "cardinality": "1:1",
+   "kind": "physical-fk"
+  },
+  {
+   "from_table": "TAR_PARTIC",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAREFA"
+   ],
+   "cardinality": "1:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

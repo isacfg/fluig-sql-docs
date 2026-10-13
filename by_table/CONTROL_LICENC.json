@@ -1,0 +1,82 @@
+{
+ "name": "CONTROL_LICENC",
+ "domain": "foundation-licenciamento",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Controle de licenciamento do produto: chaves de licença inicial e de emergência e CNPJ licenciado.",
+ "lifecycle": "Poucas linhas, gravadas na ativação/renovação de licença.",
+ "key_notes": "Sem COD_EMPRESA. Contém chaves de licença (sensível).",
+ "notes_for_agents": "Dados sensíveis (CNPJ e chaves de licença): não expor.",
+ "primary_key": [
+  "NUM_SEQ"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.foundation.model.License"
+ ],
+ "columns": [
+  {
+   "name": "NUM_SEQ",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador sequencial da licença (licenseId).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "licenseId",
+   "java_type": "int",
+   "java_entity": "License"
+  },
+  {
+   "name": "DES_CHAVE_EMERGEN",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave de licença de emergência.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "emergencialKey",
+   "java_type": "String",
+   "java_entity": "License"
+  },
+  {
+   "name": "COD_CNPJ",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "CNPJ do licenciado (federalId).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "federalId",
+   "java_type": "String",
+   "java_entity": "License"
+  },
+  {
+   "name": "DES_CHAVE_INICIAL",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave de licença inicial.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "startKey",
+   "java_type": "String",
+   "java_entity": "License"
+  }
+ ],
+ "relationships": [],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

@@ -1,0 +1,119 @@
+{
+ "name": "SINONIMO",
+ "domain": "ecm-search",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Sinônimos de termos do dicionário de busca, por idioma.",
+ "lifecycle": "Mantida pelo administrador de busca/dicionário; baixo volume.",
+ "key_notes": "PK (COD_EMPRESA, IND_IDIOMA, COD_TERMO, COD_TERMO_SINONIMO).",
+ "notes_for_agents": "Sem dados sensíveis.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "IND_IDIOMA",
+  "COD_TERMO",
+  "COD_TERMO_SINONIMO"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.foundation.model.Synonym"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa (tenant) dona do registro; faz parte da PK e deve ser filtrado em toda consulta.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "Synonym"
+  },
+  {
+   "name": "IND_IDIOMA",
+   "type": "varchar(12)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código do idioma do termo (ex.: pt).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "TERMO.IND_IDIOMA",
+   "confidence": "high",
+   "java_field": "languageId",
+   "java_type": "String",
+   "java_entity": "Synonym"
+  },
+  {
+   "name": "COD_TERMO",
+   "type": "varchar(100)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Termo principal.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "TERMO.COD_TERMO",
+   "confidence": "high",
+   "java_field": "termId",
+   "java_type": "String",
+   "java_entity": "Synonym"
+  },
+  {
+   "name": "COD_TERMO_SINONIMO",
+   "type": "varchar(100)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Termo sinônimo do termo principal.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "termSynonymId",
+   "java_type": "String",
+   "java_entity": "Synonym"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "TERMO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "IND_IDIOMA",
+    "COD_TERMO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "IND_IDIOMA",
+    "COD_TERMO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-confirmed",
+   "description": "Termo ao qual o sinônimo pertence.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "TERMO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "IND_IDIOMA",
+    "COD_TERMO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "IND_IDIOMA",
+    "COD_TERMO"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-confirmed"
+  }
+ ]
+}

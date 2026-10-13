@@ -1,0 +1,239 @@
+{
+ "name": "FDN_PDATATRACE",
+ "domain": "privacy-lgpd",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Rastro de acesso/alteração de dados pessoais (LGPD): quem, quando, qual recurso e campos.",
+ "lifecycle": "Uma linha por evento rastreado; expurgo por EXPIRATION_DAYS em FDN_PDATATRACE_CONFIG; volume alto.",
+ "key_notes": "Filtrar por TENANT_ID e USER_TENANT_ID (índice fdn_pdatatrace__idx1). RESOURCE_* são textos.",
+ "notes_for_agents": "Contém IP e identifica acessos a dados pessoais; tratar como sensível.",
+ "primary_key": [
+  "PDATATRACE_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "fdn_pdatatrace__idx1",
+   "unique": false,
+   "columns": [
+    "TENANT_ID",
+    "USER_TENANT_ID"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.fluig.datatrace.entity.PersonalDatatrace"
+ ],
+ "columns": [
+  {
+   "name": "PDATATRACE_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK surrogate do rastro.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "PersonalDatatrace"
+  },
+  {
+   "name": "TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tenant do evento.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "tenantId",
+   "java_type": "Long",
+   "java_entity": "PersonalDatatrace"
+  },
+  {
+   "name": "USER_TENANT_ID",
+   "type": "bigint(20)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Usuário (vínculo usuário-tenant) relacionado ao evento.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_TENANT_ID",
+   "confidence": "medium",
+   "java_field": "userTenantId",
+   "java_type": "Long",
+   "java_entity": "PersonalDatatrace"
+  },
+  {
+   "name": "TYPE",
+   "type": "int(11)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo do evento (enum DatatraceEventType).",
+   "semantic_type": "enum",
+   "values": "0=CREATE; 1=EDIT; 2=VIEW",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "type",
+   "java_type": "DatatraceEventType",
+   "java_entity": "PersonalDatatrace"
+  },
+  {
+   "name": "SOURCE",
+   "type": "int(11)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Origem do evento (enum DatatraceEventSource).",
+   "semantic_type": "enum",
+   "values": "0=USER_REST; 1=CARD_REST; 2=WORKFLOW_WEBSERVICE",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "source",
+   "java_type": "DatatraceEventSource",
+   "java_entity": "PersonalDatatrace"
+  },
+  {
+   "name": "RESOURCE_TABLE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tabela/entidade do recurso com dado pessoal acessado.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "FDN_PERSONALDATA.TABLE_ID",
+   "confidence": "medium",
+   "java_field": "resourceTable",
+   "java_type": "String",
+   "java_entity": "PersonalDatatrace"
+  },
+  {
+   "name": "RESOURCE_KEY",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome da chave do recurso (campo identificador).",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "resourceKey",
+   "java_type": "String",
+   "java_entity": "PersonalDatatrace"
+  },
+  {
+   "name": "RESOURCE_ID",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor do identificador do registro acessado, como texto.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "resourceId",
+   "java_type": "String",
+   "java_entity": "PersonalDatatrace"
+  },
+  {
+   "name": "FIELDS",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Campos de dados pessoais envolvidos (lista em texto).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "FDN_PERSONALDATA.FIELD_ID",
+   "confidence": "medium",
+   "java_field": "fields",
+   "java_type": "String",
+   "java_entity": "PersonalDatatrace"
+  },
+  {
+   "name": "USER_IP",
+   "type": "varchar(50)",
+   "nullable": true,
+   "default": "NULL",
+   "pk_position": null,
+   "purpose": "IP de origem da requisição (dado pessoal).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "ip",
+   "java_type": "String",
+   "java_entity": "PersonalDatatrace"
+  },
+  {
+   "name": "DATATRACE_TIMESTAMP",
+   "type": "datetime",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data e hora do evento.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "timestamp",
+   "java_type": "Date",
+   "java_entity": "PersonalDatatrace"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_USERTENANT",
+   "from_cols": [
+    "USER_TENANT_ID"
+   ],
+   "to_cols": [
+    "USER_TENANT_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Usuário associado ao evento.",
+   "status": "probable"
+  },
+  {
+   "to_table": "FDN_PERSONALDATA",
+   "from_cols": [
+    "RESOURCE_TABLE",
+    "FIELDS"
+   ],
+   "to_cols": [
+    "TABLE_ID",
+    "FIELD_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Catálogo de dados pessoais correspondente à tabela/campos rastreados.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "FDN_RESOURCE",
+   "from_cols": [
+    "RESOURCE_ID"
+   ],
+   "to_cols": [
+    "RESOURCE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Inferência rejeitada: RESOURCE_ID é valor textual de qualquer entidade, não FK para FDN_RESOURCE.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

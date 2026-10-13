@@ -1,0 +1,135 @@
+{
+ "name": "CONFIGUR_GRAF_COMPART",
+ "domain": "bpm-cap",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Compartilhamento de configurações de gráficos CAP (Controle e Acompanhamento de Processos) com usuários, grupos ou papéis.",
+ "lifecycle": "Uma linha por destinatário do compartilhamento de um gráfico.",
+ "key_notes": "Toda a tabela é PK. NUM_SEQ_GRAF aponta para CONFIGUR_GRAF_USUAR_CAP.NUM_SEQ do dono (CD_MATRICULA).",
+ "notes_for_agents": "Filtrar COD_EMPRESA.",
+ "primary_key": [
+  "IDI_TIP_COMPART",
+  "CD_MATRICULA",
+  "COD_EMPRESA",
+  "NUM_SEQ_GRAF",
+  "DES_VAL_COMPART"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.cap.model.UserGraphicSecurity"
+ ],
+ "columns": [
+  {
+   "name": "IDI_TIP_COMPART",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Tipo de destinatário do compartilhamento (attributionType); valores não confirmados no código.",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "attributionType",
+   "java_type": "int",
+   "java_entity": "UserGraphicSecurity"
+  },
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Matrícula do dono do gráfico compartilhado.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "high",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "UserGraphicSecurity"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Tenant (empresa) dono da linha; sempre filtrar por este valor.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "UserGraphicSecurity"
+  },
+  {
+   "name": "NUM_SEQ_GRAF",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Sequência do gráfico do dono compartilhado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "CONFIGUR_GRAF_USUAR_CAP.NUM_SEQ",
+   "confidence": "high",
+   "java_field": "sequence",
+   "java_type": "int",
+   "java_entity": "UserGraphicSecurity"
+  },
+  {
+   "name": "DES_VAL_COMPART",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 5,
+   "purpose": "Identificador do destinatário (usuário, grupo ou papel) conforme IDI_TIP_COMPART.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "sharedId",
+   "java_type": "String",
+   "java_entity": "UserGraphicSecurity"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "CONFIGUR_GRAF_USUAR_CAP",
+   "from_cols": [
+    "CD_MATRICULA",
+    "COD_EMPRESA",
+    "NUM_SEQ_GRAF"
+   ],
+   "to_cols": [
+    "CD_MATRICULA",
+    "COD_EMPRESA",
+    "NUM_SEQ"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Gráfico compartilhado.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "CONFIGUR_GRAF_USUAR_CAP",
+   "from_cols": [
+    "CD_MATRICULA",
+    "COD_EMPRESA",
+    "NUM_SEQ"
+   ],
+   "to_cols": [
+    "CD_MATRICULA",
+    "COD_EMPRESA",
+    "NUM_SEQ_GRAF"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable"
+  }
+ ]
+}

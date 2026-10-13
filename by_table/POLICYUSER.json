@@ -1,0 +1,163 @@
+{
+ "name": "POLICYUSER",
+ "domain": "use-policy",
+ "module": "04001-fluig-database-use-policy",
+ "purpose": "Registro de aceite/resposta de um usuário a uma versão de documento de política de uso.",
+ "lifecycle": "Criado quando o usuário responde à política; imutável (colunas updatable=false); cresce com usuários.",
+ "key_notes": "Único por (POLICYDOCUMENTID, ALIAS, DOCUMENTVERSION). Contém identificação de usuário.",
+ "notes_for_agents": "Dados pessoais: USERNAME, ALIAS. Não há coluna de tenant: chegue via POLICYDOCUMENT -> USEPOLICY.TENANTID.",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [
+  [
+   "policyDocumentId",
+   "alias",
+   "documentVersion"
+  ]
+ ],
+ "indexes": [
+  {
+   "name": "INDEX_POLICY_USER_NAME",
+   "unique": false,
+   "columns": [
+    "username"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.global.usepolicy.entities.PolicyUser"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave primária do aceite.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "ALIAS",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Alias/identificador do usuário que respondeu.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "low",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "DOCUMENTVERSION",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versão do documento aceita pelo usuário.",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "RESPONSEDATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora da resposta do usuário (default now na criação).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "USERNAME",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Login/nome do usuário que aceitou (indexado).",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.LOGIN",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "POLICYDOCUMENTID",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Documento de política respondido.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "POLICYDOCUMENT.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "POLICYDOCUMENT",
+   "from_cols": [
+    "POLICYDOCUMENTID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Documento de política respondido (jpa-join PolicyUser.policyDocument).",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "POLICYDOCUMENT",
+   "from_cols": [
+    "ID"
+   ],
+   "to_cols": [
+    "POLICYDOCUMENTID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join"
+  },
+  {
+   "from_table": "POLICYDOCUMENT_POLICYUSER",
+   "from_cols": [
+    "USERSACCEPTED_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

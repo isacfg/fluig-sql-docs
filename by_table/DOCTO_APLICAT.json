@@ -1,0 +1,118 @@
+{
+ "name": "DOCTO_APLICAT",
+ "domain": "ecm-documents",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Associação de documento a aplicativos (N:M documento-aplicativo).",
+ "lifecycle": "Linha por vínculo.",
+ "key_notes": "Tabela de junção pura.",
+ "notes_for_agents": "Entidade DocumentApplication.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NR_DOCUMENTO",
+  "NR_VERSAO",
+  "COD_APLICAT"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.DocumentApplication"
+ ],
+ "columns": [
+  {
+   "name": "COD_APLICAT",
+   "type": "varchar(50)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Código do aplicativo associado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "APLICATIVO.COD_APLICAT",
+   "confidence": "high",
+   "java_field": "applicationId",
+   "java_type": "String",
+   "java_entity": "DocumentApplication"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); parte da PK, sempre filtrar por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "DocumentApplication"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Número (ID lógico) do documento ECM, sem FK física para DOCUMENTO.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "int",
+   "java_entity": "DocumentApplication"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número da versão do documento; par com NR_DOCUMENTO identifica a versão.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "DocumentApplication"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "APLICATIVO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_APLICAT"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_APLICAT"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Aplicativo vinculado.",
+   "status": "probable"
+  },
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Documento vinculado.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

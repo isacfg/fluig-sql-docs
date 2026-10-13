@@ -1,0 +1,123 @@
+{
+ "name": "I18N_LITERAL_TRANSLATED",
+ "domain": "i18n",
+ "module": "06001-fluig-database-addon-i18n-dbupdate",
+ "purpose": "Tradução de um literal (chave) para um locale específico.",
+ "lifecycle": "Uma linha por literal por locale; volume potencialmente alto.",
+ "key_notes": "Há índice FULLTEXT (artefato). UUIDs varchar(36).",
+ "notes_for_agents": "Join com I18N_LOCALE e I18N_BUNDLE para localizar por BUNDLE_CODE e LOCALE_CODE.",
+ "primary_key": [
+  "LITERAL_TRANSLATED_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.core.i18n.domain.LiteralTranslated"
+ ],
+ "columns": [
+  {
+   "name": "LITERAL_TRANSLATED_ID",
+   "type": "varchar(36)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK UUID da tradução.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "String",
+   "java_entity": "LiteralTranslated"
+  },
+  {
+   "name": "LOCALE_ID",
+   "type": "varchar(36)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Locale da tradução.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "I18N_LOCALE.LOCALE_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "LITERAL_KEY",
+   "type": "varchar(700)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Chave do literal (ex.: chave de mensagem).",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "literalKey",
+   "java_type": "String",
+   "java_entity": "LiteralTranslated"
+  },
+  {
+   "name": "TRANSLATION_VALUE",
+   "type": "varchar(700)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Texto traduzido para o locale.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "value",
+   "java_type": "String",
+   "java_entity": "LiteralTranslated"
+  },
+  {
+   "name": "FULLTEXT",
+   "type": "INDEX",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Artefato do DDL (índice FULLTEXT), não é coluna de dados.",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "I18N_LOCALE",
+   "from_cols": [
+    "LOCALE_ID"
+   ],
+   "to_cols": [
+    "LOCALE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Locale da tradução (LiteralTranslated.locale).",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "I18N_LOCALE",
+   "from_cols": [
+    "LOCALE_ID"
+   ],
+   "to_cols": [
+    "LOCALE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk"
+  }
+ ]
+}

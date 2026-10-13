@@ -1,0 +1,208 @@
+{
+ "name": "HISTOR_CONVER",
+ "domain": "bpm-workflow",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Histórico de conversões de instâncias de processo de uma versão de definição para outra (ConversionHistory).",
+ "lifecycle": "Uma linha por execução de conversão de versão.",
+ "key_notes": "",
+ "notes_for_agents": "",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NUM_SEQ_CONVER"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.workflow.model.ConversionHistory"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa/tenant (companyId); parte da PK e filtro obrigatório de multi-tenancy.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ConversionHistory"
+  },
+  {
+   "name": "NUM_SEQ_CONVER",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Sequência da conversão (id dentro da empresa).",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "conversionSequence",
+   "java_type": "int",
+   "java_entity": "ConversionHistory"
+  },
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Matrícula do usuário que executou a conversão.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USER.COLLEAGUE_ID",
+   "confidence": "high",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "ConversionHistory"
+  },
+  {
+   "name": "DAT_CONVER",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data da conversão.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "conversionDate",
+   "java_type": "Date",
+   "java_entity": "ConversionHistory"
+  },
+  {
+   "name": "NUM_HRS_CONVER",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Hora da conversão (inteiro; formato provável HHmm ou segundos do dia).",
+   "semantic_type": "number",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "conversionTime",
+   "java_type": "int",
+   "java_entity": "ConversionHistory"
+  },
+  {
+   "name": "COD_DEF_PROCES",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Código do processo convertido.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DEF_PROCES.COD_DEF_PROCES",
+   "confidence": "high",
+   "java_field": "processId",
+   "java_type": "String",
+   "java_entity": "ConversionHistory"
+  },
+  {
+   "name": "NUM_VERS_ORIG",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versão de origem do processo antes da conversão.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "sourceVersion",
+   "java_type": "Integer",
+   "java_entity": "ConversionHistory"
+  },
+  {
+   "name": "NUM_VERS",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Versão de destino do processo após a conversão.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "VERS_DEF_PROCES.NUM_VERS",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "Integer",
+   "java_entity": "ConversionHistory"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "VERS_DEF_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_DEF_PROCES",
+    "NUM_VERS"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão de destino.",
+   "status": "probable"
+  },
+  {
+   "to_table": "HISTOR_CONVER_ESTADO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ_CONVER"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ_CONVER"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable",
+   "description": "Mapeamento de estados da conversão.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "FAVORITOS_PROCES",
+   "from_cols": [
+    "COD_EMPRESA",
+    "CD_MATRICULA",
+    "COD_DEF_PROCES"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "CD_MATRICULA",
+    "COD_DEF_PROCES"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: coincidência de colunas.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": [
+  {
+   "from_table": "HISTOR_CONVER_ESTADO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ_CONVER"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NUM_SEQ_CONVER"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

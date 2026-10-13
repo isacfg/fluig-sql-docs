@@ -1,0 +1,183 @@
+{
+ "name": "ACTIVITY_DIM_CAP",
+ "domain": "bpm-analytics-dw",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Dimensão (modelo estrela do CAP, analytics de BPM) com as atividades de cada versão de processo.",
+ "lifecycle": "Populada/regravada pela extração de dados do CAP (CAPDataExtractorBI) a partir das definições de processo; volume = atividades x versões.",
+ "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.",
+ "notes_for_agents": "Sempre filtrar por COMPANYID. Para agregar por período use YEARID/MONTHID/DAYID ou junte com TIME_DIM_CAP. Linhas de fato são snapshots (use o snapshot mais recente/um dia específico para não somar duplicado).",
+ "primary_key": [
+  "ACTIVITYID",
+  "COMPANYID",
+  "PROCESSID",
+  "PROCESSVERSION"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.cap.model.ActivityDim"
+ ],
+ "columns": [
+  {
+   "name": "ACTIVITYID",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "ID numérico da atividade dentro da versão do processo (sequência da atividade no diagrama); parte da PK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "activityID",
+   "java_type": "int",
+   "java_entity": "ActivityDim"
+  },
+  {
+   "name": "COMPANYID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Identificador da empresa (tenant) do Fluig; faz parte da PK de todas as tabelas *_CAP.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "ActivityDim"
+  },
+  {
+   "name": "PROCESSID",
+   "type": "varchar(100)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Código do processo BPM (definição de workflow) ao qual o registro se refere; parte da PK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "processID",
+   "java_type": "String",
+   "java_entity": "ActivityDim"
+  },
+  {
+   "name": "PROCESSVERSION",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Número da versão da definição do processo BPM; parte da PK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "processVersion",
+   "java_type": "int",
+   "java_entity": "ActivityDim"
+  },
+  {
+   "name": "ACTIVITYNAME",
+   "type": "varchar(100)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome da atividade (desnormalizado da dimensão) no momento do snapshot.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "activityName",
+   "java_type": "String",
+   "java_entity": "ActivityDim"
+  },
+  {
+   "name": "ISAUTOMATIC",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a atividade é automática (serviço, sem tarefa humana).",
+   "semantic_type": "flag",
+   "values": "true=atividade automática; false/NULL=não automática",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "isAutomatic",
+   "java_type": "Boolean",
+   "java_entity": "ActivityDim"
+  },
+  {
+   "name": "ISJOINT",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a atividade é de junção (join/sincronização de fluxos paralelos).",
+   "semantic_type": "flag",
+   "values": "true=atividade de junção",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "isJoint",
+   "java_type": "Boolean",
+   "java_entity": "ActivityDim"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "PROCES_VERSION_DIM_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão do processo da dimensão.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FACT_ACTIVITY_COST_CAP",
+   "from_cols": [
+    "ACTIVITYID",
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION"
+   ],
+   "to_cols": [
+    "ACTIVITYID",
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  },
+  {
+   "from_table": "FACT_ACTIVITY_VOLUME_CAP",
+   "from_cols": [
+    "ACTIVITYID",
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION"
+   ],
+   "to_cols": [
+    "ACTIVITYID",
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

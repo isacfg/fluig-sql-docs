@@ -1,0 +1,218 @@
+{
+ "name": "ECM_COLLABORATION_GUEST",
+ "domain": "ecm-collaboration",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Participantes (convidados) de uma colaboração externa, com permissão no serviço externo.",
+ "lifecycle": "Uma linha por usuário convidado por colaboração; removidas em cascata com a colaboração.",
+ "key_notes": "UNIQUE (COLLABORATION_ID, LOGIN). Sem TENANT_ID; o tenant vem de ECM_COLLABORATION.",
+ "notes_for_agents": "PII: EXTERNAL_EMAIL e LOGIN. Join: GUEST.COLLABORATION_ID = ECM_COLLABORATION.COLLABORATION_ID.",
+ "primary_key": [
+  "COLLABORATION_GUEST_ID"
+ ],
+ "unique_constraints": [
+  [
+   "COLLABORATION_ID",
+   "LOGIN"
+  ]
+ ],
+ "indexes": [],
+ "jpa_entities": [
+  "com.fluig.ecm.collaboration.entity.CollaborationGuest"
+ ],
+ "columns": [
+  {
+   "name": "COLLABORATION_GUEST_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador gerado do convidado.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "CollaborationGuest"
+  },
+  {
+   "name": "IS_ACTIVE",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o convidado ainda tem acesso à colaboração.",
+   "semantic_type": "flag",
+   "values": "1=ativo; 0=inativo",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "active",
+   "java_type": "Boolean",
+   "java_entity": "CollaborationGuest"
+  },
+  {
+   "name": "END_DATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de fim do acesso do convidado.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "endDate",
+   "java_type": "Date",
+   "java_entity": "CollaborationGuest"
+  },
+  {
+   "name": "EXTERNAL_EMAIL",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "E-mail do convidado no serviço externo (dado pessoal).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "externalEmail",
+   "java_type": "String",
+   "java_entity": "CollaborationGuest"
+  },
+  {
+   "name": "EXTERNAL_ID",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "ID do convidado/permissão no serviço externo.",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "externalId",
+   "java_type": "String",
+   "java_entity": "CollaborationGuest"
+  },
+  {
+   "name": "EXTERNAL_PERMISSION",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Papel/permissão concedido no serviço externo (ex. leitura/escrita).",
+   "semantic_type": "enum",
+   "values": "",
+   "refs": "",
+   "confidence": "low",
+   "java_field": "externalPermission",
+   "java_type": "String",
+   "java_entity": "CollaborationGuest"
+  },
+  {
+   "name": "INVITATION_DATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora em que o convite foi enviado.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "invitationDate",
+   "java_type": "Date",
+   "java_entity": "CollaborationGuest"
+  },
+  {
+   "name": "LOGIN",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Login do usuário Fluig convidado.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.LOGIN",
+   "confidence": "medium",
+   "java_field": "login",
+   "java_type": "String",
+   "java_entity": "CollaborationGuest"
+  },
+  {
+   "name": "IS_OWNER",
+   "type": "bit",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se o convidado é o dono (iniciador) da colaboração.",
+   "semantic_type": "flag",
+   "values": "1=dono; 0=convidado",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "owner",
+   "java_type": "Boolean",
+   "java_entity": "CollaborationGuest"
+  },
+  {
+   "name": "START_DATE",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora de início do acesso do convidado.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "startDate",
+   "java_type": "Date",
+   "java_entity": "CollaborationGuest"
+  },
+  {
+   "name": "COLLABORATION_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "FK para a colaboração.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "ECM_COLLABORATION.COLLABORATION_ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "ECM_COLLABORATION",
+   "from_cols": [
+    "COLLABORATION_ID"
+   ],
+   "to_cols": [
+    "COLLABORATION_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Colaboração à qual pertence.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "ECM_COLLABORATION",
+   "from_cols": [
+    "COLLABORATION_ID"
+   ],
+   "to_cols": [
+    "COLLABORATION_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "jpa-join"
+  }
+ ]
+}

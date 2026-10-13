@@ -1,0 +1,78 @@
+{
+ "name": "FDN_PDATA_INFOTYPE",
+ "domain": "privacy-lgpd",
+ "module": "01001-fluig-database-wcm",
+ "purpose": "Catálogo de tipos de informação de dados pessoais (ex.: identificação, contato) usados em FDN_PERSONALDATA.",
+ "lifecycle": "Dados de referência; poucas linhas.",
+ "key_notes": "Sem tenant.",
+ "notes_for_agents": "Tabela de domínio.",
+ "primary_key": [
+  "INFORMATION_TYPE_ID"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.foundation.security.entity.FDNPersonalDataInfoType"
+ ],
+ "columns": [
+  {
+   "name": "INFORMATION_TYPE_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "PK do tipo de informação.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "FDNPersonalDataInfoType"
+  },
+  {
+   "name": "INFORMATION_TYPE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Texto/chave do tipo de informação.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "type",
+   "java_type": "String",
+   "java_entity": "FDNPersonalDataInfoType"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "FDN_PERSONALDATA",
+   "from_cols": [
+    "INFORMATION_TYPE_ID"
+   ],
+   "to_cols": [
+    "INFORMATION_TYPE_ID"
+   ],
+   "cardinality": "1:N",
+   "kind": "physical-fk",
+   "description": "Dados pessoais deste tipo.",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FDN_PERSONALDATA",
+   "from_cols": [
+    "INFORMATION_TYPE_ID"
+   ],
+   "to_cols": [
+    "INFORMATION_TYPE_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk"
+  }
+ ]
+}

@@ -1,0 +1,118 @@
+{
+ "name": "DOCTO_TAG",
+ "domain": "ecm-documents",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Associação de tags a versões de documento.",
+ "lifecycle": "Linha por tag aplicada.",
+ "key_notes": "Tabela de junção.",
+ "notes_for_agents": "Entidade DocumentTag.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NR_DOCUMENTO",
+  "NR_VERSAO",
+  "COD_TAG"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.DocumentTag"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); parte da PK, sempre filtrar por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "DocumentTag"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Número (ID lógico) do documento ECM, sem FK física para DOCUMENTO.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "int",
+   "java_entity": "DocumentTag"
+  },
+  {
+   "name": "COD_TAG",
+   "type": "varchar(100)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Código/texto da tag.",
+   "semantic_type": "code",
+   "values": "",
+   "refs": "TAG.COD_TAG",
+   "confidence": "high",
+   "java_field": "tagId",
+   "java_type": "String",
+   "java_entity": "DocumentTag"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número da versão do documento; par com NR_DOCUMENTO identifica a versão.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "DocumentTag"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão marcada.",
+   "status": "probable"
+  },
+  {
+   "to_table": "TAG",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_TAG"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_TAG"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Tag.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

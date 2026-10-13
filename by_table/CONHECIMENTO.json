@@ -1,0 +1,246 @@
+{
+ "name": "CONHECIMENTO",
+ "domain": "ecm-documents",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Registro de ciência/consulta de documentos por colaborador: primeira e última visualização de uma versão.",
+ "lifecycle": "Linha criada na primeira visualização e atualizada nas seguintes; volume alto.",
+ "key_notes": "PK (COD_EMPRESA, CD_MATRICULA, NR_DOCUMENTO, NR_VERSAO). Existem tanto campos Calendar/datetime quanto date+hora legados.",
+ "notes_for_agents": "Índices: (COD_EMPRESA,NR_DOCUMENTO,NR_VERSAO) e (DATA_HORA_ULT_CONSULTA,COD_EMPRESA). Entidade Knowledge.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "CD_MATRICULA",
+  "NR_DOCUMENTO",
+  "NR_VERSAO"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "IDX_CONHECIMENTO001",
+   "unique": false,
+   "columns": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ]
+  },
+  {
+   "name": "IDX_CONHECIMENTO002",
+   "unique": false,
+   "columns": [
+    "DATA_HORA_ULT_CONSULTA",
+    "COD_EMPRESA"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.foundation.model.Knowledge"
+ ],
+ "columns": [
+  {
+   "name": "CD_MATRICULA",
+   "type": "varchar(150)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Matrícula do colaborador que consultou.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "FDN_USERTENANT.USER_CODE",
+   "confidence": "medium",
+   "java_field": "colleagueId",
+   "java_type": "String",
+   "java_entity": "Knowledge"
+  },
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); parte da PK, sempre filtrar por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "Knowledge"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número (ID lógico) do documento ECM, sem FK física para DOCUMENTO.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "int",
+   "java_entity": "Knowledge"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Número da versão do documento; par com NR_DOCUMENTO identifica a versão.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "Knowledge"
+  },
+  {
+   "name": "DATA_HORA_PRIMEIRA_CONSULTA",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora da primeira consulta (firstView).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "firstView",
+   "java_type": "Calendar",
+   "java_entity": "Knowledge"
+  },
+  {
+   "name": "DT_CONHECIMENTO",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data em que o colaborador tomou conhecimento do documento.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "knowledgeDate",
+   "java_type": "Date",
+   "java_entity": "Knowledge"
+  },
+  {
+   "name": "DATA_HORA_ULT_CONSULTA",
+   "type": "datetime",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data/hora da última consulta (lastView); indexada.",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "lastView",
+   "java_type": "Calendar",
+   "java_entity": "Knowledge"
+  },
+  {
+   "name": "DT_ULT_CONSULTA",
+   "type": "date",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Data da última consulta (campo legado).",
+   "semantic_type": "date",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "lastViewed",
+   "java_type": "Date",
+   "java_entity": "Knowledge"
+  },
+  {
+   "name": "HRA_ULT_CON",
+   "type": "varchar(8)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Hora da última consulta em texto (HH:mm:ss, campo legado).",
+   "semantic_type": "other",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "lastViewedTime",
+   "java_type": "String",
+   "java_entity": "Knowledge"
+  },
+  {
+   "name": "DS_VERSAO",
+   "type": "varchar(4000)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Descrição da versão no momento da consulta.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "versionDescription",
+   "java_type": "String",
+   "java_entity": "Knowledge"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão consultada.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "DOCTO_NOTIF",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "CD_MATRICULA"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "CD_MATRICULA"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: apenas coincidência de colunas de PK.",
+   "status": "rejected"
+  },
+  {
+   "to_table": "FAVORITOS",
+   "from_cols": [
+    "COD_EMPRESA",
+    "CD_MATRICULA",
+    "NR_DOCUMENTO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "CD_MATRICULA",
+    "NR_DOCUMENTO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Rejeitada: apenas coincidência de colunas de PK.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}

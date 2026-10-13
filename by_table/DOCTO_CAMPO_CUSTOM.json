@@ -1,0 +1,147 @@
+{
+ "name": "DOCTO_CAMPO_CUSTOM",
+ "domain": "ecm-documents",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Valor de cada campo customizado por versão de documento.",
+ "lifecycle": "Linha por (documento, versão, campo).",
+ "key_notes": "COD_VALOR é longtext apesar do nome \"código\".",
+ "notes_for_agents": "LOB de texto; evitar SELECT * em volume.",
+ "primary_key": [
+  "COD_EMPRESA",
+  "NR_DOCUMENTO",
+  "COD_CAMPO_CUSTOM",
+  "NR_VERSAO"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.webdesk.dm.model.DocumentCustomFields"
+ ],
+ "columns": [
+  {
+   "name": "COD_EMPRESA",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Código da empresa/tenant (multi-tenancy); parte da PK, sempre filtrar por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "DocumentCustomFields"
+  },
+  {
+   "name": "COD_CAMPO_CUSTOM",
+   "type": "varchar(100)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Campo customizado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "CAMPO_CUSTOM.COD_CAMPO_CUSTOM",
+   "confidence": "high",
+   "java_field": "customFieldId",
+   "java_type": "String",
+   "java_entity": "DocumentCustomFields"
+  },
+  {
+   "name": "NR_DOCUMENTO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Número (ID lógico) do documento ECM, sem FK física para DOCUMENTO.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_DOCUMENTO",
+   "confidence": "high",
+   "java_field": "documentId",
+   "java_type": "int",
+   "java_entity": "DocumentCustomFields"
+  },
+  {
+   "name": "NR_VERSAO",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "Número da versão do documento; par com NR_DOCUMENTO identifica a versão.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "DOCUMENTO.NR_VERSAO",
+   "confidence": "high",
+   "java_field": "version",
+   "java_type": "int",
+   "java_entity": "DocumentCustomFields"
+  },
+  {
+   "name": "COD_VALOR",
+   "type": "longtext",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor do campo customizado para o documento (texto longo).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "valueId",
+   "java_type": "String",
+   "java_entity": "DocumentCustomFields"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "CAMPO_CUSTOM",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_CAMPO_CUSTOM"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_CAMPO_CUSTOM"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Definição do campo.",
+   "status": "probable"
+  },
+  {
+   "to_table": "DOCUMENTO",
+   "from_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "NR_DOCUMENTO",
+    "NR_VERSAO"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão do documento.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "CAMPO_CUSTOM",
+   "from_cols": [
+    "COD_EMPRESA",
+    "COD_CAMPO_CUSTOM"
+   ],
+   "to_cols": [
+    "COD_EMPRESA",
+    "COD_CAMPO_CUSTOM"
+   ],
+   "cardinality": "1:N",
+   "kind": "logical-probable"
+  }
+ ]
+}

@@ -1,0 +1,174 @@
+{
+ "name": "SOCIALRELATION",
+ "domain": "social",
+ "module": "03001-fluig-database-social",
+ "purpose": "Relação direcionada entre dois perfis sociais (amizade, seguir, participante, moderador).",
+ "lifecycle": "Criada/atualizada ao seguir, convidar, aprovar ou bloquear.",
+ "key_notes": "Unique (SOCIAL_ID, RELATED_ID, TYPE). Ordinals dos enums.",
+ "notes_for_agents": "Relações recíprocas são linhas separadas.",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [
+  [
+   "social_id",
+   "related_id",
+   "type"
+  ]
+ ],
+ "indexes": [
+  {
+   "name": "SocialRelationI001",
+   "unique": false,
+   "columns": [
+    "social_id",
+    "type",
+    "status"
+   ]
+  },
+  {
+   "name": "SocialRelationI002",
+   "unique": false,
+   "columns": [
+    "related_id",
+    "type",
+    "status"
+   ]
+  },
+  {
+   "name": "SocialRelationI003",
+   "unique": false,
+   "columns": [
+    "type",
+    "social_id",
+    "status",
+    "related_id"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.social.relation.entity.SocialRelation"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id; PK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "STATUS",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Status, ordinal de SocialRelationStatus.",
+   "semantic_type": "status",
+   "values": "0=ACCEPTED; 1=REJECTED; 2=PENDING; 3=BLOCKED; 4=NOT_RELATED; 5=ITSELF",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TENANTID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id do tenant (empresa) dono da linha; filtrar sempre por ele.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TYPE",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo, ordinal de SocialRelationType.",
+   "semantic_type": "enum",
+   "values": "0=FRIEND; 1=FOLLOWING; 2=FOLLOWER; 3=PARTICIPANT; 4=MODERATOR; 5=OTHER",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "RELATED_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Perfil alvo.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIAL.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "SOCIAL_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Perfil origem.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIAL.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "SOCIAL",
+   "from_cols": [
+    "RELATED_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Perfil alvo",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "SOCIAL",
+   "from_cols": [
+    "SOCIAL_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Perfil origem",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

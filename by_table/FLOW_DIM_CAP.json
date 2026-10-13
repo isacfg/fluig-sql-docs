@@ -1,0 +1,184 @@
+{
+ "name": "FLOW_DIM_CAP",
+ "domain": "bpm-analytics-dw",
+ "module": "02001-fluig-database-ecm",
+ "purpose": "Dimensão de fluxos (transições origem->destino entre atividades) de cada versão de processo.",
+ "lifecycle": "Populada pela extração do CAP a partir da definição do processo.",
+ "key_notes": "Tabelas *_CAP são o data mart (estrela) do módulo CAP/analytics de BPM. A PK sempre inclui COMPANYID (tenant). Sem FKs físicas nem @JoinColumn: relações são lógicas por colunas de mesmo nome. Datas do snapshot ficam em DAYID/MONTHID/YEARID separados. Não foi localizado no código decompilado o ETL que popula as tabelas (CAPDataExtractorBI é apenas interface), então semântica de métricas é inferida de nomes.",
+ "notes_for_agents": "Sempre filtrar por COMPANYID. Para agregar por período use YEARID/MONTHID/DAYID ou junte com TIME_DIM_CAP. Linhas de fato são snapshots (use o snapshot mais recente/um dia específico para não somar duplicado).",
+ "primary_key": [
+  "COMPANYID",
+  "PROCESSID",
+  "PROCESSVERSION",
+  "SOURCEACTIVITY",
+  "TARGETACTIVITY"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.datasul.technology.cap.model.FlowDim"
+ ],
+ "columns": [
+  {
+   "name": "COMPANYID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": 1,
+   "purpose": "Identificador da empresa (tenant) do Fluig; faz parte da PK de todas as tabelas *_CAP.",
+   "semantic_type": "tenant",
+   "values": "",
+   "refs": "FDN_TENANT.TENANT_ID",
+   "confidence": "medium",
+   "java_field": "companyId",
+   "java_type": "long",
+   "java_entity": "FlowDim"
+  },
+  {
+   "name": "PROCESSID",
+   "type": "varchar(100)",
+   "nullable": false,
+   "default": null,
+   "pk_position": 2,
+   "purpose": "Código do processo BPM (definição de workflow) ao qual o registro se refere; parte da PK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "processID",
+   "java_type": "String",
+   "java_entity": "FlowDim"
+  },
+  {
+   "name": "PROCESSVERSION",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 3,
+   "purpose": "Número da versão da definição do processo BPM; parte da PK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "processVersion",
+   "java_type": "int",
+   "java_entity": "FlowDim"
+  },
+  {
+   "name": "SOURCEACTIVITY",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 4,
+   "purpose": "ID da atividade de origem da transição (fluxo) do processo.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "sourceActivity",
+   "java_type": "int",
+   "java_entity": "FlowDim"
+  },
+  {
+   "name": "TARGETACTIVITY",
+   "type": "integer",
+   "nullable": false,
+   "default": null,
+   "pk_position": 5,
+   "purpose": "ID da atividade de destino da transição (fluxo) do processo.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "targetActivity",
+   "java_type": "int",
+   "java_entity": "FlowDim"
+  },
+  {
+   "name": "ISRETURNALLOWED",
+   "type": "bit",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Indica se a transição permite retorno (voltar) da atividade de destino para a de origem.",
+   "semantic_type": "flag",
+   "values": "true=retorno permitido",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": "isReturnAllowed",
+   "java_type": "boolean",
+   "java_entity": "FlowDim"
+  },
+  {
+   "name": "SOURCEACTIVITYNAME",
+   "type": "varchar(100)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome da atividade de origem da transição, desnormalizado.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "sourceActivityName",
+   "java_type": "String",
+   "java_entity": "FlowDim"
+  },
+  {
+   "name": "TARGETACTIVITYNAME",
+   "type": "varchar(100)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Nome da atividade de destino da transição, desnormalizado.",
+   "semantic_type": "name",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "targetActivityName",
+   "java_type": "String",
+   "java_entity": "FlowDim"
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "PROCES_VERSION_DIM_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Versão do processo da dimensão.",
+   "status": "probable"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": [
+  {
+   "from_table": "FACT_FLOW_VOLUME_CAP",
+   "from_cols": [
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION",
+    "SOURCEACTIVITY",
+    "TARGETACTIVITY"
+   ],
+   "to_cols": [
+    "COMPANYID",
+    "PROCESSID",
+    "PROCESSVERSION",
+    "SOURCEACTIVITY",
+    "TARGETACTIVITY"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable"
+  }
+ ]
+}

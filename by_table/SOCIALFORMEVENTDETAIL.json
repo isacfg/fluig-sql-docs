@@ -1,0 +1,111 @@
+{
+ "name": "SOCIALFORMEVENTDETAIL",
+ "domain": "social-forms",
+ "module": "03001-fluig-database-social",
+ "purpose": "Condição individual (operação, tipo e valor) de um evento de formulário social.",
+ "lifecycle": "Criada junto com SOCIALFORMEVENT.",
+ "key_notes": "Sem tenant.",
+ "notes_for_agents": "",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [],
+ "indexes": [],
+ "jpa_entities": [
+  "com.totvs.technology.social.form.entities.SocialFormEventDetail"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id do detalhe; PK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "OPERATION",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Operador de comparação, enum FormOperationType (texto).",
+   "semantic_type": "enum",
+   "values": "EQUAL_TO(==); NOT_EQUAL(!=); GREATER_THEN(>); LESS_THEN(<); GREATER_THEN_OR_EQUAL_TO(>=); LESS_THEN_OR_EQUAL_TO(<=)",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TYPE",
+   "type": "varchar(255)",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo de valor comparado, enum FormValueType (texto).",
+   "semantic_type": "enum",
+   "values": "EMPTY; EMAIL; (demais não listados)",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "VALUE",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Valor de comparação.",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "FORMEVENTID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Evento ao qual a condição pertence.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIALFORMEVENT.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "SOCIALFORMEVENT",
+   "from_cols": [
+    "FORMEVENTID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Evento dono da condição",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [],
+ "referenced_by": []
+}

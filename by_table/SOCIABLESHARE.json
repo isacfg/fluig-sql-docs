@@ -1,0 +1,190 @@
+{
+ "name": "SOCIABLESHARE",
+ "domain": "social",
+ "module": "03001-fluig-database-social",
+ "purpose": "Compartilhamento de um conteúdo sociável por um perfil, para seguidores, usuário ou comunidade.",
+ "lifecycle": "Linha criada ao compartilhar.",
+ "key_notes": "Sem TENANTID. SOCIAL_ID é o destino quando TYPE é USER/COMMUNITY.",
+ "notes_for_agents": "Contador em SOCIABLE.NUMBERSHARES.",
+ "primary_key": [
+  "id"
+ ],
+ "unique_constraints": [],
+ "indexes": [
+  {
+   "name": "SociableShareI001",
+   "unique": false,
+   "columns": [
+    "sociable_id",
+    "user_id"
+   ]
+  }
+ ],
+ "jpa_entities": [
+  "com.totvs.technology.social.sociable.entity.SociableShare"
+ ],
+ "columns": [
+  {
+   "name": "ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Id do compartilhamento; PK.",
+   "semantic_type": "id",
+   "values": "",
+   "refs": "",
+   "confidence": "high",
+   "java_field": "id",
+   "java_type": "Long",
+   "java_entity": "SociableShare"
+  },
+  {
+   "name": "TEXT",
+   "type": "varchar(700)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Texto adicional do compartilhamento (até 10000 no Java, coluna varchar 700).",
+   "semantic_type": "text",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "TYPE",
+   "type": "integer",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Tipo de destino, ordinal de SociableShareType.",
+   "semantic_type": "enum",
+   "values": "0=FOLLOWERS; 1=USER; 2=COMMUNITY",
+   "refs": "",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "URLORIGIN",
+   "type": "varchar(255)",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "URL de origem do conteúdo compartilhado.",
+   "semantic_type": "path",
+   "values": "",
+   "refs": "",
+   "confidence": "medium",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "SOCIABLE_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Conteúdo compartilhado.",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIABLE.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "SOCIAL_ID",
+   "type": "bigint",
+   "nullable": true,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Perfil/comunidade destino do compartilhamento (nulo se FOLLOWERS).",
+   "semantic_type": "fk",
+   "values": "",
+   "refs": "SOCIAL.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  },
+  {
+   "name": "USER_ID",
+   "type": "bigint",
+   "nullable": false,
+   "default": null,
+   "pk_position": null,
+   "purpose": "Perfil social que compartilhou.",
+   "semantic_type": "user_ref",
+   "values": "",
+   "refs": "SOCIAL.ID",
+   "confidence": "high",
+   "java_field": null,
+   "java_type": null,
+   "java_entity": null
+  }
+ ],
+ "relationships": [
+  {
+   "to_table": "SOCIABLE",
+   "from_cols": [
+    "SOCIABLE_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Conteúdo compartilhado",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "SOCIAL",
+   "from_cols": [
+    "SOCIAL_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Destino do compartilhamento",
+   "status": "confirmed"
+  },
+  {
+   "to_table": "SOCIAL",
+   "from_cols": [
+    "USER_ID"
+   ],
+   "to_cols": [
+    "ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "physical-fk",
+   "description": "Quem compartilhou",
+   "status": "confirmed"
+  }
+ ],
+ "rejected_relationships": [
+  {
+   "to_table": "FDN_USER",
+   "from_cols": [
+    "USER_ID"
+   ],
+   "to_cols": [
+    "USER_ID"
+   ],
+   "cardinality": "N:1",
+   "kind": "logical-probable",
+   "description": "Heurística por nome de coluna rejeitada: USER_ID nesta tabela é SOCIAL.ID (perfil social), não FDN_USER.USER_ID.",
+   "status": "rejected"
+  }
+ ],
+ "referenced_by": []
+}
