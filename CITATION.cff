@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: 'Para citar este projeto, use os metadados abaixo e preserve os avisos da licença MIT nas redistribuições.'
+type: software
+title: fluig-sql-docs
+authors:
+  - given-names: Isaac
+    family-names: Figueiredo
+    alias: isacfg
+    website: https://github.com/isacfg
+repository-code: https://github.com/isacfg/fluig-sql-docs
+url: https://github.com/isacfg/fluig-sql-docs
+license: MIT
+abstract: 'Catálogo comunitário do schema Fluig 1.8.2 com documentação e ferramentas de planejamento e validação SQL para agentes.'
+keywords:
+  - Fluig
+  - SQL
+  - database schema
+  - documentation
+  - AI agents

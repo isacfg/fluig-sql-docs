@@ -8,6 +8,8 @@ Catálogo comunitário do banco de dados do **Fluig 1.8.2**, com documentação 
 
 O projeto ajuda desenvolvedores, analistas e agentes a localizar dados, escolher o grain do resultado, montar joins completos e validar consultas antes de usá-las em uma instância. É um projeto independente, sem vínculo oficial com a TOTVS.
 
+**Autor:** [Isaac Figueiredo (@isacfg)](https://github.com/isacfg).
+
 ## Comece aqui
 
 - **Consultar o schema:** abra o [índice de tabelas](index.md) e carregue a ficha em [`by_table/`](by_table/).
@@ -134,3 +136,13 @@ A convivência segue o [Código de Conduta](CODE_OF_CONDUCT.md). Para questões 
 ## Licença
 
 As contribuições originais de código e documentação deste projeto são disponibilizadas sob a [licença MIT](LICENSE). Referências e materiais de terceiros mantêm seus próprios direitos e avisos; veja [THIRD_PARTY.md](THIRD_PARTY.md).
+
+## Autoria e atribuição
+
+Ao redistribuir cópias ou partes substanciais do código ou da documentação original, preserve o aviso de copyright de **Isaac Figueiredo (@isacfg)** e o texto completo da [licença MIT](LICENSE). Preserve também os avisos aplicáveis de outros autores e de terceiros.
+
+Para citar o projeto publicamente, recomendamos:
+
+> fluig-sql-docs, de Isaac Figueiredo (@isacfg), disponível em https://github.com/isacfg/fluig-sql-docs, sob licença MIT.
+
+O crédito público e o link acima são recomendações de citação, não condições adicionais à MIT. A licença exige preservar o aviso de copyright e seu texto nas cópias ou partes substanciais; ela não exige crédito público em todo uso. Metadados de autoria para ferramentas de citação estão em [CITATION.cff](CITATION.cff).

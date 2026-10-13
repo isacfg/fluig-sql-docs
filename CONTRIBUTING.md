@@ -60,3 +60,5 @@ Se um exemplo ainda depender de uma suposição, deixe-a registrada na ficha ou 
 ## Licença das contribuições
 
 Ao enviar código ou documentação original para este projeto, você concorda em disponibilizar sua contribuição sob a [licença MIT](LICENSE) e declara que pode conceder esses direitos. Materiais de terceiros devem manter suas atribuições e condições próprias; veja [THIRD_PARTY.md](THIRD_PARTY.md).
+
+Preserve o aviso de copyright de Isaac Figueiredo (@isacfg) e o texto da licença em redistribuições do projeto. Autores de novas contribuições podem acrescentar seus próprios avisos sem remover os existentes; não é exigida cessão de direitos ao mantenedor.

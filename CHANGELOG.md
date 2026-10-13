@@ -4,6 +4,8 @@ O catálogo de referência é do Fluig 1.8.2. As alterações abaixo descrevem e
 
 ## Não lançado
 
+- Autoria de Isaac Figueiredo (@isacfg) no copyright e metadados de citação, mantendo a licença MIT padrão.
+
 - Licença MIT para as contribuições originais e avisos sobre referências de terceiros.
 - Apresentação pública com instalação, exemplo SQL, mapa do repositório e limites de cobertura.
 - Guias de contribuição, convivência e relato de segurança.
