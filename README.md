@@ -51,18 +51,18 @@ As recipes usam MySQL e parâmetros nomeados como `:tenant_id` e `:user_code`. A
 Para listar solicitações com tarefas pendentes de um usuário, use a solicitação como raiz e `EXISTS` para testar tarefas. Isso preserva uma linha por `(COD_EMPRESA, NUM_PROCES)` mesmo quando existem várias tarefas para a mesma solicitação.
 
 ```sql
-SELECT p.COD_EMPRESA, p.NUM_PROCES, p.COD_DEF_PROCES
-FROM PROCES_WORKFLOW AS p
-WHERE p.COD_EMPRESA = :tenant_id
-  AND p.LOG_ATIV = 1
+SELECT PROCES_WORKFLOW.COD_EMPRESA, PROCES_WORKFLOW.NUM_PROCES, PROCES_WORKFLOW.COD_DEF_PROCES
+FROM PROCES_WORKFLOW
+WHERE PROCES_WORKFLOW.COD_EMPRESA = :tenant_id
+  AND PROCES_WORKFLOW.LOG_ATIV = 1
   AND EXISTS (
     SELECT 1
-    FROM TAR_PROCES AS t
-    WHERE t.COD_EMPRESA = p.COD_EMPRESA
-      AND t.NUM_PROCES = p.NUM_PROCES
-      AND t.CD_MATRICULA = :user_code
-      AND t.LOG_ATIV = 1
-      AND t.IDI_STATUS IN (0, 1)
+    FROM TAR_PROCES
+    WHERE TAR_PROCES.COD_EMPRESA = PROCES_WORKFLOW.COD_EMPRESA
+      AND TAR_PROCES.NUM_PROCES = PROCES_WORKFLOW.NUM_PROCES
+      AND TAR_PROCES.CD_MATRICULA = :user_code
+      AND TAR_PROCES.LOG_ATIV = 1
+      AND TAR_PROCES.IDI_STATUS IN (0, 1)
   );
 ```
 
