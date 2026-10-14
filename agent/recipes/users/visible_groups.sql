@@ -2,7 +2,7 @@
 -- Result grain: one group per tenant
 -- Dialect: MySQL; bind named parameters through your driver (do not interpolate).
 -- Validation: static schema checks only; not executed on a Fluig database.
-SELECT g.TENANT_ID, g.GROUP_ID, g.GROUP_CODE, g.DESCRIPTION, g.GROUP_TYPE
-FROM FDN_GROUP AS g
-WHERE g.TENANT_ID = :tenant_id AND g.INTERNAL = 0
-ORDER BY g.GROUP_CODE;
+SELECT FDN_GROUP.TENANT_ID, FDN_GROUP.GROUP_ID, FDN_GROUP.GROUP_CODE, FDN_GROUP.DESCRIPTION, FDN_GROUP.GROUP_TYPE
+FROM FDN_GROUP
+WHERE FDN_GROUP.TENANT_ID = :tenant_id AND FDN_GROUP.INTERNAL = 0
+ORDER BY FDN_GROUP.GROUP_CODE;
