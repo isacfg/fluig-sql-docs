@@ -17,6 +17,22 @@ O projeto ajuda desenvolvedores, analistas e agentes a localizar dados, escolher
 - **Adaptar uma consulta:** escolha um dos [exemplos SQL](agent/recipes/) e confira seus parâmetros, grain e suposições.
 - **Contribuir:** leia [CONTRIBUTING.md](CONTRIBUTING.md).
 
+### Para humanos
+
+Quer aprender as tabelas do Fluig lendo, sem JSON nem ferramentas? Tudo abaixo é Markdown e abre direto no GitHub:
+
+1. **Veja o mapa geral:** o [índice de tabelas](index.md) lista as 333 tabelas com domínio, chave primária e uma frase sobre a finalidade. Use a busca do navegador (`Ctrl+F`) para achar uma tabela ou um assunto.
+2. **Leia o domínio da tabela:** cada arquivo em [`domains/`](domains/) reúne as tabelas de uma área funcional. Cada tabela tem finalidade, ciclo de vida, pontos de atenção, colunas com tipo e significado, e relacionamentos. Para começar:
+   - [Workflow (`bpm-workflow`)](domains/bpm-workflow.md): solicitações (`PROCES_WORKFLOW`), tarefas (`TAR_PROCES`) e histórico.
+   - [Documentos do GED (`ecm-documents`)](domains/ecm-documents.md): `DOCUMENTO` e tabelas vizinhas.
+   - [Usuários e acesso (`foundation-identity-access`)](domains/foundation-identity-access.md): `FDN_USER` e `FDN_USERTENANT`.
+3. **Entenda como as tabelas se ligam:** [`relationships.md`](relationships.md) traz a lista de relações e um diagrama ER por domínio.
+4. **Veja um SQL pronto:** as [recipes](agent/recipes/) são consultas comentadas por assunto (`workflow`, `ecm`, `users`, `forms`).
+
+Duas ressalvas ao ler: relações marcadas como `probable` não foram comprovadas por constraint, e nenhuma recipe foi executada em uma instância real. Detalhes em [Cobertura e limites](#cobertura-e-limites).
+
+As fichas em [`by_table/`](by_table/) e o [`schema.json`](schema.json) são JSON para máquinas; a leitura humana está nos arquivos acima.
+
 ## Instalação e uso
 
 A documentação e os arquivos JSON podem ser lidos diretamente, sem instalar dependências. Os scripts de geração e validação usam Python 3.10 ou superior; os testes foram executados com Python 3.14, e o template de CI usa Python 3.12.
