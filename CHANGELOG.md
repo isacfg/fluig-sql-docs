@@ -4,6 +4,7 @@ O catálogo de referência é do Fluig 1.8.2. As alterações abaixo descrevem e
 
 ## Não lançado
 
+- Seção "Para humanos" em "Comece aqui" do README, com o caminho de leitura em Markdown (índice, domínios, relações e recipes).
 - Autoria de Isaac Figueiredo (@isacfg) no copyright e metadados de citação, mantendo a licença MIT padrão.
 
 - Licença MIT para as contribuições originais e avisos sobre referências de terceiros.
